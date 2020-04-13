@@ -1,0 +1,9 @@
+# Annoying mac files
+.DS_Store
+
+# Node files
+**/node_modules/
+
+# Dot folders and files never sync unless explicitly added
+**/.*
+**/.**/
