@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "Expo Boilerplate",
+    "slug": "expo-boilerplate",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "<!-- TODO --> bundleIdentifier": "com.x.x",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "<!-- TODO --> bundleIdentifier": "com.x.x",
+      "versionCode": 1,
+      "permissions": []
+    },
+    "<!-- TODO --> scheme": "appname # Will be used as appname://",
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps"
+        }
+      ]
+    }
+  }
+}
