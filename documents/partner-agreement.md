@@ -20,7 +20,7 @@ Definitions:
 Variables
 
 - Coordinator's hourly rate: €50
-- Contributor's hourly rate: y
+- Contributor's hourly rate: €40
 - Vesting period: 12 months
 - Activity threshold: 4 hours per week (evaluated quarterly, see appendix for tracking method)
 - Full time: defined as more than 30 hours a week
