@@ -88,7 +88,12 @@ If the contributor is no longer contributing to the project at a rate above the 
 
 I                       hereby agree to be a contributor to the project under these terms.
 
-Signed:
+Signed by:
+Signed on: 
+
+
+Signature:
+
 
 
 ---
