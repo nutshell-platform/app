@@ -13,7 +13,7 @@
     "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
     "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
     "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish",
-    "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all"
+    "bust": "npm cache clean --force && rm -rf $TMPDIR/metro* && rm -rf .expo && watchman watch-del-all"
   },
   "jest": {
     "preset": "jest-expo",
