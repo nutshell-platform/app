@@ -10,9 +10,9 @@
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
     "stage": "expo publish -c --release-channel staging",
-    "compile:android": "export $(cat .env | xargs) && expo build:android",
-    "compile:ios": "export $(cat .env | xargs) && expo build:ios",
-    "publish": "export $(cat .env | xargs) && expo publish",
+    "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
+    "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
+    "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish",
     "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all"
   },
   "jest": {
