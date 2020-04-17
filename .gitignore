@@ -1,9 +1,24 @@
-# Annoying mac files
-.DS_Store
-
 # Node files
 **/node_modules/
 
 # Dot folders and files never sync unless explicitly added
 **/.*
 **/.**/
+
+# Dev files
+.expo/*
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+
+# macOS
+.DS_Store
+
+# Env variables
+.env
