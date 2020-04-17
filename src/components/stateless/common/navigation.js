@@ -22,8 +22,8 @@ export const Header = ( { style, back, title, subtitle, toggle, pan, drawer, dra
 // ///////////////////////////////
 // Sidebar
 // ///////////////////////////////
-const DarkMode = ( { toggleDark, theme } ) => <View style={ { flexDirection: 'row', marginTop: 'auto', paddingHorizontal: 20, paddingVertical: 20, borderTopWidth: 1, borderTopColor: theme.colors.divider } }>
-	<Toggle label='Dark mode' onToggle={ toggleDark } style={ { marginLeft: 20 } } value={ theme.dark } />
+const DarkMode = ( { toggleDark, theme } ) => <View style={ { flexDirection: 'row', marginTop: 'auto', paddingHorizontal: 40, paddingVertical: 20, borderTopWidth: 1, borderTopColor: theme.colors.divider } }>
+	<Toggle label='Dark mode' onToggle={ toggleDark } value={ theme.dark } />
 </View>
 
 export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, translate, toggleDark, ...props } ) => <Portal style={ { alignItems: 'center', justifyContent: 'center' } }>

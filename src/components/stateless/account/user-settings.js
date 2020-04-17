@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText } from '../common/generic'
 import ImagePicker from '../../stateful/common/image-picker'
 
-export const Settings = ( { children, avatarSize=100, user={}, changeUser, settings, changeSetting, saveChanges, passwordRequired } ) => <Main.Center>
+export const Settings = ( { children, avatarSize=100, user={}, changeUser, settings, changeNotification, saveChanges, passwordRequired } ) => <Main.Center>
 	<View style={ { paddingVertical: avatarSize/2 } }>
 		<Card style={ { paddingTop: 0, width: 400 } } >
 			<ImagePicker image={ user.newavatar || user.avatar } size={ avatarSize } style={ { marginTop: -avatarSize/2, marginBottom: 20 } } onSelected={ image => changeUser( 'newavatar', image ) } />
@@ -18,7 +18,8 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 
 			{ /* Notification prefs */ }
 			<Subheading style={ { marginVertical: 20, flexDirection: 'row' } }>Notification preferences</Subheading>
-			<Toggle label='Write your nutshell (weekly)' info="You get to write 1 nutshell message per week, this notification reminds you to use it before it expires" />
+			<Toggle onToggle={ f => changeNotification( 'writeReminder', !settings.notifications.writeReminder ) } value={ settings.notifications.writeReminder } style={ { marginTop: 10 } } label='Write your nutshell (weekly)' info="You get to write 1 nutshell message per week, this notification reminds you to use it before it expires" />
+			<Toggle onToggle={ f => changeNotification( 'readReminder', !settings.notifications.readReminder ) } value={ settings.notifications.readReminder } style={ { marginTop: 10 } } label='Unread nutshells (weekly)' info="A weekly reminder of how many nutshells you have not yet read" />
 
 			{ /* Password required */ }
 			{ passwordRequired && <React.Fragment>
