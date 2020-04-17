@@ -43,7 +43,10 @@ class Routes extends Component {
 		// Not logged in but not on the home page => go to home
 		if( pathname != '/' && !user ) history.push( '/' )
 		// If logged in but at home => go to profile
-		if( pathname == '/' && user ) history.push( '/user/settings' )
+		if( pathname == '/' && user ) history.push( '/profile/read' )
+
+		// Logged in for the first time ( no settings yet )
+		if( pathname != '/user/settings' && ( user && !user?.settings?.notifications ) ) history.push( '/user/settings' )
 
 		// On prop or state chang, always update
 		return true
@@ -60,6 +63,9 @@ class Routes extends Component {
 			{ !init && <Loading message='Loading your stuff' /> }
 			{ /* App router */ }
 			{ init && <Switch>
+
+				{ /* Platform */ }
+				<Route path='/profile/read' component={ UserSettings } />
 
 				{ /* Account specific */ }
 				<Route path='/user/settings' component={ UserSettings } />
