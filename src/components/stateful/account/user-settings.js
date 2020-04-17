@@ -29,7 +29,9 @@ class UserSettings extends Component {
 			settings: {
 				notifications: {
 					readReminder: true,
-					writeReminder: true
+					writeReminder: true,
+					newFollower: true,
+					friendJoined: true
 				},
 				...settings
 			},
@@ -111,7 +113,7 @@ class UserSettings extends Component {
 
 		return <Container>
 			<Navigation title='User settings' />
-			<Settings passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
+			<Settings passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
 		</Container>
 
 	}
