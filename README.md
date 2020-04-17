@@ -1,6 +1,14 @@
-# Expo boilerplate
+# Nutshell app
 
-Boilerplate is compatible with android, ios and web.
+## Repository protocols
+
+- Never push directly to the `master` branch
+    - `development` merges into `stageing`
+    - `stageing` merges into `master`
+    - Both are hooked up to CI through GH actions
+- All merges are done through pull-requests
+    - Merges are never done by the code author
+- Plain text file formats are strongly preferred ( `markdown` > `docx`, `svg` > `ai`)
 
 ## Requirements
 
