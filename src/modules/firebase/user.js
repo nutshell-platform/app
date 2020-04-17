@@ -2,6 +2,7 @@ import { catcher } from '../helpers'
 import { dataFromSnap } from './helpers'
 import { resetApp } from '../../redux/actions/settingsActions'
 import { unregisterListeners, registerListeners } from './listeners'
+import { setEmailFingerprint } from './fingerprints'
 
 
 // ///////////////////////////////
@@ -60,6 +61,10 @@ export const registerUser = async ( app, name, email, password ) => {
 		await app.updateUser( {
 			name: name
 		} )
+
+		// Set email hash fingerprint
+		await setEmailFingerprint( app.db, app.auth.currentUser )
+
 	} catch( e ) {
 		catcher( e )
 	}
@@ -80,6 +85,8 @@ export const updateUser = async ( app, userUpdates ) => {
 		if( email && currentpassword ) {
 			await app.loginUser( app.auth.currentUser.email, currentpassword )
 			await app.auth.currentUser.updateEmail( email )
+			// Set email fingerprint
+			await setEmailFingerprint( app.db, app.auth.currentUser )
 		}
 		if( newpassword && currentpassword ) {
 			await app.loginUser( app.auth.currentUser.email, currentpassword )

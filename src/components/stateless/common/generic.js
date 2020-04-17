@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ScrollView, View, StatusBar as Bar, SafeAreaView, Dimensions } from 'react-native'
-import { Card as PaperCard, TextInput, Appbar, withTheme, ActivityIndicator, Title, Button as PaperButton } from 'react-native-paper'
+import { Card as PaperCard, TextInput, Appbar, withTheme, ActivityIndicator, Title, Button as PaperButton, HelperText } from 'react-native-paper'
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -44,7 +44,15 @@ export const Card = ( { containerStyle, style, children } ) => <View style={ { .
 </View>
 
 // Generic text input
-export const Input = props => <TextInput mode='flat' dense={ true } { ...props } style={ { marginVertical: 10, backgroundColor: 'none', ...props.style } } />
+export const Input = props => {
+
+	 const [ showInfo, setInfo ] = useState( false )
+
+	return <React.Fragment>
+		<TextInput onFocus={ f => setInfo( true ) } mode='flat' dense={ true } { ...props } style={ { marginVertical: 10, backgroundColor: 'none', ...props.style } } />
+		{ showInfo && props.info && <HelperText type='info'>{ props.info }</HelperText> }
+	</React.Fragment>
+}
 
 // Button
 export const Button = ( { style, mode, children, ...props } ) => <PaperButton style={ { marginTop: 20, ...style } } mode={ mode || 'contained' } { ...props }>{ children }</PaperButton>
