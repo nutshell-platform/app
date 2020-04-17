@@ -12,10 +12,11 @@
     "refresh":  "adb shell am force-stop host.exp.exponent",
     "debug":    "adb shell input keyevent 82",
 
-    "stage":            "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging",
+    "stage":            "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web && firebase deploy --only hosting",
+    "compile:web":      "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:web",
     "compile:android":  "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
     "compile:ios":      "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
-    "publish":          "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish",
+    "publish":          "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web && firebase deploy --only hosting",
 
     "bust":     "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
     "reset":    "npm run bust && rm package-lock.json && rm -rf node_modules && npm i"
