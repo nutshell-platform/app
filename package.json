@@ -1,20 +1,25 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "development=true expo start",
-    "android": "development=true expo start --android",
-    "ios": "development=true expo start --ios",
-    "web": "development=true expo start --web",
-    "hybrid": "development=true expo start --android --web",
-    "test": "jest",
-    "refresh": "adb shell am force-stop host.exp.exponent",
-    "debug": "adb shell input keyevent 82",
-    "stage": "expo publish -c --release-channel staging",
-    "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
-    "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
-    "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish",
-    "bust": "npm cache clean --force && rm -rf $TMPDIR/metro* && rm -rf .expo && watchman watch-del-all",
-    "reset": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i"
+
+    "start":    "development=true expo start",
+    "android":  "development=true expo start --android",
+    "ios":      "development=true expo start --ios",
+    "web":      "development=true expo start --web",
+    "hybrid":   "development=true expo start --android --web",
+    "test":     "jest",
+
+    "refresh":  "adb shell am force-stop host.exp.exponent",
+    "debug":    "adb shell input keyevent 82",
+
+    "stage":            "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging",
+    "compile:android":  "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
+    "compile:ios":      "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
+    "publish":          "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish",
+
+    "bust":     "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
+    "reset":    "npm run bust && rm package-lock.json && rm -rf node_modules && npm i"
+    
   },
   "jest": {
     "preset": "jest-expo",

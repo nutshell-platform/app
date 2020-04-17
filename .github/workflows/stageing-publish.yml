@@ -1,0 +1,46 @@
+name: Deploy expo updates ( stageing )
+
+on:
+  # Trigger: on new tag push
+  push:
+    branches:
+      - stageing
+    paths:
+      - 'src/**'
+      - '*.json'
+      - '*.js'
+      - '.github/**'
+
+jobs:
+  build:
+    name: Publish changes
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Get the repo files from current commit
+      - name: Cloning repository
+        uses: actions/checkout@v1
+
+      - name: Set right stageing area
+        uses: git checkout stageing
+
+      - name: installing node 13
+        uses: actions/setup-node@v1
+        with:
+          node-version: '13.x'
+
+
+      - uses: expo/expo-github-action@v5
+        with:
+          expo-version: 3.x
+          expo-username: ${{ secrets.EXPO_USERNAME }}
+          expo-password: ${{ secrets.EXPO_PASSWORD }}
+
+
+      - name: Publish
+        run: |
+          echo -e "${{ secrets.DOTENV }}" > .env
+          cat .env
+          npm i
+          npm run publish
