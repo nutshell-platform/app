@@ -63,14 +63,14 @@ export const Toggle = withTheme( ( { style, theme, value, label, onToggle, info,
 		{ /* The toggle */ }
 		<View style={ { flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'flex-start', ...style } }>
 			{ label && <Text onPress={ onToggle } style={ { opacity: .7, marginRight: 20 } }>{ label }</Text> }
-			<Switch onValueChange={ onToggle } trackColor={ value ? theme.colors.primary : theme.colors.background } thumbColor={ value ? theme.colors.primary : theme.colors.background } value={ value } { ...props } />
-			<TouchableOpacity onPress={ f => setInfo( !showInfo ) } style={ { marginLeft: 'auto' } }>
-				<Avatar.Icon style={ { backgroundColor: 'rgba(0,0,0,0)' } } color={ theme.colors.text } size={24} icon='information-outline' />
-			</TouchableOpacity>
+			<Switch style={ { marginLeft: 'auto' } } onValueChange={ onToggle } trackColor={ value ? theme.colors.primary : theme.colors.background } thumbColor={ value ? theme.colors.primary : theme.colors.background } value={ value } { ...props } />
+			{ info && <TouchableOpacity onPress={ f => setInfo( !showInfo ) }>
+				<Avatar.Icon style={ { marginLeft: 10, backgroundColor: 'rgba(0,0,0,0)' } } color={ theme.colors.text } size={24} icon='information-outline' />
+			</TouchableOpacity> }
 		</View>
 
 		{ /* Info helper message */ }
-		{ ( info || error ) && showInfo && <HelperText style={ { paddingLeft: 0 } } type={ error ? 'error' : 'info' }>{ info }</HelperText> }
+		{ info && ( showInfo || error ) && <HelperText style={ { paddingLeft: 0, paddingVertical: 20 } } type={ error ? 'error' : 'info' }>{ info }</HelperText> }
 
 	</View>
 } )

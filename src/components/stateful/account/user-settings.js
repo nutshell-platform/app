@@ -18,11 +18,21 @@ class UserSettings extends Component {
 
 	constructor( props ) {
 		super( props )
+
+		// Existing settings
+		const { theme, ...settings } = props.settings
+
 		// initialise state
 		this.state = {
 			loading: false,
 			user: {},
-			settings: {},
+			settings: {
+				notifications: {
+					readReminder: true,
+					writeReminder: true
+				},
+				...settings
+			},
 			passwordRequired: false
 		}
 	}
@@ -41,14 +51,18 @@ class UserSettings extends Component {
 	}
 
 	// Input handlers
-	changeUser 		= ( key, value ) => this.updateState( { user: { ...this.state.user, [key]: value } } ).then( this.isSensitive )
-	changeSetting 	= ( key, value ) => this.updateState( { settings: { ...this.state.settings, [key]: value } } )
+	changeUser 			= ( key, value ) => this.updateState( { user: { ...this.state.user, [key]: value } } ).then( this.isSensitive )
+	changeSetting 		= ( key, value ) => this.updateState( { settings: { ...this.state.settings, [key]: value } } )
+	changeNotification 	= ( key, value ) => this.updateState( { settings: {
+		...this.state.settings,
+		notifications: {...this.state.settings.notifications, [key]: value }
+	} } )
 
 	// Save changes
 	saveChanges = async f => {
 
 		const { user, settings } = this.state
-		const { uid } = this.props.user
+		const { uid, settings: originalSettings } = this.props.user
 
 		// Avatar processing
 		if( user.newavatar ) {
@@ -72,6 +86,9 @@ class UserSettings extends Component {
 			user.newavatar.path = path
 		}
 
+		// Append settings to user if they changes
+		if( originalSettings != settings ) user.settings = settings
+
 		await this.updateState( { loading: true } )
 
 		try {
@@ -94,7 +111,7 @@ class UserSettings extends Component {
 
 		return <Container>
 			<Navigation title='User settings' />
-			<Settings passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } saveChanges={ this.saveChanges } />
+			<Settings passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
 		</Container>
 
 	}
