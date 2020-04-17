@@ -109,6 +109,8 @@ class UserSettings extends Component {
 		const { loading, user: newuser, settings: newsettings, passwordRequired } = this.state
 		const { settings, user } = this.props
 
+		console.log( this.state )
+
 		if( !user || loading ) return <Loading message={ loading } />
 
 		return <Container>
