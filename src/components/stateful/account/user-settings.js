@@ -20,7 +20,8 @@ class UserSettings extends Component {
 		super( props )
 
 		// Existing settings
-		const { theme, ...settings } = props.settings
+		const { theme, ...settings } = props.user.settings
+		console.log( props.settings, settings )
 
 		// initialise state
 		this.state = {
