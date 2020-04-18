@@ -24,15 +24,15 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "<!-- TODO --> bundleIdentifier": "com.x.x",
+      "bundleIdentifier": "com.nutshell.nutshell",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "<!-- TODO --> bundleIdentifier": "com.x.x",
+      "package": "com.nutshell.nutshell",
       "versionCode": 1,
       "permissions": []
     },
-    "<!-- TODO --> scheme": "appname # Will be used as appname://",
+    "scheme": "com.nutshell.nutshell",
     "hooks": {
       "postPublish": [
         {
