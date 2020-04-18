@@ -20,8 +20,7 @@ class UserSettings extends Component {
 		super( props )
 
 		// Existing settings
-		const { theme, ...settings } = props.user.settings
-		console.log( props.settings, settings )
+		const { theme, ...settings } = props.settings
 
 		// initialise state
 		this.state = {
@@ -65,7 +64,8 @@ class UserSettings extends Component {
 	saveChanges = async f => {
 
 		const { user, settings } = this.state
-		const { uid, settings: originalSettings } = this.props.user
+		const { user: originalUser, settings: originalSettings } = this.props
+		const { uid } = originalUser
 
 		// Avatar processing
 		if( user.newavatar ) {
@@ -89,13 +89,14 @@ class UserSettings extends Component {
 			user.newavatar.path = path
 		}
 
-		// Append settings to user if they changes
-		if( originalSettings != settings ) user.settings = settings
-
 		await this.updateState( { loading: true } )
 
 		try {
 			await app.updateUser( user )
+			// If there were changed, propagate
+			if( originalSettings != settings ) await app.updateSettings( settings )
+			if( originalUser != user ) await app.updateUser( user )
+
 		} catch( e ) {
 			catcher( e )
 		} finally {
