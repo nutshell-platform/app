@@ -7,3 +7,8 @@ export const resetApp = input => ( {
 	type: 'RESETAPP',
 	payload: true
 } )
+
+export const setSettingsAction = settings => ( {
+	type: 'SETSETTINGS',
+	payload: settings
+} )

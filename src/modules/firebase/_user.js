@@ -2,7 +2,7 @@ import { catcher } from '../helpers'
 import { dataFromSnap } from './helpers'
 import { resetApp } from '../../redux/actions/settingsActions'
 import { unregisterListeners, registerListeners } from './listeners'
-import { setEmailFingerprint } from './fingerprints'
+import { setEmailFingerprint } from './_fingerprints'
 
 
 // ///////////////////////////////

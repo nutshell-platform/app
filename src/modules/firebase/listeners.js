@@ -1,4 +1,4 @@
-import { getUserProfile } from './user'
+import { getUserProfile } from './_user'
 
 export function unregisterListeners( listeners ) {
 
