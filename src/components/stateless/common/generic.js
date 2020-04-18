@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { ScrollView, View, StatusBar as Bar, SafeAreaView, Dimensions, Switch, TouchableOpacity } from 'react-native'
 import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar } from 'react-native-paper'
+const screenHeight = Math.round(Dimensions.get('window').height)
+const screenWidth = Math.round(Dimensions.get('window').width)
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -40,15 +42,20 @@ export const Divider = ( { style, ...props } ) => <PaperDivider style={ { margin
 // ///////////////////////////////
 
 // Generic text input
-export const Input = ( { style, info, error, ...props } ) => {
+export const Input = withTheme( ( { theme, style, info, error, iconSize=30, ...props } ) => {
 
 	 const [ showInfo, setInfo ] = useState( false )
 
-	return <React.Fragment>
-		<TextInput onFocus={ f => setInfo( true ) } onBlur={ f => setInfo( false ) } mode='flat' dense={ true } { ...props } style={ { marginVertical: 10, backgroundColor: 'none', ...style } } />
-		{ ( showInfo || error ) && info && <HelperText style={ { paddingLeft: 0 } } type={ error ? 'error' : 'info' }>{ info }</HelperText> }
-	</React.Fragment>
-}
+	return <View>
+		<View style={ { position: 'relative' } }>
+			<TextInput mode='flat' dense={ true } { ...props } style={ { marginVertical: 10, backgroundColor: 'none', ...style } } />
+			{ info && <TouchableOpacity style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'flex-start' } } onPress={ f => setInfo( !showInfo ) }>
+				<Avatar.Icon style={ { backgroundColor: 'rgba(0,0,0,0)', marginTop: iconSize } } color={ theme.colors.text } size={ iconSize } icon='information-outline' />
+			</TouchableOpacity> }
+		</View>
+		{ ( showInfo || error ) && info && <HelperText type={ error ? 'error' : 'info' }>{ info }</HelperText> }
+	</View>
+} )
 
 // Button
 export const Button = ( { style, mode, children, ...props } ) => <PaperButton style={ { marginTop: 20, ...style } } mode={ mode || 'contained' } { ...props }>{ children }</PaperButton>
@@ -98,7 +105,7 @@ export const Main = {
 }
 
 // General app container
-export const Container = withTheme( ( { style, children, theme } ) => <SafeAreaView style={ { flex: 1, backgroundColor: theme.colors.primary } }>
+export const Container = withTheme( ( { style, children, theme } ) => <SafeAreaView style={ { flex: 1, width: screenWidth, backgroundColor: theme.colors.primary } }>
 
 	<View style={ {
 		flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', backgroundColor: theme.colors.background,
