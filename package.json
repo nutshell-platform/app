@@ -1,26 +1,21 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-
-    "start":    "development=true expo start",
-    "android":  "development=true expo start --android",
-    "ios":      "development=true expo start --ios",
-    "web":      "development=true expo start --web",
-    "hybrid":   "development=true expo start --android --web",
-    "test":     "jest",
-
-    "refresh":  "adb shell am force-stop host.exp.exponent",
-    "debug":    "adb shell input keyevent 82",
-
-    "stage":            "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web && firebase deploy --only hosting",
-    "compile:web":      "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:web",
-    "compile:android":  "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
-    "compile:ios":      "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
-    "publish":          "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web && firebase deploy --only hosting",
-
-    "bust":     "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
-    "reset":    "npm run bust && rm package-lock.json && rm -rf node_modules && npm i"
-    
+    "start": "development=true expo start",
+    "android": "development=true expo start --android",
+    "ios": "development=true expo start --ios",
+    "web": "development=true expo start --web",
+    "hybrid": "development=true expo start --android --web",
+    "test": "jest",
+    "refresh": "adb shell am force-stop host.exp.exponent",
+    "debug": "adb shell input keyevent 82",
+    "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web && firebase deploy --only hosting",
+    "compile:web": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:web",
+    "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
+    "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
+    "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web && firebase deploy --only hosting",
+    "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
+    "reset": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i"
   },
   "jest": {
     "preset": "jest-expo",
@@ -60,6 +55,7 @@
     "firebase": "7.9.0"
   },
   "devDependencies": {
+    "firebase-tools": "^8.1.1",
     "jest": "^25.3.0",
     "jest-expo": "^37.0.0",
     "react-native-dotenv": "^0.2.0",
