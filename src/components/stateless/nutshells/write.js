@@ -7,7 +7,9 @@ import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperTe
 // Data
 import { weekNumber, nextMonday } from '../../../modules/helpers'
 
-export const Editor = ( { children, avatarSize=100, user={}, scheduled, entries, updateEntry, maxTitleLength, maxParagraphLength } ) => {
+export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, changesMade } ) => {
+
+	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ nextMonday().toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d* )/ )[0] }`
 
 	return <Main.Center>
 		<View style={ { paddingVertical: avatarSize/2 } }>
@@ -18,25 +20,25 @@ export const Editor = ( { children, avatarSize=100, user={}, scheduled, entries,
 					<UserAvatar size={ 60 } user={ user } />
 					<View style={ { paddingLeft: 10, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' } }>
 						<Title style={ { marginVertical: 0 } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>
-						{ scheduled && <Text style={ { fontStyle: 'italic' } }>Status: scheduled for { nextMonday().toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d* )/ )[0] }</Text> }
-						{ !scheduled && <Text style={ { fontStyle: 'italic' } }>Status: draft</Text> }
+						{ status == 'scheduled' && <Text style={ { fontStyle: 'italic' } }></Text> }
+						<Toggle onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
 					</View>
 				</View>
 
-				<Text style={ { paddingTop: 20 } }>A nutshell consists out of paragraphs. Each paragraph has a one line summary and an unlimited size message under it.</Text>
+				<Text style={ { paddingTop: 20 } }>A nutshell consists out of paragraphs. Each paragraph has a one line summary and a longer message under it.</Text>
 
-				{ entries.map( ( { uuid, title, paragraph }, i ) => <Entry
+				{ entries.map( ( { uid, title, paragraph }, i ) => <Entry
 						isFirst={ i == 0 }
-						key={ uuid }
+						key={ uid }
 						title={ title }
 						paragraph={ paragraph }
-						onInput={ ( attr, text ) => updateEntry( uuid, attr, text ) }
+						onInput={ ( attr, text ) => updateEntry( uid, attr, text ) }
 						maxTitleLength={ maxTitleLength }
 						maxParagraphLength={ maxParagraphLength }
 					/>
 				) }
 
-				<Button onPress={ f => alert( 'todo' ) }>{ true ? 'Schedule nutshell' : 'Save draft' }</Button>
+				{ changesMade && <Button onPress={ saveDraft }>Save changes</Button> }
 			</Card>
 		</View>
 	</Main.Center>

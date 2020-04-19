@@ -6,7 +6,7 @@ import { Editor } from '../../stateless/nutshells/write'
 import Navigation from '../common/navigation'
 
 // Data
-import { log, getuuid } from '../../../modules/helpers'
+import { log, getuid } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux
@@ -24,31 +24,48 @@ class WriteNutshell extends Component {
 			maxTitleLength: 75,
 			maxParagraphLength: 2500,
 			nutshell: {
-				scheduled: false,
-				entries: []
-			}
+				status: 'scheduled',
+				entries: [],
+				...props.nutshell
+			},
+			changesMade: false
 		}
 
 	}
 
 	// Set initial context
-	componentDidMount = async f => {
+	componentDidUpdate = async f => {
 
 		// Get entries from nutshell and postpend a new one
 		const { nutshell } = this.state
 		const entries = [ ...nutshell.entries ]
+		let updated = false
 
-		// Add empty entry to the list
-		entries.push( { uuid: await getuuid(), title: '', paragraph: '' } )
+		// If the last entry has no emty space, add a new one
+		const lastEntry = entries[ entries.length - 1 ]
+		const lastEntryEmpty = lastEntry?.title?.length != 0 || !lastEntry?.paragraph?.length == 0
+		if( entries.length == 0 || lastEntryEmpty ) {
+			entries.push( { uid: await getuid(), title: '', paragraph: '' } )
+			updated = true
+		}
 
-		return this.updateState( { nutshell: { ...nutshell, entries: entries } } )
+		// Check if the last and second last are both empty, if so delete one
+		const secondLastEntry = entries.length > 1 && entries[ entries.length - 2 ]
+
+		// If both last and second last are empty, remove last
+		if( secondLastEntry && !lastEntry.title?.length && !lastEntry.paragraph?.length && secondLastEntry && !secondLastEntry.title?.length && !secondLastEntry.paragraph?.length ) {
+			entries.pop()	
+			updated = true
+		}	
+
+		if( updated ) return this.updateState( { nutshell: { ...nutshell, entries: entries } } )
 	}
 
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
 
 	// Entry updates
-	updateEntry = async ( uuid, key, value ) => {
+	updateEntry = async ( uid, key, value ) => {
 
 		const { nutshell, maxTitleLength, maxParagraphLength } = this.state
 		const { entries } = nutshell
@@ -57,34 +74,55 @@ class WriteNutshell extends Component {
 		if( key == 'title' && value.length > maxTitleLength ) return 
 
 		// Find the entry that needs to be updated and add changes
-		const updatedEntry = entries.find( entry => entry.uuid == uuid )
+		const updatedEntry = entries.find( entry => entry.uid == uid )
 		updatedEntry[ key ] = value
-		updatedEntry.updated = Date.now()
-		const updatedEntries = [ ...entries ].map( entry => entry.uuid == uuid ? updatedEntry : entry )
+		const updatedEntries = [ ...entries ].map( entry => entry.uid == uid ? updatedEntry : entry )
 
-		// Check if the last entry is empty, if not add a new one
-		const lastEntry = updatedEntries[ updatedEntries.length - 1 ]
-		if( lastEntry.title?.length || lastEntry.paragraph?.length ) updatedEntries.push( { uuid: await getuuid(), title: '', paragraph: '' } )
+		return this.updateState( { changesMade: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
+	}
 
-		// Check if the last two are ampty, if so remove one
-		const secondLastEntry = updatedEntries.length > 1 && updatedEntries[ updatedEntries.length - 2 ]
-		// If both last and second last are empty, remove last
-		if( !lastEntry.title?.length && !lastEntry.paragraph?.length && secondLastEntry && !secondLastEntry.title?.length && !secondLastEntry.paragraph?.length ) updatedEntries.pop()
+	// Sumbit data to firebase
+	saveDraft = async f => {
 
-		return this.updateState( { nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
+		const { nutshell } = this.state
+		const { entries, scheduled, id } = nutshell
+
+		// Validation
+		// Only send entries with a title
+		nutshell.entries = entries.filter( entry => entry.title.length > 0 )
+
+		await this.updateState( { loading: 'Submitting your nutshell to the cloud. Weird how that goes.' } )
+
+		// If hutshell already exists update it
+		try {
+			if( id ) await app.updateNutshell( nutshell )
+			if( !id ) await app.createNutshell( nutshell )
+			await this.updateState( { changesMade: false } )
+		} catch( e ) {
+			alert( e )
+		} 
+
+		await this.updateState( { loading: false } )
+
+	}
+
+	toggleStatus = f => {
+		const { nutshell } = this.state
+		const { status } = nutshell
+		this.updateState( { changesMade: true, nutshell: { ...nutshell, status: status == 'draft' ? 'scheduled' : 'draft' } } )
 	}
 
 	render() {
 
-		const { loading, nutshell, maxTitleLength, maxParagraphLength } = this.state
-		const { history, user } = this.props
+		const { loading, nutshell, maxTitleLength, maxParagraphLength, changesMade } = this.state
+		const { history, user, nutshell: originalNutshell } = this.props
 
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>
 			<Navigation title='Write your nutshell' />
 			<Main.Center>
-				<Editor user={ user } scheduled={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
+				<Editor changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
 			</Main.Center>
 		</Container>
 
@@ -93,5 +131,6 @@ class WriteNutshell extends Component {
 }
 
 export default connect( store => ( {
-	user: store.user
+	user: store.user,
+	nutshell: store.nutshells?.draft
 } ) )( WriteNutshell )

@@ -12,6 +12,7 @@ const { dispatch } = store
 // Actions
 import { setUserAction } from '../../redux/actions/userActions'
 import { setSettingsAction } from '../../redux/actions/settingsActions'
+import { setNutshellDraft } from '../../redux/actions/nutshellActions'
 
 // Config
 import config from './config'
@@ -20,6 +21,7 @@ import config from './config'
 import { listenForUserAndStartListeners, unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser } from './_user'
 import { updateSettings, listenSettings } from './_settings'
+import { createNutshell, updateNutshell, listenToLatestNutshell } from './_nutshells'
 
 // ///////////////////////////////
 // Firebase manager class
@@ -52,6 +54,12 @@ class Firebase {
 	updateSettings = settings => updateSettings( this, settings )
 
 	// ///////////////////////////////
+	// nutshells
+	// ///////////////////////////////
+	createNutshell = nutshell => createNutshell( this, nutshell )
+	updateNutshell = nutshell => updateNutshell( this, nutshell )
+
+	// ///////////////////////////////
 	// Initialisation
 	// ///////////////////////////////
 
@@ -60,7 +68,8 @@ class Firebase {
 
 		this.listeners.auth = listenUserLogin( this, dispatch, setUserAction, resolve, [
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },
-			{ name: 'settings', listener: listenSettings, action: setSettingsAction }
+			{ name: 'settings', listener: listenSettings, action: setSettingsAction },
+			{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft }
 		] )
 
 	} )
