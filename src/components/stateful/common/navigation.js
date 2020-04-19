@@ -84,6 +84,7 @@ class Navigation extends Component {
 
 				// Dynamic links when user is logged in
 				...( user ? [
+					{ label: 'Settings', to: '/user/settings' },
 					{ label: 'Logout', onPress: app.logout }
 				] : [] )
 			] }

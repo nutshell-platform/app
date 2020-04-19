@@ -46,3 +46,44 @@ export const catcher = e => {
 import { v4 as uuidv4 } from 'uuid'
 import * as Random from 'expo-random'
 export const getuuid = async f => uuidv4( { random: await Random.getRandomBytesAsync( 16 ) } )
+
+// ///////////////////////////////
+// Dates
+// ///////////////////////////////
+
+// Baselines
+const msInADay = 86400000
+const today = new Date()
+
+// profiling the 1st of jan
+const oneJan = new Date( today.getFullYear(), 0, 1 )
+const oneJanDayType = oneJan.getDay()
+
+// Weeks are defined by the number of 7 day increments that have elapsed
+export const weekNumber = f => {
+
+    const daysPassedSinceOneJan = Math.floor( ( today.getTime() - oneJan.getTime() ) / msInADay )
+
+    // Compose week number
+    const weekNumber = Math.ceil( ( daysPassedSinceOneJan + oneJanDayType ) / 7 )
+
+    return weekNumber
+}
+
+// Mondays are defined by the next by 7 divisible number of days passed since 
+export const distanceToMonday = f => {
+	let dayIndex = today.getDay()
+
+	// 0 is sunday, the rest is already distance until monday if you substract one ( since sunday is 0 )
+	return dayIndex == 0 ? 1 : dayIndex - 1
+}
+
+export const nextMonday = f => {
+	const startofToday = new Date( today )
+	startofToday.setHours( 0 )
+	startofToday.setMinutes( 0 )
+	startofToday.setSeconds( 0 )
+	
+	const nextMonday = startofToday.setDate( startofToday.getDate() + distanceToMonday() )
+	return new Date( nextMonday )
+}
