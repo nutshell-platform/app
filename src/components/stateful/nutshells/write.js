@@ -21,6 +21,8 @@ class WriteNutshell extends Component {
 
 		this.state = {
 			loading: false,
+			maxTitleLength: 75,
+			maxParagraphLength: 2500,
 			nutshell: {
 				scheduled: false,
 				entries: []
@@ -29,6 +31,7 @@ class WriteNutshell extends Component {
 
 	}
 
+	// Set initial context
 	componentDidMount = async f => {
 
 		// Get entries from nutshell and postpend a new one
@@ -47,8 +50,11 @@ class WriteNutshell extends Component {
 	// Entry updates
 	updateEntry = async ( uuid, key, value ) => {
 
-		const { nutshell } = this.state
+		const { nutshell, maxTitleLength, maxParagraphLength } = this.state
 		const { entries } = nutshell
+
+		// Validations/constraints
+		if( key == 'title' && value.length > maxTitleLength ) return 
 
 		// Find the entry that needs to be updated and add changes
 		const updatedEntry = entries.find( entry => entry.uuid == uuid )
@@ -70,7 +76,7 @@ class WriteNutshell extends Component {
 
 	render() {
 
-		const { loading, nutshell } = this.state
+		const { loading, nutshell, maxTitleLength, maxParagraphLength } = this.state
 		const { history, user } = this.props
 
 		if( loading ) return <Loading message={ loading } />
@@ -78,7 +84,7 @@ class WriteNutshell extends Component {
 		return <Container>
 			<Navigation title='Write your nutshell' />
 			<Main.Center>
-				<Editor user={ user } scheduled={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } />
+				<Editor user={ user } scheduled={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
 			</Main.Center>
 		</Container>
 

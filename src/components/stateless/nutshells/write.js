@@ -7,7 +7,7 @@ import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperTe
 // Data
 import { weekNumber, nextMonday } from '../../../modules/helpers'
 
-export const Editor = ( { children, avatarSize=100, user={}, scheduled, entries, updateEntry } ) => {
+export const Editor = ( { children, avatarSize=100, user={}, scheduled, entries, updateEntry, maxTitleLength, maxParagraphLength } ) => {
 
 	return <Main.Center>
 		<View style={ { paddingVertical: avatarSize/2 } }>
@@ -25,7 +25,16 @@ export const Editor = ( { children, avatarSize=100, user={}, scheduled, entries,
 
 				<Text style={ { paddingTop: 20 } }>A nutshell consists out of paragraphs. Each paragraph has a one line summary and an unlimited size message under it.</Text>
 
-				{ entries.map( ( { uuid, title, paragraph }, i ) => <Entry isFirst={ i == 0 } key={ uuid } title={ title } paragraph={ paragraph } onInput={ ( attr, text ) => updateEntry( uuid, attr, text ) } /> ) }
+				{ entries.map( ( { uuid, title, paragraph }, i ) => <Entry
+						isFirst={ i == 0 }
+						key={ uuid }
+						title={ title }
+						paragraph={ paragraph }
+						onInput={ ( attr, text ) => updateEntry( uuid, attr, text ) }
+						maxTitleLength={ maxTitleLength }
+						maxParagraphLength={ maxParagraphLength }
+					/>
+				) }
 
 				<Button onPress={ f => alert( 'todo' ) }>{ true ? 'Schedule nutshell' : 'Save draft' }</Button>
 			</Card>
@@ -33,7 +42,7 @@ export const Editor = ( { children, avatarSize=100, user={}, scheduled, entries,
 	</Main.Center>
 }
 
-export const Entry = ( { title='', paragraph='', onInput, isFirst } ) => {
+export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLength, maxParagraphLength } ) => {
 
 	const [ opaque, setOpaque ] = useState( title.length > 0 || paragraph.length > 0 || isFirst  )
 
@@ -49,7 +58,7 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst } ) => {
 			style={ { fontWeight: 'bold' } }
 			value={ title }
 			label='One line summary'
-			info='A short summary of what you want to say. E.g. "Struggling to focus this week" or "My new routine is really nice".'
+			info={ `A short summary (max ${ maxTitleLength } characters) of what you want to say. E.g. "Struggling to focus this week" or "My new routine is really nice".` }
 			onChangeText={ text => onInput( 'title', text ) }
 			dense={ false }
 		/>
@@ -59,7 +68,7 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst } ) => {
 			hideInfo={ true }
 			value={ paragraph }
 			label='Elaborate message paragraph'
-			info='Explain in as much (or little) detail what you want to say. This paragraph will collapse under the one line summary, people will only see it if they click your one liner.'
+			info={ `Explain in detail what you want to say (max ${ maxParagraphLength } characters). This paragraph will collapse under the one line summary, people will only see it if they click your one liner.` }
 			onChangeText={ text => onInput( 'paragraph', text ) }
 			multiline={ true }
 		/>
