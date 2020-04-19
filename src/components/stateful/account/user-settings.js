@@ -2,7 +2,7 @@ import React from 'react'
 
 // Visual
 import { Component, Container, Loading } from '../../stateless/common/generic'
-import Navigation from '../../stateful/common/navigation'
+import Navigation from '../common/navigation'
 import { View } from 'react-native'
 import { Settings } from '../../stateless/account/user-settings'
 import * as ImageManipulator from "expo-image-manipulator"

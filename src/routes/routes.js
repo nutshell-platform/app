@@ -18,6 +18,7 @@ import { Switch, Route, withRouter } from './router'
 // Components
 import LoginRegistration from '../components/stateful/onboarding/login-register'
 import UserSettings from '../components/stateful/account/user-settings'
+import WriteNutshell from '../components/stateful/nutshells/write'
 
 // Route maneger class
 class Routes extends Component {
@@ -33,7 +34,7 @@ class Routes extends Component {
 
 	shouldComponentUpdate = ( nextProps, nextState ) => {
 
-		const { history, user } = nextProps
+		const { history, user, settings } = nextProps
 		const { pathname } = history.location
 
 		// ///////////////////////////////
@@ -43,10 +44,10 @@ class Routes extends Component {
 		// Not logged in but not on the home page => go to home
 		if( pathname != '/' && !user ) history.push( '/' )
 		// If logged in but at home => go to profile
-		if( pathname == '/' && user ) history.push( '/profile/read' )
+		if( pathname == '/' && user ) history.push( '/nutshells/read' )
 
 		// Logged in for the first time ( no settings yet )
-		if( pathname != '/user/settings' && ( user && !user?.settings?.notifications ) ) history.push( '/user/settings' )
+		if( pathname != '/user/settings' && ( user && !settings?.notifications ) ) history.push( '/user/settings' )
 
 		// On prop or state chang, always update
 		return true
@@ -65,7 +66,8 @@ class Routes extends Component {
 			{ init && <Switch>
 
 				{ /* Platform */ }
-				<Route path='/profile/read' component={ UserSettings } />
+				<Route path='/nutshells/read' component={ UserSettings } />
+				<Route path='/nutshells/write' component={ WriteNutshell } />
 
 				{ /* Account specific */ }
 				<Route path='/user/settings' component={ UserSettings } />
@@ -82,5 +84,6 @@ class Routes extends Component {
 
 export default withRouter( connect( store => ( {
 	user: store.user,
-	theme: store.settings.theme
+	theme: store.settings.theme,
+	settings: store.settings
 } ) )( Routes ) )

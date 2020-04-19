@@ -37,22 +37,34 @@ export const Card = ( { containerStyle, style, children } ) => <View style={ { .
 // Divider
 export const Divider = ( { style, ...props } ) => <PaperDivider style={ { marginVertical: 20, ...style } } { ...props } />
 
+// Profile image
+export const UserAvatar = ( { size=100, user, style, ...props } ) => user.avatar ? <Avatar.Image size={ size } source={ user.avatar.uri } /> : <Avatar.Icon size={ size } icon='account-circle-outline' />
+
 // ///////////////////////////////
 // Input components
 // ///////////////////////////////
 
 // Generic text input
-export const Input = withTheme( ( { theme, style, info, error, iconSize=30, ...props } ) => {
+export const Input = withTheme( ( { theme, style, info, error, multiline, iconSize=30, ...props } ) => {
 
 	 const [ showInfo, setInfo ] = useState( false )
+	 const [ height, setHeight ] = useState( undefined )
+	 const adjustHeight = ( { nativeEvent } ) => setHeight( nativeEvent?.contentSize?.height )
+	 const defaultHeight = f => setHeight( multiline ? 100 : undefined )
 
 	return <View>
 		<View style={ { position: 'relative' } }>
-			<TextInput mode='flat' dense={ true } { ...props } style={ { marginVertical: 10, backgroundColor: 'none', ...style } } />
+
+			{ /* The actual input */ }
+			<TextInput onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ !multiline } { ...props } style={ { ...( height && { height: height } ),marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
+
+			{ /* The info icon */ }
 			{ info && <TouchableOpacity style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'flex-start' } } onPress={ f => setInfo( !showInfo ) }>
 				<Avatar.Icon style={ { backgroundColor: 'rgba(0,0,0,0)', marginTop: iconSize } } color={ theme.colors.text } size={ iconSize } icon='information-outline' />
 			</TouchableOpacity> }
 		</View>
+
+		{ /* the help message triggeres by the info icon */ }
 		{ ( showInfo || error ) && info && <HelperText type={ error ? 'error' : 'info' }>{ info }</HelperText> }
 	</View>
 } )
