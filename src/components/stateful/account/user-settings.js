@@ -8,7 +8,7 @@ import { Settings } from '../../stateless/account/user-settings'
 import * as ImageManipulator from "expo-image-manipulator"
 
 // Helpers
-import { log, catcher, getuuid	 } from '../../../modules/helpers'
+import { log, catcher, getuid	 } from '../../../modules/helpers'
 
 // Data
 import app from '../../../modules/firebase/app'
@@ -85,7 +85,7 @@ class UserSettings extends Component {
 			user.newavatar.blob = await file.blob()
 
 			// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
-			const path = `avatars/${ uid }-${ await getuuid() }.jpg`
+			const path = `avatars/${ uid }-${ await getuid() }.jpg`
 			user.newavatar.path = path
 		}
 

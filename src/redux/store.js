@@ -10,9 +10,11 @@ import storage from './storage'
 // Reducers
 import settingsReducer from './reducers/settingsReducer'
 import userReducer from './reducers/userReducer'
+import nutshellReducer from './reducers/nutshellReducer'
 const reducers = combineReducers( { 
 	settings: settingsReducer,
-	user: userReducer
+	user: userReducer,
+	nutshells: nutshellReducer
 } )
 
 // Root reducer

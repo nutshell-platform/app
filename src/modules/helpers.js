@@ -45,7 +45,7 @@ export const catcher = e => {
 // ///////////////////////////////
 import { v4 as uuidv4 } from 'uuid'
 import * as Random from 'expo-random'
-export const getuuid = async f => uuidv4( { random: await Random.getRandomBytesAsync( 16 ) } )
+export const getuid = async f => uuidv4( { random: await Random.getRandomBytesAsync( 16 ) } )
 
 // ///////////////////////////////
 // Dates
