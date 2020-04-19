@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // Visual
 import { View } from 'react-native'
@@ -35,10 +35,17 @@ export const Editor = ( { children, avatarSize=100, user={}, scheduled, entries,
 
 export const Entry = ( { title='', paragraph='', onInput, isFirst } ) => {
 
-	const hasContent = title.length > 0 || paragraph.length > 0
+	const [ opaque, setOpaque ] = useState( title.length > 0 || paragraph.length > 0 || isFirst  )
 
-	return <View style={ { paddingVertical: 20, opacity: ( hasContent || isFirst ) ? 1 : .2 } }>
+	let hasContent = title.length > 0 || paragraph.length > 0
+	const onFocus = f => setOpaque( true )
+	const onBlur = f => setOpaque( title.length > 0 || paragraph.length > 0 || isFirst )
+
+	return <View style={ { paddingVertical: 20, opacity: opaque ? 1 : .2 } }>
 		<Input
+			onFocus={ onFocus }
+			onBlur={ onBlur }
+			hideInfo={ true }
 			style={ { fontWeight: 'bold' } }
 			value={ title }
 			label='One line summary'
@@ -47,6 +54,9 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst } ) => {
 			dense={ false }
 		/>
 		<Input
+			onFocus={ onFocus }
+			onBlur={ onBlur }
+			hideInfo={ true }
 			value={ paragraph }
 			label='Elaborate message paragraph'
 			info='Explain in as much (or little) detail what you want to say. This paragraph will collapse under the one line summary, people will only see it if they click your one liner.'
