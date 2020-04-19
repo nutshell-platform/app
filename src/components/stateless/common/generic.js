@@ -45,7 +45,7 @@ export const UserAvatar = ( { size=100, user, style, ...props } ) => user.avatar
 // ///////////////////////////////
 
 // Generic text input
-export const Input = withTheme( ( { theme, style, info, error, multiline, iconSize=30, ...props } ) => {
+export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, multiline, iconSize=30, value, ...props } ) => {
 
 	 const [ showInfo, setInfo ] = useState( false )
 	 const [ height, setHeight ] = useState( undefined )
@@ -56,10 +56,10 @@ export const Input = withTheme( ( { theme, style, info, error, multiline, iconSi
 		<View style={ { position: 'relative' } }>
 
 			{ /* The actual input */ }
-			<TextInput onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ !multiline } { ...props } style={ { ...( height && { height: height } ),marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
+			<TextInput value={ value || '' } onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ !multiline } { ...props } style={ { ...( height && { height: height } ),marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
 
 			{ /* The info icon */ }
-			{ info && <TouchableOpacity style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'flex-start' } } onPress={ f => setInfo( !showInfo ) }>
+			{ info && ( !hideInfo || ( hideInfo && !value ) ) && <TouchableOpacity tabindex={ -1 } style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'flex-start' } } onPress={ f => setInfo( !showInfo ) }>
 				<Avatar.Icon style={ { backgroundColor: 'rgba(0,0,0,0)', marginTop: iconSize } } color={ theme.colors.text } size={ iconSize } icon='information-outline' />
 			</TouchableOpacity> }
 		</View>
