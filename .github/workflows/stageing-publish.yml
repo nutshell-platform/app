@@ -43,4 +43,4 @@ jobs:
           echo -e "${{ secrets.DOTENV }}" > .env
           cat .env
           npm i
-          npm run publish
+          npm run stage
