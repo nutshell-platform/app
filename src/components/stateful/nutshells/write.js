@@ -115,14 +115,14 @@ class WriteNutshell extends Component {
 	render() {
 
 		const { loading, nutshell, maxTitleLength, maxParagraphLength, changesMade } = this.state
-		const { history, user, nutshell: originalNutshell } = this.props
+		const { history, user, nutshell: originalNutshell, theme } = this.props
 
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>
 			<Navigation title='Write your nutshell' />
 			<Main.Center>
-				<Editor changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
+				<Editor background={ theme.colors.background } changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
 			</Main.Center>
 		</Container>
 
@@ -132,5 +132,6 @@ class WriteNutshell extends Component {
 
 export default connect( store => ( {
 	user: store.user,
-	nutshell: store.nutshells?.draft
+	nutshell: store.nutshells?.draft,
+	theme: store.settings.theme
 } ) )( WriteNutshell )
