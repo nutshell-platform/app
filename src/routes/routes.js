@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 // Theming
 import { Provider as PaperProvider } from 'react-native-paper'
 
-// Firebase
+// Firebase api
 import firebase from '../modules/firebase/app'
 
 // Components
