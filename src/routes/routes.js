@@ -19,6 +19,7 @@ import { Switch, Route, withRouter } from './router'
 import LoginRegistration from '../components/stateful/onboarding/login-register'
 import UserSettings from '../components/stateful/account/user-settings'
 import WriteNutshell from '../components/stateful/nutshells/write'
+import ReadNutshell from '../components/stateful/nutshells/read'
 
 // Route maneger class
 class Routes extends Component {
@@ -66,7 +67,7 @@ class Routes extends Component {
 			{ init && <Switch>
 
 				{ /* Platform */ }
-				<Route path='/nutshells/read' component={ WriteNutshell } />
+				<Route path='/nutshells/read' component={ ReadNutshell } />
 				<Route path='/nutshells/write' component={ WriteNutshell } />
 
 				{ /* Account specific */ }
