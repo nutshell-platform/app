@@ -41,3 +41,15 @@ Based on your app you will have to edit:
 ## Environment variables
 
 Environment variables in `.env` file are mandatory. Empty strings are allowed (and disable the service). You may use a separate `.env.production`. There is an overview of variables in the `.env.example` file.
+
+
+Notes 
+
+---
+
+Questions I want to ask the data:
+
+- What nutshells have my friends written that I have not yet read?
+- Who do I follow?
+- Who follows me?
+- Give me all my nutshells

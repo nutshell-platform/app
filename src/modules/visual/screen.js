@@ -1,6 +1,6 @@
 // Rotation
 import * as ScreenOrientation from 'expo-screen-orientation'
-import { Platform } from 'react-native'
+import { Platform, Dimensions } from 'react-native'
 
 // Screen rotation
 export const setOrientation = async f => {
@@ -16,4 +16,16 @@ export const setOrientation = async f => {
 	}
 }
 
-export const another = false
+class ScreenMan {
+
+	width 	= Math.round( Dimensions.get('window').width )
+	height 	= Math.round( Dimensions.get('window').height )
+
+	listener = Dimensions.addEventListener( 'change', ( { window, screen } ) => {
+		this.width 		= Math.round( window.width )
+		this.height 	= Math.round( window.height )
+	} )
+
+}
+
+export const Screen = new ScreenMan()

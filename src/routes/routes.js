@@ -44,7 +44,7 @@ class Routes extends Component {
 		// Not logged in but not on the home page => go to home
 		if( pathname != '/' && !user ) history.push( '/' )
 		// If logged in but at home => go to profile
-		if( pathname == '/' && user ) history.push( '/nutshells/read' )
+		if( pathname == '/' && user ) history.push( '/nutshells/write' )
 
 		// Logged in for the first time ( no settings yet )
 		if( pathname != '/user/settings' && ( user && !settings?.notifications ) ) history.push( '/user/settings' )
@@ -66,7 +66,7 @@ class Routes extends Component {
 			{ init && <Switch>
 
 				{ /* Platform */ }
-				<Route path='/nutshells/read' component={ UserSettings } />
+				<Route path='/nutshells/read' component={ WriteNutshell } />
 				<Route path='/nutshells/write' component={ WriteNutshell } />
 
 				{ /* Account specific */ }

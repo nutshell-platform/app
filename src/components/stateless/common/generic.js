@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { ScrollView, View, StatusBar as Bar, SafeAreaView, Dimensions, Switch, TouchableOpacity } from 'react-native'
+import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity } from 'react-native'
 import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar } from 'react-native-paper'
-const screenHeight = Math.round(Dimensions.get('window').height)
-const screenWidth = Math.round(Dimensions.get('window').width)
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -28,17 +26,20 @@ export const StatusBar = withTheme( ( { theme } ) => <View>
 </View> )
 
 // Generic card
-export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, padding: 10, minWidth: 400, maxWidth: '100%' } }>
-	<PaperCard elevation={ 2 } style={ { padding: 40, ...style } }>
+export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, padding: 10, minWidth: 0, maxWidth: '100%' } }>
+	<PaperCard elevation={ 2 } style={ { padding: 40, maxWidth: '100%', ...style } }>
 		{ children }
 	</PaperCard>
 </View>
+
+// Modified view with sensible defaults
+export const View = ( { style, ...props } ) => <NativeView style={ { maxWidth: '100%', flexWrap: 'wrap', ...style } } { ...props } />
 
 // Divider
 export const Divider = ( { style, ...props } ) => <PaperDivider style={ { marginVertical: 20, ...style } } { ...props } />
 
 // Profile image
-export const UserAvatar = ( { size=100, user, style, ...props } ) => user.avatar ? <Avatar.Image size={ size } source={ user.avatar.uri } /> : <Avatar.Icon size={ size } icon='account-circle-outline' />
+export const UserAvatar = ( { size=100, user, ...props } ) => user.avatar ? <Avatar.Image { ...props } size={ size } source={ user.avatar.uri } /> : <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' />
 
 // ///////////////////////////////
 // Input components
@@ -108,16 +109,16 @@ export const Loading = ( { message } ) => <Container style={ { justifyContent: '
 // Positioning
 // ///////////////////////////////
 export const Main = {
-	Center: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } style={ { flex: 1 } } contentContainerStyle={ { minHeight: '100%', ...style } }>
+	Center: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } style={ { flex: 1, maxWidth: '100%' } } contentContainerStyle={ { minHeight: '100%', ...style } }>
 		<View style={ { flex: 1, justifyContent: 'center', flexDirection: 'column' } }>
 			{ children }
 		</View>
 	</ScrollView> ),
-	Top: ( { children, style } ) => ( <ScrollView style={ { flex: 1 } } contentContainerStyle={ {  ...style } }>{ children }</ScrollView> )
+	Top: ( { children, style } ) => ( <ScrollView style={ { flex: 1, maxWidth: '100%' } } contentContainerStyle={ {  ...style } }>{ children }</ScrollView> )
 }
 
 // General app container
-export const Container = withTheme( ( { style, children, theme } ) => <SafeAreaView style={ { flex: 1, width: screenWidth, backgroundColor: theme.colors.primary } }>
+export const Container = withTheme( ( { style, children, theme } ) => <SafeAreaView style={ { flex: 1, width: '100%', backgroundColor: theme.colors.primary } }>
 
 	<View style={ {
 		flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', backgroundColor: theme.colors.background,

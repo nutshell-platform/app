@@ -1,27 +1,26 @@
 import React, { useState } from 'react'
 
 // Visual
-import { View } from 'react-native'
-import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, withTheme } from '../common/generic'
+import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View } from '../common/generic'
 
 // Data
 import { weekNumber, nextMonday } from '../../../modules/helpers'
 
-export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, changesMade } ) => {
+export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, changesMade, background='grey' } ) => {
 
 	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ nextMonday().toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d* )/ )[0] }`
 
 	return <Main.Center>
-		<View style={ { paddingVertical: avatarSize/2 } }>
+		<View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
 			<Card style={ { paddingTop: 0, width: 500 } } >
 
 				{ /* Meta overview */ }
-				<View style={ { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingVertical: 20 } }>
-					<UserAvatar size={ 60 } user={ user } />
-					<View style={ { paddingLeft: 10, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' } }>
-						<Title style={ { marginVertical: 0 } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>
+				<View style={ { width: '100%', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center', paddingBottom: 20 } }>
+					<UserAvatar style={ { marginTop: -avatarSize/2 } } size={ avatarSize } user={ user } />
+					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' } }>
+						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>
 						{ status == 'scheduled' && <Text style={ { fontStyle: 'italic' } }></Text> }
-						<Toggle onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
+						<Toggle style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
 					</View>
 				</View>
 
