@@ -33,9 +33,7 @@ class WriteNutshell extends Component {
 
 	}
 
-	// Set initial context
-	componentDidUpdate = async f => {
-
+	updateEntryInterface = async f => {
 		// Get entries from nutshell and postpend a new one
 		const { nutshell } = this.state
 		let entries = [ ...nutshell.entries ]
@@ -60,6 +58,9 @@ class WriteNutshell extends Component {
 
 		if( updated ) return this.updateState( { nutshell: { ...nutshell, entries: entries } } )
 	}
+	// Set initial context
+	componentDidMount = f => this.updateEntryInterface()
+	componentDidUpdate = f => this.updateEntryInterface()
 
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )

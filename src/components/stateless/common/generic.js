@@ -26,7 +26,7 @@ export const StatusBar = withTheme( ( { theme } ) => <View>
 </View> )
 
 // Generic card
-export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, padding: 10, minWidth: 0, maxWidth: '100%' } }>
+export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, padding: 10, minWidth: 400, maxWidth: '100%' } }>
 	<PaperCard elevation={ 2 } style={ { padding: 40, maxWidth: '100%', ...style } }>
 		{ children }
 	</PaperCard>
