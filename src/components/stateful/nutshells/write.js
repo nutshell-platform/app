@@ -38,7 +38,7 @@ class WriteNutshell extends Component {
 
 		// Get entries from nutshell and postpend a new one
 		const { nutshell } = this.state
-		const entries = [ ...nutshell.entries ]
+		let entries = [ ...nutshell.entries ]
 		let updated = false
 
 		// If the last entry has no emty space, add a new one
@@ -54,7 +54,7 @@ class WriteNutshell extends Component {
 
 		// If both last and second last are empty, remove last
 		if( secondLastEntry && !lastEntry.title?.length && !lastEntry.paragraph?.length && secondLastEntry && !secondLastEntry.title?.length && !secondLastEntry.paragraph?.length ) {
-			entries.pop()	
+			entries = entries.slice[ 0, entries.length - 2 ]
 			updated = true
 		}	
 
