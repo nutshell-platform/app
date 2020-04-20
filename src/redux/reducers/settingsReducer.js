@@ -10,6 +10,10 @@ export default ( state = { theme: Light }, action ) => {
 			return { ...state, theme: state.theme.dark ? Light : Dark }
 		break
 
+		case "SETSETTINGS":
+			return { ...state, ...payload }
+		break
+
 		// Just return the state if no known action is specified
 		default:
 			return state

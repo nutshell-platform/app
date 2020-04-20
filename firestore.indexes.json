@@ -1,0 +1,23 @@
+{
+	"indexes": [
+		{
+			"collectionGroup": "nutshells",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "owner",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "status",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "updated",
+					"order": "DESCENDING"
+				}
+			]
+		}
+	],
+	"fieldOverrides": []
+}

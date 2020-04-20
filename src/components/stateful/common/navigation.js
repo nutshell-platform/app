@@ -57,7 +57,10 @@ class Navigation extends Component {
 
 	}
 
-	toggleDarkMode = f => this.props.dispatch( toggleDarkMode() )
+	toggleDarkMode = f => {
+		console.log( 'Toggle dark' )
+		return this.props.dispatch( toggleDarkMode() )
+	}
 
 	render( ) {
 
@@ -81,6 +84,7 @@ class Navigation extends Component {
 
 				// Dynamic links when user is logged in
 				...( user ? [
+					{ label: 'Settings', to: '/user/settings' },
 					{ label: 'Logout', onPress: app.logout }
 				] : [] )
 			] }

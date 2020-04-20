@@ -2,13 +2,13 @@ import React from 'react'
 
 // Visual
 import { Component, Container, Loading } from '../../stateless/common/generic'
-import Navigation from '../../stateful/common/navigation'
+import Navigation from '../common/navigation'
 import { View } from 'react-native'
 import { Settings } from '../../stateless/account/user-settings'
 import * as ImageManipulator from "expo-image-manipulator"
 
 // Helpers
-import { log, catcher, getuuid	 } from '../../../modules/helpers'
+import { log, catcher, getuid	 } from '../../../modules/helpers'
 
 // Data
 import app from '../../../modules/firebase/app'
@@ -18,11 +18,23 @@ class UserSettings extends Component {
 
 	constructor( props ) {
 		super( props )
+
+		// Existing settings
+		const { theme, ...settings } = props.settings
+
 		// initialise state
 		this.state = {
 			loading: false,
 			user: {},
-			settings: {},
+			settings: {
+				notifications: {
+					readReminder: true,
+					writeReminder: true,
+					newFollower: true,
+					friendJoined: true
+				},
+				...settings
+			},
 			passwordRequired: false
 		}
 	}
@@ -41,14 +53,19 @@ class UserSettings extends Component {
 	}
 
 	// Input handlers
-	changeUser 		= ( key, value ) => this.updateState( { user: { ...this.state.user, [key]: value } } ).then( this.isSensitive )
-	changeSetting 	= ( key, value ) => this.updateState( { settings: { ...this.state.settings, [key]: value } } )
+	changeUser 			= ( key, value ) => this.updateState( { user: { ...this.state.user, [key]: value } } ).then( this.isSensitive )
+	changeSetting 		= ( key, value ) => this.updateState( { settings: { ...this.state.settings, [key]: value } } )
+	changeNotification 	= ( key, value ) => this.updateState( { settings: {
+		...this.state.settings,
+		notifications: {...this.state.settings.notifications, [key]: value }
+	} } )
 
 	// Save changes
 	saveChanges = async f => {
 
 		const { user, settings } = this.state
-		const { uid } = this.props.user
+		const { user: originalUser, settings: originalSettings } = this.props
+		const { uid } = originalUser
 
 		// Avatar processing
 		if( user.newavatar ) {
@@ -68,7 +85,7 @@ class UserSettings extends Component {
 			user.newavatar.blob = await file.blob()
 
 			// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
-			const path = `avatars/${ uid }-${ await getuuid() }.jpg`
+			const path = `avatars/${ uid }-${ await getuid() }.jpg`
 			user.newavatar.path = path
 		}
 
@@ -76,6 +93,10 @@ class UserSettings extends Component {
 
 		try {
 			await app.updateUser( user )
+			// If there were changed, propagate
+			if( originalSettings != settings ) await app.updateSettings( settings )
+			if( originalUser != user ) await app.updateUser( user )
+
 		} catch( e ) {
 			catcher( e )
 		} finally {
@@ -94,7 +115,7 @@ class UserSettings extends Component {
 
 		return <Container>
 			<Navigation title='User settings' />
-			<Settings passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } saveChanges={ this.saveChanges } />
+			<Settings passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
 		</Container>
 
 	}

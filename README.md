@@ -1,6 +1,14 @@
-# Expo boilerplate
+# Nutshell app
 
-Boilerplate is compatible with android, ios and web.
+## Repository protocols
+
+- Never push directly to the `master` branch
+    - `development` merges into `stageing`
+    - `stageing` merges into `master`
+    - Both are hooked up to CI through GH actions
+- All merges are done through pull-requests
+    - Merges are never done by the code author
+- Plain text file formats are strongly preferred ( `markdown` > `docx`, `svg` > `ai`)
 
 ## Requirements
 
@@ -33,3 +41,15 @@ Based on your app you will have to edit:
 ## Environment variables
 
 Environment variables in `.env` file are mandatory. Empty strings are allowed (and disable the service). You may use a separate `.env.production`. There is an overview of variables in the `.env.example` file.
+
+
+Notes 
+
+---
+
+Questions I want to ask the data:
+
+- What nutshells have my friends written that I have not yet read?
+- Who do I follow?
+- Who follows me?
+- Give me all my nutshells

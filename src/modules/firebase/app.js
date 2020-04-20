@@ -11,13 +11,17 @@ const { dispatch } = store
 
 // Actions
 import { setUserAction } from '../../redux/actions/userActions'
+import { setSettingsAction } from '../../redux/actions/settingsActions'
+import { setNutshellDraft } from '../../redux/actions/nutshellActions'
 
 // Config
 import config from './config'
 
 // Functions
 import { listenForUserAndStartListeners, unregisterListeners, registerListeners } from './listeners'
-import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser } from './user'
+import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser } from './_user'
+import { updateSettings, listenSettings } from './_settings'
+import { createNutshell, updateNutshell, listenToLatestNutshell } from './_nutshells'
 
 // ///////////////////////////////
 // Firebase manager class
@@ -45,6 +49,17 @@ class Firebase {
 	resetPassword = email => resetPassword( this.auth, email )
 
 	// ///////////////////////////////
+	// Settings
+	// ///////////////////////////////
+	updateSettings = settings => updateSettings( this, settings )
+
+	// ///////////////////////////////
+	// nutshells
+	// ///////////////////////////////
+	createNutshell = nutshell => createNutshell( this, nutshell )
+	updateNutshell = nutshell => updateNutshell( this, nutshell )
+
+	// ///////////////////////////////
 	// Initialisation
 	// ///////////////////////////////
 
@@ -52,7 +67,9 @@ class Firebase {
 	init = f => new Promise( resolve => {
 
 		this.listeners.auth = listenUserLogin( this, dispatch, setUserAction, resolve, [
-			{ name: 'profile', listener: listenUserChanges, action: setUserAction }
+			{ name: 'profile', listener: listenUserChanges, action: setUserAction },
+			{ name: 'settings', listener: listenSettings, action: setSettingsAction },
+			{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft }
 		] )
 
 	} )

@@ -9,11 +9,13 @@
     "test": "jest",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
-    "stage": "expo publish -c --release-channel staging",
+    "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web && firebase deploy --only hosting",
+    "compile:web": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:web",
     "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
     "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
-    "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish",
-    "bust": "npm cache clean --force && rm -rf $TMPDIR/metro* && rm -rf .expo && watchman watch-del-all"
+    "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web && firebase deploy --only hosting",
+    "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
+    "reset": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i"
   },
   "jest": {
     "preset": "jest-expo",
@@ -53,11 +55,13 @@
     "firebase": "7.9.0"
   },
   "devDependencies": {
+    "firebase-tools": "^8.1.1",
     "jest": "^25.3.0",
     "jest-expo": "^37.0.0",
     "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "^16.13.1",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "sha3": "^2.1.2"
   },
   "private": true
 }
