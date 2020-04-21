@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 // Visual
-import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View } from '../common/generic'
+import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View, ToolTip } from '../common/generic'
 
 // Data
 import { weekNumber, nextMonday } from '../../../modules/helpers'
@@ -18,13 +18,13 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 				<View style={ { width: '100%', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center', paddingBottom: 20 } }>
 					<UserAvatar style={ { marginTop: -avatarSize/2 } } size={ avatarSize } user={ user } />
 					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' } }>
+						
 						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>
-						{ status == 'scheduled' && <Text style={ { fontStyle: 'italic' } }></Text> }
 						<Toggle style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
+						<ToolTip label='What is a nutshell?' info={ `A nutshell is a once a week message to your friends. It consists out of paragraphs, which each have a one line summary and a more detailed message.\n\nNutshells are published on mondays.\n\nYou only get one nutshell a week.` } />
+					
 					</View>
 				</View>
-
-				<Text style={ { paddingTop: 20 } }>A nutshell consists out of paragraphs. Each paragraph has a one line summary and a longer message under it.</Text>
 
 				{ entries.map( ( { uid, title, paragraph }, i ) => <Entry
 						isFirst={ i == 0 }
