@@ -50,7 +50,6 @@ class WriteNutshell extends Component {
 
 		// If there are more than two empty entries, remove one
 		const empty = entries.map( ( entry, index ) => !entry.title.length && !entry.paragraph.length && index ).filter( entry => typeof entry == 'number' )
-		console.log( empty )
 		if( empty.length > 1 ) { 
 			// Leave one empty one available
 			empty.pop()

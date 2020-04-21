@@ -75,7 +75,7 @@ export const distanceToMonday = f => {
 	let dayIndex = today.getDay()
 
 	// 0 is sunday, the rest is already distance until monday if you substract one ( since sunday is 0 )
-	return dayIndex == 0 ? 1 : dayIndex - 1
+	return dayIndex == 0 ? 1 : 7 - ( dayIndex - 1 )
 }
 
 export const nextMonday = f => {
