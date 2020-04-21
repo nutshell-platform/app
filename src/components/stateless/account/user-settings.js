@@ -20,6 +20,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				<Subheading>Account settings</Subheading>
 				<Input label='name' value={ user.name } info='This lets your friends find you.' onChangeText={ t => changeUser( 'name', t ) } />
 				<Input label='email' value={ user.email } info='Nobody can see this publicly.' onChangeText={ t => changeUser( 'email', t ) } />
+				<Input label='bio' value={ user.bio } info='What should people know about you?' onChangeText={ t => changeUser( 'bio', t ) } />
 				<Input secureTextEntry label='new password' value={ user.newpassword || '' } onChangeText={ t => changeUser( 'newpassword', t ) } />
 
 				{ /* Notification prefs */ }

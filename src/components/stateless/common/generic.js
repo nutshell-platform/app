@@ -26,8 +26,8 @@ export const StatusBar = withTheme( ( { theme } ) => <View>
 </View> )
 
 // Generic card
-export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, padding: 10, minWidth: 400, maxWidth: '100%' } }>
-	<PaperCard elevation={ 2 } style={ { padding: 40, maxWidth: '100%', ...style } }>
+export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, padding: 10, width: 500, maxWidth: '100%!important' } }>
+	<PaperCard elevation={ 2 } style={ { padding: 40, maxWidth: '100%', flexWrap: 'wrap', ...style } }>
 		{ children }
 	</PaperCard>
 </View>
@@ -128,12 +128,12 @@ export const Loading = ( { message } ) => <Container style={ { justifyContent: '
 // Positioning
 // ///////////////////////////////
 export const Main = {
-	Center: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } style={ { flex: 1, maxWidth: '100%' } } contentContainerStyle={ { minHeight: '100%', ...style } }>
+	Center: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } style={ { flex: 1, maxWidth: '100%', paddingHorizontal: 5 } } contentContainerStyle={ { minHeight: '100%', ...style } }>
 		<View style={ { flex: 1, justifyContent: 'center', flexDirection: 'column' } }>
 			{ children }
 		</View>
 	</ScrollView> ),
-	Top: ( { children, style } ) => ( <ScrollView style={ { flex: 1, maxWidth: '100%' } } contentContainerStyle={ {  ...style } }>{ children }</ScrollView> )
+	Top: ( { children, style } ) => ( <ScrollView style={ { flex: 1, maxWidth: '100%', paddingHorizontal: 5 } } contentContainerStyle={ { ...style } }>{ children }</ScrollView> )
 }
 
 // General app container
