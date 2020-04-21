@@ -39,6 +39,7 @@ class WriteNutshell extends Component {
 		let entries = [ ...nutshell.entries ]
 		let updated = false
 
+
 		// If the last entry has no emty space, add a new one
 		const lastEntry = entries[ entries.length - 1 ]
 		const lastEntryEmpty = lastEntry?.title?.length != 0 || !lastEntry?.paragraph?.length == 0
@@ -47,14 +48,20 @@ class WriteNutshell extends Component {
 			updated = true
 		}
 
-		// Check if the last and second last are both empty, if so delete one
-		const secondLastEntry = entries.length > 1 && entries[ entries.length - 2 ]
+		// If there are more than two empty entries, remove one
+		const empty = entries.map( ( entry, index ) => !entry.title.length && !entry.paragraph.length && index ).filter( entry => typeof entry == 'number' )
+		console.log( empty )
+		if( empty.length > 1 ) { 
+			// Leave one empty one available
+			empty.pop()
 
-		// If both last and second last are empty, remove last
-		if( secondLastEntry && !lastEntry.title?.length && !lastEntry.paragraph?.length && secondLastEntry && !secondLastEntry.title?.length && !secondLastEntry.paragraph?.length ) {
-			entries = entries.slice[ 0, entries.length - 2 ]
+			// Remove entries whose index is in the empty list
+			const updatedEntries = [ ...entries ].map( ( entry, index ) => empty.includes( index ) ? false : entry ).filter( entry => entry )
+
+			// Set entries to the updated ones
+			entries = updatedEntries
 			updated = true
-		}	
+		}
 
 		if( updated ) return this.updateState( { nutshell: { ...nutshell, entries: entries } } )
 	}
