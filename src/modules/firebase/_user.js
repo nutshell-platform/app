@@ -51,7 +51,7 @@ export const listenUserChanges = ( app, dispatch, action ) => {
 // ///////////////////////////////
 
 // Register a new user by email and password
-export const registerUser = async ( app, name, email, password ) => {
+export const registerUser = async ( app, name, handle, email, password ) => {
 
 	try {
 		// Create account
@@ -59,7 +59,8 @@ export const registerUser = async ( app, name, email, password ) => {
 
 		// Update profile to include name, this also triggers redux
 		await app.updateUser( {
-			name: name
+			name: name,
+			handle: handle
 		} )
 
 		// Set email hash fingerprint
@@ -135,3 +136,8 @@ export const logoutUser = auth => auth.signOut()
 
 // Delete
 export const deleteUser = auth => auth.currentUser.delete()
+
+// ///////////////////////////////
+// Validations
+// ///////////////////////////////
+export const handleIsAvailable = ( db, handle ) => db.collection( 'users' ).where( 'handle', '==', handle ).limit( 1 ).get().then( dataFromSnap ).then( docs => docs.length == 0 )

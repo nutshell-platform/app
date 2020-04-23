@@ -19,7 +19,7 @@ import config from './config'
 
 // Functions
 import { listenForUserAndStartListeners, unregisterListeners, registerListeners } from './listeners'
-import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser } from './_user'
+import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable } from './_user'
 import { updateSettings, listenSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell } from './_nutshells'
 import { getRandomPeople } from './_friends'
@@ -42,7 +42,7 @@ class Firebase {
 	// ///////////////////////////////
 	// User actions
 	// ///////////////////////////////
-	registerUser  = ( name, email, pass ) => registerUser( this, name, email, pass )
+	registerUser  = ( name, handle, email, pass ) => registerUser( this, name, handle, email, pass )
 	loginUser     = ( email, pass ) => loginUser( this.auth, email, pass )
 	updateUser	  = userUpdates => updateUser( this, userUpdates )
 	logout		  = f => logoutUser( this.auth )
@@ -53,6 +53,7 @@ class Firebase {
 	// Settings
 	// ///////////////////////////////
 	updateSettings = settings => updateSettings( this, settings )
+	handleIsAvailable = handle => handleIsAvailable( this.db, handle )
 
 	// ///////////////////////////////
 	// nutshells

@@ -34,6 +34,22 @@ class Routes extends Component {
 		return this.setState( { init: true } )
 	}
 
+	loggedInNotOnboarded = f => {
+
+		const { user, settings } = this.props
+
+		// Logged in?
+		if( !user ) return false
+
+		// All the right settings sets
+		if( !settings?.notifications ) return true
+		if( !user?.bio && !user?.handle ) return true
+
+		// Default is false
+		return false
+
+	}
+
 	shouldComponentUpdate = ( nextProps, nextState ) => {
 
 		const { history, user, settings } = nextProps
@@ -49,7 +65,7 @@ class Routes extends Component {
 		if( pathname == '/' && user ) history.push( '/nutshells/write' )
 
 		// Logged in for the first time ( no settings yet )
-		if( pathname != '/user/settings' && ( user && ( !settings?.notifications || !user.bio ) ) ) history.push( '/user/settings' )
+		if( pathname != '/user/settings' && this.loggedInNotOnboarded() ) history.push( '/user/settings' )
 
 		// On prop or state chang, always update
 		return true

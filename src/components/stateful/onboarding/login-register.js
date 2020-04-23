@@ -13,23 +13,54 @@ export default class LoginRegister extends Component {
 	state = {
 		action: 'login',
 		name: '',
+		handle: '',
 		email: '',
 		password: '',
-		loading: false
+		available: true,
+		loading: false,
+		timeout: 2000
 	}
 
+	// set handle availabilisy
+	setAvailable = handle => setTimeout( async f => {
+		try {
+			const status = await app.handleIsAvailable( handle )
+			return this.updateState( { available: status } )
+		} catch( e ) {
+			catcher( e )
+		}
+	}, this.state.timeout )
+
 	// Input handler
-	onInput = ( key, value ) => this.updateState( { [key]: value } )
+	onInput = ( key, value ) => {
+
+		const { action, validator } = this.state
+
+		// If not handle, just udate
+		if( key != 'handle' ) return this.updateState( { [key]: value } )
+
+		// If register, check if handle is available then update
+		const handleSet = value?.length > 0
+		if( handleSet ) clearTimeout( validator )
+
+		const saneHandle = value[0] == '@' ? value.substring( 1 ) : value
+		return this.updateState( { [key]: saneHandle, available: true, validator: handleSet && this.setAvailable( saneHandle ) } )
+
+
+	}
 
 	// Log/reg toggle
 	toggleAction = action => this.updateState( { action: action || ( this.state.action == 'login' ? 'register' : 'login' ) } )
 
 	// Validate input
 	validate = f => {
-		const { action, email, password, name } = this.state
+		const { action, email, password, name, handle, available } = this.state
 		if( !email ) return 'Please fill in your email address'
 		if( action != 'recover' && !password ) return 'Please fill in your password'
 		if( action == 'register' && !name ) return 'Please fill in your name'
+		if( action == 'register' && !handle ) return 'Please choose a handle'
+		if( action == 'register' && !available ) return 'That handle is taken!'
+
 		return false
 	}
 
@@ -40,14 +71,14 @@ export default class LoginRegister extends Component {
 		const missing = this.validate()
 		if( missing ) return alert( missing )
 
-		const { action, email, password, name } = this.state
+		const { action, email, password, name, handle } = this.state
 		const { history } = this.props
 
 		await this.updateState( { loading: `Best app ${action} ever...` } )
 
 		try {
 			if( action == 'login' ) await app.loginUser( email.trim(), password )
-			if( action == 'register' ) await app.registerUser( name.trim(), email.trim(), password )
+			if( action == 'register' ) await app.registerUser( name.trim(), handle.trim(), email.trim(), password )
 			if( action == 'recover' ) await app.resetPassword( email.trim() )
 			return history.push( '/user/settings' )
 		} catch( e ) {
@@ -60,7 +91,7 @@ export default class LoginRegister extends Component {
 
 	render() {
 
-		const { action, email, password, name, loading } = this.state
+		const { action, email, password, name, handle, loading, available } = this.state
 		const { history } = this.props
 
 		if( loading ) return <Loading message={ loading } />
@@ -68,7 +99,7 @@ export default class LoginRegister extends Component {
 		return <Container>
 			<Navigation title={ action } />
 			<Main.Center>
-				<Login name={ name } email={ email } password={ password } onInput={ this.onInput } proceed={ this.onSubmit } toggle={ this.toggleAction } action={ action } />
+				<Login name={ name } handle={ handle } email={ email } password={ password } available={ available } onInput={ this.onInput } proceed={ this.onSubmit } toggle={ this.toggleAction } action={ action } />
 			</Main.Center>
 		</Container>
 

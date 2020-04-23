@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity } from 'react-native'
-import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar } from 'react-native-paper'
+import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading } from 'react-native-paper'
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -24,6 +24,9 @@ export class Component extends React.Component {
 export const StatusBar = withTheme( ( { theme } ) => <View>
 	<Bar backgroundColor={ theme.colors.primary } /> 
 </View> )
+
+// Subheading
+export const Subheading = ( { style, ...props } ) => <PaperSubheading style={ { marginTop: 20, ...style } } { ...props } />
 
 // Generic card
 export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, paddingVertical: 10, width: 500, maxWidth: '100%' } }>
@@ -76,7 +79,7 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, m
 		<View style={ { position: 'relative' } }>
 
 			{ /* The actual input */ }
-			<TextInput value={ value || '' } onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ !multiline } { ...props } style={ { ...( height && { height: height } ),marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
+			<TextInput value={ value || '' } onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ { ...( height && { height: height } ),marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
 
 			{ /* The info icon */ }
 			{ info && ( !hideInfo || ( hideInfo && !value ) ) && <TouchableOpacity tabindex={ -1 } style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'flex-start' } } onPress={ f => setInfo( !showInfo ) }>
@@ -151,4 +154,4 @@ export const Container = withTheme( ( { style, children, theme } ) => <SafeAreaV
 // ///////////////////////////////
 // Pass through exports straignt from paper
 // ///////////////////////////////
-export { Drawer, Portal, Appbar, withTheme, Surface, Text, Title, Subheading, HelperText, Avatar } from 'react-native-paper'
+export { Drawer, Portal, Appbar, withTheme, Surface, Text, Title, HelperText, Avatar } from 'react-native-paper'
