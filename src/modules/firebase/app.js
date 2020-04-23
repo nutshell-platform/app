@@ -22,7 +22,7 @@ import { listenForUserAndStartListeners, unregisterListeners, registerListeners 
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable } from './_user'
 import { updateSettings, listenSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell } from './_nutshells'
-import { getRandomPeople } from './_friends'
+import { getRandomPeople, followPerson, unfollowPerson } from './_friends'
 
 // ///////////////////////////////
 // Firebase manager class
@@ -65,7 +65,8 @@ class Firebase {
 	// friends
 	// ///////////////////////////////
 	getRandomPeople = f => getRandomPeople( this )
-
+	followPerson 	= theirUid => followPerson( this, theirUid )
+	unfollowPerson 	= theirUid => unfollowPerson( this, theirUid )
 	// ///////////////////////////////
 	// Initialisation
 	// ///////////////////////////////

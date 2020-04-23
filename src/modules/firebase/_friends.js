@@ -9,3 +9,11 @@ export const followPerson = ( app, theirUid ) => {
 		author: theirUid
 	} )
 }
+
+export const unfollowPerson = ( app, theirUid ) => {
+	const { currentUser: { uid: myUid } } = app.auth
+	return app.db.collection( 'relationships' ).where( {
+		follower: myUid,
+		author: theirUid
+	} ).delete()
+}

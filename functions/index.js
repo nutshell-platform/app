@@ -2,7 +2,7 @@ const functions = require('firebase-functions')
 
 const admin = require('firebase-admin')
 const app = admin.initializeApp()
-const { FieldValue } = app.firestore
+const { FieldValue } = admin.firestore
 const db = app.firestore()
 
 // ///////////////////////////////

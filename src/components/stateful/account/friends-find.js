@@ -28,7 +28,7 @@ class FindFriends extends Component {
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
 
 	// Follow function
-	follow = uid => alert( uid )
+	follow = uid => app.followPerson( uid )
 
 	render() {
 
