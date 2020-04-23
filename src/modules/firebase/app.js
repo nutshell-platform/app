@@ -10,7 +10,7 @@ import { store } from '../../redux/store'
 const { dispatch } = store
 
 // Actions
-import { setUserAction } from '../../redux/actions/userActions'
+import { setUserAction, setUserMetaAction } from '../../redux/actions/userActions'
 import { setSettingsAction } from '../../redux/actions/settingsActions'
 import { setNutshellDraft } from '../../redux/actions/nutshellActions'
 
@@ -19,7 +19,7 @@ import config from './config'
 
 // Functions
 import { listenForUserAndStartListeners, unregisterListeners, registerListeners } from './listeners'
-import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable } from './_user'
+import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson } from './_friends'
@@ -76,6 +76,7 @@ class Firebase {
 
 		this.listeners.auth = listenUserLogin( this, dispatch, setUserAction, resolve, [
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },
+			{ name: 'meta', listener: listenUserMetaChanges, action: setUserMetaAction },
 			{ name: 'settings', listener: listenSettings, action: setSettingsAction },
 			{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft }
 		] )

@@ -46,6 +46,16 @@ export const listenUserChanges = ( app, dispatch, action ) => {
 
 }
 
+export const listenUserMetaChanges = ( app, dispatch, action ) => {
+
+	app.db.collection( 'userMeta' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
+
+		return dispatch( action( dataFromSnap( doc, false ) ) )
+
+	} )
+
+}
+
 // ///////////////////////////////
 // User actions
 // ///////////////////////////////

@@ -3,4 +3,7 @@ export const setUserAction = user => ( {
 	payload: user
 } )
 
-export const another = true
+export const setUserMetaAction = data => ( {
+	type: 'SETUSERMETA',
+	payload: data
+} )

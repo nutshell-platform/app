@@ -12,8 +12,9 @@ export const followPerson = ( app, theirUid ) => {
 
 export const unfollowPerson = ( app, theirUid ) => {
 	const { currentUser: { uid: myUid } } = app.auth
-	return app.db.collection( 'relationships' ).where( {
-		follower: myUid,
-		author: theirUid
-	} ).delete()
+	return app.db.collection( 'relationships' )
+	.where( 'follower', '==', myUid )
+	.where( 'author', '==', theirUid )
+	.get()
+	.then( snap => snap.docs.map( doc => doc.ref.delete() ) )
 }
