@@ -70,7 +70,7 @@ export const registerUser = async ( app, name, handle, email, password ) => {
 		// Update profile to include name, this also triggers redux
 		await app.updateUser( {
 			name: name,
-			handle: handle
+			handle: handle.toLowerCase()
 		} )
 
 		// Set email hash fingerprint
@@ -88,7 +88,7 @@ export const loginUser = async ( auth, email, password ) => auth.signInWithEmail
 // Update the user profile and return the new user object to store
 export const updateUser = async ( app, userUpdates ) => {
 
-	let { uid, email, newpassword, currentpassword, newavatar, avatar, ...updates } = userUpdates
+	let { uid, email, newpassword, currentpassword, newavatar, avatar, handle, ...updates } = userUpdates
 	
 	try {
 
@@ -121,6 +121,7 @@ export const updateUser = async ( app, userUpdates ) => {
 		// Set other properties to store
 		await app.db.collection( 'users' ).doc( app.auth.currentUser.uid ).set( {
 			...updates,
+			...( handle && { handle: handle.toLowerCase() } ),
 			updated: Date.now()
 		}, { merge: true } )
 
@@ -150,4 +151,4 @@ export const deleteUser = auth => auth.currentUser.delete()
 // ///////////////////////////////
 // Validations
 // ///////////////////////////////
-export const handleIsAvailable = ( db, handle ) => db.collection( 'users' ).where( 'handle', '==', handle ).limit( 1 ).get().then( dataFromSnap ).then( docs => docs.length == 0 )
+export const handleIsAvailable = ( db, handle ) => db.collection( 'users' ).where( 'handle', '==', handle.toLowerCase() ).limit( 1 ).get().then( dataFromSnap ).then( docs => docs.length == 0 )

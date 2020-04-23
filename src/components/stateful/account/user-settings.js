@@ -44,8 +44,9 @@ class UserSettings extends Component {
 
 	// Is handle available?
 	setAvailable = handle => setTimeout( async f => {
+		const { handle: oldHandle } = this.props.user
 		try {
-			const status = await app.handleIsAvailable( handle )
+			const status = handle.toLowerCase() == oldHandle || await app.handleIsAvailable( handle )
 			return this.updateState( { handleAvailable: status } )
 		} catch( e ) {
 			catcher( e )

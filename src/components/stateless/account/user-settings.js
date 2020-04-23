@@ -19,7 +19,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				{ /* User data */ }
 				<Subheading>About you</Subheading>
 				<Input error={ user.name?.length == 0 } label='name' value={ user.name } info='This lets your friends find you.' onChangeText={ t => changeUser( 'name', t ) } />
-				<Input error={ !handleAvailable } label='handle' value={ user.handle } info='Choose a handle that is not taken. This helps friends find you.' onChangeText={ t => changeUser( 'handle', t ) } />
+				<Input error={ !handleAvailable && 'This handle is taken' } label='handle' value={ user.handle } info='Your handle is a unique username you can share with your friends so they can easily find you.' onChangeText={ t => changeUser( 'handle', t ) } />
 				<Input error={ user.bio?.length == 0 } label='bio' value={ user.bio } info='What should people know about you?' onChangeText={ t => changeUser( 'bio', t ) } />
 
 				<Subheading>Account settings</Subheading>

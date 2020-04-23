@@ -30,13 +30,13 @@ export const Subheading = ( { style, ...props } ) => <PaperSubheading style={ { 
 
 // Generic card
 export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, paddingVertical: 10, width: 500, maxWidth: '100%' } }>
-	<PaperCard elevation={ 2 } style={ { padding: 40, maxWidth: '100%', flexWrap: 'wrap', ...style } }>
+	<PaperCard elevation={ 2 } style={ { padding: 40, maxWidth: '100%', ...style } }>
 		{ children }
 	</PaperCard>
 </View>
 
 // Modified view with sensible defaults
-export const View = ( { style, ...props } ) => <NativeView style={ { maxWidth: '100%', flexWrap: 'wrap', ...style } } { ...props } />
+export const View = ( { style, ...props } ) => <NativeView style={ { maxWidth: '100%', ...style } } { ...props } />
 
 // Divider
 export const Divider = ( { style, ...props } ) => <PaperDivider style={ { marginVertical: 20, ...style } } { ...props } />
@@ -72,7 +72,9 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, m
 
 	 const [ showInfo, setInfo ] = useState( false )
 	 const [ height, setHeight ] = useState( undefined )
-	 const adjustHeight = ( { nativeEvent } ) => setHeight( nativeEvent?.contentSize?.height )
+	 const adjustHeight = ( { nativeEvent } ) => {
+	 	if( multiline ) setHeight( nativeEvent?.contentSize?.height )
+	 }
 	 const defaultHeight = f => setHeight( multiline ? 100 : undefined )
 
 	return <View>
@@ -88,7 +90,7 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, m
 		</View>
 
 		{ /* the help message triggeres by the info icon */ }
-		{ ( showInfo || error ) && info && <HelperText type={ error ? 'error' : 'info' }>{ info }</HelperText> }
+		{ ( showInfo || error ) && ( info || error ) && <HelperText type={ error ? 'error' : 'info' }>{ error || info }</HelperText> }
 	</View>
 } )
 
