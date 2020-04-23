@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "nutshell-staging-1b98e"
+    "default": "nutshell-staging-1b98e",
+    "staging": "nutshell-staging-1b98e"
   }
 }
