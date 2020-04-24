@@ -9,7 +9,7 @@
     "test": "jest",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
-    "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && echo 'success 1' && npm run compile:web && echo 'success 2' && firebase use staging && echo 'success 3' && firebase deploy",
+    "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && firebase use staging && expo publish -c --release-channel staging && echo 'success 1' && npm run compile:web && echo 'success 2' && echo 'success 3' && firebase deploy",
     "compile:web": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:web",
     "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
     "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
