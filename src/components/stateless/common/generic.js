@@ -163,4 +163,4 @@ export const Container = withTheme( ( { style, children, theme } ) => <SafeAreaV
 // ///////////////////////////////
 // Pass through exports straignt from paper
 // ///////////////////////////////
-export { Drawer, Portal, Appbar, withTheme, Surface, Text, Title, HelperText, Avatar } from 'react-native-paper'
+export { Drawer, Portal, Appbar, withTheme, Surface, Text, Title, HelperText, Avatar, Caption, IconButton } from 'react-native-paper'
