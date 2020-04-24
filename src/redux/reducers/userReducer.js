@@ -5,8 +5,12 @@ export default ( state=null, action ) => {
 	switch( type ) {
 
 		case "SETUSER":
-		case "UPDATEUSER_FULFILLED":
 			return payload
+		break
+
+		case 'SETUSERMETA':
+		case "UPDATEUSER_FULFILLED":
+			return { ...state, ...payload }
 		break
 
 		// Just return the state if no known action is specified

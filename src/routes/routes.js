@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 // Theming
 import { Provider as PaperProvider } from 'react-native-paper'
 
-// Firebase
+// Firebase api
 import firebase from '../modules/firebase/app'
 
 // Components
@@ -20,6 +20,7 @@ import LoginRegistration from '../components/stateful/onboarding/login-register'
 import UserSettings from '../components/stateful/account/user-settings'
 import WriteNutshell from '../components/stateful/nutshells/write'
 import ReadNutshell from '../components/stateful/nutshells/read'
+import FindFriends from '../components/stateful/account/friends-find'
 
 // Route maneger class
 class Routes extends Component {
@@ -31,6 +32,22 @@ class Routes extends Component {
 	componentDidMount = async () => {
 		await firebase.init()
 		return this.setState( { init: true } )
+	}
+
+	loggedInNotOnboarded = f => {
+
+		const { user, settings } = this.props
+
+		// Logged in?
+		if( !user ) return false
+
+		// All the right settings sets
+		if( !settings?.notifications ) return true
+		if( !user?.bio && !user?.handle ) return true
+
+		// Default is false
+		return false
+
 	}
 
 	shouldComponentUpdate = ( nextProps, nextState ) => {
@@ -48,7 +65,7 @@ class Routes extends Component {
 		if( pathname == '/' && user ) history.push( '/nutshells/write' )
 
 		// Logged in for the first time ( no settings yet )
-		if( pathname != '/user/settings' && ( user && !settings?.notifications ) ) history.push( '/user/settings' )
+		if( pathname != '/user/settings' && this.loggedInNotOnboarded() ) history.push( '/user/settings' )
 
 		// On prop or state chang, always update
 		return true
@@ -65,6 +82,9 @@ class Routes extends Component {
 			{ !init && <Loading message='Loading your stuff' /> }
 			{ /* App router */ }
 			{ init && <Switch>
+
+				{ /* Friends */ }
+				<Route path='/friends/find' component={ FindFriends } />
 
 				{ /* Platform */ }
 				<Route path='/nutshells/read' component={ ReadNutshell } />

@@ -33,13 +33,12 @@ class WriteNutshell extends Component {
 
 	}
 
-	// Set initial context
-	componentDidUpdate = async f => {
-
+	updateEntryInterface = async f => {
 		// Get entries from nutshell and postpend a new one
 		const { nutshell } = this.state
 		let entries = [ ...nutshell.entries ]
 		let updated = false
+
 
 		// If the last entry has no emty space, add a new one
 		const lastEntry = entries[ entries.length - 1 ]
@@ -49,17 +48,25 @@ class WriteNutshell extends Component {
 			updated = true
 		}
 
-		// Check if the last and second last are both empty, if so delete one
-		const secondLastEntry = entries.length > 1 && entries[ entries.length - 2 ]
+		// If there are more than two empty entries, remove one
+		const empty = entries.map( ( entry, index ) => !entry.title.length && !entry.paragraph.length && index ).filter( entry => typeof entry == 'number' )
+		if( empty.length > 1 ) { 
+			// Leave one empty one available
+			empty.pop()
 
-		// If both last and second last are empty, remove last
-		if( secondLastEntry && !lastEntry.title?.length && !lastEntry.paragraph?.length && secondLastEntry && !secondLastEntry.title?.length && !secondLastEntry.paragraph?.length ) {
-			entries = entries.slice[ 0, entries.length - 2 ]
+			// Remove entries whose index is in the empty list
+			const updatedEntries = [ ...entries ].map( ( entry, index ) => empty.includes( index ) ? false : entry ).filter( entry => entry )
+
+			// Set entries to the updated ones
+			entries = updatedEntries
 			updated = true
-		}	
+		}
 
 		if( updated ) return this.updateState( { nutshell: { ...nutshell, entries: entries } } )
 	}
+	// Set initial context
+	componentDidMount = f => this.updateEntryInterface()
+	componentDidUpdate = f => this.updateEntryInterface()
 
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
@@ -81,8 +88,26 @@ class WriteNutshell extends Component {
 		return this.updateState( { changesMade: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
 	}
 
+	// Inspiration
+	inspire = f => {
+		const inspirations = [
+			`what are you struggling with?`,
+			`what are you proud of?`,
+			`what do you feel good about?`,
+			`what are your plans?`,
+			`what has changed in your life?`,
+			`what are you relieved about?`,
+			`what do you need help with?`,
+			`what has been going well?`,
+			`what is bothering you?`,
+			`what have you been working on?`
+		]
+
+		return inspirations[ inspirations.length * Math.random() | 0 ]
+	}
+
 	// Sumbit data to firebase
-	saveDraft = async f => {
+	saveDraft = async ( { type } ) => {
 
 		const { nutshell } = this.state
 		const { entries, scheduled, id } = nutshell
@@ -122,7 +147,7 @@ class WriteNutshell extends Component {
 		return <Container>
 			<Navigation title='Write your nutshell' />
 			<Main.Center>
-				<Editor background={ theme.colors.background } changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
+				<Editor inspire={ this.inspire } background={ theme.colors.background } changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
 			</Main.Center>
 		</Container>
 
@@ -131,7 +156,7 @@ class WriteNutshell extends Component {
 }
 
 export default connect( store => ( {
-	user: store.user,
-	nutshell: store.nutshells?.draft,
+	user: store.user || {},
+	nutshell: store.nutshells?.draft || {},
 	theme: store.settings.theme
 } ) )( WriteNutshell )

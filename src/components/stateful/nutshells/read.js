@@ -5,7 +5,7 @@ import { Component, Container, Loading, Main, Text } from '../../stateless/commo
 import Navigation from '../common/navigation'
 
 // Data
-import { log, getuid } from '../../../modules/helpers'
+import { log } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux

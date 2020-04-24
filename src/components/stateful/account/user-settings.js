@@ -35,10 +35,23 @@ class UserSettings extends Component {
 				},
 				...settings
 			},
-			passwordRequired: false
+			passwordRequired: false,
+			handleAvailable: true,
+			timeout: 2000
 		}
+
 	}
 
+	// Is handle available?
+	setAvailable = handle => setTimeout( async f => {
+		const { handle: oldHandle } = this.props.user
+		try {
+			const status = handle.toLowerCase() == oldHandle || await app.handleIsAvailable( handle )
+			return this.updateState( { handleAvailable: status } )
+		} catch( e ) {
+			catcher( e )
+		}
+	}, this.state.timeout )
 
 	// Sensitive input?
 	isSensitive = f => { 
@@ -53,7 +66,31 @@ class UserSettings extends Component {
 	}
 
 	// Input handlers
-	changeUser 			= ( key, value ) => this.updateState( { user: { ...this.state.user, [key]: value } } ).then( this.isSensitive )
+	changeUser = ( key, value ) => {
+
+		// Set changed attr and check if pass is required for this change
+		if( key != 'handle' ) return this.updateState( { user: { ...this.state.user, [key]: value } } ).then( this.isSensitive )
+
+		// If handle was changed
+		const { user: oldUser } = this.props
+		const { validator } = this.state
+		const isSame = oldUser?.handle == value
+
+		// Clear old checker
+		if( validator ) clearTimeout( validator )
+
+		// Set user attribure and checker
+		return this.updateState( {
+			user: {
+				...this.state.user,
+				[key]: value,
+				...( isSame && { handleAvailable: isSame } )
+			},
+			validator: !isSame && this.setAvailable( value )
+		} )
+
+	}
+
 	changeSetting 		= ( key, value ) => this.updateState( { settings: { ...this.state.settings, [key]: value } } )
 	changeNotification 	= ( key, value ) => this.updateState( { settings: {
 		...this.state.settings,
@@ -63,9 +100,12 @@ class UserSettings extends Component {
 	// Save changes
 	saveChanges = async f => {
 
-		const { user, settings } = this.state
+		const { user, settings, handleAvailable } = this.state
 		const { user: originalUser, settings: originalSettings } = this.props
 		const { uid } = originalUser
+
+		// Handle is available?
+		if( !handleAvailable ) return alert( 'This handle is taken, please choose another' )
 
 		// Avatar processing
 		if( user.newavatar ) {
@@ -92,6 +132,11 @@ class UserSettings extends Component {
 		await this.updateState( { loading: true } )
 
 		try {
+
+			// DOuble check handle availability
+			const available = await app.handleIsAvailable( user.handle )
+			if( !available ) alert( 'This handle is taken, please choose another' )
+
 			await app.updateUser( user )
 			// If there were changed, propagate
 			if( originalSettings != settings ) await app.updateSettings( settings )
@@ -100,7 +145,7 @@ class UserSettings extends Component {
 		} catch( e ) {
 			catcher( e )
 		} finally {
-			await this.updateState( { user: {}, loading: false, passwordRequired: false } )
+			await this.updateState( { user: {}, loading: false, passwordRequired: false, handleAvailable: true } )
 		}
 
 	}
@@ -108,14 +153,14 @@ class UserSettings extends Component {
 
 	render() {
 
-		const { loading, user: newuser, settings: newsettings, passwordRequired } = this.state
+		const { loading, user: newuser, settings: newsettings, passwordRequired, handleAvailable } = this.state
 		const { settings, user } = this.props
 
 		if( !user || loading ) return <Loading message={ loading } />
 
 		return <Container>
 			<Navigation title='User settings' />
-			<Settings passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
+			<Settings handleAvailable={ handleAvailable } passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
 		</Container>
 
 	}

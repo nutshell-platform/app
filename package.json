@@ -1,21 +1,22 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "development=true expo start",
-    "android": "development=true expo start --android",
-    "ios": "development=true expo start --ios",
-    "web": "development=true expo start --web",
-    "hybrid": "development=true expo start --android --web",
+    "start": "export development=true expo start",
+    "android": "export development=true && expo start --android",
+    "ios": "export development=true && expo start --ios",
+    "web": "export development=true && expo start --web",
+    "hybrid": "export development=true && expo start --android --web",
     "test": "jest",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
-    "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web && firebase deploy --only hosting",
+    "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web && firebase use staging && firebase deploy",
     "compile:web": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:web",
     "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
     "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
-    "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web && firebase deploy --only hosting",
+    "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web && firebase deploy hosting",
     "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
-    "reset": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i"
+    "reset": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
+    "diagnostics": "expo diagnostics"
   },
   "jest": {
     "preset": "jest-expo",
@@ -25,10 +26,10 @@
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
-    "@sentry/browser": "^5.15.4",
+    "@sentry/browser": "^5.15.5",
     "babel-preset-expo": "^8.1.0",
-    "expo": "^37.0.6",
-    "expo-cli": "^3.17.20",
+    "expo": "^37.0.7",
+    "expo-cli": "^3.18.6",
     "expo-constants": "~9.0.0",
     "expo-image-manipulator": "~8.1.0",
     "expo-image-picker": "~8.1.0",
@@ -56,7 +57,7 @@
   },
   "devDependencies": {
     "firebase-tools": "^8.1.1",
-    "jest": "^25.3.0",
+    "jest": "^25.4.0",
     "jest-expo": "^37.0.0",
     "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "^16.13.1",

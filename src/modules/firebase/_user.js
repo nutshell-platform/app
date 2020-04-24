@@ -46,12 +46,22 @@ export const listenUserChanges = ( app, dispatch, action ) => {
 
 }
 
+export const listenUserMetaChanges = ( app, dispatch, action ) => {
+
+	app.db.collection( 'userMeta' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
+
+		return dispatch( action( dataFromSnap( doc, false ) ) )
+
+	} )
+
+}
+
 // ///////////////////////////////
 // User actions
 // ///////////////////////////////
 
 // Register a new user by email and password
-export const registerUser = async ( app, name, email, password ) => {
+export const registerUser = async ( app, name, handle, email, password ) => {
 
 	try {
 		// Create account
@@ -59,7 +69,8 @@ export const registerUser = async ( app, name, email, password ) => {
 
 		// Update profile to include name, this also triggers redux
 		await app.updateUser( {
-			name: name
+			name: name,
+			handle: handle.toLowerCase()
 		} )
 
 		// Set email hash fingerprint
@@ -77,7 +88,7 @@ export const loginUser = async ( auth, email, password ) => auth.signInWithEmail
 // Update the user profile and return the new user object to store
 export const updateUser = async ( app, userUpdates ) => {
 
-	let { uid, email, newpassword, currentpassword, newavatar, avatar, ...updates } = userUpdates
+	let { uid, email, newpassword, currentpassword, newavatar, avatar, handle, ...updates } = userUpdates
 	
 	try {
 
@@ -110,6 +121,7 @@ export const updateUser = async ( app, userUpdates ) => {
 		// Set other properties to store
 		await app.db.collection( 'users' ).doc( app.auth.currentUser.uid ).set( {
 			...updates,
+			...( handle && { handle: handle.toLowerCase() } ),
 			updated: Date.now()
 		}, { merge: true } )
 
@@ -135,3 +147,8 @@ export const logoutUser = auth => auth.signOut()
 
 // Delete
 export const deleteUser = auth => auth.currentUser.delete()
+
+// ///////////////////////////////
+// Validations
+// ///////////////////////////////
+export const handleIsAvailable = ( db, handle ) => db.collection( 'users' ).where( 'handle', '==', handle.toLowerCase() ).limit( 1 ).get().then( dataFromSnap ).then( docs => docs.length == 0 )
