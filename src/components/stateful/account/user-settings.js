@@ -115,8 +115,8 @@ class UserSettings extends Component {
 			const extension = dataUriExt ? dataUriExt[1] : 'jpg'
 			if( ![ 'png', 'jpg', 'jpeg' ].includes( extension ) ) return alert( 'Please select a png or jpg image.' )
 
-			// Compress the image
-			const resize = [ { resize: { width: 500, height: 500 } } ]
+			// Compress the image, setting only width in resize makes height auto
+			const resize = [ { resize: { width: 500} } ]
 			const options = { compress: .8 }
 			user.newavatar = await ImageManipulator.manipulateAsync( user.newavatar.uri, resize, options )
 
@@ -134,8 +134,10 @@ class UserSettings extends Component {
 		try {
 
 			// DOuble check handle availability
-			const available = await app.handleIsAvailable( user.handle )
-			if( !available ) alert( 'This handle is taken, please choose another' )
+			if( user.handle ) {
+				const available = await app.handleIsAvailable( user.handle )
+				if( !available ) return alert( 'This handle is taken, please choose another' )
+			}
 
 			await app.updateUser( user )
 			// If there were changed, propagate
