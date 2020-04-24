@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity } from 'react-native'
-import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading } from 'react-native-paper'
+import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading, Searchbar } from 'react-native-paper'
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -118,6 +118,12 @@ export const Toggle = withTheme( ( { style, theme, value, label, onToggle, info,
 
 	</View>
 } )
+
+// Search bar
+export const Search = ( { style, searching, ...props } ) => <View>
+	<Searchbar { ...props } />
+	{ searching && <ActivityIndicator style={ { position: 'absolute', right: 0, height: '100%', paddingHorizontal: 15, backgroundColor: 'white' } } /> }
+</View>
 
 // ///////////////////////////////
 // Screens

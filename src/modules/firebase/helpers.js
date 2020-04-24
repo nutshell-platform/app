@@ -1,4 +1,5 @@
 import { catcher, error } from '../helpers'
+import { SHA3 } from 'sha3'
 
 export const dataFromSnap = ( snapOfDocOrDocs, withDocId=true ) => {
 
@@ -11,4 +12,4 @@ export const dataFromSnap = ( snapOfDocOrDocs, withDocId=true ) => {
 
 }
 
-export const another = true
+export const hash = string => new SHA3( 512 ).update( string || `${Date.now()}-${Math.random()}` ).digest( 'hex' )

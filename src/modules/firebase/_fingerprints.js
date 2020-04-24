@@ -1,8 +1,7 @@
-import { SHA3 } from 'sha3'
-import { dataFromSnap } from './helpers'
+import { dataFromSnap, hash } from './helpers'
 
 export const setEmailFingerprint = ( db, user ) => {
-	const emailHash = new SHA3( 512 ).update( user.email ).digest( 'hex' )
+	const emailHash = hash( user.email )
 	return db.collection( 'fingerprints' ).doc( user.uid ).set( { email: emailHash }, { merge: true } )
 }
 

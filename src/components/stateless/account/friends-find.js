@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, Text, View, UserAvatar, Button } from '../common/generic'
 
 export const ListResults = ( { results=[], follow, unfollow } ) => <View style={ { width: '100%', paddingTop: 20 } }>
+	{ results.length == 0 && <Text style={ { textAlign: 'center' } }>No users found, try a different query</Text> }
 	{ results.map( user => <Card key={ user.uid }>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />
