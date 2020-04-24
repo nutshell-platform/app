@@ -10,12 +10,12 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 
 	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ nextMonday().toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d* )/ )[0] }`
 
-	return <Main.Center>
+	return <View>
 		<View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
 			<Card style={ { paddingTop: 0, width: 500 } } >
 
 				{ /* Meta overview */ }
-				<View style={ { width: '100%', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center', paddingBottom: 20 } }>
+				<View style={ { width: '100%', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' } }>
 					<UserAvatar style={ { marginTop: -avatarSize/2 } } size={ avatarSize } user={ user } />
 					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' } }>
 						
@@ -26,21 +26,23 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 					</View>
 				</View>
 
-				{ entries.map( ( { uid, title, paragraph }, i ) => <Entry
-						isFirst={ i == 0 }
-						key={ uid }
-						title={ title }
-						paragraph={ paragraph }
-						onInput={ ( attr, text ) => updateEntry( uid, attr, text ) }
-						maxTitleLength={ maxTitleLength }
-						maxParagraphLength={ maxParagraphLength }
-					/>
-				) }
-
 				{ changesMade && <Button onPress={ saveDraft }>Save changes</Button> }
 			</Card>
+
+
+			{ entries.map( ( { uid, title, paragraph }, i ) => <Entry
+					isFirst={ i == 0 }
+					key={ uid }
+					title={ title }
+					paragraph={ paragraph }
+					onInput={ ( attr, text ) => updateEntry( uid, attr, text ) }
+					maxTitleLength={ maxTitleLength }
+					maxParagraphLength={ maxParagraphLength }
+				/>
+			) }
+
 		</View>
-	</Main.Center>
+	</View>
 }
 
 export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLength, maxParagraphLength } ) => {
@@ -51,7 +53,7 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLengt
 	const onFocus = f => setOpaque( true )
 	const onBlur = f => setOpaque( title.length > 0 || paragraph.length > 0 || isFirst )
 
-	return <View style={ { paddingVertical: 20, opacity: opaque ? 1 : .2 } }>
+	return <Card style={ { paddingVertical: 20, opacity: opaque ? 1 : .5 } }>
 		<Input
 			onFocus={ onFocus }
 			onBlur={ onBlur }
@@ -73,5 +75,5 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLengt
 			onChangeText={ text => onInput( 'paragraph', text ) }
 			multiline={ true }
 		/>
-	</View>
+	</Card>
 }
