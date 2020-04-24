@@ -31,10 +31,10 @@ jobs:
           node-version: '13.x'
 
       - name: Install dependencies
-        run: npm i
+        run: |
+          npm i
+          npm i -g sharp-cli
 
-      - name: Install sharpe ( used by expo optimise )
-        run: npm i -g sharp-cli
 
       - uses: expo/expo-github-action@v5
         with:
@@ -48,3 +48,9 @@ jobs:
           echo -e "${{ secrets.DOTENV }}" > .env
           cat .env
           npm run stage
+
+      - name: Deploy to Firebase
+        run: |
+        sudo npm install -g firebase-tools
+        firebase use staging
+        firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
