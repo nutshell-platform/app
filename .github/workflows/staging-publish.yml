@@ -33,6 +33,9 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      - name: Install sharpe ( used by expo optimise )
+        run: npm i -g sharp-cli
+
       - uses: expo/expo-github-action@v5
         with:
           expo-version: 3.x
