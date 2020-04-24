@@ -51,6 +51,6 @@ jobs:
 
       - name: Deploy to Firebase
         run: |
-        sudo npm install -g firebase-tools
-        firebase use staging
-        firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+          sudo npm install -g firebase-tools
+          firebase use staging
+          firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
