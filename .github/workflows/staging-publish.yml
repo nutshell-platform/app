@@ -34,6 +34,9 @@ jobs:
         run: |
           npm i
           npm i -g sharp-cli
+          cd functions
+          npm i
+          cd ..
 
 
       - uses: expo/expo-github-action@v5
