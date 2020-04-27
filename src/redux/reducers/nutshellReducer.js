@@ -9,6 +9,9 @@ export default ( state = {}, action ) => {
 			return { ...state, draft: payload || {} }
 		break
 
+		case "SETINBOX":
+			return { ...state, inbox: payload || [] }
+		break
 
 		// Just return the state if no known action is specified
 		default:

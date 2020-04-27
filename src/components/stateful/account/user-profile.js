@@ -26,10 +26,11 @@ class UserProfile extends Component {
 
 		try {
 			const profile = await app.getPerson( handle )
-			const nutshells = await app.getNutshells( profile.uid )
+			const nutshells = await app.getNutshellsOfUser( profile.uid )
 			await this.updateState( { profile: profile, nutshells: nutshells, loading: false } )
 		} catch( e ) {
 
+			log( e )
 			// Unable to find user
 			const { history } = this.props 
 			history.push( '/404' )

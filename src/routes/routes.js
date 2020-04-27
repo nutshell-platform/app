@@ -64,7 +64,7 @@ class Routes extends Component {
 		// Not logged in but not on the home page => go to home
 		if( pathname != '/' && !user ) history.push( '/' )
 		// If logged in but at home => go to profile
-		if( pathname == '/' && user ) history.push( '/nutshells/write' )
+		if( pathname == '/' && user ) history.push( '/nutshells/read' )
 
 		// Logged in for the first time ( no settings yet )
 		if( pathname != '/user/settings' && this.loggedInNotOnboarded() ) history.push( '/user/settings' )

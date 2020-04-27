@@ -12,7 +12,7 @@ const { dispatch } = store
 // Actions
 import { setUserAction, setUserMetaAction } from '../../redux/actions/userActions'
 import { setSettingsAction } from '../../redux/actions/settingsActions'
-import { setNutshellDraft } from '../../redux/actions/nutshellActions'
+import { setNutshellDraft, setNutshellInbox } from '../../redux/actions/nutshellActions'
 
 // Config
 import config from './config'
@@ -21,7 +21,7 @@ import config from './config'
 import { listenForUserAndStartListeners, unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshells } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson } from './_friends'
 
 // ///////////////////////////////
@@ -58,9 +58,10 @@ class Firebase {
 	// ///////////////////////////////
 	// nutshells
 	// ///////////////////////////////
-	createNutshell = nutshell => createNutshell( this, nutshell )
-	updateNutshell = nutshell => updateNutshell( this, nutshell )
-	getNutshells   = uid 	  => getNutshells( this.db, uid )
+	createNutshell     = nutshell => createNutshell( this, nutshell )
+	updateNutshell     = nutshell => updateNutshell( this, nutshell )
+	getNutshellsOfUser = uid 	  => getNutshellsOfUser( this, uid )
+	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid )
 
 	// ///////////////////////////////
 	// friends
@@ -82,7 +83,8 @@ class Firebase {
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },
 			{ name: 'meta', listener: listenUserMetaChanges, action: setUserMetaAction },
 			{ name: 'settings', listener: listenSettings, action: setSettingsAction },
-			{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft }
+			{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft },
+			{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox }
 		] )
 
 	} )

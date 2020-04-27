@@ -101,7 +101,9 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, m
 } )
 
 // Button
-export const Button = ( { style, mode, children, ...props } ) => <PaperButton style={ { marginTop: 20, ...style } } mode={ mode || 'contained' } { ...props }>{ children }</PaperButton>
+export const Button = ( { style, mode, children, to, ...props } ) => <PaperButton style={ { marginTop: 20, ...style } } mode={ mode || 'contained' } { ...props }>
+	{ to ? <Link style={ { color: 'white' } } to={ to }>{ children }</Link> : children }
+</PaperButton>
 
 // Toggle
 export const Toggle = withTheme( ( { style, theme, value, label, onToggle, info, error, ...props } ) => {
