@@ -21,6 +21,8 @@ import UserSettings from '../components/stateful/account/user-settings'
 import WriteNutshell from '../components/stateful/nutshells/write'
 import ReadNutshell from '../components/stateful/nutshells/read'
 import FindFriends from '../components/stateful/account/friends-find'
+import UserProfile from '../components/stateful/account/user-profile'
+import FourOhFour from '../components/stateless/common/404'
 
 // Route maneger class
 class Routes extends Component {
@@ -92,6 +94,12 @@ class Routes extends Component {
 
 				{ /* Account specific */ }
 				<Route path='/user/settings' component={ UserSettings } />
+
+				{ /* Home */ }
+				<Route path='/404' component={ FourOhFour } />
+
+				{ /* Unknown url? Check if it is a user */ }
+				<Route path='/:handle' component={ UserProfile } />
 
 				{ /* Home */ }
 				<Route path='/' component={ LoginRegistration } />
