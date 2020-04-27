@@ -21,6 +21,7 @@ export default ( { props } ) => {
 			</Paragraph>
 
 			{ !beNice && <Button onPress={ f => toggle( !beNice ) }>Question self reflection</Button> }
+			{ beNice && <Button to='/'>Go to your profile</Button> }
 		</View>
 	</Main.Center>
 </Container>

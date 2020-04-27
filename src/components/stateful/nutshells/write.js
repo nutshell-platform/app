@@ -110,7 +110,7 @@ class WriteNutshell extends Component {
 	saveDraft = async ( { type } ) => {
 
 		const { nutshell } = this.state
-		const { entries, scheduled, id } = nutshell
+		const { entries, scheduled, uid } = nutshell
 
 		// Validation
 		// Only send entries with a title
@@ -120,8 +120,8 @@ class WriteNutshell extends Component {
 
 		// If hutshell already exists update it
 		try {
-			if( id ) await app.updateNutshell( nutshell )
-			if( !id ) await app.createNutshell( nutshell )
+			if( uid ) await app.updateNutshell( nutshell )
+			if( !uid ) await app.createNutshell( nutshell )
 			await this.updateState( { changesMade: false } )
 		} catch( e ) {
 			alert( e )

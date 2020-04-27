@@ -26,7 +26,7 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, following
 
 			</Card>
 
-			{ nutshells.map( nutshell => <NutshellCard key={ nutshell.uid } nutshell={ nutshell } /> ) }
+			{ nutshells.map( nutshell => <NutshellCard status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 
 		</View>
 	</Main.Center>
