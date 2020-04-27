@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity } from 'react-native'
 import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading, Searchbar } from 'react-native-paper'
+import { Link as NativeLink } from '../../../routes/router'
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -62,6 +63,11 @@ export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStype,
 
 	</TouchableOpacity>
 } )
+
+export const Link = withTheme( ( { style, theme, ...props } ) => <NativeLink
+	style={ { color: theme.colors.text, textDecorationLine: 'none', ...theme.fonts.regular, ...style } }
+	{ ...props }
+/> )
 
 // ///////////////////////////////
 // Input components
@@ -163,4 +169,4 @@ export const Container = withTheme( ( { style, children, theme } ) => <SafeAreaV
 // ///////////////////////////////
 // Pass through exports straignt from paper
 // ///////////////////////////////
-export { Drawer, Portal, Appbar, withTheme, Surface, Text, Title, HelperText, Avatar, Caption, IconButton } from 'react-native-paper'
+export { Drawer, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, HelperText, Avatar, Caption, IconButton } from 'react-native-paper'

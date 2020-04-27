@@ -57,10 +57,7 @@ class Navigation extends Component {
 
 	}
 
-	toggleDarkMode = f => {
-		console.log( 'Toggle dark' )
-		return this.props.dispatch( toggleDarkMode() )
-	}
+	toggleDarkMode = f => this.props.dispatch( toggleDarkMode() )
 
 	render( ) {
 

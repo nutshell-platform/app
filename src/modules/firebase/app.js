@@ -21,8 +21,8 @@ import config from './config'
 import { listenForUserAndStartListeners, unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell } from './_nutshells'
-import { getRandomPeople, followPerson, unfollowPerson, findPerson } from './_friends'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshells } from './_nutshells'
+import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson } from './_friends'
 
 // ///////////////////////////////
 // Firebase manager class
@@ -60,6 +60,7 @@ class Firebase {
 	// ///////////////////////////////
 	createNutshell = nutshell => createNutshell( this, nutshell )
 	updateNutshell = nutshell => updateNutshell( this, nutshell )
+	getNutshells   = uid 	  => getNutshells( this.db, uid )
 
 	// ///////////////////////////////
 	// friends
@@ -68,6 +69,8 @@ class Firebase {
 	followPerson 	= theirUid => followPerson( this, theirUid )
 	unfollowPerson 	= theirUid => unfollowPerson( this, theirUid )
 	findPerson      = query => findPerson( this, query )
+	getPerson 		= ( query, by='handle' ) => getPerson( this.db, query, by )
+	
 	// ///////////////////////////////
 	// Initialisation
 	// ///////////////////////////////

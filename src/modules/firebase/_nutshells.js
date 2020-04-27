@@ -36,3 +36,5 @@ export const listenToLatestNutshell = ( app, dispatch, action ) => {
 
 		} )
 }
+
+export const getNutshells = ( db, uid ) => db.collection( 'nutshells' ).where( 'owner', '==', uid ).limit( 5 ).get().then( dataFromSnap )

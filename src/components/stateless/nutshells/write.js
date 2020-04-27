@@ -5,11 +5,11 @@ import { TouchableOpacity } from 'react-native'
 import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View, ToolTip, Caption, IconButton } from '../common/generic'
 
 // Data
-import { weekNumber, nextMonday } from '../../../modules/helpers'
+import { weekNumber, nextMonday, timestampToHuman } from '../../../modules/helpers'
 
 export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, changesMade, background='grey', inspire } ) => {
 
-	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ nextMonday().toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d* )/ )[0] }`
+	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( nextMonday() ) }`
 
 	return <View>
 		<View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
