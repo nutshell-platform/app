@@ -6,7 +6,7 @@ import { Editor } from '../../stateless/nutshells/write'
 import Navigation from '../common/navigation'
 
 // Data
-import { log, getuid } from '../../../modules/helpers'
+import { log, getuid, nextMonday } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux
@@ -115,6 +115,9 @@ class WriteNutshell extends Component {
 		// Validation
 		// Only send entries with a title
 		nutshell.entries = entries.filter( entry => entry.title.length > 0 )
+
+		// Set the next ublish day to the next monday
+		nutshell.published = nextMonday().getTime()
 
 		await this.updateState( { loading: 'Submitting your nutshell to the cloud. Weird how that goes.' } )
 
