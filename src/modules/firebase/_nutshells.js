@@ -13,7 +13,7 @@ export const createNutshell = ( app, nutshell ) => {
 export const updateNutshell = ( app, nutshell ) => {
 
 	const { uid } = nutshell
-	delete nutshell.id
+	delete nutshell.uid
 
 	return app.db.collection( 'nutshells' ).doc( uid ).set( {
 		...nutshell,
