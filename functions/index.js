@@ -40,7 +40,7 @@ exports.follow = functions.firestore.document( 'relationships/{relationId}' ).on
 // ///////////////////////////////
 // Cron
 // ///////////////////////////////
-exports.publish = functions.pubsub.schedule( 'every 1 hours' ).onRun( async context => {
+exports.publish = functions.pubsub.runWith( { timeoutSeconds: 540, memory: '2GB' } ).schedule( 'every 1 hours' ).onRun( async context => {
 
 	try {
 
@@ -48,6 +48,7 @@ exports.publish = functions.pubsub.schedule( 'every 1 hours' ).onRun( async cont
 		// Get nutshells scheduled for the pase
 		// ///////////////////////////////
 		const queue = await db.collection( 'nutshells' ).where( 'status', '==', 'scheduled' ).where( 'published', '<=', Date.now() ).get().then( dataFromSnap )
+		if( queue.length == 0 ) return null
 		const nutshells = queue.map( ( { uid, owner } ) => ( { uid, owner } ) )
 
 		// ///////////////////////////////
