@@ -74,7 +74,7 @@ export const Link = withTheme( ( { style, theme, ...props } ) => <NativeLink
 // ///////////////////////////////
 
 // Generic text input
-export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, multiline, iconSize=30, value, ...props } ) => {
+export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, onSubmit, multiline, iconSize=30, value, ...props } ) => {
 
 	 const [ showInfo, setInfo ] = useState( false )
 	 const [ height, setHeight ] = useState( undefined )
@@ -82,12 +82,15 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, m
 	 	if( multiline ) setHeight( nativeEvent?.contentSize?.height )
 	 }
 	 const defaultHeight = f => setHeight( multiline ? 100 : undefined )
+	 const manageEnter = ( { nativeEvent } ) => {
+	 	if( nativeEvent.key == 'Enter' ) return onSubmit()
+	 }
 
 	return <View>
 		<View style={ { position: 'relative' } }>
 
 			{ /* The actual input */ }
-			<TextInput value={ value || '' } onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ { ...( height && { height: height } ),marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
+			<TextInput onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ { ...( height && { height: height } ),marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
 
 			{ /* The info icon */ }
 			{ info && ( !hideInfo || ( hideInfo && !value ) ) && <TouchableOpacity tabindex={ -1 } style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'flex-start' } } onPress={ f => setInfo( !showInfo ) }>

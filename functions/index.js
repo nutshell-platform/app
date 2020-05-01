@@ -40,7 +40,7 @@ exports.follow = functions.firestore.document( 'relationships/{relationId}' ).on
 // ///////////////////////////////
 // Cron
 // ///////////////////////////////
-exports.publish = functions.pubsub.runWith( { timeoutSeconds: 540, memory: '2GB' } ).schedule( 'every 1 hours' ).onRun( async context => {
+exports.publish = functions.pubsub.schedule( 'every 1 hours' ).onRun( async context => {
 
 	try {
 

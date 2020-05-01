@@ -44,9 +44,16 @@ class Routes extends Component {
 		// Logged in?
 		if( !user ) return false
 
-		// All the right settings sets
-		if( !settings?.notifications ) return true
-		if( !user?.bio && !user?.handle ) return true
+		// Force onboarding if things are missing
+		if( user && settings ) {
+
+			// Notification settings incomplete
+			if( settings.notifications && Object.keys( settings.notifications ).length < 4 ) return true
+
+			// User has no bio or handle
+			if( user && ( !user.bio || !user.handle ) ) return true
+				
+		}
 
 		// Default is false
 		return false
@@ -64,7 +71,7 @@ class Routes extends Component {
 
 		// Not logged in but not on the home page => go to home
 		if( pathname != '/' && !user ) history.push( '/' )
-		// If logged in but at home => go to profile
+		// If logged in but at slash => go to profile
 		if( pathname == '/' && user ) history.push( '/nutshells/read' )
 
 		// Logged in for the first time ( no settings yet )

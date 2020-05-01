@@ -136,7 +136,8 @@ export const updateUser = async ( app, userUpdates ) => {
 export const getUserProfile = async ( db, user ) => ( {
 	uid: user.uid,
 	email: user.email,
-	...( await db.collection( 'users' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) )
+	...( await db.collection( 'users' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) ),
+	...( await db.collection( 'userMeta' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) )
 } )
 
 // Recover password

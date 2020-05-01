@@ -5,8 +5,6 @@ import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
 
-console.log( firebase.firestore.FieldValue )
-
 // Redux
 import { store } from '../../redux/store'
 const { dispatch } = store

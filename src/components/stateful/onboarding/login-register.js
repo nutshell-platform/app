@@ -35,7 +35,6 @@ export default class LoginRegister extends Component {
 	onInput = ( key, value ) => {
 
 		const { action, validator } = this.state
-
 		// If not handle, just udate
 		if( key != 'handle' ) return this.updateState( { [key]: value } )
 
@@ -80,13 +79,12 @@ export default class LoginRegister extends Component {
 			if( action == 'login' ) await app.loginUser( email.trim(), password )
 			if( action == 'register' ) await app.registerUser( name.trim(), handle.trim(), email.trim(), password )
 			if( action == 'recover' ) await app.resetPassword( email.trim() )
-			return history.push( '/user/settings' )
+			return history.push( '/' )
 		} catch( e ) {
 			log( e )
 			alert( e )
+			return this.updateState( { loading: false } )
 		}
-
-		await this.updateState( { loading: false } )
 	}
 
 	render() {
