@@ -1,18 +1,27 @@
+import { Alert as NativeAlert, Platform } from 'react-native'
+
+// ///////////////////////////////
+// Constants
+// ///////////////////////////////
+export const dev = process.env.NODE_ENV == 'development'
+export const isWeb = Platform.OS == 'web'
 // ///////////////////////////////
 // Visual
 // ///////////////////////////////
-
-import { Alert as NativeAlert } from 'react-native'
-
 export const Dialogue = ( title, message, options=[ { text: 'ok', onPress: f => Promise.resolve() } ] ) => new Promise( resolve => {
 
 	// Option has text and onpress
-	NativeAlert.alert(
+	if( !isWeb ) NativeAlert.alert(
 		title,
 		message,
 		options.map( option => ( { ...option, onPress: f => option.onPress && option.onPress().then( res => resolve( res ) ) } ) ),
 		{ cancelable: true }
 	 )
+
+	if( isWeb ) {
+		if( confirm( `${title}\n\n${message}` ) ) options[0].onPress().then( resolve )
+		else resolve()
+	}
 
 } )
 
@@ -23,6 +32,7 @@ export const capitalize = string => string ? string.charAt(0).toUpperCase() + st
 // ///////////////////////////////
 // Debugging
 // ///////////////////////////////
+
 export const log = msg => {
 	if( process.env.NODE_ENV == 'development' ) console.log( msg )
 }

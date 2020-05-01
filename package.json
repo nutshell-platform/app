@@ -18,7 +18,8 @@
     "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web",
     "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
     "reset": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
-    "diagnostics": "expo diagnostics"
+    "diagnostics": "expo diagnostics",
+    "i": "expo install"
   },
   "jest": {
     "preset": "jest-expo",
@@ -55,7 +56,9 @@
     "redux-promise-middleware": "^6.1.2",
     "sentry-expo": "^2.0.4",
     "uuid": "^7.0.3",
-    "firebase": "7.9.0"
+    "firebase": "7.9.0",
+    "expo-updates": "~0.1.2",
+    "expo-network": "~2.1.0"
   },
   "devDependencies": {
     "firebase-tools": "^8.2.0",
