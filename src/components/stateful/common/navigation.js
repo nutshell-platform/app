@@ -82,7 +82,7 @@ class Navigation extends Component {
 				// Dynamic links when user is logged in
 				...( user ? [
 					{ label: 'Profile', to: `/${user.handle}` },
-					// { label: 'Friends', to: '/friends/find' },
+					{ label: 'Friends', to: '/friends/manage' },
 					{ label: 'Settings', to: '/user/settings' },
 					{ label: 'Logout', onPress: app.logout }
 				] : [] )

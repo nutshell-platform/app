@@ -16,23 +16,38 @@ class FindFriends extends Component {
 
 	// initialise state
 	state = {
-		loading: 'Loading random people. Not randos though, nice people.',
+		loading: false,
+		timeout: 1000,
 		newFollows: [],
 		newUnfollows: [],
-		timeout: 1000,
-		filter: 'all'
+		results: []
 	}
 
-	componentDidMount = f => this.defaultSearch()
+	loadFollowerDetails = async f => {
+		const { loading } = this.state 
+		if( loading ) return
+		await this.updateState( { loading: 'Loading your friend details' } )
+		const { following } = this.props.user
+		const friends = await Promise.all( following.map( uid => app.getPerson( uid, 'uid' ) ) )
+		return this.updateState( { results: friends, loading: false } )
+	}
+
+	componentDidMount = async f => this.loadFollowerDetails()
+
+	shouldComponentUpdate = async ( nextprops, nextstate ) => {
+		const { followers } = nextprops.user
+		const { results, loading } = nextstate
+
+		// If loading or no followers, do nothing
+		if( loading || !followers ) return false
+
+		// If remote followers are more than local, get follower details
+		if( followers.length > results.length ) await this.loadFollowerDetails()
+		return true
+	}
 
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
-
-	// Set random people as results
-	defaultSearch = async f => {
-		const people = await app.getRandomPeople(  )
-		return this.updateState( { results: people, loading: false } )
-	}
 
 	// Search manager interface
 	search = query => {
@@ -89,16 +104,7 @@ class FindFriends extends Component {
 		const { results, newFollows, newUnfollows, filter } = this.state
 		const { following: oldFollows } = this.props.user
 		const allFollows = [ ...oldFollows, ...newFollows ].filter( fuid => !newUnfollows.includes( fuid ) )
-
-		const sortedResults = results.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
-		if( filter == 'all' ) return sortedResults
-		// Disable sorting based on following status for now
-		// .sort( ( a, b ) => {
-		// 	// Followed users go below
-		// 	if( a.following == b.following ) return 0
-		// 	if( a.following && !b.following ) return 1
-		// 	if( !a.following && b.following ) return -1
-		// } )
+		return results.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
 
 
 	}
@@ -122,5 +128,5 @@ class FindFriends extends Component {
 }
 
 export default connect( store => ( {
-	user: store.user
+	user: store.user || {}
 } ) )( FindFriends )
