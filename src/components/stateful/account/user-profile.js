@@ -60,6 +60,7 @@ class UserProfile extends Component {
 		const isSelf = user?.uid == profile?.uid
 		const noDraft = !( draft?.entries?.length > 0 )
 
+
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>

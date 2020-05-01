@@ -43,6 +43,7 @@ class ReadNutshell extends Component {
 		// If remote followers are more than local, get follower details
 		if( externalInbox.length != internalInbox.length ) await this.loadInbox()
 		return true
+
 	}
 
 	// Input handler
