@@ -5,6 +5,8 @@ import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
 
+console.log( firebase.firestore.FieldValue )
+
 // Redux
 import { store } from '../../redux/store'
 const { dispatch } = store
@@ -21,7 +23,7 @@ import config from './config'
 import { listenForUserAndStartListeners, unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson } from './_friends'
 
 // ///////////////////////////////
@@ -38,6 +40,7 @@ class Firebase {
 	func 		= this.fb.functions()
 	auth 		= this.fb.auth()
 	listeners 	= {}
+	FieldValue  = firebase.firestore.FieldValue
 
 	// ///////////////////////////////
 	// User actions
@@ -62,6 +65,7 @@ class Firebase {
 	updateNutshell     = nutshell => updateNutshell( this, nutshell )
 	getNutshellsOfUser = uid 	  => getNutshellsOfUser( this, uid )
 	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid )
+	markNutshellRead   = uid 	  => markNutshellRead( this, uid )
 
 	// ///////////////////////////////
 	// friends

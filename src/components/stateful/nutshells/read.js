@@ -19,9 +19,8 @@ class ReadNutshell extends Component {
 		loading: 'Checking your nutshell inbox'
 	}
 
-	// Load nutshells on mount
-	componentDidMount = async f => {
-
+	// Load inbox
+	loadInbox = async f => {
 		try {
 			const { inbox } = this.props
 			const nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ) ) )
@@ -29,13 +28,29 @@ class ReadNutshell extends Component {
 		} catch( e ) {
 			alert( e )
 		}
+	}
 
+	// Load nutshells on mount
+	componentDidMount = f => this.loadInbox()
+
+	shouldComponentUpdate = async ( nextprops, nextstate ) => {
+		const { inbox: externalInbox } = nextprops
+		const { inbox: internalInbox, loading } = nextstate
+
+		// If loading or no followers, do nothing
+		if( loading || !externalInbox ) return false
+
+		// If remote followers are more than local, get follower details
+		if( externalInbox.length != internalInbox.length ) await this.loadInbox()
+		return true
 	}
 
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
 
 	go = to => to && this.props.history.push( to )
+
+	markRead = uid => app.markNutshellRead( uid )
 
 	render() {
 
@@ -47,7 +62,7 @@ class ReadNutshell extends Component {
 		return <Container>
 			<Navigation title='Nutshell feed' />
 			<Main.Top>
-				{ inbox.map( nutshell => <NutshellCard go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+				{ inbox.map( nutshell => <NutshellCard markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>
 		</Container>

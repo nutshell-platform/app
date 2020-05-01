@@ -101,9 +101,10 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, m
 } )
 
 // Button
-export const Button = ( { style, mode, children, to, ...props } ) => <PaperButton style={ { marginTop: 20, ...style } } mode={ mode || 'contained' } { ...props }>
-	{ to ? <Link style={ { color: 'white' } } to={ to }>{ children }</Link> : children }
-</PaperButton>
+export const Button = withTheme( ( { style, mode, loading=false, children, to, theme, ...props } ) => <PaperButton labelStyle={ { paddingRight: loading ? 30 : 0 } } style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } } mode={ mode || 'contained' } { ...props }>
+	{ to ? <Link style={ { color: 'white', height: '100%' } } to={ to }>{ children }</Link> : children }
+	{ loading && <ActivityIndicator color={ mode == 'text' ? theme.colors.text : theme.colors.background } style={ { position: 'absolute', top: 0, right: 0, padding: 10, height: '100%' } } /> }
+</PaperButton> )
 
 // Toggle
 export const Toggle = withTheme( ( { style, theme, value, label, onToggle, info, error, ...props } ) => {
