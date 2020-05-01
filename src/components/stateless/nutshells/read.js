@@ -3,7 +3,7 @@ import { timestampToHuman, nextMonday } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
 import { Card, Title, Paragraph, View, HelperText, IconButton, Divider, Button, ToolTip, UserAvatar } from '../common/generic'
 
-export const NutshellCard = ( { nutshell={}, avatarSize=100, status=false, follow, unfollow } ) => {
+export const NutshellCard = ( { nutshell={}, avatarSize=100, status=false, follow, unfollow, go } ) => {
 
 	const { entries, updated, user } = nutshell
 
@@ -11,15 +11,15 @@ export const NutshellCard = ( { nutshell={}, avatarSize=100, status=false, follo
 		<Card style={ { paddingBottom: 20, paddingTop: user ? 0 : 20 } }>
 
 			{ /* Avatar */ }
-			{ user && <View style={ { marginTop: -avatarSize/2, marginBottom: 20, width: '100%', alignItems: 'center', justifyContent: 'center' } }>
+			{ user && <TouchableOpacity onPress={ f => go( `/${ user.handle }` ) } style={ { marginTop: -avatarSize/2, marginBottom: 20, width: '100%', alignItems: 'center', justifyContent: 'center' } }>
 				<UserAvatar user={ user } size={ avatarSize } />
-			</View> }
+			</TouchableOpacity> }
 
 
 			<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
 
-				{ user && <Title>{user.name}</Title> }
-				<HelperText style={ { paddingBottom: 10 } }>{ user && `@${user.handle}` }{ timestampToHuman( updated ) }</HelperText>
+				{ user && <Title onPress={ f => go( `/${ user.handle }` ) }>{user.name}</Title> }
+				<HelperText style={ { paddingBottom: 10 } }>{ user && `@${user.handle}` } { timestampToHuman( updated ) }</HelperText>
 
 				<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
 					{ entries.map( entry => <Entry key={ entry.uid } entry={ entry } /> ) }
@@ -54,7 +54,7 @@ export const Placeholder = ( {  } ) => <Card style={ { paddingVertical: 20 } }>
 	<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
 
 		<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
-			<ToolTip label={ `You have nothing to read until ${ timestampToHuman( nextMonday() ) }.` } info={ `Nutshells are released on mondays. The only reason to come back to this app until then is to draft your own nutshell. We've not trying to get you addicted/hooked, you can to to FB/Insta/Tiktok for that.` } />
+			<ToolTip label={ `Next nutshell release is ${ timestampToHuman( nextMonday() ) }.` } info={ `Nutshells are released on mondays. The only reason to come back to this app until then is to draft your own nutshell. We've not trying to get you addicted/hooked, you can to to FB/Insta/Tiktok for that.` } />
 			<Button style={ { alignSelf: 'center' } } to='/nutshells/write'>Draft & schedule your nutshell</Button>
 		</View>
 

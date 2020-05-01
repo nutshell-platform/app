@@ -35,6 +35,8 @@ class ReadNutshell extends Component {
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
 
+	go = to => to && this.props.history.push( to )
+
 	render() {
 
 		const { loading, inbox } = this.state
@@ -43,10 +45,10 @@ class ReadNutshell extends Component {
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>
-			<Navigation title='Reading nutshells' />
+			<Navigation title='Nutshell feed' />
 			<Main.Top>
-				{ inbox.map( nutshell => <NutshellCard key={ nutshell.uid } nutshell={ nutshell } /> ) }
-				<Placeholder />
+				{ inbox.map( nutshell => <NutshellCard go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>
 		</Container>
 

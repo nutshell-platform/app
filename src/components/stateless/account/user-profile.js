@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Card, Main, Title, UserAvatar, Text, Button, View } from '../common/generic'
-import { NutshellCard } from '../nutshells/read'
+import { NutshellCard, Placeholder } from '../nutshells/read'
 
-export const UserCard = ( { children, avatarSize=100, user={}, isSelf, following, followMan, nutshells=[] } ) => {
+export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, following, followMan, nutshells=[] } ) => {
 
 	const [ followed, setFollowed ] = useState( following )
 
@@ -25,6 +25,8 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, following
 				{ !isSelf && <Button mode={ followed && 'text' } onPress={ f => followMan( followed, setFollowed ) }>{ followed ? 'Unfollow' : 'Follow' }</Button> }
 
 			</Card>
+
+			{ isSelf && noDraft && <Placeholder /> }
 
 			{ nutshells.map( nutshell => <NutshellCard status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 

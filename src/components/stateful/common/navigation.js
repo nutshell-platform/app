@@ -1,6 +1,6 @@
 import React from 'react'
 import { Animated, Platform } from 'react-native'
-import { Component } from '../../stateless/common/generic'
+import { Component, Appbar } from '../../stateless/common/generic'
 import { Header, Menu } from '../../stateless/common/navigation'
 import { connect } from 'react-redux'
 import { withRouter } from '../../../routes/router'
@@ -77,20 +77,25 @@ class Navigation extends Component {
 			links={ [
 
 				// Static links
-				{ label: 'Home', to: '/' },
+				// { label: 'Feed', to: '/' },
 
 				// Dynamic links when user is logged in
 				...( user ? [
-					{ label: 'Friends', to: '/friends/find' },
+					{ label: 'Profile', to: `/${user.handle}` },
+					// { label: 'Friends', to: '/friends/find' },
 					{ label: 'Settings', to: '/user/settings' },
 					{ label: 'Logout', onPress: app.logout }
 				] : [] )
 			] }
-		/>
+		>
+			<Appbar.Action icon='inbox-arrow-down' onPress={ f => history.push( `/` ) } />
+			<Appbar.Action icon='account-plus' onPress={ f => history.push( `/friends/find` ) } />
+			<Appbar.Action icon='pencil-outline' onPress={ f => history.push( `/nutshells/write` ) } />
+		</Header>
 	}
 
 }
 
 export default withRouter( connect( store => ( {
-	user: !!store.user
+	user: store.user
 } ) )( Navigation ) )

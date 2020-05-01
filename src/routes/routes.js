@@ -21,6 +21,7 @@ import UserSettings from '../components/stateful/account/user-settings'
 import WriteNutshell from '../components/stateful/nutshells/write'
 import ReadNutshell from '../components/stateful/nutshells/read'
 import FindFriends from '../components/stateful/account/friends-find'
+import ManageFriends from '../components/stateful/account/friends-manage'
 import UserProfile from '../components/stateful/account/user-profile'
 import FourOhFour from '../components/stateless/common/404'
 
@@ -87,6 +88,7 @@ class Routes extends Component {
 
 				{ /* Friends */ }
 				<Route path='/friends/find' component={ FindFriends } />
+				<Route path='/friends/manage' component={ ManageFriends } />
 
 				{ /* Platform */ }
 				<Route path='/nutshells/read' component={ ReadNutshell } />
