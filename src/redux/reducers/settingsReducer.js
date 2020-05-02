@@ -1,6 +1,6 @@
 // Theming
 import { Light, Dark } from '../../modules/visual/themes'
-const defaultSettings = { notifications: {} }
+const defaultSettings = {  }
 export default ( state = { theme: Light }, action ) => {
 
 	const { type, payload } = action

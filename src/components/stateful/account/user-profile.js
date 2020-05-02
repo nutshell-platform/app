@@ -56,7 +56,7 @@ class UserProfile extends Component {
 
 		const { loading, handle, profile, nutshells } = this.state
 		const { user, draft } = this.props
-		const following = user.following.includes( profile.uid )
+		const following = user.following?.includes( profile.uid )
 		const isSelf = user?.uid == profile?.uid
 		const noDraft = !( draft?.entries?.length > 0 )
 
@@ -64,7 +64,7 @@ class UserProfile extends Component {
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>
-			<Navigation title={ `${handle}'s' profile` } />
+			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
 				<UserCard noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
 			</Main.Top>

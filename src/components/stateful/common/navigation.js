@@ -63,6 +63,18 @@ class Navigation extends Component {
 
 		const { title, user, history } = this.props
 		const { drawer, drawerWidth, drawerOffset } = this.state
+		const links = [
+			// Static links
+			// { label: 'Feed', to: '/' },
+
+			// Dynamic links when user is logged in
+			...( user ? [
+				{ label: 'Profile', to: `/${user.handle}` },
+				{ label: 'Friends', to: '/friends/manage' },
+				{ label: 'Settings', to: '/user/settings' },
+				{ label: 'Logout', onPress: app.logout }
+			] : [] )
+		]
 
 		return <Header
 			drawerTranslate={ { transform: this.pan.getTranslateTransform() } }
@@ -74,23 +86,10 @@ class Navigation extends Component {
 			drawer={ drawer }
 			toggleDark={ this.toggleDarkMode }
 			go={ to => history.push( to ) }
-			links={ [
-
-				// Static links
-				// { label: 'Feed', to: '/' },
-
-				// Dynamic links when user is logged in
-				...( user ? [
-					{ label: 'Profile', to: `/${user.handle}` },
-					{ label: 'Friends', to: '/friends/manage' },
-					{ label: 'Settings', to: '/user/settings' },
-					{ label: 'Logout', onPress: app.logout }
-				] : [] )
-			] }
-		>
-			<Appbar.Action icon='inbox-arrow-down' onPress={ f => history.push( `/` ) } />
-			<Appbar.Action icon='account-plus' onPress={ f => history.push( `/friends/find` ) } />
-			<Appbar.Action icon='pencil-outline' onPress={ f => history.push( `/nutshells/write` ) } />
+			links={ links } >
+				{ user && <Appbar.Action icon='home' onPress={ f => history.push( `/` ) } /> }
+				{ user && <Appbar.Action icon='account-plus' onPress={ f => history.push( `/friends/find` ) } /> }
+				{ user && <Appbar.Action icon='pencil-outline' onPress={ f => history.push( `/nutshells/write` ) } /> }
 		</Header>
 	}
 

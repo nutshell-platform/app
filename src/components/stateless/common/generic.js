@@ -104,9 +104,9 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 } )
 
 // Button
-export const Button = withTheme( ( { style, mode, loading=false, children, to, theme, ...props } ) => <PaperButton labelStyle={ { paddingRight: loading ? 30 : 0 } } style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } } mode={ mode || 'contained' } { ...props }>
-	{ to ? <Link style={ { color: 'white', height: '100%' } } to={ to }>{ children }</Link> : children }
-	{ loading && <ActivityIndicator color={ mode == 'text' ? theme.colors.text : theme.colors.background } style={ { position: 'absolute', top: 0, right: 0, padding: 10, height: '100%' } } /> }
+export const Button = withTheme( ( { style, mode='contained', loading=false, children, to, theme, ...props } ) => <PaperButton labelStyle={ { paddingRight: loading ? 30 : 0 } } style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } } mode={ mode } { ...props }>
+	{ to ? <Link style={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface, height: '100%' } } to={ to }>{ children }</Link> : children }
+	{ loading && <ActivityIndicator color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { position: 'absolute', top: 0, right: 0, padding: 10, height: '100%' } } /> }
 </PaperButton> )
 
 

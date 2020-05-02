@@ -37,29 +37,6 @@ class Routes extends Component {
 		return this.setState( { init: true } )
 	}
 
-	loggedInNotOnboarded = f => {
-
-		const { user, settings } = this.props
-
-		// Logged in?
-		if( !user ) return false
-
-		// Force onboarding if things are missing
-		if( user && settings ) {
-
-			// Notification settings incomplete
-			if( settings.notifications && Object.keys( settings.notifications ).length < 4 ) return true
-
-			// User has no bio or handle
-			if( user && ( !user.bio || !user.handle ) ) return true
-				
-		}
-
-		// Default is false
-		return false
-
-	}
-
 	shouldComponentUpdate = ( nextProps, nextState ) => {
 
 		const { history, user, settings } = nextProps
@@ -74,10 +51,6 @@ class Routes extends Component {
 		// If logged in but at slash => go to profile
 		if( pathname == '/' && user ) history.push( '/nutshells/read' )
 
-		// Logged in for the first time ( no settings yet )
-		if( pathname != '/user/settings' && this.loggedInNotOnboarded() ) history.push( '/user/settings' )
-
-		// On prop or state chang, always update
 		return true
 
 	}

@@ -148,7 +148,7 @@ class WriteNutshell extends Component {
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>
-			<Navigation title='Write your nutshell' />
+			<Navigation title='Write' />
 			<Main.Center>
 				<Editor inspire={ this.inspire } background={ theme.colors.background } changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
 			</Main.Center>

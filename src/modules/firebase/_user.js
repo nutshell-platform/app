@@ -59,7 +59,7 @@ export const listenUserMetaChanges = ( app, dispatch, action ) => {
 // ///////////////////////////////
 // User actions
 // ///////////////////////////////
-
+			
 // Register a new user by email and password
 export const registerUser = async ( app, name, handle, email, password ) => {
 

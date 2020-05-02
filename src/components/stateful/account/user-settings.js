@@ -161,7 +161,7 @@ class UserSettings extends Component {
 		if( !user || loading ) return <Loading message={ loading } />
 
 		return <Container>
-			<Navigation title='User settings' />
+			<Navigation title='Settings' />
 			<Settings handleAvailable={ handleAvailable } passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
 		</Container>
 

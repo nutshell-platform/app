@@ -1,7 +1,8 @@
 import React from 'react'
 
 // Visual
-import { Component, Container, Loading, Main, Text } from '../../stateless/common/generic'
+import { Component, Container, Loading, Main } from '../../stateless/common/generic'
+import Tutorial from '../onboarding/tutorial'
 import { Placeholder, NutshellCard } from '../../stateless/nutshells/read'
 import Navigation from '../common/navigation'
 
@@ -61,8 +62,9 @@ class ReadNutshell extends Component {
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>
-			<Navigation title='Nutshell feed' />
+			<Navigation title='Home' />
 			<Main.Top>
+				<Tutorial />
 				{ inbox.map( nutshell => <NutshellCard markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>

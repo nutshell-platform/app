@@ -5,7 +5,7 @@ export default ( state=null, action ) => {
 	switch( type ) {
 
 		case "SETUSER":
-			return { ...state, ...payload }
+			return { ...state, ...payload, followers: payload.followers || [], following: payload.following || [] }
 		break
 
 		case 'SETUSERMETA':
