@@ -64,10 +64,8 @@ export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStype,
 	</TouchableOpacity>
 } )
 
-export const Link = withTheme( ( { style, theme, children, ...props } ) => <NativeLink>
-	<View>
-		<Text>{ children }</Text>
-	</View>
+export const Link = withTheme( ( { style, theme, children, to, ...props } ) => <NativeLink to={ to }>
+	<Text style={ { color: theme.colors.text, textDecorationLine: 'none', ...theme.fonts.regular, ...style } }>{ children }</Text>
 </NativeLink> )
 
 // ///////////////////////////////
@@ -105,13 +103,9 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 } )
 
 // Button
-// export const Button = withTheme( ( { style, mode='contained', loading=false, children, to, theme, ...props } ) => <PaperButton labelStyle={ { paddingRight: loading ? 30 : 0 } } style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } } mode={ mode } { ...props }>
-// 	{ to ? <Link style={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface, height: '100%' } } to={ to }>{children}</Link> : children }
-// 	{ loading && <ActivityIndicator color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { position: 'absolute', top: 0, right: 0, padding: 10, height: '100%' } } /> }
-// </PaperButton> )
 export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <PaperButton
 	onPress={ to ? f => history.push( to ) : onPress }
-	labelStyle={ { paddingRight: loading ? 30 : 0, color: mode != 'contained' ? theme.colors.text : theme.colors.surface } }
+	labelStyle={ { paddingRight: loading ? 30 : 0, color: mode != 'contained' ? theme.colors.text : theme.colors.surface, minWidth: '100%' } }
 	style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } }
 	mode={ mode } { ...props }
 >
