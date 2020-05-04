@@ -4,7 +4,6 @@ import React from 'react'
 import { TouchableOpacity, View, Animated, SafeAreaView } from 'react-native'
 import { Drawer, Portal, Appbar, withTheme, Surface, Text, StatusBar, Toggle } from './generic'
 import { PanGestureHandler } from 'react-native-gesture-handler'
-import { Screen } from '../../../modules/visual/screen'
 import { isWeb } from '../../../modules/apis/platform'
 
 // ///////////////////////////////
@@ -34,7 +33,7 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 	<TouchableOpacity activeOpacity={ 1 } onPress={ toggle } style={ { flex: 1 } }>
 
 		{ /* The actual sidebar */ }
-		<TouchableOpacity activeOpacity={ 1 } style={ { height: isWeb ? '100vh' : Screen.height, width: width, maxWidth: '100%', alignSelf: 'flex-end' } }>
+		<TouchableOpacity activeOpacity={ 1 } style={ { height: isWeb ? '100vh' : '100%', width: width, maxWidth: '100%', alignSelf: 'flex-end' } }>
 
 			{ /* Animation gesture handler */ }
 			<PanGestureHandler onHandlerStateChange={ pan } onGestureEvent={ pan }>
