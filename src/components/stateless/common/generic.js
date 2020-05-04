@@ -43,7 +43,7 @@ export const View = ( { style, ...props } ) => <NativeView style={ { maxWidth: '
 export const Divider = ( { style, ...props } ) => <PaperDivider style={ { marginVertical: 20, ...style } } { ...props } />
 
 // Profile image
-export const UserAvatar = ( { size=100, user, ...props } ) => user.avatar ? <Avatar.Image { ...props } size={ size } source={ user.avatar.uri } /> : <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' />
+export const UserAvatar = ( { size=100, user, ...props } ) => user.avatar ? <Avatar.Image { ...props } size={ size } source={ user.avatar } /> : <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' />
 
 // Tooltip
 export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStype, label, info, theme, ...props } ) => {
