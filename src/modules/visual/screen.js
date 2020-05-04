@@ -1,19 +1,20 @@
 // Rotation
 import * as ScreenOrientation from 'expo-screen-orientation'
 import { Dimensions } from 'react-native'
-import { isWeb, dev } from './apis/platform'
+import { isWeb, dev, isAndroid } from '../apis/platform'
 
 // Screen rotation
 export const setOrientation = async f => {
 
+	console.log( isWeb, dev, isAndroid )
 	// Not web and developing?
-	if( isWeb && dev ) {
-		// await ScreenOrientation.lockAsync( ScreenOrientation.Orientation.PORTRAIT_DOWN )
+	if( !isWeb && dev ) {
+		if( isAndroid ) await ScreenOrientation.lockAsync( ScreenOrientation.OrientationLock.PORTRAIT_DOWN )
 		await ScreenOrientation.unlockAsync()
 	// Not web and production?
-	} else if ( isWeb ) {
+	} else if ( !isWeb ) {
 		// Force portrait
-		await ScreenOrientation.lockAsync( ScreenOrientation.Orientation.PORTRAIT )
+		await ScreenOrientation.lockAsync( ScreenOrientation.OrientationLock.PORTRAIT )
 	}
 }
 

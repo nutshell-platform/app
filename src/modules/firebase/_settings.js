@@ -1,10 +1,19 @@
 import { dataFromSnap } from './helpers'
+import { getTokenIfNeeded } from '../push'
 
 export const listenSettings = ( app, dispatch, action ) => {
 
-	app.db.collection( 'settings' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
+	const { db, FieldValue, auth } = app
 
-		return dispatch( action( dataFromSnap( doc, false ) ) )
+	db.collection( 'settings' ).doc( auth.currentUser.uid ).onSnapshot( async doc => {
+
+		const settings = dataFromSnap( doc, false )
+		const pushToken = await getTokenIfNeeded( settings )
+		
+		// New token? Send to firebase
+		if( pushToken ) await db.collection( 'settings' ).doc( auth.currentUser.uid ).set( { pushTokens: FieldValue.arrayUnion( pushToken ) }, { merge: true } )
+
+		return dispatch( action( settings ) )
 
 	} )
 

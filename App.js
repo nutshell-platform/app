@@ -18,9 +18,6 @@ import { Loading } from './src/components/stateless/common/generic'
 import { setOrientation } from './src/modules/visual/screen'
 import { injectWebCss } from './src/modules/visual/style'
 
-// Push notifications
-import { askForPushPermissions } from './src/modules/push'
-
 // Udates
 import { updateIfAvailable } from './src/modules/apis/updates'
 
@@ -42,9 +39,6 @@ export default class App extends React.Component {
 
 		// Initialise Sentry
 		// SentryInit()
-
-		// Create and store expo push token in secure storage { pushtoken }
-		// await askForPushPermissions()
 	}
 
 

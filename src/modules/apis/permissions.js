@@ -10,7 +10,7 @@ import Storage from './storage'
 // Push
 // ///////////////////////////////
 const getPushToken = f => Storage.getItemAsync( 'pushtoken' )
-export const getOrRequestPushAccess = async f => {
+export const checkOrRequestPushAccess = async f => {
 
 	try {
 		
@@ -27,7 +27,7 @@ export const getOrRequestPushAccess = async f => {
 		if( !newToken ) throw 'Token generation failed'
 
 		// Store new token
-		await Storage.setItemAsync( 'pushtoken', token, isIos ? { keychainAccessible: Storage.ALWAYS } : {} )
+		await Storage.setItemAsync( 'pushtoken', newToken, isIos ? { keychainAccessible: Storage.ALWAYS } : {} )
 
 		// Return the token
 		return newToken
