@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 // Image specific
 import * as ImgPick from 'expo-image-picker'
-import { checkCameraPermissions, confirmOrAskCameraPermissions } from '../../../modules/permissions'
+import { checkCameraPermissions, confirmOrAskCameraPermissions } from '../../../modules/apis/permissions'
 import { Asset } from 'expo-asset'
 import { Dialogue } from '../../../modules/helpers'
 

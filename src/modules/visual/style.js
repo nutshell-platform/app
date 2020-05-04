@@ -1,4 +1,4 @@
-import { Platform } from 'react-native'
+import { isWeb } from '../apis/platform'
 
 const noGlow = `
 textarea, select, input, button {
@@ -14,7 +14,7 @@ textarea:focus, select:focus, input:focus, button:focus {
 export const injectWebCss = f => {
 
 	// Only on web
-	if ( Platform.OS != 'web' ) return
+	if ( !isWeb ) return
 
 	// Inject style
 	const style = document.createElement('style')

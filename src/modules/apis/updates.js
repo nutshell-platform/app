@@ -1,6 +1,7 @@
 import * as Updates from 'expo-updates'
 import * as Network from 'expo-network'
-import { log, catcher, dev, Dialogue } from './helpers'
+import { log, catcher, Dialogue } from '../helpers'
+import { dev } from '../apis/platform'
 
 const connectivityCheck = f => Network.getNetworkStateAsync().then( ( { isInternetReachable } ) => isInternetReachable ).catch( f => false )
 

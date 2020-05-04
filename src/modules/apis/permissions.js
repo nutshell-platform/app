@@ -1,8 +1,10 @@
 import * as Permissions from 'expo-permissions'
-import Storage from './storage'
 import { Notifications } from 'expo'
-import { log, catcher } from './helpers'
-import { isWeb } from './apis/platform'
+
+// Device apis and helpers
+import { log, catcher } from '../helpers'
+import { isWeb, isIos } from './platform'
+import Storage from './storage'
 
 // ///////////////////////////////
 // Push
@@ -11,7 +13,7 @@ const getPushToken = f => Storage.getItemAsync( 'pushtoken' )
 export const getOrRequestPushAccess = async f => {
 
 	try {
-
+		
 		// Check device permissions
 		const { status } = await Permissions.askAsync( Permissions.NOTIFICATIONS )
 		if ( status != 'granted' ) throw 'Notification permissions not granted'
@@ -25,13 +27,11 @@ export const getOrRequestPushAccess = async f => {
 		if( !newToken ) throw 'Token generation failed'
 
 		// Store new token
-		await Storage.setItemAsync( 'pushtoken', token, {
-			keychainAccessible: Storage.ALWAYS
-		} )
+		await Storage.setItemAsync( 'pushtoken', token, isIos ? { keychainAccessible: Storage.ALWAYS } : {} )
 
 		// Return the token
 		return newToken
-
+		
 	} catch( e ) {
 		log( `Token error ${JSON.stringify( e )}` )
 		catcher( e )
@@ -42,7 +42,6 @@ export const getOrRequestPushAccess = async f => {
 // ///////////////////////////////
 // Camera
 // ///////////////////////////////
-
 // Check for camera permissions
 export const checkCameraPermissions = f => {
 	if( isWeb ) return Permissions.getAsync( Permissions.CAMERA ).then( ( { granted } ) => granted ).catch( f => false )

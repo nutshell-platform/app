@@ -1,10 +1,6 @@
-import { Alert as NativeAlert, Platform } from 'react-native'
+import { Alert as NativeAlert } from 'react-native'
+import { dev } from './apis/platform'
 
-// ///////////////////////////////
-// Constants
-// ///////////////////////////////
-export const dev = process.env.NODE_ENV == 'development'
-export const isWeb = Platform.OS == 'web'
 // ///////////////////////////////
 // Visual
 // ///////////////////////////////
@@ -34,11 +30,11 @@ export const capitalize = string => string ? string.charAt(0).toUpperCase() + st
 // ///////////////////////////////
 
 export const log = msg => {
-	if( process.env.NODE_ENV == 'development' ) console.log( msg )
+	if( dev ) console.log( msg )
 }
 
 export const error = msg => {
-	if( process.env.NODE_ENV == 'development' ) {
+	if( dev ) {
 		console.log( msg )
 		console.trace()
 	}

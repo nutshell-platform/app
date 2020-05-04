@@ -22,7 +22,7 @@ import { injectWebCss } from './src/modules/visual/style'
 import { askForPushPermissions } from './src/modules/push'
 
 // Udates
-import { updateIfAvailable } from './src/modules/updates'
+import { updateIfAvailable } from './src/modules/apis/updates'
 
 
 // ///////////////////////////////
