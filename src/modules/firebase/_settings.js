@@ -1,5 +1,5 @@
 import { dataFromSnap } from './helpers'
-import { getTokenIfNeeded } from '../push'
+import { getTokenIfNeeded, registerNotificationListeners } from '../push'
 
 export const listenSettings = ( app, dispatch, action ) => {
 
@@ -12,6 +12,9 @@ export const listenSettings = ( app, dispatch, action ) => {
 		
 		// New token? Send to firebase
 		if( pushToken ) await db.collection( 'settings' ).doc( auth.currentUser.uid ).set( { pushTokens: FieldValue.arrayUnion( pushToken ) }, { merge: true } )
+
+		// If we have tokens, listen for notis
+		if( settings.pushTokens?.length != 0 ) registerNotificationListeners()
 
 		return dispatch( action( settings ) )
 

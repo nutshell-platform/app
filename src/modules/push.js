@@ -1,7 +1,7 @@
+import { Notifications } from 'expo'
 import { checkOrRequestPushAccess } from './apis/permissions'
-import { isWeb } from './apis/platform'
-
-export const another = true
+import { isWeb, isAndroid } from './apis/platform'
+import { log } from './helpers'
 
 export const getTokenIfNeeded = async settings => {
 
@@ -17,4 +17,18 @@ export const getTokenIfNeeded = async settings => {
 	// Otherwise, return the token for handling
 	return localPushToken
 
+}
+
+export const registerNotificationListeners = f => {
+
+	// Set andriod notification category
+	if( isAndroid ) Notifications.createChannelAndroidAsync( 'default', {
+		name: 'default',
+		default: 'Notifications as configured in your settings.',
+        sound: true,
+        priority: 'max',
+        vibrate: true
+	} )
+
+	Notifications.addListener( notification => log( notification ) )
 }
