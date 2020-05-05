@@ -8,6 +8,11 @@ const dataFromSnap = ( snapOfDocOrDocs, withDocId=true ) => {
 
 }
 
+const log = ( title, content ) => {
+	console.log( title, content && JSON.stringify( content, null, process.env.NODE_ENV == 'development' ? 2 : 0 ) )
+}
+
 module.exports = {
-	dataFromSnap: dataFromSnap
+	dataFromSnap: dataFromSnap,
+	log: log
 }

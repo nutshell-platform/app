@@ -22,3 +22,6 @@ web-report/
 
 # Env variables
 .env
+
+# Secrets
+nutshell-staging.json

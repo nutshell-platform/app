@@ -85,3 +85,17 @@ exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pu
 	}
 
 } )
+
+// ///////////////////////////////
+// Push notification handling
+// ///////////////////////////////
+const { sendPushNotifications, retreivePushReceipts } = require( './modules/push' )
+
+// Get receipts
+exports.pushReceiptHandler = functions.pubsub.schedule( 'every 6 hours' ).onRun( context => retreivePushReceipts( db ) )
+
+// Debugging
+// exports.manualPushReceiptHandler = functions.https.onCall( ( context, data ) => retreivePushReceipts( db ) )
+// const tokens = [ 'ExponentPushToken[4KmlslOnJCvvNS3-jHOS5k]' ]
+// const message = { body: 'Derp' }
+// exports.manualPushSend = functions.https.onCall( ( context, data ) => sendPushNotifications( db, tokens, message ) )

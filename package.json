@@ -12,6 +12,7 @@
     "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web",
     "firebase:stage": "firebase use staging && firebase deploy",
     "firebase:production": "firebase use production && firebase deploy",
+    "firebase:functions": "export development=true && firebase functions:shell",
     "compile:web": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:web",
     "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:android",
     "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo build:ios",
