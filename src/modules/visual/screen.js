@@ -6,7 +6,6 @@ import { isWeb, dev, isAndroid } from '../apis/platform'
 // Screen rotation
 export const setOrientation = async f => {
 
-	console.log( isWeb, dev, isAndroid )
 	// Not web and developing?
 	if( !isWeb && dev ) {
 		if( isAndroid ) await ScreenOrientation.lockAsync( ScreenOrientation.OrientationLock.PORTRAIT_DOWN )

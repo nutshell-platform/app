@@ -21,6 +21,9 @@ import { injectWebCss } from './src/modules/visual/style'
 // Udates
 import { updateIfAvailable } from './src/modules/apis/updates'
 
+// Devving
+import { ignoreErrors } from './src/modules/helpers'
+
 
 // ///////////////////////////////
 // Main app ( web )
@@ -29,6 +32,8 @@ export default class App extends React.Component {
 
 	
 	async componentDidMount() {
+
+		ignoreErrors( [ 'Setting a timer' ] )
 
 		// Put upside down if developing on mobile, but not in browser
 		await setOrientation()

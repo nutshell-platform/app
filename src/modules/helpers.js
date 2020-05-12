@@ -1,4 +1,4 @@
-import { Alert as NativeAlert } from 'react-native'
+import { Alert as NativeAlert, YellowBox } from 'react-native'
 import { dev } from './apis/platform'
 
 // ///////////////////////////////
@@ -45,6 +45,8 @@ export const catcher = e => {
 	// throw to sentry
 	throw e
 }
+
+export const ignoreErrors = arr => YellowBox.ignoreWarnings( arr )
 
 // ///////////////////////////////
 // Generators
