@@ -24,12 +24,13 @@ exports.pushReceiptHandler = functions.pubsub.schedule( 'every 6 hours' ).onRun(
 // ///////////////////////////////
 // Notifications
 // ///////////////////////////////
-const { unreadNutshells } = require( './modules/notifications' )
+const { unreadNutshells, rememberToWrite } = require( './modules/notifications' )
 exports.notifyOfUnreadNutshells = functions.pubsub.schedule( 'every monday 13:00' ).onRun( unreadNutshells )
+exports.notifyRememberToWrite = functions.pubsub.schedule( 'every friday 13:00' ).onRun( rememberToWrite )
 
 // Debugging
 // exports.manualPushReceiptHandler = functions.https.onCall( ( context, data ) => retreivePushReceipts( db ) )
 // const tokens = [ 'ExponentPushToken[4KmlslOnJCvvNS3-jHOS5k]' ]
 // const message = { body: 'Derp' }
 // exports.manualPushSend = functions.https.onCall( ( context, data ) => sendPushNotifications( db, tokens, message ) )
-exports.manualInboxNotifier = functions.https.onCall( unreadNutshells )
+// exports.manualInboxNotifier = functions.https.onCall( rememberToWrite )

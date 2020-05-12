@@ -46,3 +46,20 @@ exports.unreadNutshells = async f => {
 	}
 
 }
+
+exports.rememberToWrite = async f => {
+
+	try {
+
+		// Load users that want to be notified
+		const usersWhoWantToBeNotified = await db.collection( 'settings' ).where( 'notifications.writeReminder', '==', true ).get().then( dataFromSnap )
+
+		// Notify those will full inboxes
+		const unreadMessage = { title: `Remember to write your nutshell!`, body: `The next publishing round is on monday.` }
+		await Promise.all( usersWhoWantToBeNotified.map( ( { pushTokens } ) => sendPushNotifications( pushTokens, unreadMessage ) ) )
+
+	} catch( e ) {
+		log( 'Remember to write error: ', e )
+	}
+
+}
