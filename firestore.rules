@@ -1,17 +1,57 @@
-rules_version = '2';
+// Write: create, update, delete
+// Read: get, list
+
+rules_version = '2'
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // This rule allows anyone on the internet to view, edit, and delete
-    // all data in your Firestore database. It is useful for getting
-    // started, but it is configured to expire after 30 days because it
-    // leaves your app open to attackers. At that time, all client
-    // requests to your Firestore database will be denied.
-    //
-    // Make sure to write security rules for your app before that time, or else
-    // your app will lose access to your Firestore database
+    // Disallow all by default
     match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2020, 5, 14);
+      allow read, write: if false
     }
+
+
+    // ///////////////////////////////
+    // Public facing data
+    // ///////////////////////////////
+    match /users/{userUid} {
+      // Write own, read others if logged in
+      allow write: if request.auth.uid == userUid
+      allow read: if request.auth.uid != null
+    }
+    match /userMeta/{userUid} {
+      // Write own, read others if logged in
+      allow write: if request.auth.uid == userUid
+      allow read: if request.auth.uid != null
+    }
+    match /relationships/{relationshipId} {
+      // Write if you are the follower, read only otherwise
+      allow write: if resource == null || resource.data.follower == request.auth.uid
+      allow read: if request.auth.uid != null
+    }
+    match /nutshells/{nutshellId} {
+      // Write own, read others if logged in
+      allow write: if resource == null || resource.data.owner == request.auth.uid
+      allow read: if request.auth.uid != null
+    }
+    match /fingerprints/{userUid} {
+      // Write own, read others if logged in
+      allow write: if request.auth.uid == userUid
+      allow read: if request.auth.uid != null
+    }
+
+    // ///////////////////////////////
+    // Private data
+    // ///////////////////////////////
+    match /settings/{userUid} {
+      // Write own, read others if logged in
+      allow write, read: if request.auth.uid == userUid
+    }
+    match /inbox/{userUid} {
+      // Write own, read others if logged in
+      allow write, read: if request.auth.uid == userUid
+    }
+
+
   }
 }

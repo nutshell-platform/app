@@ -128,6 +128,9 @@ class UserSettings extends Component {
 			// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
 			const path = `avatars/${ uid }-${ await getuid() }.jpg`
 			user.newavatar.path = path
+
+			// Append old avatar data in order to parse it in the api module
+			user.oldavatar = originalUser.avatar
 		}
 
 		await this.updateState( { loading: 'Saving settings...' } )
