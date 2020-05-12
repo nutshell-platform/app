@@ -1,6 +1,8 @@
 const { Expo } = require( 'expo-server-sdk' )
 const expo = new Expo()
 const { log, dataFromSnap } = require( './helpers' )
+const { flatten } = require( 'array-flatten' )
+const { db } = require( './firebase' )
 
 
 // Parse tokens into message objects
@@ -13,13 +15,13 @@ const toChunks = messages => expo.chunkPushNotifications( messages )
 // Send messages to expo
 // Good: { "data": [ { "status": "ok", "id": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" } ] }
 // Error: { "data": [ { "status": "error", "message": "\"ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]\" is not a registered push notification recipient", "details": { "error": "DeviceNotRegistered" } } ] }
-const sendChunksReceiveTickets = async chunks => Promise.all( chunks.map( chunk => expo.sendPushNotificationsAsync( chunk ) ) ).then( tChunks => tChunks.flat() )
+const sendChunksReceiveTickets = async chunks => Promise.all( chunks.map( chunk => expo.sendPushNotificationsAsync( chunk ) ) ).then( tChunks => flatten( tChunks ) )
 
 // Turn tickets in to receipts
 const ticketsToReceipts = tickets => {
 	const receiptsIds = tickets.filter( ticket => ticket.id ).map( ticket => ticket.id )
 	const receiptChunks = expo.chunkPushNotificationReceiptIds( receiptsIds )
-	return Promise.all( receiptChunks.map( chunk => expo.getPushNotificationReceiptsAsync( chunk ) ) ).then( rChunks => rChunks.flat() )
+	return Promise.all( receiptChunks.map( chunk => expo.getPushNotificationReceiptsAsync( chunk ) ) ).then( rChunks => flatten( rChunks ) )
 }
 
 // Format receipt/ticket errors to have less nesting
@@ -31,7 +33,10 @@ const tokenFromMessage = message => {
 }
 const resToError = ( { id, status, message, details } ) => ( { id: id, status: status, message: message, error: details.error, ...tokenFromMessage( tokenRegex ) } )
 
-const sendPushNotifications = async ( db, tokens, message ) => {
+// ///////////////////////////////
+// Push notification sending
+// ///////////////////////////////
+exports.sendPushNotifications = async ( tokens, message={ title: undefined, body: undefined } ) => {
 
 	try {
 
@@ -56,7 +61,10 @@ const sendPushNotifications = async ( db, tokens, message ) => {
 
 }
 
-const retreivePushReceipts = async db => {
+// ////////////////////////////////////
+// Retreiving push receipts from expo
+// ////////////////////////////////////
+exports.retreivePushReceipts = async f => {
 
 
 	try {
@@ -95,9 +103,4 @@ const retreivePushReceipts = async db => {
 		log( 'Push receipt error: ', e )
 	}
 
-}
-
-module.exports = {
-	retreivePushReceipts: retreivePushReceipts,
-	sendPushNotifications: sendPushNotifications
 }
