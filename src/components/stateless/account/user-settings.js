@@ -10,7 +10,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 
 	return <Main.Center>
 		<View style={ { paddingVertical: avatarSize/2 } }>
-			<Card style={ { paddingTop: 0, width: 400 } } >
+			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
 				<ImagePicker image={ user.newavatar || user.avatar } size={ avatarSize } style={ { marginTop: -avatarSize/2, marginBottom: 20 } } onSelected={ image => changeUser( 'newavatar', image ) } />
 				<Title style={ { textAlign: 'center' } }>{ !user?.settings?.notifications && 'Welcome ' }{ user.name || user.email }{ user?.settings?.notifications ? '\'s settings' : '!' }</Title>
 				{ newUser && <Text style={ { marginTop: 10, textAlign: 'center' } }>Welcome to Nutshell { user.name }! Please let us know if these settings are ok with you, you can change them any time in the 'settings' section.</Text> }

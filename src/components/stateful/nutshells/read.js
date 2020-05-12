@@ -5,6 +5,7 @@ import { Component, Container, Loading, Main, Link } from '../../stateless/commo
 import Tutorial from '../onboarding/tutorial'
 import { Placeholder, NutshellCard } from '../../stateless/nutshells/read'
 import Navigation from '../common/navigation'
+import People from '../../../../assets/undraw_people_tax5.svg'
 
 // Data
 import { log } from '../../../modules/helpers'
@@ -61,7 +62,7 @@ class ReadNutshell extends Component {
 
 		if( loading ) return <Loading message={ loading } />
 
-		return <Container>
+		return <Container Background={ People }>
 			<Navigation title='Home' />
 			<Main.Top>
 				 <Tutorial />

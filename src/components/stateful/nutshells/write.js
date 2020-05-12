@@ -4,6 +4,7 @@ import React from 'react'
 import { Component, Container, Loading, Main } from '../../stateless/common/generic'
 import { Editor } from '../../stateless/nutshells/write'
 import Navigation from '../common/navigation'
+import Write from '../../../../assets/undraw_typewriter_i8xd.svg'
 
 // Data
 import { log, getuid, nextMonday } from '../../../modules/helpers'
@@ -147,7 +148,7 @@ class WriteNutshell extends Component {
 
 		if( loading ) return <Loading message={ loading } />
 
-		return <Container>
+		return <Container Background={ Write }>
 			<Navigation title='Write' />
 			<Main.Center>
 				<Editor inspire={ this.inspire } background={ theme.colors.background } changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />

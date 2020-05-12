@@ -18,7 +18,7 @@ import { setNutshellDraft, setNutshellInbox } from '../../redux/actions/nutshell
 import config from './config'
 
 // Functions
-import { listenForUserAndStartListeners, unregisterListeners, registerListeners } from './listeners'
+import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead } from './_nutshells'

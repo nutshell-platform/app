@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Image } from 'react-native'
+
+// Visual
+const Color = require('color')
+import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
 import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading, Searchbar } from 'react-native-paper'
 import { Link as NativeLink, withRouter } from '../../../routes/router'
+import { isWeb, isIos } from '../../../modules/apis/platform'
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -78,7 +82,7 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 	 const [ showInfo, setInfo ] = useState( false )
 	 const [ height, setHeight ] = useState( undefined )
 	 const adjustHeight = ( { nativeEvent } ) => {
-	 	if( multiline ) setHeight( nativeEvent?.contentSize?.height )
+	 	if( multiline ) setHeight( nativeEvent?.contentSize?.height + ( isIos ? 35 : 0 ) )
 	 }
 	 const defaultHeight = f => setHeight( multiline ? 100 : undefined )
 	 const manageEnter = ( { nativeEvent } ) => {
@@ -89,11 +93,11 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 		<View style={ { position: 'relative' } }>
 
 			{ /* The actual input */ }
-			<TextInput onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ { ...( height && { height: height } ),marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
+			<TextInput onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ { ...( height && { height: height } ), minHeight: 50, marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
 
 			{ /* The info icon */ }
-			{ info && ( !hideInfo || ( hideInfo && !value ) ) && <TouchableOpacity tabindex={ -1 } style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'flex-start' } } onPress={ f => setInfo( !showInfo ) }>
-				<Avatar.Icon style={ { backgroundColor: 'rgba(0,0,0,0)', marginTop: iconSize } } color={ theme.colors.text } size={ iconSize } icon='information-outline' />
+			{ info && ( !hideInfo || ( hideInfo && !value ) ) && <TouchableOpacity tabindex={ -1 } style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'center' } } onPress={ f => setInfo( !showInfo ) }>
+				<Avatar.Icon style={ { backgroundColor: 'rgba(0,0,0,0)', alignSelf: 'center' } } color={ theme.colors.text } size={ iconSize } icon='information-outline' />
 			</TouchableOpacity> }
 		</View>
 
@@ -160,22 +164,25 @@ export const Main = {
 	Center: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, alignItems: 'center', justifyContent: 'center',  ...style } }>
 			{ children }
 	</ScrollView> ),
-	Top: ( { children, style } ) => ( <ScrollView contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
+	Top: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
 }
 
 // General app container
-const bgStyles = { position: 'absolute', top: 0, bottom: 0, right: 0, left: 0 }
-export const Container = withTheme( ( { style, children, theme, Background } ) => <SafeAreaView style={ { flex: 1, width: '100%', backgroundColor: theme.colors.primary } }>
+const bgStyles = { position: 'absolute', bottom: 0, left: 0, minWidth: '100%', minHeight: '100%' }
+export const Container = withTheme( ( { style, children, theme, Background } ) => <KeyboardAvoidingView style={ { flex: 1 } } behavior={ isIos ? 'padding' : 'none' } >
+		<SafeAreaView style={ { flex: 1, width: '100%', backgroundColor: theme.colors.primary } }>
 
-	<View style={ {
-		flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', backgroundColor: theme.colors.background,
-		...style
-	} }>
-		{ Background && isWeb ? <Image style={ bgStyles } source={ Background } /> : <Background style={ bgStyles } /> }
-		{ children }
-	</View>
-	
-</SafeAreaView> )
+		<View style={ {
+			flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', backgroundColor: theme.colors.background, overflow: 'hidden',
+			...style
+		} }>
+			{ Background && ( isWeb ? <Image style={ bgStyles } source={ Background } /> : <Background style={ bgStyles } /> ) }
+			{ Background && <View style={ { position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, backgroundColor: Color( theme.colors.background ).alpha( 0.9 ) } } /> }
+			{ children }
+		</View>
+		
+	</SafeAreaView>
+</KeyboardAvoidingView> )
 
 // ///////////////////////////////
 // Pass through exports straignt from paper

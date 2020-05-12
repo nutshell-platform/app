@@ -6,6 +6,7 @@ import Navigation from '../common/navigation'
 import { View } from 'react-native'
 import { Settings } from '../../stateless/account/user-settings'
 import * as ImageManipulator from "expo-image-manipulator"
+import Background from '../../../../assets/undraw_personal_settings_kihd.svg'
 
 // Helpers
 import { log, catcher, getuid } from '../../../modules/helpers'
@@ -162,7 +163,7 @@ class UserSettings extends Component {
 
 		if( !user || loading ) return <Loading message={ loading } />
 
-		return <Container>
+		return <Container Background={ Background }>
 			<Navigation title='Settings' />
 			<Settings handleAvailable={ handleAvailable } passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
 		</Container>

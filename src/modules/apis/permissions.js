@@ -15,8 +15,23 @@ export const checkOrRequestPushAccess = async f => {
 	try {
 		
 		// Check device permissions
-		const { status } = await Permissions.askAsync( Permissions.NOTIFICATIONS )
-		if ( status != 'granted' ) throw 'Notification permissions not granted'
+		if( isIos ) {
+
+			// Check permission status
+			const { permissions: { notifications: noti } } = await Permissions.askAsync( Permissions.NOTIFICATIONS )
+
+			if( !noti.allowsAlert || !noti.allowsBadge || !noti.allowsSound ) throw 'Ios push permissions not granted'
+
+			const { status } = await Permissions.askAsync( Permissions.USER_FACING_NOTIFICATIONS )
+			if ( status != 'granted' ) throw 'Notification permissions not granted'
+
+		} else {
+
+			// Check permission status
+			const { status } = await Permissions.askAsync( Permissions.NOTIFICATIONS )
+			if ( status != 'granted' ) throw 'Notification permissions not granted'
+
+		}
 
 		// Check for token
 		const oldToken = await getPushToken()

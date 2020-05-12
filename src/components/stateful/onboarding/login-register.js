@@ -4,7 +4,7 @@ import React from 'react'
 import { Component, Container, Loading, Main } from '../../stateless/common/generic'
 import Navigation from '../../stateful/common/navigation'
 import { Login } from '../../stateless/onboarding/login-register'
-import Street from '../../../../assets/undraw_empty_street_sfxm.svg'
+import Park from '../../../../assets/undraw_through_the_park_lxnl.svg'
 
 
 // Data
@@ -98,7 +98,7 @@ export default class LoginRegister extends Component {
 
 		if( loading ) return <Loading message={ loading } />
 
-		return <Container Background={ Street }>
+		return <Container Background={ Park }>
 			<Navigation title={ action } />
 			<Main.Center>
 				<Login name={ name } handle={ handle } email={ email } password={ password } available={ available } onInput={ this.onInput } proceed={ this.onSubmit } toggle={ this.toggleAction } action={ action } />

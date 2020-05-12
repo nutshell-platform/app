@@ -4,6 +4,7 @@ import React from 'react'
 import { Component, Container, Loading, Main } from '../../stateless/common/generic'
 import Navigation from '../common/navigation'
 import { UserCard } from '../../stateless/account/user-profile'
+import Background from '../../../../assets/undraw_texting_k35o.svg'
 
 // Data
 import { log, catcher } from '../../../modules/helpers'
@@ -63,7 +64,7 @@ class UserProfile extends Component {
 
 		if( loading ) return <Loading message={ loading } />
 
-		return <Container>
+		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
 				<UserCard noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />

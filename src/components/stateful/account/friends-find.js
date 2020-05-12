@@ -4,6 +4,7 @@ import React from 'react'
 import { Component, Container, Loading, Main, Title, Search } from '../../stateless/common/generic'
 import Navigation from '../common/navigation'
 import { ListResults } from '../../stateless/account/friends-find'
+import Friends from '../../../../assets/undraw_friends_online_klj6.svg'
 
 // Data
 import { log, catcher } from '../../../modules/helpers'
@@ -109,7 +110,7 @@ class FindFriends extends Component {
 
 		if( loading ) return <Loading message={ loading } />
 
-		return <Container>
+		return <Container Background={ Friends }>
 			<Navigation title='Friends' />
 			<Main.Top style={ { width: 500 } }>
 				<Search searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
