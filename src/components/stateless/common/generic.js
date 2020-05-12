@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity } from 'react-native'
+import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Image } from 'react-native'
 import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading, Searchbar } from 'react-native-paper'
 import { Link as NativeLink, withRouter } from '../../../routes/router'
 
@@ -164,12 +164,14 @@ export const Main = {
 }
 
 // General app container
-export const Container = withTheme( ( { style, children, theme } ) => <SafeAreaView style={ { flex: 1, width: '100%', backgroundColor: theme.colors.primary } }>
+const bgStyles = { position: 'absolute', top: 0, bottom: 0, right: 0, left: 0 }
+export const Container = withTheme( ( { style, children, theme, Background } ) => <SafeAreaView style={ { flex: 1, width: '100%', backgroundColor: theme.colors.primary } }>
 
 	<View style={ {
 		flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', backgroundColor: theme.colors.background,
 		...style
 	} }>
+		{ Background && isWeb ? <Image style={ bgStyles } source={ Background } /> : <Background style={ bgStyles } /> }
 		{ children }
 	</View>
 	
