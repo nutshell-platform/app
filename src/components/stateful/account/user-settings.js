@@ -8,7 +8,7 @@ import { Settings } from '../../stateless/account/user-settings'
 import * as ImageManipulator from "expo-image-manipulator"
 
 // Helpers
-import { log, catcher, getuid	 } from '../../../modules/helpers'
+import { log, catcher, getuid } from '../../../modules/helpers'
 
 // Data
 import app from '../../../modules/firebase/app'
@@ -129,17 +129,19 @@ class UserSettings extends Component {
 			user.newavatar.path = path
 		}
 
-		await this.updateState( { loading: true } )
+		await this.updateState( { loading: 'Saving settings...' } )
 
 		try {
 
-			// DOuble check handle availability
+			// Double check handle availability
 			if( user.handle ) {
 				const available = await app.handleIsAvailable( user.handle )
 				if( !available ) return alert( 'This handle is taken, please choose another' )
 			}
 
+			// Remote updates
 			await app.updateUser( user )
+
 			// If there were changed, propagate
 			if( originalSettings != settings ) await app.updateSettings( settings )
 			if( originalUser != user ) await app.updateUser( user )

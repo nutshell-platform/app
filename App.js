@@ -18,11 +18,11 @@ import { Loading } from './src/components/stateless/common/generic'
 import { setOrientation } from './src/modules/visual/screen'
 import { injectWebCss } from './src/modules/visual/style'
 
-// Push notifications
-import { askForPushPermissions } from './src/modules/push'
-
 // Udates
-import { updateIfAvailable } from './src/modules/updates'
+import { updateIfAvailable } from './src/modules/apis/updates'
+
+// Devving
+import { ignoreErrors } from './src/modules/helpers'
 
 
 // ///////////////////////////////
@@ -33,6 +33,8 @@ export default class App extends React.Component {
 	
 	async componentDidMount() {
 
+		ignoreErrors( [ 'Setting a timer' ] )
+
 		// Put upside down if developing on mobile, but not in browser
 		await setOrientation()
 		injectWebCss()
@@ -42,9 +44,6 @@ export default class App extends React.Component {
 
 		// Initialise Sentry
 		// SentryInit()
-
-		// Create and store expo push token in secure storage { pushtoken }
-		// await askForPushPermissions()
 	}
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity } from 'react-native'
 import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading, Searchbar } from 'react-native-paper'
-import { Link as NativeLink } from '../../../routes/router'
+import { Link as NativeLink, withRouter } from '../../../routes/router'
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -43,7 +43,7 @@ export const View = ( { style, ...props } ) => <NativeView style={ { maxWidth: '
 export const Divider = ( { style, ...props } ) => <PaperDivider style={ { marginVertical: 20, ...style } } { ...props } />
 
 // Profile image
-export const UserAvatar = ( { size=100, user, ...props } ) => user.avatar ? <Avatar.Image { ...props } size={ size } source={ user.avatar.uri } /> : <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' />
+export const UserAvatar = ( { size=100, user, ...props } ) => user.avatar ? <Avatar.Image { ...props } size={ size } source={ user.avatar } /> : <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' />
 
 // Tooltip
 export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStype, label, info, theme, ...props } ) => {
@@ -64,10 +64,9 @@ export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStype,
 	</TouchableOpacity>
 } )
 
-export const Link = withTheme( ( { style, theme, ...props } ) => <NativeLink
-	style={ { color: theme.colors.text, textDecorationLine: 'none', ...theme.fonts.regular, ...style } }
-	{ ...props }
-/> )
+export const Link = withTheme( ( { style, theme, children, to, ...props } ) => <NativeLink to={ to }>
+	<Text style={ { color: theme.colors.text, textDecorationLine: 'none', ...theme.fonts.regular, ...style } }>{ children }</Text>
+</NativeLink> )
 
 // ///////////////////////////////
 // Input components
@@ -104,10 +103,15 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 } )
 
 // Button
-export const Button = withTheme( ( { style, mode='contained', loading=false, children, to, theme, ...props } ) => <PaperButton labelStyle={ { paddingRight: loading ? 30 : 0 } } style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } } mode={ mode } { ...props }>
-	{ to ? <Link style={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface, height: '100%' } } to={ to }>{ children }</Link> : children }
+export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <PaperButton
+	onPress={ to ? f => history.push( to ) : onPress }
+	labelStyle={ { paddingRight: loading ? 30 : 0, color: mode != 'contained' ? theme.colors.text : theme.colors.surface, minWidth: '100%' } }
+	style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } }
+	mode={ mode } { ...props }
+>
+	{ children }
 	{ loading && <ActivityIndicator color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { position: 'absolute', top: 0, right: 0, padding: 10, height: '100%' } } /> }
-</PaperButton> )
+</PaperButton> ) )
 
 
 // Toggle
@@ -151,14 +155,12 @@ export const Loading = ( { message } ) => <Container style={ { justifyContent: '
 // ///////////////////////////////
 // Positioning
 // ///////////////////////////////
-const sharedStyles = { paddingHorizontal: 10, paddingVertical: 40, maxWidth: '100%' }
+const sharedStyles = { paddingHorizontal: 10, paddingVertical: 40, maxWidth: '100%', flexGrow: 1, flexShrink: 0 }
 export const Main = {
-	Center: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } style={ { flex: 1, ...sharedStyles } } contentContainerStyle={ { maxWidth: '100%', minHeight: '100%', ...style } }>
-		<View style={ { flex: 1, justifyContent: 'center', flexDirection: 'column' } }>
+	Center: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, alignItems: 'center', justifyContent: 'center',  ...style } }>
 			{ children }
-		</View>
 	</ScrollView> ),
-	Top: ( { children, style } ) => ( <ScrollView style={ { flex: 1, ...sharedStyles } } contentContainerStyle={ { maxWidth: '100%', ...style } }>{ children }</ScrollView> )
+	Top: ( { children, style } ) => ( <ScrollView contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
 }
 
 // General app container

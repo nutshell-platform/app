@@ -15,6 +15,9 @@ import { Component, Loading } from '../components/stateless/common/generic'
 // Routing
 import { Switch, Route, withRouter } from './router'
 
+// Helpers
+import { log } from '../modules/helpers'
+
 // Components
 import LoginRegistration from '../components/stateful/onboarding/login-register'
 import UserSettings from '../components/stateful/account/user-settings'
@@ -41,6 +44,9 @@ class Routes extends Component {
 
 		const { history, user, settings } = nextProps
 		const { pathname } = history.location
+
+		// Development-only logging of path
+		log( pathname )
 
 		// ///////////////////////////////
 		// Redirect rules

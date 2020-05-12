@@ -48,9 +48,9 @@ export const Entry = ( { entry } ) => {
 	const [ open, setOpen ] = useState( false )
 
 	return <View style={ { width: '100%', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start' } }>
-		<TouchableOpacity onPress={ f => setOpen( !open ) } style={ { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start', width: '100%' } }>
-			<Title style={ { fontSize: 18 } }>{ entry.title }</Title>
-			<IconButton style={ { marginLeft: 'auto', height: '100%' } } size={ 18 } icon={ open ? 'minus' : 'plus' } />
+		<TouchableOpacity onPress={ f => setOpen( !open ) } style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', width: '100%' } }>
+			<Title style={ { flexShrink: 1, fontSize: 18 } }>{ entry.title }</Title>
+			<IconButton style={ { flexShrink: 1, marginLeft: 'auto' } } size={ 18 } icon={ open ? 'minus' : 'plus' } />
 		</TouchableOpacity>
 
 		{ open && <Paragraph style={ { paddingVertical: 20 } }>{ entry.paragraph }</Paragraph> }
