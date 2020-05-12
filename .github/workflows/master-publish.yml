@@ -1,10 +1,10 @@
-name: Deploy expo updates ( staging )
+name: Deploy expo updates ( master )
 
 on:
   # Trigger: on new tag push
   push:
     branches:
-      - staging
+      - master
     paths:
       - 'src/**'
       - '*.json'
@@ -22,9 +22,6 @@ jobs:
       # Get the repo files from current commit
       - name: Cloning repository
         uses: actions/checkout@v1
-
-      - name: Set right stageing area
-        run: git checkout staging
 
       - name: installing node 13
         uses: actions/setup-node@v1
@@ -49,12 +46,12 @@ jobs:
 
       - name: Publish
         run: |
-          echo -e "${{ secrets.DOTENV_STAGING }}" > .env
-          npm run stage
+          echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
+          npm run publish
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --project=staging
+          args: deploy --project=production
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
