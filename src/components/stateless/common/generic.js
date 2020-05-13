@@ -161,10 +161,10 @@ export const Loading = ( { message } ) => <Container style={ { justifyContent: '
 // ///////////////////////////////
 const sharedStyles = { paddingHorizontal: 10, paddingVertical: 40, maxWidth: '100%', flexGrow: 1, flexShrink: 0 }
 export const Main = {
-	Center: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, alignItems: 'center', justifyContent: 'center',  ...style } }>
+	Center: ( { children, style } ) => ( <ScrollView style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, alignItems: 'center', justifyContent: 'center',  ...style } }>
 			{ children }
 	</ScrollView> ),
-	Top: ( { children, style } ) => ( <ScrollView showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
+	Top: ( { children, style } ) => ( <ScrollView style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
 }
 
 // General app container
