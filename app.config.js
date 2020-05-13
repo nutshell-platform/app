@@ -1,6 +1,11 @@
-{
+export default {
   "expo": {
+
+    // Publically visible
     "name": "Nutshell",
+    "description": "One message a week from people you care about",
+
+    // Settings
     "slug": "nutshell-platform",
     "privacy": "public",
     "platforms": [
@@ -9,30 +14,44 @@
       "web"
     ],
     "version": "1.0.0",
+
+    // Visual
     "orientation": "default",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon/acorn_drop_appStore.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon/acorn_drop_appStore.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#808080"
     },
+    "notification": {
+      icon: './assets/icon/acorn_drop_vector_greyscale_94_94.png'
+    },
+
+    // App settings
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
     ],
+    "scheme": "com.nutshell.nutshell",
+    
+    // IOS config
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nutshell.nutshell",
       "buildNumber": "1.0.0"
     },
+
+    // Android config
     "android": {
       "package": "com.nutshell.nutshell",
       "versionCode": 1,
       "permissions": []
     },
-    "scheme": "com.nutshell.nutshell",
+    
+
+    // Sentry config
     "hooks": {
       "postPublish": [
         {
@@ -40,6 +59,8 @@
         }
       ]
     },
+
+    // Metro config
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": [
