@@ -3,8 +3,8 @@
 ## Repository protocols
 
 - Never push directly to the `master` branch
-    - `development` merges into `stageing`
-    - `stageing` merges into `master`
+    - `development` merges into `staging`
+    - `staging` merges into `master`
     - Both are hooked up to CI through GH actions
 - All merges are done through pull-requests
     - Merges are never done by the code author
