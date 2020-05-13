@@ -36,6 +36,13 @@ class Routes extends Component {
 	}
 
 	componentDidMount = async () => {
+
+		// If url is wrongly using hash (for example due to a direct link), fix it
+		const { href, host } = window.location
+		const [ fullMatch, pathMatch ] = href.match( /(\w+)#/ ) || []
+		if( pathMatch ) window.history.replaceState( null, '', `/#/${pathMatch}` )
+
+		// Init firebase
 		await firebase.init()
 		return this.setState( { init: true } )
 	}
