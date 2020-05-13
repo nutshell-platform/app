@@ -4,9 +4,10 @@ import React from 'react'
 import { Component, Container, Loading, Main } from '../../stateless/common/generic'
 import { Editor } from '../../stateless/nutshells/write'
 import Navigation from '../common/navigation'
+import Write from '../../../../assets/undraw_typewriter_i8xd.svg'
 
 // Data
-import { log, getuid } from '../../../modules/helpers'
+import { log, getuid, nextMonday } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux
@@ -110,18 +111,21 @@ class WriteNutshell extends Component {
 	saveDraft = async ( { type } ) => {
 
 		const { nutshell } = this.state
-		const { entries, scheduled, id } = nutshell
+		const { entries, scheduled, uid } = nutshell
 
 		// Validation
 		// Only send entries with a title
 		nutshell.entries = entries.filter( entry => entry.title.length > 0 )
 
+		// Set the next ublish day to the next monday
+		nutshell.published = nextMonday().getTime()
+
 		await this.updateState( { loading: 'Submitting your nutshell to the cloud. Weird how that goes.' } )
 
 		// If hutshell already exists update it
 		try {
-			if( id ) await app.updateNutshell( nutshell )
-			if( !id ) await app.createNutshell( nutshell )
+			if( uid ) await app.updateNutshell( nutshell )
+			if( !uid ) await app.createNutshell( nutshell )
 			await this.updateState( { changesMade: false } )
 		} catch( e ) {
 			alert( e )
@@ -144,8 +148,8 @@ class WriteNutshell extends Component {
 
 		if( loading ) return <Loading message={ loading } />
 
-		return <Container>
-			<Navigation title='Write your nutshell' />
+		return <Container Background={ Write }>
+			<Navigation title='Write' />
 			<Main.Center>
 				<Editor inspire={ this.inspire } background={ theme.colors.background } changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
 			</Main.Center>

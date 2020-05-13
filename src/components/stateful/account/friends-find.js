@@ -4,6 +4,7 @@ import React from 'react'
 import { Component, Container, Loading, Main, Title, Search } from '../../stateless/common/generic'
 import Navigation from '../common/navigation'
 import { ListResults } from '../../stateless/account/friends-find'
+import Friends from '../../../../assets/undraw_friends_online_klj6.svg'
 
 // Data
 import { log, catcher } from '../../../modules/helpers'
@@ -19,7 +20,8 @@ class FindFriends extends Component {
 		loading: 'Loading random people. Not randos though, nice people.',
 		newFollows: [],
 		newUnfollows: [],
-		timeout: 1000
+		timeout: 1000,
+		filter: 'all'
 	}
 
 	componentDidMount = f => this.defaultSearch()
@@ -85,17 +87,19 @@ class FindFriends extends Component {
 	// Split following vs not yet
 	sortedResults = f => {
 
-		const { results, newFollows, newUnfollows } = this.state
+		const { results, newFollows, newUnfollows, filter } = this.state
 		const { following: oldFollows } = this.props.user
 		const allFollows = [ ...oldFollows, ...newFollows ].filter( fuid => !newUnfollows.includes( fuid ) )
 
 		const sortedResults = results.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
-		return sortedResults.sort( ( a, b ) => {
-			// Followed users go below
-			if( a.following == b.following ) return 0
-			if( a.following && !b.following ) return 1
-			if( !a.following && b.following ) return -1
-		} )
+		if( filter == 'all' ) return sortedResults
+		// Disable sorting based on following status for now
+		// .sort( ( a, b ) => {
+		// 	// Followed users go below
+		// 	if( a.following == b.following ) return 0
+		// 	if( a.following && !b.following ) return 1
+		// 	if( !a.following && b.following ) return -1
+		// } )
 
 
 	}
@@ -106,8 +110,8 @@ class FindFriends extends Component {
 
 		if( loading ) return <Loading message={ loading } />
 
-		return <Container>
-			<Navigation title='Find friends' />
+		return <Container Background={ Friends }>
+			<Navigation title='Friends' />
 			<Main.Top style={ { width: 500 } }>
 				<Search searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
 				<ListResults unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Animated, Platform } from 'react-native'
-import { Component } from '../../stateless/common/generic'
+import { Component, Appbar } from '../../stateless/common/generic'
 import { Header, Menu } from '../../stateless/common/navigation'
 import { connect } from 'react-redux'
 import { withRouter } from '../../../routes/router'
@@ -57,15 +57,24 @@ class Navigation extends Component {
 
 	}
 
-	toggleDarkMode = f => {
-		console.log( 'Toggle dark' )
-		return this.props.dispatch( toggleDarkMode() )
-	}
+	toggleDarkMode = f => this.props.dispatch( toggleDarkMode() )
 
 	render( ) {
 
 		const { title, user, history } = this.props
 		const { drawer, drawerWidth, drawerOffset } = this.state
+		const links = [
+			// Static links
+			// { label: 'Feed', to: '/' },
+
+			// Dynamic links when user is logged in
+			...( user ? [
+				{ label: 'Profile', to: `/${user.handle}` },
+				{ label: 'Friends', to: '/friends/manage' },
+				{ label: 'Settings', to: '/user/settings' },
+				{ label: 'Logout', onPress: app.logout }
+			] : [] )
+		]
 
 		return <Header
 			drawerTranslate={ { transform: this.pan.getTranslateTransform() } }
@@ -77,23 +86,15 @@ class Navigation extends Component {
 			drawer={ drawer }
 			toggleDark={ this.toggleDarkMode }
 			go={ to => history.push( to ) }
-			links={ [
-
-				// Static links
-				{ label: 'Home', to: '/' },
-
-				// Dynamic links when user is logged in
-				...( user ? [
-					{ label: 'Friends', to: '/friends/find' },
-					{ label: 'Settings', to: '/user/settings' },
-					{ label: 'Logout', onPress: app.logout }
-				] : [] )
-			] }
-		/>
+			links={ links } >
+				{ user && <Appbar.Action icon='home' onPress={ f => history.push( `/` ) } /> }
+				{ user && <Appbar.Action icon='account-plus' onPress={ f => history.push( `/friends/find` ) } /> }
+				{ user && <Appbar.Action icon='pencil-outline' onPress={ f => history.push( `/nutshells/write` ) } /> }
+		</Header>
 	}
 
 }
 
 export default withRouter( connect( store => ( {
-	user: !!store.user
+	user: store.user
 } ) )( Navigation ) )

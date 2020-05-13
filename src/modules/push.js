@@ -1,23 +1,34 @@
-import * as Permissions from 'expo-permissions'
-import * as SecureStore from 'expo-secure-store'
 import { Notifications } from 'expo'
+import { checkOrRequestPushAccess } from './apis/permissions'
+import { isWeb, isAndroid } from './apis/platform'
+import { log } from './helpers'
 
-export const askForPushPermissions = async f => {
+export const getTokenIfNeeded = async settings => {
 
-	const { status } = await Permissions.askAsync( Permissions.NOTIFICATIONS )
-	if ( status != 'granted' ) throw 'Notification permissions not granted'
+	// Exit if web or no notifications enabled
+	if( isWeb || !Object.values( settings.notifications ).includes( true ) ) return false
 
-	const token = await Notifications.getExpoPushTokenAsync()
-	if( !token ) throw 'Token generation failed'
+	// Get local push token
+	const localPushToken = await checkOrRequestPushAccess( )
 
-	await SecureStore.setItemAsync( 'pushtoken', token, {
-		keychainAccessible: SecureStore.ALWAYS
-	} )
+	// Check if local push token is already registered remotely
+	if( settings.pushTokens?.includes( localPushToken ) ) return false
+
+	// Otherwise, return the token for handling
+	return localPushToken
 
 }
 
-export const getPushToken = f => SecureStore.getItemAsync( 'pushtoken' )
+export const registerNotificationListeners = f => {
 
-export const savePushToken = async token => {
-	// This is where you do logic to save your push token on your backend
+	// Set andriod notification category
+	if( isAndroid ) Notifications.createChannelAndroidAsync( 'default', {
+		name: 'default',
+		default: 'Notifications as configured in your settings.',
+        sound: true,
+        priority: 'max',
+        vibrate: true
+	} )
+
+	Notifications.addListener( notification => log( notification ) )
 }

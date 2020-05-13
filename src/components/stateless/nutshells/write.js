@@ -5,11 +5,11 @@ import { TouchableOpacity } from 'react-native'
 import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View, ToolTip, Caption, IconButton } from '../common/generic'
 
 // Data
-import { weekNumber, nextMonday } from '../../../modules/helpers'
+import { weekNumber, nextMonday, timestampToHuman } from '../../../modules/helpers'
 
 export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, changesMade, background='grey', inspire } ) => {
 
-	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ nextMonday().toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d* )/ )[0] }`
+	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( nextMonday() ) }`
 
 	return <View>
 		<View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
@@ -18,7 +18,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 				{ /* Meta overview */ }
 				<View style={ { width: '100%', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' } }>
 					<UserAvatar style={ { marginTop: -avatarSize/2 } } size={ avatarSize } user={ user } />
-					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' } }>
+					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' } }>
 						
 						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>
 						<Toggle style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />

@@ -1,10 +1,14 @@
 import React from 'react'
+
+// Visual
 import { Component, Container, Loading, Main } from '../../stateless/common/generic'
 import Navigation from '../../stateful/common/navigation'
 import { Login } from '../../stateless/onboarding/login-register'
+import Park from '../../../../assets/undraw_through_the_park_lxnl.svg'
 
+
+// Data
 import { log } from '../../../modules/helpers'
-
 import app from '../../../modules/firebase/app'
 
 export default class LoginRegister extends Component {
@@ -35,7 +39,6 @@ export default class LoginRegister extends Component {
 	onInput = ( key, value ) => {
 
 		const { action, validator } = this.state
-
 		// If not handle, just udate
 		if( key != 'handle' ) return this.updateState( { [key]: value } )
 
@@ -80,13 +83,12 @@ export default class LoginRegister extends Component {
 			if( action == 'login' ) await app.loginUser( email.trim(), password )
 			if( action == 'register' ) await app.registerUser( name.trim(), handle.trim(), email.trim(), password )
 			if( action == 'recover' ) await app.resetPassword( email.trim() )
-			return history.push( '/user/settings' )
+			return history.push( '/' )
 		} catch( e ) {
 			log( e )
 			alert( e )
+			return this.updateState( { loading: false } )
 		}
-
-		await this.updateState( { loading: false } )
 	}
 
 	render() {
@@ -96,7 +98,7 @@ export default class LoginRegister extends Component {
 
 		if( loading ) return <Loading message={ loading } />
 
-		return <Container>
+		return <Container Background={ Park }>
 			<Navigation title={ action } />
 			<Main.Center>
 				<Login name={ name } handle={ handle } email={ email } password={ password } available={ available } onInput={ this.onInput } proceed={ this.onSubmit } toggle={ this.toggleAction } action={ action } />

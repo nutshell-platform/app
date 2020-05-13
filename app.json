@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Expo Boilerplate",
-    "slug": "expo-boilerplate",
+    "name": "Nutshell Platform",
+    "slug": "nutshell-platform",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -38,6 +38,22 @@
         {
           "file": "sentry-expo/upload-sourcemaps"
         }
+      ]
+    },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "expo.ts",
+        "expo.tsx",
+        "expo.js",
+        "expo.jsx",
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "wasm",
+        "svg"
       ]
     }
   }

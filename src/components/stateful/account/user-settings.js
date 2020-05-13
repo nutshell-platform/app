@@ -6,9 +6,10 @@ import Navigation from '../common/navigation'
 import { View } from 'react-native'
 import { Settings } from '../../stateless/account/user-settings'
 import * as ImageManipulator from "expo-image-manipulator"
+import Background from '../../../../assets/undraw_personal_settings_kihd.svg'
 
 // Helpers
-import { log, catcher, getuid	 } from '../../../modules/helpers'
+import { log, catcher, getuid } from '../../../modules/helpers'
 
 // Data
 import app from '../../../modules/firebase/app'
@@ -127,19 +128,24 @@ class UserSettings extends Component {
 			// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
 			const path = `avatars/${ uid }-${ await getuid() }.jpg`
 			user.newavatar.path = path
+
+			// Append old avatar data in order to parse it in the api module
+			user.oldavatar = originalUser.avatar
 		}
 
-		await this.updateState( { loading: true } )
+		await this.updateState( { loading: 'Saving settings...' } )
 
 		try {
 
-			// DOuble check handle availability
+			// Double check handle availability
 			if( user.handle ) {
 				const available = await app.handleIsAvailable( user.handle )
 				if( !available ) return alert( 'This handle is taken, please choose another' )
 			}
 
+			// Remote updates
 			await app.updateUser( user )
+
 			// If there were changed, propagate
 			if( originalSettings != settings ) await app.updateSettings( settings )
 			if( originalUser != user ) await app.updateUser( user )
@@ -160,8 +166,8 @@ class UserSettings extends Component {
 
 		if( !user || loading ) return <Loading message={ loading } />
 
-		return <Container>
-			<Navigation title='User settings' />
+		return <Container Background={ Background }>
+			<Navigation title='Settings' />
 			<Settings handleAvailable={ handleAvailable } passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
 		</Container>
 

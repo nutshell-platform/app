@@ -1,4 +1,4 @@
-import { catcher } from '../helpers'
+import { catcher, log } from '../helpers'
 import { dataFromSnap } from './helpers'
 import { resetApp } from '../../redux/actions/settingsActions'
 import { unregisterListeners, registerListeners } from './listeners'
@@ -59,7 +59,7 @@ export const listenUserMetaChanges = ( app, dispatch, action ) => {
 // ///////////////////////////////
 // User actions
 // ///////////////////////////////
-
+			
 // Register a new user by email and password
 export const registerUser = async ( app, name, handle, email, password ) => {
 
@@ -88,7 +88,7 @@ export const loginUser = async ( auth, email, password ) => auth.signInWithEmail
 // Update the user profile and return the new user object to store
 export const updateUser = async ( app, userUpdates ) => {
 
-	let { uid, email, newpassword, currentpassword, newavatar, avatar, handle, ...updates } = userUpdates
+	let { uid, email, newpassword, currentpassword, newavatar, oldavatar, handle, ...updates } = userUpdates
 	
 	try {
 
@@ -115,7 +115,8 @@ export const updateUser = async ( app, userUpdates ) => {
 				path: newavatar.path
 			}
 			// Delete old file
-			if( avatar ) await app.storage.child( avatar.path ).delete()
+			console.log( 'Deleting ', oldavatar.path )
+			if( oldavatar ) await app.storage.child( oldavatar.path ).delete().catch( e => log( e ) )
 		}
 
 		// Set other properties to store
@@ -136,7 +137,8 @@ export const updateUser = async ( app, userUpdates ) => {
 export const getUserProfile = async ( db, user ) => ( {
 	uid: user.uid,
 	email: user.email,
-	...( await db.collection( 'users' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) )
+	...( await db.collection( 'users' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) ),
+	...( await db.collection( 'userMeta' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) )
 } )
 
 // Recover password

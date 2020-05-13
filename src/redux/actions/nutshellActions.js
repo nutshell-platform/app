@@ -3,4 +3,7 @@ export const setNutshellDraft = nutshell => ( {
 	payload: nutshell
 } )
 
-export const another = true
+export const setNutshellInbox = inbox => ( {
+	type: 'SETINBOX',
+	payload: inbox
+} )

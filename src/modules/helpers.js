@@ -1,18 +1,23 @@
+import { Alert as NativeAlert, YellowBox } from 'react-native'
+import { dev } from './apis/platform'
+
 // ///////////////////////////////
 // Visual
 // ///////////////////////////////
-
-import { Alert as NativeAlert } from 'react-native'
-
 export const Dialogue = ( title, message, options=[ { text: 'ok', onPress: f => Promise.resolve() } ] ) => new Promise( resolve => {
 
 	// Option has text and onpress
-	NativeAlert.alert(
+	if( !isWeb ) NativeAlert.alert(
 		title,
 		message,
 		options.map( option => ( { ...option, onPress: f => option.onPress && option.onPress().then( res => resolve( res ) ) } ) ),
 		{ cancelable: true }
 	 )
+
+	if( isWeb ) {
+		if( confirm( `${title}\n\n${message}` ) ) options[0].onPress().then( resolve )
+		else resolve()
+	}
 
 } )
 
@@ -23,12 +28,13 @@ export const capitalize = string => string ? string.charAt(0).toUpperCase() + st
 // ///////////////////////////////
 // Debugging
 // ///////////////////////////////
+
 export const log = msg => {
-	if( process.env.NODE_ENV == 'development' ) console.log( msg )
+	if( dev ) console.log( msg )
 }
 
 export const error = msg => {
-	if( process.env.NODE_ENV == 'development' ) {
+	if( dev ) {
 		console.log( msg )
 		console.trace()
 	}
@@ -39,6 +45,8 @@ export const catcher = e => {
 	// throw to sentry
 	throw e
 }
+
+export const ignoreErrors = arr => YellowBox.ignoreWarnings( arr )
 
 // ///////////////////////////////
 // Generators
@@ -58,6 +66,8 @@ const today = new Date()
 // profiling the 1st of jan
 const oneJan = new Date( today.getFullYear(), 0, 1 )
 const oneJanDayType = oneJan.getDay()
+
+export const timestampToHuman = ms => new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ )[0]
 
 // Weeks are defined by the number of 7 day increments that have elapsed
 export const weekNumber = f => {

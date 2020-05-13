@@ -42,3 +42,18 @@ export const findPerson = async ( app, query ) => {
 	}
 
 }
+
+export const getPerson = async ( db, query, by ) => {
+
+	try {
+		let user
+		if( by == 'uid' ) user = await db.collection( 'users' ).doc( query ).get().then( dataFromSnap )
+		else user = await db.collection( 'users' ).where( by, '==', query ).get().then( dataFromSnap ).then( hits => hits[0] || {} )
+		if( !user.uid ) throw 'User not found'
+		const meta = await db.collection( 'userMeta' ).doc( user.uid ).get().then( dataFromSnap )
+		return { ...user, ...meta }
+	} catch( e ) {
+		throw e
+	}
+
+}

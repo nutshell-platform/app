@@ -1,0 +1,120 @@
+[debug] [2020-05-12T10:14:42.965Z] ----------------------------------------------------------------------
+[debug] [2020-05-12T10:14:42.968Z] Command:       /Users/mentor/.nvm/versions/node/v13.12.0/bin/node /Users/mentor/.nvm/versions/node/v13.12.0/bin/firebase functions:shell
+[debug] [2020-05-12T10:14:42.968Z] CLI Version:   8.1.1
+[debug] [2020-05-12T10:14:42.969Z] Platform:      darwin
+[debug] [2020-05-12T10:14:42.969Z] Node Version:  v13.12.0
+[debug] [2020-05-12T10:14:42.971Z] Time:          Tue May 12 2020 12:14:42 GMT+0200 (Central European Summer Time)
+[debug] [2020-05-12T10:14:42.971Z] ----------------------------------------------------------------------
+[debug] [2020-05-12T10:14:42.971Z] 
+[debug] [2020-05-12T10:14:42.981Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-05-12T10:14:42.982Z] > authorizing via signed-in user
+[debug] [2020-05-12T10:14:42.982Z] [iam] checking project nutshell-staging-1b98e for permissions ["firebase.projects.get"]
+[debug] [2020-05-12T10:14:42.984Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-05-12T10:14:42.984Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-05-12T10:14:43.097Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 12 May 2020 10:14:43 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-05-12T10:14:43.118Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/nutshell-staging-1b98e:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-05-12T10:14:43.951Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 12 May 2020 10:14:43 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=606","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] ⚠  Your requested "node" version "10" doesn't match your global version "13"
+[info] ✔  functions: functions emulator started at http://localhost:5000
+[debug] [2020-05-12T10:14:43.977Z] [functions] Watching "/Users/mentor/dev/nutshell/functions" for Cloud Functions...
+[debug] [2020-05-12T10:14:43.991Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-12T10:14:43.991Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-05-12T10:14:43.991Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-12T10:14:43.991Z] DEBUG: [worker-~diagnostic~-822ba9be-764e-4b57-9b14-3a12ac1f1382]: Assigning socketPath: /var/folders/px/qc_bkgpd79n7vssdnpwhqbs00000gn/T/fire_emu_57141.sock
+[debug] [2020-05-12T10:14:43.992Z] DEBUG: [worker-~diagnostic~-822ba9be-764e-4b57-9b14-3a12ac1f1382]: BUSY
+[debug] [2020-05-12T10:14:44.279Z] DEBUG: [runtime-status] [57141] Functions runtime initialized. {"cwd":"/Users/mentor/dev/nutshell/functions","node_version":"13.12.0"}
+[debug] [2020-05-12T10:14:44.280Z] DEBUG: [runtime-status] [57141] Disabled runtime features: undefined
+[debug] [2020-05-12T10:14:44.283Z] DEBUG: [runtime-status] [57141] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-12T10:14:44.284Z] DEBUG: [runtime-status] [57141] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  functions: Your GOOGLE_APPLICATION_CREDENTIALS environment variable points to /Users/mentor/dev/nutshell//nutshell-staging.json. Non-emulated services will access production using these credentials. Be careful!
+[debug] [2020-05-12T10:14:44.286Z] DEBUG: [runtime-status] [57141] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-12T10:14:44.324Z] DEBUG: [runtime-status] [57141] Checked functions.config() {"config":{}}
+[debug] [2020-05-12T10:14:44.324Z] DEBUG: [runtime-status] [57141] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-12T10:14:44.325Z] DEBUG: [runtime-status] [57141] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-12T10:14:44.326Z] DEBUG: [runtime-status] [57141] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-12T10:14:44.326Z] DEBUG: [runtime-status] [57141] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-12T10:14:44.372Z] DEBUG: [runtime-status] [57141] initializeApp(DEFAULT) {"databaseURL":"https://nutshell-staging-1b98e.firebaseio.com","storageBucket":"nutshell-staging-1b98e.appspot.com","projectId":"nutshell-staging-1b98e"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-12T10:14:44.697Z] [functions[manualInboxNotifier]] http function initialized (http://localhost:5000/nutshell-staging-1b98e/us-central1/manualInboxNotifier).
+[debug] [2020-05-12T10:14:44.697Z] [functions[unFollow]] function ignored because the firestore emulator does not exist or is not running.
+[debug] [2020-05-12T10:14:44.697Z] [functions[follow]] function ignored because the firestore emulator does not exist or is not running.
+[debug] [2020-05-12T10:14:44.697Z] [functions[publish]] function ignored because the pubsub emulator does not exist or is not running.
+[debug] [2020-05-12T10:14:44.697Z] [functions[pushReceiptHandler]] function ignored because the pubsub emulator does not exist or is not running.
+[debug] [2020-05-12T10:14:44.697Z] [functions[notifyOfUnreadNutshells]] function ignored because the pubsub emulator does not exist or is not running.
+[debug] [2020-05-12T10:14:44.698Z] [functions[notifyRememberToWrite]] function ignored because the pubsub emulator does not exist or is not running.
+[info] i  functions: Loaded functions: unFollow, follow, publish, pushReceiptHandler, notifyOfUnreadNutshells, notifyRememberToWrite, manualInboxNotifier
+[warn] ⚠  functions: The following emulators are not running, calls to these services will affect production: firestore, database, pubsub
+[debug] [2020-05-12T10:14:44.704Z] DEBUG: [worker-~diagnostic~-822ba9be-764e-4b57-9b14-3a12ac1f1382]: IDLE
+[debug] [2020-05-12T10:14:48.577Z] [work-queue] {"queueLength":1,"workRunningCount":0}
+[debug] [2020-05-12T10:14:48.579Z] [work-queue] {"queueLength":0,"workRunningCount":1}
+[debug] [2020-05-12T10:14:48.580Z] Accepted request POST /nutshell-staging-1b98e/us-central1/manualInboxNotifier --> manualInboxNotifier
+[debug] [2020-05-12T10:14:48.587Z] DEBUG: [worker-pool] addWorker(manualInboxNotifier)
+[debug] [2020-05-12T10:14:48.587Z] DEBUG: [worker-pool] Adding worker with key manualInboxNotifier, total=1
+[debug] [2020-05-12T10:14:48.587Z] DEBUG: [worker-pool] submitWork(triggerId=manualInboxNotifier)
+[debug] [2020-05-12T10:14:48.588Z] DEBUG: [worker-manualInboxNotifier-265d0a93-a631-4b28-a2a1-77243920b005]: Assigning socketPath: /var/folders/px/qc_bkgpd79n7vssdnpwhqbs00000gn/T/fire_emu_57151.sock
+[debug] [2020-05-12T10:14:48.588Z] DEBUG: [worker-manualInboxNotifier-265d0a93-a631-4b28-a2a1-77243920b005]: BUSY
+[debug] [2020-05-12T10:14:48.822Z] DEBUG: [runtime-status] [57151] Functions runtime initialized. {"cwd":"/Users/mentor/dev/nutshell/functions","node_version":"13.12.0"}
+[debug] [2020-05-12T10:14:48.823Z] DEBUG: [runtime-status] [57151] Disabled runtime features: undefined
+[debug] [2020-05-12T10:14:48.825Z] DEBUG: [runtime-status] [57151] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-12T10:14:48.826Z] DEBUG: [runtime-status] [57151] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  functions: Your GOOGLE_APPLICATION_CREDENTIALS environment variable points to /Users/mentor/dev/nutshell//nutshell-staging.json. Non-emulated services will access production using these credentials. Be careful!
+[debug] [2020-05-12T10:14:48.828Z] DEBUG: [runtime-status] [57151] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-12T10:14:48.856Z] DEBUG: [runtime-status] [57151] Checked functions.config() {"config":{}}
+[debug] [2020-05-12T10:14:48.856Z] DEBUG: [runtime-status] [57151] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-12T10:14:48.857Z] DEBUG: [runtime-status] [57151] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-12T10:14:48.858Z] DEBUG: [runtime-status] [57151] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-12T10:14:48.858Z] DEBUG: [runtime-status] [57151] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-12T10:14:48.887Z] DEBUG: [runtime-status] [57151] initializeApp(DEFAULT) {"databaseURL":"https://nutshell-staging-1b98e.firebaseio.com","storageBucket":"nutshell-staging-1b98e.appspot.com","projectId":"nutshell-staging-1b98e"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-12T10:14:49.068Z] DEBUG: [runtime-status] [57151] Trigger "manualInboxNotifier" has been found, beginning invocation!
+[debug] [2020-05-12T10:14:49.068Z] [functions] Beginning execution of "manualInboxNotifier"
+[debug] [2020-05-12T10:14:49.069Z] DEBUG: [runtime-status] [57151] triggerDefinition {"httpsTrigger":{},"labels":{"deployment-callable":"true"},"name":"manualInboxNotifier","entryPoint":"manualInboxNotifier"}
+[debug] [2020-05-12T10:14:49.069Z] DEBUG: [runtime-status] [57151] Running manualInboxNotifier in mode HTTPS
+[debug] [2020-05-12T10:14:49.071Z] DEBUG: [runtime-status] [57151] Attempting to listen to socketPath: /var/folders/px/qc_bkgpd79n7vssdnpwhqbs00000gn/T/fire_emu_57151.sock
+[debug] [2020-05-12T10:14:49.075Z] DEBUG: [functions] Runtime ready! Sending request!
+[debug] [2020-05-12T10:14:49.093Z] DEBUG: [runtime-status] [57151] Ephemeral server handling POST request
+[debug] [2020-05-12T10:14:49.094Z] DEBUG: [runtime-status] [57151] No callable functions auth found
+[debug] [2020-05-12T10:14:49.099Z] DEBUG: [runtime-status] [57151] Ephemeral server survived.
+[warn] ⚠  Google API requested!
+   - URL: "https://www.googleapis.com/oauth2/v4/token"
+   - Be careful, this may be a production service.
+[info] >  Push notification error:  {} {"user":"Push notification error:  {}"}
+[info] >  Push notification error:  {} {"user":"Push notification error:  {}"}
+[warn] ⚠  External network resource requested!
+   - URL: "https://exp.host/--/api/v2/push/send"
+ - Be careful, this may be a production service.
+[info] >  Push notification error:  {} {"user":"Push notification error:  {}"}
+[info] >  Push notification error:  {} {"user":"Push notification error:  {}"}
+[debug] [2020-05-12T10:14:50.076Z] [functions] Finished "manualInboxNotifier" in ~1s
+[debug] [2020-05-12T10:14:50.076Z] DEBUG: [worker-manualInboxNotifier-265d0a93-a631-4b28-a2a1-77243920b005]: IDLE
+[debug] [2020-05-12T10:14:50.077Z] [work-queue] {"queueLength":0,"workRunningCount":0}
+[debug] [2020-05-12T10:15:24.663Z] DEBUG: File /Users/mentor/dev/nutshell/functions/index.js changed, reloading triggers
+[debug] [2020-05-12T10:15:25.668Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-12T10:15:25.668Z] DEBUG: [worker-~diagnostic~-822ba9be-764e-4b57-9b14-3a12ac1f1382]: FINISHING
+[debug] [2020-05-12T10:15:25.669Z] DEBUG: [worker-pool] Shutting down IDLE worker (manualInboxNotifier)
+[debug] [2020-05-12T10:15:25.669Z] DEBUG: [worker-manualInboxNotifier-265d0a93-a631-4b28-a2a1-77243920b005]: FINISHING
+[debug] [2020-05-12T10:15:25.678Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-12T10:15:25.679Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-12T10:15:25.679Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-12T10:15:25.679Z] DEBUG: [worker-~diagnostic~-b413e6aa-4c3c-4638-9524-21ef510e1160]: Assigning socketPath: /var/folders/px/qc_bkgpd79n7vssdnpwhqbs00000gn/T/fire_emu_57222.sock
+[debug] [2020-05-12T10:15:25.679Z] DEBUG: [worker-~diagnostic~-b413e6aa-4c3c-4638-9524-21ef510e1160]: BUSY
+[debug] [2020-05-12T10:15:25.682Z] DEBUG: [worker-~diagnostic~-822ba9be-764e-4b57-9b14-3a12ac1f1382]: exited
+[debug] [2020-05-12T10:15:25.682Z] DEBUG: [worker-~diagnostic~-822ba9be-764e-4b57-9b14-3a12ac1f1382]: FINISHED
+[debug] [2020-05-12T10:15:25.682Z] DEBUG: [worker-manualInboxNotifier-265d0a93-a631-4b28-a2a1-77243920b005]: exited
+[debug] [2020-05-12T10:15:25.682Z] DEBUG: [worker-manualInboxNotifier-265d0a93-a631-4b28-a2a1-77243920b005]: FINISHED
+[debug] [2020-05-12T10:15:26.057Z] DEBUG: [runtime-status] [57222] Functions runtime initialized. {"cwd":"/Users/mentor/dev/nutshell/functions","node_version":"13.12.0"}
+[debug] [2020-05-12T10:15:26.060Z] DEBUG: [runtime-status] [57222] Disabled runtime features: undefined
+[debug] [2020-05-12T10:15:26.064Z] DEBUG: [runtime-status] [57222] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-12T10:15:26.065Z] DEBUG: [runtime-status] [57222] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  functions: Your GOOGLE_APPLICATION_CREDENTIALS environment variable points to /Users/mentor/dev/nutshell//nutshell-staging.json. Non-emulated services will access production using these credentials. Be careful!
+[debug] [2020-05-12T10:15:26.069Z] DEBUG: [runtime-status] [57222] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-12T10:15:26.134Z] DEBUG: [runtime-status] [57222] Checked functions.config() {"config":{}}
+[debug] [2020-05-12T10:15:26.135Z] DEBUG: [runtime-status] [57222] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-12T10:15:26.136Z] DEBUG: [runtime-status] [57222] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-12T10:15:26.136Z] DEBUG: [runtime-status] [57222] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-12T10:15:26.136Z] DEBUG: [runtime-status] [57222] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.12.1","resolution":"/Users/mentor/dev/nutshell/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-12T10:15:26.189Z] DEBUG: [runtime-status] [57222] initializeApp(DEFAULT) {"databaseURL":"https://nutshell-staging-1b98e.firebaseio.com","storageBucket":"nutshell-staging-1b98e.appspot.com","projectId":"nutshell-staging-1b98e"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-12T10:15:26.456Z] DEBUG: [worker-~diagnostic~-b413e6aa-4c3c-4638-9524-21ef510e1160]: IDLE

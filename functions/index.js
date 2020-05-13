@@ -1,36 +1,36 @@
 const functions = require('firebase-functions')
 
-const admin = require('firebase-admin')
-const app = admin.initializeApp()
-const { FieldValue } = admin.firestore
-const db = app.firestore()
+// ///////////////////////////////
+// On relation create
+// ///////////////////////////////
+const { follow, unfollow } = require( './modules/following' )
+exports.unFollow = functions.firestore.document( 'relationships/{relationId}' ).onDelete( unfollow )
+exports.follow = functions.firestore.document( 'relationships/{relationId}' ).onWrite( follow )
 
 // ///////////////////////////////
-// On relation create IN PROGRESS
+// Cron
 // ///////////////////////////////
-exports.unFollow = functions.firestore.document( 'relationships/{relationId}' ).onDelete( ( snap, context ) => {
+const { publish } = require( './modules/nutshells' )
+exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( 'every 1 hours' ).onRun( publish )
 
-	const { author, follower } = snap.data()
-	return Promise.all( [
-		// Remove from author's followers
-		db.collection( 'userMeta' ).doc( author ).set( { followers: FieldValue.arrayRemove( follower ) }, { merge: true } ),
-		// Remove from follower's following
-		db.collection( 'userMeta' ).doc( follower ).set( { following: FieldValue.arrayRemove( author ) }, { merge: true } )
-	] )
+// ///////////////////////////////
+// Push notification handling
+// ///////////////////////////////
+const { retreivePushReceipts } = require( './modules/push' )
 
-} )
+// Get receipts
+exports.pushReceiptHandler = functions.pubsub.schedule( 'every 6 hours' ).onRun( retreivePushReceipts )
 
-exports.follow = functions.firestore.document( 'relationships/{relationId}' ).onWrite( ( change, context ) => {
+// ///////////////////////////////
+// Notifications
+// ///////////////////////////////
+const { unreadNutshells, rememberToWrite } = require( './modules/notifications' )
+exports.notifyOfUnreadNutshells = functions.pubsub.schedule( 'every monday 13:00' ).onRun( unreadNutshells )
+exports.notifyRememberToWrite = functions.pubsub.schedule( 'every friday 13:00' ).onRun( rememberToWrite )
 
-	// Ignore deletiona
-	if( !change.after.exists ) return
-		
-	const { author, follower } = change.after.data()
-	return Promise.all( [
-		// Remove from author's followers
-		db.collection( 'userMeta' ).doc( author ).set( { followers: FieldValue.arrayUnion( follower ) }, { merge: true } ),
-		// Remove from follower's following
-		db.collection( 'userMeta' ).doc( follower ).set( { following: FieldValue.arrayUnion( author ) }, { merge: true } )
-	] )
-
-} )
+// Debugging
+// exports.manualPushReceiptHandler = functions.https.onCall( ( context, data ) => retreivePushReceipts( db ) )
+// const tokens = [ 'ExponentPushToken[4KmlslOnJCvvNS3-jHOS5k]' ]
+// const message = { body: 'Derp' }
+// exports.manualPushSend = functions.https.onCall( ( context, data ) => sendPushNotifications( db, tokens, message ) )
+// exports.manualInboxNotifier = functions.https.onCall( rememberToWrite )

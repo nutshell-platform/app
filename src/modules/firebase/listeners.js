@@ -1,5 +1,3 @@
-import { getUserProfile } from './_user'
-
 export function unregisterListeners( listeners ) {
 
 	const { auth, ...datalisteners } = listeners
@@ -21,22 +19,4 @@ export async function registerListeners( app, dispatch, listeners ) {
 
 	} )
 
-}
-
-export const listenForUserAndStartListeners = ( app, dispatch, onLoginAction, onLogoutAction ) => {
-	// Listen to the user object
-	return app.auth.onAuthStateChanged( async user => {
-
-		// Register listeners if we are logged in
-		if( user ) {
-			registerListeners( app )
-			return dispatch( onLoginAction( await getUserProfile( app.db, user ) ) )
-		}
-
-		// Unregister listeners and reset app if we are not logged in
-		if( !user ) {
-			unregisterListeners( app.listeners )
-			return dispatch( onLogoutAction( ) )
-		}
-	} )
 }
