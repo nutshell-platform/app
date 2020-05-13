@@ -49,7 +49,7 @@ jobs:
 
       - name: Publish
         run: |
-          echo -e "${{ secrets.DOTENV }}" > .env
+          echo -e "${{ secrets.DOTENV_STAGING }}" > .env
           cat .env
           npm run stage
 
