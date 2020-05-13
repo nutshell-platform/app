@@ -34,7 +34,7 @@ export const findPerson = async ( app, query ) => {
 			const matches = await app.db.collection( 'fingerprints' ).where( 'email', '==', hash( query ) ).get().then( dataFromSnap )
 			return Promise.all( notMe( matches ).map( readProfile ) )
 		} else {
-			return app.db.collection( 'users' ).where( 'handle', '==', query ).get().then( dataFromSnap ).then( notMe )
+			return app.db.collection( 'users' ).where( 'handle', '==', query.toLowerCase() ).get().then( dataFromSnap ).then( notMe )
 		}
 
 	} catch( e ) {
