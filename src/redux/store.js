@@ -2,6 +2,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 import promise from 'redux-promise-middleware'
 import logger from 'redux-logger'
 import { isWeb, dev } from '../modules/apis/platform'
+import { log } from '../modules/helpers'
 
 
 // Redux persistance
@@ -24,9 +25,8 @@ const metaReducer = ( state, action ) => {
 	switch( action.type ) {
 		
 		case "RESETAPP":
-			console.log( 'Resetting app storage' )
+			log( 'Resetting app storage' )
 			state = undefined
-			// return undefined
 		break
 
 	}
@@ -47,7 +47,7 @@ export const persistor = persistStore( store )
 
 // Have a persistor purge query option
 if( isWeb && location.href.indexOf( 'purge' ) != -1 ) {
-	console.log( 'Purge request detected' )
+	log( 'Purge request detected' )
 	persistor.purge()
 	location.href = '/'
 }
