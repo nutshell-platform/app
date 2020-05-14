@@ -8,5 +8,6 @@ export default {
 	projectId: FIREBASE_projectId,
 	storageBucket: FIREBASE_storageBucket,
 	messagingSenderId: FIREBASE_messagingSenderId,
-	appId: FIREBASE_appId
+	appId: FIREBASE_appId,
+	measurementId: FIREBASE_measurementId
 }

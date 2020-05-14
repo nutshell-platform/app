@@ -2,7 +2,7 @@ export default {
   "expo": {
 
     // Publically visible
-    "name": "Nutshell",
+    "name": "Nutshell - Slowcial Network",
     "description": "One message a week from people you care about",
 
     // Settings

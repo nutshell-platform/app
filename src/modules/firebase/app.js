@@ -4,6 +4,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
+// import 'firebase/analytics'
 
 // Redux
 import { store } from '../../redux/store'
@@ -80,6 +81,9 @@ class Firebase {
 
 	// Register user listener in a promise wrapper that resolved when initial auth state is received
 	init = f => new Promise( resolve => {
+
+		// Analytics DOES NOT WORK WITH EXPO!
+		// this.fb.analytics()
 
 		this.listeners.auth = listenUserLogin( this, dispatch, setUserAction, resolve, [
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },
