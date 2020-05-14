@@ -1,5 +1,5 @@
 // Sentry debugging and Amplitude tracking
-// import SentryInit from './src/modules/sentry'
+import SentryInit from './src/modules/sentry/sentry'
 
 // React
 import React from 'react'
@@ -43,7 +43,7 @@ export default class App extends React.Component {
 		await updateIfAvailable()
 
 		// Initialise Sentry
-		// SentryInit()
+		SentryInit()
 	}
 
 
