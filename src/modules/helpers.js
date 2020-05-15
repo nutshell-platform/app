@@ -1,5 +1,5 @@
 import { Alert as NativeAlert, YellowBox } from 'react-native'
-import { dev } from './apis/platform'
+import { dev, isWeb } from './apis/platform'
 
 // ///////////////////////////////
 // Visual
