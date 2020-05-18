@@ -15,6 +15,16 @@
 				{
 					"fieldPath": "updated",
 					"order": "DESCENDING"
+				}
+			]
+		},
+		{
+			"collectionGroup": "nutshells",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "status",
+					"order": "ASCENDING"
 				},
 				{
 					"fieldPath": "published",
@@ -22,6 +32,7 @@
 				}
 			]
 		}
+
 	],
 	"fieldOverrides": []
 }
