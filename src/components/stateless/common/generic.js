@@ -3,9 +3,12 @@ import React, { useState } from 'react'
 // Visual
 const Color = require('color')
 import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
-import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading, Searchbar } from 'react-native-paper'
+import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading, Searchbar, Checkbox as PaperCheckbox } from 'react-native-paper'
 import { Link as NativeLink, withRouter } from '../../../routes/router'
 import { isWeb, isIos } from '../../../modules/apis/platform'
+
+// Actions
+import * as Linking from 'expo-linking'
 
 // Optimised react root component
 export class Component extends React.Component {
@@ -68,9 +71,20 @@ export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStype,
 	</TouchableOpacity>
 } )
 
-export const Link = withTheme( ( { style, theme, children, to, ...props } ) => <NativeLink to={ to }>
-	<Text style={ { color: theme.colors.text, textDecorationLine: 'none', ...theme.fonts.regular, ...style } }>{ children }</Text>
-</NativeLink> )
+export const Link = withTheme( ( { style, theme, children, to, onPress, ...props } ) => {
+
+	const text = <Text style={ { color: theme.colors.text, textDecorationLine: 'none', ...theme.fonts.regular, ...style } }>{ children }</Text>
+
+	if( to.includes( 'http' ) || onPress ) return <TouchableOpacity onPress={ onPress || ( f => Linking.openURL( to ) ) } style={ { textDecorationLine: 'underline', paddingVertical: 10 } }>
+		{ text }
+	</TouchableOpacity>
+
+	return <TouchableOpacity onPress={ onPress }>
+		<NativeLink to={ to }>
+			{ text }
+		</NativeLink>
+	</TouchableOpacity>
+} )
 
 // ///////////////////////////////
 // Input components
@@ -111,7 +125,7 @@ export const Button = withRouter( withTheme( ( { style, mode='contained', loadin
 	<PaperButton
 		onPress={ to ? f => history.push( to ) : onPress }
 		labelStyle={ { paddingRight: loading ? 30 : 0, color: mode != 'contained' ? theme.colors.text : theme.colors.surface, minWidth: '100%' } }
-		style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }
+		style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%' } }
 		mode={ mode } { ...props }
 	>
 		{ children }
@@ -146,6 +160,12 @@ export const Toggle = withTheme( ( { style, theme, value, label, onToggle, info,
 export const Search = ( { style, searching, ...props } ) => <View>
 	<Searchbar { ...props } />
 	{ searching && <ActivityIndicator style={ { position: 'absolute', right: 0, height: '100%', paddingHorizontal: 15, backgroundColor: 'white' } } /> }
+</View>
+
+// Checkbox
+export const Checkbox = ( { checked, children, onPress, style, ...props } ) => <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', ...style } }>
+	<PaperCheckbox onPress={ onPress } status={ checked ? 'checked' : 'unchecked' } />
+	{ children }
 </View>
 
 // ///////////////////////////////

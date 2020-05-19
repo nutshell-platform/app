@@ -22,7 +22,8 @@ export default class LoginRegister extends Component {
 		password: '',
 		available: true,
 		loading: false,
-		timeout: 2000
+		timeout: 2000,
+		tos: false
 	}
 
 	// set handle availabilisy
@@ -57,12 +58,15 @@ export default class LoginRegister extends Component {
 
 	// Validate input
 	validate = f => {
-		const { action, email, password, name, handle, available } = this.state
+		const { action, email, password, name, handle, available, tos } = this.state
+		
 		if( !email ) return 'Please fill in your email address'
 		if( action != 'recover' && !password ) return 'Please fill in your password'
 		if( action == 'register' && !name ) return 'Please fill in your name'
 		if( action == 'register' && !handle ) return 'Please choose a handle'
 		if( action == 'register' && !available ) return 'That handle is taken!'
+		if( !tos ) return 'Please accept the terms of service'
+
 
 		return false
 	}
@@ -93,7 +97,7 @@ export default class LoginRegister extends Component {
 
 	render() {
 
-		const { action, email, password, name, handle, loading, available } = this.state
+		const { action, email, password, name, handle, loading, available, tos } = this.state
 		const { history } = this.props
 
 		if( loading ) return <Loading message={ loading } />
@@ -101,7 +105,7 @@ export default class LoginRegister extends Component {
 		return <Container Background={ Park }>
 			<Navigation title={ action } />
 			<Main.Center>
-				<Login name={ name } handle={ handle } email={ email } password={ password } available={ available } onInput={ this.onInput } proceed={ this.onSubmit } toggle={ this.toggleAction } action={ action } />
+				<Login tos={ tos } name={ name } handle={ handle } email={ email } password={ password } available={ available } onInput={ this.onInput } proceed={ this.onSubmit } toggle={ this.toggleAction } action={ action } />
 			</Main.Center>
 		</Container>
 
