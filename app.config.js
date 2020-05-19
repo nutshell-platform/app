@@ -46,6 +46,7 @@ export default {
     // Android config
     "android": {
       "package": "com.nutshell.nutshell",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 1,
       "permissions": []
     },
