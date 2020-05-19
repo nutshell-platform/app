@@ -107,11 +107,11 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 } )
 
 // Button
-export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
+export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', ...style } }>
 	<PaperButton
 		onPress={ to ? f => history.push( to ) : onPress }
 		labelStyle={ { paddingRight: loading ? 30 : 0, color: mode != 'contained' ? theme.colors.text : theme.colors.surface, minWidth: '100%' } }
-		style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } }
+		style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }
 		mode={ mode } { ...props }
 	>
 		{ children }
