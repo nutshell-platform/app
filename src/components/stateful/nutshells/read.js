@@ -66,8 +66,8 @@ class ReadNutshell extends Component {
 			<Navigation title='Home' />
 			<Main.Top>
 				 <Tutorial />
-				{ inbox.map( nutshell => <NutshellCard markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
-				{ true && inbox.length == 0 && <Placeholder /> }
+				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>
 		</Container>
 

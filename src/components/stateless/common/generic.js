@@ -107,15 +107,17 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 } )
 
 // Button
-export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <PaperButton
-	onPress={ to ? f => history.push( to ) : onPress }
-	labelStyle={ { paddingRight: loading ? 30 : 0, color: mode != 'contained' ? theme.colors.text : theme.colors.surface, minWidth: '100%' } }
-	style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } }
-	mode={ mode } { ...props }
->
-	{ children }
-	{ loading && <ActivityIndicator color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { position: 'absolute', top: 0, right: 0, padding: 10, height: '100%' } } /> }
-</PaperButton> ) )
+export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
+	<PaperButton
+		onPress={ to ? f => history.push( to ) : onPress }
+		labelStyle={ { paddingRight: loading ? 30 : 0, color: mode != 'contained' ? theme.colors.text : theme.colors.surface, minWidth: '100%' } }
+		style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } }
+		mode={ mode } { ...props }
+	>
+		{ children }
+	</PaperButton>
+	{ loading && <ActivityIndicator size={ 15 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ {  marginTop: 20, height: 20, width: 20 } } /> }
+</View>  ) )
 
 
 // Toggle

@@ -19,7 +19,7 @@ exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pu
 const { retreivePushReceipts } = require( './modules/push' )
 
 // Get receipts
-exports.pushReceiptHandler = functions.pubsub.schedule( 'every 6 hours' ).onRun( retreivePushReceipts )
+exports.pushReceiptHandler = functions.pubsub.schedule( 'every 1 hours' ).onRun( retreivePushReceipts )
 
 // ///////////////////////////////
 // Notifications

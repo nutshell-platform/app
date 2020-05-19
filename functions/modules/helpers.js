@@ -9,5 +9,5 @@ exports.dataFromSnap = ( snapOfDocOrDocs, withDocId=true ) => {
 }
 
 exports.log = ( title, content ) => {
-	console.log( title, content && JSON.stringify( content, null, process.env.NODE_ENV == 'development' ? 2 : 0 ) )
+	console.log( title, content && JSON.stringify( content, null, process.env.NODE_ENV == 'development' ? 2 : null ) )
 }
