@@ -65,7 +65,7 @@ export default class LoginRegister extends Component {
 		if( action == 'register' && !name ) return 'Please fill in your name'
 		if( action == 'register' && !handle ) return 'Please choose a handle'
 		if( action == 'register' && !available ) return 'That handle is taken!'
-		if( !tos ) return 'Please accept the terms of service'
+		if( action == 'register' && !tos ) return 'Please accept the terms of service'
 
 
 		return false
