@@ -121,16 +121,16 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 } )
 
 // Button
-export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', ...style } }>
+export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 20, ...style } }>
 	<PaperButton
 		onPress={ to ? f => history.push( to ) : onPress }
-		labelStyle={ { paddingRight: loading ? 30 : 0, color: mode != 'contained' ? theme.colors.text : theme.colors.surface, minWidth: '100%' } }
-		style={ { marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%' } }
+		labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface } }
+		style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%' } }
 		mode={ mode } { ...props }
 	>
 		{ children }
 	</PaperButton>
-	{ loading && <ActivityIndicator size={ 15 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ {  marginTop: 20, height: 20, width: 20 } } /> }
+	{ loading && <ActivityIndicator size={ 15 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { height: 20, width: 20 } } /> }
 </View>  ) )
 
 
