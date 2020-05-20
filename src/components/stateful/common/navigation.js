@@ -76,7 +76,7 @@ class Navigation extends Component {
 			] ),
 
 			// Special functionalities
-			...( !user.moderator ? [] : [ { label: 'Moderation', to: '/nutshells/moderate' } ] )
+			...( !user?.moderator ? [] : [ { label: 'Moderation', to: '/nutshells/moderate' } ] )
 		]
 
 		return <Header

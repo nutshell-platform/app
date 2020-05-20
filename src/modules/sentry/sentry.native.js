@@ -11,7 +11,7 @@ const SentryInit = f => {
 		} )
 		
 		// Doesn't work on web, only expo's package
-		// Sentry.setRelease( Constants.manifest.revisionId )
+		Sentry.setRelease( Constants.manifest.revisionId )
 
 	 }
 }

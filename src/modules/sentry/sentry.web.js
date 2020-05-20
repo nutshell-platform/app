@@ -10,7 +10,8 @@ const SentryInit = f => {
 		  // enableInExpoDevelopment: true
 		} )
 
-		Sentry.setRelease( Constants.manifest.revisionId )
+		// // Doesn't work in web
+		// Sentry.setRelease( Constants.manifest.revisionId )
 
 	 }
 }
