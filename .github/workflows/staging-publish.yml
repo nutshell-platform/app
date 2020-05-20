@@ -50,7 +50,7 @@ jobs:
       - name: Publish
         run: |
           echo -e "${{ secrets.DOTENV_STAGING }}" > .env
-          cat .env
+          echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
           npm run stage
 
       - name: Deploy to Firebase

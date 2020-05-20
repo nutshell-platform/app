@@ -47,7 +47,7 @@ export default {
     "android": {
       "package": "com.nutshell.nutshell",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 1,
+      "versionCode": 2,
       "permissions": []
     },
     

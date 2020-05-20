@@ -46,6 +46,7 @@ jobs:
 
       - name: Publish
         run: |
+          echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
           echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
           npm run publish
 
