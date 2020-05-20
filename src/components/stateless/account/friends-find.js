@@ -9,7 +9,7 @@ export const ListResults = ( { results=[], follow, unfollow } ) => <View style={
 			<View style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
 				<Link to={ `/${user.handle}` }>{ user.name }</Link>
 				<Text style={ { flex: 1,fontStyle: 'italic', opacity: .8 } }>{ user.bio || `This person has nothing to say about themselves. It's ok to be shy though. ` }</Text>
-				{ !user.following && <Button style={ { width: 90, alignItems: 'flex-start' } } onPress={ f => follow( user.uid ) }>Follow</Button> }
+				{ !user.following && <Button style={ { width: 100, alignItems: 'flex-start' } } onPress={ f => follow( user.uid ) }>Follow</Button> }
 				{ user.following && <Button mode='outlined' style={ { width: 120 } } onPress={ f => unfollow( user.uid ) }>Unfollow</Button> }
 			</View>
 		</View>

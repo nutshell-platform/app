@@ -7,21 +7,20 @@ export const NutshellCard = ( { nutshell={}, mute, report, markRead, avatarSize=
 
 	const { entries, updated, user, uid, readcount } = nutshell
 	const [ deleting, setDeleting ] = useState( false )
+	const gutter = 40
 
-	return <View key={ uid } style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
+	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
 
 		{ /* Nutshell card */ }
-		<Card style={ { paddingTop: user ? 0 : 30, zIndex: 1 } }>
-
-
+		<Card style={ { paddingTop: user ? 0 : 30, paddingHorizontal: 0 } }>
 
 			{ /* Avatar */ }
 			{ user && <TouchableOpacity onPress={ f => go( `/${ user.handle }` ) } style={ { marginTop: -avatarSize/2, marginBottom: 20, width: '100%', alignItems: 'center', justifyContent: 'center' } }>
 				<UserAvatar user={ user } size={ avatarSize } />
 			</TouchableOpacity> }
 
-
-			<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
+			{ /* Nutshell content */ }
+			<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%', paddingHorizontal: gutter } }>
 
 				{ user && <Title onPress={ f => go( `/${ user.handle }` ) }>{user.name}</Title> }
 				<HelperText style={ { paddingBottom: 10 } }>
@@ -36,16 +35,20 @@ export const NutshellCard = ( { nutshell={}, mute, report, markRead, avatarSize=
 
 			</View>
 
-			{ markRead && <Button loading={ deleting } mode='text' onPress={ f => {
+			{ markRead && <Button style={ { marginHorizontal: gutter } } loading={ deleting } mode='text' onPress={ f => {
 				markRead( uid )
 				setDeleting( true )
 			} }>Mark read</Button> }
-			{ status && <Button to='/nutshells/write'>Edit this {status} nutshell</Button> }
+			{ status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} nutshell</Button> }
+
+
+			{ /* Menu dots */ }
+			<ReportNutshell mute={ f => mute( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
+
 
 		</Card>
 
-		{ /* Menu dots */ }
-		<ReportNutshell mute={ f => mute( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: user ? avatarSize/2 : 0, zIndex: 2, padding: 20 } } />
+
 
 	</View>
 
@@ -83,10 +86,10 @@ const ReportNutshell = ( { style, mute, report, ...props } ) => {
 
 	const [ isOpen, setOpen ] = useState( false )
 
-	return <View style={ { ...style } }>
-		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton style={ { zIndex: 2, opacity: .5 } } onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
+	return <TouchableOpacity onPress={ f => setOpen( true ) } style={ { ...style } }>
+		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton style={ { opacity: .5, width: 50, height: 50, zIndex: 2 } } onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
 			<Menu.Item onPress={ report } title="Report abuse" />
 			<Menu.Item onPress={ mute }  title="Block & unfollow this user" />
 		</Menu>
-	</View>
+	</TouchableOpacity>
 }
