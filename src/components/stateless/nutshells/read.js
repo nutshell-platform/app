@@ -1,15 +1,22 @@
 import React, { useState } from 'react'
 import { timestampToHuman, nextMonday } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
-import { Card, Title, Paragraph, View, HelperText, IconButton, Divider, Button, ToolTip, UserAvatar } from '../common/generic'
+import { Card, Title, Paragraph, View, HelperText, IconButton, Divider, Button, ToolTip, UserAvatar, Menu } from '../common/generic'
 
-export const NutshellCard = ( { nutshell={}, markRead, avatarSize=100, status=false, follow, unfollow, go } ) => {
+export const NutshellCard = ( { nutshell={}, mute, report, markRead, avatarSize=100, status=false, follow, unfollow, go } ) => {
 
 	const { entries, updated, user, uid, readcount } = nutshell
 	const [ deleting, setDeleting ] = useState( false )
 
 	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
+
+		{ /* Menu dots */ }
+		<ReportNutshell mute={ f => mute( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: avatarSize/2, zIndex: 1, padding: 20 } } />
+
+		{ /* Nutshell card */ }
 		<Card style={ { paddingTop: user ? 0 : 30 } }>
+
+
 
 			{ /* Avatar */ }
 			{ user && <TouchableOpacity onPress={ f => go( `/${ user.handle }` ) } style={ { marginTop: -avatarSize/2, marginBottom: 20, width: '100%', alignItems: 'center', justifyContent: 'center' } }>
@@ -69,3 +76,16 @@ export const Placeholder = ( {  } ) => <Card>
 
 	</View>
 </Card>
+
+// Report users
+const ReportNutshell = ( { style, mute, report, ...props } ) => {
+
+	const [ isOpen, setOpen ] = useState( false )
+
+	return <View style={ { ...style } }>
+		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
+			<Menu.Item onPress={ report } title="Report abuse" />
+			<Menu.Item onPress={ mute }  title="Block & unfollow this user" />
+		</Menu>
+	</View>
+}

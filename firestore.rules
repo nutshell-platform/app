@@ -52,6 +52,13 @@ service cloud.firestore {
       allow write, read: if request.auth.uid == userUid
     }
 
+    // ///////////////////////////////
+    // Syatem data
+    // ///////////////////////////////
+    match /reportedAbuse/{reportUid} {
+      // Only create new ones
+      allow create: if request.auth.uid != null
+    }
 
   }
 }

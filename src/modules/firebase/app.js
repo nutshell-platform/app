@@ -22,7 +22,7 @@ import config from './config'
 import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson } from './_friends'
 
 // ///////////////////////////////
@@ -65,6 +65,7 @@ class Firebase {
 	getNutshellsOfUser = uid 	  => getNutshellsOfUser( this, uid )
 	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid )
 	markNutshellRead   = uid 	  => markNutshellRead( this, uid )
+	reportNutshell	   = report   => reportNutshell( this, report )
 
 	// ///////////////////////////////
 	// friends

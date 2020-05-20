@@ -21,11 +21,18 @@ import { log } from '../modules/helpers'
 // Components
 import LoginRegistration from '../components/stateful/onboarding/login-register'
 import UserSettings from '../components/stateful/account/user-settings'
+import UserProfile from '../components/stateful/account/user-profile'
+
+// Nutshells
 import WriteNutshell from '../components/stateful/nutshells/write'
 import ReadNutshell from '../components/stateful/nutshells/read'
+import ReportNutshell from '../components/stateful/nutshells/report'
+
+// Friends
 import FindFriends from '../components/stateful/account/friends-find'
 import ManageFriends from '../components/stateful/account/friends-manage'
-import UserProfile from '../components/stateful/account/user-profile'
+
+// System
 import FourOhFour from '../components/stateless/common/404'
 
 // Route maneger class
@@ -88,6 +95,7 @@ class Routes extends Component {
 				{ /* Platform */ }
 				<Route path='/nutshells/read' component={ ReadNutshell } />
 				<Route path='/nutshells/write' component={ WriteNutshell } />
+				<Route path='/nutshells/report/:uid' component={ ReportNutshell } />
 
 				{ /* Account specific */ }
 				<Route path='/user/settings' component={ UserSettings } />

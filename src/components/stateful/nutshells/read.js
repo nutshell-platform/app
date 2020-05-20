@@ -55,6 +55,13 @@ class ReadNutshell extends Component {
 
 	markRead = uid => app.markNutshellRead( uid )
 
+	mute = ( userUid, nutshellUid ) => Promise.all( [
+		app.markNutshellRead( nutshellUid ),
+		app.unfollowUser( userUid )
+	] )
+
+	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
+
 	render() {
 
 		const { loading, inbox } = this.state
@@ -66,7 +73,7 @@ class ReadNutshell extends Component {
 			<Navigation title='Home' />
 			<Main.Top>
 				 <Tutorial />
-				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard report={ this.report } mute={ this.mute } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>
 		</Container>

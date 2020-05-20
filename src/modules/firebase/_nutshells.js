@@ -60,6 +60,14 @@ export const markNutshellRead = ( app, uid ) => {
 
 }
 
+export const reportNutshell = ( app, report ) => {
+
+	const { db, FieldValue } = app
+
+	return db.collection( 'reportedAbuse' ).add( report )
+
+}
+
 // ///////////////////////////////
 // Listeners
 // ///////////////////////////////

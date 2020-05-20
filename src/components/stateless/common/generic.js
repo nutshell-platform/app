@@ -209,4 +209,4 @@ export const Container = withTheme( ( { style, children, theme, Background } ) =
 // ///////////////////////////////
 // Pass through exports straignt from paper
 // ///////////////////////////////
-export { Drawer, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, HelperText, Avatar, Caption, IconButton } from 'react-native-paper'
+export { Drawer, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, HelperText, Avatar, Caption, IconButton, Menu } from 'react-native-paper'
