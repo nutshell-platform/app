@@ -64,7 +64,7 @@ export const reportNutshell = ( app, report ) => {
 
 	const { db, FieldValue } = app
 
-	return db.collection( 'reportedAbuse' ).add( report )
+	return db.collection( 'reportedAbuse' ).add( { ...report, moderated: false } )
 
 }
 

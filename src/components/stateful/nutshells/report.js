@@ -84,8 +84,6 @@ class ReportNutshell extends Component {
 		const { history } = this.props
 		const { user } = offendingNutshell
 
-		console.log( offendingNutshell )
-
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>

@@ -8,13 +8,10 @@ export const NutshellCard = ( { nutshell={}, mute, report, markRead, avatarSize=
 	const { entries, updated, user, uid, readcount } = nutshell
 	const [ deleting, setDeleting ] = useState( false )
 
-	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
-
-		{ /* Menu dots */ }
-		<ReportNutshell mute={ f => mute( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: avatarSize/2, zIndex: 1, padding: 20 } } />
+	return <View key={ uid } style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
 
 		{ /* Nutshell card */ }
-		<Card style={ { paddingTop: user ? 0 : 30 } }>
+		<Card style={ { paddingTop: user ? 0 : 30, zIndex: 1 } }>
 
 
 
@@ -46,6 +43,10 @@ export const NutshellCard = ( { nutshell={}, mute, report, markRead, avatarSize=
 			{ status && <Button to='/nutshells/write'>Edit this {status} nutshell</Button> }
 
 		</Card>
+
+		{ /* Menu dots */ }
+		<ReportNutshell mute={ f => mute( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: user ? avatarSize/2 : 0, zIndex: 2, padding: 20 } } />
+
 	</View>
 
 }
@@ -83,7 +84,7 @@ const ReportNutshell = ( { style, mute, report, ...props } ) => {
 	const [ isOpen, setOpen ] = useState( false )
 
 	return <View style={ { ...style } }>
-		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
+		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton style={ { zIndex: 2, opacity: .5 } } onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
 			<Menu.Item onPress={ report } title="Report abuse" />
 			<Menu.Item onPress={ mute }  title="Block & unfollow this user" />
 		</Menu>

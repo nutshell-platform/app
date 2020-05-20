@@ -68,12 +68,15 @@ class Navigation extends Component {
 			// { label: 'Feed', to: '/' },
 
 			// Dynamic links when user is logged in
-			...( user ? [
+			...( !user ? [] : [
 				{ label: 'Profile', to: `/${user.handle}` },
 				{ label: 'Friends', to: '/friends/manage' },
 				{ label: 'Settings', to: '/user/settings' },
 				{ label: 'Logout', onPress: app.logout }
-			] : [] )
+			] ),
+
+			// Special functionalities
+			...( !user.moderator ? [] : [ { label: 'Moderation', to: '/nutshells/moderate' } ] )
 		]
 
 		return <Header

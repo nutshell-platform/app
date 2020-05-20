@@ -24,6 +24,7 @@ import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser
 import { updateSettings, listenSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson } from './_friends'
+import { getModerationQueue, markAbuseModerated  } from './_system'
 
 // ///////////////////////////////
 // Firebase manager class
@@ -66,6 +67,12 @@ class Firebase {
 	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid )
 	markNutshellRead   = uid 	  => markNutshellRead( this, uid )
 	reportNutshell	   = report   => reportNutshell( this, report )
+
+	// ///////////////////////////////
+	// Syatem functions
+	// ///////////////////////////////
+	getModerationQueue  = f => getModerationQueue( this )
+	markAbuseModerated  = reportUid => markAbuseModerated( this, reportUid )
 
 	// ///////////////////////////////
 	// friends

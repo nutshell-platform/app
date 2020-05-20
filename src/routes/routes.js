@@ -27,6 +27,7 @@ import UserProfile from '../components/stateful/account/user-profile'
 import WriteNutshell from '../components/stateful/nutshells/write'
 import ReadNutshell from '../components/stateful/nutshells/read'
 import ReportNutshell from '../components/stateful/nutshells/report'
+import ModerateNutshells from '../components/stateful/nutshells/moderate'
 
 // Friends
 import FindFriends from '../components/stateful/account/friends-find'
@@ -95,7 +96,10 @@ class Routes extends Component {
 				{ /* Platform */ }
 				<Route path='/nutshells/read' component={ ReadNutshell } />
 				<Route path='/nutshells/write' component={ WriteNutshell } />
+
+				{ /* Moderation */ }
 				<Route path='/nutshells/report/:uid' component={ ReportNutshell } />
+				<Route path='/nutshells/moderate' component={ ModerateNutshells } />
 
 				{ /* Account specific */ }
 				<Route path='/user/settings' component={ UserSettings } />

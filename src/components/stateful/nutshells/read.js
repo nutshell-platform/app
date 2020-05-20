@@ -26,7 +26,10 @@ class ReadNutshell extends Component {
 		try {
 			const { inbox } = this.props
 			const nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ) ) )
-			await this.updateState( { inbox: nutshells, loading: false } )
+
+			// Filter  out censored and set to state
+			await this.updateState( { inbox: nutshells.filter( n => !n.hidden ), loading: false } )
+
 		} catch( e ) {
 			alert( e )
 		}
@@ -57,7 +60,7 @@ class ReadNutshell extends Component {
 
 	mute = ( userUid, nutshellUid ) => Promise.all( [
 		app.markNutshellRead( nutshellUid ),
-		app.unfollowUser( userUid )
+		app.unfollowPerson( userUid )
 	] )
 
 	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
