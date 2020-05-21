@@ -27,9 +27,12 @@ exports.publish = async f => {
 				const { followers } = await db.collection( 'userMeta' ).doc( nutshell.owner ).get().then( dataFromSnap )
 
 				// For every follower, add this nutshell to their inbox
-				return Promise.all( followers.map( followerUid => {
+				await Promise.all( followers.map( followerUid => {
 					return db.collection( 'inbox' ).doc( followerUid ).set( { nutshells: FieldValue.arrayUnion( nutshell.uid ) }, { merge: true } )
 				} ) )
+
+				// Once added to inboxes, mark scheduled
+				await db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published', { merge: true } } ) )
 
 			} catch( e ) {
 				throw e
@@ -37,10 +40,6 @@ exports.publish = async f => {
 
 		} ) )
 
-		// ///////////////////////////////
-		// Update nutshell status
-		// ///////////////////////////////
-		await Promise.all( nutshells.map( ( { uid } ) => db.collection( 'nutshells' ).doc( uid ).update( { status: 'published' } ) ) )
 
 
 	} catch( e ) {
