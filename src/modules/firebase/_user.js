@@ -145,7 +145,11 @@ export const getUserProfile = async ( db, user ) => ( {
 export const resetPassword = ( auth, email ) => auth.sendPasswordResetEmail( email )
 
 // Logout
-export const logoutUser = auth => auth.signOut()
+export const logoutUser = async app => {
+	const { auth, listeners } = app
+	unregisterListeners( listeners )
+	await auth.signOut()
+}
 
 // Delete
 export const deleteUser = auth => auth.currentUser.delete()

@@ -23,7 +23,7 @@ import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell } from './_nutshells'
-import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson } from './_friends'
+import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, mutePerson, unmutePerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
 
 // ///////////////////////////////
@@ -48,7 +48,7 @@ class Firebase {
 	registerUser  = ( name, handle, email, pass ) => registerUser( this, name, handle, email, pass )
 	loginUser     = ( email, pass ) => loginUser( this.auth, email, pass )
 	updateUser	  = userUpdates => updateUser( this, userUpdates )
-	logout		  = f => logoutUser( this.auth )
+	logout		  = f => logoutUser( this )
 	deleteUser	  = f => deleteUser( this.auth )
 	resetPassword = email => resetPassword( this.auth, email )
 
@@ -82,6 +82,8 @@ class Firebase {
 	unfollowPerson 	= theirUid => unfollowPerson( this, theirUid )
 	findPerson      = query => findPerson( this, query )
 	getPerson 		= ( query, by='handle' ) => getPerson( this.db, query, by )
+	mutePerson 		= uid => mutePerson( this, uid )
+	unmutePerson 	= uid => unmutePerson( this, uid )
 	
 	// ///////////////////////////////
 	// Initialisation

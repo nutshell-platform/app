@@ -87,11 +87,16 @@ class FindFriends extends Component {
 	// Split following vs not yet
 	sortedResults = f => {
 
+		// Grab data
 		const { results, newFollows, newUnfollows, filter } = this.state
-		const { following: oldFollows } = this.props.user
+		const { following: oldFollows, muted } = this.props.user
+
+		// Filter data
+		const onlyUnmuted = results.filter( ( { uid } ) => !muted.includes( uid ) )
 		const allFollows = [ ...oldFollows, ...newFollows ].filter( fuid => !newUnfollows.includes( fuid ) )
 
-		const sortedResults = results.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
+		
+		const sortedResults = onlyUnmuted.map( res => ( { ...res, following: onlyUnmuted.includes( res.uid ) } ) )
 		if( filter == 'all' ) return sortedResults
 		// Disable sorting based on following status for now
 		// .sort( ( a, b ) => {

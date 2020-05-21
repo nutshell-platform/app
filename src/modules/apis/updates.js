@@ -16,7 +16,7 @@ export const updateIfAvailable = async f => {
 	if( dev ) return log( `Update checking triggered, doesn't work in development mode though` )
 
 	const available = await updateAvailable()
-	if( !available ) return
+	if( !available ) return false
 	
 	try {
 		await Updates.fetchUpdateAsync()
@@ -24,6 +24,7 @@ export const updateIfAvailable = async f => {
 			text: 'Yes, restart',
 			onPress: f => Updates.reloadAsync()
 		} ] )
+		return true
 	} catch( e ) {
 		catcher( e )
 	}

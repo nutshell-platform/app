@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // Visual
 import { TouchableOpacity, View, Animated, SafeAreaView } from 'react-native'
 import { Drawer, Portal, Appbar, withTheme, Surface, Text, StatusBar, Toggle } from './generic'
 import { PanGestureHandler } from 'react-native-gesture-handler'
-import { isWeb } from '../../../modules/apis/platform'
+import { isWeb, version } from '../../../modules/apis/platform'
+import { updateIfAvailable } from '../../../modules/apis/updates'
 
 // ///////////////////////////////
 // Header
@@ -23,11 +24,14 @@ export const Header = ( { style, back, title, subtitle, toggle, pan, drawer, dra
 // ///////////////////////////////
 // Sidebar
 // ///////////////////////////////
-const DarkMode = ( { toggleDark, theme } ) => <View style={ { flexDirection: 'row', marginTop: 'auto', paddingHorizontal: 40, paddingVertical: 20, borderTopWidth: 1, borderTopColor: theme.colors.divider } }>
+
+// Dark mode
+const DarkMode = ( { toggleDark, theme } ) => <View style={ { flexDirection: 'row', paddingHorizontal: 40, paddingVertical: 20, borderTopWidth: 1, borderTopColor: theme.colors.divider } }>
 	<Toggle label='Dark mode' onToggle={ toggleDark } value={ theme.dark } />
 </View>
 
-export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, translate, toggleDark, ...props } ) => <Portal style={ { alignItems: 'center', justifyContent: 'center' } }>
+// Backdrop of menu
+const Backdrop = ( { children, width, toggle, pan, ...props } ) => <Portal style={ { alignItems: 'center', justifyContent: 'center' } }>
 
 	{  /* Touchable backdrop that closes the sidebar */ }
 	<TouchableOpacity activeOpacity={ 1 } onPress={ toggle } style={ { flex: 1 } }>
@@ -38,27 +42,7 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 			{ /* Animation gesture handler */ }
 			<PanGestureHandler onHandlerStateChange={ pan } onGestureEvent={ pan }>
 
-				<Animated.View style={ [ translate, { flex: 1 } ] }>
-
-					{ /* Visual surface element */ }
-					<Surface elevation={ 1 } style={ { flex: 1 } }>
-						<SafeAreaView style={ { flex: 1, backgroundColor: theme.colors.surface } }>
-
-							{ /* Title */ }
-							<Drawer.Section title='Menu' style={ { height: '100%', marginBottom: 0 } }>
-							
-								{ /* Elements included from above */ }
-								{ links.map( ( { label, to, onPress } ) => <Drawer.Item key={ label+to } label={ label } onPress={ onPress ? onPress : f => go( to ) } /> ) }
-
-								{ /* Darkmode toggle */ }
-							    <DarkMode toggleDark={ toggleDark } theme={ theme } />
-
-						    </Drawer.Section>
-					    </SafeAreaView>
-					</Surface>
-				
-
-				</Animated.View>
+				{ children }
 				
 			</PanGestureHandler>
 
@@ -66,4 +50,50 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 		
 	</TouchableOpacity>	
 	
-</Portal> )
+</Portal>
+
+// ///////////////////////////////
+//  Menu
+// ///////////////////////////////
+export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, translate, toggleDark, ...props } ) => {
+
+	const [ updatesAvailable, setUpdatesAvailable ] = useState( false )
+	const [ checkingUpdates, setCheckingUpdates ] = useState( false )
+	const [ checkedAt, setCheckedAt ] = useState( undefined )
+	const check = async f => {
+		setCheckingUpdates( true )
+		const available = await updateIfAvailable()
+		setUpdatesAvailable( available )
+		setCheckingUpdates( false )
+		setCheckedAt( `${new Date().getHours()}:${new Date().getMinutes()}` )
+	}
+
+	return <Backdrop toggle={ toggle } pan={ pan } width={ width }>
+		<Animated.View style={ [ translate, { flex: 1 } ] }>
+
+			{ /* Visual surface element */ }
+			<Surface style={ { flex: 1, elevation: 5 } }>
+				<SafeAreaView style={ { flex: 1, backgroundColor: theme.colors.surface } }>
+
+					{ /* Title */ }
+					<Drawer.Section title='Menu' style={ { height: '100%', marginBottom: 0 } }>
+					
+						{ /* Elements included from above */ }
+						{ links.map( ( { label, to, onPress } ) => <Drawer.Item key={ label+to } label={ label } onPress={ onPress ? onPress : f => go( to ) } /> ) }
+
+						
+					    <View style={ { marginTop: 'auto', width: '100%' } }>
+					    	{ /* Version info */ }
+					    	{ checkingUpdates && <Text style={ { opacity: .3, padding: 10, textAlign: 'right' } }>Checking for updates</Text> }
+					    	{ !checkingUpdates && !updatesAvailable && <Text onPress={ check } style={ { opacity: .3, padding: 10, textAlign: 'right' } }>{ version } { updatesAvailable ? '- update available' : '- latest' } { checkedAt && `(checked: ${ checkedAt })` }</Text> }
+					    	{ /* Darkmode toggle */ }
+					    	<DarkMode toggleDark={ toggleDark } theme={ theme } />
+					    </View>
+
+				    </Drawer.Section>
+			    </SafeAreaView>
+			</Surface>
+		
+		</Animated.View>
+	</Backdrop>
+} )

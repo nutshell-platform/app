@@ -2,6 +2,9 @@ import { dataFromSnap, hash } from './helpers'
 
 export const getRandomPeople = app => app.db.collection( 'users' ).get( ).then( dataFromSnap ).then( friends => friends.filter( friend => friend.uid != app.auth.currentUser.uid ) )
 
+// ///////////////////////////////
+// Following
+// ///////////////////////////////
 export const followPerson = ( app, theirUid ) => {
 	const { currentUser: { uid: myUid } } = app.auth
 	return app.db.collection( 'relationships' ).add( {
@@ -18,6 +21,23 @@ export const unfollowPerson = ( app, theirUid ) => {
 	.get()
 	.then( snap => snap.docs.map( doc => doc.ref.delete() ) )
 }
+
+export const mutePerson = ( app, theirUid ) => {
+	const { db, auth, FieldValue } = app
+	const { currentUser: { uid: myUid } } = auth
+	return db.collection( 'userMeta' ).doc( myUid ).set( { muted: FieldValue.arrayUnion( theirUid ) }, { merge: true } )
+}
+
+export const unmutePerson = ( app, theirUid ) => {
+	const { db, auth, FieldValue } = app
+	const { currentUser: { uid: myUid } } = auth
+	return db.collection( 'userMeta' ).doc( myUid ).set( { muted: FieldValue.arrayRemove( theirUid ) }, { merge: true } )
+}
+
+
+// ///////////////////////////////
+// Getching
+// ///////////////////////////////
 export const findPerson = async ( app, query ) => {
 
 	const { currentUser: { uid: myUid } } = app.auth

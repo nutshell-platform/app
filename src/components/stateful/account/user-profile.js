@@ -21,8 +21,20 @@ class UserProfile extends Component {
 		profile: {}
 	}
 
-	componentDidMount = async f => {
+	componentDidMount = f => this.getUserByHandle()
 
+	componentDidUpdate = async f => {
+
+		const { handle } = this.state 
+		const { handle: paramHandle } = this.props.match.params
+		if( handle != paramHandle ) {
+			await this.updateState( { handle: paramHandle, loading: 'Finding user data' } )
+			await this.getUserByHandle()
+		}
+
+	}
+
+	getUserByHandle = async f => {
 		const { handle } = this.state
 
 		try {
@@ -37,7 +49,6 @@ class UserProfile extends Component {
 			history.push( '/404' )
 			
 		}
-
 	}
 
 	followMan = ( following, setLocal ) => {
@@ -53,6 +64,13 @@ class UserProfile extends Component {
 
 	}
 
+	mutePerson = theirUid => Promise.all( [
+		app.unfollowPerson( theirUid ),
+		app.mutePerson( theirUid )
+	] )
+
+	unmutePerson = theirUid => app.unmutePerson( theirUid )
+
 	render() {
 
 		const { loading, handle, profile, nutshells } = this.state
@@ -60,6 +78,7 @@ class UserProfile extends Component {
 		const following = user.following?.includes( profile.uid )
 		const isSelf = user?.uid == profile?.uid
 		const noDraft = !( draft?.entries?.length > 0 )
+		const muted = user.muted?.includes( profile.uid )
 
 
 		if( loading ) return <Loading message={ loading } />
@@ -67,7 +86,7 @@ class UserProfile extends Component {
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
+				<UserCard muted={ muted } unmutePerson={ this.unmutePerson } mutePerson={ !isSelf && this.mutePerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
 			</Main.Top>
 		</Container>
 

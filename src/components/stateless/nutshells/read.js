@@ -30,7 +30,7 @@ export const NutshellCard = ( { nutshell={}, mute, report, markRead, avatarSize=
 				</HelperText>
 
 				<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
-					{ entries.map( entry => <Entry key={ entry.uid } entry={ entry } /> ) }
+					{ entries.map( entry => <Entry key={ entry.uid || Math.random() } entry={ entry } /> ) }
 				</View>
 
 			</View>

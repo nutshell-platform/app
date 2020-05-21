@@ -60,7 +60,8 @@ class ReadNutshell extends Component {
 
 	mute = ( userUid, nutshellUid ) => Promise.all( [
 		app.markNutshellRead( nutshellUid ),
-		app.unfollowPerson( userUid )
+		app.unfollowPerson( userUid ),
+		app.mutePerson( userUid )
 	] )
 
 	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
