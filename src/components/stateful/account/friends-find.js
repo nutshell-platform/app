@@ -92,7 +92,7 @@ class FindFriends extends Component {
 		const { following: oldFollows, muted } = this.props.user
 
 		// Filter data
-		const onlyUnmuted = results.filter( ( { uid } ) => !muted.includes( uid ) )
+		const onlyUnmuted = muted?.length ? results.filter( ( { uid } ) => !muted.includes( uid ) ) : results
 		const allFollows = [ ...oldFollows, ...newFollows ].filter( fuid => !newUnfollows.includes( fuid ) )
 
 		
