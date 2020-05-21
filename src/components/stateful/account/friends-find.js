@@ -96,7 +96,7 @@ class FindFriends extends Component {
 		const allFollows = [ ...oldFollows, ...newFollows ].filter( fuid => !newUnfollows.includes( fuid ) )
 
 		
-		const sortedResults = onlyUnmuted.map( res => ( { ...res, following: onlyUnmuted.includes( res.uid ) } ) )
+		const sortedResults = onlyUnmuted.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
 		if( filter == 'all' ) return sortedResults
 		// Disable sorting based on following status for now
 		// .sort( ( a, b ) => {
