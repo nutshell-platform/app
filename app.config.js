@@ -40,14 +40,14 @@ export default {
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nutshell.nutshell",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.1.0"
     },
 
     // Android config
     "android": {
       "package": "com.nutshell.nutshell",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 2,
+      "versionCode": 3,
       "permissions": []
     },
     
