@@ -32,7 +32,7 @@ exports.publish = async f => {
 				} ) )
 
 				// Once added to inboxes, mark scheduled
-				await db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published', { merge: true } } ) )
+				await db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published' }, { merge: true } )
 
 			} catch( e ) {
 				throw e
