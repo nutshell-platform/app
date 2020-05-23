@@ -64,12 +64,12 @@ class UserProfile extends Component {
 
 	}
 
-	mutePerson = theirUid => Promise.all( [
+	blockPerson = theirUid => Promise.all( [
 		app.unfollowPerson( theirUid ),
-		app.mutePerson( theirUid )
+		app.blockPerson( theirUid )
 	] )
 
-	unmutePerson = theirUid => app.unmutePerson( theirUid )
+	unblockPerson = theirUid => app.unblockPerson( theirUid )
 
 	render() {
 
@@ -78,7 +78,7 @@ class UserProfile extends Component {
 		const following = user.following?.includes( profile.uid )
 		const isSelf = user?.uid == profile?.uid
 		const noDraft = !( draft?.entries?.length > 0 )
-		const muted = user.muted?.includes( profile.uid )
+		const blocked = user.blocked?.includes( profile.uid )
 
 
 		if( loading ) return <Loading message={ loading } />
@@ -86,7 +86,7 @@ class UserProfile extends Component {
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard muted={ muted } unmutePerson={ this.unmutePerson } mutePerson={ !isSelf && this.mutePerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
+				<UserCard blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
 			</Main.Top>
 		</Container>
 

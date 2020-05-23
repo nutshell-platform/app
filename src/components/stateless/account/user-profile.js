@@ -3,7 +3,7 @@ import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton } f
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
 
-export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, following, followMan, nutshells=[], mutePerson, unmutePerson, muted } ) => {
+export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, following, followMan, nutshells=[], blockPerson, unblockPerson, blocked } ) => {
 
 	const [ followed, setFollowed ] = useState( following )
 	const gutter = 25
@@ -24,40 +24,40 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, 
 					<Text style={ { marginTop: 10, opacity: .7 } }>Following { user.following?.length || 0 } | Followers { user.followers?.length || 0 }</Text>
 				</View>
 
-				{ !isSelf && !muted && <Button style={ { paddingHorizontal: gutter } } mode={ followed && 'text' } onPress={ f => followMan( followed, setFollowed ) }>{ followed ? 'Unfollow' : 'Follow' }</Button> }
-				{ muted && <Button style={ { paddingHorizontal: gutter } } mode={ 'text' } onPress={ f => unmutePerson( user.uid ) }>Press to unmute</Button> }
+				{ !isSelf && !blocked && <Button style={ { paddingHorizontal: gutter } } mode={ followed && 'text' } onPress={ f => followMan( followed, setFollowed ) }>{ followed ? 'Unfollow' : 'Follow' }</Button> }
+				{ blocked && <Button style={ { paddingHorizontal: gutter } } mode={ 'text' } onPress={ f => unblockPerson( user.uid ) }>Press to unblock</Button> }
 
 				{ /* Menu dots */ }
-				<MuteUser muted={ muted } unmute={ f => unmutePerson( user.uid ) } mute={ f => mutePerson( user.uid) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
+				<blockUser blocked={ blocked } unblock={ f => unblockPerson( user.uid ) } block={ f => blockPerson( user.uid) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
 
 
 			</Card>
 
 			{ isSelf && noDraft && <Placeholder /> }
 
-			{ !muted && nutshells.map( nutshell => <NutshellCard status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+			{ !blocked && nutshells.map( nutshell => <NutshellCard status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 
 		</View>
 	</Main.Center>
 }
 
 // Report users
-const MuteUser = ( { style, muted, unmute, mute, ...props } ) => {
+const blockUser = ( { style, blocked, unblock, block, ...props } ) => {
 
 	const [ isOpen, setOpen ] = useState( false )
-	const doMute = f => {
+	const doblock = f => {
 		setOpen( false )
-		mute()
+		block()
 	}
-	const doUnmute = f => {
+	const doUnblock = f => {
 		setOpen( false )
-		unmute(  )
+		unblock(  )
 	}
 
 	return <TouchableOpacity onPress={ f => setOpen( true ) } style={ { ...style } }>
 		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton style={ { opacity: .5, width: 50, height: 50, zIndex: 2 } } onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
-			{ !muted && <Menu.Item onPress={ doMute } title="Mute user" /> }
-			{ muted && <Menu.Item onPress={ doUnmute } title="Unmute user" /> }
+			{ !blocked && <Menu.Item onPress={ doblock } title="block user" /> }
+			{ blocked && <Menu.Item onPress={ doUnblock } title="Unblock user" /> }
 		</Menu>
 	</TouchableOpacity>
 }

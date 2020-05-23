@@ -22,16 +22,16 @@ export const unfollowPerson = ( app, theirUid ) => {
 	.then( snap => snap.docs.map( doc => doc.ref.delete() ) )
 }
 
-export const mutePerson = ( app, theirUid ) => {
+export const blockPerson = ( app, theirUid ) => {
 	const { db, auth, FieldValue } = app
 	const { currentUser: { uid: myUid } } = auth
-	return db.collection( 'userMeta' ).doc( myUid ).set( { muted: FieldValue.arrayUnion( theirUid ) }, { merge: true } )
+	return db.collection( 'userMeta' ).doc( myUid ).set( { blocked: FieldValue.arrayUnion( theirUid ) }, { merge: true } )
 }
 
-export const unmutePerson = ( app, theirUid ) => {
+export const unblockPerson = ( app, theirUid ) => {
 	const { db, auth, FieldValue } = app
 	const { currentUser: { uid: myUid } } = auth
-	return db.collection( 'userMeta' ).doc( myUid ).set( { muted: FieldValue.arrayRemove( theirUid ) }, { merge: true } )
+	return db.collection( 'userMeta' ).doc( myUid ).set( { blocked: FieldValue.arrayRemove( theirUid ) }, { merge: true } )
 }
 
 
