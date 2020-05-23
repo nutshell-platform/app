@@ -3,7 +3,7 @@ import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton } f
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
 
-export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, following, followMan, nutshells=[], blockPerson, unblockPerson, blocked } ) => {
+export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, following, followMan, nutshells=[], blockPerson, unblockPerson, blocked, mute } ) => {
 
 	const [ followed, setFollowed ] = useState( following )
 	const gutter = 25
@@ -28,21 +28,21 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, 
 				{ blocked && <Button style={ { paddingHorizontal: gutter } } mode={ 'text' } onPress={ f => unblockPerson( user.uid ) }>Press to unblock</Button> }
 
 				{ /* Menu dots */ }
-				<blockUser blocked={ blocked } unblock={ f => unblockPerson( user.uid ) } block={ f => blockPerson( user.uid) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
+				<BlockUser blocked={ blocked } unblock={ f => unblockPerson( user.uid ) } block={ f => blockPerson( user.uid) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
 
 
 			</Card>
 
 			{ isSelf && noDraft && <Placeholder /> }
 
-			{ !blocked && nutshells.map( nutshell => <NutshellCard status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+			{ !blocked && nutshells.map( nutshell => <NutshellCard mute={ f => mute( nutshell.uid ) } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 
 		</View>
 	</Main.Center>
 }
 
 // Report users
-const blockUser = ( { style, blocked, unblock, block, ...props } ) => {
+const BlockUser = ( { style, blocked, unblock, block, ...props } ) => {
 
 	const [ isOpen, setOpen ] = useState( false )
 	const doblock = f => {

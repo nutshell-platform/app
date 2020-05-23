@@ -60,11 +60,23 @@ export const markNutshellRead = ( app, uid ) => {
 
 }
 
+// ///////////////////////////////
+// Abose
+// ///////////////////////////////
+
 export const reportNutshell = ( app, report ) => {
 
 	const { db, FieldValue } = app
 
 	return db.collection( 'reportedAbuse' ).add( { ...report, moderated: false } )
+
+}
+
+export const muteNutshell = ( app, nutshellUid ) => {
+
+	const { db, auth, FieldValue } = app
+	const { currentUser: { uid: myUid } } = auth
+	return db.collection( 'userMeta' ).doc( myUid ).set( { muted: FieldValue.arrayUnion( nutshellUid ) }, { merge: true } )
 
 }
 

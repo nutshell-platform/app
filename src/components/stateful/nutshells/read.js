@@ -23,9 +23,13 @@ class ReadNutshell extends Component {
 
 	// Load inbox
 	loadInbox = async f => {
+
 		try {
-			const { inbox } = this.props
-			const nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ) ) )
+			const { inbox, user } = this.props
+			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ) ) )
+
+			// If we have muted items, filter them
+			if( user.muted ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
 
 			// Filter  out censored and set to state
 			await this.updateState( { inbox: nutshells.filter( n => !n.hidden ), loading: false } )
@@ -64,6 +68,13 @@ class ReadNutshell extends Component {
 		app.blockPerson( userUid )
 	] )
 
+	mute = nutshellUid => Promise.all( [
+		app.markNutshellRead( nutshellUid ),
+		app.muteNutshell( nutshellUid ),
+		// Filter out the blocked onw from current state
+		this.updateState( { inbox: this.state.inbox.filter( ( { uid } ) => uid != nutshellUid ) } )
+	] )
+
 	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
 
 	render() {
@@ -77,7 +88,7 @@ class ReadNutshell extends Component {
 			<Navigation title='Home' />
 			<Main.Top>
 				 <Tutorial />
-				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>
 		</Container>

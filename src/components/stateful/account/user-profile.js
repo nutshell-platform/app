@@ -36,11 +36,17 @@ class UserProfile extends Component {
 
 	getUserByHandle = async f => {
 		const { handle } = this.state
+		const { user } = this.props
 
 		try {
 			const profile = await app.getPerson( handle )
-			const nutshells = await app.getNutshellsOfUser( profile.uid )
+			let nutshells = await app.getNutshellsOfUser( profile.uid )
+
+			// If we have muted items, filter them
+			if( user.muted ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
+
 			await this.updateState( { profile: profile, nutshells: nutshells, loading: false } )
+
 		} catch( e ) {
 
 			log( e )
@@ -71,6 +77,13 @@ class UserProfile extends Component {
 
 	unblockPerson = theirUid => app.unblockPerson( theirUid )
 
+	mute = nutshellUid => Promise.all( [
+		app.markNutshellRead( nutshellUid ),
+		app.muteNutshell( nutshellUid ),
+		// Filter out the blocked onw from current state
+		this.updateState( { nutshells: this.state.nutshells.filter( ( { uid } ) => uid != nutshellUid ) } )
+	] )
+
 	render() {
 
 		const { loading, handle, profile, nutshells } = this.state
@@ -86,7 +99,7 @@ class UserProfile extends Component {
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
+				<UserCard mute={ this.mute } blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
 			</Main.Top>
 		</Container>
 

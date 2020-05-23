@@ -22,7 +22,7 @@ import config from './config'
 import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
 
@@ -67,6 +67,7 @@ class Firebase {
 	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid )
 	markNutshellRead   = uid 	  => markNutshellRead( this, uid )
 	reportNutshell	   = report   => reportNutshell( this, report )
+	muteNutshell	   = uid 	  => muteNutshell( this, uid )
 
 	// ///////////////////////////////
 	// Syatem functions
@@ -82,8 +83,8 @@ class Firebase {
 	unfollowPerson 	= theirUid => unfollowPerson( this, theirUid )
 	findPerson      = query => findPerson( this, query )
 	getPerson 		= ( query, by='handle' ) => getPerson( this.db, query, by )
-	blockPerson 		= uid => mutePerson( this, uid )
-	unblockPerson 	= uid => unmutePerson( this, uid )
+	blockPerson 	= uid => blockPerson( this, uid )
+	unblockPerson 	= uid => unblockPerson( this, uid )
 	
 	// ///////////////////////////////
 	// Initialisation
