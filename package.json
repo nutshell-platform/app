@@ -22,7 +22,7 @@
     "baseline": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
     "diagnostics": "expo diagnostics",
     "i": "expo install",
-    "propagate": "branch development && push && branch staging && git merge development && push && master && git merge staging && push"
+    "propagate": "branch development && push && branch staging && git merge development && push && master && git merge staging && push && branch development && gh"
   },
   "jest": {
     "preset": "jest-expo",
