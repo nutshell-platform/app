@@ -40,7 +40,11 @@ export default {
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nutshell.nutshell",
-      "buildNumber": "1.1.0"
+      "buildNumber": "1.1.1",
+      "infoPlist": {
+        NSCameraUsageDescription: "Camera permission is used to take a new photo to use as your profile picture.",
+        NSPhotoLibraryUsageDescription: "Photo library permission is used to select an existing photo on your device as a profile picture."
+      }
     },
 
     // Android config
