@@ -21,7 +21,8 @@
     "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
     "baseline": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
     "diagnostics": "expo diagnostics",
-    "i": "expo install"
+    "i": "expo install",
+    "propagate": "branch development && push && branch staging && git merge development && push && master && git merge staging && push"
   },
   "jest": {
     "preset": "jest-expo",
@@ -46,7 +47,7 @@
     "expo-random": "~8.1.0",
     "expo-screen-orientation": "~1.0.0",
     "expo-secure-store": "~8.1.0",
-    "expo-updates": "~0.2.3",
+    "expo-updates": "~0.2.5",
     "firebase": "7.9.0",
     "history": "^4.10.1",
     "react": "16.9.0",
