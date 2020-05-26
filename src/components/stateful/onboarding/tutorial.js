@@ -20,7 +20,7 @@ class Tutorial extends Component {
 
 		return <Card>
 			<Title>Welcome {user.name} 🎉</Title>
-			<Text style={ { paddingTop: 20 } }>To make the most out of Nutshell we recommend doing the following things:</Text>
+			<Text style={ { paddingTop: 20 } }>To make the most out of Nutshell, we recommend doing the following things:</Text>
 			{ todos.map( ( { label, to } ) => <Button key={ label } to={ to }>{ label }</Button> ) }
 		</Card>
 
