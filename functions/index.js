@@ -11,7 +11,7 @@ exports.follow = functions.firestore.document( 'relationships/{relationId}' ).on
 // Cron
 // ///////////////////////////////
 const { publish } = require( './modules/nutshells' )
-exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( 'every 1 hours' ).onRun( publish )
+exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( 'every 1 hour' ).onRun( publish )
 
 // ///////////////////////////////
 // Push notification handling

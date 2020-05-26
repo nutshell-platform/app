@@ -11,3 +11,7 @@ exports.dataFromSnap = ( snapOfDocOrDocs, withDocId=true ) => {
 exports.log = ( title, content ) => {
 	console.log( title, content && JSON.stringify( content, null, process.env.NODE_ENV == 'development' ? 2 : null ) )
 }
+
+exports.error = ( title, content ) => {
+	console.error( title, content && JSON.stringify( content, null, process.env.NODE_ENV == 'development' ? 2 : null ) )
+}
