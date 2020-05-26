@@ -8,6 +8,6 @@ export const isAndroid = Platform.OS == 'android'
 export const dev = process.env.NODE_ENV == 'development' || ( isWeb && location && location.href.includes( 'debug=true' ) )
 
 const { version: appVersion, revisionId } = manifest
-export const version = `${ appVersion || '' } ${ revisionId ? `- ${ revisionId }` : '' }`
+export const version = `${ revisionId ? `- ${ revisionId }` : '' }`
 
 export { Platform } from 'react-native'
