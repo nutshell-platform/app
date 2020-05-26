@@ -43,13 +43,13 @@ const Backdrop = ( { children, width, toggle, pan, ...props } ) => <Portal style
 			<PanGestureHandler onHandlerStateChange={ pan } onGestureEvent={ pan }>
 
 				{ children }
-				
+
 			</PanGestureHandler>
 
 		</TouchableOpacity>
-		
-	</TouchableOpacity>	
-	
+
+	</TouchableOpacity>
+
 </Portal>
 
 // ///////////////////////////////
@@ -77,15 +77,15 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 
 					{ /* Title */ }
 					<Drawer.Section title='Menu' style={ { height: '100%', marginBottom: 0 } }>
-					
+
 						{ /* Elements included from above */ }
 						{ links.map( ( { label, to, onPress } ) => <Drawer.Item key={ label+to } label={ label } onPress={ onPress ? onPress : f => go( to ) } /> ) }
 
-						
+
 					    <View style={ { marginTop: 'auto', width: '100%' } }>
 					    	{ /* Version info */ }
 					    	{ checkingUpdates && <Text style={ { opacity: .3, padding: 10, textAlign: 'right' } }>Checking for updates</Text> }
-					    	{ !checkingUpdates && !updatesAvailable && <Text onPress={ check } style={ { opacity: .3, padding: 10, textAlign: 'right' } }>{ version } { updatesAvailable ? '- update available' : '- latest' } { checkedAt && `(checked: ${ checkedAt })` }</Text> }
+					    	{ !checkingUpdates && !updatesAvailable && <Text onPress={ check } style={ { opacity: .3, padding: 10, textAlign: 'right' } }>{ version } { updatesAvailable ? '- update available' : '- latest' } { checkedAt && `(last checked at ${ checkedAt })` }</Text> }
 					    	{ /* Darkmode toggle */ }
 					    	<DarkMode toggleDark={ toggleDark } theme={ theme } />
 					    </View>
@@ -93,7 +93,7 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 				    </Drawer.Section>
 			    </SafeAreaView>
 			</Surface>
-		
+
 		</Animated.View>
 	</Backdrop>
 } )
