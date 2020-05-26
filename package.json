@@ -48,7 +48,7 @@
     "expo-screen-orientation": "~1.0.0",
     "expo-secure-store": "~8.1.0",
     "expo-updates": "~0.2.5",
-    "firebase": "7.9.0",
+    "firebase": "^7.14.5",
     "history": "^4.10.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",
