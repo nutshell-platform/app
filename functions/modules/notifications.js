@@ -1,5 +1,5 @@
 // Data helpers
-const { dataFromSnap, log } = require( './helpers' )
+const { dataFromSnap, log, error } = require( './helpers' )
 const { db, FieldValue } = require( './firebase' )
 const { sendPushNotifications } = require( './push' )
 
@@ -17,7 +17,7 @@ exports.unreadNutshells = async f => {
 			const inbox = await db.collection( 'inbox' ).doc( user.uid ).get().then( dataFromSnap )
 
 			// If inbox has items, return length only
-			if( inbox.nutshells && inbox.nutshells.length != 0 ) {
+			if( inbox && inbox.nutshells && inbox.nutshells.length != 0 ) {
 
 				// Grab push tokens of the user that has a full inbox
 				const { pushTokens } = usersWhoWantToBeNotified.find( user => user.uid == inbox.uid )
@@ -32,6 +32,11 @@ exports.unreadNutshells = async f => {
 
 		} ) )
 
+		if( !inboxesOfThoseUsers || inboxesOfThoseUsers.length == 0 ) {
+			log( 'No inboxes of users that want to be notified' )
+			return null
+		}
+
 		// Filter out the inboxes that have no content
 		const fullInboxesWithPushTokens = inboxesOfThoseUsers.filter( inbox => inbox.nutshells )
 		log( 'Full inboxes: ', fullInboxesWithPushTokens )
@@ -42,7 +47,7 @@ exports.unreadNutshells = async f => {
 
 
 	} catch( e ) {
-		log( 'Unread nutshell error: ', e )
+		error( 'Unread nutshell error: ', e )
 	}
 
 }
@@ -53,13 +58,14 @@ exports.rememberToWrite = async f => {
 
 		// Load users that want to be notified
 		const usersWhoWantToBeNotified = await db.collection( 'settings' ).where( 'notifications.writeReminder', '==', true ).get().then( dataFromSnap )
+		if( !usersWhoWantToBeNotified || usersWhoWantToBeNotified.length == 0 ) return null
 
 		// Notify those will full inboxes
 		const unreadMessage = { title: `Remember to write your nutshell!`, body: `The next publishing round is on monday.` }
 		await Promise.all( usersWhoWantToBeNotified.map( ( { pushTokens } ) => sendPushNotifications( pushTokens, unreadMessage ) ) )
 
 	} catch( e ) {
-		log( 'Remember to write error: ', e )
+		error( 'Remember to write error: ', e )
 	}
 
 }
