@@ -19,12 +19,12 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 				<View style={ { width: '100%', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' } }>
 					<UserAvatar style={ { marginTop: -avatarSize/2 } } size={ avatarSize } user={ user } />
 					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' } }>
-						
+
 						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>
 						<Toggle style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
-						<ToolTip label='What is a nutshell?' info={
-							`A nutshell is a summary of what/how you are doing.
-							\nNutshells are published on mondays. You only get one nutshell per week.
+						<ToolTip label='What is a Nutshell?' info={
+							`A Nutshell is a summary of what's been going on in your life since your last Nutshell, such as what you've been doing or how you've been feeling.\n
+							Scheduled Nutshells will be published on Mondays, and all users only get one Nutshell per week.
 						` } />
 					</View>
 				</View>
@@ -71,7 +71,8 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLengt
 			style={ { fontWeight: 'bold' } }
 			value={ title }
 			label='Headline'
-			info={ `A short summary (max ${ maxTitleLength } characters) of what you want to say. E.g. "Struggling to focus this week" or "My new routine is really nice".` }
+			info={ `A short summary of at most ${ maxTitleLength } characters about what you want to say.\n
+			Examples: "Struggling to focus this week" or "My new routine is really nice".` }
 			onChangeText={ text => onInput( 'title', text ) }
 			dense={ false }
 		/>
@@ -81,7 +82,8 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLengt
 			hideInfo={ true }
 			value={ paragraph }
 			label='Message'
-			info={ `Explain in detail what you want to say (max ${ maxParagraphLength } characters). This paragraph will collapse under the one line summary, people will only see it if they click your one liner.` }
+			info={ `Tell the headline's story in at most ${ maxParagraphLength } characters.\n
+			In the Nutshell feed, this paragraph will collapse under the headline. Better make sure your headline is catchy!` }
 			onChangeText={ text => onInput( 'paragraph', text ) }
 			multiline={ true }
 		/>

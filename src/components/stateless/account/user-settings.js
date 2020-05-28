@@ -15,7 +15,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				<Title style={ { textAlign: 'center' } }>{ !user?.settings?.notifications && 'Welcome ' }{ user.name || user.email }{ user?.settings?.notifications ? '\'s settings' : '!' }</Title>
 				{ newUser && <Text style={ { marginTop: 10, textAlign: 'center' } }>Welcome to Nutshell { user.name }! Please let us know if these settings are ok with you, you can change them any time in the 'settings' section.</Text> }
 				<Divider />
-				
+
 				{ /* User data */ }
 				<Subheading>About you</Subheading>
 				<Input error={ user.name?.length == 0 } label='name' value={ user.name } info='This lets your friends find you.' onChangeText={ t => changeUser( 'name', t ) } />
@@ -28,10 +28,10 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 
 				{ /* Notification prefs */ }
 				<Subheading style={ { marginVertical: 20, flexDirection: 'row' } }>Notification preferences</Subheading>
-				<Toggle onToggle={ f => changeNotification( 'writeReminder', !notiPrefs.writeReminder ) } value={ notiPrefs.writeReminder } style={ { marginTop: 10 } } label='Write your nutshell (weekly)' info="You get to write 1 nutshell message per week, this notification reminds you to use it before it expires" />
-				<Toggle onToggle={ f => changeNotification( 'readReminder', !notiPrefs.readReminder ) } value={ notiPrefs.readReminder } style={ { marginTop: 10 } } label='Unread nutshells (weekly)' info="A weekly reminder of how many nutshells you have not yet read" />
-				<Toggle onToggle={ f => changeNotification( 'newFollower', !notiPrefs.newFollower ) } value={ notiPrefs.newFollower } style={ { marginTop: 10 } } label='New followers (realtime)' info="Get a notification when a new friend starts following you" />
-				<Toggle onToggle={ f => changeNotification( 'friendJoined', !notiPrefs.friendJoined ) } value={ notiPrefs.friendJoined } style={ { marginTop: 10 } } label='Friend joined (realtime)' info="Get a notification when a friend joins nutshell" />
+				<Toggle onToggle={ f => changeNotification( 'writeReminder', !notiPrefs.writeReminder ) } value={ notiPrefs.writeReminder } style={ { marginTop: 10 } } label='Write your nutshell (weekly)' info="You get to write one Nutshell per week. This notification reminds you to use it before it expires." />
+				<Toggle onToggle={ f => changeNotification( 'readReminder', !notiPrefs.readReminder ) } value={ notiPrefs.readReminder } style={ { marginTop: 10 } } label='Unread nutshells (weekly)' info="A weekly reminder of how many Nutshells you have not yet read." />
+				<Toggle onToggle={ f => changeNotification( 'newFollower', !notiPrefs.newFollower ) } value={ notiPrefs.newFollower } style={ { marginTop: 10 } } label='New followers (real-time)' info="Get a notification when a new friend starts following you." />
+				<Toggle onToggle={ f => changeNotification( 'friendJoined', !notiPrefs.friendJoined ) } value={ notiPrefs.friendJoined } style={ { marginTop: 10 } } label='Friend joined (real-time)' info="Get a notification when a friend joins Nutshell." />
 
 				{ /* Password required */ }
 				{ passwordRequired && <React.Fragment>

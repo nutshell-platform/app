@@ -65,17 +65,18 @@ export const Entry = ( { entry } ) => {
 		</TouchableOpacity>
 
 		{ open && <Paragraph style={ { paddingVertical: 20 } }>{ entry.paragraph }</Paragraph> }
-		
+
 	</View>
 
 }
 
 export const Placeholder = ( {  } ) => <Card>
 	<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
-
+		<Title>You're all caught up! 🎉</Title>
 		<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
-			<ToolTip label={ `Next nutshell release is ${ timestampToHuman( nextMonday() ) }.` } info={ `Nutshells are released on mondays. The only reason to come back to this app until then is to draft your own nutshell. We've not trying to get you addicted/hooked, you can to to FB/Insta/Tiktok for that.` } />
-			<Button mode='text' style={ { alignSelf: 'center' } } to='/nutshells/write'>Draft & schedule your nutshell</Button>
+			<ToolTip label={ `The next Nutshells will be released on ${ timestampToHuman( nextMonday() ) }.` }
+			info={ `Nutshells are released on Mondays. The only reason to come back to this app until then is to draft your own Nutshell. We're not trying to get you hooked, there are plenty of other social networks for that.` } />
+			<Button mode='text' style={ { alignSelf: 'center' } } to='/nutshells/write'>Draft & schedule your Nutshell</Button>
 		</View>
 
 	</View>
