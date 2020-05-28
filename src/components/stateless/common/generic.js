@@ -53,20 +53,20 @@ export const Divider = ( { style, ...props } ) => <PaperDivider style={ { margin
 export const UserAvatar = ( { size=100, user, ...props } ) => user.avatar ? <Avatar.Image { ...props } size={ size } source={ user.avatar } /> : <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' />
 
 // Tooltip
-export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStype, label, info, theme, ...props } ) => {
+export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStyle, textStyle, label, info, theme, ...props } ) => {
 
 	const [ showInfo, setInfo ] = useState( false )
 
 	return <TouchableOpacity style={ { width: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', ...containerStyle } } onPress={ f => setInfo( !showInfo ) } { ...props }>
-		<View style={ { flexDirection: 'row', alignItems: 'center', paddingTop: 10, paddingBottom: showInfo ? 0 : 10, ...tooltipStype } }>
-			<Text>{ label }</Text>
+		<View style={ { flexDirection: 'row', alignItems: 'center', paddingTop: 10, paddingBottom: showInfo ? 0 : 10, ...tooltipStyle } }>
+			<Text style={ { ...textStyle } }>{ label }</Text>
 
 			{ /* The info icon */ }
 			{ info && <Avatar.Icon style={ { backgroundColor: 'rgba(0,0,0,0)' } } color={ theme.colors.text } size={ iconSize } icon='information-outline' /> }
 		</View>
 
 		{ /* the help message triggeres by the info icon */ }
-		{ showInfo && info && <HelperText style={ { paddingBottom: 10, textAlign: 'center', ...tooltipStype } } type={ 'info' }>{ info }</HelperText> }
+		{ showInfo && info && <HelperText style={ { paddingBottom: 10, textAlign: 'center', ...tooltipStyle } } type={ 'info' }>{ info }</HelperText> }
 
 	</TouchableOpacity>
 } )
