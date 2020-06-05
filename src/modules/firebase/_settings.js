@@ -1,4 +1,5 @@
 import { dataFromSnap } from './helpers'
+import { dateOfNext } from '../helpers'
 import { getTokenIfNeeded, registerNotificationListeners } from '../push'
 
 export const listenSettings = ( app, dispatch, action ) => {
@@ -9,9 +10,23 @@ export const listenSettings = ( app, dispatch, action ) => {
 
 		const settings = dataFromSnap( doc, false )
 		const pushToken = await getTokenIfNeeded( settings )
+		const fridayNoon = dateOfNext( 'friday' ).setHours( 12 )
+		const sundayNoon = dateOfNext( 'sunday' ).setHours( 12 )
 		
 		// New token? Send to firebase
-		if( pushToken ) await db.collection( 'settings' ).doc( auth.currentUser.uid ).set( { pushTokens: FieldValue.arrayUnion( pushToken ) }, { merge: true } )
+		if( pushToken ) await db.collection( 'settings' ).doc( auth.currentUser.uid ).set( {
+			// Add push token
+			pushTokens: FieldValue.arrayUnion( pushToken )
+			
+		}, { merge: true } )
+
+		// Set the local times to the server
+		await db.collection( 'settings' ).doc( auth.currentUser.uid ).set( {
+			times: {
+				fridayNoon: fridayNoon,
+				sundayNoon: sundayNoon
+			}
+		}, { merge: true } )
 
 		// If we have tokens, listen for notis
 		if( settings.pushTokens?.length != 0 ) registerNotificationListeners()

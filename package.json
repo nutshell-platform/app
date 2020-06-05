@@ -1,11 +1,11 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "export development=true && expo start",
-    "android": "export development=true && expo start --android",
-    "ios": "export development=true && expo start --ios",
-    "web": "export development=true && expo start --web",
-    "hybrid": "export development=true && expo start --android --web",
+    "start": "firebase use staging && export development=true && expo start",
+    "android": "firebase use staging && export development=true && expo start --android",
+    "ios": "firebase use staging && export development=true && expo start --ios",
+    "web": "firebase use staging && export development=true && expo start --web",
+    "hybrid": "firebase use staging && export development=true && expo start --android --web",
     "test": "jest",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
