@@ -40,7 +40,8 @@ import FourOhFour from '../components/stateless/common/404'
 class Routes extends Component {
 
 	state = {
-		init: false
+		// If there is a saved user, no loading screen, otherwise loading screen
+		init: !!this.props.user
 	}
 
 	componentDidMount = async () => {
@@ -54,7 +55,10 @@ class Routes extends Component {
 
 		// Init firebase
 		await firebase.init()
+		
+		// Disable loading screen
 		return this.setState( { init: true } )
+		
 	}
 
 	shouldComponentUpdate = ( nextProps, nextState ) => {

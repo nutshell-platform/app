@@ -21,7 +21,7 @@ import config from './config'
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
-import { updateSettings, listenSettings } from './_settings'
+import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
@@ -91,12 +91,12 @@ class Firebase {
 	// ///////////////////////////////
 
 	// Register user listener in a promise wrapper that resolved when initial auth state is received
-	init = f => new Promise( resolve => {
+	init = async f => {
 
 		// Analytics DOES NOT WORK WITH EXPO!
 		// this.fb.analytics()
 
-		this.listeners.auth = listenUserLogin( this, dispatch, setUserAction, resolve, [
+		this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },
 			{ name: 'meta', listener: listenUserMetaChanges, action: setUserMetaAction },
 			{ name: 'settings', listener: listenSettings, action: setSettingsAction },
@@ -104,7 +104,9 @@ class Firebase {
 			{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox }
 		] )
 
-	} )
+		setLocalTimeToSettings( this )
+
+	}
 
 	
 	

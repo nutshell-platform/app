@@ -11,7 +11,8 @@ exports.follow = functions.firestore.document( 'relationships/{relationId}' ).on
 // Cron
 // ///////////////////////////////
 const { publish } = require( './modules/nutshells' )
-exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( 'every 1 hours' ).onRun( publish )
+// cron: Every hour monday and tuesday 0 * * * 1,2
+exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( '0 * * * 1,2' ).onRun( publish )
 
 // ///////////////////////////////
 // Push notification handling
@@ -19,14 +20,21 @@ exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pu
 const { retreivePushReceipts } = require( './modules/push' )
 
 // Get receipts
-exports.pushReceiptHandler = functions.pubsub.schedule( 'every 1 hours' ).onRun( retreivePushReceipts )
+// Cron: run twice daily 0 12,0 * * *
+exports.pushReceiptHandler = functions.pubsub.schedule( '0 12,0 * * *' ).onRun( retreivePushReceipts )
 
 // ///////////////////////////////
 // Notifications
 // ///////////////////////////////
 const { unreadNutshells, rememberToWrite } = require( './modules/notifications' )
-exports.notifyOfUnreadNutshells = functions.pubsub.schedule( 'every monday 13:00' ).onRun( unreadNutshells )
-exports.notifyRememberToWrite = functions.pubsub.schedule( 'every friday 13:00' ).onRun( rememberToWrite )
+
+// Triggers every monday noon based on firestore time declarations
+// Cron: every 5 past on mondays
+exports.notifyOfUnreadNutshells = functions.pubsub.schedule( '5 * * * 1' ).onRun( unreadNutshells )
+
+// Triggers every friday and sunday noon based on firestore declarations
+// Cron 5 * * * 5,0 means every hour at 5 past on fri and sun. See https://crontab.guru/#5_*_*_*_5,0
+exports.notifyRememberToWrite = functions.pubsub.schedule( '5 * * * 5,0' ).onRun( rememberToWrite )
 
 // Debugging
 // exports.manualPushReceiptHandler = functions.https.onCall( ( context, data ) => retreivePushReceipts( db ) )
