@@ -80,20 +80,37 @@ export const weekNumber = f => {
     return weekNumber
 }
 
-// Mondays are defined by the next by 7 divisible number of days passed since 
-export const distanceToMonday = f => {
-	let dayIndex = today.getDay()
+// Calculating the distance until the next day of a week
+export const distanceToNextDayType = ( targetDay, baseline ) => {
 
-	// 0 is sunday, the rest is already distance until monday if you substract one ( since sunday is 0 )
-	return dayIndex == 0 ? 1 : 7 - ( dayIndex - 1 )
+	// Find the index of the target day, where sunday is 0 because javascript
+	const week = [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ]
+	const targetIndex = week.indexOf( targetDay )
+
+	// If parameter is not a day, break
+	if( targetIndex == -1 ) throw 'Faulty day name'
+
+	// Get the index of today relative to the local device
+	const dayIndex = baseline ? baseline.getDay() : today.getDay()
+
+	const distance = targetIndex - dayIndex
+
+	// If the distance is negative than the day is in the past and we want next week's day of that type
+	if( distance < 0 ) return distance + 7
+
+	// If the distance is positive, the day is in the future and we're good
+	return distance
+
 }
 
-export const nextMonday = f => {
+export const dateOfNext = day => {
+
+	// Generate midnight today ( the first second of today, in the past )
 	const startofToday = new Date( today )
-	startofToday.setHours( 0 )
-	startofToday.setMinutes( 0 )
-	startofToday.setSeconds( 0 )
+	startofToday.setHours( 0, 0, 0, 0 )
 	
-	const nextMonday = startofToday.setDate( startofToday.getDate() + distanceToMonday() )
-	return new Date( nextMonday )
+	// Next day of the type input into the function, also it's first second of that day
+	const nextDayOfSuppliedType = new Date().setDate( startofToday.getDate() + distanceToNextDayType( day ) )
+	// console.log( nextDayOfSuppliedType )
+	return new Date( nextDayOfSuppliedType )
 }

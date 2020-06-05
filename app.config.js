@@ -24,7 +24,10 @@ export default {
       "backgroundColor": "#808080"
     },
     "notification": {
-      icon: './assets/icon/acorn_drop_vector_greyscale_94_94.png'
+      icon: './assets/icon/acorn_drop_vector_greyscale_94_94.png',
+      color: '#000000',
+      iosDisplayInForeground: true,
+      androidMode: 'default'
     },
 
     // App settings

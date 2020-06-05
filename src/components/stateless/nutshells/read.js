@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { timestampToHuman, nextMonday } from '../../../modules/helpers'
+import { timestampToHuman, dateOfNext } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
 import { Card, Title, Paragraph, View, HelperText, IconButton, Divider, Button, ToolTip, UserAvatar, Menu } from '../common/generic'
 
@@ -74,7 +74,7 @@ export const Placeholder = ( {  } ) => <Card>
 	<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
 		<Title>You're all caught up! 🎉</Title>
 		<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
-			<ToolTip textStyle={ { textAlign: 'center' } } label={ `Next Nutshells release: ${ timestampToHuman( nextMonday() ) }.` }
+			<ToolTip textStyle={ { textAlign: 'center' } } label={ `Next Nutshells release: ${ timestampToHuman( dateOfNext( 'monday' ) ) }.` }
 			info={ `Nutshells are released on Mondays. The only reason to come back to this app until then is to draft your own Nutshell. We're not trying to get you hooked, there are plenty of other social networks for that.` } />
 			<Button mode='text' style={ { alignSelf: 'center' } } to='/nutshells/write'>Draft & schedule your Nutshell</Button>
 		</View>
