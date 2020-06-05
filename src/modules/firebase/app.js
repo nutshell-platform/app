@@ -21,7 +21,7 @@ import config from './config'
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
-import { updateSettings, listenSettings } from './_settings'
+import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
@@ -103,6 +103,8 @@ class Firebase {
 			{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft },
 			{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox }
 		] )
+
+		setLocalTimeToSettings( this )
 
 	}
 

@@ -31,6 +31,48 @@
 					"order": "ASCENDING"
 				}
 			]
+		},
+		{
+			"collectionGroup": "settings",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "notifications.writeReminder",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "times.fridayNoon",
+					"order": "ASCENDING"
+				}
+			]
+		},
+		{
+			"collectionGroup": "settings",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "notifications.writeReminder",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "times.sundayNoon",
+					"order": "ASCENDING"
+				}
+			]
+		},
+		{
+			"collectionGroup": "settings",
+			"queryScope": "COLLECTION",
+			"fields": [
+				{
+					"fieldPath": "notifications.readReminder",
+					"order": "ASCENDING"
+				},
+				{
+					"fieldPath": "times.mondayNoon",
+					"order": "ASCENDING"
+				}
+			]
 		}
 
 	],

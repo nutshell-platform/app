@@ -107,11 +107,10 @@ export const dateOfNext = day => {
 
 	// Generate midnight today ( the first second of today, in the past )
 	const startofToday = new Date( today )
-	startofToday.setHours( 0 )
-	startofToday.setMinutes( 0 )
-	startofToday.setSeconds( 0 )
+	startofToday.setHours( 0, 0, 0, 0 )
 	
 	// Next day of the type input into the function, also it's first second of that day
-	const nextDayOfSuppliedType = startofToday.setDate( startofToday.getDate() + distanceToNextDayType( day ) )
+	const nextDayOfSuppliedType = new Date().setDate( startofToday.getDate() + distanceToNextDayType( day ) )
+	// console.log( nextDayOfSuppliedType )
 	return new Date( nextDayOfSuppliedType )
 }
