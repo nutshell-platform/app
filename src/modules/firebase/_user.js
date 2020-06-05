@@ -10,27 +10,27 @@ import { setEmailFingerprint } from './_fingerprints'
 // ///////////////////////////////
 
 // Listen to user authentication
-export const listenUserLogin = ( app, dispatch, action, resolve, listeners ) => {
+export const listenUserLogin = ( app, dispatch, action, listeners ) => new Promise( resolve => {
 	// Listen to the user object
-	return app.auth.onAuthStateChanged( async user => {
+	const authListener = app.auth.onAuthStateChanged( async user => {
 
 		// Register listeners if we are logged in
 		if( user ) {
 			registerListeners( app, dispatch, listeners )
-			dispatch( action( await getUserProfile( app.db, user ) ) )
+			await dispatch( action( await getUserProfile( app.db, user ) ) )
 		}
 
 		// Unregister listeners and reset app if we are not logged in
 		if( !user ) {
 			unregisterListeners( app.listeners )
-			dispatch( resetApp( ) )
+			await dispatch( resetApp( ) )
 		}
 
 		// Resolve when done
-		resolve()
+		resolve( authListener )
 
 	} )
-}
+} ) 
 
 // Listen to user changes
 export const listenUserChanges = ( app, dispatch, action ) => {

@@ -91,12 +91,12 @@ class Firebase {
 	// ///////////////////////////////
 
 	// Register user listener in a promise wrapper that resolved when initial auth state is received
-	init = f => new Promise( resolve => {
+	init = async f => {
 
 		// Analytics DOES NOT WORK WITH EXPO!
 		// this.fb.analytics()
 
-		this.listeners.auth = listenUserLogin( this, dispatch, setUserAction, resolve, [
+		this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },
 			{ name: 'meta', listener: listenUserMetaChanges, action: setUserMetaAction },
 			{ name: 'settings', listener: listenSettings, action: setSettingsAction },
@@ -104,7 +104,7 @@ class Firebase {
 			{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox }
 		] )
 
-	} )
+	}
 
 	
 	

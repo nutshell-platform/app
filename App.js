@@ -31,6 +31,7 @@ import { ignoreErrors } from './src/modules/helpers'
 export default class App extends React.Component {
 
 	
+	// Initialisations before anything else is done
 	async componentDidMount() {
 
 		ignoreErrors( [ 'Setting a timer' ] )

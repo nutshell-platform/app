@@ -7,7 +7,7 @@ import Navigation from '../common/navigation'
 import Write from '../../../../assets/undraw_typewriter_i8xd.svg'
 
 // Data
-import { log, getuid, nextMonday } from '../../../modules/helpers'
+import { log, getuid, dateOfNext } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux
@@ -118,7 +118,7 @@ class WriteNutshell extends Component {
 		nutshell.entries = entries.filter( entry => entry.title.length > 0 )
 
 		// Set the next ublish day to the next monday
-		nutshell.published = nextMonday().getTime()
+		nutshell.published = dateOfNext( 'monday' ).getTime()
 
 		await this.updateState( { loading: 'Submitting your nutshell to the cloud. Weird how that goes.' } )
 

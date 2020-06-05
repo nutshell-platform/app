@@ -69,7 +69,7 @@
   },
   "devDependencies": {
     "firebase-tools": "^8.4.0",
-    "jest": "^26.0.1",
+    "jest": "^25.5.4",
     "jest-expo": "^37.0.0",
     "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "^16.13.1",
