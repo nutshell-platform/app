@@ -3,6 +3,7 @@ import React from 'react'
 // Visual
 import { Component, Container, Loading, Main, Link } from '../../stateless/common/generic'
 import Tutorial from '../onboarding/tutorial'
+import FAB from '../common/fab'
 import { Placeholder, NutshellCard } from '../../stateless/nutshells/read'
 import Navigation from '../common/navigation'
 import People from '../../../../assets/undraw_people_tax5.svg'
@@ -85,7 +86,7 @@ class ReadNutshell extends Component {
 	render() {
 
 		const { loading, inbox } = this.state
-		const { user } = this.props
+		const { user, history } = this.props
 
 		if( loading ) return <Loading message={ loading } />
 
@@ -96,6 +97,8 @@ class ReadNutshell extends Component {
 				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>
+
+			<FAB go={ to => history.push( to ) } />
 		</Container>
 
 	}
