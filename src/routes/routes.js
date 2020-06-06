@@ -1,4 +1,5 @@
 import React from 'react'
+import { BackHandler } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
@@ -46,12 +47,25 @@ class Routes extends Component {
 
 	componentDidMount = async () => {
 
+		const { history } = this.props
+
 		// If url is wrongly using hash (for example due to a direct link), fix it
 		if( window?.location ) {
 			const { href, host } = window.location
 			const [ fullMatch, pathMatch ] = href.match( /(\w+)#/ ) || []
 			if( pathMatch ) window.history.replaceState( null, '', `/#/${pathMatch}` )
 		}
+
+		// Register back button handler
+		this.backHandler = BackHandler.addEventListener( 'hardwareBackPress', f => {
+
+			// Navigate back
+			history.goBack()
+
+			// Stop the event from bubbling up and closing the app
+			return true
+
+		} )
 
 		// Init firebase
 		await firebase.init()
