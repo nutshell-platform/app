@@ -1,5 +1,5 @@
 import { dataFromSnap } from './helpers'
-import { dateOfNext } from '../helpers'
+import { dateOfNext, catcher } from '../helpers'
 import { getTokenIfNeeded, registerNotificationListeners } from '../push'
 
 export const listenSettings = ( app, dispatch, action ) => {
@@ -28,22 +28,32 @@ export const listenSettings = ( app, dispatch, action ) => {
 
 }
 
-export const setLocalTimeToSettings = app => {
+export const setLocalTimeToSettings = async app => {
 
-	const { db, FieldValue, auth } = app
+	try {
 
-	const fridayNoon = dateOfNext( 'friday' ).setHours( 10, 0, 0, 0 )
-	const sundayNoon = dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 )
-	const mondayNoon = dateOfNext( 'monday' ).setHours( 10, 0, 0, 0 )
+		const { db, FieldValue, auth } = app
 
-	// Set the local times to the server
-	return db.collection( 'settings' ).doc( auth.currentUser.uid ).set( {
-		times: {
-			fridayNoon: fridayNoon,
-			sundayNoon: sundayNoon,
-			mondayNoon: mondayNoon
+		// Get timestamps of relevan days
+		const fridayNoon = dateOfNext( 'friday' ).setHours( 10, 0, 0, 0 )
+		const sundayNoon = dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 )
+		const mondayNoon = dateOfNext( 'monday' ).setHours( 10, 0, 0, 0 )
+
+		const { times } = await db.collection( 'settings' ).doc( auth.currentUser.uid ).get().then( dataFromSnap )
+
+		// If the server timestamp is bigger than the local one, keep the remote because notification has been sent
+		const newTimes = {
+			fridayNoon: times.fridayNoon > fridayNoon ? times.fridayNoon : fridayNoon,
+			sundayNoon: times.sundayNoon > sundayNoon ? times.sundayNoon : sundayNoon,
+			mondayNoon: times.mondayNoon > mondayNoon ? times.mondayNoon : mondayNoon
 		}
-	}, { merge: true } )
+
+		// Set the local times to the server
+		return db.collection( 'settings' ).doc( auth.currentUser.uid ).set( { times: newTimes }, { merge: true } )
+
+	} catch( e ) {
+		catcher( e )
+	}
 
 }
 
