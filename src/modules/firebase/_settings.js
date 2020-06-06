@@ -6,7 +6,7 @@ export const listenSettings = ( app, dispatch, action ) => {
 
 	const { db, FieldValue, auth } = app
 
-	db.collection( 'settings' ).doc( auth.currentUser.uid ).onSnapshot( async doc => {
+	return db.collection( 'settings' ).doc( auth.currentUser.uid ).onSnapshot( async doc => {
 
 		const settings = dataFromSnap( doc, false )
 		const pushToken = await getTokenIfNeeded( settings )
@@ -35,7 +35,7 @@ export const setLocalTimeToSettings = async app => {
 		const { db, FieldValue, auth } = app
 
 		// If no user is logged in, do nothing
-		if( !auth.currentUser ) return
+		if( !auth.currentUser?.uid ) return
 
 		// Get timestamps of relevan days
 		const fridayNoon = dateOfNext( 'friday' ).setHours( 10, 0, 0, 0 )

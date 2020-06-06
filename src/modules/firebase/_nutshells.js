@@ -85,7 +85,7 @@ export const muteNutshell = ( app, nutshellUid ) => {
 // ///////////////////////////////
 export const listenToLatestNutshell = ( app, dispatch, action ) => {
 
-	app.db.collection( 'nutshells' )
+	return app.db.collection( 'nutshells' )
 		.where( 'owner', '==', app.auth.currentUser.uid )
 		.where( 'status', 'in', [ 'draft', 'scheduled' ] )
 		.orderBy( 'updated', 'desc' )
@@ -100,7 +100,7 @@ export const listenToLatestNutshell = ( app, dispatch, action ) => {
 
 export const listenToNutshellInbox = ( app, dispatch, action ) => {
 
-	app.db.collection( 'inbox' )
+	return app.db.collection( 'inbox' )
 		.doc( app.auth.currentUser.uid )
 		.onSnapshot( doc => {
 			const { nutshells } = dataFromSnap( doc )
