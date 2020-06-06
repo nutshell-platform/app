@@ -34,6 +34,9 @@ export const setLocalTimeToSettings = async app => {
 
 		const { db, FieldValue, auth } = app
 
+		// If no user is logged in, do nothing
+		if( !auth.currentUser ) return
+
 		// Get timestamps of relevan days
 		const fridayNoon = dateOfNext( 'friday' ).setHours( 10, 0, 0, 0 )
 		const sundayNoon = dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 )
