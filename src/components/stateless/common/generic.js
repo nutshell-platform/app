@@ -124,8 +124,9 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 20, ...style } }>
 	<PaperButton
 		onPress={ to ? f => history.push( to ) : onPress }
-		labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface } }
-		style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%' } }
+		style={ { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', width: '100%' } }
+		contentStyle={ { width: '100%' } }
+		labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface, width: '100%' } }		
 		mode={ mode } { ...props }
 	>
 		{ children }
@@ -209,4 +210,4 @@ export const Container = withTheme( ( { style, children, theme, Background } ) =
 // ///////////////////////////////
 // Pass through exports straignt from paper
 // ///////////////////////////////
-export { Drawer, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, HelperText, Avatar, Caption, IconButton, Menu } from 'react-native-paper'
+export { Drawer, Provider, FAB, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, HelperText, Avatar, Caption, IconButton, Menu } from 'react-native-paper'

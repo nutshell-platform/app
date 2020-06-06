@@ -1,3 +1,4 @@
+import { persistor } from '../store'
 export const toggleDarkMode = input => ( {
 	type: 'TOGGLEDARKMODE',
 	payload: true

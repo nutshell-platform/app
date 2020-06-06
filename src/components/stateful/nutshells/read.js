@@ -3,6 +3,7 @@ import React from 'react'
 // Visual
 import { Component, Container, Loading, Main, Link } from '../../stateless/common/generic'
 import Tutorial from '../onboarding/tutorial'
+import FAB from '../common/fab'
 import { Placeholder, NutshellCard } from '../../stateless/nutshells/read'
 import Navigation from '../common/navigation'
 import People from '../../../../assets/undraw_people_tax5.svg'
@@ -28,29 +29,34 @@ class ReadNutshell extends Component {
 			const { inbox, user } = this.props
 			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ) ) )
 
-			// If we have muted items, filter them
-			if( user.muted ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
-
-			// Filter  out censored and set to state
-			await this.updateState( { inbox: nutshells.filter( n => !n.hidden ), loading: false } )
+			// Filter out censored and set to state
+			await this.updateState( {
+				rawInbox: nutshells,
+				inbox: this.cleanNutshells( nutshells, user.muted ),
+				loading: false
+			} )
 
 		} catch( e ) {
 			alert( e )
 		}
 	}
 
+	cleanNutshells = ( nutshells=[], muted=[] ) => nutshells.filter( n => !muted.includes( n.uid ) ).filter( n => !n.hidden )
+
 	// Load nutshells on mount
 	componentDidMount = f => this.loadInbox()
 
 	shouldComponentUpdate = async ( nextprops, nextstate ) => {
-		const { inbox: externalInbox } = nextprops
-		const { inbox: internalInbox, loading } = nextstate
+		const { inbox: externalInbox, user } = nextprops
+		const { rawInbox: internalInbox, loading } = nextstate
 
 		// If loading or no followers, do nothing
 		if( loading || !externalInbox ) return false
 
 		// If remote followers are more than local, get follower details
 		if( externalInbox.length != internalInbox.length ) await this.loadInbox()
+
+		// Always trigger rerender ( default behavior )
 		return true
 
 	}
@@ -80,7 +86,7 @@ class ReadNutshell extends Component {
 	render() {
 
 		const { loading, inbox } = this.state
-		const { user } = this.props
+		const { user, history } = this.props
 
 		if( loading ) return <Loading message={ loading } />
 
@@ -91,6 +97,8 @@ class ReadNutshell extends Component {
 				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>
+
+			<FAB go={ to => history.push( to ) } />
 		</Container>
 
 	}

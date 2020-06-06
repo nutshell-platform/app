@@ -1,4 +1,5 @@
 import React from 'react'
+import { BackHandler } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
@@ -41,10 +42,12 @@ class Routes extends Component {
 
 	state = {
 		// If there is a saved user, no loading screen, otherwise loading screen
-		init: !!this.props.user
+		init: false
 	}
 
 	componentDidMount = async () => {
+
+		const { history, user } = this.props
 
 		// If url is wrongly using hash (for example due to a direct link), fix it
 		if( window?.location ) {
@@ -53,6 +56,19 @@ class Routes extends Component {
 			if( pathMatch ) window.history.replaceState( null, '', `/#/${pathMatch}` )
 		}
 
+		// Register back button handler
+		this.backHandler = BackHandler.addEventListener( 'hardwareBackPress', f => {
+
+			// Navigate back
+			history.goBack()
+
+			// Stop the event from bubbling up and closing the app
+			return true
+
+		} )
+
+		// Set the state to initialised if a user is already in stor
+		this.setState( { init: !!user } )
 		// Init firebase
 		await firebase.init()
 		
@@ -68,13 +84,18 @@ class Routes extends Component {
 
 		// Development-only logging of path
 		log( pathname )
+		log( user )
 
 		// ///////////////////////////////
 		// Redirect rules
 		// ///////////////////////////////
 
 		// Not logged in but not on the home page => go to home
-		if( pathname != '/' && !user ) history.push( '/' )
+		if( pathname != '/' && !user ) {
+			history.push( '/' )
+			// Do not update router since the history is changing
+			return false
+		}
 		// If logged in but at slash => go to profile
 		if( pathname == '/' && user ) history.push( '/nutshells/read' )
 

@@ -16,7 +16,7 @@ import { connect } from 'react-redux'
 class UserProfile extends Component {
 
 	state = {
-		loading: 'Finding user data',
+		loading: 'Loading user data',
 		handle: this.props.match.params.handle,
 		profile: {}
 	}
