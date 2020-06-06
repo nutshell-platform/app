@@ -85,7 +85,7 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 					    <View style={ { marginTop: 'auto', width: '100%' } }>
 					    	{ /* Version info */ }
 					    	{ checkingUpdates && <Text style={ { opacity: .3, padding: 10, textAlign: 'right' } }>Checking for updates</Text> }
-					    	{ !checkingUpdates && !updatesAvailable && <Text onPress={ check } style={ { opacity: .3, padding: 10, textAlign: 'right' } }>{ version } { updatesAvailable ? '- update available' : '- latest' } { checkedAt && `(last checked at ${ checkedAt })` }</Text> }
+					    	{ !checkingUpdates && !updatesAvailable && <Text onPress={ check } style={ { opacity: .3, padding: 10, textAlign: 'right' } }>{ version } { updatesAvailable ? '- update available' : '- latest' } { checkedAt && `(checked: ${ checkedAt })` }</Text> }
 					    	{ /* Darkmode toggle */ }
 					    	<DarkMode toggleDark={ toggleDark } theme={ theme } />
 					    </View>

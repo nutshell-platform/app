@@ -33,28 +33,21 @@ export const listenUserLogin = ( app, dispatch, action, listeners ) => new Promi
 } ) 
 
 // Listen to user changes
-export const listenUserChanges = ( app, dispatch, action ) => {
+export const listenUserChanges = ( app, dispatch, action ) => app.db.collection( 'users' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
 
-	app.db.collection( 'users' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
+	return dispatch( action( {
+		email: app.auth.currentUser.email,
+		...dataFromSnap( doc ) 
+	} ) )
 
-		return dispatch( action( {
-			email: app.auth.currentUser.email,
-			...dataFromSnap( doc ) 
-		} ) )
+} )
 
-	} )
+export const listenUserMetaChanges = ( app, dispatch, action ) => app.db.collection( 'userMeta' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
 
-}
+	return dispatch( action( dataFromSnap( doc, false ) ) )
 
-export const listenUserMetaChanges = ( app, dispatch, action ) => {
+} )
 
-	app.db.collection( 'userMeta' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
-
-		return dispatch( action( dataFromSnap( doc, false ) ) )
-
-	} )
-
-}
 
 // ///////////////////////////////
 // User actions

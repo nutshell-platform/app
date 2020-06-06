@@ -53,7 +53,7 @@ service cloud.firestore {
     }
 
     // ///////////////////////////////
-    // Syatem data
+    // System data
     // ///////////////////////////////
     match /reportedAbuse/{reportUid} {
       // Only create new ones
