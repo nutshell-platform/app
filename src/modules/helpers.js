@@ -41,7 +41,7 @@ export const error = msg => {
 }
 
 export const catcher = e => {
-	log( e )
+	errorw( e )
 	// throw to sentry
 	throw e
 }
