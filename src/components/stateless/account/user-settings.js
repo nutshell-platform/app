@@ -22,6 +22,17 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				<Input error={ !handleAvailable && 'This handle is taken' } label='handle' value={ user.handle } info='Your handle is a unique username you can share with your friends so they can easily find you.' onChangeText={ t => changeUser( 'handle', t ) } />
 				<Input error={ user.bio?.length == 0 } label='bio' value={ user.bio } info='What should people know about you?' onChangeText={ t => changeUser( 'bio', t ) } />
 
+
+				{ /* Password required */ }
+				{ passwordRequired && <React.Fragment>
+					<Input secureTextEntry label='current password' info='Current password required for this change' error={ true } value={ user.currentpassword || '' } onChangeText={ t => changeUser( 'currentpassword', t ) } />
+				</React.Fragment> }
+				<Button onPress={ saveChanges }>{ newUser ? 'Confirm settings and continue' : 'Save changes' }</Button>
+			</Card>
+
+			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
+			
+				
 				<Subheading>Account settings</Subheading>
 				<Input label='email' value={ user.email } info='Nobody can see this publicly.' onChangeText={ t => changeUser( 'email', t ) } />
 				<Input secureTextEntry label='new password' value={ user.newpassword || '' } onChangeText={ t => changeUser( 'newpassword', t ) } />
@@ -39,6 +50,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				</React.Fragment> }
 				<Button onPress={ saveChanges }>{ newUser ? 'Confirm settings and continue' : 'Save changes' }</Button>
 			</Card>
+
 		</View>
 	</Main.Center>
 }
