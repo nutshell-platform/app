@@ -7,8 +7,8 @@ import { Asset } from 'expo-asset'
 import { Dialogue } from '../../../modules/helpers'
 
 // Visual
-import { TouchableOpacity, Image, Text, Platform } from 'react-native'
-import { Component, Avatar } from '../../stateless/common/generic'
+import { TouchableOpacity, Image, Text, Platform, View } from 'react-native'
+import { Component, Avatar, IconButton } from '../../stateless/common/generic'
 
 class ShowOrPickImage extends Component {
 
@@ -56,8 +56,11 @@ class ShowOrPickImage extends Component {
 		const { image: chosenImage } = this.state
 		const { style, theme, size, image } = this.props
 
-		return <TouchableOpacity onPress={ this.pickImage } style={ { alignItems: 'center', justifyContent: 'center', ...style } }>
-			{ ( image || chosenImage ) ? <Avatar.Image size={ size || 100 } source={ chosenImage || image } /> : <Avatar.Icon size={ size || 100 } icon='camera' /> }
+		return <TouchableOpacity onPress={ this.pickImage } style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } }>
+			<View>
+				{ ( image || chosenImage ) ? <Avatar.Image size={ size || 100 } source={ chosenImage || image } /> : <Avatar.Icon size={ size || 100 } icon='camera' /> }
+				<IconButton size={ 15 } style={ { position: 'absolute', bottom: 0, right: 0, background: theme.colors.surface, borderColor: theme.colors.text, borderWidth: .5 } } icon='pencil' />
+			</View>
 		</TouchableOpacity>
 
 	}
