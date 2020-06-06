@@ -31,10 +31,10 @@ class Fab extends Component {
 					open={ open }
 					icon={ open ? 'close' : 'plus'}
 					fabStyle={ { backgroundColor: theme.colors.primary } }
-					style={ {  } }
+					style={ { paddingBottom: 20, paddingRight: 10 } }
 					actions={[
 						{ icon: 'pencil', label: 'Write nutshell', onPress: f => go( '/nutshells/write' ) },
-						{ icon: 'plus', label: 'Add friends', onPress: f => go( '/friends/find' ) },
+						{ icon: 'account-plus', label: 'Add friends', onPress: f => go( '/friends/find' ) },
 					]}
 					onStateChange={ this.onBackgroundPress }
 					onPress={ this.toggle }
