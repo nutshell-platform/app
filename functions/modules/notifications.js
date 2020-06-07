@@ -90,13 +90,13 @@ exports.rememberToWrite = async f => {
 		// Load users with a known friday timezone
 		const usersWhoWantToBeNotifiedFriday = await db.collection( 'settings' )
 			.where( 'notifications.writeReminder', '==', true )
-			.where( 'times.fridayNoon', '<', Date.now()+ ( 1000*60*60*24*7 ) )
+			.where( 'times.fridayNoon', '<', Date.now() )
 			.get().then( dataFromSnap )
 
 		// Load users with a known sunday timezone
 		const usersWhoWantToBeNotifiedSunday = await db.collection( 'settings' )
 			.where( 'notifications.writeReminder', '==', true )
-			.where( 'times.sundayNoon', '<', Date.now()+ ( 1000*60*60*24*7 ) )
+			.where( 'times.sundayNoon', '<', Date.now() )
 			.get().then( dataFromSnap )
 
 

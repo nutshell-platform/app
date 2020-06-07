@@ -25,4 +25,5 @@ web-report/
 
 # Secrets
 nutshell-staging.json
+nutshell-production.json
 google-services.json
