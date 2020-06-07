@@ -44,7 +44,7 @@ exports.weekNumber = f => {
 }
 
 // Calculating the distance until the next day of a week
-exports.distanceToNextDayType = ( targetDay, baseline ) => {
+const distanceToNextDayType = ( targetDay, baseline ) => {
 
 	// Find the index of the target day, where sunday is 0 because javascript
 	const week = [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ]
@@ -65,14 +65,17 @@ exports.distanceToNextDayType = ( targetDay, baseline ) => {
 	return distance
 
 }
+exports.distanceToNextDayType = distanceToNextDayType
 
 exports.dateOfNext = day => {
+
 
 	// Generate midnight today ( the first second of today, in the past )
 	const startofToday = new Date( today )
 	startofToday.setHours( 0 )
 	startofToday.setMinutes( 0 )
 	startofToday.setSeconds( 0 )
+
 	
 	// Next day of the type input into the function, also it's first second of that day
 	const nextDayOfSuppliedType = startofToday.setDate( startofToday.getDate() + distanceToNextDayType( day ) )
