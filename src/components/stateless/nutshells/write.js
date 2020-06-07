@@ -9,7 +9,7 @@ import { weekNumber, dateOfNext, timestampToHuman } from '../../../modules/helpe
 
 export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, changesMade, background='grey', inspire } ) => {
 
-	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( dateOfNext( 'monday' ) ) }`
+	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( dateOfNext( 'monday' ) ) } at 00:00`
 
 	return <View>
 		<View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
