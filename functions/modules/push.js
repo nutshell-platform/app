@@ -38,6 +38,8 @@ const resToError = ( { id, status, message, details } ) => ( { id: id, status: s
 // ///////////////////////////////
 exports.sendPushNotifications = async ( tokens, message={ title: undefined, body: undefined } ) => {
 
+	if( !tokens || tokens.length == 0 ) return null
+
 	try {
 
 		// Format messages and make chunks
@@ -53,7 +55,8 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 				type: 'ticket',
 				...( ticket.details ? resToError( ticket ) : ticket )
 		} )
-		await Promise.all( tickets.map( ticket => db.collection( 'pushLogs' ).doc( ticket.id ).set( formatTicket( ticket ) ) ) )
+
+		return Promise.all( tickets.map( ticket => db.collection( 'pushLogs' ).doc( ticket.id ).set( formatTicket( ticket ) ) ) )
 
 	} catch( e ) {
 		log( 'Push notification error: ', e )

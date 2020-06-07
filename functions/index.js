@@ -26,7 +26,7 @@ exports.pushReceiptHandler = functions.pubsub.schedule( '0 12,0 * * *' ).onRun( 
 // ///////////////////////////////
 // Notifications
 // ///////////////////////////////
-const { unreadNutshells, rememberToWrite } = require( './modules/notifications' )
+const { unreadNutshells, rememberToWrite, resetNotificationTimes } = require( './modules/notifications' )
 
 // Triggers every monday noon based on firestore time declarations
 // Cron: every 5 past on mondays
@@ -35,6 +35,8 @@ exports.notifyOfUnreadNutshells = functions.pubsub.schedule( '5 * * * 1' ).onRun
 // Triggers every friday and sunday noon based on firestore declarations
 // Cron 5 * * * 5,0 means every hour at 5 past on fri and sun. See https://crontab.guru/#5_*_*_*_5,0
 exports.notifyRememberToWrite = functions.pubsub.schedule( '5 * * * 5,0' ).onRun( rememberToWrite )
+
+// exports.resetNotificationTimes = functions.https.onCall( resetNotificationTimes )
 
 // Debugging
 // exports.manualPushReceiptHandler = functions.https.onCall( ( context, data ) => retreivePushReceipts( db ) )

@@ -1,5 +1,5 @@
 // Data helpers
-const { dataFromSnap, log, error, dateOfNext } = require( './helpers' )
+const { dataFromSnap, log, error, dateOfNext, distanceToNextDayType } = require( './helpers' )
 const { db, FieldValue } = require( './firebase' )
 const { sendPushNotifications } = require( './push' )
 
@@ -49,6 +49,10 @@ exports.unreadNutshells = async f => {
 
 		// Notify those will full inboxes
 		const unreadMessage = amount => ( { title: `${amount} unread nutshells!`, body: `Click notification to read what your friends have to say this week.` } )
+
+		// Date resets
+		const extraWeek = ( 1000 * 60 * 60 * 24 * 7 )
+		const nextMonday = distanceToNextDayType( 'monday' ) == 0 ? ( dateOfNext( 'monday' ).setHours( 10, 0, 0, 0 ) + extraWeek ) : dateOfNext( 'monday' ).setHours( 10, 0, 0, 0 )
 
 		// Send all notifications in parrallell
 		await Promise.all( fullInboxesWithPushTokens.map( async ( { uid, times, pushTokens, nutshells } ) => {
@@ -102,6 +106,11 @@ exports.rememberToWrite = async f => {
 
 		if( !usersWhoWantToBeNotified || usersWhoWantToBeNotified.length == 0 ) return null
 
+		// Date resets
+		const extraWeek = ( 1000 * 60 * 60 * 24 * 7 )
+		const nextFriday = distanceToNextDayType( 'friday' ) == 0 ? ( dateOfNext( 'friday' ).setHours( 10, 0, 0, 0 ) + extraWeek ) : dateOfNext( 'friday' ).setHours( 10, 0, 0, 0 )
+		const nextSunday = distanceToNextDayType( 'sunday' ) == 0 ? ( dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 ) + extraWeek ) : dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 )
+
 		// Notify those will full inboxes
 		const unreadMessage = { title: `Remember to write your nutshell!`, body: `The deadline is this midnight this sunday.` }
 		await Promise.all( usersWhoWantToBeNotified.map( async ( { uid, times, pushTokens } ) => {
@@ -114,8 +123,61 @@ exports.rememberToWrite = async f => {
 				// If notification was sent, set the next notification moment to a week later
 				return db.collection( 'settings' ).doc( uid ).set( { times: {
 					// Set to one week from now
-					fridayNoon: times.fridayNoon + ( 1000 * 60 * 60 * 24 * 7 ),
-					sundayNoon: times.sundayNoon + ( 1000 * 60 * 60 * 24 * 7 )
+					fridayNoon: nextFriday,
+					sundayNoon: nextSunday
+
+				} }, { merge: true } ).catch( console.log.bind( console ) )
+
+
+			} catch( e ) {
+				error( e )
+				throw e
+			}
+
+		} ) )
+
+	} catch( e ) {
+		error( 'Remember to write error: ', e )
+	}
+
+}
+
+exports.resetNotificationTimes = async f => {
+
+	try {
+
+		// Load users with a known friday timezone
+		const allUsers = await db.collection( 'settings' ).get().then( dataFromSnap )
+
+		const usersWhoWantToBeNotified = allUsers
+
+		log( 'Users to notify: ', usersWhoWantToBeNotified )
+
+		if( !usersWhoWantToBeNotified || usersWhoWantToBeNotified.length == 0 ) return null
+
+		log( 'Generate times', dateOfNext( 'friday' ) )
+		// Date resets
+		const nextFriday = dateOfNext( 'friday' ).setHours( 10, 0, 0, 0 )
+		const nextSunday = dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 )
+		const nextMonday = dateOfNext( 'monday' ).setHours( 10, 0, 0, 0 )
+
+		log( `${ nextMonday }, ${nextFriday}, ${ nextSunday }` )
+
+
+		// Notify those will full inboxes
+		const unreadMessage = { title: `Remember to write your nutshell!`, body: `The deadline is this midnight this sunday.` }
+		await Promise.all( usersWhoWantToBeNotified.map( async ( { uid } ) => {
+
+			try {
+
+				log( 'Notifying: ', uid )
+
+				// If notification was sent, set the next notification moment to a week later
+				return db.collection( 'settings' ).doc( uid ).set( { times: {
+					// Set to one week from now
+					fridayNoon: nextFriday,
+					sundayNoon: nextSunday,
+					mondayNoon: nextMonday
 
 				} }, { merge: true } )
 
