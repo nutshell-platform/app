@@ -165,7 +165,7 @@ export const Search = ( { style, searching, ...props } ) => <View>
 
 // Checkbox
 export const Checkbox = ( { checked, children, onPress, style, ...props } ) => <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', ...style } }>
-	<PaperCheckbox onPress={ onPress } status={ checked ? 'checked' : 'unchecked' } />
+	<PaperCheckbox.Android onPress={ onPress } status={ checked ? 'checked' : 'unchecked' } />
 	{ children }
 </View>
 
