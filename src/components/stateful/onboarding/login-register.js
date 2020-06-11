@@ -89,7 +89,6 @@ export default class LoginRegister extends Component {
 			if( action == 'recover' ) await app.resetPassword( email.trim() )
 			return history.push( '/' )
 		} catch( e ) {
-			log( e )
 			alert( e )
 			return this.updateState( { loading: false } )
 		}

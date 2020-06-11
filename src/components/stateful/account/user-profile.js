@@ -42,6 +42,9 @@ class UserProfile extends Component {
 			const profile = await app.getPerson( handle )
 			let nutshells = await app.getNutshellsOfUser( profile.uid )
 
+			// Sort the nutshells
+			nutshells.sort( ( a, b ) => b.updated > a.updated ? 1 : -1 )
+
 			// If we have muted items, filter them
 			if( user.muted ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
 
@@ -49,7 +52,7 @@ class UserProfile extends Component {
 
 		} catch( e ) {
 
-			log( e )
+			log( 'Trouble getting user by handle: ', e )
 			// Unable to find user
 			const { history } = this.props 
 			history.push( '/404' )
