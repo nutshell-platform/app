@@ -124,6 +124,7 @@ class WriteNutshell extends Component {
 
 		// If hutshell already exists update it
 		try {
+			log( `${ uid ? 'Updating' : 'Creating new' } nutshell` )
 			if( uid ) await app.updateNutshell( nutshell )
 			if( !uid ) await app.createNutshell( nutshell )
 			await this.updateState( { changesMade: false } )
