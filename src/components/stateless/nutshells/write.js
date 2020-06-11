@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 
 // Visual
 import { TouchableOpacity } from 'react-native'
-import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View, ToolTip, Caption, IconButton } from '../common/generic'
+import { Card, Main, Title, Input, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View, ToolTip, Caption, IconButton } from '../common/generic'
 
 // Data
-import { weekNumber, dateOfNext, timestampToHuman } from '../../../modules/helpers'
+import { weekNumber, dateOfNext, timestampToHuman, timestampToTime } from '../../../modules/helpers'
 
-export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, changesMade, background='grey', inspire } ) => {
+export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, unsavedChanges, background='grey', inspire } ) => {
 
 	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( dateOfNext( 'monday' ) ) }`
 
@@ -23,13 +23,11 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>
 						<Toggle style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
 						<ToolTip label='What is a Nutshell?' info={
-							`A Nutshell is a summary of what's been going on in your life since your last Nutshell, such as what you've been doing or how you've been feeling.\n
-							Scheduled Nutshells will be published on Mondays, and all users only get one Nutshell per week.
+							`A Nutshell is a summary of what's been going on in your life since your last Nutshell, such as what you've been doing or how you've been feeling.\n\n Scheduled Nutshells will be published on Mondays, and all users only get one Nutshell per week.
 						` } />
 					</View>
 				</View>
 
-				{ changesMade && <Button onPress={ saveDraft }>Save changes</Button> }
 			</Card>
 
 
@@ -42,6 +40,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 					maxTitleLength={ maxTitleLength }
 					maxParagraphLength={ maxParagraphLength }
 					inspire={ inspire }
+					unsavedChanges={ unsavedChanges }
 				/>
 			) }
 
@@ -49,7 +48,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 	</View>
 }
 
-export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLength, maxParagraphLength, inspire } ) => {
+export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLength, maxParagraphLength, inspire, unsavedChanges } ) => {
 
 	const [ opaque, setOpaque ] = useState( title.length > 0 || paragraph.length > 0 || isFirst  )
 	const [ inspiration, setInspiration ] = useState( inspire() )
@@ -70,7 +69,7 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLengt
 			hideInfo={ true }
 			style={ { fontWeight: 'bold' } }
 			value={ title }
-			label='Headline'
+			label={ `Headline (${ title.length }/${ maxTitleLength })` }
 			info={ `A short summary of at most ${ maxTitleLength } characters about what you want to say.\n
 			Examples: "Struggling to focus this week" or "My new routine is really nice".` }
 			onChangeText={ text => onInput( 'title', text ) }
@@ -81,15 +80,17 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLengt
 			onBlur={ onBlur }
 			hideInfo={ true }
 			value={ paragraph }
-			label='Message'
+			label={ `Message (${ paragraph.length }/${ maxParagraphLength })` }
 			info={ `Tell the headline's story in at most ${ maxParagraphLength } characters.\n
 			In the Nutshell feed, this paragraph will collapse under the headline. Better make sure your headline is catchy!` }
 			onChangeText={ text => onInput( 'paragraph', text ) }
 			multiline={ true }
 		/>
+		
 		<TouchableOpacity style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingTop: 10 } } onPress={ newInspiration }>
 			<Caption>Inspiration: { inspiration }</Caption>
 			<IconButton style={ { opacity: .8 } } size={ 15 } icon='reload' />
 		</TouchableOpacity>
+		<HelperText style={ {  textAlign: 'center', width: '100%' } }>{ unsavedChanges ? 'Unsaved changes. ' : `All changes saved at ${timestampToTime()}. ` }</HelperText>
 	</Card>
 }

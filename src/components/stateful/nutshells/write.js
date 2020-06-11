@@ -22,6 +22,7 @@ class WriteNutshell extends Component {
 
 		this.state = {
 			loading: false,
+			autosaveInterval: 2000,
 			maxTitleLength: 75,
 			maxParagraphLength: 2500,
 			nutshell: {
@@ -29,7 +30,7 @@ class WriteNutshell extends Component {
 				entries: [],
 				...props.nutshell
 			},
-			changesMade: false
+			unsavedChanges: false
 		}
 
 	}
@@ -72,6 +73,18 @@ class WriteNutshell extends Component {
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
 
+	// Auto save scheduler
+	scheduleAutosave = f => {
+
+		if( this.scheduledAutosave ) {
+			clearTimeout( this.scheduledAutosave )
+			this.scheduledAutosave = undefined
+		}
+
+		this.scheduledAutosave = setTimeout( this.saveDraft, this.state.autosaveInterval )
+
+	}
+
 	// Entry updates
 	updateEntry = async ( uid, key, value ) => {
 
@@ -86,7 +99,10 @@ class WriteNutshell extends Component {
 		updatedEntry[ key ] = value
 		const updatedEntries = [ ...entries ].map( entry => entry.uid == uid ? updatedEntry : entry )
 
-		return this.updateState( { changesMade: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
+		// Trigger autosave
+		this.scheduleAutosave()
+
+		return this.updateState( { unsavedChanged: true, unsavedChanges: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
 	}
 
 	// Inspiration
@@ -108,7 +124,7 @@ class WriteNutshell extends Component {
 	}
 
 	// Sumbit data to firebase
-	saveDraft = async ( { type } ) => {
+	saveDraft = async f => {
 
 		const { nutshell } = this.state
 		const { entries, scheduled, uid } = nutshell
@@ -120,31 +136,28 @@ class WriteNutshell extends Component {
 		// Set the next ublish day to the next monday
 		nutshell.published = dateOfNext( 'monday' ).getTime()
 
-		await this.updateState( { loading: 'Submitting your nutshell to the cloud. Weird how that goes.' } )
-
 		// If hutshell already exists update it
 		try {
 			log( `${ uid ? 'Updating' : 'Creating new' } nutshell: `, nutshell )
 			if( uid ) await app.updateNutshell( nutshell )
 			if( !uid ) await app.createNutshell( nutshell )
-			await this.updateState( { changesMade: false } )
+			await this.updateState( { unsavedChanges: false } )
 		} catch( e ) {
 			alert( e )
-		} 
-
-		await this.updateState( { loading: false } )
+		}
 
 	}
 
 	toggleStatus = f => {
 		const { nutshell } = this.state
 		const { status } = nutshell
-		this.updateState( { changesMade: true, nutshell: { ...nutshell, status: status == 'draft' ? 'scheduled' : 'draft' } } )
+		this.scheduledAutosave()
+		this.updateState( { unsavedChanges: true, nutshell: { ...nutshell, status: status == 'draft' ? 'scheduled' : 'draft' } } )
 	}
 
 	render() {
 
-		const { loading, nutshell, maxTitleLength, maxParagraphLength, changesMade } = this.state
+		const { loading, nutshell, maxTitleLength, maxParagraphLength, unsavedChanges } = this.state
 		const { history, user, nutshell: originalNutshell, theme } = this.props
 
 		if( loading ) return <Loading message={ loading } />
@@ -152,7 +165,7 @@ class WriteNutshell extends Component {
 		return <Container Background={ Write }>
 			<Navigation title='Write' />
 			<Main.Center>
-				<Editor inspire={ this.inspire } background={ theme.colors.background } changesMade={ changesMade } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
+				<Editor inspire={ this.inspire } background={ theme.colors.background } unsavedChanges={ unsavedChanges } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
 			</Main.Center>
 		</Container>
 
