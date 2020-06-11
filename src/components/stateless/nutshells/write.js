@@ -20,7 +20,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 					<UserAvatar style={ { marginTop: -avatarSize/2 } } size={ avatarSize } user={ user } />
 					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' } }>
 
-						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>
+						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>						
 						<Toggle style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
 						<ToolTip label='What is a Nutshell?' info={
 							`A Nutshell is a summary of what's been going on in your life since your last Nutshell, such as what you've been doing or how you've been feeling.\n\n Scheduled Nutshells will be published on Mondays, and all users only get one Nutshell per week.
@@ -32,7 +32,8 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 
 
 			{ entries.map( ( { uid, title, paragraph }, i ) => <Entry
-					isFirst={ i == 0 }
+					entrynr={ i + 1 }
+					entries={ entries.length }
 					key={ uid }
 					title={ title }
 					paragraph={ paragraph }
@@ -48,9 +49,9 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 	</View>
 }
 
-export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLength, maxParagraphLength, inspire, unsavedChanges } ) => {
+export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxTitleLength, maxParagraphLength, inspire, unsavedChanges } ) => {
 
-	const [ opaque, setOpaque ] = useState( title.length > 0 || paragraph.length > 0 || isFirst  )
+	const [ opaque, setOpaque ] = useState( title.length > 0 || paragraph.length > 0 || ( entrynr == 1 )  )
 	const [ inspiration, setInspiration ] = useState( inspire() )
 	const newInspiration = f => {
 		let newOne = inspire()
@@ -60,9 +61,10 @@ export const Entry = ( { title='', paragraph='', onInput, isFirst, maxTitleLengt
 
 	let hasContent = title.length > 0 || paragraph.length > 0
 	const onFocus = f => setOpaque( true )
-	const onBlur = f => setOpaque( title.length > 0 || paragraph.length > 0 || isFirst )
+	const onBlur = f => setOpaque( title.length > 0 || paragraph.length > 0 || ( entrynr == 1 ) )
 
 	return <Card style={ { paddingVertical: 20, opacity: opaque ? 1 : .5 } }>
+		<Caption style={ { width: '100%', textAlign: 'center' } }>Entry {entrynr} of {entries} (max 10)</Caption>
 		<Input
 			onFocus={ onFocus }
 			onBlur={ onBlur }
