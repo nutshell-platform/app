@@ -54,8 +54,8 @@ export default {
     "android": {
       "package": "com.nutshell.nutshell",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 3,
-      "permissions": []
+      "versionCode": 4,
+      "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE" ]
     },
     
 
