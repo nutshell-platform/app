@@ -88,7 +88,7 @@ export const Link = withTheme( ( { style, theme, children, to, onPress, ...props
 	</TouchableOpacity>
 
 	return <TouchableOpacity onPress={ onPress }>
-		<NativeLink to={ to }>
+		<NativeLink style={ { textDecorationLine: 'none' } } to={ to }>
 			{ text }
 		</NativeLink>
 	</TouchableOpacity>
