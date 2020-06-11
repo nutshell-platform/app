@@ -28,12 +28,14 @@ export const getNutshellByUid = async ( db, uid ) => {
 // ///////////////////////////////
 export const createNutshell = ( app, nutshell ) => {
 
-	return app.db.collection( 'nutshells' ).add( {
+	const { uid, ...nutshellContent } = nutshell 
+
+	return app.db.collection( 'nutshells' ).doc( uid ).set( {
 		...nutshell,
 		created: Date.now(),
 		updated: Date.now(),
 		owner: app.auth.currentUser.uid
-	} )
+	}, { merge: true } )
 
 }
 
