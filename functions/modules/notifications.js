@@ -100,9 +100,24 @@ exports.rememberToWrite = async f => {
 			.get().then( dataFromSnap )
 
 
-		const usersWhoWantToBeNotified = [ ...usersWhoWantToBeNotifiedFriday, ...usersWhoWantToBeNotifiedSunday ]
+		let usersWhoWantToBeNotified = [ ...usersWhoWantToBeNotifiedFriday, ...usersWhoWantToBeNotifiedSunday ]
 
-		log( 'Users to notify: ', usersWhoWantToBeNotified.length )
+		log( 'All user notification entries: ', usersWhoWantToBeNotified.length )
+
+		// Take out duplicates which will exist because we do a double .get()
+		const alreadyInList = []
+		usersWhoWantToBeNotified = usersWhoWantToBeNotified.filter( ( { uid } ) => {
+
+			// Filter out those that have already been scanned
+			if( alreadyInList.includes( uid ) ) return false
+
+			// Keep if not and put it in the list
+			alreadyInList.push( uid )
+			return true
+
+		} )
+
+		log( 'Users to notify (deduped): ', usersWhoWantToBeNotified.length )
 
 		if( !usersWhoWantToBeNotified || usersWhoWantToBeNotified.length == 0 ) return null
 

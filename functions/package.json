@@ -3,7 +3,7 @@
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "serve": "export development=true && firebase emulators:start --only functions",
-    "shell": "export development=true && firebase functions:shell",
+    "shell": "source ~/.nvm/nvm.sh && nvm use && export development=true && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
