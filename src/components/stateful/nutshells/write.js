@@ -170,9 +170,23 @@ class WriteNutshell extends Component {
 		// If hutshell already exists update it
 		try {
 			log( `${ uid ? 'Updating' : 'Creating new' } nutshell: `, nutshell )
+
+			// Update existing nutshell
 			if( uid ) await app.updateNutshell( nutshell )
-			if( !uid ) await app.createNutshell( nutshell )
+
+			// Create new nutshell
+
+			if( !uid ) {
+				const newNutshell = { ...nutshell, uid: await getuid() }
+				await Promise.all( [
+					app.createNutshell( newNutshell ),
+					this.updateState( { nutshell: newNutshell } )
+				] )
+			}
+
+			// Set unsabed changes to false
 			await this.updateState( { unsavedChanges: false } )
+
 		} catch( e ) {
 			alert( e )
 		}
