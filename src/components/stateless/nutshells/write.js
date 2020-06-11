@@ -7,7 +7,7 @@ import { Card, Main, Title, Input, Subheading, Divider, Toggle, HelperText, Text
 // Data
 import { weekNumber, dateOfNext, timestampToHuman, timestampToTime } from '../../../modules/helpers'
 
-export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, unsavedChanges, background='grey', inspire } ) => {
+export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, unsavedChanges, background='grey', inspire, moveCard } ) => {
 
 	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( dateOfNext( 'monday' ) ) }`
 
@@ -32,7 +32,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 
 
 			{ entries.map( ( { uid, title, paragraph }, i ) => <Entry
-					entrynr={ i + 1 }
+					entrynr={ i }
 					entries={ entries.length }
 					key={ uid }
 					title={ title }
@@ -42,6 +42,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 					maxParagraphLength={ maxParagraphLength }
 					inspire={ inspire }
 					unsavedChanges={ unsavedChanges }
+					move={ moveCard }
 				/>
 			) }
 
@@ -49,9 +50,9 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 	</View>
 }
 
-export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxTitleLength, maxParagraphLength, inspire, unsavedChanges } ) => {
+export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxTitleLength, maxParagraphLength, inspire, unsavedChanges, move } ) => {
 
-	const [ opaque, setOpaque ] = useState( title.length > 0 || paragraph.length > 0 || ( entrynr == 1 )  )
+	const [ opaque, setOpaque ] = useState( title.length > 0 || paragraph.length > 0 || ( entrynr == 0 )  )
 	const [ inspiration, setInspiration ] = useState( inspire() )
 	const newInspiration = f => {
 		let newOne = inspire()
@@ -61,10 +62,14 @@ export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxT
 
 	let hasContent = title.length > 0 || paragraph.length > 0
 	const onFocus = f => setOpaque( true )
-	const onBlur = f => setOpaque( title.length > 0 || paragraph.length > 0 || ( entrynr == 1 ) )
+	const onBlur = f => setOpaque( title.length > 0 || paragraph.length > 0 || ( entrynr == 0 ) )
 
 	return <Card style={ { paddingVertical: 20, opacity: opaque ? 1 : .5 } }>
-		<Caption style={ { width: '100%', textAlign: 'center' } }>Entry {entrynr} of {entries} (max 10)</Caption>
+		{ entrynr < ( entries - 1 ) && <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
+			<IconButton onPress={ f => move( entrynr, 'up' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-up' />
+			<Caption>Entry { entrynr + 1 } of { entries - 1 } (max 10)</Caption>
+			<IconButton onPress={ f => move( entrynr, 'down' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-down' />
+		</View> }
 		<Input
 			onFocus={ onFocus }
 			onBlur={ onBlur }

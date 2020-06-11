@@ -73,6 +73,37 @@ class WriteNutshell extends Component {
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
 
+	// Move card around
+	moveCard = ( index, direction ) => {
+		const { nutshell } = this.state
+		const { entries } = nutshell
+
+		// Ignore redundant requests
+		if( index == 0 && direction == 'up' ) return log( 'Entry already at the top' )
+		if( index == ( entries.length - 2 ) && direction == 'down' ) return log( 'Entry already at the bottom' )
+
+		// Formulate new array with new order
+		const swapIndex = direction == 'up' ? ( index - 1 ) : ( index + 1 )
+		const swapEntry = { ...entries[ swapIndex ] }
+		const entry = { ...entries[ index ] }
+
+		log( `Swapping ${ index }`, entry )
+		log( `With ${ swapIndex }`, swapEntry )
+
+		// Use splice to replace the entries
+		const orderedEntries = [ ...entries ]
+
+		// Take out one item at the place where the entry should go and put the entry there
+		orderedEntries.splice( swapIndex, 1, entry )
+		
+		// Take out one item where the entry used to be and swap it with the replaced entry
+		orderedEntries.splice( index, 1, swapEntry )
+
+		this.scheduleAutosave()
+		return this.updateState( { unsavedChanges: true, nutshell: { ...nutshell, entries: [ ...orderedEntries ] } } )
+
+	}
+
 	// Auto save scheduler
 	scheduleAutosave = f => {
 
@@ -102,7 +133,7 @@ class WriteNutshell extends Component {
 		// Trigger autosave
 		this.scheduleAutosave()
 
-		return this.updateState( { unsavedChanged: true, unsavedChanges: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
+		return this.updateState( { unsavedChanges: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
 	}
 
 	// Inspiration
@@ -165,7 +196,7 @@ class WriteNutshell extends Component {
 		return <Container Background={ Write }>
 			<Navigation title='Write' />
 			<Main.Center>
-				<Editor inspire={ this.inspire } background={ theme.colors.background } unsavedChanges={ unsavedChanges } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
+				<Editor moveCard={ this.moveCard } inspire={ this.inspire } background={ theme.colors.background } unsavedChanges={ unsavedChanges } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
 			</Main.Center>
 		</Container>
 
