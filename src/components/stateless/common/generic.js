@@ -50,7 +50,10 @@ export const View = ( { style, ...props } ) => <NativeView style={ { maxWidth: '
 export const Divider = ( { style, ...props } ) => <PaperDivider style={ { marginVertical: 20, ...style } } { ...props } />
 
 // Profile image
-export const UserAvatar = ( { size=100, user, ...props } ) => user.avatar ? <Avatar.Image { ...props } size={ size } source={ user.avatar } /> : <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' />
+export const UserAvatar = withRouter( ( { size=100, user, history, ...props } ) => <TouchableOpacity onPress={ f => history.push( `/${user.handle}` ) }>
+	{ user.avatar && <Avatar.Image { ...props } size={ size } source={ user.avatar } /> }
+	{ !user.avatar && <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' /> }
+</TouchableOpacity> )
 
 // Tooltip
 export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStyle, textStyle, label, info, theme, ...props } ) => {
