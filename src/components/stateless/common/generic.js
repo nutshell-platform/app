@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 // Visual
 const Color = require('color')
 import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
-import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText, Avatar, Subheading as PaperSubheading, Searchbar, Checkbox as PaperCheckbox } from 'react-native-paper'
+import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText as PaperHelperText, Avatar, Subheading as PaperSubheading, Searchbar, Checkbox as PaperCheckbox, IconButton } from 'react-native-paper'
 import { Link as NativeLink, withRouter } from '../../../routes/router'
 import { isWeb, isIos } from '../../../modules/apis/platform'
 
@@ -50,7 +50,10 @@ export const View = ( { style, ...props } ) => <NativeView style={ { maxWidth: '
 export const Divider = ( { style, ...props } ) => <PaperDivider style={ { marginVertical: 20, ...style } } { ...props } />
 
 // Profile image
-export const UserAvatar = ( { size=100, user, ...props } ) => user.avatar ? <Avatar.Image { ...props } size={ size } source={ user.avatar } /> : <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' />
+export const UserAvatar = withRouter( ( { size=100, user, history, ...props } ) => <TouchableOpacity onPress={ f => history.push( `/${user.handle}` ) }>
+	{ user.avatar && <Avatar.Image { ...props } size={ size } source={ user.avatar } /> }
+	{ !user.avatar && <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' /> }
+</TouchableOpacity> )
 
 // Tooltip
 export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStyle, textStyle, label, info, theme, ...props } ) => {
@@ -66,10 +69,15 @@ export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStyle,
 		</View>
 
 		{ /* the help message triggeres by the info icon */ }
-		{ showInfo && info && <HelperText style={ { paddingBottom: 10, textAlign: 'center', ...tooltipStyle } } type={ 'info' }>{ info }</HelperText> }
+		{ showInfo && info && <PaperHelperText style={ { paddingBottom: 10, textAlign: 'center', ...tooltipStyle } } type={ 'info' }>{ info }</PaperHelperText> }
 
 	</TouchableOpacity>
 } )
+
+export const HelperText = ( { icon, ...props } ) => !icon ? <PaperHelperText { ...props } /> : <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
+	<PaperHelperText { ...props } />
+	<IconButton style={ { opacity: .8, margin: 0 } } icon={ icon } size={ 15 } />
+</View>
 
 export const Link = withTheme( ( { style, theme, children, to, onPress, ...props } ) => {
 
@@ -80,7 +88,7 @@ export const Link = withTheme( ( { style, theme, children, to, onPress, ...props
 	</TouchableOpacity>
 
 	return <TouchableOpacity onPress={ onPress }>
-		<NativeLink to={ to }>
+		<NativeLink style={ { textDecorationLine: 'none' } } to={ to }>
 			{ text }
 		</NativeLink>
 	</TouchableOpacity>
@@ -93,21 +101,21 @@ export const Link = withTheme( ( { style, theme, children, to, onPress, ...props
 // Generic text input
 export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, onSubmit, multiline, iconSize=30, value, ...props } ) => {
 
-	 const [ showInfo, setInfo ] = useState( false )
-	 const [ height, setHeight ] = useState( undefined )
-	 const adjustHeight = ( { nativeEvent } ) => {
-	 	if( multiline ) setHeight( nativeEvent?.contentSize?.height + ( isIos ? 35 : 0 ) )
-	 }
-	 const defaultHeight = f => setHeight( multiline ? 100 : undefined )
-	 const manageEnter = ( { nativeEvent } ) => {
-	 	if( nativeEvent.key == 'Enter' ) return onSubmit()
-	 }
+	const gutter = multiline ? 200 : undefined
+	const [ showInfo, setInfo ] = useState( false )
+	const [ height, setHeight ] = useState( gutter )
+	const adjustHeight = ( { nativeEvent } ) => {
+		if( multiline ) setHeight( nativeEvent?.contentSize?.height + ( isIos ? 35 : 0 ) )
+	}
+	const manageEnter = ( { nativeEvent } ) => {
+		if( nativeEvent.key == 'Enter' ) return onSubmit()
+	}
 
 	return <View>
 		<View style={ { position: 'relative' } }>
 
 			{ /* The actual input */ }
-			<TextInput onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onFocus={ defaultHeight } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ { ...( height && { height: height } ), minHeight: 50, marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
+			<TextInput onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ { ...( height && { height: height } ), minHeight: 50, marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
 
 			{ /* The info icon */ }
 			{ info && ( !hideInfo || ( hideInfo && !value ) ) && <TouchableOpacity tabindex={ -1 } style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'center' } } onPress={ f => setInfo( !showInfo ) }>
@@ -116,7 +124,7 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 		</View>
 
 		{ /* the help message triggeres by the info icon */ }
-		{ ( showInfo || error ) && ( info || error ) && <HelperText type={ error ? 'error' : 'info' }>{ error || info }</HelperText> }
+		{ ( showInfo || error ) && ( info || error ) && <PaperHelperText type={ error ? 'error' : 'info' }>{ error || info }</PaperHelperText> }
 	</View>
 } )
 
@@ -152,7 +160,7 @@ export const Toggle = withTheme( ( { style, theme, value, label, onToggle, info,
 		</View>
 
 		{ /* Info helper message */ }
-		{ info && ( showInfo || error ) && <HelperText style={ { paddingLeft: 0, paddingVertical: 20 } } type={ error ? 'error' : 'info' }>{ info }</HelperText> }
+		{ info && ( showInfo || error ) && <PaperHelperText style={ { paddingLeft: 0, paddingVertical: 20 } } type={ error ? 'error' : 'info' }>{ info }</PaperHelperText> }
 
 	</View>
 } )
@@ -165,7 +173,7 @@ export const Search = ( { style, searching, ...props } ) => <View>
 
 // Checkbox
 export const Checkbox = ( { checked, children, onPress, style, ...props } ) => <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', ...style } }>
-	<PaperCheckbox onPress={ onPress } status={ checked ? 'checked' : 'unchecked' } />
+	<PaperCheckbox.Android onPress={ onPress } status={ checked ? 'checked' : 'unchecked' } />
 	{ children }
 </View>
 
@@ -210,4 +218,4 @@ export const Container = withTheme( ( { style, children, theme, Background } ) =
 // ///////////////////////////////
 // Pass through exports straignt from paper
 // ///////////////////////////////
-export { Drawer, Provider, FAB, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, HelperText, Avatar, Caption, IconButton, Menu } from 'react-native-paper'
+export { Drawer, Provider, FAB, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, Avatar, Caption, IconButton, Menu } from 'react-native-paper'

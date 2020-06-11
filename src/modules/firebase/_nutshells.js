@@ -39,11 +39,10 @@ export const createNutshell = ( app, nutshell ) => {
 
 export const updateNutshell = ( app, nutshell ) => {
 
-	const { uid } = nutshell
-	delete nutshell.uid
+	const { uid, ...nutshellContent } = nutshell
 
 	return app.db.collection( 'nutshells' ).doc( uid ).set( {
-		...nutshell,
+		...nutshellContent,
 		updated: Date.now(),
 	}, { merge: true } )
 

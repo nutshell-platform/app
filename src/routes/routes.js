@@ -83,8 +83,7 @@ class Routes extends Component {
 		const { pathname } = history.location
 
 		// Development-only logging of path
-		log( pathname )
-		log( user )
+		log( 'Current path: ', pathname )
 
 		// ///////////////////////////////
 		// Redirect rules

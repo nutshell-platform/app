@@ -28,7 +28,7 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, 
 				{ blocked && <Button style={ { paddingHorizontal: gutter } } mode={ 'text' } onPress={ f => unblockPerson( user.uid ) }>Press to unblock</Button> }
 
 				{ /* Menu dots */ }
-				<BlockUser blocked={ blocked } unblock={ f => unblockPerson( user.uid ) } block={ f => blockPerson( user.uid) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
+				{ !isSelf && <BlockUser blocked={ blocked } unblock={ f => unblockPerson( user.uid ) } block={ f => blockPerson( user.uid) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } /> }
 
 
 			</Card>
