@@ -69,6 +69,7 @@ service cloud.firestore {
     match /nutshells/{nutshellId} {
       // Write own, read others if logged in
       allow update: if get(/databases/$(database)/documents/specialPowers/$(request.auth.uid)).data.moderator == true
+      allow delete: if get(/databases/$(database)/documents/specialPowers/$(request.auth.uid)).data.admin == true
     }
 
   }

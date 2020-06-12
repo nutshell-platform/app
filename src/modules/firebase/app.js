@@ -22,7 +22,7 @@ import config from './config'
 import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
 
@@ -63,6 +63,7 @@ class Firebase {
 	// ///////////////////////////////
 	createNutshell     = nutshell => createNutshell( this, nutshell )
 	updateNutshell     = nutshell => updateNutshell( this, nutshell )
+	deleteNutshell 	   = uid 	  => deleteNutshell( this, uid )
 	getNutshellsOfUser = uid 	  => getNutshellsOfUser( this, uid )
 	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid )
 	markNutshellRead   = uid 	  => markNutshellRead( this, uid )
@@ -70,7 +71,7 @@ class Firebase {
 	muteNutshell	   = uid 	  => muteNutshell( this, uid )
 
 	// ///////////////////////////////
-	// Syatem functions
+	// System functions
 	// ///////////////////////////////
 	getModerationQueue  = f => getModerationQueue( this )
 	markAbuseModerated  = reportUid => markAbuseModerated( this, reportUid )

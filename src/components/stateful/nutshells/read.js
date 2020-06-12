@@ -27,7 +27,10 @@ class ReadNutshell extends Component {
 
 		try {
 			const { inbox, user } = this.props
-			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ) ) )
+			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ).catch( f => false ) ) )
+
+			// Filter out nutshells that failed to load ( e.g. has been deleted )
+			nutshells = nutshells.filter( nutshell => nutshell )
 
 			// Filter out censored and set to state
 			await this.updateState( {
@@ -83,6 +86,12 @@ class ReadNutshell extends Component {
 
 	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
 
+	deleteNutshell = uidToDelete => Promise.all( [
+		app.deleteNutshell( uidToDelete ),
+		// Filter out the blocked onw from current state
+		this.updateState( { inbox: this.state.inbox.filter( ( { uid } ) => uid != uidToDelete ) } )
+	] )
+
 	render() {
 
 		const { loading, inbox } = this.state
@@ -94,7 +103,7 @@ class ReadNutshell extends Component {
 			<Navigation title='Home' />
 			<Main.Top>
 				 <Tutorial />
-				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard isAdmin={ user.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				{ inbox.length == 0 && <Placeholder /> }
 			</Main.Top>
 
