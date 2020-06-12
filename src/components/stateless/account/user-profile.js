@@ -3,7 +3,7 @@ import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton } f
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
 
-export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, following, followMan, nutshells=[], blockPerson, unblockPerson, blocked, mute } ) => {
+export const UserCard = ( { children, avatarSize=100, user={}, isSelf, isAdmin, noDraft, following, followMan, nutshells=[], blockPerson, unblockPerson, blocked, mute, deleteNutshell } ) => {
 
 	const [ followed, setFollowed ] = useState( following )
 	const gutter = 25
@@ -33,9 +33,9 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, noDraft, 
 
 			</Card>
 
-			{ isSelf && noDraft && <Placeholder /> }
+			{ /* isSelf && noDraft && <Placeholder /> */ }
 
-			{ !blocked && nutshells.map( nutshell => <NutshellCard mute={ f => mute( nutshell.uid ) } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+			{ !blocked && nutshells.map( nutshell => <NutshellCard isAdmin={ isAdmin } deleteNutshell={ deleteNutshell } isSelf={ isSelf } mute={ f => mute( nutshell.uid ) } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 
 		</View>
 	</Main.Center>
