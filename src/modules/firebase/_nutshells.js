@@ -11,7 +11,7 @@ export const getNutshellsOfUser = ( app, uid ) => {
 	return app.db.collection( 'nutshells' )
 		.where( 'owner', '==', uid)
 		.where( 'status', isMe ? 'in' : '==', isMe ? [ 'published', 'draft', 'scheduled' ] : 'published' )
-		.limit( 5 ).get().then( dataFromSnap )
+		.limit( 52 ).get().then( dataFromSnap )
 }
 
 // Get nutshell info by uid
