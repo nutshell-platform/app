@@ -87,6 +87,12 @@ class UserProfile extends Component {
 		this.updateState( { nutshells: this.state.nutshells.filter( ( { uid } ) => uid != nutshellUid ) } )
 	] )
 
+	deleteNutshell = uidToDelete => Promise.all( [
+		app.deleteNutshell( uidToDelete ),
+		// Filter out the blocked onw from current state
+		this.updateState( { nutshells: this.state.nutshells.filter( ( { uid } ) => uid != uidToDelete ) } )
+	] )
+
 	render() {
 
 		const { loading, handle, profile, nutshells } = this.state
@@ -102,7 +108,7 @@ class UserProfile extends Component {
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard mute={ this.mute } blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
+				<UserCard isAdmin={ user?.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
 			</Main.Top>
 		</Container>
 

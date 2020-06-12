@@ -47,3 +47,24 @@ exports.publish = async f => {
 	}
 
 }
+
+// ( snap, context ) =>
+exports.deleteFromUnboxesOnNutshellDelete = async ( snap, context ) => {
+	const { nutshellUid } = context.params
+	const { owner } = snap.data()
+
+	try {
+
+		// Grab all the followers of this user
+		const followerRelations = await db.collection( 'relationships' ).where( 'follower', '==', owner ).get().then( dataFromSnap )
+		if( !followerRelations || followerRelations.length == 0 ) return null
+
+		// For each loader update the inbox to no longer have this nutshell
+		return Promise.all( followerRelations.map( ( { follower } ) => {
+			return db.collection( 'inbox' ).doc( follower ).set( { nutshells: FieldValue.arrayRemove( nutshellUid ) }, { merge: true } ).catch( e => error( `Error marking nutshell ${ nutshellUid } read for ${ follower }: `, e ) )
+		} ) )
+
+	} catch( e ) {
+		error( 'Error deleting nutshell from inboxes after it was deleted: ', e )
+	}
+}

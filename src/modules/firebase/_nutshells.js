@@ -61,6 +61,13 @@ export const markNutshellRead = ( app, uid ) => {
 
 }
 
+export const deleteNutshell = ( app, uid ) => {
+
+	const { db } = app
+	return db.collection( 'nutshells' ).doc( uid ).delete()
+
+}
+
 // ///////////////////////////////
 // Abose
 // ///////////////////////////////

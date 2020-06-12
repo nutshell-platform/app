@@ -162,22 +162,26 @@ class WriteNutshell extends Component {
 
 		// Validation
 		// Only send entries with a title
-		nutshell.entries = entries.filter( entry => entry.title.length > 0 )
+		const updatedNutshell = {
+			...nutshell,
+			entries: entries.filter( entry => entry.title.length > 0 ),
+			published: dateOfNext( 'monday' ).getTime()
+		}
+		// nutshell.entries = 
 
-		// Set the next ublish day to the next monday
-		nutshell.published = dateOfNext( 'monday' ).getTime()
+		// // Set the next ublish day to the next monday
+		// nutshell.published = dateOfNext( 'monday' ).getTime()
 
 		// If hutshell already exists update it
 		try {
-			log( `${ uid ? 'Updating' : 'Creating new' } nutshell: `, nutshell )
+			log( `${ uid ? 'Updating' : 'Creating new' } nutshell: `, updatedNutshell )
 
 			// Update existing nutshell
-			if( uid ) await app.updateNutshell( nutshell )
+			if( uid ) await app.updateNutshell( updatedNutshell )
 
 			// Create new nutshell
-
 			if( !uid ) {
-				const newNutshell = { ...nutshell, uid: await getuid() }
+				const newNutshell = { ...updatedNutshell, uid: await getuid() }
 				await Promise.all( [
 					app.createNutshell( newNutshell ),
 					this.updateState( { nutshell: newNutshell } )
