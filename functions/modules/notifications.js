@@ -127,7 +127,7 @@ exports.rememberToWrite = async f => {
 		const nextSunday = distanceToNextDayType( 'sunday' ) == 0 ? ( dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 ) + extraWeek ) : dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 )
 
 		// Notify those will full inboxes
-		const unreadMessage = { title: `Remember to write your Nutshell!`, body: `The deadline is this midnight this Sunday.` }
+		const unreadMessage = { title: `Remember to write your Nutshell!`, body: `The deadline is midnight this Sunday.` }
 		await Promise.all( usersWhoWantToBeNotified.map( async ( { uid, times, pushTokens } ) => {
 
 			try {
@@ -180,7 +180,7 @@ exports.resetNotificationTimes = async f => {
 
 
 		// Notify those will full inboxes
-		const unreadMessage = { title: `Remember to write your Nutshell!`, body: `The deadline is this midnight this Sunday.` }
+		const unreadMessage = { title: `Remember to write your Nutshell!`, body: `The deadline is midnight this Sunday.` }
 		await Promise.all( usersWhoWantToBeNotified.map( async ( { uid } ) => {
 
 			try {
