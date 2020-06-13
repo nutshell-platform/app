@@ -39,7 +39,7 @@ export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize
 				markRead( uid )
 				setDeleting( true )
 			} }>Mark read</Button> }
-			{ status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} nutshell</Button> }
+			{ status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} Nutshell</Button> }
 
 
 			{ /* Menu dots */ }
@@ -91,8 +91,8 @@ const NutshellOptions = ( { isSelf, style, block, report, mute, deleteNutshell, 
 		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton style={ { opacity: .5, width: 50, height: 50, zIndex: 2 } } onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
 			{ !isSelf && <Menu.Item onPress={ report } title="Report abuse" /> }
 			{ !isSelf && <Menu.Item onPress={ block }  title="Block & unfollow this user" /> }
-			{ !isSelf && <Menu.Item onPress={ mute }  title="Mute this nutshell" /> }
-			{ ( isSelf || isAdmin ) && <Menu.Item onPress={ deleteNutshell }  title="Delete this nutshell" /> }
+			{ !isSelf && <Menu.Item onPress={ mute }  title="Mute this Nutshell" /> }
+			{ ( isSelf || isAdmin ) && <Menu.Item onPress={ deleteNutshell }  title="Delete this Nutshell" /> }
 		</Menu>
 	</TouchableOpacity>
 }

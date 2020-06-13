@@ -19,7 +19,7 @@ class ReadNutshell extends Component {
 
 	// initialise state
 	state = {
-		loading: 'Checking your nutshell inbox'
+		loading: 'Checking your Nutshell inbox'
 	}
 
 	// Load inbox
@@ -29,7 +29,7 @@ class ReadNutshell extends Component {
 			const { inbox, user } = this.props
 			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ).catch( f => false ) ) )
 
-			// Filter out nutshells that failed to load ( e.g. has been deleted )
+			// Filter out Nutshells that failed to load ( e.g. has been deleted )
 			nutshells = nutshells.filter( nutshell => nutshell )
 
 			// Filter out censored and set to state
@@ -46,7 +46,7 @@ class ReadNutshell extends Component {
 
 	cleanNutshells = ( nutshells=[], muted=[] ) => nutshells.filter( n => !muted.includes( n.uid ) ).filter( n => !n.hidden )
 
-	// Load nutshells on mount
+	// Load Nutshells on mount
 	componentDidMount = f => this.loadInbox()
 
 	shouldComponentUpdate = async ( nextprops, nextstate ) => {

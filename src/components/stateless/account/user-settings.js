@@ -31,16 +31,16 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 			</Card>
 
 			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
-			
-				
+
+
 				<Subheading>Account settings</Subheading>
 				<Input label='email' value={ user.email } info='Nobody can see this publicly.' onChangeText={ t => changeUser( 'email', t ) } />
 				<Input secureTextEntry label='new password' value={ user.newpassword || '' } onChangeText={ t => changeUser( 'newpassword', t ) } />
 
 				{ /* Notification prefs */ }
 				<Subheading style={ { marginVertical: 20, flexDirection: 'row' } }>Notification preferences</Subheading>
-				<Toggle onToggle={ f => changeNotification( 'writeReminder', !notiPrefs.writeReminder ) } value={ notiPrefs.writeReminder } style={ { marginTop: 10 } } label='Write your nutshell (weekly)' info="You get to write one Nutshell per week. This notification reminds you to use it before it expires." />
-				<Toggle onToggle={ f => changeNotification( 'readReminder', !notiPrefs.readReminder ) } value={ notiPrefs.readReminder } style={ { marginTop: 10 } } label='Unread nutshells (weekly)' info="A weekly reminder of how many Nutshells you have not yet read." />
+				<Toggle onToggle={ f => changeNotification( 'writeReminder', !notiPrefs.writeReminder ) } value={ notiPrefs.writeReminder } style={ { marginTop: 10 } } label='Write your Nutshell (weekly)' info="You get to write one Nutshell per week. This notification reminds you to use it before it expires." />
+				<Toggle onToggle={ f => changeNotification( 'readReminder', !notiPrefs.readReminder ) } value={ notiPrefs.readReminder } style={ { marginTop: 10 } } label='Unread Nutshells (weekly)' info="A weekly reminder of how many Nutshells you have not yet read." />
 				<Toggle onToggle={ f => changeNotification( 'newFollower', !notiPrefs.newFollower ) } value={ notiPrefs.newFollower } style={ { marginTop: 10 } } label='New followers (real-time)' info="Get a notification when a new friend starts following you." />
 				<Toggle onToggle={ f => changeNotification( 'friendJoined', !notiPrefs.friendJoined ) } value={ notiPrefs.friendJoined } style={ { marginTop: 10 } } label='Friend joined (real-time)' info="Get a notification when a friend joins Nutshell." />
 

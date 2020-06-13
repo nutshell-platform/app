@@ -26,7 +26,7 @@ class NutshellModerator extends Component {
 	}
 
 	censor = report => Promise.all( [
-		app.updateNutshell( { uid: report.nutshell.uid, hidden: true, entries: [ { title: '<Deleted>', paragraph: 'This nutshell broke the rules. It is we gave it to a moose passing by.' } ] } ),
+		app.updateNutshell( { uid: report.nutshell.uid, hidden: true, entries: [ { title: '<Deleted>', paragraph: 'This Nutshell broke the rules. We gave it to a moose passing by.' } ] } ),
 		app.markAbuseModerated( report.uid ),
 		this.updateState( { queue: this.state.queue.filter( rep => rep.uid != report.uid ) } )
 	] )
@@ -56,7 +56,7 @@ class NutshellModerator extends Component {
 							<Button onPress={ f => this.censor( item ) }>Guilty your honour</Button>
 							<Button onPress={ f => this.setFree( item ) }>You're free to leave son</Button>
 						</View>
-					</Card> 
+					</Card>
 				}) }
 			</Main.Top>
 		</Container>
