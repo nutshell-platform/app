@@ -9,7 +9,7 @@ import Navigation from '../common/navigation'
 import People from '../../../../assets/undraw_people_tax5.svg'
 
 // Data
-import { log } from '../../../modules/helpers'
+import { log, Dialogue } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux
@@ -86,11 +86,18 @@ class ReadNutshell extends Component {
 
 	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
 
-	deleteNutshell = uidToDelete => Promise.all( [
-		app.deleteNutshell( uidToDelete ),
-		// Filter out the blocked onw from current state
-		this.updateState( { inbox: this.state.inbox.filter( ( { uid } ) => uid != uidToDelete ) } )
-	] )
+	deleteNutshell = uidToDelete => Dialogue(
+		'⚠️ Confirm deletion',
+		'Are you sure you want to delete this nutshell?',
+		[
+			{ text: 'Yes', onPress: f => Promise.all( [
+				app.deleteNutshell( uidToDelete ),
+				// Filter out the blocked onw from current state
+				this.updateState( { inbox: this.state.inbox.filter( ( { uid } ) => uid != uidToDelete ) } )
+			] ) },
+			{ text: 'No, keep nutshell' }
+		]
+	)
 
 	render() {
 

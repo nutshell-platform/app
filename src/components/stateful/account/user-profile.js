@@ -7,7 +7,7 @@ import { UserCard } from '../../stateless/account/user-profile'
 import Background from '../../../../assets/undraw_texting_k35o.svg'
 
 // Data
-import { log, catcher } from '../../../modules/helpers'
+import { log, catcher, Dialogue } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux
@@ -87,11 +87,18 @@ class UserProfile extends Component {
 		this.updateState( { nutshells: this.state.nutshells.filter( ( { uid } ) => uid != nutshellUid ) } )
 	] )
 
-	deleteNutshell = uidToDelete => Promise.all( [
-		app.deleteNutshell( uidToDelete ),
-		// Filter out the blocked onw from current state
-		this.updateState( { nutshells: this.state.nutshells.filter( ( { uid } ) => uid != uidToDelete ) } )
-	] )
+	deleteNutshell = uidToDelete => Dialogue(
+		'⚠️ Confirm deletion',
+		'Are you sure you want to delete this nutshell?',
+		[
+			{ text: 'Yes', onPress: f => Promise.all( [
+				app.deleteNutshell( uidToDelete ),
+				// Filter out the blocked onw from current state
+				this.updateState( { nutshells: this.state.nutshells.filter( ( { uid } ) => uid != uidToDelete ) } )
+			] ) },
+			{ text: 'No, keep nutshell' }
+		]
+	)
 
 	render() {
 
