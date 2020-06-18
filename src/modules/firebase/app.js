@@ -92,7 +92,10 @@ class Firebase {
 	// ///////////////////////////////
 
 	// Register user listener in a promise wrapper that resolved when initial auth state is received
-	init = async f => {
+	init = async history => {
+
+		// Keep a reference to the history object
+		if( history ) this.history = history
 
 		// Analytics DOES NOT WORK WITH EXPO!
 		// this.fb.analytics()

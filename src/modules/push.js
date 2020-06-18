@@ -19,7 +19,7 @@ export const getTokenIfNeeded = async settings => {
 
 }
 
-export const registerNotificationListeners = f => {
+export const registerNotificationListeners = history => {
 
 	// Set andriod notification category
 	if( isAndroid ) Notifications.createChannelAndroidAsync( 'default', {
@@ -30,5 +30,15 @@ export const registerNotificationListeners = f => {
         vibrate: true
 	} )
 
-	Notifications.addListener( notification => log( notification ) )
+	Notifications.addListener( notification => {
+
+		log( notification )
+
+		// Check if data was sent with the notification
+		const { origin, data } = notification
+
+		// If the user tapped the notification and there is route info
+		if( origin == 'selected' && data.goto ) history.push( data.goto )
+
+	} )
 }

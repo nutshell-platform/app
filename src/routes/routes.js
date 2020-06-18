@@ -70,7 +70,7 @@ class Routes extends Component {
 		// Set the state to initialised if a user is already in stor
 		this.setState( { init: !!user } )
 		// Init firebase
-		await firebase.init()
+		await firebase.init( history )
 		
 		// Disable loading screen
 		return this.setState( { init: true } )
