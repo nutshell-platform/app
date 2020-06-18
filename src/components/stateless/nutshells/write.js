@@ -9,7 +9,7 @@ import { weekNumber, dateOfNext, timestampToHuman, timestampToTime } from '../..
 
 export const Editor = ( { children, avatarSize=100, user={}, status, entries, updateEntry, maxTitleLength, maxParagraphLength, saveDraft, toggleStatus, unsavedChanges, background='grey', inspire, moveCard } ) => {
 
-	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( dateOfNext( 'monday' ) ) }`
+	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( dateOfNext( 'sunday' ) ) } at midnight`
 
 	return <View>
 		<View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
