@@ -36,13 +36,13 @@ class WriteNutshell extends Component {
 	}
 
 	updateEntryInterface = async f => {
-		// Get entries from nutshell and postpend a new one
+		// Get entries from Nutshell and postpend a new one
 		const { nutshell } = this.state
 		let entries = [ ...nutshell.entries ]
 		let updated = false
 
 
-		// If the last entry has no emty space, add a new one
+		// If the last entry has no empty space, add a new one
 		const lastEntry = entries[ entries.length - 1 ]
 		const lastEntryEmpty = lastEntry?.title?.length != 0 || !lastEntry?.paragraph?.length == 0
 		if( entries.length == 0 || lastEntryEmpty ) {
@@ -52,7 +52,7 @@ class WriteNutshell extends Component {
 
 		// If there are more than two empty entries, remove one
 		const empty = entries.map( ( entry, index ) => !entry.title.length && !entry.paragraph.length && index ).filter( entry => typeof entry == 'number' )
-		if( empty.length > 1 ) { 
+		if( empty.length > 1 ) {
 			// Leave one empty one available
 			empty.pop()
 
@@ -95,7 +95,7 @@ class WriteNutshell extends Component {
 
 		// Take out one item at the place where the entry should go and put the entry there
 		orderedEntries.splice( swapIndex, 1, entry )
-		
+
 		// Take out one item where the entry used to be and swap it with the replaced entry
 		orderedEntries.splice( index, 1, swapEntry )
 
@@ -123,7 +123,7 @@ class WriteNutshell extends Component {
 		const { entries } = nutshell
 
 		// Validations/constraints
-		if( key == 'title' && value.length > maxTitleLength ) return 
+		if( key == 'title' && value.length > maxTitleLength ) return
 
 		// Find the entry that needs to be updated and add changes
 		const updatedEntry = entries.find( entry => entry.uid == uid )
@@ -167,19 +167,19 @@ class WriteNutshell extends Component {
 			entries: entries.filter( entry => entry.title.length > 0 ),
 			published: dateOfNext( 'monday' ).getTime()
 		}
-		// nutshell.entries = 
+		// nutshell.entries =
 
 		// // Set the next ublish day to the next monday
 		// nutshell.published = dateOfNext( 'monday' ).getTime()
 
-		// If hutshell already exists update it
+		// If Nutshell already exists update it
 		try {
 			log( `${ uid ? 'Updating' : 'Creating new' } nutshell: `, updatedNutshell )
 
-			// Update existing nutshell
+			// Update existing Nutshell
 			if( uid ) await app.updateNutshell( updatedNutshell )
 
-			// Create new nutshell
+			// Create new Nutshell
 			if( !uid ) {
 				const newNutshell = { ...updatedNutshell, uid: await getuid() }
 				await Promise.all( [
@@ -188,7 +188,7 @@ class WriteNutshell extends Component {
 				] )
 			}
 
-			// Set unsabed changes to false
+			// Set unsaved changes to false
 			await this.updateState( { unsavedChanges: false } )
 
 		} catch( e ) {

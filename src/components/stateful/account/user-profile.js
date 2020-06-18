@@ -25,7 +25,7 @@ class UserProfile extends Component {
 
 	componentDidUpdate = async f => {
 
-		const { handle } = this.state 
+		const { handle } = this.state
 		const { handle: paramHandle } = this.props.match.params
 		if( handle != paramHandle ) {
 			await this.updateState( { handle: paramHandle, loading: 'Finding user data' } )
@@ -42,7 +42,7 @@ class UserProfile extends Component {
 			const profile = await app.getPerson( handle )
 			let nutshells = await app.getNutshellsOfUser( profile.uid )
 
-			// Sort the nutshells
+			// Sort the Nutshells
 			nutshells.sort( ( a, b ) => b.updated > a.updated ? 1 : -1 )
 
 			// If we have muted items, filter them
@@ -54,9 +54,9 @@ class UserProfile extends Component {
 
 			log( 'Trouble getting user by handle: ', e )
 			// Unable to find user
-			const { history } = this.props 
+			const { history } = this.props
 			history.push( '/404' )
-			
+
 		}
 	}
 

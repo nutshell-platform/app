@@ -15,7 +15,7 @@ class ReportNutshell extends Component {
 
 	state = {
 		offendingNutshell: {},
-		loading: 'Loading offensing nutshell',
+		loading: 'Loading offending Nutshell',
 		unfollow: true,
 		reported: false
 	}
@@ -28,7 +28,7 @@ class ReportNutshell extends Component {
 				loading: false
 			} )
 		} catch( e ) {
-			log( 'Getting offending nutshell: ', e )
+			log( 'Getting offending Nutshell: ', e )
 			catcher( e )
 		}
 	}
@@ -58,13 +58,13 @@ class ReportNutshell extends Component {
 
 		try {
 
-			await this.updateState( { loading: 'Reporting nutshell' } )
+			await this.updateState( { loading: 'Reporting Nutshell' } )
 
 			// Unfollow offender and remove offending from queue
 			if( unfollow ) await app.unfollowPerson( user.uid )
 			await app.markNutshellRead( offendingNutshell.uid )
 
-			// Report the nutshell
+			// Report the Nutshell
 			await app.reportNutshell( report )
 
 			await this.updateState( { loading: false, reported: true } )
@@ -72,7 +72,7 @@ class ReportNutshell extends Component {
 
 		} catch( e ) {
 			await this.updateState( { loading: false } )
-			log( 'Reporting offending nutshell: ', e )
+			log( 'Reporting offending Nutshell: ', e )
 			catcher( e )
 		}
 
@@ -95,13 +95,13 @@ class ReportNutshell extends Component {
 					<Button onPress={ f => history.goBack() }>Go back to where I was</Button>
 				</Card> }
 				{ !reported && <Card>
-					<Title>Report { user.name }'s' nutshell</Title>
-					<Text>If a nutshell breaches the terms of service you can report it. We will review the nutshell within 24 hours and will take appropriate action.</Text>
-					
+					<Title>Report { user.name }'s' Nutshell</Title>
+					<Text>If a Nutshell breaches the terms of service you can report it. We will review the Nutshell within 24 hours and will take appropriate action.</Text>
+
 					<Toggle onToggle={ this.toggleUnfollow } value={ unfollow } style={ { paddingVertical: 20 } } label="Unfollow this user after reporting" />
 					<Input onChangeText={ this.recordReason } value={ reason } multiline={ true } label='Reason for reporting' />
 
-					<Button onPress={ this.report }>Report this nutshell</Button>
+					<Button onPress={ this.report }>Report this Nutshell</Button>
 				</Card> }
 			</Main.Center>
 		</Container>

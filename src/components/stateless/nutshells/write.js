@@ -20,7 +20,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 					<UserAvatar style={ { marginTop: -avatarSize/2 } } size={ avatarSize } user={ user } />
 					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' } }>
 
-						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } nutshell for week { weekNumber() }</Title>						
+						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } Nutshell for week { weekNumber() }</Title>
 						<Toggle style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
 						<ToolTip label='What is a Nutshell?' info={
 							`A Nutshell is a summary of what's been going on in your life since your last Nutshell, such as what you've been doing or how you've been feeling.\n\n Scheduled Nutshells will be published on Mondays, and all users only get one Nutshell per week.
@@ -93,7 +93,7 @@ export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxT
 			onChangeText={ text => onInput( 'paragraph', text ) }
 			multiline={ true }
 		/>
-		
+
 		<TouchableOpacity style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingTop: 10 } } onPress={ newInspiration }>
 			<Caption>Inspiration: { inspiration }</Caption>
 			<IconButton style={ { opacity: .8 } } size={ 15 } icon='reload' />

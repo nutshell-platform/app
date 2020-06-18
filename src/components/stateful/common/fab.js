@@ -17,7 +17,7 @@ class Fab extends Component {
 
 	toggle = f => this.updateState( { open: !this.state.open } )
 
-	// On toggle is triggered when 
+	// On toggle is triggered when
 	onBackgroundPress = e => this.state.open && this.toggle()
 
 	render() {
@@ -33,7 +33,7 @@ class Fab extends Component {
 					fabStyle={ { backgroundColor: theme.colors.primary } }
 					style={ { paddingBottom: 20, paddingRight: 10 } }
 					actions={[
-						{ icon: 'pencil', label: 'Write nutshell', onPress: f => go( '/nutshells/write' ) },
+						{ icon: 'pencil', label: 'Write Nutshell', onPress: f => go( '/nutshells/write' ) },
 						{ icon: 'account-plus', label: 'Add friends', onPress: f => go( '/friends/find' ) },
 					]}
 					onStateChange={ this.onBackgroundPress }

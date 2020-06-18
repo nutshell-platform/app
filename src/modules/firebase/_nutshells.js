@@ -3,7 +3,7 @@ import { dataFromSnap } from './helpers'
 // ///////////////////////////////
 // Getters
 // ///////////////////////////////
-// Get nutshells belonging to specific user
+// Get Nutshells belonging to specific user
 export const getNutshellsOfUser = ( app, uid ) => {
 
 	const isMe = app.auth.currentUser.uid == uid
@@ -14,7 +14,7 @@ export const getNutshellsOfUser = ( app, uid ) => {
 		.limit( 52 ).get().then( dataFromSnap )
 }
 
-// Get nutshell info by uid
+// Get Nutshell info by uid
 export const getNutshellByUid = async ( db, uid ) => {
 
 	const nutshell = await db.collection( 'nutshells' ).doc( uid ).get().then( dataFromSnap )
@@ -28,7 +28,7 @@ export const getNutshellByUid = async ( db, uid ) => {
 // ///////////////////////////////
 export const createNutshell = ( app, nutshell ) => {
 
-	const { uid, ...nutshellContent } = nutshell 
+	const { uid, ...nutshellContent } = nutshell
 
 	return app.db.collection( 'nutshells' ).doc( uid ).set( {
 		...nutshell,

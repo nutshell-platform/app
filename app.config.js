@@ -19,7 +19,7 @@ export default {
     "orientation": "default",
     "icon": "./assets/icon/acorn_drop_appStore.png",
     "splash": {
-      "image": "./assets/icon/acorn_drop_appStore.png",
+      "image": "./assets/icon/acorn_bg_appStore.png",
       "resizeMode": "contain",
       "backgroundColor": "#808080"
     },
@@ -38,7 +38,7 @@ export default {
       "**/*"
     ],
     "scheme": "com.nutshell.nutshell",
-    
+
     // IOS config
     "ios": {
       "supportsTablet": true,
@@ -57,7 +57,7 @@ export default {
       "versionCode": 4,
       "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE" ]
     },
-    
+
 
     // Sentry config
     "hooks": {
