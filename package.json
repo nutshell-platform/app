@@ -6,7 +6,7 @@
     "ios": "export development=true && expo start --ios",
     "web": "export development=true && expo start --web",
     "hybrid": "export development=true && expo start --android --web",
-    "test": "jest",
+    "test": "CI=true jest --colors",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
     "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web",
@@ -18,26 +18,20 @@
     "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env.production | xargs) && exportSENTRY_LOG_LEVEL='debug' && expo build:ios && expo upload:ios",
     "upload:ios": "expo upload:ios",
     "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web",
-    "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
+    "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all && jest --clearCache",
     "baseline": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
     "diagnostics": "expo diagnostics",
     "i": "expo install",
     "propagate": "branch development && push && branch staging && git merge development && push && master && git merge staging && push && branch development && gh"
   },
-  "jest": {
-    "preset": "jest-expo",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@neverdull-agency/expo-unlimited-secure-store)"
-    ]
-  },
   "dependencies": {
-    "@babel/core": "^7.10.1",
+    "@babel/core": "^7.10.2",
     "@neverdull-agency/expo-unlimited-secure-store": "^1.0.10",
-    "@sentry/browser": "^5.15.5",
+    "@sentry/browser": "^5.17.0",
     "babel-preset-expo": "^8.2.1",
     "color": "^3.1.2",
     "expo": "^37.0.12",
-    "expo-cli": "^3.21.3",
+    "expo-cli": "^3.21.5",
     "expo-constants": "~9.0.0",
     "expo-image-manipulator": "~8.1.0",
     "expo-image-picker": "~8.1.0",
@@ -47,7 +41,7 @@
     "expo-random": "~8.1.0",
     "expo-screen-orientation": "~1.0.0",
     "expo-secure-store": "~8.1.0",
-    "expo-updates": "~0.2.7",
+    "expo-updates": "~0.2.9",
     "firebase": "7.9.0",
     "history": "^4.10.1",
     "react": "16.9.0",
@@ -64,11 +58,11 @@
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "redux-promise-middleware": "^6.1.2",
-    "sentry-expo": "^2.0.4",
+    "sentry-expo": "^2.1.2",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
-    "firebase-tools": "^8.4.0",
+    "firebase-tools": "^8.4.3",
     "jest": "^25.5.4",
     "jest-expo": "^37.0.0",
     "react-native-dotenv": "^0.2.0",

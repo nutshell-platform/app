@@ -1,11 +1,12 @@
 import React from 'react'
-import { Animated, Platform } from 'react-native'
+import { Animated } from 'react-native'
 import { Component, Appbar } from '../../stateless/common/generic'
 import { Header, Menu } from '../../stateless/common/navigation'
 import { connect } from 'react-redux'
 import { withRouter } from '../../../routes/router'
 import { toggleDarkMode } from '../../../redux/actions/settingsActions'
 import { capitalize, log } from '../../../modules/helpers'
+import { isWeb } from '../../../modules/apis/platform'
 import app from '../../../modules/firebase/app'
 
 class Navigation extends Component {
@@ -36,8 +37,7 @@ class Navigation extends Component {
 	pan = new Animated.ValueXY( { x: this.state.drawerWidth, y: 0 } )
 	handleDrag = Animated.event(
 		[ { translationX: this.pan.x } ],
-		// { useNativeDriver: Platform.OS != 'web' },
-		{ useNativeDriver: false }
+		{ useNativeDriver: !isWeb }
 	)
 
 	panDrawer = ( { nativeEvent } ) => {
