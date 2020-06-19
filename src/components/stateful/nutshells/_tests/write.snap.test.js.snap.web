@@ -1280,7 +1280,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                       >
                         Inspiration: 
-                        what has been going well?
+                        what are you struggling with?
                       </div>
                       <div
                         aria-disabled={true}
@@ -1373,7 +1373,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       }
                       total={5}
                     >
-                      All changes saved at 13:17. 
+                      All changes saved at 12:01. 
                     </div>
                   </div>
                 </div>
@@ -1933,7 +1933,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       }
                       total={5}
                     >
-                      All changes saved at 13:17. 
+                      All changes saved at 12:01. 
                     </div>
                   </div>
                 </div>

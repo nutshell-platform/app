@@ -1040,7 +1040,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                       >
                         Inspiration: 
-                        what do you feel good about?
+                        what are you struggling with?
                       </Text>
                       <View
                         accessibilityRole="button"
@@ -1122,7 +1122,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       }
                       total={5}
                     >
-                      All changes saved at 13:17. 
+                      All changes saved at 12:01. 
                     </Text>
                   </View>
                 </View>
@@ -1624,7 +1624,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                       >
                         Inspiration: 
-                        what do you feel good about?
+                        what are you struggling with?
                       </Text>
                       <View
                         accessibilityRole="button"
@@ -1706,7 +1706,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       }
                       total={5}
                     >
-                      All changes saved at 13:18. 
+                      All changes saved at 12:01. 
                     </Text>
                   </View>
                 </View>

@@ -9,6 +9,7 @@ import Write from '../../../../assets/undraw_typewriter_i8xd.svg'
 // Data
 import { log, getuid, dateOfNext } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
+import { isCI } from '../../../modules/apis/platform'
 
 // Redux
 import { connect } from 'react-redux'
@@ -137,7 +138,8 @@ class WriteNutshell extends Component {
 	}
 
 	// Inspiration
-	inspire = f => {
+	inspire = f => {		
+
 		const inspirations = [
 			`what are you struggling with?`,
 			`what are you proud of?`,
@@ -151,7 +153,8 @@ class WriteNutshell extends Component {
 			`what have you been working on?`
 		]
 
-		return inspirations[ inspirations.length * Math.random() | 0 ]
+		// If we are in isCI test mode, the output needs to be predictable
+		return inspirations[ isCI ? 0 : ( inspirations.length * Math.random() | 0 ) ]
 	}
 
 	// Sumbit data to firebase
@@ -167,10 +170,6 @@ class WriteNutshell extends Component {
 			entries: entries.filter( entry => entry.title.length > 0 ),
 			published: dateOfNext( 'monday' ).getTime()
 		}
-		// nutshell.entries =
-
-		// // Set the next ublish day to the next monday
-		// nutshell.published = dateOfNext( 'monday' ).getTime()
 
 		// If Nutshell already exists update it
 		try {
