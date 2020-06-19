@@ -5,12 +5,8 @@ import renderer from 'react-test-renderer'
 // Module to test
 import UserProfile from '../user-profile'
 
-// Redux mocking
-import { Provider } from "react-redux"
-import configureMockStore from "redux-mock-store"
-import { store as dummyStore } from '../../../../modules/dummy-data'
-const mockStore = configureMockStore()
-const store = mockStore( dummyStore )
+// Providers
+import Providers from '../../test-wrapper'
 const mockParam = { params: { handle: '@person' } }
 
 describe( 'UserProfile', () => {
@@ -18,9 +14,9 @@ describe( 'UserProfile', () => {
 	it( 'Matches snapshot', () => {
 
 
-		const element = renderer.create( <Provider store={ store }>
+		const element = renderer.create( <Providers>
 			<UserProfile match={ mockParam } />
-		</Provider> ).toJSON()
+		</Providers> ).toJSON()
 		expect( element ).toMatchSnapshot( )
 
 	} )

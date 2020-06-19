@@ -45,7 +45,8 @@ export const nutshell = {
 	entries: [
 		{ paragraph: 'Paragraph Derp', title: 'Title Derp', uid: 'a45a9e6a-2431-4537-b108-03ba3ccd455f' },
 		{ paragraph: 'Paragraph Derp 2', title: 'Title Derp 2', uid: 'b45a9e6a-2431-4537-b108-03ba3ccd455f' }
-	]
+	],
+	user: { ...user }
 }
 
 export const settings = {

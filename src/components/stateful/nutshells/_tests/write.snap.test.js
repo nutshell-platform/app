@@ -5,19 +5,17 @@ import renderer from 'react-test-renderer'
 // Module to test
 import WriteNutshell from '../write'
 
-// Redux mocking
-import { Provider } from "react-redux"
-import configureMockStore from "redux-mock-store"
-import { store as dummyStore } from '../../../../modules/dummy-data'
-const mockStore = configureMockStore()
-const store = mockStore( dummyStore )
+// Providers
+import Wrapper from '../../test-wrapper'
 
 describe( 'WriteNutshell', () => {
 
-	it( 'Matches snapshot', () => {
+	it( 'Matches snapshot', async () => {
 
 
-		const element = renderer.create( <Provider store={ store }><WriteNutshell /></Provider> ).toJSON()
+		const element = renderer.create( <Wrapper>
+			<WriteNutshell />
+		</Wrapper> ).toJSON()
 		expect( element ).toMatchSnapshot( )
 
 	} )

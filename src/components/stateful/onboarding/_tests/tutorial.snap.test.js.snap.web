@@ -2,131 +2,20 @@
 
 exports[`Tutorial Matches snapshot 1`] = `
 <div
-  className="css-view-1dbjc4n"
+  className="css-view-1dbjc4n r-pointerEvents-12vffkv"
   style={
     Object {
-      "maxWidth": "100%",
-      "paddingBottom": "10px",
-      "paddingTop": "10px",
-      "width": "500px",
+      "WebkitBoxFlex": 1,
+      "WebkitFlexBasis": "0%",
+      "WebkitFlexGrow": 1,
+      "WebkitFlexShrink": 1,
+      "flexBasis": "0%",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "msFlexNegative": 1,
+      "msFlexPositive": 1,
+      "msFlexPreferredSize": "0%",
     }
   }
->
-  <div
-    className="css-view-1dbjc4n"
-    style={
-      Object {
-        "backgroundColor": "rgba(255,255,255,1.00)",
-        "borderBottomLeftRadius": "4px",
-        "borderBottomRightRadius": "4px",
-        "borderTopLeftRadius": "4px",
-        "borderTopRightRadius": "4px",
-        "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
-        "maxWidth": "100%",
-        "paddingBottom": "40px",
-        "paddingLeft": "40px",
-        "paddingRight": "40px",
-        "paddingTop": "40px",
-      }
-    }
-  >
-    <div
-      aria-disabled={true}
-      className="css-view-1dbjc4n"
-      disabled={true}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "WebkitBoxFlex": 1,
-          "WebkitFlexGrow": 1,
-          "WebkitFlexShrink": 1,
-          "flexGrow": 1,
-          "flexShrink": 1,
-          "msFlexNegative": 1,
-          "msFlexPositive": 1,
-        }
-      }
-    >
-      <div
-        className="css-text-901oao"
-        dir="auto"
-        index={0}
-        siblings={
-          Array [
-            "withTheme(Text)",
-          ]
-        }
-        style={
-          Object {
-            "color": "rgba(0,0,0,0.87)",
-            "direction": "ltr",
-            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-            "fontSize": "20px",
-            "fontWeight": "500",
-            "letterSpacing": "0.15px",
-            "lineHeight": "30px",
-            "marginBottom": "2px",
-            "marginTop": "2px",
-            "textAlign": "left",
-          }
-        }
-        total={5}
-      >
-        Welcome 
-        Mentor
-         🎉
-      </div>
-      <div
-        className="css-text-901oao"
-        dir="auto"
-        index={1}
-        siblings={
-          Array [
-            "withTheme(Text)",
-          ]
-        }
-        style={
-          Object {
-            "color": "rgba(0,0,0,1.00)",
-            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-            "fontWeight": "400",
-            "paddingTop": "20px",
-            "textAlign": "left",
-          }
-        }
-        total={5}
-      >
-        To make the most out of Nutshell, we recommend doing the following things:
-      </div>
-      <componentFunction
-        history={
-          Object {
-            "push": [Function],
-          }
-        }
-      />
-      <componentFunction
-        history={
-          Object {
-            "push": [Function],
-          }
-        }
-      />
-      <componentFunction
-        history={
-          Object {
-            "push": [Function],
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
+/>
 `;

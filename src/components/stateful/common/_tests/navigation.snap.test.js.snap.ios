@@ -1,11 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Navitagion Matches snapshot 1`] = `
-<componentFunction
-  history={
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
     Object {
-      "push": [Function],
+      "flex": 1,
     }
   }
-/>
+>
+  <componentFunction
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+  />
+</View>
 `;

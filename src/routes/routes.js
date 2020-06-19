@@ -4,14 +4,11 @@ import { BackHandler } from 'react-native'
 // Redux
 import { connect } from 'react-redux'
 
-// Theming
-import { Provider as PaperProvider } from 'react-native-paper'
-
 // Firebase api
 import firebase from '../modules/firebase/app'
 
 // Components
-import { Component, Loading } from '../components/stateless/common/generic'
+import { Component, Loading, Provider as PaperProvider } from '../components/stateless/common/generic'
 
 // Routing
 import { Switch, Route, withRouter } from './router'

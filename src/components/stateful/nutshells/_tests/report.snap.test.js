@@ -5,19 +5,18 @@ import renderer from 'react-test-renderer'
 // Module to test
 import Report from '../report'
 
-// Redux mocking
-import { Provider } from "react-redux"
-import configureMockStore from "redux-mock-store"
-import { store as dummyStore } from '../../../../modules/dummy-data'
-const mockStore = configureMockStore()
-const store = mockStore( dummyStore )
+// Providers
+import Wrapper from '../../test-wrapper'
+const mockParam = { params: { handle: '@person' } }
 
 describe( 'Report', () => {
 
-	it( 'Matches snapshot', () => {
+	it( 'Matches snapshot', async () => {
 
 
-		const element = renderer.create( <Provider store={ store }><Report /></Provider> ).toJSON()
+		const element = renderer.create( <Wrapper>
+			<Report match={ mockParam } />
+		</Wrapper> ).toJSON()
 		expect( element ).toMatchSnapshot( )
 
 	} )

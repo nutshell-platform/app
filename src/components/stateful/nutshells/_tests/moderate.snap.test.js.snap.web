@@ -2,7 +2,7 @@
 
 exports[`Moderate Matches snapshot 1`] = `
 <div
-  className="css-view-1dbjc4n"
+  className="css-view-1dbjc4n r-pointerEvents-12vffkv"
   style={
     Object {
       "WebkitBoxFlex": 1,
@@ -26,18 +26,12 @@ exports[`Moderate Matches snapshot 1`] = `
         "WebkitFlexBasis": "0%",
         "WebkitFlexGrow": 1,
         "WebkitFlexShrink": 1,
-        "backgroundColor": "rgba(98,0,238,1.00)",
         "flexBasis": "0%",
         "flexGrow": 1,
         "flexShrink": 1,
         "msFlexNegative": 1,
         "msFlexPositive": 1,
         "msFlexPreferredSize": "0%",
-        "paddingBottom": "env(safe-area-inset-bottom)",
-        "paddingLeft": "env(safe-area-inset-left)",
-        "paddingRight": "env(safe-area-inset-right)",
-        "paddingTop": "env(safe-area-inset-top)",
-        "width": "100%",
       }
     }
   >
@@ -45,55 +39,79 @@ exports[`Moderate Matches snapshot 1`] = `
       className="css-view-1dbjc4n"
       style={
         Object {
-          "WebkitAlignItems": "center",
-          "WebkitBoxAlign": "center",
-          "WebkitBoxDirection": "normal",
           "WebkitBoxFlex": 1,
-          "WebkitBoxOrient": "vertical",
-          "WebkitBoxPack": "center",
           "WebkitFlexBasis": "0%",
-          "WebkitFlexDirection": "column",
           "WebkitFlexGrow": 1,
           "WebkitFlexShrink": 1,
-          "WebkitJustifyContent": "center",
-          "alignItems": "center",
-          "backgroundColor": "rgba(246,246,246,1.00)",
+          "backgroundColor": "rgba(0,0,0,1.00)",
           "flexBasis": "0%",
-          "flexDirection": "column",
           "flexGrow": 1,
           "flexShrink": 1,
-          "justifyContent": "center",
-          "maxWidth": "100%",
-          "msFlexAlign": "center",
-          "msFlexDirection": "column",
           "msFlexNegative": 1,
-          "msFlexPack": "center",
           "msFlexPositive": 1,
           "msFlexPreferredSize": "0%",
-          "overflowX": "hidden",
-          "overflowY": "hidden",
+          "paddingBottom": "env(safe-area-inset-bottom)",
+          "paddingLeft": "env(safe-area-inset-left)",
+          "paddingRight": "env(safe-area-inset-right)",
+          "paddingTop": "env(safe-area-inset-top)",
+          "width": "100%",
         }
       }
     >
       <div
-        className="css-text-901oao"
-        dir="auto"
+        className="css-view-1dbjc4n"
         style={
           Object {
-            "color": "rgba(0,0,0,0.87)",
-            "direction": "ltr",
-            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-            "fontSize": "20px",
-            "fontWeight": "500",
-            "letterSpacing": "0.15px",
-            "lineHeight": "30px",
-            "marginBottom": "2px",
-            "marginTop": "20px",
-            "textAlign": "center",
+            "WebkitAlignItems": "center",
+            "WebkitBoxAlign": "center",
+            "WebkitBoxDirection": "normal",
+            "WebkitBoxFlex": 1,
+            "WebkitBoxOrient": "vertical",
+            "WebkitBoxPack": "center",
+            "WebkitFlexBasis": "0%",
+            "WebkitFlexDirection": "column",
+            "WebkitFlexGrow": 1,
+            "WebkitFlexShrink": 1,
+            "WebkitJustifyContent": "center",
+            "alignItems": "center",
+            "backgroundColor": "rgba(246,246,246,1.00)",
+            "flexBasis": "0%",
+            "flexDirection": "column",
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
+            "maxWidth": "100%",
+            "msFlexAlign": "center",
+            "msFlexDirection": "column",
+            "msFlexNegative": 1,
+            "msFlexPack": "center",
+            "msFlexPositive": 1,
+            "msFlexPreferredSize": "0%",
+            "overflowX": "hidden",
+            "overflowY": "hidden",
           }
         }
       >
-        Loading messages to be moderated
+        <div
+          className="css-text-901oao"
+          dir="auto"
+          style={
+            Object {
+              "color": "rgba(0,0,0,0.87)",
+              "direction": "ltr",
+              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+              "fontSize": "20px",
+              "fontWeight": "500",
+              "letterSpacing": "0.15px",
+              "lineHeight": "30px",
+              "marginBottom": "2px",
+              "marginTop": "20px",
+              "textAlign": "center",
+            }
+          }
+        >
+          Loading messages to be moderated
+        </div>
       </div>
     </div>
   </div>

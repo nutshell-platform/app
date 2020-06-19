@@ -1,11 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Navitagion Matches snapshot 1`] = `
-<componentFunction
-  history={
+<div
+  className="css-view-1dbjc4n r-pointerEvents-12vffkv"
+  style={
     Object {
-      "push": [Function],
+      "WebkitBoxFlex": 1,
+      "WebkitFlexBasis": "0%",
+      "WebkitFlexGrow": 1,
+      "WebkitFlexShrink": 1,
+      "flexBasis": "0%",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "msFlexNegative": 1,
+      "msFlexPositive": 1,
+      "msFlexPreferredSize": "0%",
     }
   }
-/>
+>
+  <componentFunction
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
+  />
+</div>
 `;

@@ -2,7 +2,8 @@
 
 exports[`ReadNutshell Matches snapshot 1`] = `
 <View
-  onLayout={[Function]}
+  collapsable={false}
+  pointerEvents="box-none"
   style={
     Object {
       "flex": 1,
@@ -10,74 +11,83 @@ exports[`ReadNutshell Matches snapshot 1`] = `
   }
 >
   <View
+    onLayout={[Function]}
     style={
       Object {
-        "backgroundColor": "#6200ee",
         "flex": 1,
-        "width": "100%",
       }
     }
   >
     <View
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "#f6f6f6",
+          "backgroundColor": "rgb(0,0,0)",
           "flex": 1,
-          "flexDirection": "column",
-          "justifyContent": "center",
-          "maxWidth": "100%",
-          "overflow": "hidden",
+          "width": "100%",
         }
       }
     >
-      <Text
+      <View
         style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "sans-serif",
-              "fontWeight": "normal",
-              "textAlign": "left",
-            },
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#f6f6f6",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "maxWidth": "100%",
+            "overflow": "hidden",
+          }
+        }
+      >
+        <Text
+          style={
             Array [
               Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-                "fontFamily": "sans-serif-medium",
-                "fontWeight": "normal",
+                "color": "#000000",
+                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
-                  "fontSize": 20,
-                  "letterSpacing": 0.15,
-                  "lineHeight": 30,
-                  "marginVertical": 2,
+                  "color": "rgba(0, 0, 0, 0.87)",
+                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                  "fontWeight": "500",
+                  "textAlign": "left",
+                  "writingDirection": "ltr",
                 },
-                Object {
-                  "marginTop": 20,
-                  "textAlign": "center",
-                },
+                Array [
+                  Object {
+                    "fontSize": 20,
+                    "letterSpacing": 0.15,
+                    "lineHeight": 30,
+                    "marginVertical": 2,
+                  },
+                  Object {
+                    "marginTop": 20,
+                    "textAlign": "center",
+                  },
+                ],
+                Array [
+                  Object {
+                    "fontSize": 20,
+                    "letterSpacing": 0.15,
+                    "lineHeight": 30,
+                    "marginVertical": 2,
+                  },
+                  Object {
+                    "marginTop": 20,
+                    "textAlign": "center",
+                  },
+                ],
               ],
-              Array [
-                Object {
-                  "fontSize": 20,
-                  "letterSpacing": 0.15,
-                  "lineHeight": 30,
-                  "marginVertical": 2,
-                },
-                Object {
-                  "marginTop": 20,
-                  "textAlign": "center",
-                },
-              ],
-            ],
-          ]
-        }
-      >
-        Checking your Nutshell inbox
-      </Text>
+            ]
+          }
+        >
+          Checking your Nutshell inbox
+        </Text>
+      </View>
     </View>
   </View>
 </View>

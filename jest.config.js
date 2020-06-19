@@ -7,15 +7,40 @@ const expoTransforms = "node_modules/(?!(jest-)?react-native|react-clone-referen
 const customTransforms = "(?!react-router|@neverdull-agency)"
 
 // Mocks
-const mockNotificationModule = '<rootDir>/_test/_mock_expo_notification.js'
 const mockNativAnimationDriver = '<rootDir>/_test/_mock_animation_driver.js'
 const mockTimers = '<rootDir>/_test/_mock_timers.js'
 const mockSvgs = { "\\.svg": "<rootDir>/_test/_mock_svg.js" }
+const firebaseMock = '<rootDir>/_test/_mock_firebase.js'
 const webMocks = '<rootDir>/_test/_mocks_web.js'
+
+// Error handling
+const handleUnhandlesRejections = '<rootDir>/_test/_handle_unhandled_rejections.js'
+
+const universalSetup = [ mockNativAnimationDriver, mockTimers, handleUnhandlesRejections, firebaseMock ]
+
 module.exports = {
 	"projects": [
-		{ "preset": "jest-expo/ios", transform: transformers, "transformIgnorePatterns": [ `${expoTransforms}${customTransforms}` ], setupFiles: [ mockNativAnimationDriver, mockTimers] },
-		{ "preset": "jest-expo/android", transform: transformers, "transformIgnorePatterns": [ `${expoTransforms}${customTransforms}` ], setupFiles: [ mockNativAnimationDriver, mockTimers ] },
-		{ "preset": "jest-expo/web", transform: transformers, "transformIgnorePatterns": [ `${expoTransforms}${customTransforms}` ], setupFiles: [ mockNotificationModule, mockNativAnimationDriver, mockTimers], moduleNameMapper: { ...mockSvgs } }
+		{
+			"preset": "jest-expo/ios",
+			clearMocks: true,
+			transform: transformers,
+			"transformIgnorePatterns": [ `${expoTransforms}${customTransforms}` ],
+			setupFilesAfterEnv: universalSetup
+		},
+		{
+			"preset": "jest-expo/android",
+			clearMocks: true,
+			transform: transformers,
+			"transformIgnorePatterns": [ `${expoTransforms}${customTransforms}` ],
+			setupFilesAfterEnv: universalSetup
+		},
+		{
+			"preset": "jest-expo/web",
+			clearMocks: true,
+			transform: transformers,
+			"transformIgnorePatterns": [ `${expoTransforms}${customTransforms}` ],
+			setupFilesAfterEnv: [ webMocks,...universalSetup ],
+			moduleNameMapper: { ...mockSvgs }
+		}
 	]
 }

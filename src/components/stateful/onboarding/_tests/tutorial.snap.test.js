@@ -6,21 +6,16 @@ import renderer from 'react-test-renderer'
 import Tutorial from '../tutorial'
 
 // Redux mocking
-import { Provider } from "react-redux"
-import configureMockStore from "redux-mock-store"
-const mockStore = configureMockStore()
-const store = mockStore( {
-	user: {
-		name: 'Mentor'
-	}
-} )
+import Wrapper from '../../test-wrapper'
 
 describe( 'Tutorial', () => {
 
-	it( 'Matches snapshot', () => {
+	it( 'Matches snapshot', async () => {
 
 
-		const element = renderer.create( <Provider store={ store }><Tutorial /></Provider> ).toJSON()
+		const element = renderer.create( <Wrapper>
+			<Tutorial />
+		</Wrapper> ).toJSON()
 		expect( element ).toMatchSnapshot( )
 
 	} )
