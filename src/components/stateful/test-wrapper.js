@@ -10,7 +10,7 @@ const mockStore = configureMockStore()
 const store = mockStore( dummyStore )
 
 const Wrapper = ( { children, ...props } ) => <Provider store={ store }>
-	<Router history={ History }>
+	<Router keyLength={0} history={ History }>
 		<PaperProvider theme={ settings.theme }>
 			{ children }
 		</PaperProvider>
