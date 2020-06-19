@@ -16,7 +16,7 @@ jobs:
   build:
     name: Publish changes
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       # Get the repo files from current commit
@@ -44,8 +44,8 @@ jobs:
           echo -e "${{ secrets.DOTENV_STAGING }}" > .env
           echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
 
-      - name: Automated testing
-        run: npm test -- --bail
+      # - name: Automated testing
+      #   run: npm test -- --bail
         
 
       - uses: expo/expo-github-action@v5
