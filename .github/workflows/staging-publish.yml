@@ -16,7 +16,7 @@ jobs:
   build:
     name: Publish changes
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       # Get the repo files from current commit
