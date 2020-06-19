@@ -31,7 +31,7 @@ const { unreadNutshells, rememberToWrite, resetNotificationTimes } = require( '.
 
 // Triggers every monday noon based on firestore time declarations
 // Cron: every 5 past on mondays
-exports.notifyOfUnreadNutshells = functions.pubsub.schedule( '5 * * * 1' ).onRun( unreadNutshells )
+exports.notifyOfUnreadNutshells = functions.pubsub.schedule( '5 * * * 1,2' ).onRun( unreadNutshells )
 
 // Triggers every friday and sunday noon based on firestore declarations
 // Cron 5 * * * 5,0 means every hour at 5 past on fri and sun. See https://crontab.guru/#5_*_*_*_5,0
