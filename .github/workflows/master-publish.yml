@@ -36,6 +36,11 @@ jobs:
           npm i
           cd ..
 
+      - name: Create environment files
+        run: |
+          echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
+          echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
+
       - name: Automated testing
         run: npm test
 
@@ -48,10 +53,7 @@ jobs:
 
 
       - name: Publish
-        run: |
-          echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
-          echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
-          npm run publish
+        run: npm run publish
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
