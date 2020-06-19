@@ -39,6 +39,9 @@ jobs:
           npm i
           cd ..
 
+      - name: Automated testing
+        run: npm test
+        
 
       - uses: expo/expo-github-action@v5
         with:

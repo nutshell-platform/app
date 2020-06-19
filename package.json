@@ -1,12 +1,12 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "firebase use staging && export development=true && expo start",
-    "android": "firebase use staging && export development=true && expo start --android",
-    "ios": "firebase use staging && export development=true && expo start --ios",
-    "web": "firebase use staging && export development=true && expo start --web",
-    "hybrid": "firebase use staging && export development=true && expo start --android --web",
-    "test": "jest",
+    "start": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start",
+    "android": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --android",
+    "ios": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --ios",
+    "web": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --web",
+    "hybrid": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --android --web",
+    "test": "CI=true jest --colors --silent",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
     "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web",
@@ -18,26 +18,19 @@
     "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env.production | xargs) && exportSENTRY_LOG_LEVEL='debug' && expo build:ios && expo upload:ios",
     "upload:ios": "expo upload:ios",
     "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web",
-    "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all",
-    "baseline": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
+    "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all && jest --clearCache",
+    "baseline": "source ~/.nvm/nvm.sh && nvm use && npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
     "diagnostics": "expo diagnostics",
-    "i": "expo install",
-    "propagate": "branch development && push && branch staging && git merge development && push && master && git merge staging && push && branch development && gh"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@neverdull-agency/expo-unlimited-secure-store)"
-    ]
+    "i": "source ~/.nvm/nvm.sh && nvm use && expo install"
   },
   "dependencies": {
-    "@babel/core": "^7.10.1",
+    "@babel/core": "^7.10.2",
     "@neverdull-agency/expo-unlimited-secure-store": "^1.0.10",
-    "@sentry/browser": "^5.15.5",
+    "@sentry/browser": "^5.17.0",
     "babel-preset-expo": "^8.2.1",
     "color": "^3.1.2",
     "expo": "^37.0.12",
-    "expo-cli": "^3.21.3",
+    "expo-cli": "^3.21.5",
     "expo-constants": "~9.0.0",
     "expo-image-manipulator": "~8.1.0",
     "expo-image-picker": "~8.1.0",
@@ -47,8 +40,7 @@
     "expo-random": "~8.1.0",
     "expo-screen-orientation": "~1.0.0",
     "expo-secure-store": "~8.1.0",
-    "expo-updates": "~0.2.7",
-    "firebase": "7.9.0",
+    "expo-updates": "~0.2.9",
     "history": "^4.10.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",
@@ -64,16 +56,19 @@
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "redux-promise-middleware": "^6.1.2",
-    "sentry-expo": "^2.0.4",
-    "uuid": "^7.0.3"
+    "sentry-expo": "^2.1.2",
+    "uuid": "^7.0.3",
+    "firebase": "7.9.0"
   },
   "devDependencies": {
-    "firebase-tools": "^8.4.0",
+    "firebase-tools": "^8.4.3",
     "jest": "^25.5.4",
     "jest-expo": "^37.0.0",
+    "jest-svg-transformer": "^1.0.0",
     "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "^16.13.1",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.4",
     "sha3": "^2.1.2"
   },
   "private": true

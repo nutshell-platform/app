@@ -13,7 +13,7 @@ class Tutorial extends Component {
 
 		if( !user?.avatar ) todos.push( { label: 'Set your avatar', to: '/user/settings' } )
 		if( !user?.bio ) todos.push( { label: 'Update your bio', to: '/user/settings' } )
-		if( !user?.following.length ) todos.push( { label: 'Follow some people', to: '/friends/find' } )
+		if( !user?.following?.length ) todos.push( { label: 'Follow some people', to: '/friends/find' } )
 
 		// No todos? No component
 		if( !todos.length ) return null

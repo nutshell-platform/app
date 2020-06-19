@@ -48,7 +48,13 @@ exports.unreadNutshells = async f => {
 		log( 'Full inboxes: ', fullInboxesWithPushTokens )
 
 		// Notify those will full inboxes
-		const unreadMessage = amount => ( { title: `${amount} unread nutshells!`, body: `Click notification to read what your friends have to say this week.` } )
+		const unreadMessage = amount => ( {
+			title: `${amount} unread nutshells!`,
+			body: `Read what your friends have to say this week.`,
+			data: {
+				goto: '/nutshells/read'
+			}
+		} )
 
 		// Date resets
 		const extraWeek = ( 1000 * 60 * 60 * 24 * 7 )
@@ -180,7 +186,13 @@ exports.resetNotificationTimes = async f => {
 
 
 		// Notify those will full inboxes
-		const unreadMessage = { title: `Remember to write your Nutshell!`, body: `The deadline is midnight this Sunday.` }
+		const unreadMessage = {
+			title: `Remember to write your Nutshell!`,
+			body: `The deadline is midnight this Sunday.`,
+			data: {
+				goto: '/nutshells/write'
+			}
+		}
 		await Promise.all( usersWhoWantToBeNotified.map( async ( { uid } ) => {
 
 			try {

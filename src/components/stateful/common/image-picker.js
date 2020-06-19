@@ -59,7 +59,7 @@ class ShowOrPickImage extends Component {
 		return <TouchableOpacity onPress={ this.pickImage } style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', ...style } }>
 			<View>
 				{ ( image || chosenImage ) ? <Avatar.Image size={ size || 100 } source={ chosenImage || image } /> : <Avatar.Icon size={ size || 100 } icon='camera' /> }
-				<IconButton size={ 15 } style={ { position: 'absolute', bottom: 0, right: 0, background: theme.colors.surface, borderColor: theme.colors.text, borderWidth: .5 } } icon='pencil' />
+				<IconButton size={ 15 } style={ { position: 'absolute', bottom: 0, right: 0, backgroundColor: theme.colors.surface, borderColor: theme.colors.text, borderWidth: .5 } } icon='pencil' />
 			</View>
 		</TouchableOpacity>
 

@@ -6,7 +6,7 @@ describe( 'Store unit test', () => {
 
 		const emptyStore = store.getState()
 		const keys = Object.keys( emptyStore )
-		const mandatory = [ 'reducer', '_persist' ]
+		const mandatory = [ 'settings', 'user', 'nutshells', , '_persist' ]
 
 		expect( keys ).toEqual( expect.arrayContaining( mandatory ) )
 

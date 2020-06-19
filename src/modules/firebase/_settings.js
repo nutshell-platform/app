@@ -4,7 +4,7 @@ import { getTokenIfNeeded, registerNotificationListeners } from '../push'
 
 export const listenSettings = ( app, dispatch, action ) => {
 
-	const { db, FieldValue, auth } = app
+	const { db, FieldValue, auth, history } = app
 
 	return db.collection( 'settings' ).doc( auth.currentUser.uid ).onSnapshot( async doc => {
 
@@ -20,7 +20,7 @@ export const listenSettings = ( app, dispatch, action ) => {
 
 
 		// If we have tokens, listen for notis
-		if( settings.pushTokens?.length != 0 ) registerNotificationListeners()
+		if( settings.pushTokens?.length != 0 ) registerNotificationListeners( history )
 
 		return dispatch( action( settings ) )
 
