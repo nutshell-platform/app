@@ -1,12 +1,12 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "export development=true && expo start",
-    "android": "export development=true && expo start --android",
-    "ios": "export development=true && expo start --ios",
-    "web": "export development=true && expo start --web",
-    "hybrid": "export development=true && expo start --android --web",
-    "test": "CI=true jest --colors",
+    "start": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start",
+    "android": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --android",
+    "ios": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --ios",
+    "web": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --web",
+    "hybrid": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --android --web",
+    "test": "CI=true jest --colors --silent",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
     "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web",
@@ -19,10 +19,9 @@
     "upload:ios": "expo upload:ios",
     "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web",
     "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all && jest --clearCache",
-    "baseline": "npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
+    "baseline": "source ~/.nvm/nvm.sh && nvm use && npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
     "diagnostics": "expo diagnostics",
-    "i": "expo install",
-    "propagate": "branch development && push && branch staging && git merge development && push && master && git merge staging && push && branch development && gh"
+    "i": "source ~/.nvm/nvm.sh && nvm use && expo install"
   },
   "dependencies": {
     "@babel/core": "^7.10.2",
@@ -42,7 +41,6 @@
     "expo-screen-orientation": "~1.0.0",
     "expo-secure-store": "~8.1.0",
     "expo-updates": "~0.2.9",
-    "firebase": "7.9.0",
     "history": "^4.10.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",
@@ -59,7 +57,8 @@
     "redux-persist": "^6.0.0",
     "redux-promise-middleware": "^6.1.2",
     "sentry-expo": "^2.1.2",
-    "uuid": "^7.0.3"
+    "uuid": "^7.0.3",
+    "firebase": "7.9.0"
   },
   "devDependencies": {
     "firebase-tools": "^8.4.3",

@@ -13,7 +13,7 @@ import app from '../../../modules/firebase/app'
 // Redux
 import { connect } from 'react-redux'
 
-class FindFriends extends Component {
+class ManageFriends extends Component {
 
 	// initialise state
 	state = {
@@ -130,4 +130,4 @@ class FindFriends extends Component {
 
 export default connect( store => ( {
 	user: store.user || {}
-} ) )( FindFriends )
+} ) )( ManageFriends )

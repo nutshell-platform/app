@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FriendFinder Matches snapshot 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#6200ee",
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#f6f6f6",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "maxWidth": "100%",
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "sans-serif",
+              "fontWeight": "normal",
+              "textAlign": "left",
+            },
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "fontFamily": "sans-serif-medium",
+                "fontWeight": "normal",
+                "textAlign": "left",
+                "writingDirection": "ltr",
+              },
+              Array [
+                Object {
+                  "fontSize": 20,
+                  "letterSpacing": 0.15,
+                  "lineHeight": 30,
+                  "marginVertical": 2,
+                },
+                Object {
+                  "marginTop": 20,
+                  "textAlign": "center",
+                },
+              ],
+              Array [
+                Object {
+                  "fontSize": 20,
+                  "letterSpacing": 0.15,
+                  "lineHeight": 30,
+                  "marginVertical": 2,
+                },
+                Object {
+                  "marginTop": 20,
+                  "textAlign": "center",
+                },
+              ],
+            ],
+          ]
+        }
+      >
+        Loading random people. Not randos though, nice people.
+      </Text>
+    </View>
+  </View>
+</View>
+`;

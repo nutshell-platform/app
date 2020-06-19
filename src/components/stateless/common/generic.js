@@ -3,9 +3,13 @@ import React, { useState } from 'react'
 // Visual
 const Color = require('color')
 import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
-import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator, Title, Text, Button as PaperButton, HelperText as PaperHelperText, Avatar, Subheading as PaperSubheading, Searchbar, Checkbox as PaperCheckbox, IconButton } from 'react-native-paper'
+import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator as PaperActivityIndicator, Title, Text, Button as PaperButton, HelperText as PaperHelperText, Avatar, Subheading as PaperSubheading, Searchbar, Checkbox as PaperCheckbox, IconButton } from 'react-native-paper'
 import { Link as NativeLink, withRouter } from '../../../routes/router'
 import { isWeb, isIos } from '../../../modules/apis/platform'
+
+// CI config
+const { CI } = process.env
+const ActivityIndicator = CI ? ( f => false ) : PaperActivityIndicator
 
 // Actions
 import * as Linking from 'expo-linking'

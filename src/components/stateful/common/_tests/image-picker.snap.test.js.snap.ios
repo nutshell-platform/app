@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShowOrPickImage with image Matches snapshot 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "opacity": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#6200ee",
+            "borderRadius": 50,
+            "height": 100,
+            "width": 100,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "/abcd",
+          }
+        }
+        style={
+          Object {
+            "borderRadius": 50,
+            "height": 100,
+            "width": 100,
+          }
+        }
+      />
+    </View>
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      focusable={false}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+              "margin": 6,
+              "overflow": "hidden",
+            },
+            Object {
+              "borderRadius": 11.25,
+              "height": 22.5,
+              "width": 22.5,
+            },
+            undefined,
+            Object {
+              "backgroundColor": "#ffffff",
+              "borderColor": "#000000",
+              "borderWidth": 0.5,
+              "bottom": 0,
+              "position": "absolute",
+              "right": 0,
+            },
+          ],
+        ]
+      }
+    >
+      <View
+        style={null}
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`ShowOrPickImage without image Matches snapshot 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "opacity": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#6200ee",
+            "borderRadius": 50,
+            "height": 100,
+            "width": 100,
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {},
+        ]
+      }
+    >
+      <Text />
+    </View>
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      focusable={false}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+              "margin": 6,
+              "overflow": "hidden",
+            },
+            Object {
+              "borderRadius": 11.25,
+              "height": 22.5,
+              "width": 22.5,
+            },
+            undefined,
+            Object {
+              "backgroundColor": "#ffffff",
+              "borderColor": "#000000",
+              "borderWidth": 0.5,
+              "bottom": 0,
+              "position": "absolute",
+              "right": 0,
+            },
+          ],
+        ]
+      }
+    >
+      <View
+        style={null}
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+</View>
+`;
