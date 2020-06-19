@@ -45,7 +45,7 @@ jobs:
           echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
 
       - name: Automated testing
-        run: npm test
+        run: npm test -- --bail
         
 
       - uses: expo/expo-github-action@v5
