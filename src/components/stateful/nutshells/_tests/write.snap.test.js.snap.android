@@ -1621,7 +1621,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                         total={5}
                       >
-                        All changes saved at 12:01. 
+                        All changes saved at 02:00. 
                       </Text>
                     </View>
                   </View>
@@ -2205,7 +2205,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                         total={5}
                       >
-                        All changes saved at 12:01. 
+                        All changes saved at 02:00. 
                       </Text>
                     </View>
                   </View>

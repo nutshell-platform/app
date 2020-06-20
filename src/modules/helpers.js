@@ -1,5 +1,5 @@
 import { Alert as NativeAlert, YellowBox } from 'react-native'
-import { dev, isWeb, isCI } from './apis/platform'
+import { dev, isWeb } from './apis/platform'
 import { v4 as uuidv4 } from 'uuid'
 import * as Random from 'expo-random'
 
@@ -69,7 +69,7 @@ const oneJanDayType = oneJan.getDay()
 
 export const timestampToHuman = ms => new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ )[0]
 // Give timestamp of now, except in CI
-export const timestampToTime = ms => isCI ? '12:01' : new Date( ms || Date.now() ).toString().match( /\d{1,2}:\d{1,2}/ )[0]
+export const timestampToTime = ms => new Date( ms || Date.now() ).toString().match( /\d{1,2}:\d{1,2}/ )[0]
 
 // Weeks are defined by the number of 7 day increments that have elapsed
 export const weekNumber = f => {
