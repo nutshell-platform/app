@@ -959,7 +959,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           >
                             Mentor Palokaj's
                              Nutshell for week 
-                            25
+                            2635
                           </div>
                           <div
                             className="css-view-1dbjc4n"
@@ -1021,7 +1021,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 }
                                 tabIndex="0"
                               >
-                                Status: scheduled for Sun Jun 21 at midnight
+                                Status: scheduled for Sun Jun 28 at midnight
                               </div>
                               <div
                                 className="css-view-1dbjc4n"
@@ -1961,7 +1961,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                         total={5}
                       >
-                        All changes saved at 02:00. 
+                        All changes saved at 17:31. 
                       </div>
                     </div>
                   </div>
@@ -2521,7 +2521,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                         total={5}
                       >
-                        All changes saved at 02:00. 
+                        All changes saved at 17:31. 
                       </div>
                     </div>
                   </div>

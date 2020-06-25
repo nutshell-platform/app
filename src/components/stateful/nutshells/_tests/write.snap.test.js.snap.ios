@@ -746,7 +746,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           >
                             Mentor Palokaj's
                              Nutshell for week 
-                            25
+                            2635
                           </Text>
                           <View
                             style={
@@ -787,7 +787,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   ]
                                 }
                               >
-                                Status: scheduled for Sun Jun 21 at midnight
+                                Status: scheduled for Sun Jun 28 at midnight
                               </Text>
                               <RCTSwitch
                                 accessibilityRole="button"
@@ -1632,7 +1632,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                         total={5}
                       >
-                        All changes saved at 02:00. 
+                        All changes saved at 17:31. 
                       </Text>
                     </View>
                   </View>
@@ -2216,7 +2216,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         }
                         total={5}
                       >
-                        All changes saved at 02:00. 
+                        All changes saved at 17:31. 
                       </Text>
                     </View>
                   </View>

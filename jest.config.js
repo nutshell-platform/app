@@ -15,8 +15,9 @@ const webMocks = '<rootDir>/_test/_mocks_web.js'
 
 // Error handling
 const handleUnhandlesRejections = '<rootDir>/_test/_handle_unhandled_rejections.js'
+const handleAsyncQueue = '<rootDir>/_test/_handle-async-queue.js'
 
-const universalSetup = [ mockNativAnimationDriver, mockTimers, handleUnhandlesRejections, firebaseMock ]
+const universalSetup = [ mockNativAnimationDriver, mockTimers, handleUnhandlesRejections, firebaseMock, handleAsyncQueue ]
 
 module.exports = {
 	"projects": [
