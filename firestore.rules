@@ -17,7 +17,7 @@ service cloud.firestore {
     match /users/{userUid} {
       // Write own, read others if logged in
       allow write: if request.auth.uid == userUid
-      allow read: if request.auth.uid != null
+      allow read: if true // Needed for handle checks
     }
     match /userMeta/{userUid} {
       // Write own, read others if logged in
