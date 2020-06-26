@@ -56,7 +56,7 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 				...( ticket.details ? resToError( ticket ) : ticket )
 		} )
 
-		return Promise.all( tickets.map( ticket => db.collection( 'pushLogs' ).doc( ticket.id ).set( formatTicket( ticket ) ) ) )
+		await Promise.all( tickets.map( ticket => db.collection( 'pushLogs' ).doc( ticket.id ).set( formatTicket( ticket ) ) ) )
 
 	} catch( e ) {
 		log( 'Push notification error: ', e )

@@ -41,8 +41,8 @@ jobs:
           echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
           echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
 
-      # - name: Automated testing
-      #   run: npm test -- --bail
+      - name: Automated testing
+        run: npm test -- --bail
 
 
       - uses: expo/expo-github-action@v5

@@ -8,7 +8,7 @@ import Park from '../../../../assets/undraw_through_the_park_lxnl.svg'
 
 
 // Data
-import { log } from '../../../modules/helpers'
+import { log, catcher } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 export default class LoginRegister extends Component {

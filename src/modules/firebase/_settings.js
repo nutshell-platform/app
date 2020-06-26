@@ -46,9 +46,9 @@ export const setLocalTimeToSettings = async app => {
 
 		// If the server timestamp is bigger than the local one, keep the remote because notification has been sent
 		const newTimes = {
-			fridayNoon: times.fridayNoon > fridayNoon ? times.fridayNoon : fridayNoon,
-			sundayNoon: times.sundayNoon > sundayNoon ? times.sundayNoon : sundayNoon,
-			mondayNoon: times.mondayNoon > mondayNoon ? times.mondayNoon : mondayNoon
+			fridayNoon: times?.fridayNoon > fridayNoon ? times?.fridayNoon : fridayNoon,
+			sundayNoon: times?.sundayNoon > sundayNoon ? times?.sundayNoon : sundayNoon,
+			mondayNoon: times?.mondayNoon > mondayNoon ? times?.mondayNoon : mondayNoon
 		}
 
 		// Set the local times to the server

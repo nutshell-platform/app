@@ -37,7 +37,8 @@ class Navigation extends Component {
 	pan = new Animated.ValueXY( { x: this.state.drawerWidth, y: 0 } )
 	handleDrag = Animated.event(
 		[ { translationX: this.pan.x } ],
-		{ useNativeDriver: !isWeb }
+		// Do not enable native driver, the PanGestureHandler can't handle native
+		{ useNativeDriver: false }
 	)
 
 	panDrawer = ( { nativeEvent } ) => {
