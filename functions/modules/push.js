@@ -15,7 +15,7 @@ const toChunks = messages => expo.chunkPushNotifications( messages )
 // Send messages to expo
 // Good: { "data": [ { "status": "ok", "id": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" } ] }
 // Error: { "data": [ { "status": "error", "message": "\"ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]\" is not a registered push notification recipient", "details": { "error": "DeviceNotRegistered" } } ] }
-const sendChunksReceiveTickets = async chunks => Promise.all( chunks.map( chunk => expo.sendPushNotificationsAsync( chunk ) ) ).then( tChunks => flatten( tChunks ) )
+const sendChunksReceiveTickets = chunks => Promise.all( chunks.map( chunk => expo.sendPushNotificationsAsync( chunk ) ) ).then( tChunks => flatten( tChunks ) )
 
 // Turn tickets in to receipts
 const ticketsToReceipts = tickets => {
@@ -60,6 +60,7 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 
 	} catch( e ) {
 		log( 'Push notification error: ', e )
+		throw e
 	}
 
 }
@@ -104,6 +105,7 @@ exports.retreivePushReceipts = async f => {
 
 	} catch( e ) {
 		log( 'Push receipt error: ', e )
+		throw e
 	}
 
 }

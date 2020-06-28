@@ -10,10 +10,10 @@ exports.follow = functions.firestore.document( 'relationships/{relationId}' ).on
 // ///////////////////////////////
 // Cron
 // ///////////////////////////////
-const { publish, deleteFromUnboxesOnNutshellDelete, makeDemo } = require( './modules/nutshells' )
+const { publish, deleteFromInboxesOnNutshellDelete, makeDemo } = require( './modules/nutshells' )
 // cron: Every hour monday and tuesday 0 * * * 1,2
 exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( '0 * * * 1,2' ).onRun( publish )
-exports.deleteFromUnboxesOnNutshellDelete = functions.firestore.document( 'nutshells/{nutshellUid}' ).onDelete( deleteFromUnboxesOnNutshellDelete )
+exports.deleteFromInboxesOnNutshellDelete = functions.firestore.document( 'nutshells/{nutshellUid}' ).onDelete( deleteFromInboxesOnNutshellDelete )
 
 
 // exports.makeDemo = functions.pubsub.schedule( '0 12,0 * * *' ).onRun( makeDemo )
