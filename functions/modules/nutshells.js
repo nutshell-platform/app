@@ -93,8 +93,8 @@ exports.publish = async f => {
 
 				} catch( e ) {
 
-					log.push( 'Problem parsing nutshell:' )
-					log.push( e )
+					runLog.push( 'Problem parsing nutshell:' )
+					runLog.push( e )
 					throw e
 
 				}
@@ -105,8 +105,7 @@ exports.publish = async f => {
 
 	} catch( e ) {
 		// If an error occurs, log it and return null
-		error( 'Nutshell publishing error: ', JSON.stringify( e, null, 2 ) )
-		return null
+		error( 'Nutshell publishing error: ', e )
 	} finally {
 		log( 'Publishing logs: ', runLog )
 	}
@@ -114,7 +113,7 @@ exports.publish = async f => {
 }
 
 // ( snap, context ) =>
-exports.deleteFromUnboxesOnNutshellDelete = async ( snap, context ) => {
+exports.deleteFromInboxesOnNutshellDelete = async ( snap, context ) => {
 	const { nutshellUid } = context.params
 	const { owner } = snap.data()
 

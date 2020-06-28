@@ -9,11 +9,11 @@ exports.dataFromSnap = ( snapOfDocOrDocs, withDocId=true ) => {
 }
 
 exports.log = ( title, content ) => {
-	console.log( title, content && JSON.stringify( content, null, process.env.development ? 2 : null ) )
+	console.log( title, content && process.env.development ? JSON.stringify( content, null, 2 ) : content )
 }
 
 exports.error = ( title, content ) => {
-	console.error( title, content && JSON.stringify( content, null, process.env.development ? 2 : null ) )
+	console.error( title, content && process.env.development ? JSON.stringify( content, null, 2 ) : content )
 }
 
 // ///////////////////////////////
