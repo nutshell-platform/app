@@ -33,6 +33,26 @@ exports.makeDemo = async f => {
 
 }
 
+// ///////////////////////////////
+// Admin checking
+// ///////////////////////////////
+exports.scheduledNutshells = async all => {
+	
+	try {
+		const nutshells = await ( all ? db.collection( 'nutshells' ).get().then( dataFromSnap ) : db.collection( 'nutshells' ).where( 'status', '==', 'scheduled' ).get().then( dataFromSnap ) )
+		const humanReadable = await Promise.all( nutshells.map( async nutshell => ( {
+			...nutshell,
+			pusbishAt: new Date( nutshell.published ),
+			updatedAt: new Date( nutshell.updated ),
+			owner: await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
+		} ) ) )
+		return humanReadable
+	} catch( e ) {
+		throw e
+	}
+
+}
+
 
 // ///////////////////////////////
 // Publish scheduled Nutshells
