@@ -1,6 +1,6 @@
 const { Expo } = require( 'expo-server-sdk' )
 const expo = new Expo()
-const { log, dataFromSnap } = require( './helpers' )
+const { log, error, dataFromSnap } = require( './helpers' )
 const { flatten } = require( 'array-flatten' )
 const { db } = require( './firebase' )
 
@@ -19,6 +19,13 @@ const sendChunksReceiveTickets = chunks => Promise.all( chunks.map( chunk => exp
 
 // Turn tickets in to receipts
 const ticketsToReceipts = tickets => {
+	// Tickets are a numbered object so we need to arrayify it
+	const ticketsArray = []
+	Object.keys( tickets ).map( index => {
+		ticketsArray.push( { ...tickets[index], index: index } )
+	} )
+	tickets = ticketsArray
+
 	const receiptsIds = tickets.filter( ticket => ticket.id ).map( ticket => ticket.id )
 	const receiptChunks = expo.chunkPushNotificationReceiptIds( receiptsIds )
 	return Promise.all( receiptChunks.map( chunk => expo.getPushNotificationReceiptsAsync( chunk ) ) ).then( rChunks => flatten( rChunks ) )
@@ -59,7 +66,7 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 		await Promise.all( tickets.map( ticket => db.collection( 'pushLogs' ).doc( ticket.id ).set( formatTicket( ticket ) ) ) )
 
 	} catch( e ) {
-		log( 'Push notification error: ', e )
+		error( 'Push notification error: ', e )
 		throw e
 	}
 
@@ -70,26 +77,30 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 // ////////////////////////////////////
 exports.retreivePushReceipts = async f => {
 
+	const logs = []
+
 
 	try {
 
 		// Get tickets from db
 		const tickets = await db.collection( 'pushLogs' ).where( 'type', '==', 'ticket' ).where( 'status', '==', 'ok' ).get().then( dataFromSnap )
-		log( 'Tickets: ', tickets )
+		logs.push( 'First ticket: ', tickets && tickets.length && tickets[0] )
 		if( tickets.length == 0 ) return null
 		// Get receipts from expo
 		const receipts = await ticketsToReceipts( tickets )
-		log( 'receipts: ', receipts )
+		logs.push( 'receipts: ', receipts )
 		if( receipts.length == 0 ) return null
 		// Format receipts as array
 		const receiptIdsRetreived = Object.keys( receipts )[0]
-		const formattedReceipts = receipts.map( receipt => {
+		const formattedReceipts = receipts.filter( receipt => Object.keys( receipt )[0] ).map( receipt => {
 			const id = Object.keys( receipt )[0]
 			return { id: id, ...receipt[ id ] }
 		} )
-		log( 'Formatted receipts: ', formattedReceipts )
+		logs.push( 'Formatted receipts: ', formattedReceipts )
 		// Parse receipt results
 		await Promise.all( formattedReceipts.map( async receipt => {
+
+			logs.push( 'Receipt: ', receipt )
 
 			// If receipt indicated an error, overwrite the ticket entry with the receipt entry
 			if( receipt.status != 'ok' ) return db.collection( 'pushLogs' ).doc( receipt.id ).set( resToError( receipt ) )
@@ -97,15 +108,19 @@ exports.retreivePushReceipts = async f => {
 			// Is the receipt signals things are ok, delete the local ticket reference
 			if( receipt.status == 'ok' ) return db.collection( 'pushLogs' ).doc( receipt.id ).delete()
 
-			log( 'THIS SHOULD NEVER HAPPEN' )
+			logs.push( 'THIS SHOULD NEVER HAPPEN' )
 
 		} ) )
 
-		log( 'Receipts handled' )
+		throw new Error( 'Testing this out' )
+
+		logs.push( 'Receipts handled' )
 
 	} catch( e ) {
-		log( 'Push receipt error: ', e )
-		throw e
+		error( 'Push receipt error: ', e )
+		logs.push( 'Push receipt error: ', e )
+	} finally {
+		log( 'Push receipt logs: ', logs )
 	}
 
 }

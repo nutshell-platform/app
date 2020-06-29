@@ -44,6 +44,7 @@ exports.unreadNutshells = async f => {
 				// If not return no objext
 				else return false
 			} catch( e ) {
+				error( 'Error notifying user:', e )
 				logs.push( 'Error notifying user:', e )
 				throw e
 			}
@@ -59,7 +60,7 @@ exports.unreadNutshells = async f => {
 		// Filter out the inboxes that have no content
 		const fullInboxesWithPushTokens = inboxesOfThoseUsers.filter( inbox => inbox.nutshells )
 		logs.push( `Full inboxes: ${ fullInboxesWithPushTokens.length }` )
-		log( 'Full inboxes: ', fullInboxesWithPushTokens )
+		if( !fullInboxesWithPushTokens || fullInboxesWithPushTokens.length == 0 ) return logs.push( 'No inboxes to notify, exiting' )
 
 		// Notify those will full inboxes
 		const unreadMessage = amount => ( {
@@ -90,6 +91,7 @@ exports.unreadNutshells = async f => {
 				} }, { merge: true } )
 
 			} catch( e ) {
+				error( 'Push sending error: ', e )
 				logs.push( 'Problem sending push notification', e )
 				throw e
 			}
@@ -149,7 +151,7 @@ exports.rememberToWrite = async f => {
 
 		logs.push( `Users to notify (deduped): ${usersWhoWantToBeNotified.length}` )
 
-		if( !usersWhoWantToBeNotified || usersWhoWantToBeNotified.length == 0 ) return null
+		if( !usersWhoWantToBeNotified || usersWhoWantToBeNotified.length == 0 ) return logs.push( 'No users to notify, exiting' )
 
 		// Date resets
 		const extraWeek = ( 1000 * 60 * 60 * 24 * 7 )
@@ -175,6 +177,7 @@ exports.rememberToWrite = async f => {
 
 
 			} catch( e ) {
+				error( 'Error sending push: ', e )
 				logs.push( 'Error sending push: ', e )
 				throw e
 			}
