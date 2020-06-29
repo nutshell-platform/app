@@ -33,7 +33,7 @@
     "expo-cli": "^3.21.13",
     "expo-constants": "~9.1.1",
     "expo-image-manipulator": "~8.1.0",
-    "expo-image-picker": "~8.1.0",
+    "expo-image-picker": "~8.3.0",
     "expo-linking": "^1.0.3",
     "expo-network": "~2.2.1",
     "expo-permissions": "~8.1.0",
