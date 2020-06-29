@@ -39,62 +39,58 @@ exports.makeDemo = async f => {
 // ///////////////////////////////
 exports.publish = async f => {
 
-	const runLog = []
+	const logs = []
 
 	try {
 
 		// ///////////////////////////////
 		// Get Nutshells scheduled for the pase
 		// ///////////////////////////////
-		runLog.push( 'Getting nutshell queue' )
+		logs.push( 'Getting nutshell queue' )
 		const queue = await db.collection( 'nutshells' ).where( 'status', '==', 'scheduled' ).where( 'published', '<=', Date.now() ).get().then( dataFromSnap )
-		runLog.push( `Got ${ queue.length } nutshells` )
-		if( !queue || queue.length == 0 ) {
-			log( 'No Nutshells in publishing queue, exiting gracefully' )
-			return null
-		}
+		logs.push( `Got ${ queue.length } nutshells` )
+		if( !queue || queue.length == 0 ) return logs.push( 'No Nutshells in publishing queue, exiting gracefully' )
 
 		const nutshells = queue.map( ( { uid, owner } ) => ( { uid, owner } ) )
 
 		// ///////////////////////////////
 		// For every Nutshell send to inboxed
 		// ///////////////////////////////
-		runLog.push( 'Sending nutshells to inbox' )
+		logs.push( 'Sending nutshells to inbox' )
 
 		await Promise.all( nutshells.map( async nutshell => {
 
 				try {
 
-					runLog.push( `Parsing ${ nutshell.uid }` )
+					logs.push( `Parsing ${ nutshell.uid }` )
 
 					// Get the followers of the owner of this Nutshell
 					const { followers } = await db.collection( 'userMeta' ).doc( nutshell.owner ).get().then( dataFromSnap )
 
-					runLog.push( `Nutshell ${ nutshell.uid } has ${ followers && followers.length } followers` )
+					logs.push( `Nutshell ${ nutshell.uid } has ${ followers && followers.length } followers` )
 
 					// For every follower, add this Nutshell to their inbox
 					if( followers && followers.length != 0 ) await Promise.all( followers.map( followerUid => {
 						return db.collection( 'inbox' ).doc( followerUid ).set( { nutshells: FieldValue.arrayUnion( nutshell.uid ) }, { merge: true } )
 							.catch( e => {
-								runLog.push( `Error adding ${ nutshell.uid } to inbox of ${ followerUid }` )
-								runLog.push( e )
+								logs.push( `Error adding ${ nutshell.uid } to inbox of ${ followerUid }`, e )
 								throw e
 							} )
 					} ) )
 
 					// Once added to inboxes, mark published
-					runLog.push(  `Marking nutshell ${ nutshell.uid } as read` )
+					logs.push(  `Marking nutshell ${ nutshell.uid } as read` )
 					return db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published' }, { merge: true } )
 						.catch( e => {
-							runLog.push( `Error marking ${ nutshell.uid } as read` )
-							runLog.push( e )
+							logs.push( `Error marking ${ nutshell.uid } as read` )
+							logs.push( e )
 							throw e
 						} )
 
 				} catch( e ) {
 
-					runLog.push( 'Problem parsing nutshell:' )
-					runLog.push( e )
+					logs.push( 'Problem parsing nutshell:' )
+					logs.push( e )
 					throw e
 
 				}
@@ -107,7 +103,7 @@ exports.publish = async f => {
 		// If an error occurs, log it and return null
 		error( 'Nutshell publishing error: ', e )
 	} finally {
-		log( 'Publishing logs: ', runLog )
+		log( 'Publishing logs: ', logs )
 	}
 
 }
