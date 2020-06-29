@@ -10,7 +10,7 @@ on:
       - '*.json'
       - '*.js'
       - '.github/**'
-      - 'functions/*'
+      - 'functions/**'
 
 jobs:
   build:
