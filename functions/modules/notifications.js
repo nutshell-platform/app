@@ -98,7 +98,7 @@ exports.unreadNutshells = async f => {
 
 		} ) )
 
-		log( 'All done for inboxes: ', fullInboxesWithPushTokens.length )
+		logs.push( 'All done for inboxes: ', fullInboxesWithPushTokens.length )
 
 
 	} catch( e ) {
@@ -134,7 +134,6 @@ exports.rememberToWrite = async f => {
 		let usersWhoWantToBeNotified = [ ...usersWhoWantToBeNotifiedFriday, ...usersWhoWantToBeNotifiedSunday ]
 
 		logs.push( `All user notification entries: ${ usersWhoWantToBeNotified.length }` )
-		log( 'All user notification entries: ', usersWhoWantToBeNotified.length )
 
 		// Take out duplicates which will exist because we do a double .get()
 		const alreadyInList = []
