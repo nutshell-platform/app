@@ -35,8 +35,8 @@ const ticketsToReceipts = tickets => {
 // Helper returns token object for destructuring
 const tokenRegex = /ExponentPushToken\[.*\]/
 const tokenFromMessage = message => {
-	const token = message.match( tokenRegex )
-	return token ? { token: token[0] } : {}
+	const token = typeof message == 'string' && message.match( tokenRegex )
+	return token ? { token: token[0] } : { token: 'unknown' }
 }
 const resToError = ( { id, status, message, details } ) => ( { id: id, status: status, message: message, error: details.error, ...tokenFromMessage( tokenRegex ) } )
 
@@ -55,6 +55,7 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 		const mChunks = toChunks( messages )
 
 		// Sent notifications
+
 		const tickets = await sendChunksReceiveTickets( mChunks )
 
 		// Format tickets and register them

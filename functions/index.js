@@ -52,8 +52,9 @@ exports.notifyRememberToWrite = functions.pubsub.schedule( '5 * * * 5,0' ).onRun
 // exports.resetNotificationTimes = functions.https.onCall( resetNotificationTimes )
 
 // Debugging
+const { sendPushNotifications } = require( './modules/push' )
 // exports.manualPushReceiptHandler = functions.https.onCall( ( context, data ) => retreivePushReceipts( db ) )
-// const tokens = [ 'ExponentPushToken[4KmlslOnJCvvNS3-jHOS5k]' ]
-// const message = { body: 'Derp' }
-// exports.manualPushSend = functions.https.onCall( ( context, data ) => sendPushNotifications( db, tokens, message ) )
+const tokens = [ 'ExponentPushToken[4KmlslOnJCvvNS3-jHOS5k]' ]
+const message = { body: 'Derp' }
+exports.manualPushSend = functions.https.onCall( ( context, data ) => sendPushNotifications( tokens, message ) )
 // exports.manualInboxNotifier = functions.https.onCall( rememberToWrite )
