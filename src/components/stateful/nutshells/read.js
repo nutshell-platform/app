@@ -22,16 +22,28 @@ class ReadNutshell extends Component {
 		loading: 'Checking your Nutshell inbox'
 	}
 
+	loading = false
+	inboxLoader = undefined
+
 	// Load inbox
 	loadInbox = async f => {
 
+		if( this.loading ) return
+
 		try {
+
+			this.loading = true
+
 			const { inbox, user } = this.props
-			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ).catch( f => false ) ) )
+			log( 'Load nutshells' )
+			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ).catch( f => ( { delete: uid } ) ) ) )
+			const markRead = nutshells.filter( nutshell => nutshell.delete )
 
+			log( 'Filter nutshells', nutshells )
 			// Filter out Nutshells that failed to load ( e.g. has been deleted )
-			nutshells = nutshells.filter( nutshell => nutshell )
+			nutshells = nutshells.filter( nutshell => !nutshell.delete )
 
+			log( 'Update state with filtered nutshells: ', this.cleanNutshells( nutshells, user.muted ) )
 			// Filter out censored and set to state
 			await this.updateState( {
 				rawInbox: nutshells,
@@ -39,8 +51,14 @@ class ReadNutshell extends Component {
 				loading: false
 			} )
 
+			// Delete nutshells that failed to load
+			log( 'Mark read because of loading error: ', markRead )
+			await Promise.all( markRead.map( nutshell => this.markRead( nutshell.delete ) ) ).catch( e => log( e ) )
+
 		} catch( e ) {
 			alert( e )
+		} finally {
+			this.loading = false
 		}
 	}
 
@@ -56,8 +74,11 @@ class ReadNutshell extends Component {
 		// If loading or no followers, do nothing
 		if( loading || !externalInbox ) return false
 
-		// If remote followers are more than local, get follower details
-		if( externalInbox.length != internalInbox.length ) await this.loadInbox()
+		// If remote followers are more than local, get follower details with a small delay
+		if( externalInbox.length != internalInbox.length ) {
+			if( this.inboxLoader ) clearTimeout( this.inboxLoader )
+			this.inboxLoader = setTimeout( this.loadInbox, 2000 )
+		}
 
 		// Always trigger rerender ( default behavior )
 		return true
@@ -69,7 +90,13 @@ class ReadNutshell extends Component {
 
 	go = to => to && this.props.history.push( to )
 
-	markRead = uid => app.markNutshellRead( uid )
+	markRead = async uid => {
+		await app.markNutshellRead( uid )
+		const { inbox: oldInbox } = this.state
+		const newInbox = [ ...oldInbox.filter( item => item.uid != uid ) ]
+		await this.updateState( { inbox: newInbox } )
+	}
+
 
 	block = ( userUid, nutshellUid ) => Promise.all( [
 		app.markNutshellRead( nutshellUid ),
