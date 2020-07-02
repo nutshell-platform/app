@@ -7,7 +7,7 @@ import Navigation from '../common/navigation'
 import Write from '../../../../assets/undraw_typewriter_i8xd.svg'
 
 // Data
-import { log, getuid, dateOfNext } from '../../../modules/helpers'
+import { log, getuid, dateOfNext, Dialogue } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 import { isCI } from '../../../modules/apis/platform'
 
@@ -31,7 +31,10 @@ class WriteNutshell extends Component {
 				entries: [],
 				...props.nutshell
 			},
-			unsavedChanges: false
+			unsavedChanges: false,
+			tips: {
+				cards: `You're typing a lot into one card! That is ok, but you might want to consider adding an extra card!\n\nScroll down to see the next card.`
+			}
 		}
 
 	}
@@ -117,6 +120,33 @@ class WriteNutshell extends Component {
 
 	}
 
+	// Handletips
+	scheduleTipCheck = f => {
+
+		if( this.scheduledTipCheck ) {
+			clearTimeout( this.scheduledTipCheck )
+			this.scheduledTipCheck = undefined
+		}
+
+		this.scheduledTipCheck = setTimeout( this.handleTips, this.state.autosaveInterval )
+
+	}
+	handleTips = async f => {
+
+		const { nutshell: { entries }, tips } = this.state
+
+		const longestEntry = entries.sort( ( a, b ) => a.paragraph.length > b.paragraph.length )[0]
+
+		// Tip about having multiple cards
+		if( tips.cards && longestEntry.paragraph.length > 500 ) {
+			const newTips = { ...tips }
+			delete newTips.cards
+			await this.updateState( { tips: newTips } )
+			await Dialogue( 'Tip', tips.cards )
+		}
+
+	}
+
 	// Entry updates
 	updateEntry = async ( uid, key, value ) => {
 
@@ -133,6 +163,7 @@ class WriteNutshell extends Component {
 
 		// Trigger autosave
 		this.scheduleAutosave()
+		this.scheduleTipCheck()
 
 		return this.updateState( { unsavedChanges: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
 	}
@@ -167,7 +198,7 @@ class WriteNutshell extends Component {
 		// Only send entries with a title
 		const updatedNutshell = {
 			...nutshell,
-			entries: entries.filter( entry => entry.title.length > 0 ),
+			entries: entries.filter( entry => entry.title.length > 0 || entry.paragraph.length > 0 ),
 			published: dateOfNext( 'monday' ).getTime()
 		}
 

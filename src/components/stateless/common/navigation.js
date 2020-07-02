@@ -76,10 +76,12 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 				<SafeAreaView style={ { flex: 1, backgroundColor: theme.colors.surface } }>
 
 					{ /* Title */ }
-					<Drawer.Section title='Menu' style={ { height: '100%', marginBottom: 0 } }>
+					<View style={ { height: '100%', marginBottom: 0 } }>
 
 						{ /* Elements included from above */ }
-						{ links.map( ( { label, to, onPress } ) => <Drawer.Item key={ label+to } label={ label } onPress={ onPress ? onPress : f => go( to ) } /> ) }
+						{ links.map( section => <Drawer.Section style={ { } } key={ section.label } title={ section.label }>
+							{ section.links.map( ( { label, to, onPress } ) => <Drawer.Item key={ label+to } label={ label } onPress={ onPress ? onPress : f => go( to ) } /> ) }
+						</Drawer.Section> ) }
 
 
 					    <View style={ { marginTop: 'auto', width: '100%' } }>
@@ -90,7 +92,7 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 					    	<DarkMode toggleDark={ toggleDark } theme={ theme } />
 					    </View>
 
-				    </Drawer.Section>
+				    </View>
 			    </SafeAreaView>
 			</Surface>
 

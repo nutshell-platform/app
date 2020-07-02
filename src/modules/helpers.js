@@ -2,6 +2,7 @@ import { Alert as NativeAlert, YellowBox } from 'react-native'
 import { dev, isWeb, isCI } from './apis/platform'
 import { v4 as uuidv4 } from 'uuid'
 import * as Random from 'expo-random'
+import * as Linking from 'expo-linking'
 
 // ///////////////////////////////
 // Visual
@@ -54,6 +55,31 @@ export const ignoreErrors = arr => YellowBox.ignoreWarnings( arr )
 // Generators
 // ///////////////////////////////
 export const getuid = async f => uuidv4( { random: await Random.getRandomBytesAsync( 16 ) } )
+
+export const sendEmail = ( to, subject, body ) => Linking.openURL( `mailto:${to}?subject=${subject}&body=${encodeURIComponent( body )}` )
+
+// ///////////////////////////////
+// Data manipulation
+// ///////////////////////////////
+export const uniqueByProp = ( array, propToFilterBy ) => {
+
+	const matches = []
+
+	return array.filter( item => {
+
+		const valueThatShouldBeUnique = item[ propToFilterBy ]
+
+		// If already found, exclude
+		if( matches.includes( valueThatShouldBeUnique ) ) return false
+
+		// Otherwise register and keep it
+		matches.push( valueThatShouldBeUnique )
+		return true
+
+	} )
+
+}
+
 
 // ///////////////////////////////
 // Dates

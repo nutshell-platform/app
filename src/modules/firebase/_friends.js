@@ -1,4 +1,5 @@
 import { dataFromSnap, hash } from './helpers'
+import { uniqueByProp } from '../helpers'
 
 export const getRandomPeople = app => app.db.collection( 'users' ).get( ).then( dataFromSnap ).then( friends => friends.filter( friend => friend.uid != app.auth.currentUser.uid ) )
 
@@ -54,7 +55,9 @@ export const findPerson = async ( app, query ) => {
 			const matches = await app.db.collection( 'fingerprints' ).where( 'email', '==', hash( query ) ).get().then( dataFromSnap )
 			return Promise.all( notMe( matches ).map( readProfile ) )
 		} else {
-			return app.db.collection( 'users' ).where( 'handle', '==', query.toLowerCase() ).get().then( dataFromSnap ).then( notMe )
+			const handleMatches = await app.db.collection( 'users' ).where( 'handle', '==', query.toLowerCase() ).get().then( dataFromSnap ).then( notMe )
+			const nameMatches = await app.db.collection( 'users' ).where( 'name', '==', query.toLowerCase() ).get().then( dataFromSnap ).then( notMe )
+			return uniqueByProp( [ ...handleMatches, ...nameMatches  ], 'uid' )
 		}
 
 	} catch( e ) {
