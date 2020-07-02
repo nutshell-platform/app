@@ -56,7 +56,7 @@ export const ignoreErrors = arr => YellowBox.ignoreWarnings( arr )
 // ///////////////////////////////
 export const getuid = async f => uuidv4( { random: await Random.getRandomBytesAsync( 16 ) } )
 
-export const sendEmail = ( to, subject, body ) => Linking.openURL( `mailto:${to}?subject=${subject}&body=${encodeURIComponent( body )}` )
+export const sendEmail = ( to, subject, body ) => Linking.openURL( `mailto:${to}?subject=${subject}&body=${body}` )
 
 // ///////////////////////////////
 // Data manipulation
