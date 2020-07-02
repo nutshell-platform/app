@@ -107,12 +107,16 @@ export const distanceToNextDayType = ( targetDay, baseline ) => {
 
 export const dateOfNext = day => {
 
-	// Generate midnight today ( the first second of today, in the past )
+	// Generate midnight today ( the first second of today, whic is technically midnight yesterday )
 	const startofToday = new Date( today )
 	startofToday.setHours( 0, 0, 0, 0 )
 	
 	// Next day of the type input into the function, also it's first second of that day
-	const nextDayOfSuppliedType = new Date().setDate( startofToday.getDate() + distanceToNextDayType( day ) )
+	const nextDayOfSuppliedType = new Date()
+	// Set the next day of that typed based on day of the month
+	nextDayOfSuppliedType.setDate( startofToday.getDate() + distanceToNextDayType( day ) )
+	nextDayOfSuppliedType.setHours( 0, 0, 0, 0 )
+
 	// console.log( nextDayOfSuppliedType )
 	return new Date( nextDayOfSuppliedType )
 }
