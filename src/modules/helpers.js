@@ -2,6 +2,7 @@ import { Alert as NativeAlert, YellowBox } from 'react-native'
 import { dev, isWeb, isCI } from './apis/platform'
 import { v4 as uuidv4 } from 'uuid'
 import * as Random from 'expo-random'
+import * as Linking from 'expo-linking'
 
 // ///////////////////////////////
 // Visual
@@ -55,6 +56,31 @@ export const ignoreErrors = arr => YellowBox.ignoreWarnings( arr )
 // ///////////////////////////////
 export const getuid = async f => uuidv4( { random: await Random.getRandomBytesAsync( 16 ) } )
 
+export const sendEmail = ( to, subject, body ) => Linking.openURL( `mailto:${to}?subject=${subject}&body=${body}` )
+
+// ///////////////////////////////
+// Data manipulation
+// ///////////////////////////////
+export const uniqueByProp = ( array, propToFilterBy ) => {
+
+	const matches = []
+
+	return array.filter( item => {
+
+		const valueThatShouldBeUnique = item[ propToFilterBy ]
+
+		// If already found, exclude
+		if( matches.includes( valueThatShouldBeUnique ) ) return false
+
+		// Otherwise register and keep it
+		matches.push( valueThatShouldBeUnique )
+		return true
+
+	} )
+
+}
+
+
 // ///////////////////////////////
 // Dates
 // ///////////////////////////////
@@ -107,12 +133,16 @@ export const distanceToNextDayType = ( targetDay, baseline ) => {
 
 export const dateOfNext = day => {
 
-	// Generate midnight today ( the first second of today, in the past )
+	// Generate midnight today ( the first second of today, whic is technically midnight yesterday )
 	const startofToday = new Date( today )
 	startofToday.setHours( 0, 0, 0, 0 )
 	
 	// Next day of the type input into the function, also it's first second of that day
-	const nextDayOfSuppliedType = new Date().setDate( startofToday.getDate() + distanceToNextDayType( day ) )
+	const nextDayOfSuppliedType = new Date()
+	// Set the next day of that typed based on day of the month
+	nextDayOfSuppliedType.setDate( startofToday.getDate() + distanceToNextDayType( day ) )
+	nextDayOfSuppliedType.setHours( 0, 0, 0, 0 )
+
 	// console.log( nextDayOfSuppliedType )
 	return new Date( nextDayOfSuppliedType )
 }

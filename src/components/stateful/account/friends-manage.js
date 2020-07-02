@@ -43,7 +43,6 @@ class ManageFriends extends Component {
 		if( loading || !followers ) return false
 
 		// If remote followers are more than local, get follower details
-		if( followers.length > results.length ) await this.loadFollowerDetails()
 		return true
 	}
 
@@ -111,6 +110,8 @@ class ManageFriends extends Component {
 	}
 
 	render() {
+
+		log( 'Friends state: ', this.state )
 
 		const { loading, query, searching } = this.state
 

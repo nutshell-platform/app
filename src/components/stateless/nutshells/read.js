@@ -5,7 +5,7 @@ import { Card, Title, Paragraph, View, HelperText, IconButton, Divider, Button, 
 
 export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, isSelf, isAdmin, deleteNutshell } ) => {
 
-	const { entries, updated, user, uid, readcount } = nutshell
+	const { entries, updated, published, user, uid, readcount } = nutshell
 	const [ deleting, setDeleting ] = useState( false )
 	const gutter = 40
 
@@ -25,7 +25,7 @@ export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize
 				{ user && <Title onPress={ f => go( `/${ user.handle }` ) }>{user.name}</Title> }
 				<HelperText style={ { paddingBottom: 10 } }>
 					{ user && `@${user.handle}, ` }
-					{ timestampToHuman( updated ) }
+					{ timestampToHuman( published || updated ) }
 					{ readcount > 0 && `, read by ${readcount}` }
 				</HelperText>
 
