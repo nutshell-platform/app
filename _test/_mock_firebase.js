@@ -1,6 +1,9 @@
 import { user, inbox, nutshell, settings } from '../src/modules/dummy-data'
 class Firebase {
 
+	// Helpers
+	isOnline = async f => true
+
 	// ///////////////////////////////
 	// User actions
 	// ///////////////////////////////
