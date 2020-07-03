@@ -7,7 +7,7 @@ import { ListResults } from '../../stateless/account/friends-find'
 import Friends from '../../../../assets/undraw_friends_online_klj6.svg'
 
 // Data
-import { log, catcher } from '../../../modules/helpers'
+import { log, catcher, Dialogue } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux
@@ -21,7 +21,8 @@ class FindFriends extends Component {
 		newFollows: [],
 		newUnfollows: [],
 		timeout: 1000,
-		filter: 'all'
+		filter: 'all',
+		results: []
 	}
 
 	componentDidMount = f => this.defaultSearch()
@@ -31,6 +32,13 @@ class FindFriends extends Component {
 
 	// Set random people as results
 	defaultSearch = async f => {
+
+		// Offline checker
+		if( !( await app.isOnline() ) ) return Promise.all( [
+			Dialogue( 'You are offline', `We can't load any new data and any changes will not be saved.` ),
+			this.updateState( { loading: false } )
+		] )
+
 		const people = await app.getRandomPeople(  )
 		return this.updateState( { results: people, loading: false } )
 	}

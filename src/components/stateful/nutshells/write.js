@@ -33,13 +33,15 @@ class WriteNutshell extends Component {
 			},
 			unsavedChanges: false,
 			tips: {
-				cards: `You're typing a lot into one card! That is ok, but you might want to consider adding an extra card!\n\nScroll down to see the next card.`
+				cards: `You're typing a lot into one card! That is ok, but you might want to consider adding an extra card!\n\nScroll down to see the next card.`,
+				offline: `You are offline. We can't load any new data and any changes will not be saved.`
 			}
 		}
 
 	}
 
 	updateEntryInterface = async f => {
+
 		// Get entries from Nutshell and postpend a new one
 		const { nutshell } = this.state
 		let entries = [ ...nutshell.entries ]
@@ -143,6 +145,14 @@ class WriteNutshell extends Component {
 			delete newTips.cards
 			await this.updateState( { tips: newTips } )
 			await Dialogue( 'Tip', tips.cards )
+		}
+
+		// Offline checker
+		if( !( await app.isOnline() ) ) {
+			const newTips = { ...tips }
+			delete newTips.offline
+			await this.updateState( { tips: newTips } )
+			await Dialogue( 'You are offline', tips.offline )
 		}
 
 	}

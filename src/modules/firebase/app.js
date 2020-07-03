@@ -17,6 +17,7 @@ import { setNutshellDraft, setNutshellInbox } from '../../redux/actions/nutshell
 
 // Config
 import config from './config'
+import * as Network from 'expo-network'
 
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'
@@ -51,6 +52,9 @@ class Firebase {
 	logout		  = f => logoutUser( this )
 	deleteUser	  = f => deleteUser( this.auth )
 	resetPassword = email => resetPassword( this.auth, email )
+
+	// Helpers
+	isOnline = f => Network.getNetworkStateAsync().then( ( { isInternetReachable } ) => isInternetReachable ).catch( f => false )
 
 	// ///////////////////////////////
 	// Settings

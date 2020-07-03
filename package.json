@@ -35,7 +35,7 @@
     "expo-image-manipulator": "~8.1.0",
     "expo-image-picker": "~8.3.0",
     "expo-linking": "^1.0.3",
-    "expo-network": "~2.2.1",
+    "expo-network": "~2.1.0",
     "expo-permissions": "~8.1.0",
     "expo-random": "~8.1.0",
     "expo-screen-orientation": "~1.0.0",
