@@ -127,7 +127,7 @@ class Navigation extends Component {
 		} )
 
 		// Add moderation link
-		if( user.moderator ) links.push( { 
+		if( user?.moderator ) links.push( { 
 			label: 'Superpowers',
 			links: [
 				{ label: 'Moderation', to: '/nutshells/moderate' }
