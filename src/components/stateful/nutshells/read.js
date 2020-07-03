@@ -19,7 +19,9 @@ class ReadNutshell extends Component {
 
 	// initialise state
 	state = {
-		loading: 'Checking your Nutshell inbox'
+		loading: 'Checking your Nutshell inbox',
+		inbox: [],
+		rawInbox: undefined
 	}
 
 	loading = false
@@ -29,6 +31,12 @@ class ReadNutshell extends Component {
 	loadInbox = async f => {
 
 		if( this.loading ) return
+
+		// Offline checker
+		if( !( await app.isOnline() ) ) return Promise.all( [
+			Dialogue( 'You are offline', `We can't load any new data and any changes will not be saved.` ),
+			this.updateState( { loading: false } )
+		] )
 
 		try {
 
@@ -56,7 +64,7 @@ class ReadNutshell extends Component {
 			await Promise.all( markRead.map( nutshell => this.markRead( nutshell.delete ) ) ).catch( e => log( e ) )
 
 		} catch( e ) {
-			alert( e )
+			Dialogue( 'Something went wrong', e )
 		} finally {
 			this.loading = false
 		}

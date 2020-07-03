@@ -13,7 +13,7 @@ import app from '../../../modules/firebase/app'
 
 // Helpers
 import { capitalize, log, sendEmail, Dialogue } from '../../../modules/helpers'
-import { isWeb, version, OS } from '../../../modules/apis/platform'
+import { isWeb, isIos, isAndroid, version, OS } from '../../../modules/apis/platform'
 
 
 class Navigation extends Component {
@@ -70,20 +70,19 @@ class Navigation extends Component {
 	mailBugreport = async f => {
 
 		const { user: { name, handle } } = this.props
-		const n = isWeb ? '\n' : '<br>'
+		const n = ( isWeb && '\n' ) || ( isIos && '<br>' ) || ( isAndroid && '<br><br>' )
 
 		await Dialogue( '💌 Your email client will open', `Your input is super appreciated ${ handle }.\n\nWe have pre-composed an email for you, please edit the relevant parts with your input.` )
 
 		const message = `Hello nutshell team!
-			${ n }${ n }My name is ${ name }, my nutshell handle is ${ handle }.
-			${ n }${ n }I encountered a problem:
-			${ n }${ n }1. I was trying to ✏️ insert_what_you_were_doing
+			${ n }My name is ${ name }, my nutshell handle is ${ handle }.
+			${ n }I encountered a problem:
+			${ n }1. I was trying to ✏️ insert_what_you_were_doing
 			${ n }2. I expected the app to ✏️ insert_what_you_expeted_to_happen
 			${ n }3. Instead, the app ✏️ insert_what_happened
-			${ n }${ n }I am using app version "${ version }" on ${ OS }.
-			${ n }${ n }Thanks for taking a look at it!
-			${ n }${ n }Sincerely,
-			${ n }${ name }
+			${ n }I am using app version "${ version }" on ${ OS }.
+			${ n }Thanks for taking a look at it!
+			${ n }Sincerely,${ n }${ name }
 		`
 
 		return sendEmail( 'bugs@nutshell.social', '🐞 Nutshell bug report', message )
@@ -93,17 +92,17 @@ class Navigation extends Component {
 	mailFeaturerequest = async f => {
 
 		const { user: { name, handle } } = this.props
+		const n = ( isWeb && '\n' ) || ( isIos && '<br>' ) || ( isAndroid && '<br><br>' )
 
 		await Dialogue( '💌 Your email client will open', `Your input is super appreciated ${ handle }.\n\nWe have pre-composed an email for you, please edit the relevant parts with your input.` )
 
 		const message = `Hello nutshell team!
-			${ n }${ n }My name is ${ name }, my nutshell handle is ${ handle }.
-			${ n }${ n }I would like to suggest a feature, it would be great if:
-			${ n }${ n }✏️ Insert_your_feature_idea.
-			${ n }${ n }I am using app version "${ version }" on ${ OS }.
-			${ n }${ n }Thanks for taking a look at it!
-			${ n }${ n }Sincerely,
-			${ n }${ name }
+			${ n }My name is ${ name }, my nutshell handle is ${ handle }.
+			${ n }I would like to suggest a feature, it would be great if:
+			${ n }✏️ Insert_your_feature_idea.
+			${ n }I am using app version "${ version }" on ${ OS }.
+			${ n }Thanks for taking a look at it!
+			${ n }Sincerely,${ n }${ name }
 		`
 
 		return sendEmail( 'features@nutshell.social', '✨ Nutshell feature request', message )
@@ -128,7 +127,7 @@ class Navigation extends Component {
 		} )
 
 		// Add moderation link
-		if( user.moderator ) links.push( { 
+		if( user?.moderator ) links.push( { 
 			label: 'Superpowers',
 			links: [
 				{ label: 'Moderation', to: '/nutshells/moderate' }
