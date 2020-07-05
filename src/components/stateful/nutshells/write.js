@@ -137,7 +137,7 @@ class WriteNutshell extends Component {
 
 		const { nutshell: { entries }, tips } = this.state
 
-		const longestEntry = entries.sort( ( a, b ) => a.paragraph.length > b.paragraph.length )[0]
+		const longestEntry = [ ...entries ].sort( ( a, b ) => a.paragraph.length > b.paragraph.length )[0]
 
 		// Tip about having multiple cards
 		if( tips.cards && longestEntry.paragraph.length > 500 ) {
