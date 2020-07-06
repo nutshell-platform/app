@@ -99,10 +99,10 @@ exports.publish = async f => {
 					} ) )
 
 					// Once added to inboxes, mark published
-					logs.push(  `Marking nutshell ${ nutshell.uid } as read` )
+					logs.push(  `Marking nutshell ${ nutshell.uid } as published` )
 					return db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published' }, { merge: true } )
 						.catch( e => {
-							logs.push( `Error marking ${ nutshell.uid } as read` )
+							logs.push( `Error marking ${ nutshell.uid } as published` )
 							logs.push( e )
 							throw e
 						} )
@@ -116,6 +116,8 @@ exports.publish = async f => {
 				}
 
 		} ) )
+
+		logs.push( 'Nutshell publishing completed gracefully' )
 
 
 
