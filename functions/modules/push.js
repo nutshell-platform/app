@@ -113,8 +113,6 @@ exports.retreivePushReceipts = async f => {
 
 		} ) )
 
-		throw new Error( 'Testing this out' )
-
 		logs.push( 'Receipts handled' )
 
 	} catch( e ) {
