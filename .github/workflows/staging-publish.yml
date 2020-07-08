@@ -43,6 +43,7 @@ jobs:
         run: |
           echo -e "${{ secrets.DOTENV_STAGING }}" > .env
           echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
+          echo -e "${{ secrets.GOOGLE_SERVICES_PLIST }}" > GoogleService-info.plist
 
       - name: Automated testing
         run: npm test -- --bail

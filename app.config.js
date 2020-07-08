@@ -1,3 +1,19 @@
+// Firebase configs
+require('dotenv').config()
+
+const { FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_databaseURL, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, FIREBASE_measurementId } = process.env
+const { development: dev } = process.env
+const firebaseConfig = {
+  apiKey: FIREBASE_apiKey,
+  authDomain: FIREBASE_authDomain,
+  databaseURL: FIREBASE_databaseURL,
+  projectId: FIREBASE_projectId,
+  storageBucket: FIREBASE_storageBucket,
+  messagingSenderId: FIREBASE_messagingSenderId,
+  appId: FIREBASE_appId,
+  measurementId: FIREBASE_measurementId
+}
+
 export default {
   "expo": {
 
@@ -43,6 +59,7 @@ export default {
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nutshell.nutshell",
+      "googleServicesFile": `./GoogleService-Info${ dev ? '-development' : '' }.plist`,
       "buildNumber": "1.1.1",
       "infoPlist": {
         NSCameraUsageDescription: "Camera permission is used to take a new photo to use as your profile picture.",
@@ -53,9 +70,14 @@ export default {
     // Android config
     "android": {
       "package": "com.nutshell.nutshell",
-      "googleServicesFile": "./google-services.json",
+      "googleServicesFile": `./google-services${ dev ? '-development' : '' }.json`,
       "versionCode": 4,
       "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE" ]
+    },
+
+    // Web config
+    web: {
+      firebase: firebaseConfig
     },
 
 

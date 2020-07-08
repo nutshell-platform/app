@@ -61,6 +61,7 @@
     "uuid": "^7.0.3"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "firebase-tools": "^8.4.3",
     "jest": "^25.5.4",
     "jest-expo": "^37.0.0",

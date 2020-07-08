@@ -38,8 +38,10 @@ jobs:
 
       - name: Create environment files
         run: |
-          echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
           echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
+          echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
+          echo -e "${{ secrets.GOOGLE_SERVICES_PLIST }}" > GoogleService-info.plist
+          
 
       - name: Automated testing
         run: npm test -- --bail
