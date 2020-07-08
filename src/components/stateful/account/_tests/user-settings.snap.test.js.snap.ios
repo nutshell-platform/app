@@ -185,7 +185,6 @@ exports[`UserSettings Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -196,7 +195,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -227,9 +225,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -268,7 +264,6 @@ exports[`UserSettings Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -279,7 +274,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -310,9 +304,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -351,7 +343,6 @@ exports[`UserSettings Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -362,7 +353,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -393,9 +383,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -434,7 +422,6 @@ exports[`UserSettings Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -445,7 +432,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -476,9 +462,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -596,7 +580,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <View
                       accessible={true}
                       focusable={true}
-                      isTVSelectable={true}
                       onClick={[Function]}
                       onResponderGrant={[Function]}
                       onResponderMove={[Function]}
@@ -647,7 +630,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         </View>
                         <View
                           accessibilityRole="button"
-                          accessibilityStates={Array []}
                           accessible={true}
                           focusable={false}
                           hitSlop={
@@ -658,7 +640,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "top": 6,
                             }
                           }
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -696,9 +677,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             ]
                           }
                         >
-                          <View
-                            style={null}
-                          >
+                          <View>
                             <Text />
                           </View>
                         </View>
@@ -1041,7 +1020,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -1283,7 +1261,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -1525,7 +1502,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -1634,10 +1610,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                       >
                         <View
                           accessibilityRole="button"
-                          accessibilityStates={Array []}
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -2022,7 +1996,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -2369,7 +2342,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           Write your Nutshell (weekly)
                         </Text>
                         <RCTSwitch
-                          accessibilityRole="button"
+                          accessibilityRole="switch"
                           index={4}
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
@@ -2403,7 +2376,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -2483,7 +2455,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           Unread Nutshells (weekly)
                         </Text>
                         <RCTSwitch
-                          accessibilityRole="button"
+                          accessibilityRole="switch"
                           index={5}
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
@@ -2517,7 +2489,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -2597,7 +2568,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           New followers (real-time)
                         </Text>
                         <RCTSwitch
-                          accessibilityRole="button"
+                          accessibilityRole="switch"
                           index={6}
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
@@ -2631,7 +2602,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -2711,7 +2681,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           Friend joined (real-time)
                         </Text>
                         <RCTSwitch
-                          accessibilityRole="button"
+                          accessibilityRole="switch"
                           index={7}
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
@@ -2745,7 +2715,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -2851,10 +2820,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                       >
                         <View
                           accessibilityRole="button"
-                          accessibilityStates={Array []}
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}

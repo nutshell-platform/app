@@ -13,7 +13,6 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
   <View
     accessible={true}
     focusable={true}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -61,7 +60,6 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
       </View>
       <View
         accessibilityRole="button"
-        accessibilityStates={Array []}
         accessible={true}
         focusable={false}
         hitSlop={
@@ -72,7 +70,6 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
             "top": 6,
           }
         }
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -110,9 +107,7 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
           ]
         }
       >
-        <View
-          style={null}
-        >
+        <View>
           <Text
             accessibilityElementsHidden={true}
             allowFontScaling={false}
@@ -167,7 +162,6 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
   <View
     accessible={true}
     focusable={true}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -206,7 +200,6 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
       </View>
       <View
         accessibilityRole="button"
-        accessibilityStates={Array []}
         accessible={true}
         focusable={false}
         hitSlop={
@@ -217,7 +210,6 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
             "top": 6,
           }
         }
-        isTVSelectable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -255,9 +247,7 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
           ]
         }
       >
-        <View
-          style={null}
-        >
+        <View>
           <Text />
         </View>
       </View>
