@@ -3,6 +3,19 @@ const { dataFromSnap, log, error } = require( './helpers' )
 const { db, FieldValue } = require( './firebase' )
 
 // ///////////////////////////////
+//  Show queue
+// ///////////////////////////////
+exports.showQueue = async ( req, res ) => {
+	if( req.query.secret != 42 ) return res.send( 'Invalid authentication' )
+	try {
+		const nutshells = await scheduledNutshells( !!req.query.all )
+		return res.send( nutshells )
+	} catch( e ) {
+		return res.send( { error: e } )
+	}
+}
+
+// ///////////////////////////////
 // Demo data
 // ///////////////////////////////
 exports.makeDemo = async f => {

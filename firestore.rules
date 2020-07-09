@@ -34,10 +34,9 @@ service cloud.firestore {
       allow write: if resource == null || resource.data.owner == request.auth.uid
       allow read: if request.auth.uid != null
     }
-    match /fingerprints/{userUid} {
-      // Write own, read others if logged in
-      allow write: if request.auth.uid == userUid
-      allow read: if request.auth.uid != null
+    match /fingerprints/{fingerprint} {
+      // Only allow a write if the data given is ownership of the logged in account and that is the only data supplied
+      allow write: if request.auth.uid != null && request.resource.data.size() == 1 && request.resource.data.owners.hasOnly( [ request.auth.uid ] )
     }
 
     // ///////////////////////////////

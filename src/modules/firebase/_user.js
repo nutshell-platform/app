@@ -18,6 +18,9 @@ export const listenUserLogin = ( app, dispatch, action, listeners ) => new Promi
 		if( user ) {
 			registerListeners( app, dispatch, listeners )
 			await dispatch( action( await getUserProfile( app.db, user ) ) )
+			
+			// Set email fingerprint
+			await setEmailFingerprint( app )
 		}
 
 		// Unregister listeners and reset app if we are not logged in
@@ -67,7 +70,7 @@ export const registerUser = async ( app, name, handle, email, password ) => {
 		} )
 
 		// Set email hash fingerprint
-		await setEmailFingerprint( app.db, app.auth.currentUser )
+		await setEmailFingerprint( app )
 
 	} catch( e ) {
 		catcher( e )
@@ -90,7 +93,7 @@ export const updateUser = async ( app, userUpdates ) => {
 			await app.loginUser( app.auth.currentUser.email, currentpassword )
 			await app.auth.currentUser.updateEmail( email )
 			// Set email fingerprint
-			await setEmailFingerprint( app.db, app.auth.currentUser )
+			await setEmailFingerprint( app )
 		}
 		if( newpassword && currentpassword ) {
 			await app.loginUser( app.auth.currentUser.email, currentpassword )

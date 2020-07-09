@@ -26,6 +26,7 @@ import { updateSettings, listenSettings, setLocalTimeToSettings } from './_setti
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
+import { getAndSaveFingerprints } from './_fingerprints'
 
 // ///////////////////////////////
 // Firebase manager class
@@ -90,6 +91,11 @@ class Firebase {
 	getPerson 		= ( query, by='handle' ) => getPerson( this.db, query, by )
 	blockPerson 	= uid => blockPerson( this, uid )
 	unblockPerson 	= uid => unblockPerson( this, uid )
+
+	// ///////////////////////////////
+	// Fingerprints
+	// ///////////////////////////////
+	getAndSaveFingerprints = f => getAndSaveFingerprints( this )
 	
 	// ///////////////////////////////
 	// Initialisation

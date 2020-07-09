@@ -60,7 +60,8 @@
     "redux-persist": "^6.0.0",
     "redux-promise-middleware": "^6.1.2",
     "sentry-expo": "^2.1.2",
-    "uuid": "^8.2.0"
+    "uuid": "^8.2.0",
+    "expo-contacts": "~8.2.1"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

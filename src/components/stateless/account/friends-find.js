@@ -16,4 +16,6 @@ export const ListResults = ( { results=[], follow, unfollow } ) => <View style={
 	</Card> ) }
 </View>
 
-export const another = true
+export const LinkContacts = ( { linkContacts, ...props } ) => <View style={ { width: '100%', paddingTop: 20 } }>
+	<Link onPress={ linkContacts }>Do the thing</Link>
+</View>

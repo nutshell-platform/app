@@ -3,12 +3,14 @@ import React from 'react'
 // Visual
 import { Component, Container, Loading, Main, Title, Search } from '../../stateless/common/generic'
 import Navigation from '../common/navigation'
-import { ListResults } from '../../stateless/account/friends-find'
+import { ListResults, LinkContacts } from '../../stateless/account/friends-find'
 import Friends from '../../../../assets/undraw_friends_online_klj6.svg'
 
 // Data
-import { log, catcher, Dialogue } from '../../../modules/helpers'
+import { log, catcher, Dialogue, wait } from '../../../modules/helpers'
+import { isWeb } from '../../../modules/apis/platform'
 import app from '../../../modules/firebase/app'
+
 
 // Redux
 import { connect } from 'react-redux'
@@ -117,6 +119,32 @@ class FindFriends extends Component {
 
 	}
 
+	linkContacts = async f => {
+
+		try {
+
+			await Dialogue( '🕵️‍♀️ Detective friendfinder', 'This will cross-reference your contact book with Nutshel users.' )
+			await this.updateState( { loading: 'Sherlock is analysing your contacts...' } )
+			const status = await Promise.race( [
+				app.getAndSaveFingerprints(),
+				wait( 5000 ).then( f => 'long' )
+			] )
+
+			if( status == 'long' ) {
+				await this.updateState( { loading: 'Sherlock is slow today, no coffee this morning you see.' } )
+				await wait( 5000 )
+			}
+
+		} catch( e ) {
+			Dialogue( `Something went wrong with your contacts, sorry about that. Try again in a few minutes? We'll get some coffee.` )
+			log( e )
+		} finally {
+			await this.updateState( { loading: false } )
+			Dialogue( '🔥 All set!', `We are running our cross-referencing in the backgroud. You will be notified when we find a match.` )
+		}
+
+	}
+
 	render() {
 
 		const { loading, query, searching } = this.state
@@ -127,6 +155,7 @@ class FindFriends extends Component {
 			<Navigation title='Friends' />
 			<Main.Top style={ { width: 500 } }>
 				<Search searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
+				{ !isWeb && <LinkContacts linkContacts={ this.linkContacts } /> }
 				<ListResults unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } />
 			</Main.Top>
 		</Container>
