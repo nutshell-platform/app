@@ -17,10 +17,17 @@ export const listenUserLogin = ( app, dispatch, action, listeners ) => new Promi
 		// Register listeners if we are logged in
 		if( user ) {
 			registerListeners( app, dispatch, listeners )
-			await dispatch( action( await getUserProfile( app.db, user ) ) )
+
+			const profile = await getUserProfile( app.db, user )
+			await dispatch( action( profile ) )
 			
 			// Set email fingerprint
 			await setEmailFingerprint( app )
+
+			// If user has no score, but does have a bio or avatar, update the score
+			const scoreUser = app.func.httpsCallable( 'scoreUser' )
+			if( !profile.score && ( profile.avatar || profile.bio ) ) await scoreUser( profile.uid )
+
 		}
 
 		// Unregister listeners and reset app if we are not logged in

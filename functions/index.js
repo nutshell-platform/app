@@ -46,6 +46,12 @@ const { saveFingerprints } = require( './modules/fingerprints' )
 exports.saveFingerprints = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).https.onCall( saveFingerprints )
 
 // ///////////////////////////////
+// Recommendation engine
+// ///////////////////////////////
+const { scoreUser } = require( './modules/reccomendations' )
+exports.scoreUser = functions.https.onCall( ( data, context ) => scoreUser( context.auth.uid ) )
+
+// ///////////////////////////////
 // Debugging
 // ///////////////////////////////
 

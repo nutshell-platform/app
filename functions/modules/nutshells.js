@@ -72,6 +72,9 @@ exports.scheduledNutshells = async all => {
 // ///////////////////////////////
 exports.publish = async f => {
 
+	// Score recomputation module
+	const { scoreUser } = './recommendations'
+
 	const logs = []
 
 	try {
@@ -86,9 +89,9 @@ exports.publish = async f => {
 
 		const nutshells = queue.map( ( { uid, owner } ) => ( { uid, owner } ) )
 
-		// ///////////////////////////////
-		// For every Nutshell send to inboxed
-		// ///////////////////////////////
+		// //////////////////////////////////
+		// For every Nutshell send to inbox
+		// //////////////////////////////////
 		logs.push( 'Sending nutshells to inbox' )
 
 		await Promise.all( nutshells.map( async nutshell => {
@@ -113,12 +116,17 @@ exports.publish = async f => {
 
 					// Once added to inboxes, mark published
 					logs.push(  `Marking nutshell ${ nutshell.uid } as published` )
-					return db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published' }, { merge: true } )
+					await db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published' }, { merge: true } )
 						.catch( e => {
 							logs.push( `Error marking ${ nutshell.uid } as published` )
 							logs.push( e )
 							throw e
 						} )
+
+					// Recalculate user score after publishing is complete
+					logs.push( 'Recomputing score of user' )
+					await scoreUser( nutshell.owner )
+					logs.push( 'Score recomputed' )
 
 				} catch( e ) {
 
@@ -127,6 +135,8 @@ exports.publish = async f => {
 					throw e
 
 				}
+
+				return
 
 		} ) )
 
