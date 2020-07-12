@@ -40,7 +40,7 @@ jobs:
         run: |
           echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
           echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
-          echo -e "${{ secrets.GOOGLE_SERVICES_PLIST }}" > GoogleService-info.plist
+          echo -e "${{ secrets.GOOGLE_SERVICES_PLIST }}" > GoogleService-Info.plist
           
 
       - name: Automated testing
