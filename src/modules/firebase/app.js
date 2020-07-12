@@ -5,6 +5,7 @@ import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
 // import 'firebase/analytics'
+import 'expo-firebase-analytics'
 
 // Redux
 import { store } from '../../redux/store'
@@ -18,6 +19,9 @@ import { setNutshellDraft, setNutshellInbox } from '../../redux/actions/nutshell
 // Config
 import config from './config'
 import * as Network from 'expo-network'
+
+// Helpers
+// import { isWeb } from '../apis/platform'
 
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'
@@ -109,7 +113,7 @@ class Firebase {
 		if( history ) this.history = history
 
 		// Analytics DOES NOT WORK WITH EXPO!
-		// this.fb.analytics()
+		// if( isWeb ) this.fb.analytics()
 
 		this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },

@@ -6,7 +6,7 @@
     "ios": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --ios",
     "web": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --web",
     "hybrid": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --android --web",
-    "test": "jest --colors --silent",
+    "test": "./node_modules/jest/bin/jest.js --colors --silent",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
     "stage": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel staging && npm run compile:web",
@@ -62,7 +62,8 @@
     "redux-persist": "^6.0.0",
     "redux-promise-middleware": "^6.1.2",
     "sentry-expo": "^2.1.2",
-    "uuid": "^8.2.0"
+    "uuid": "^8.2.0",
+    "expo-firebase-analytics": "~2.4.1"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
