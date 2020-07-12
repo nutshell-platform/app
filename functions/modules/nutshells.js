@@ -73,7 +73,7 @@ exports.scheduledNutshells = async all => {
 exports.publish = async f => {
 
 	// Score recomputation module
-	const { scoreUser } = './recommendations'
+	const { scoreUser, getRecommendations } = './recommendations'
 
 	const logs = []
 
@@ -127,6 +127,11 @@ exports.publish = async f => {
 					logs.push( 'Recomputing score of user' )
 					await scoreUser( nutshell.owner )
 					logs.push( 'Score recomputed' )
+
+					// Get user recommendations for this user
+					logs.push( 'Getting user reccs' )
+					await getRecommendations( nutshell.owner )
+					logs( 'Recommendations set' )
 
 				} catch( e ) {
 

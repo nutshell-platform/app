@@ -17,7 +17,6 @@ export const getAndSaveFingerprints = async app => {
 
 		// Grab prints from contact book
 		const fingerprints = await getFingerprints()
-		console.log( fingerprints[0] )
 
 		// Send to cloud function
 		await save( fingerprints )

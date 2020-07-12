@@ -1,7 +1,38 @@
 import { dataFromSnap, hash } from './helpers'
 import { uniqueByProp } from '../helpers'
 
-export const getRandomPeople = app => app.db.collection( 'users' ).get( ).then( dataFromSnap ).then( friends => friends.filter( friend => friend.uid != app.auth.currentUser.uid ) )
+// Find people and filter out myself
+export const getRandomPeople = async app => {
+
+	const searchLimit = 50
+
+	// Get scored users
+	let users = await app.db.collection( 'users' ).orderBy( 'score', 'desc' ).limit( searchLimit ).get().then( dataFromSnap )
+
+	// If there are not enough scored users, get unscored ones to fill them up
+	if( users.length < searchLimit ) {
+		const unscoredUsers = await app.db.collection( 'users' ).limit( searchLimit - users.length ).get().then( dataFromSnap )
+		users = [ ...users, ...unscoredUsers  ]
+	}
+
+	// Sort by score and/or relevance
+	users.sort( ( a, b ) => {
+
+		// If one has a score, use it to compute order
+		if( a.score || b.score ) return b.score - a.score
+
+		// If neither has score favor those with avatar
+		if( a.avatar && !b.avatar ) return -1
+		if( !a.avatar && b.avatar ) return 1
+
+		return 0
+
+	} )
+
+	// Return all that are not self
+	return users.filter( friend => friend.uid != app.auth.currentUser.uid )
+
+}
 
 // ///////////////////////////////
 // Following
@@ -78,5 +109,16 @@ export const getPerson = async ( db, query, by ) => {
 	} catch( e ) {
 		throw e
 	}
+
+}
+
+export const getContactRecommendations = async app => {
+
+	// Get funcs and data
+	const { func, auth: { currentUser } } = app
+	const getRecs = func.httpsCallable( 'getContactRecommendations' )
+
+	// Generare recommendations
+	return getRecs()
 
 }
