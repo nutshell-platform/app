@@ -4,7 +4,7 @@ import React from 'react'
 import { Component, Container, Loading, Main, Link } from '../../stateless/common/generic'
 import Tutorial from '../onboarding/tutorial'
 import FAB from '../common/fab'
-import { Placeholder, NutshellCard } from '../../stateless/nutshells/read'
+import { Placeholder, NutshellCard, ViewRecs } from '../../stateless/nutshells/read'
 import Navigation from '../common/navigation'
 import People from '../../../../assets/undraw_people_tax5.svg'
 
@@ -146,7 +146,9 @@ class ReadNutshell extends Component {
 			<Main.Top>
 				 <Tutorial />
 				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard isAdmin={ user.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+				<ViewRecs recAmount={ user.recommendations?.length } />
 				{ inbox.length == 0 && <Placeholder /> }
+
 			</Main.Top>
 
 			<FAB go={ to => history.push( to ) } />

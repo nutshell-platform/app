@@ -185,7 +185,6 @@ exports[`Login and registration Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -196,7 +195,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -227,9 +225,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -268,7 +264,6 @@ exports[`Login and registration Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -279,7 +274,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -310,9 +304,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -351,7 +343,6 @@ exports[`Login and registration Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -362,7 +353,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -393,9 +383,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -434,7 +422,6 @@ exports[`Login and registration Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -445,7 +432,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -476,9 +462,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -1044,10 +1028,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                     >
                       <View
                         accessibilityRole="button"
-                        accessibilityStates={Array []}
                         accessible={true}
                         focusable={true}
-                        isTVSelectable={true}
                         onClick={[Function]}
                         onResponderGrant={[Function]}
                         onResponderMove={[Function]}
@@ -1193,10 +1175,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                     >
                       <View
                         accessibilityRole="button"
-                        accessibilityStates={Array []}
                         accessible={true}
                         focusable={true}
-                        isTVSelectable={true}
                         onClick={[Function]}
                         onResponderGrant={[Function]}
                         onResponderMove={[Function]}

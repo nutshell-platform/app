@@ -114,7 +114,6 @@ exports[`Navitagion Matches snapshot 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={Array []}
           accessible={true}
           focusable={true}
           hitSlop={
@@ -125,7 +124,6 @@ exports[`Navitagion Matches snapshot 1`] = `
               "top": 6,
             }
           }
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -156,9 +154,7 @@ exports[`Navitagion Matches snapshot 1`] = `
             ]
           }
         >
-          <View
-            style={null}
-          >
+          <View>
             <View
               style={
                 Array [
@@ -197,7 +193,6 @@ exports[`Navitagion Matches snapshot 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={Array []}
           accessible={true}
           focusable={true}
           hitSlop={
@@ -208,7 +203,6 @@ exports[`Navitagion Matches snapshot 1`] = `
               "top": 6,
             }
           }
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -239,9 +233,7 @@ exports[`Navitagion Matches snapshot 1`] = `
             ]
           }
         >
-          <View
-            style={null}
-          >
+          <View>
             <View
               style={
                 Array [
@@ -280,7 +272,6 @@ exports[`Navitagion Matches snapshot 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={Array []}
           accessible={true}
           focusable={true}
           hitSlop={
@@ -291,7 +282,6 @@ exports[`Navitagion Matches snapshot 1`] = `
               "top": 6,
             }
           }
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -322,9 +312,7 @@ exports[`Navitagion Matches snapshot 1`] = `
             ]
           }
         >
-          <View
-            style={null}
-          >
+          <View>
             <View
               style={
                 Array [
@@ -363,7 +351,6 @@ exports[`Navitagion Matches snapshot 1`] = `
         </View>
         <View
           accessibilityRole="button"
-          accessibilityStates={Array []}
           accessible={true}
           focusable={true}
           hitSlop={
@@ -374,7 +361,6 @@ exports[`Navitagion Matches snapshot 1`] = `
               "top": 6,
             }
           }
-          isTVSelectable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -405,9 +391,7 @@ exports[`Navitagion Matches snapshot 1`] = `
             ]
           }
         >
-          <View
-            style={null}
-          >
+          <View>
             <View
               style={
                 Array [

@@ -5,6 +5,7 @@ import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
 // import 'firebase/analytics'
+import 'expo-firebase-analytics'
 
 // Redux
 import { store } from '../../redux/store'
@@ -19,13 +20,17 @@ import { setNutshellDraft, setNutshellInbox } from '../../redux/actions/nutshell
 import config from './config'
 import * as Network from 'expo-network'
 
+// Helpers
+// import { isWeb } from '../apis/platform'
+
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell } from './_nutshells'
-import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson } from './_friends'
+import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
+import { getAndSaveFingerprints } from './_fingerprints'
 
 // ///////////////////////////////
 // Firebase manager class
@@ -90,7 +95,13 @@ class Firebase {
 	getPerson 		= ( query, by='handle' ) => getPerson( this.db, query, by )
 	blockPerson 	= uid => blockPerson( this, uid )
 	unblockPerson 	= uid => unblockPerson( this, uid )
-	
+
+	// ///////////////////////////////
+	// Fingerprints
+	// ///////////////////////////////
+	getAndSaveFingerprints = f => getAndSaveFingerprints( this )
+	getContactRecommendations = f => getContactRecommendations( this )
+
 	// ///////////////////////////////
 	// Initialisation
 	// ///////////////////////////////
@@ -102,7 +113,7 @@ class Firebase {
 		if( history ) this.history = history
 
 		// Analytics DOES NOT WORK WITH EXPO!
-		// this.fb.analytics()
+		// if( isWeb ) this.fb.analytics()
 
 		this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },

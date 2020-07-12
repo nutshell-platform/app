@@ -10,21 +10,11 @@ exports.follow = functions.firestore.document( 'relationships/{relationId}' ).on
 // ///////////////////////////////
 // Cron
 // ///////////////////////////////
-const { publish, deleteFromInboxesOnNutshellDelete, makeDemo, scheduledNutshells } = require( './modules/nutshells' )
+const { publish, deleteFromInboxesOnNutshellDelete, scheduledNutshells, showQueue } = require( './modules/nutshells' )
 // cron: Every hour monday and tuesday 0 * * * 1,2
 exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( '0 * * * 1,2' ).onRun( publish )
 exports.deleteFromInboxesOnNutshellDelete = functions.firestore.document( 'nutshells/{nutshellUid}' ).onDelete( deleteFromInboxesOnNutshellDelete )
-exports.scheduledNutshells = functions.https.onRequest( async ( req, res ) => {
-	if( req.query.secret != 42 ) return res.send( 'Invalid authentication' )
-	try {
-		const nutshells = await scheduledNutshells( !!req.query.all )
-		return res.send( nutshells )
-	} catch( e ) {
-		return res.send( { error: e } )
-	}
-} )
-
-// exports.makeDemo = functions.pubsub.schedule( '0 12,0 * * *' ).onRun( makeDemo )
+exports.scheduledNutshells = functions.https.onRequest( showQueue )
 
 
 // ///////////////////////////////
@@ -49,12 +39,29 @@ exports.notifyOfUnreadNutshells = functions.pubsub.schedule( '5 * * * 1,2' ).onR
 // Cron 5 * * * 5,0 means every hour at 5 past on fri and sun. See https://crontab.guru/#5_*_*_*_5,0
 exports.notifyRememberToWrite = functions.pubsub.schedule( '5 * * * 5,0' ).onRun( rememberToWrite )
 
-// exports.resetNotificationTimes = functions.https.onCall( resetNotificationTimes )
+// ///////////////////////////////
+// Figerprints
+// ///////////////////////////////
+const { saveFingerprints } = require( './modules/fingerprints' )
+exports.saveFingerprints = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).https.onCall( saveFingerprints )
 
+// ///////////////////////////////
+// Recommendation engine
+// ///////////////////////////////
+const { scoreUser, getContactRecommendations } = require( './modules/reccomendations' )
+exports.scoreUser = functions.https.onCall( ( data, context ) => scoreUser( context.auth.uid ) )
+exports.getContactRecommendations = functions.https.onCall( ( data, context ) => getContactRecommendations( context.auth.uid ) )
+
+// ///////////////////////////////
 // Debugging
-const { sendPushNotifications } = require( './modules/push' )
+// ///////////////////////////////
+
+// exports.resetNotificationTimes = functions.https.onCall( resetNotificationTimes )
+// const { makeDemo } = require( './modules/nutshells' )
+// exports.makeDemo = functions.pubsub.schedule( '0 12,0 * * *' ).onRun( makeDemo )
+// const { sendPushNotifications } = require( './modules/push' )
 // exports.manualPushReceiptHandler = functions.https.onCall( ( context, data ) => retreivePushReceipts( db ) )
-const tokens = [ 'ExponentPushToken[4KmlslOnJCvvNS3-jHOS5k]' ]
-const message = { body: 'Derp' }
-exports.manualPushSend = functions.https.onCall( ( context, data ) => sendPushNotifications( tokens, message ) )
+// const tokens = [ 'ExponentPushToken[4KmlslOnJCvvNS3-jHOS5k]' ]
+// const message = { body: 'Derp' }
+// exports.manualPushSend = functions.https.onCall( ( data, context) => sendPushNotifications( tokens, message ) )
 // exports.manualInboxNotifier = functions.https.onCall( rememberToWrite )

@@ -29,11 +29,11 @@ const handleErrorType = content => {
 }
 
 exports.log = ( title, content ) => {
-	console.log( title, content && JSON.stringify( handleErrorType( content ), null, process.env.development ? 2 : null ) )
+	console.log( title, content ? JSON.stringify( handleErrorType( content ), null, process.env.development ? 2 : null ) : '' )
 }
 
 exports.error = ( title, content ) => {
-	console.log( title, content && JSON.stringify( handleErrorType( content ), null, process.env.development ? 2 : null ) )
+	console.log( title, content ? JSON.stringify( handleErrorType( content ), null, process.env.development ? 2 : null ) : '' )
 }
 
 // ///////////////////////////////

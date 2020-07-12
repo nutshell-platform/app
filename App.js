@@ -24,6 +24,11 @@ import { updateIfAvailable } from './src/modules/apis/updates'
 // Devving
 import { ignoreErrors } from './src/modules/helpers'
 
+// Firebase dependency fix, if we ever switch to Firbease native this can be removed
+import { decode, encode } from 'base-64'
+if( !global.btoa ) global.btoa = encode
+if( !global.atob ) global.atob = decode
+
 
 // ///////////////////////////////
 // Main app ( web )

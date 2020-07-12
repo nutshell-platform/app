@@ -179,7 +179,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -190,7 +189,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -221,9 +219,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -262,7 +258,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -273,7 +268,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -304,9 +298,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -345,7 +337,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -356,7 +347,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -387,9 +377,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -428,7 +416,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
-                accessibilityStates={Array []}
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -439,7 +426,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
-                isTVSelectable={true}
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -470,9 +456,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                   ]
                 }
               >
-                <View
-                  style={null}
-                >
+                <View>
                   <View
                     style={
                       Array [
@@ -613,7 +597,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         <View
                           accessible={true}
                           focusable={true}
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -784,7 +767,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 Status: scheduled for Sun Jun 28 at midnight
                               </Text>
                               <AndroidSwitch
-                                accessibilityRole="button"
+                                accessibilityRole="switch"
                                 enabled={true}
                                 on={true}
                                 onChange={[Function]}
@@ -802,7 +785,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           <View
                             accessible={true}
                             focusable={true}
-                            isTVSelectable={true}
                             onClick={[Function]}
                             onResponderGrant={[Function]}
                             onResponderMove={[Function]}
@@ -925,7 +907,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           Array [
                             "withTheme()",
                             "withTheme()",
-                            "TouchableOpacity",
                           ]
                         }
                         style={
@@ -940,7 +921,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       >
                         <View
                           accessibilityRole="button"
-                          accessibilityStates={Array []}
                           accessible={true}
                           focusable={true}
                           hitSlop={
@@ -951,7 +931,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "top": 6,
                             }
                           }
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -984,9 +963,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             ]
                           }
                         >
-                          <View
-                            style={null}
-                          >
+                          <View>
                             <Text />
                           </View>
                         </View>
@@ -1037,7 +1014,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         </Text>
                         <View
                           accessibilityRole="button"
-                          accessibilityStates={Array []}
                           accessible={true}
                           focusable={true}
                           hitSlop={
@@ -1048,7 +1024,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "top": 6,
                             }
                           }
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -1081,9 +1056,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             ]
                           }
                         >
-                          <View
-                            style={null}
-                          >
+                          <View>
                             <Text />
                           </View>
                         </View>
@@ -1245,7 +1218,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   Array [
                                     "withTheme()",
                                     "withTheme()",
-                                    "TouchableOpacity",
                                   ]
                                 }
                                 style={
@@ -1440,7 +1412,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   Array [
                                     "withTheme()",
                                     "withTheme()",
-                                    "TouchableOpacity",
                                   ]
                                 }
                                 style={
@@ -1481,7 +1452,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <View
                         accessible={true}
                         focusable={true}
-                        isTVSelectable={true}
                         onClick={[Function]}
                         onResponderGrant={[Function]}
                         onResponderMove={[Function]}
@@ -1543,7 +1513,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         </Text>
                         <View
                           accessibilityRole="button"
-                          accessibilityStates={Array []}
                           accessible={true}
                           focusable={false}
                           hitSlop={
@@ -1554,7 +1523,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "top": 6,
                             }
                           }
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -1587,9 +1555,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             ]
                           }
                         >
-                          <View
-                            style={null}
-                          >
+                          <View>
                             <Text />
                           </View>
                         </View>
@@ -1601,7 +1567,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           Array [
                             "withTheme()",
                             "withTheme()",
-                            "TouchableOpacity",
                           ]
                         }
                         style={
@@ -1829,7 +1794,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   Array [
                                     "withTheme()",
                                     "withTheme()",
-                                    "TouchableOpacity",
                                   ]
                                 }
                                 style={
@@ -2024,7 +1988,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   Array [
                                     "withTheme()",
                                     "withTheme()",
-                                    "TouchableOpacity",
                                   ]
                                 }
                                 style={
@@ -2065,7 +2028,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <View
                         accessible={true}
                         focusable={true}
-                        isTVSelectable={true}
                         onClick={[Function]}
                         onResponderGrant={[Function]}
                         onResponderMove={[Function]}
@@ -2127,7 +2089,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         </Text>
                         <View
                           accessibilityRole="button"
-                          accessibilityStates={Array []}
                           accessible={true}
                           focusable={false}
                           hitSlop={
@@ -2138,7 +2099,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "top": 6,
                             }
                           }
-                          isTVSelectable={true}
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -2171,9 +2131,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             ]
                           }
                         >
-                          <View
-                            style={null}
-                          >
+                          <View>
                             <Text />
                           </View>
                         </View>
@@ -2185,7 +2143,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           Array [
                             "withTheme()",
                             "withTheme()",
-                            "TouchableOpacity",
                           ]
                         }
                         style={

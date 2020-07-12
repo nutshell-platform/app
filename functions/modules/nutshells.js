@@ -3,6 +3,19 @@ const { dataFromSnap, log, error } = require( './helpers' )
 const { db, FieldValue } = require( './firebase' )
 
 // ///////////////////////////////
+//  Show queue
+// ///////////////////////////////
+exports.showQueue = async ( req, res ) => {
+	if( req.query.secret != 42 ) return res.send( 'Invalid authentication' )
+	try {
+		const nutshells = await scheduledNutshells( !!req.query.all )
+		return res.send( nutshells )
+	} catch( e ) {
+		return res.send( { error: e } )
+	}
+}
+
+// ///////////////////////////////
 // Demo data
 // ///////////////////////////////
 exports.makeDemo = async f => {
@@ -59,6 +72,9 @@ exports.scheduledNutshells = async all => {
 // ///////////////////////////////
 exports.publish = async f => {
 
+	// Score recomputation module
+	const { scoreUser, getRecommendations } = './recommendations'
+
 	const logs = []
 
 	try {
@@ -73,9 +89,9 @@ exports.publish = async f => {
 
 		const nutshells = queue.map( ( { uid, owner } ) => ( { uid, owner } ) )
 
-		// ///////////////////////////////
-		// For every Nutshell send to inboxed
-		// ///////////////////////////////
+		// //////////////////////////////////
+		// For every Nutshell send to inbox
+		// //////////////////////////////////
 		logs.push( 'Sending nutshells to inbox' )
 
 		await Promise.all( nutshells.map( async nutshell => {
@@ -100,12 +116,22 @@ exports.publish = async f => {
 
 					// Once added to inboxes, mark published
 					logs.push(  `Marking nutshell ${ nutshell.uid } as published` )
-					return db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published' }, { merge: true } )
+					await db.collection( 'nutshells' ).doc( nutshell.uid ).set( { status: 'published' }, { merge: true } )
 						.catch( e => {
 							logs.push( `Error marking ${ nutshell.uid } as published` )
 							logs.push( e )
 							throw e
 						} )
+
+					// Recalculate user score after publishing is complete
+					logs.push( 'Recomputing score of user' )
+					await scoreUser( nutshell.owner )
+					logs.push( 'Score recomputed' )
+
+					// Get user recommendations for this user
+					logs.push( 'Getting user reccs' )
+					await getRecommendations( nutshell.owner )
+					logs( 'Recommendations set' )
 
 				} catch( e ) {
 
@@ -114,6 +140,8 @@ exports.publish = async f => {
 					throw e
 
 				}
+
+				return
 
 		} ) )
 

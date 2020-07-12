@@ -3,12 +3,14 @@ import React from 'react'
 // Visual
 import { Component, Container, Loading, Main, Title, Search } from '../../stateless/common/generic'
 import Navigation from '../common/navigation'
-import { ListResults } from '../../stateless/account/friends-find'
+import { ListResults, LinkContacts } from '../../stateless/account/friends-find'
 import Friends from '../../../../assets/undraw_friends_online_klj6.svg'
 
 // Data
-import { log, catcher, Dialogue } from '../../../modules/helpers'
+import { log, catcher, Dialogue, wait } from '../../../modules/helpers'
+import { isWeb } from '../../../modules/apis/platform'
 import app from '../../../modules/firebase/app'
+
 
 // Redux
 import { connect } from 'react-redux'
@@ -22,10 +24,51 @@ class FindFriends extends Component {
 		newUnfollows: [],
 		timeout: 1000,
 		filter: 'all',
-		results: []
+		results: [],
+		recommendations: []
 	}
 
-	componentDidMount = f => this.defaultSearch()
+	// Load default list
+	componentDidMount = async f => {
+
+		let { following, followers } = this.props.user
+
+		try {
+
+			// Load recommentations if they exist and exit if they do
+			await this.loadRecommendations()
+			const { results } = this.state 
+			if( results.length != 0 ) return
+
+			// If there are no recommendations, load the default search and trigger recommendation generation
+			await Promise.all( [
+				this.defaultSearch(),
+				( following?.length || followers?.length ) && app.getContactRecommendations()
+			] )
+
+		} catch( e ) {
+			alert( e )
+		} finally {
+
+			return this.updateState( { loading: false } )
+
+		}
+
+	}
+
+	shouldComponentUpdate = async ( nextprops, nextstate ) => {
+
+		// Check if new recommendations arrived
+		const { recommendations: oldRecs } = this.props.user
+		const { recommendations: newRecs } = nextprops.user
+
+		// New data was added?
+		if( ( !oldRecs && newRecs ) || ( oldRecs?.length < newRecs?.length ) ) Dialogue( '🕵️‍♀️ I found new friend recommendations!', 'Load them now?', [ { text: 'Yes, load them', onPress: this.loadRecommendations } ] )
+
+		return true
+
+	}
+
 
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
@@ -40,7 +83,17 @@ class FindFriends extends Component {
 		] )
 
 		const people = await app.getRandomPeople(  )
-		return this.updateState( { results: people, loading: false } )
+		return this.updateState( { results: people } )
+	}
+
+	// Load recommendation data
+	loadRecommendations = async f => {
+
+		const { recommendations } = this.props.user
+		if( !recommendations ) return
+		const people = await Promise.all( recommendations.map( uid => app.getPerson( uid, 'uid' ) ) )
+		return this.updateState( { results: people } )
+
 	}
 
 	// Search manager interface
@@ -106,27 +159,51 @@ class FindFriends extends Component {
 		
 		const sortedResults = onlyUnblocked.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
 		if( filter == 'all' ) return sortedResults
-		// Disable sorting based on following status for now
-		// .sort( ( a, b ) => {
-		// 	// Followed users go below
-		// 	if( a.following == b.following ) return 0
-		// 	if( a.following && !b.following ) return 1
-		// 	if( !a.following && b.following ) return -1
-		// } )
 
+
+	}
+
+	linkContacts = async f => {
+
+		try {
+
+			await Dialogue( '🕵️‍♀️ Detective friendfinder', 'This will cross-reference your contact book with Nutshel users.' )
+			await this.updateState( { loading: 'Sherlock is analysing your contacts...' } )
+			const status = await Promise.race( [
+				app.getAndSaveFingerprints(),
+				wait( 5000 ).then( f => 'long' )
+			] )
+
+			if( status == 'long' ) {
+				await this.updateState( { loading: 'Sherlock is slow today, no coffee this morning you see.' } )
+				await wait( 5000 )
+			}
+
+		} catch( e ) {
+			Dialogue( `Something went wrong with your contacts, sorry about that. Try again in a few minutes? We'll get some coffee.` )
+			log( e )
+		} finally {
+			await this.updateState( { loading: false } )
+			Dialogue( '🔥 All set!', `We are running our cross-referencing in the backgroud. You will be notified when we find a match.` )
+		}
 
 	}
 
 	render() {
 
-		const { loading, query, searching } = this.state
+		const { loading, query, searching, recommendations } = this.state
+		const { user } = this.props
 
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Friends }>
 			<Navigation title='Friends' />
 			<Main.Top style={ { width: 500 } }>
+
 				<Search searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
+				{ !isWeb && !user.contactBookSaved && <LinkContacts linkContacts={ this.linkContacts } /> }
+
+				{ /* Search results */ }
 				<ListResults unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } />
 			</Main.Top>
 		</Container>
