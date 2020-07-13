@@ -3,6 +3,7 @@ import { BackHandler } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
+import { Light, Dark } from '../modules/visual/themes'
 
 // Firebase api
 import firebase from '../modules/firebase/app'
@@ -95,6 +96,9 @@ class Routes extends Component {
 		// If logged in but at slash => go to profile
 		if( pathname == '/' && user ) history.push( '/nutshells/read' )
 
+		// Log user screen
+		if( pathname ) firebase.analytics.setCurrentScreen( pathname )
+
 		return true
 
 	}
@@ -105,7 +109,7 @@ class Routes extends Component {
 		const { init } = this.state
 
 		{ /* Paper theme provider */ }
-		return <PaperProvider theme={ theme }>
+		return <PaperProvider theme={ theme || Light }>
 			{ !init && <Loading message='Loading your stuff' /> }
 			{ /* App router */ }
 			{ init && <Switch>

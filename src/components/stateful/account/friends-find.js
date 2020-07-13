@@ -25,7 +25,7 @@ class FindFriends extends Component {
 		timeout: 1000,
 		filter: 'all',
 		results: [],
-		recommendations: []
+		recommendations: [ ...( this.props.user?.recommendations ? this.props.user?.recommendations : [] ) ]
 	}
 
 	// Load default list

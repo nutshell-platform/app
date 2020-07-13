@@ -201,7 +201,7 @@ export const Main = {
 }
 
 // General app container
-const bgStyles = { position: 'absolute', bottom: 0, left: 0, minWidth: '100%', minHeight: '100%' }
+const bgStyles = { position: 'fixed', bottom: 0, left: 0, minWidth: '100%', minHeight: '100%' }
 export const Container = withTheme( ( { style, children, theme, Background } ) => <KeyboardAvoidingView style={ { flex: 1 } } behavior={ isIos ? 'padding' : 'height' } >
 		<SafeAreaView style={ { flex: 1, width: '100%', backgroundColor: theme.colors.primary } }>
 

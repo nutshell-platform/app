@@ -4,8 +4,9 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
-// import 'firebase/analytics'
-import 'expo-firebase-analytics'
+
+// Analytics
+import * as Analytics from 'expo-firebase-analytics'
 
 // Redux
 import { store } from '../../redux/store'
@@ -21,7 +22,10 @@ import config from './config'
 import * as Network from 'expo-network'
 
 // Helpers
-// import { isWeb } from '../apis/platform'
+import { dev, isWeb } from '../apis/platform'
+
+// If dev, keep analytics in dev
+if( !isWeb && dev ) Analytics.setDebugModeEnabled( true )
 
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'
@@ -47,6 +51,7 @@ class Firebase {
 	auth 		= this.fb.auth()
 	listeners 	= {}
 	FieldValue  = firebase.firestore.FieldValue
+	analytics  	= Analytics
 
 	// ///////////////////////////////
 	// User actions
