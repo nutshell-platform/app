@@ -28,7 +28,7 @@ import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell } from './_nutshells'
-import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations } from './_friends'
+import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
 import { getAndSaveFingerprints } from './_fingerprints'
 
@@ -97,10 +97,11 @@ class Firebase {
 	unblockPerson 	= uid => unblockPerson( this, uid )
 
 	// ///////////////////////////////
-	// Fingerprints
+	// Fingerprints & recommendations
 	// ///////////////////////////////
 	getAndSaveFingerprints = f => getAndSaveFingerprints( this )
 	getContactRecommendations = f => getContactRecommendations( this )
+	unrecommendPerson = uid => unrecommendPerson( this, uid )
 
 	// ///////////////////////////////
 	// Initialisation
