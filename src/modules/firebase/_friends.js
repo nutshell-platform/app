@@ -122,3 +122,12 @@ export const getContactRecommendations = async app => {
 	return getRecs()
 
 }
+
+export const unrecommendPerson = async ( app, uidToUnrecommend ) => {
+
+	// Get current user
+	const { auth: { currentUser: { uid } }, db, FieldValue } = app
+
+	return db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( uidToUnrecommend ) }, { merge: true } )
+
+}

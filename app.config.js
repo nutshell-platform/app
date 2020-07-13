@@ -60,10 +60,11 @@ export default {
       "supportsTablet": true,
       "bundleIdentifier": "com.nutshell.nutshell",
       "googleServicesFile": `./GoogleService-Info${ dev ? '-development' : '' }.plist`,
-      "buildNumber": "1.1.1",
+      "buildNumber": "1.2.1",
       "infoPlist": {
         NSCameraUsageDescription: "Camera permission is used to take a new photo to use as your profile picture.",
-        NSPhotoLibraryUsageDescription: "Photo library permission is used to select an existing photo on your device as a profile picture."
+        NSPhotoLibraryUsageDescription: "Photo library permission is used to select an existing photo on your device as a profile picture.",
+        NSContactsUsageDescription: "Contact book permission is used to find your friends on the platform, you will need to trigger this action manually. Your contacts are never accessed without your consent."
       }
     },
 
@@ -71,8 +72,8 @@ export default {
     "android": {
       "package": "com.nutshell.nutshell",
       "googleServicesFile": `./google-services${ dev ? '-development' : '' }.json`,
-      "versionCode": 4,
-      "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE" ]
+      "versionCode": 5,
+      "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "READ_CONTACTS" ]
     },
 
     // Web config

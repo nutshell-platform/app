@@ -4,8 +4,9 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
-// import 'firebase/analytics'
-import 'expo-firebase-analytics'
+
+// Analytics
+import * as Analytics from 'expo-firebase-analytics'
 
 // Redux
 import { store } from '../../redux/store'
@@ -21,14 +22,17 @@ import config from './config'
 import * as Network from 'expo-network'
 
 // Helpers
-// import { isWeb } from '../apis/platform'
+import { dev, isWeb } from '../apis/platform'
+
+// If dev, keep analytics in dev
+if( !isWeb && dev ) Analytics.setDebugModeEnabled( true )
 
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell } from './_nutshells'
-import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations } from './_friends'
+import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
 import { getAndSaveFingerprints } from './_fingerprints'
 
@@ -47,6 +51,7 @@ class Firebase {
 	auth 		= this.fb.auth()
 	listeners 	= {}
 	FieldValue  = firebase.firestore.FieldValue
+	analytics  	= Analytics
 
 	// ///////////////////////////////
 	// User actions
@@ -97,10 +102,11 @@ class Firebase {
 	unblockPerson 	= uid => unblockPerson( this, uid )
 
 	// ///////////////////////////////
-	// Fingerprints
+	// Fingerprints & recommendations
 	// ///////////////////////////////
 	getAndSaveFingerprints = f => getAndSaveFingerprints( this )
 	getContactRecommendations = f => getContactRecommendations( this )
+	unrecommendPerson = uid => unrecommendPerson( this, uid )
 
 	// ///////////////////////////////
 	// Initialisation

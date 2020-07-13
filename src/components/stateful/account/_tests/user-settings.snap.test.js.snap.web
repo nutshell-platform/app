@@ -105,7 +105,7 @@ exports[`UserSettings Matches snapshot 1`] = `
               "msFlexPreferredSize": "auto",
               "overflowX": "hidden",
               "overflowY": "hidden",
-              "position": "absolute",
+              "position": "fixed",
               "zIndex": 0,
             }
           }

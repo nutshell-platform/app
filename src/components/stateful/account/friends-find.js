@@ -25,7 +25,7 @@ class FindFriends extends Component {
 		timeout: 1000,
 		filter: 'all',
 		results: [],
-		recommendations: []
+		recommendations: [ ...( this.props.user?.recommendations ? this.props.user?.recommendations : [] ) ]
 	}
 
 	// Load default list
@@ -124,8 +124,11 @@ class FindFriends extends Component {
 	// Follow function
 	follow = uid => { 
 		const { newFollows, newUnfollows } = this.state
+		const { user } = this.props
+
 		return Promise.all( [
 			app.followPerson( uid ),
+			user?.recommendations?.includes( uid ) && app.unrecommendPerson( uid ),
 			this.updateState( {
 				newFollows: [ ...newFollows, uid ],
 				newUnfollows: [ ...newUnfollows.filter( fuid => fuid != uid ) ]

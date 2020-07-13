@@ -80,6 +80,8 @@ class UserProfile extends Component {
 
 	unblockPerson = theirUid => app.unblockPerson( theirUid )
 
+	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
+
 	mute = nutshellUid => Promise.all( [
 		app.markNutshellRead( nutshellUid ),
 		app.muteNutshell( nutshellUid ),
@@ -115,7 +117,7 @@ class UserProfile extends Component {
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard isAdmin={ user?.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
+				<UserCard report={ this.report } isAdmin={ user?.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
 			</Main.Top>
 		</Container>
 
