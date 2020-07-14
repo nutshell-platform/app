@@ -97,7 +97,6 @@ exports[`UserSettings Matches snapshot 1`] = `
           style={
             Object {
               "WebkitFlexBasis": "auto",
-              "bottom": "0px",
               "flexBasis": "auto",
               "left": "0px",
               "minHeight": "100%",
@@ -105,7 +104,8 @@ exports[`UserSettings Matches snapshot 1`] = `
               "msFlexPreferredSize": "auto",
               "overflowX": "hidden",
               "overflowY": "hidden",
-              "position": "fixed",
+              "position": "absolute",
+              "top": "0px",
               "zIndex": 0,
             }
           }

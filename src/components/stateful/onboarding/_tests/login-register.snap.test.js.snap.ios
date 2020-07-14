@@ -50,11 +50,11 @@ exports[`Login and registration Matches snapshot 1`] = `
           data-file-name="SvgUndraw_through_the_park_lxnl"
           style={
             Object {
-              "bottom": 0,
               "left": 0,
               "minHeight": "100%",
               "minWidth": "100%",
-              "position": "fixed",
+              "position": "absolute",
+              "top": 0,
             }
           }
         />
