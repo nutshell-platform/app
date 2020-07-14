@@ -63,7 +63,8 @@
     "redux-promise-middleware": "^6.1.2",
     "sentry-expo": "^2.1.2",
     "uuid": "^8.2.0",
-    "expo-firebase-analytics": "~2.4.1"
+    "expo-firebase-analytics": "~2.4.1",
+    "expo-firebase-core": "~1.1.1"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

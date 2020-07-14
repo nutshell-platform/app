@@ -109,6 +109,11 @@ class Firebase {
 	unrecommendPerson = uid => unrecommendPerson( this, uid )
 
 	// ///////////////////////////////
+	// Analytics
+	// ///////////////////////////////
+	analyticsSetScreen = path => this.analytics && this.analytics.setCurrentScreen( path ).catch( f => f )
+
+	// ///////////////////////////////
 	// Initialisation
 	// ///////////////////////////////
 
@@ -117,9 +122,6 @@ class Firebase {
 
 		// Keep a reference to the history object
 		if( history ) this.history = history
-
-		// Analytics DOES NOT WORK WITH EXPO!
-		// if( isWeb ) this.fb.analytics()
 
 		this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
 			{ name: 'profile', listener: listenUserChanges, action: setUserAction },

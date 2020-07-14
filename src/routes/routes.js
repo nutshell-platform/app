@@ -97,7 +97,7 @@ class Routes extends Component {
 		if( pathname == '/' && user ) history.push( '/nutshells/read' )
 
 		// Log user screen
-		if( pathname ) firebase.analytics.setCurrentScreen( pathname )
+		if( pathname ) firebase.analyticsSetScreen( pathname )
 
 		return true
 

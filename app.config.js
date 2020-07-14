@@ -78,7 +78,9 @@ export default {
 
     // Web config
     web: {
-      firebase: firebaseConfig
+      config: {
+        firebase: firebaseConfig
+      }
     },
 
 
