@@ -29,7 +29,7 @@ export default {
       "android",
       "web"
     ],
-    "version": "1.1.0",
+    "version": "1.1.1",
 
     // Visual
     "orientation": "default",
@@ -60,7 +60,7 @@ export default {
       "supportsTablet": true,
       "bundleIdentifier": "com.nutshell.nutshell",
       "googleServicesFile": `./GoogleService-Info${ dev ? '-development' : '' }.plist`,
-      "buildNumber": "1.2.1",
+      "buildNumber": "1.2.2",
       "infoPlist": {
         NSCameraUsageDescription: "Camera permission is used to take a new photo to use as your profile picture.",
         NSPhotoLibraryUsageDescription: "Photo library permission is used to select an existing photo on your device as a profile picture.",
@@ -72,8 +72,13 @@ export default {
     "android": {
       "package": "com.nutshell.nutshell",
       "googleServicesFile": `./google-services${ dev ? '-development' : '' }.json`,
-      "versionCode": 5,
-      "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "READ_CONTACTS" ]
+      "versionCode": 6,
+      "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "READ_CONTACTS" ],
+      icon: "./assets/icon/acorn_bg_appStore_rounded.png",
+      adaptiveIcon: {
+        foregroundImage: "./assets/icon/acorn_transparent_bg_512.png",
+        backgroundColor: "#808080"
+      }
     },
 
     // Web config

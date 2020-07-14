@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><style>.cls-1{fill:gray;}.cls-2{fill:#666;}.cls-3{fill:#f80;}.cls-4{fill:#e47700;}.cls-5{fill:#984d00;}.cls-6{fill:#723802;}</style></defs><title>acorn_drop_vector</title><g id="Background"><rect class="cls-1" width="512" height="512"/></g><g id="Shadow"><polygon class="cls-2" points="85 428 200.01 512 512 512 512 135.81 446 84 85 428"/></g><g id="Acorn"><path class="cls-3" d="M186.86,102.7l-82.11,82.11A182.09,182.09,0,0,0,66.6,386.36l18.11,41.5L126.22,446a182.08,182.08,0,0,0,201.54-38.15l82.11-82.11Z"/><path class="cls-4" d="M84.71,427.86,126.22,446a182.08,182.08,0,0,0,201.54-38.15l82.11-82.11L298.36,214.21Z"/><rect class="cls-4" x="363.75" y="93.69" width="86.25" height="24" transform="translate(44.44 318.66) rotate(-45)"/><rect class="cls-5" x="368" y="103.94" width="86.25" height="12" transform="translate(42.68 322.91) rotate(-45)"/><path class="cls-5" d="M418.17,143,369.6,94.41a146.3,146.3,0,0,0-206.89,0h0L418.17,349.86h0A146.28,146.28,0,0,0,418.17,143Z"/><path class="cls-6" d="M393.88,118.69,290.44,222.14,418.17,349.86h0a146.28,146.28,0,0,0,0-206.88Z"/></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Background">
+        <rect x="0" y="0" width="512" height="512" style="fill:rgb(128,128,128);"/>
+        <g transform="matrix(4.19006,0,0,4.52495,-24.7587,-63.3493)">
+            <path d="M128.103,42.288C128.103,26.675 114.415,14 97.554,14L36.457,14C19.597,14 5.909,26.675 5.909,42.288L5.909,98.863C5.909,114.475 19.597,127.15 36.457,127.15L97.554,127.15C114.415,127.15 128.103,114.475 128.103,98.863L128.103,42.288Z" style="fill:rgb(128,128,128);"/>
+        </g>
+    </g>
+    <g id="Shadow">
+        <path d="M85,428L200.01,512L512,512L512,135.81L446,84L85,428Z" style="fill:rgb(102,102,102);fill-rule:nonzero;"/>
+    </g>
+    <g id="Acorn">
+        <path d="M186.86,102.7L104.75,184.81C51.915,237.645 36.73,317.871 66.6,386.36L84.71,427.86L126.22,446C194.706,475.868 274.929,460.683 327.76,407.85L409.87,325.74L186.86,102.7Z" style="fill:rgb(255,136,0);fill-rule:nonzero;"/>
+        <path d="M84.71,427.86L126.22,446C194.706,475.868 274.929,460.683 327.76,407.85L409.87,325.74L298.36,214.21L84.71,427.86Z" style="fill:rgb(228,119,0);fill-rule:nonzero;"/>
+        <g transform="matrix(0.707107,-0.707107,0.707107,0.707107,44.44,318.66)">
+            <rect x="363.75" y="93.69" width="86.25" height="24" style="fill:rgb(228,119,0);"/>
+        </g>
+        <g transform="matrix(0.707107,-0.707107,0.707107,0.707107,42.68,322.91)">
+            <rect x="368" y="103.94" width="86.25" height="12" style="fill:rgb(152,77,0);"/>
+        </g>
+        <path d="M418.17,143L369.6,94.41C312.85,37.665 219.46,37.665 162.71,94.41L418.17,349.86C474.906,293.118 474.906,199.742 418.17,143Z" style="fill:rgb(152,77,0);fill-rule:nonzero;"/>
+        <path d="M393.88,118.69L290.44,222.14L418.17,349.86C445.595,322.437 461.019,285.203 461.019,246.42C461.019,207.637 445.595,170.403 418.17,142.98L393.88,118.69Z" style="fill:rgb(114,56,2);fill-rule:nonzero;"/>
+    </g>
+</svg>
