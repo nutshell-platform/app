@@ -1,8 +1,9 @@
 // Firebase configs
 require('dotenv').config()
 
+
+// Firebase config
 const { FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_databaseURL, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, FIREBASE_measurementId } = process.env
-const { development: dev } = process.env
 const firebaseConfig = {
   apiKey: FIREBASE_apiKey,
   authDomain: FIREBASE_authDomain,
@@ -12,6 +13,12 @@ const firebaseConfig = {
   messagingSenderId: FIREBASE_messagingSenderId,
   appId: FIREBASE_appId,
   measurementId: FIREBASE_measurementId
+}
+
+const conf = {
+  dev: process.env.development,
+  bundle: 'com.nutshell.nutshell', // ⚠️ Reverse DNS, same as android
+  version: 7, // ⚠️ Update on build
 }
 
 export default {
@@ -29,7 +36,7 @@ export default {
       "android",
       "web"
     ],
-    "version": "1.1.1",
+    "version": `${conf.version}.0.0`,
 
     // Visual
     "orientation": "default",
@@ -58,9 +65,9 @@ export default {
     // IOS config
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.nutshell.nutshell",
-      "googleServicesFile": `./GoogleService-Info${ dev ? '-development' : '' }.plist`,
-      "buildNumber": "1.2.2",
+      "bundleIdentifier": conf.bundle,
+      "googleServicesFile": `./GoogleService-Info${ conf.dev ? '-development' : '' }.plist`,
+      "buildNumber": `${conf.version}.0.0`,
       "infoPlist": {
         NSCameraUsageDescription: "Camera permission is used to take a new photo to use as your profile picture.",
         NSPhotoLibraryUsageDescription: "Photo library permission is used to select an existing photo on your device as a profile picture.",
@@ -71,12 +78,12 @@ export default {
     // Android config
     "android": {
       "package": "com.nutshell.nutshell",
-      "googleServicesFile": `./google-services${ dev ? '-development' : '' }.json`,
-      "versionCode": 6,
+      "googleServicesFile": `./google-services${ conf.dev ? '-development' : '' }.json`,
+      "versionCode": conf.version,
       "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "READ_CONTACTS" ],
       icon: "./assets/icon/acorn_bg_appStore_rounded.png",
       adaptiveIcon: {
-        foregroundImage: "./assets/icon/acorn_transparent_bg_512.png",
+        foregroundImage: "./assets/icon/acorn_drop_vector_108outer_72inner.svg",
         backgroundColor: "#808080"
       }
     },
