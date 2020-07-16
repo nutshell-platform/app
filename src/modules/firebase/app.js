@@ -5,8 +5,13 @@ import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
 
+// Helpers
+import { dev, isWeb } from '../apis/platform'
+
 // Analytics
 import * as Analytics from 'expo-firebase-analytics'
+// If dev, keep analytics in dev
+if( !isWeb && dev ) Analytics.setDebugModeEnabled( true )
 
 // Redux
 import { store } from '../../redux/store'
@@ -21,11 +26,7 @@ import { setNutshellDraft, setNutshellInbox } from '../../redux/actions/nutshell
 import config from './config'
 import * as Network from 'expo-network'
 
-// Helpers
-import { dev, isWeb } from '../apis/platform'
 
-// If dev, keep analytics in dev
-if( !isWeb && dev ) Analytics.setDebugModeEnabled( true )
 
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'

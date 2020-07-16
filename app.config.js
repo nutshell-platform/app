@@ -40,14 +40,14 @@ export default {
 
     // Visual
     "orientation": "default",
-    "icon": "./assets/icon/acorn_drop_appStore.png",
+    "icon": "./assets/icon/app/app-icon-solid-bg.png",
     "splash": {
-      "image": "./assets/icon/acorn_bg_appStore.png",
+      "image": "./assets/icon/app/app-icon-solid-bg.png",
       "resizeMode": "contain",
       "backgroundColor": "#808080"
     },
     "notification": {
-      icon: './assets/icon/acorn_drop_vector_greyscale_94_94.png',
+      icon: './assets/icon/app/app-icon-greyscale-alpha.png',
       color: '#000000',
       iosDisplayInForeground: true,
       androidMode: 'default'
@@ -81,9 +81,9 @@ export default {
       "googleServicesFile": `./google-services${ conf.dev ? '-development' : '' }.json`,
       "versionCode": conf.version,
       "permissions": [ "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "READ_CONTACTS" ],
-      icon: "./assets/icon/acorn_bg_appStore_rounded.png",
+      icon: "./assets/icon/app/app-icon-solid-bg-rounded.png",
       adaptiveIcon: {
-        foregroundImage: "./assets/icon/acorn_drop_vector_108outer_72inner.svg",
+        foregroundImage: "./assets/icon/app/app-icon-alpha-adaptive-108-outer-72-inner.png",
         backgroundColor: "#808080"
       }
     },
