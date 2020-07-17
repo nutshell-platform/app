@@ -158,13 +158,19 @@ exports.rememberToWrite = async f => {
 		const nextSunday = distanceToNextDayType( 'sunday' ) == 0 ? ( dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 ) + extraWeek ) : dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 )
 
 		// Notify those will full inboxes
-		const unreadMessage = { title: `Remember to write your Nutshell!`, body: `The deadline is midnight this Sunday.` }
+		const rememberToWriteMessage = {
+			title: `Remember to write your Nutshell!`,
+			body: `The deadline is midnight this Sunday.`,
+			data: {
+				goto: '/nutshells/write'
+			}
+		}
 		await Promise.all( usersWhoWantToBeNotified.map( async ( { uid, times, pushTokens } ) => {
 
 			try {
 
 				// Send the notification
-				await sendPushNotifications( pushTokens, unreadMessage )
+				await sendPushNotifications( pushTokens, rememberToWriteMessage )
 
 				// If notification was sent, set the next notification moment to a week later
 				await db.collection( 'settings' ).doc( uid ).set( { times: {
