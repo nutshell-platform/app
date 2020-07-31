@@ -97,6 +97,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
           style={
             Object {
               "WebkitFlexBasis": "auto",
+              "bottom": "0px",
               "flexBasis": "auto",
               "left": "0px",
               "minHeight": "100%",

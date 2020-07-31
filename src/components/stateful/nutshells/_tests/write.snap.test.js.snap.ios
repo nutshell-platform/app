@@ -48,8 +48,11 @@ exports[`WriteNutshell Matches snapshot 1`] = `
       >
         <svg
           data-file-name="SvgUndraw_typewriter_i8xd"
+          height="101%"
+          preserveAspectRatio="xMidYMid slice"
           style={
             Object {
+              "bottom": 0,
               "left": 0,
               "minHeight": "100%",
               "minWidth": "100%",

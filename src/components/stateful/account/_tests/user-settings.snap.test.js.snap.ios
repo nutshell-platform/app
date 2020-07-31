@@ -48,8 +48,11 @@ exports[`UserSettings Matches snapshot 1`] = `
       >
         <svg
           data-file-name="SvgUndraw_personal_settings_kihd"
+          height="101%"
+          preserveAspectRatio="xMidYMid slice"
           style={
             Object {
+              "bottom": 0,
               "left": 0,
               "minHeight": "100%",
               "minWidth": "100%",

@@ -42,8 +42,11 @@ exports[`Login and registration Matches snapshot 1`] = `
       >
         <svg
           data-file-name="SvgUndraw_through_the_park_lxnl"
+          height="101%"
+          preserveAspectRatio="xMidYMid slice"
           style={
             Object {
+              "bottom": 0,
               "left": 0,
               "minHeight": "100%",
               "minWidth": "100%",
