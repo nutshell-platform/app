@@ -240,7 +240,7 @@ class WriteNutshell extends Component {
 	toggleStatus = f => {
 		const { nutshell } = this.state
 		const { status } = nutshell
-		this.scheduledAutosave()
+		this.scheduleAutosave()
 		this.updateState( { unsavedChanges: true, nutshell: { ...nutshell, status: status == 'draft' ? 'scheduled' : 'draft' } } )
 	}
 
