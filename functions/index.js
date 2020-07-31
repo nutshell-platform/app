@@ -50,11 +50,12 @@ exports.saveFingerprints = functions.runWith( { timeoutSeconds: 540, memory: '2G
 // ///////////////////////////////
 const { scoreUser, getContactRecommendations } = require( './modules/reccomendations' )
 exports.scoreUser = functions.https.onCall( ( data, context ) => scoreUser( context.auth.uid ) )
-exports.getContactRecommendations = functions.https.onCall( ( data, context ) => getContactRecommendations( context.auth.uid ) )
+exports.getContactRecommendations = functions.https.onCall( ( data, context ) => getContactRecommendations( "HYmfM9Pkp4S88qJwxuJ1N5q4Igp1" ) )
 
 // ///////////////////////////////
 // Debugging
 // ///////////////////////////////
+// "HYmfM9Pkp4S88qJwxuJ1N5q4Igp1" <- mentor@palokaj.co
 // exports.resetNotificationTimes = functions.https.onCall( resetNotificationTimes )
 // const { makeDemo } = require( './modules/nutshells' )
 // exports.makeDemo = functions.pubsub.schedule( '0 12,0 * * *' ).onRun( makeDemo )
