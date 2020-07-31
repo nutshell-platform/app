@@ -55,7 +55,6 @@ exports.getContactRecommendations = functions.https.onCall( ( data, context ) =>
 // ///////////////////////////////
 // Debugging
 // ///////////////////////////////
-
 // exports.resetNotificationTimes = functions.https.onCall( resetNotificationTimes )
 // const { makeDemo } = require( './modules/nutshells' )
 // exports.makeDemo = functions.pubsub.schedule( '0 12,0 * * *' ).onRun( makeDemo )

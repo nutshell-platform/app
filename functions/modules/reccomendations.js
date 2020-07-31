@@ -68,9 +68,8 @@ exports.getContactRecommendations = async uid => {
 
 		// Get user's meta
 		logs.push( 'Getting user follow list and followers' )
-		let { following, followers, muted, blocked } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
+		let { following, followers, muted=[], blocked=[] } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
 		const personaNonGrata = [ ...muted, ...blocked, uid ]
-
 		// Make sure both are arrays
 		following = following.length ? following : []
 		followers = followers.length ? followers : []
