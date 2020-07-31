@@ -8,6 +8,9 @@ import { Light, Dark } from '../modules/visual/themes'
 // Firebase api
 import firebase from '../modules/firebase/app'
 
+// Udates
+import { updateIfAvailable } from '../modules/apis/updates'
+
 // Components
 import { Component, Loading, Provider as PaperProvider } from '../components/stateless/common/generic'
 
@@ -83,6 +86,9 @@ class Routes extends Component {
 		// Development-only logging of path
 		log( 'Current path: ', pathname )
 
+		// Update trigger
+		this.scheduleUpdateCheck()
+
 		// ///////////////////////////////
 		// Redirect rules
 		// ///////////////////////////////
@@ -100,6 +106,22 @@ class Routes extends Component {
 		if( pathname ) firebase.analyticsSetScreen( pathname )
 
 		return true
+
+	}
+
+	// Schedule an update check
+	scheduleUpdateCheck = f => {
+
+		if( this.scheduledUpdateCheck ) {
+			clearTimeout( this.scheduledUpdateCheck )
+			this.scheduledUpdateCheck = undefined
+		}
+
+		// Limit to once every 5 seconds in case they are navigating around
+		this.scheduledUpdateCheck = setTimeout( f => {
+			log( 'Checking for update...' )
+			updateIfAvailable()
+		}, 5000 )
 
 	}
 
