@@ -201,7 +201,7 @@ export const Main = {
 }
 
 // General app container
-const bgStyles = { position: 'absolute', top: 0, left: 0, minWidth: '100%', minHeight: '100%' }
+const bgStyles = { position: 'absolute', top: 0, left: 0, bottom: 0, minWidth: '100%', minHeight: '100%' }
 export const Container = withTheme( ( { style, children, theme, Background } ) => <KeyboardAvoidingView style={ { flex: 1 } } behavior={ isIos ? 'padding' : 'height' } >
 		<SafeAreaView style={ { flex: 1, width: '100%', backgroundColor: theme.colors.primary } }>
 
@@ -209,7 +209,7 @@ export const Container = withTheme( ( { style, children, theme, Background } ) =
 			flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', backgroundColor: theme.colors.background, overflow: 'hidden',
 			...style
 		} }>
-			{ Background && ( isWeb ? <Image style={ bgStyles } source={ Background } /> : <Background style={ bgStyles } /> ) }
+			{ Background && ( isWeb ? <Image style={ bgStyles } source={ Background } /> : <Background height={ '101%' } preserveAspectRatio="xMidYMid slice" style={ bgStyles } /> ) }
 			{ Background && <View style={ { position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, backgroundColor: Color( theme.colors.background ).alpha( 0.9 ) } } /> }
 			{ children }
 		</View>
