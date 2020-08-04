@@ -50,7 +50,7 @@ exports.saveFingerprints = functions.runWith( { timeoutSeconds: 540, memory: '2G
 // ///////////////////////////////
 const { scoreUser, getContactRecommendations } = require( './modules/reccomendations' )
 exports.scoreUser = functions.https.onCall( ( data, context ) => scoreUser( context.auth.uid ) )
-exports.getContactRecommendations = functions.https.onCall( ( data, context ) => getContactRecommendations( "HYmfM9Pkp4S88qJwxuJ1N5q4Igp1" ) )
+exports.getContactRecommendations = functions.https.onCall( ( data, context ) => getContactRecommendations( context.auth.uid ) )
 
 // ///////////////////////////////
 // Debugging
