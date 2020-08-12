@@ -73,9 +73,11 @@ exports.getContactRecommendations = async uid => {
 		// Ignore yourself, muted people, blocked people and preople you already follow
 		const personaNonGrata = [ ...muted, ...blocked, ...following, uid ]
 
+		// ///////////////////////////////
 		// Remove persona non grata from current recommendations (in case blocked, muted or follows updated since last run)
+		// ///////////////////////////////
 		logs.push( 'Grabbing current recommendations: ' )
-		const { recommendations } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
+		const { recommendations=[] } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
 		logs.push( recommendations )
 
 		// Find people to unrecommend, these are current recs in the persona non grata array
@@ -83,6 +85,10 @@ exports.getContactRecommendations = async uid => {
 		logs.push( `Unrecommending ${ unRecommendThesePeople.length } people` )
 		await Promise.all( unRecommendThesePeople.map( uidToUnrec => db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( uidToUnrec ) }, { merge: true } ) ) )
 
+
+		// ///////////////////////////////
+		// Recc algo
+		// ///////////////////////////////
 		// Get second degree
 		logs.push( 'Get meta of followers and followees' )
 		const secondDegree = await Promise.all( [ ...followers, ...following ].map( uid => db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap ) ) )

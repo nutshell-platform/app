@@ -73,7 +73,7 @@ exports.scheduledNutshells = async all => {
 exports.publish = async f => {
 
 	// Score recomputation module
-	const { scoreUser, getRecommendations } = './recommendations'
+	const { scoreUser, getRecommendations } = require( './recommendations' )
 
 	const logs = []
 
