@@ -3,7 +3,7 @@ const Throttle = require( 'promise-parallel-throttle' )
 // Data helpers
 const { dataFromSnap, log, error } = require( './helpers' )
 const { db, FieldValue } = require( './firebase' )
-const { getContactRecommendations } = require( './recomendations' )
+const { getContactRecommendations } = require( './recommendations' )
 
 exports.saveFingerprints = async ( data, context ) => {
 
