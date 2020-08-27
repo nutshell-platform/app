@@ -131,7 +131,7 @@ exports.publish = async f => {
 					// Get user recommendations for this user
 					logs.push( 'Getting user reccs' )
 					await getContactRecommendations( nutshell.owner )
-					logs( 'Recommendations set' )
+					logs.push( 'Recommendations set' )
 
 				} catch( e ) {
 
