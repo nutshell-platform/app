@@ -20,7 +20,7 @@ class ReadNutshell extends Component {
 	// initialise state
 	state = {
 		loading: 'Checking your Nutshell inbox',
-		inbox: [],
+		inbox: [ ...( this.props.nutshells?.inbox || [] ) ],
 		rawInbox: undefined
 	}
 
@@ -137,7 +137,8 @@ class ReadNutshell extends Component {
 	render() {
 
 		const { loading, inbox } = this.state
-		const { user, history } = this.props
+		const { user, history, draft } = this.props
+		console.log( draft )
 
 		if( loading ) return <Loading message={ loading } />
 
@@ -147,7 +148,7 @@ class ReadNutshell extends Component {
 				 <Tutorial />
 				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard isAdmin={ user.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				<ViewRecs recAmount={ user.recommendations?.length } />
-				{ inbox.length == 0 && <Placeholder /> }
+				{ inbox.length == 0 && <Placeholder status={ draft.status } hasDraft={ draft.entries?.length != 0 } /> }
 
 			</Main.Top>
 
@@ -160,5 +161,6 @@ class ReadNutshell extends Component {
 
 export default connect( store => ( {
 	user: store.user,
-	inbox: store.nutshells.inbox || []
+	inbox: store.nutshells.inbox || [],
+	draft: store.nutshells?.draft
 } ) )( ReadNutshell )

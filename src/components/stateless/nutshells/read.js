@@ -70,13 +70,13 @@ export const Entry = ( { entry } ) => {
 
 }
 
-export const Placeholder = ( {  } ) => <Card>
+export const Placeholder = ( { hasDraft, status='' } ) => <Card>
 	<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
-		<Title>You're all caught up! 🎉</Title>
+		<Title>{ hasDraft ? 'Edit' : 'Draft' } your { `${ status } ` || 'next ' }Nutshell</Title>
 		<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
-			<ToolTip textStyle={ { textAlign: 'center' } } label={ `Next Nutshells release: ${ timestampToHuman( dateOfNext( 'monday' ) ) }.` }
-			info={ `Nutshells are released on Mondays. The only reason to come back to this app until then is to draft your own Nutshell. We're not trying to get you hooked, there are plenty of other social networks for that.` } />
-			<Button style={ { alignSelf: 'center' } } to='/nutshells/write'>Draft your Nutshell</Button>
+			<ToolTip textStyle={ { textAlign: 'center' } } label={ `Next Nutshells release: midnight ${ timestampToHuman( dateOfNext( 'sunday' ) ) }.` }
+			info={ `Nutshells are released on sunday midnight. The only reason to come back to this app until then is to draft your own Nutshell. We're not trying to get you hooked, there are plenty of other social networks for that.` } />
+			<Button style={ { alignSelf: 'center' } } to='/nutshells/write'>{ hasDraft ? 'Edit' : 'Draft' } your Nutshell</Button>
 		</View>
 
 	</View>
