@@ -731,10 +731,10 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "borderTopRightRadius": "0px",
                     "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
                     "maxWidth": "100%",
-                    "paddingBottom": "40px",
-                    "paddingLeft": "40px",
-                    "paddingRight": "40px",
-                    "paddingTop": "40px",
+                    "paddingBottom": "30px",
+                    "paddingLeft": "30px",
+                    "paddingRight": "30px",
+                    "paddingTop": "30px",
                   }
                 }
               >

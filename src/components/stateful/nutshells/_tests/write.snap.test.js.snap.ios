@@ -558,7 +558,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "borderRadius": 0,
                         "elevation": 2,
                         "maxWidth": "100%",
-                        "padding": 40,
+                        "padding": 30,
                         "paddingTop": 0,
                         "shadowColor": "#000000",
                         "shadowOffset": Object {
@@ -886,7 +886,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "elevation": 2,
                         "maxWidth": "100%",
                         "opacity": 1,
-                        "padding": 40,
+                        "padding": 30,
                         "paddingVertical": 20,
                         "shadowColor": "#000000",
                         "shadowOffset": Object {
@@ -1622,7 +1622,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "elevation": 2,
                         "maxWidth": "100%",
                         "opacity": 1,
-                        "padding": 40,
+                        "padding": 30,
                         "paddingVertical": 20,
                         "shadowColor": "#000000",
                         "shadowOffset": Object {

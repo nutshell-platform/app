@@ -750,9 +750,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "borderTopRightRadius": "0px",
                         "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
                         "maxWidth": "100%",
-                        "paddingBottom": "40px",
-                        "paddingLeft": "40px",
-                        "paddingRight": "40px",
+                        "paddingBottom": "30px",
+                        "paddingLeft": "30px",
+                        "paddingRight": "30px",
                         "paddingTop": "0px",
                         "width": "500px",
                       }
@@ -1255,8 +1255,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "maxWidth": "100%",
                         "opacity": 1,
                         "paddingBottom": "20px",
-                        "paddingLeft": "40px",
-                        "paddingRight": "40px",
+                        "paddingLeft": "30px",
+                        "paddingRight": "30px",
                         "paddingTop": "20px",
                       }
                     }
@@ -1991,8 +1991,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "maxWidth": "100%",
                         "opacity": 1,
                         "paddingBottom": "20px",
-                        "paddingLeft": "40px",
-                        "paddingRight": "40px",
+                        "paddingLeft": "30px",
+                        "paddingRight": "30px",
                         "paddingTop": "20px",
                       }
                     }

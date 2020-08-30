@@ -542,7 +542,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "borderRadius": 0,
                     "elevation": 2,
                     "maxWidth": "100%",
-                    "padding": 40,
+                    "padding": 30,
                     "shadowColor": "#000000",
                     "shadowOffset": Object {
                       "height": 0.75,

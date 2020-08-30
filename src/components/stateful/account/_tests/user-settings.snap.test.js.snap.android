@@ -544,7 +544,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                       "borderRadius": 0,
                       "elevation": 2,
                       "maxWidth": "100%",
-                      "padding": 40,
+                      "padding": 30,
                       "paddingTop": 0,
                       "shadowColor": "#000000",
                       "shadowOffset": Object {
@@ -1705,7 +1705,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                       "borderRadius": 0,
                       "elevation": 2,
                       "maxWidth": "100%",
-                      "padding": 40,
+                      "padding": 30,
                       "paddingTop": 0,
                       "shadowColor": "#000000",
                       "shadowOffset": Object {
