@@ -19,7 +19,7 @@ class FindFriends extends Component {
 
 	// initialise state
 	state = {
-		loading: 'Loading random people. Not randos though, nice people.',
+		loading: 'Loading some people. Nice people.',
 		newFollows: [],
 		newUnfollows: [],
 		timeout: 1000,

@@ -5,7 +5,7 @@ export const ListResults = ( { results=[], follow, unfollow, recommendedProfiles
 	{ results.length == 0 && <Text style={ { textAlign: 'center' } }>No users found, try a different query</Text> }
 
 	{ /* Recommendartions */ }
-	{ [ 'all' ].includes( filter ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Recommendations:</Text> }
+	{ [ 'all' ].includes( filter ) && recommendedProfiles.length > 0 && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Recommendations:</Text> }
 	{ [ 'all' ].includes( filter ) && recommendedProfiles.length > 0 && recommendedProfiles.map( user => <Card key={ user.uid }>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />

@@ -91,7 +91,7 @@ exports[`FriendFinder Matches snapshot 1`] = `
             ]
           }
         >
-          Loading random people. Not randos though, nice people.
+          Loading some people. Nice people.
         </Text>
       </View>
     </RCTSafeAreaView>

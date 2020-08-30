@@ -84,7 +84,7 @@ export const Placeholder = ( { hasDraft, status='' } ) => <Card>
 
 export const ViewRecs = ( { recAmount } ) => <Card>
 	<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
-		{ recAmount && <Title style={ { textAlign: 'center', marginBottom: 15 } }>You have { recAmount } friend suggestions!</Title> }
+		{ recAmount > 0 && <Title style={ { textAlign: 'center', marginBottom: 15 } }>You have { recAmount } friend suggestions!</Title> }
 		{ !recAmount && <Title style={ { textAlign: 'center', marginBottom: 15 } }>We can help you find your friends!</Title> }
 		<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
 			<HelperText style={ { textAlign: 'center' } }>We use "friends of friends" and optionally your contact book to find your friends.</HelperText>
