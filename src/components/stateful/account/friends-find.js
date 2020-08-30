@@ -33,16 +33,17 @@ class FindFriends extends Component {
 
 		let { following, followers } = this.props.user
 
-		try {
-
-			// Load recommentations if they exist and exit if they do
-			await this.loadRecommendations()
-			const { results } = this.state 
-			if( results.length != 0 ) return
+		try {			
 
 			// If there are no recommendations, load the default search and trigger recommendation generation
 			await Promise.all( [
+				// Load reccs
+				await this.loadRecommendations(),
+
+				// Load default results
 				this.defaultSearch(),
+
+				// If not followers or not following anyone, get recommendations
 				( following?.length || followers?.length ) && app.getContactRecommendations()
 			] )
 
@@ -92,7 +93,7 @@ class FindFriends extends Component {
 		const { recommendations } = this.props.user
 		if( !recommendations ) return
 		const people = await Promise.all( recommendations.map( uid => app.getPerson( uid, 'uid' ) ) )
-		return this.updateState( { results: people } )
+		return this.updateState( { recommendedProfiles: people } )
 
 	}
 
@@ -103,9 +104,9 @@ class FindFriends extends Component {
 
 		if( query.length == 0 ) return Promise.all( [
 			results.length == 0 && this.defaultSearch(),
-			this.updateState( { query: undefined, searching: false } )
+			this.updateState( { filter: 'all', query: undefined, searching: false } )
 		] )
-		return this.updateState( { query: query, searching: true, autoSearch: setTimeout( f => this.searchBackend( query ), timeout ) } )
+		return this.updateState( { filter: 'search', query: query, searching: true, autoSearch: setTimeout( f => this.searchBackend( query ), timeout ) } )
 	}
 
 	// Searcher backend
@@ -161,7 +162,7 @@ class FindFriends extends Component {
 
 		
 		const sortedResults = onlyUnblocked.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
-		if( filter == 'all' ) return sortedResults
+		return sortedResults
 
 
 	}
@@ -194,7 +195,7 @@ class FindFriends extends Component {
 
 	render() {
 
-		const { loading, query, searching, recommendations } = this.state
+		const { loading, query, searching, recommendations, recommendedProfiles, filter } = this.state
 		const { user } = this.props
 
 		if( loading ) return <Loading message={ loading } />
@@ -207,7 +208,7 @@ class FindFriends extends Component {
 				{ !isWeb && !user.contactBookSaved && <LinkContacts linkContacts={ this.linkContacts } /> }
 
 				{ /* Search results */ }
-				<ListResults unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } />
+				<ListResults filter={ filter } unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } recommendedProfiles={ recommendedProfiles } />
 			</Main.Top>
 		</Container>
 

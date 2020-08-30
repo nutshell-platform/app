@@ -138,7 +138,6 @@ class ReadNutshell extends Component {
 
 		const { loading, inbox } = this.state
 		const { user, history, draft } = this.props
-		console.log( draft )
 
 		if( loading ) return <Loading message={ loading } />
 
