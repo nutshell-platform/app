@@ -705,6 +705,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                           </View>
                           <TextInput
                             allowFontScaling={true}
+                            autoCapitalize="none"
+                            autoCompleteType="password"
                             editable={true}
                             index={2}
                             keyboardType="email-address"
@@ -903,6 +905,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           </View>
                           <TextInput
                             allowFontScaling={true}
+                            autoCapitalize="none"
                             editable={true}
                             index={3}
                             multiline={false}
