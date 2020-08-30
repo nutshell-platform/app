@@ -67,23 +67,23 @@ exports.getContactRecommendations = async uid => {
 		// ///////////////////////////////
 
 		// Get user's meta
-		logs.push( 'Getting user follow list and followers' )
-		let { following=[], followers=[], muted=[], blocked=[] } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
+		logs.push( 'Getting user follow list, recommendations and followers' )
+		let { recommendations=[], following=[], followers=[], muted=[], blocked=[] } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
 		
 		// Ignore yourself, muted people, blocked people and preople you already follow
 		const personaNonGrata = [ ...muted, ...blocked, ...following, uid ]
+		logs.push( 'Persona non grata: ', personaNonGrata )
 
 		// ///////////////////////////////
-		// Remove persona non grata from current recommendations (in case blocked, muted or follows updated since last run)
+		// Remove persona non grata from current recommendations
+		// (in case blocked, muted or follows updated since last run)
 		// ///////////////////////////////
-		logs.push( 'Grabbing current recommendations: ' )
-		const { recommendations=[] } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
-		logs.push( recommendations )
 
 		// Find people to unrecommend, these are current recs in the persona non grata array
-		const unRecommendThesePeople = recommendations.filter( reccedUid => !personaNonGrata.includes( reccedUid ) )
+		const unRecommendThesePeople = recommendations.filter( reccedUid => personaNonGrata.includes( reccedUid ) )
 		logs.push( `Unrecommending ${ unRecommendThesePeople.length } people` )
-		await Promise.all( unRecommendThesePeople.map( uidToUnrec => db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( uidToUnrec ) }, { merge: true } ) ) )
+		await db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( ...unRecommendThesePeople ) }, { merge: true } )
+		// await Promise.all( unRecommendThesePeople.map( uidToUnrec => db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( uidToUnrec ) }, { merge: true } ) ) )
 
 
 		// ///////////////////////////////
@@ -93,12 +93,20 @@ exports.getContactRecommendations = async uid => {
 		logs.push( 'Get meta of followers and followees' )
 		const secondDegree = await Promise.all( [ ...followers, ...following ].map( uid => db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap ) ) )
 
-		// Transform into persons of interest
-		logs.push( 'Transforming second degree into single list that excludes blocked and muted people' )
-		let personsOfInterest = secondDegree.filter( ( { uid } ) => !personaNonGrata.includes( uid ) ).map( ( { followers=[], following=[] } ) => [ ...followers, ...following ] )
+		// Transform into persons of interest ( array of users )
+		logs.push( 'Transforming second degree into single list that excludes blocked and muted people.' )
+
+		// Make persons of interest into an array
+		let personsOfInterest = secondDegree.map( ( { uid, followers=[], following=[] } ) => [ ...followers, ...following, uid ] )
 
 		// Flatten in node 10 without .flat()
 		personsOfInterest = [].concat.apply( [], personsOfInterest )
+
+		// Filter out persona non grata
+		personsOfInterest = personsOfInterest.filter( uid => !personaNonGrata.includes( uid ) )
+		logs.push( 'Persons of interest: ', personsOfInterest )
+
+		
 
 		logs.push( 'Making a ranked object' )
 		const rankedPersons = {}

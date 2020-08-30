@@ -101,7 +101,7 @@ exports.publish = async f => {
 					logs.push( `Parsing ${ nutshell.uid }` )
 
 					// Get the followers of the owner of this Nutshell
-					const { followers } = await db.collection( 'userMeta' ).doc( nutshell.owner ).get().then( dataFromSnap )
+					const { followers=[] } = await db.collection( 'userMeta' ).doc( nutshell.owner ).get().then( dataFromSnap )
 
 					logs.push( `Nutshell ${ nutshell.uid } has ${ followers && followers.length } followers` )
 
