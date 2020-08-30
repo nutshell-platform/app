@@ -41,7 +41,7 @@ export const Subheading = ( { style, ...props } ) => <PaperSubheading style={ { 
 
 // Generic card
 export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, paddingVertical: 10, width: 500, maxWidth: '100%' } }>
-	<PaperCard elevation={ 2 } style={ { padding: 40, maxWidth: '100%', ...style } }>
+	<PaperCard elevation={ 2 } style={ { padding: 30, maxWidth: '100%', ...style } }>
 		{ children }
 	</PaperCard>
 </View>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Visual
-import { Component, Container, Loading, Main, Link } from '../../stateless/common/generic'
+import { Component, Container, Loading, Main, Link, Button } from '../../stateless/common/generic'
 import Tutorial from '../onboarding/tutorial'
 import FAB from '../common/fab'
 import { Placeholder, NutshellCard, ViewRecs } from '../../stateless/nutshells/read'
@@ -19,7 +19,6 @@ class ReadNutshell extends Component {
 
 	// initialise state
 	state = {
-		loading: 'Checking your Nutshell inbox',
 		inbox: [ ...( this.props.nutshells?.inbox || [] ) ],
 		rawInbox: undefined
 	}
@@ -35,7 +34,6 @@ class ReadNutshell extends Component {
 		// Offline checker
 		if( !( await app.isOnline() ) ) return Promise.all( [
 			Dialogue( 'You are offline', `We can't load any new data and any changes will not be saved.` ),
-			this.updateState( { loading: false } )
 		] )
 
 		try {
@@ -55,8 +53,7 @@ class ReadNutshell extends Component {
 			// Filter out censored and set to state
 			await this.updateState( {
 				rawInbox: nutshells,
-				inbox: this.cleanNutshells( nutshells, user.muted ),
-				loading: false
+				inbox: this.cleanNutshells( nutshells, user.muted )
 			} )
 
 			// Delete nutshells that failed to load
@@ -136,15 +133,14 @@ class ReadNutshell extends Component {
 
 	render() {
 
-		const { loading, inbox } = this.state
+		const { loading, inbox, rawInbox } = this.state
 		const { user, history, draft } = this.props
-
-		if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ People }>
 			<Navigation title='Home' />
 			<Main.Top>
-				 <Tutorial />
+				{ !rawInbox && <Button style={ { width: '90%', marginBottom: 20 } } mode='flat' loading={ true }>Loading your inbox</Button> }
+				<Tutorial />
 				{ inbox?.length > 0 && inbox.map( nutshell => <NutshellCard isAdmin={ user.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				<ViewRecs recAmount={ user.recommendations?.length } />
 				{ inbox.length == 0 && <Placeholder status={ draft.status } hasDraft={ draft.entries?.length != 0 } /> }

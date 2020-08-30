@@ -19,7 +19,7 @@ export const ListResults = ( { results=[], follow, unfollow, recommendedProfiles
 	</Card>) }
 
 	{ /* Seaech results */ }
-	{ [ 'all' ].includes( filter ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Random people:</Text> }
+	{ [ 'all' ].includes( filter ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Interesting people:</Text> }
 	{ [ 'all', 'search' ].includes( filter ) && results.length > 0 && results.map( user => <Card key={ user.uid }>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />

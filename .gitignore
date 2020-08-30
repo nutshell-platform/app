@@ -30,3 +30,4 @@ google-services.json
 GoogleService-Info.plist
 google-services-development.json
 GoogleService-Info-development.plist
+*.jks

@@ -18,7 +18,7 @@ const firebaseConfig = {
 const conf = {
   dev: process.env.development,
   bundle: 'com.nutshell.nutshell', // ⚠️ Reverse DNS, same as android
-  version: 7, // ⚠️ Update on build
+  version: 8, // ⚠️ Update on build
 }
 
 export default {
@@ -68,6 +68,7 @@ export default {
       "bundleIdentifier": conf.bundle,
       "googleServicesFile": `./GoogleService-Info${ conf.dev ? '-development' : '' }.plist`,
       "buildNumber": `${conf.version}.0.0`,
+       "associatedDomains": [ 'applinks:app.nutshell.social' ],
       "infoPlist": {
         NSCameraUsageDescription: "Camera permission is used to take a new photo to use as your profile picture.",
         NSPhotoLibraryUsageDescription: "Photo library permission is used to select an existing photo on your device as a profile picture.",
@@ -85,7 +86,23 @@ export default {
       adaptiveIcon: {
         foregroundImage: "./assets/icon/app/app-icon-alpha-adaptive-108-outer-72-inner.png",
         backgroundColor: "#808080"
-      }
+      },
+      intentFilters: [
+          {
+            action: "VIEW",
+            autoVerify: true,
+            data: [
+              {
+                scheme: "https",
+                host: "app.nutshell.social"
+              }
+            ],
+            category: [
+              "BROWSABLE",
+              "DEFAULT"
+            ]
+          }
+        ]
     },
 
     // Web config
