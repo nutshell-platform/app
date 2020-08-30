@@ -134,7 +134,7 @@ class ReadNutshell extends Component {
 	render() {
 
 		const { loading, inbox, rawInbox } = this.state
-		const { user, history, draft } = this.props
+		const { user, history } = this.props
 
 		return <Container Background={ People }>
 			<Navigation title='Home' />
@@ -157,5 +157,5 @@ class ReadNutshell extends Component {
 export default connect( store => ( {
 	user: store.user,
 	inbox: store.nutshells.inbox || [],
-	draft: store.nutshells?.draft
+	draft: store.nutshells?.draft || {}
 } ) )( ReadNutshell )
