@@ -34,7 +34,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm i
-          npm i -g sharp-cli
           cd functions
           npm i
           cd ..
