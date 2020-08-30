@@ -134,7 +134,7 @@ class ReadNutshell extends Component {
 	render() {
 
 		const { loading, inbox, rawInbox } = this.state
-		const { user, history } = this.props
+		const { user, history, draft } = this.props
 
 		return <Container Background={ People }>
 			<Navigation title='Home' />
