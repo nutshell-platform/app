@@ -4,6 +4,7 @@
   "scripts": {
     "serve": "export development=true && firebase emulators:start --only functions",
     "shell": "source ~/.nvm/nvm.sh && nvm use && export development=true && export GOOGLE_APPLICATION_CREDENTIALS=\"$(pwd)/../nutshell-staging.json\" && firebase functions:shell",
+    "shell:production": "source ~/.nvm/nvm.sh && nvm use && export development=true && export GOOGLE_APPLICATION_CREDENTIALS=\"$(pwd)/../nutshell-production.json\" && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"

@@ -2,6 +2,19 @@
 const { dataFromSnap, log, error } = require( './helpers' )
 const { db, FieldValue } = require( './firebase' )
 
+exports.refreshAllReccs = async f => {
+
+	try {
+		const users = await db.collection( 'userMeta' ).get().then( dataFromSnap )
+		await Promise.all( users.map( ( { uid } ) => getContactRecommendations( uid ) ) )
+	} catch( e ) {
+		error( e )
+	} finally {
+		
+	}
+
+}
+
 exports.scoreUser = async uid => {
 
 	const logs = []
