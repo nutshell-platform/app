@@ -82,7 +82,7 @@ exports.getContactRecommendations = async uid => {
 		// Find people to unrecommend, these are current recs in the persona non grata array
 		const unRecommendThesePeople = recommendations.filter( reccedUid => personaNonGrata.includes( reccedUid ) )
 		logs.push( `Unrecommending ${ unRecommendThesePeople.length } people` )
-		await db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( ...unRecommendThesePeople ) }, { merge: true } )
+		if( unRecommendThesePeople.length != 0 ) await db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( ...unRecommendThesePeople ) }, { merge: true } )
 		// await Promise.all( unRecommendThesePeople.map( uidToUnrec => db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( uidToUnrec ) }, { merge: true } ) ) )
 
 
