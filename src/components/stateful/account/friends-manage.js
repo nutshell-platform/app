@@ -121,7 +121,7 @@ class ManageFriends extends Component {
 			<Navigation title='Friends' />
 			<Main.Top style={ { width: 500 } }>
 				<Search searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
-				<ListResults unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } />
+				<ListResults unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } filter='friends' />
 			</Main.Top>
 		</Container>
 

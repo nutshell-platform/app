@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Text, Link, View, UserAvatar, Button } from '../common/generic'
 
-export const ListResults = ( { results=[], follow, unfollow, recommendedProfiles=[], filter } ) => <View style={ { width: '100%', paddingTop: 20 } }>
+export const ListResults = ( { results=[], follow, unfollow, recommendedProfiles=[], filter='all' } ) => <View style={ { width: '100%', paddingTop: 20 } }>
 	{ results.length == 0 && <Text style={ { textAlign: 'center' } }>No users found, try a different query</Text> }
 
 	{ /* Recommendartions */ }
@@ -20,7 +20,7 @@ export const ListResults = ( { results=[], follow, unfollow, recommendedProfiles
 
 	{ /* Seaech results */ }
 	{ [ 'all' ].includes( filter ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Interesting people:</Text> }
-	{ [ 'all', 'search' ].includes( filter ) && results.length > 0 && results.map( user => <Card key={ user.uid }>
+	{ [ 'all', 'search', 'friends' ].includes( filter ) && results.length > 0 && results.map( user => <Card key={ user.uid }>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />
 			<View style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
