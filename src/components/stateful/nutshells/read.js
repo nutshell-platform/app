@@ -9,7 +9,7 @@ import Navigation from '../common/navigation'
 import People from '../../../../assets/undraw_people_tax5.svg'
 
 // Data
-import { log, Dialogue } from '../../../modules/helpers'
+import { log, Dialogue, wait } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 // Redux
@@ -42,7 +42,12 @@ class ReadNutshell extends Component {
 
 			const { inbox, user } = this.props
 			log( 'Load nutshells' )
-			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ).catch( f => ( { delete: uid } ) ) ) )
+
+			// Load nutshells, but with a minimum duration of 2 secs for UX
+			const start = Date.now()
+			let nutshells = await Promise.all( inbox.map( uid => app.getNutshellByUid( uid ).catch( e => log( 'Error loading nutshell', uid, e ) ) ) )
+			if( Date.now() - start < 1000 ) await wait( 2000 )
+
 			const markRead = nutshells.filter( nutshell => nutshell.delete )
 
 			log( 'Filter nutshells', nutshells )
@@ -80,7 +85,7 @@ class ReadNutshell extends Component {
 		if( loading || !externalInbox ) return false
 
 		// If remote followers are more than local, get follower details with a small delay
-		if( externalInbox.length != internalInbox.length ) {
+		if( externalInbox?.length != internalInbox?.length ) {
 			if( this.inboxLoader ) clearTimeout( this.inboxLoader )
 			this.inboxLoader = setTimeout( this.loadInbox, 2000 )
 		}

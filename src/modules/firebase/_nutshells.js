@@ -17,9 +17,25 @@ export const getNutshellsOfUser = ( app, uid ) => {
 // Get Nutshell info by uid
 export const getNutshellByUid = async ( db, uid ) => {
 
-	const nutshell = await db.collection( 'nutshells' ).doc( uid ).get().then( dataFromSnap )
-	const user = await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
-	return { ...nutshell, user: user }
+	try {
+
+		// et nutshell data
+		let nutshell = await db.collection( 'nutshells' ).doc( uid ).get()
+
+		// If nutshell doesn't exist send the delete signal
+		if( !nutshell.exists ) return { delete: true, uid: uid }
+
+		// Retreive nutshell data
+		nutshell = dataFromSnap( nutshell )	
+		
+		// Get user data
+		const user = await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
+
+		return { ...nutshell, user: user }
+
+	} catch( e ) {
+		alert( e )
+	}
 
 }
 
