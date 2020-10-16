@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
-import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text } from '../common/generic'
+import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, Menu } from '../common/generic'
 import ImagePicker from '../../stateful/common/image-picker'
 
-export const Settings = ( { children, avatarSize=100, user={}, changeUser, settings={}, changeNotification, changeSetting, saveChanges, passwordRequired, handleAvailable } ) => {
+export const Settings = ( { children, avatarSize=100, user={}, changeUser, settings={}, changeNotification, changeSetting, saveChanges, passwordRequired, handleAvailable, changeContactMethod, contactMethods } ) => {
 
 	const newUser = !settings.notifications
 	const notiPrefs = settings.notifications || {}
 
 	return <Main.Center>
 		<View style={ { paddingVertical: avatarSize/2 } }>
+
+			{ /* About you  */ }
 			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
 				<ImagePicker image={ user.newavatar || user.avatar } size={ avatarSize } style={ { marginTop: -avatarSize/2, marginBottom: 20 } } onSelected={ image => changeUser( 'newavatar', image ) } />
 				<Title style={ { textAlign: 'center' } }>{ !user?.settings?.notifications && 'Welcome ' }{ user.name || user.email }{ user?.settings?.notifications ? '\'s settings' : '!' }</Title>
@@ -30,6 +32,25 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				<Button onPress={ saveChanges }>{ newUser ? 'Confirm settings and continue' : 'Save changes' }</Button>
 			</Card>
 
+			{ /* Contact preferences */ }
+			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center', position: 'relative' } } >
+
+
+				<Subheading>Contact details</Subheading>
+				<HelperText style={ { paddingLeft: 0 } }>These are ways your followers can react to your Nutshells.</HelperText>
+
+				{ /* Add contact methods */ }
+			    <Input label='WhatsApp number' value={ contactMethods.whatsapp } info='What is your number including country code?' onChangeText={ t => changeContactMethod( 'whatsapp', t ) } />
+			    <Input label='Contact email' value={ user.email || contactMethods.email } info='This does not have to be the same as your account email, but we autofilled it that way' onChangeText={ t => changeContactMethod( 'email', t ) } />
+
+				{ /* Notification prefs */ }
+				<Toggle onToggle={ f => changeSetting( 'anyoneCanRespond', !settings.anyoneCanRespond ) } value={ settings.anyoneCanRespond } style={ { marginTop: 10 } } label='Allow all followers to contact you' info="By default only people *you* follow can react to your Nutshells. If you want anyone who follows you to be able to respond to your messages toggle this." />
+				{ /* Password required */ }
+
+				<Button onPress={ saveChanges }>{ newUser ? 'Confirm settings and continue' : 'Save changes' }</Button>
+			</Card>
+
+			{ /* Account settings */ }
 			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
 
 
@@ -50,6 +71,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				</React.Fragment> }
 				<Button onPress={ saveChanges }>{ newUser ? 'Confirm settings and continue' : 'Save changes' }</Button>
 			</Card>
+
 
 		</View>
 	</Main.Center>

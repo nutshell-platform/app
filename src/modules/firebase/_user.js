@@ -58,6 +58,12 @@ export const listenUserMetaChanges = ( app, dispatch, action ) => app.db.collect
 
 } )
 
+export const listenContactMethods = ( app, dispatch, action ) => app.db.collection( 'userContacts' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
+
+	return dispatch( action( { contactMethods: dataFromSnap( doc, false ) } ) )
+
+} )
+
 
 // ///////////////////////////////
 // User actions
@@ -136,13 +142,31 @@ export const updateUser = async ( app, userUpdates ) => {
 }
 
 // Get user profile
-export const getUserProfile = async ( db, user ) => ( {
-	uid: user.uid,
-	email: user.email,
-	...( await db.collection( 'users' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) ),
-	...( await db.collection( 'userMeta' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) ),
-	...( await db.collection( 'specialPowers' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => ( { } ) ) )
-} )
+export const getUserProfile = async ( db, user ) => {
+
+	try {
+
+		// Anyone is allowed to read these when logged in
+		const userData = await db.collection( 'users' ).doc( user.uid ).get().then( doc => doc.data() )
+		const userMeta = await await db.collection( 'userMeta' ).doc( user.uid ).get().then( doc => doc.data() )
+
+		// Will fail if it is not yourself
+		const userPowers = await db.collection( 'specialPowers' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => false )
+
+		// Will fail if their settings do not allow it
+		const userContactMethods = await db.collection( 'userContacts' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => false )
+		
+		return {
+			uid: user.uid,
+			email: user.email,
+			...userData,
+			...userMeta,
+			...userPowers,
+			...userContactMethods
+		}
+	} catch( e ) {} finally {}
+
+}
 
 // Recover password
 export const resetPassword = ( auth, email ) => auth.sendPasswordResetEmail( email )
@@ -161,3 +185,9 @@ export const deleteUser = auth => auth.currentUser.delete()
 // Validations
 // ///////////////////////////////
 export const handleIsAvailable = ( db, handle ) => db.collection( 'users' ).where( 'handle', '==', handle.toLowerCase() ).limit( 1 ).get().then( dataFromSnap ).then( docs => docs.length == 0 )
+
+// ///////////////////////////////
+// Contact methods
+// ///////////////////////////////
+
+export const updateContactMethods = ( app, methods ) => app.db.collection( 'userContacts' ).doc( app.auth.currentUser.uid ).set( methods, { merge: true } )

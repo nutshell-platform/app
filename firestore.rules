@@ -52,6 +52,17 @@ service cloud.firestore {
     }
 
     // ///////////////////////////////
+    // Conditional data
+    // ///////////////////////////////
+    match /userContacts/{userUid} {
+      // Write own, read others if logged in
+      allow write, read: if request.auth.uid == userUid
+
+      // Allow reading if either 1) the user you want to read follows you or 2) this user put their profile on public mode
+      allow read: if ( request.auth.uid in get(/databases/$(database)/documents/userMeta/$(userUid)).data.following ) || ( get(/databases/$(database)/documents/settings/$(userUid)).data.anyoneCanRespond == true )
+    }
+
+    // ///////////////////////////////
     // System data
     // ///////////////////////////////
     match /reportedAbuse/{reportUid} {

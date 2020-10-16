@@ -18,7 +18,7 @@ import { store } from '../../redux/store'
 const { dispatch } = store
 
 // Actions
-import { setUserAction, setUserMetaAction } from '../../redux/actions/userActions'
+import { setUserAction, setUserMetaAction, setUserContactMethodsAction } from '../../redux/actions/userActions'
 import { setSettingsAction } from '../../redux/actions/settingsActions'
 import { setNutshellDraft, setNutshellInbox } from '../../redux/actions/nutshellActions'
 
@@ -30,7 +30,7 @@ import * as Network from 'expo-network'
 
 // Functions
 import { unregisterListeners, registerListeners } from './listeners'
-import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges } from './_user'
+import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges, updateContactMethods, listenContactMethods } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson } from './_friends'
@@ -72,6 +72,7 @@ class Firebase {
 	// ///////////////////////////////
 	updateSettings = settings => updateSettings( this, settings )
 	handleIsAvailable = handle => handleIsAvailable( this.db, handle )
+	updateContactMethods = methods => updateContactMethods( this, methods )
 
 	// ///////////////////////////////
 	// nutshells
@@ -129,7 +130,8 @@ class Firebase {
 			{ name: 'meta', listener: listenUserMetaChanges, action: setUserMetaAction },
 			{ name: 'settings', listener: listenSettings, action: setSettingsAction },
 			{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft },
-			{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox }
+			{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox },
+			{ name: 'contactmethods', listener: listenContactMethods, action: setUserContactMethodsAction }
 		] )
 
 		setLocalTimeToSettings( this )

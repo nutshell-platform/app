@@ -1,0 +1,2 @@
+- Test whether contact methods can be read from users who follow you
+- Add contact buttons for those methods

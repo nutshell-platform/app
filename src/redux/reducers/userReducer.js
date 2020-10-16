@@ -9,6 +9,7 @@ export default ( state=null, action ) => {
 		break
 
 		case 'SETUSERMETA':
+		case 'SETUSERCONTACTMETHODS':
 		case "UPDATEUSER_FULFILLED":
 			return { ...state, ...payload }
 		break

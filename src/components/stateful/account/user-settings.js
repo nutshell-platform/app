@@ -22,6 +22,7 @@ class UserSettings extends Component {
 
 		// Existing settings
 		const { theme, ...settings } = props.settings
+		const { contactMethods } = props.user
 
 		// initialise state
 		this.state = {
@@ -36,6 +37,7 @@ class UserSettings extends Component {
 				},
 				...settings
 			},
+			contactMethods: { ...contactMethods },
 			passwordRequired: false,
 			handleAvailable: true,
 			timeout: 2000
@@ -97,13 +99,14 @@ class UserSettings extends Component {
 		...this.state.settings,
 		notifications: {...this.state.settings.notifications, [key]: value }
 	} } )
+	changeContactMethod = ( key, value ) => this.updateState( { contactMethods: { ...this.state.contactMethods, [key]: value } } )
 
 	// Save changes
 	saveChanges = async f => {
 
-		const { user, settings, handleAvailable } = this.state
+		const { user, settings, handleAvailable, contactMethods } = this.state
 		const { user: originalUser, settings: originalSettings } = this.props
-		const { uid } = originalUser
+		const { uid, contactMethods: originalContactMethods } = originalUser
 
 		// Handle is available?
 		if( !handleAvailable ) return alert( 'This handle is taken, please choose another' )
@@ -146,9 +149,13 @@ class UserSettings extends Component {
 			// Remote updates
 			await app.updateUser( user )
 
-			// If there were changed, propagate
+			// If there were changes, propagate
 			if( originalSettings != settings ) await app.updateSettings( settings )
 			if( originalUser != user ) await app.updateUser( user )
+
+			// Updated contact methods
+			const updatedContactMethods = { email: user.email || originalUser.email, ...originalContactMethods, ...contactMethods }
+			if( originalContactMethods != updatedContactMethods ) await app.updateContactMethods( updatedContactMethods )
 
 		} catch( e ) {
 			catcher( e )
@@ -161,14 +168,25 @@ class UserSettings extends Component {
 
 	render() {
 
-		const { loading, user: newuser, settings: newsettings, passwordRequired, handleAvailable } = this.state
-		const { settings, user } = this.props
+		const { loading, user: newuser, settings: newsettings, passwordRequired, handleAvailable, contactMethods } = this.state
+		const { settings, user, contactMethods: originalContactMethods } = this.props
 
 		if( !user || loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Background }>
 			<Navigation title='Settings' />
-			<Settings handleAvailable={ handleAvailable } passwordRequired={ passwordRequired } user={ { ...user, ...newuser } } changeUser={ this.changeUser } settings={ { ...settings, ...newsettings } } changeSetting={ this.changeSetting } changeNotification={ this.changeNotification } saveChanges={ this.saveChanges } />
+			<Settings
+				handleAvailable={ handleAvailable }
+				passwordRequired={ passwordRequired }
+				user={ { ...user, ...newuser } }
+				changeUser={ this.changeUser }
+				settings={ { ...settings, ...newsettings } }
+				changeSetting={ this.changeSetting }
+				changeNotification={ this.changeNotification }
+				saveChanges={ this.saveChanges }
+				changeContactMethod={ this.changeContactMethod }
+				contactMethods={ { ...originalContactMethods, ...contactMethods } }
+			/>
 		</Container>
 
 	}
