@@ -7,3 +7,8 @@ export const setNutshellInbox = inbox => ( {
 	type: 'SETINBOX',
 	payload: inbox
 } )
+
+export const updateOfflineInbox = ( newNutshells=[], inbox=[] ) => ( {
+	type: 'UPDATEOFFLINEINBOX',
+	payload: { newNutshells: newNutshells, inbox: inbox }
+} )

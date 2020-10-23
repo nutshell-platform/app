@@ -32,8 +32,8 @@ export const capitalize = string => string ? string.charAt(0).toUpperCase() + st
 // Debugging
 // ///////////////////////////////
 
-export const log = ( msg, data ) => {
-	if( dev ) console.log( msg, data || '' )
+export const log = ( ...messages ) => {
+	if( dev ) console.log( ...messages )
 }
 
 export const error = msg => {
