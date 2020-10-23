@@ -148,7 +148,7 @@ export const getUserProfile = async ( db, user ) => {
 
 		// Anyone is allowed to read these when logged in
 		const userData = await db.collection( 'users' ).doc( user.uid ).get().then( doc => doc.data() )
-		const userMeta = await await db.collection( 'userMeta' ).doc( user.uid ).get().then( doc => doc.data() )
+		const userMeta = await db.collection( 'userMeta' ).doc( user.uid ).get().then( doc => doc.data() )
 
 		// Will fail if it is not yourself
 		const userPowers = await db.collection( 'specialPowers' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => false )
@@ -164,7 +164,10 @@ export const getUserProfile = async ( db, user ) => {
 			...userPowers,
 			...userContactMethods
 		}
-	} catch( e ) {} finally {}
+	} catch( e ) {
+		log( 'getUserProfile error: ', e )
+		throw e
+	}
 
 }
 

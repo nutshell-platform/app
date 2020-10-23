@@ -101,11 +101,17 @@ export const Link = withTheme( ( { style, theme, children, to, onPress, ...props
 // ///////////////////////////////
 
 // Generic text input
-export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, onSubmit, multiline, iconSize=30, value, ...props } ) => {
+export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, onSubmit, multiline, iconSize=30, value, ref=f=>f, ...props } ) => {
 
+	// Internal variables
 	const gutter = multiline ? 200 : undefined
 	const [ showInfo, setInfo ] = useState( false )
 	const [ height, setHeight ] = useState( gutter )
+
+	// Styles
+	const inputStyles = { ...( height && { height: height } ), minHeight: 50, marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style }
+
+	// Internal helpers
 	const adjustHeight = ( { nativeEvent } ) => {
 		if( multiline ) setHeight( nativeEvent?.contentSize?.height + ( isIos ? 35 : 0 ) )
 	}
@@ -113,11 +119,12 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 		if( nativeEvent.key == 'Enter' ) return onSubmit()
 	}
 
+
 	return <View>
 		<View style={ { position: 'relative' } }>
 
 			{ /* The actual input */ }
-			<TextInput onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ { ...( height && { height: height } ), minHeight: 50, marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style } } />
+			<TextInput onPress={ f => console.log( 'Focus' ) } ref={ ref } onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ inputStyles } />
 
 			{ /* The info icon */ }
 			{ info && ( !hideInfo || ( hideInfo && !value ) ) && <TouchableOpacity tabindex={ -1 } style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'center' } } onPress={ f => setInfo( !showInfo ) }>
@@ -131,18 +138,26 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 } )
 
 // Button
-export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 20, ...style } }>
-	<PaperButton
-		onPress={ to ? f => history.push( to ) : onPress }
-		style={ { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', width: '100%' } }
-		contentStyle={ { width: '100%' } }
-		labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface, width: '100%' } }		
-		mode={ mode } { ...props }
-	>
-		{ children }
-	</PaperButton>
-	{ loading && <ActivityIndicator size={ 15 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { height: 20, width: 20 } } /> }
-</View>  ) )
+export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => {
+
+	const handleLink = link => {
+		if( link.includes( 'http' ) || link.includes( 'mailto:' ) ) return Linking.openURL( link )
+		return history.push( link )
+	}
+
+	return <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 20, ...style } }>
+		<PaperButton
+			onPress={ to ? f => handleLink( to ) : onPress }
+			style={ { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', width: '100%' } }
+			contentStyle={ { width: '100%' } }
+			labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface } }		
+			mode={ mode } { ...props }
+		>
+			{ children }
+		</PaperButton>
+		{ loading && <ActivityIndicator size={ 15 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { height: 20, width: 20 } } /> }
+	</View>
+} ) )
 
 
 // Toggle

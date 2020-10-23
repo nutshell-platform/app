@@ -12,8 +12,9 @@ import { toggleDarkMode } from '../../../redux/actions/settingsActions'
 import app from '../../../modules/firebase/app'
 
 // Helpers
-import { capitalize, log, sendEmail, Dialogue } from '../../../modules/helpers'
-import { isWeb, isIos, isAndroid, version, OS } from '../../../modules/apis/platform'
+import { capitalize, log, Dialogue } from '../../../modules/helpers'
+import { sendEmail } from '../../../modules/apis/messaging'
+import { version, OS } from '../../../modules/apis/platform'
 
 
 class Navigation extends Component {
@@ -70,19 +71,19 @@ class Navigation extends Component {
 	mailBugreport = async f => {
 
 		const { user: { name, handle } } = this.props
-		const n = ( isWeb && '\n' ) || ( isIos && '<br>' ) || ( isAndroid && '<br><br>' )
 
 		await Dialogue( '💌 Your email client will open', `Your input is super appreciated ${ handle }.\n\nWe have pre-composed an email for you, please edit the relevant parts with your input.` )
 
 		const message = `Hello nutshell team!
-			${ n }My name is ${ name }, my nutshell handle is ${ handle }.
-			${ n }I encountered a problem:
-			${ n }1. I was trying to ✏️ insert_what_you_were_doing
-			${ n }2. I expected the app to ✏️ insert_what_you_expeted_to_happen
-			${ n }3. Instead, the app ✏️ insert_what_happened
-			${ n }I am using app version "${ version }" on ${ OS }.
-			${ n }Thanks for taking a look at it!
-			${ n }Sincerely,${ n }${ name }
+			My name is ${ name }, my nutshell handle is ${ handle }.
+			I encountered a problem:
+			1. I was trying to ✏️ insert_what_you_were_doing
+			2. I expected the app to ✏️ insert_what_you_expeted_to_happen
+			3. Instead, the app ✏️ insert_what_happened
+			I am using app version "${ version }" on ${ OS }.
+			Thanks for taking a look at it!
+			Sincerely,
+			${ name }
 		`
 
 		return sendEmail( 'bugs@nutshell.social', '🐞 Nutshell bug report', message )
@@ -92,17 +93,17 @@ class Navigation extends Component {
 	mailFeaturerequest = async f => {
 
 		const { user: { name, handle } } = this.props
-		const n = ( isWeb && '\n' ) || ( isIos && '<br>' ) || ( isAndroid && '<br><br>' )
 
 		await Dialogue( '💌 Your email client will open', `Your input is super appreciated ${ handle }.\n\nWe have pre-composed an email for you, please edit the relevant parts with your input.` )
 
 		const message = `Hello nutshell team!
-			${ n }My name is ${ name }, my nutshell handle is ${ handle }.
-			${ n }I would like to suggest a feature, it would be great if:
-			${ n }✏️ Insert_your_feature_idea.
-			${ n }I am using app version "${ version }" on ${ OS }.
-			${ n }Thanks for taking a look at it!
-			${ n }Sincerely,${ n }${ name }
+			My name is ${ name }, my nutshell handle is ${ handle }.
+			I would like to suggest a feature, it would be great if:
+			✏️ Insert_your_feature_idea.
+			I am using app version "${ version }" on ${ OS }.
+			Thanks for taking a look at it!
+			Sincerely,
+			${ name }
 		`
 
 		return sendEmail( 'features@nutshell.social', '✨ Nutshell feature request', message )

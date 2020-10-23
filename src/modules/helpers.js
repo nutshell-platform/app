@@ -1,4 +1,4 @@
-import { Alert as NativeAlert, YellowBox } from 'react-native'
+import { Alert as NativeAlert, LogBox } from 'react-native'
 import { dev, isWeb, isCI } from './apis/platform'
 import { v4 as uuidv4 } from 'uuid'
 import * as Random from 'expo-random'
@@ -49,7 +49,7 @@ export const catcher = e => {
 	throw e
 }
 
-export const ignoreErrors = arr => YellowBox.ignoreWarnings( arr )
+export const ignoreErrors = arr => LogBox && LogBox.ignoreLogs( arr )
 
 // ///////////////////////////////
 // Generators

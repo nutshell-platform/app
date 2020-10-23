@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { Card, Title, Paragraph, View, HelperText, IconButton, Divider, Button, ToolTip, UserAvatar, Menu } from '../common/generic'
+
+// Helper functions
 import { timestampToHuman, dateOfNext } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
-import { Card, Title, Paragraph, View, HelperText, IconButton, Divider, Button, ToolTip, UserAvatar, Menu } from '../common/generic'
+import { sendEmail, sendWhatsapp } from '../../../modules/apis/messaging'
 
 export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, isSelf, isAdmin, deleteNutshell } ) => {
 
@@ -35,13 +38,18 @@ export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize
 
 			</View>
 
-			{ markRead && <Button style={ { marginHorizontal: gutter } } loading={ deleting } mode='text' onPress={ f => {
+			{ /* Contact methods */ }
+			{ user.contactMethods && <ContactMethods contactMethods={ user.contactMethods } /> }
+
+			{ /* Mark as read button */ }
+			{ markRead && <Button style={ { marginHorizontal: gutter } } loading={ deleting } icon='archive' onPress={ f => {
 				markRead( uid )
 				setDeleting( true )
-			} }>Mark read</Button> }
+			} }>Save to archive</Button> }
 			{ status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} Nutshell</Button> }
 
 
+			
 			{ /* Menu dots */ }
 			<NutshellOptions isAdmin={ isAdmin } isSelf={ isSelf } deleteNutshell={ f => deleteNutshell( nutshell.uid ) } mute={ f => mute( nutshell.uid ) } block={ f => block( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
 
@@ -54,6 +62,8 @@ export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize
 
 }
 
+
+// Single collapsble entry
 export const Entry = ( { entry } ) => {
 
 	const [ open, setOpen ] = useState( false )
@@ -70,6 +80,30 @@ export const Entry = ( { entry } ) => {
 
 }
 
+// User contact methods
+const ContactMethods = ( { contactMethods={} } ) => {
+
+	// Contact methods
+	const { whatsapp, email } = contactMethods
+
+	// Button styling
+	const buttonStyles = { width: 170, maxWidth: '100%' }
+
+	const message = 'Hey! I was reading your Nutshell and wanted to respond.'
+
+	// If none, render none
+	if( !whatsapp && !email ) return false
+
+	return <View>
+		<HelperText style={ { width: '100%', textAlign: 'center' } }>React to this Nutshell:</HelperText>
+		<View style={ { alignItems: 'center', justifyContent: 'center', flexDirection: 'row' } }>
+			{ whatsapp && <Button onPress={ f => sendWhatsapp( whatsapp, message ) } style={ buttonStyles } mode='text' icon='whatsapp'>WhatsApp</Button> }
+			{ email && <Button onPress={ f => sendEmail( email, 'Your Nutshell', message ) } style={ buttonStyles } mode='text' icon='email-plus-outline'>Email</Button> }
+		</View>
+	</View>
+}
+
+// Placeholder nutshell card
 export const Placeholder = ( { hasDraft, status='' } ) => <Card>
 	<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
 		<Title>{ hasDraft ? 'Edit' : 'Draft' } your { `${ status } ` || 'next ' }Nutshell</Title>
@@ -82,6 +116,7 @@ export const Placeholder = ( { hasDraft, status='' } ) => <Card>
 	</View>
 </Card>
 
+// View recommendations card
 export const ViewRecs = ( { recAmount } ) => <Card>
 	<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%' } }>
 		{ recAmount > 0 && <Title style={ { textAlign: 'center', marginBottom: 15 } }>You have { recAmount } friend suggestions!</Title> }
