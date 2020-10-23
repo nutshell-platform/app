@@ -73,7 +73,8 @@ export const markNutshellRead = ( app, uid ) => {
 
 	return Promise.all( [
 		db.collection( 'nutshells' ).doc( uid ).set( { readcount: FieldValue.increment( 1 ) }, { merge: true } ),
-		db.collection( 'inbox' ).doc( app.auth.currentUser.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } )
+		db.collection( 'inbox' ).doc( app.auth.currentUser.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } ),
+		db.collection( 'archive' ).doc( app.auth.currentUser.uid ).set( { nutshells: FieldValue.arrayUnion( uid ) }, { merge: true } )
 	] )
 
 }

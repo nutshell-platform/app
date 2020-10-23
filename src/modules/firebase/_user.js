@@ -98,19 +98,26 @@ export const loginUser = async ( auth, email, password ) => auth.signInWithEmail
 export const updateUser = async ( app, userUpdates ) => {
 
 	let { uid, email, newpassword, currentpassword, newavatar, oldavatar, handle, ...updates } = userUpdates
+	const { currentUser } = app.auth
 	
 	try {
 
+		// If this is a sensitive change, reauthenticate
+		if( currentpassword ) {
+			const { EmailAuthProvider } = app.Auth
+			await currentUser.reauthenticateWithCredential( EmailAuthProvider.credential( currentUser.email, password ) )
+		}
+
 		// If email change was requested, set to firebase auth object
 		if( email && currentpassword ) {
-			await app.loginUser( app.auth.currentUser.email, currentpassword )
-			await app.auth.currentUser.updateEmail( email )
+			await app.loginUser( currentUser.email, currentpassword )
+			await currentUser.updateEmail( email )
 			// Set email fingerprint
 			await setEmailFingerprint( app )
 		}
 		if( newpassword && currentpassword ) {
-			await app.loginUser( app.auth.currentUser.email, currentpassword )
-			await app.auth.currentUser.updatePassword( newpassword )
+			await app.loginUser( currentUser.email, currentpassword )
+			await currentUser.updatePassword( newpassword )
 		}
 
 		// If new file was added
@@ -128,7 +135,7 @@ export const updateUser = async ( app, userUpdates ) => {
 		}
 
 		// Set other properties to store
-		await app.db.collection( 'users' ).doc( app.auth.currentUser.uid ).set( {
+		await app.db.collection( 'users' ).doc( currentUser.uid ).set( {
 			...updates,
 			...( handle && { handle: handle.toLowerCase() } ),
 			updated: Date.now()
@@ -182,7 +189,34 @@ export const logoutUser = async app => {
 }
 
 // Delete
-export const deleteUser = auth => auth.currentUser.delete()
+export const deleteUser = async ( app, password ) => {
+
+	const { auth, db, FieldValue } = app
+	const { currentUser } = auth
+	const { EmailAuthProvider } = app.Auth
+
+	try {
+
+		await currentUser.reauthenticateWithCredential( EmailAuthProvider.credential( currentUser.email, password ) )
+
+		await Promise.all( [
+			db.collection( 'inbox' ).doc( currentUser.uid ).delete(),
+			db.collection( 'nutshells' ).doc( currentUser.uid ).delete(),
+			db.collection( 'settings' ).doc( currentUser.uid ).delete(),
+			db.collection( 'userContacts' ).doc( currentUser.uid ).delete(),
+			db.collection( 'users' ).doc( currentUser.uid ).delete(),
+			db.collection( 'userMeta' ).doc( currentUser.uid ).delete(),
+			db.collection( 'specialPowers' ).doc( currentUser.uid ).delete(),
+		] )
+
+		await auth.currentUser.delete()
+
+	} catch( e ) {
+		log( 'Deletion error: ', e )
+		throw e.message
+	}
+
+} 
 
 // ///////////////////////////////
 // Validations

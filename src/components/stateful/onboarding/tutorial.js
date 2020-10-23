@@ -1,6 +1,7 @@
 import React from 'react'
 import { Component, Loading, Card, Title, Text, Button } from '../../stateless/common/generic'
 import { connect } from 'react-redux'
+import { log } from '../../../modules/helpers'
 
 class Tutorial extends Component {
 
@@ -14,6 +15,9 @@ class Tutorial extends Component {
 		if( !user?.avatar ) todos.push( { label: 'Set your avatar', to: '/user/settings' } )
 		if( !user?.bio ) todos.push( { label: 'Update your bio', to: '/user/settings' } )
 		if( !user?.following?.length ) todos.push( { label: 'Follow some people', to: '/friends/find' } )
+		if( !user?.contactMethods.whatsapp && !user?.contactMethods.email ) todos.push( { label: 'Set a comment method', to: '/user/settings' } )
+
+		log( 'Recommended actions: ', todos )
 
 		// No todos? No component
 		if( !todos.length ) return null

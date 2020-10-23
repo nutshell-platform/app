@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
-import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, Menu } from '../common/generic'
+import { Card, Main, Title, Input, Button, Subheading, Divider, Toggle, HelperText, Text, Menu, Link } from '../common/generic'
 import ImagePicker from '../../stateful/common/image-picker'
 
-export const Settings = ( { children, avatarSize=100, user={}, changeUser, settings={}, changeNotification, changeSetting, saveChanges, passwordRequired, handleAvailable, changeContactMethod, contactMethods } ) => {
+export const Settings = ( { children, avatarSize=100, user={}, changeUser, settings={}, changeNotification, changeSetting, deleteAccount, saveChanges, passwordRequired, handleAvailable, changeContactMethod, contactMethods } ) => {
 
 	const newUser = !settings.notifications
 	const notiPrefs = settings.notifications || {}
@@ -69,7 +69,11 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				{ passwordRequired && <React.Fragment>
 					<Input secureTextEntry label='current password' info='Current password required for this change' error={ true } value={ user.currentpassword || '' } onChangeText={ t => changeUser( 'currentpassword', t ) } />
 				</React.Fragment> }
-				<Button onPress={ saveChanges }>{ newUser ? 'Confirm settings and continue' : 'Save changes' }</Button>
+
+				
+				{ !user.deleteAccount && <Button onPress={ saveChanges }>{ newUser ? 'Confirm settings and continue' : 'Save changes' }</Button> }
+				<DeleteAccount confirmIntent={ f => changeUser( 'deleteAccount', true ) } deleteAccount={ deleteAccount } />
+
 			</Card>
 
 
@@ -77,4 +81,14 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 	</Main.Center>
 }
 
-export const another = true
+export const DeleteAccount = ( { confirmIntent, deleteAccount } ) => {
+
+	const [ iamsure, toggleIamsure ] = useState( false )
+	const confirm = f => {
+		toggleIamsure( true )
+		confirmIntent( )
+	}
+
+	if( !iamsure ) return <Link underline={ false } style={ { color: 'red', marginTop: 20, textAlign: 'center' } } onPress={ confirm }>Delete account</Link>
+	return <Button onPress={ deleteAccount } icon='alert-outline'>Confirm account deletion</Button>
+}

@@ -9,7 +9,7 @@ import { sendEmail, sendWhatsapp } from '../../../modules/apis/messaging'
 export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, isSelf, isAdmin, deleteNutshell } ) => {
 
 	const { entries, updated, published, user, uid, readcount } = nutshell
-	const [ deleting, setDeleting ] = useState( false )
+	
 	const gutter = 40
 
 	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
@@ -38,18 +38,13 @@ export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize
 
 			</View>
 
-			{ /* Contact methods */ }
-			{ user.contactMethods && <ContactMethods contactMethods={ user.contactMethods } /> }
+			{ /* Nutshell actions methods */ }
+			<NutshellActions gutter={ gutter } archive={ f => markRead( uid ) } contactMethods={ user.contactMethods } />
 
-			{ /* Mark as read button */ }
-			{ markRead && <Button style={ { marginHorizontal: gutter } } loading={ deleting } icon='archive' onPress={ f => {
-				markRead( uid )
-				setDeleting( true )
-			} }>Save to archive</Button> }
+			{ /* If this is your nutshell */ }
 			{ status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} Nutshell</Button> }
 
 
-			
 			{ /* Menu dots */ }
 			<NutshellOptions isAdmin={ isAdmin } isSelf={ isSelf } deleteNutshell={ f => deleteNutshell( nutshell.uid ) } mute={ f => mute( nutshell.uid ) } block={ f => block( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
 
@@ -81,24 +76,29 @@ export const Entry = ( { entry } ) => {
 }
 
 // User contact methods
-const ContactMethods = ( { contactMethods={} } ) => {
+const NutshellActions = ( { gutter, archive, contactMethods={} } ) => {
+
+	const [ deleting, setDeleting ] = useState( false )
+	const sendToArchive = f => {
+		archive(  )
+		setDeleting( true )
+	}
 
 	// Contact methods
 	const { whatsapp, email } = contactMethods
 
 	// Button styling
-	const buttonStyles = { width: 170, maxWidth: '100%' }
+	const buttonStyles = { flexShrink: 1, maxWidth: '100%', marginHorizontal: 10 }
+	const buttonLabel = { fontSize: 12 }
 
 	const message = 'Hey! I was reading your Nutshell and wanted to respond.'
 
 	// If none, render none
-	if( !whatsapp && !email ) return false
-
 	return <View>
-		<HelperText style={ { width: '100%', textAlign: 'center' } }>React to this Nutshell:</HelperText>
-		<View style={ { alignItems: 'center', justifyContent: 'center', flexDirection: 'row' } }>
-			{ whatsapp && <Button onPress={ f => sendWhatsapp( whatsapp, message ) } style={ buttonStyles } mode='text' icon='whatsapp'>WhatsApp</Button> }
-			{ email && <Button onPress={ f => sendEmail( email, 'Your Nutshell', message ) } style={ buttonStyles } mode='text' icon='email-plus-outline'>Email</Button> }
+		<View style={ { alignItems: 'center', justifyContent: 'center', flexDirection: 'row', paddingHorizontal: 5 } }>
+			{ whatsapp && <Button labelStyle={ buttonLabel } onPress={ f => sendWhatsapp( whatsapp, message ) } style={ buttonStyles } icon='whatsapp'>WhatsApp</Button> }
+			{ email && <Button labelStyle={ buttonLabel } onPress={ f => sendEmail( email, 'Your Nutshell', message ) } style={ buttonStyles } icon='email-plus-outline'>Email</Button> }
+			<Button labelStyle={ buttonLabel } style={ buttonStyles } loading={ deleting } icon='archive' onPress={ sendToArchive }>Archive</Button>
 		</View>
 	</View>
 }

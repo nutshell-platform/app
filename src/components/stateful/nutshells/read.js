@@ -20,7 +20,8 @@ class ReadNutshell extends Component {
 
 	// initialise state
 	state = {
-		loading: true
+		loading: true,
+		markedReadOffline: []
 	}
 
 	// Timeouted loading trackers
@@ -28,7 +29,7 @@ class ReadNutshell extends Component {
 	inboxLoader = undefined
 
 	// Load inbox
-	loadInbox = async f => {
+	loadInbox = async ( silent=false ) => {
 
 		// Set loading tracker
 		if( this.loading ) return
@@ -42,7 +43,7 @@ class ReadNutshell extends Component {
 
 			log( 'Start nutshell loading' )
 			this.loading = true
-			await this.updateState( { loading: true } )
+			if( !silent ) await this.updateState( { loading: true } )
 
 			const { inbox, user, offlineInbox, dispatch } = this.props
 			log( 'Load nutshells' )
@@ -79,22 +80,35 @@ class ReadNutshell extends Component {
 		}
 	}
 
-	cleanNutshells = ( nutshells=[], muted=[] ) => nutshells.filter( n => !muted.includes( n.uid ) ).filter( n => !n.hidden ).filter( nutshell => !nutshell.delete )
+	cleanNutshells = ( nutshells=[] ) => {
+
+		const { user } = this.props
+		const { markedReadOffline } = this.state
+
+		nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
+		nutshells = nutshells.filter( n => !n.hidden )
+		nutshells = nutshells.filter( n => !n.delete )
+		nutshells = nutshells.filter( n => !markedReadOffline.includes( n.uid ) )
+
+		return nutshells
+		
+	}
 
 	// Load Nutshells on mount
 	componentDidMount = f => this.loadInbox()
 
 	shouldComponentUpdate = async ( nextprops, nextstate ) => {
 		const { inbox: remoteInbox, offlineInbox, user } = nextprops
-		const { loading } = nextstate
+		const { loading, markedReadOffline } = nextstate
 
 		// If loading or no inbox, do nothing
 		if( loading || this.loading || !remoteInbox ) return false
 
 		// If remote inbox are more than local, get inbox details with a small delay
-		if( remoteInbox?.length > offlineInbox?.length ) {
+		if( remoteInbox?.length != offlineInbox?.length ) {
 			if( this.inboxLoader ) clearTimeout( this.inboxLoader )
-			this.inboxLoader = setTimeout( this.loadInbox, 2000 )
+			// Trigger inbox load, but keep it silent if we are probably more current
+			this.inboxLoader = setTimeout( f => this.loadInbox( !!markedReadOffline.length ), 2000 )
 		}
 
 		// Always trigger rerender ( default behavior )
@@ -108,10 +122,12 @@ class ReadNutshell extends Component {
 	go = to => to && this.props.history.push( to )
 
 	markRead = async uid => {
+
+		// Track offline
+		await this.updateState( { markedReadOffline: [ ...this.state.markedReadOffline, uid ] } )
+
+		// Track online
 		await app.markNutshellRead( uid )
-		const { inbox: oldInbox } = this.state
-		const newInbox = [ ...oldInbox.filter( item => item.uid != uid ) ]
-		await this.updateState( { inbox: newInbox } )
 	}
 
 

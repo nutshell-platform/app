@@ -50,6 +50,10 @@ service cloud.firestore {
       // Write own, read others if logged in
       allow write, read: if request.auth.uid == userUid
     }
+    match /archive/{userUid} {
+      // Write own, read others if logged in
+      allow write, read: if request.auth.uid == userUid
+    }
 
     // ///////////////////////////////
     // Conditional data
@@ -74,6 +78,7 @@ service cloud.firestore {
     match /specialPowers/{userUid} {
       // Only create new ones
       allow read: if request.auth.uid == userUid
+      allow delete: if request.auth.uid == userUid
     }
 
     match /nutshells/{nutshellId} {

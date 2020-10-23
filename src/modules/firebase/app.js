@@ -52,6 +52,7 @@ class Firebase {
 	auth 		= this.fb.auth()
 	listeners 	= {}
 	FieldValue  = firebase.firestore.FieldValue
+	Auth 		= firebase.auth
 	analytics  	= Analytics
 
 	// ///////////////////////////////
@@ -61,7 +62,7 @@ class Firebase {
 	loginUser     = ( email, pass ) => loginUser( this.auth, email, pass )
 	updateUser	  = userUpdates => updateUser( this, userUpdates )
 	logout		  = f => logoutUser( this )
-	deleteUser	  = f => deleteUser( this.auth )
+	deleteUser	  = password => deleteUser( this, password )
 	resetPassword = email => resetPassword( this.auth, email )
 
 	// Helpers

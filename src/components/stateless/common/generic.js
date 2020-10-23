@@ -82,10 +82,10 @@ export const HelperText = ( { icon, ...props } ) => !icon ? <PaperHelperText { .
 	<IconButton style={ { opacity: .8, margin: 0 } } icon={ icon } size={ 15 } />
 </View>
 
-export const Link = withTheme( ( { style, theme, children, to, onPress, ...props } ) => {
+export const Link = withTheme( ( { style, theme, children, to, onPress, underline=true, ...props } ) => {
 
 	const text = <Text style={ { color: theme.colors.text, textDecorationLine: 'none', ...theme.fonts.regular, ...style } }>{ children }</Text>
-	if( to?.includes( 'http' ) || to?.includes( 'mailto' ) || onPress ) return <TouchableOpacity onPress={ onPress || ( f => Linking.openURL( to ) ) } style={ { borderBottomWidth: .2, paddingTop: 1, marginHorizontal: 5 } }>
+	if( to?.includes( 'http' ) || to?.includes( 'mailto' ) || onPress ) return <TouchableOpacity onPress={ onPress || ( f => Linking.openURL( to ) ) } style={ { paddingTop: 1, marginHorizontal: 5, ...( underline && { borderBottomWidth: .2 } ) } }>
 		{ text }
 	</TouchableOpacity>
 

@@ -9,7 +9,7 @@ import * as ImageManipulator from "expo-image-manipulator"
 import Background from '../../../../assets/undraw_personal_settings_kihd.svg'
 
 // Helpers
-import { log, catcher, getuid } from '../../../modules/helpers'
+import { log, catcher, getuid, Dialogue } from '../../../modules/helpers'
 
 // Data
 import app from '../../../modules/firebase/app'
@@ -57,12 +57,12 @@ class UserSettings extends Component {
 	}, this.state.timeout )
 
 	// Sensitive input?
-	isSensitive = f => { 
+	checkIfIsSensitive = f => { 
 
 		const { user, passwordRequired } = this.state 
 		const { user: oldUser } = this.props
 
-		if( user.email && ( user.email != oldUser.email ) || user.newpassword ) return this.updateState( { passwordRequired: true } )
+		if( user.email && ( user.email != oldUser.email ) || user.newpassword || user.deleteAccount ) return this.updateState( { passwordRequired: true } )
 
 		if( passwordRequired ) return this.updateState( { passwordRequired: false } )
 
@@ -71,8 +71,10 @@ class UserSettings extends Component {
 	// Input handlers
 	changeUser = ( key, value ) => {
 
+		log( `User change, set ${ key } to: `, value )
+
 		// Set changed attr and check if pass is required for this change
-		if( key != 'handle' ) return this.updateState( { user: { ...this.state.user, [key]: value } } ).then( this.isSensitive )
+		if( key != 'handle' ) return this.updateState( { user: { ...this.state.user, [key]: value } } ).then( this.checkIfIsSensitive )
 
 		// If handle was changed
 		const { user: oldUser } = this.props
@@ -165,6 +167,41 @@ class UserSettings extends Component {
 
 	}
 
+	// Delete accounts
+	deleteAccount = async f => {
+
+		const deleteAndLogout = async f => {
+
+			const { user } = this.state
+			if( !user.currentpassword ) return Dialogue( 'Missing data', 'Please fill in your current password' )
+
+			try {
+				await app.deleteUser( user.currentpassword )
+				await Dialogue( 'It was fun having you', 'Your account no longer exists. Goodbye 😢' )
+				await app.logout()
+			} catch( e ) {
+				await Dialogue( 'Something went wrong', e )
+				log( e )
+			}
+
+		}
+
+		try {
+
+			await Dialogue( 'Permanently delete account?', 'This CANNOT BE UNDONE!', [ {
+				text: 'Yes, delete my account permanently',
+				onPress: deleteAndLogout
+			}, {
+				text: `Noooo! Don't do it!`,
+				onPress: f => this.changeUser( 'deleteAccount', false )
+			} ] )
+
+		} catch( e ) {
+			await Dialogue( 'Error: ', e )
+		}
+
+	}
+
 
 	render() {
 
@@ -186,6 +223,7 @@ class UserSettings extends Component {
 				saveChanges={ this.saveChanges }
 				changeContactMethod={ this.changeContactMethod }
 				contactMethods={ { ...originalContactMethods, ...contactMethods } }
+				deleteAccount={ this.deleteAccount }
 			/>
 		</Container>
 
