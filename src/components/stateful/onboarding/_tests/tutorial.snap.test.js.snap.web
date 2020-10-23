@@ -17,5 +17,225 @@ exports[`Tutorial Matches snapshot 1`] = `
       "msFlexPreferredSize": "0%",
     }
   }
-/>
+>
+  <div
+    className="css-view-1dbjc4n"
+    style={
+      Object {
+        "maxWidth": "100%",
+        "paddingBottom": "10px",
+        "paddingTop": "10px",
+        "width": "500px",
+      }
+    }
+  >
+    <div
+      className="css-view-1dbjc4n"
+      style={
+        Object {
+          "backgroundColor": "rgba(255,255,255,1.00)",
+          "borderBottomLeftRadius": "0px",
+          "borderBottomRightRadius": "0px",
+          "borderTopLeftRadius": "0px",
+          "borderTopRightRadius": "0px",
+          "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
+          "maxWidth": "100%",
+          "paddingBottom": "30px",
+          "paddingLeft": "30px",
+          "paddingRight": "30px",
+          "paddingTop": "30px",
+        }
+      }
+    >
+      <div
+        aria-disabled={true}
+        className="css-view-1dbjc4n"
+        disabled={true}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onKeyDown={[Function]}
+        style={
+          Object {
+            "WebkitBoxFlex": 1,
+            "WebkitFlexGrow": 1,
+            "WebkitFlexShrink": 1,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "msFlexNegative": 1,
+            "msFlexPositive": 1,
+          }
+        }
+      >
+        <div
+          className="css-text-901oao"
+          dir="auto"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "rgba(0,0,0,0.87)",
+              "direction": "ltr",
+              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+              "fontSize": "20px",
+              "fontWeight": "500",
+              "letterSpacing": "0.15px",
+              "lineHeight": "30px",
+              "marginBottom": "2px",
+              "marginTop": "2px",
+              "textAlign": "left",
+            }
+          }
+        >
+          Welcome 
+          Mentor Palokaj
+           🎉
+        </div>
+        <div
+          className="css-text-901oao"
+          dir="auto"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "rgba(0,0,0,1.00)",
+              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+              "fontWeight": "400",
+              "paddingTop": "20px",
+              "textAlign": "left",
+            }
+          }
+        >
+          To make the most out of Nutshell, we recommend doing the following things:
+        </div>
+        <div
+          className="css-view-1dbjc4n"
+          style={
+            Object {
+              "WebkitAlignItems": "center",
+              "WebkitBoxAlign": "center",
+              "WebkitBoxDirection": "normal",
+              "WebkitBoxOrient": "horizontal",
+              "WebkitBoxPack": "start",
+              "WebkitFlexDirection": "row",
+              "WebkitJustifyContent": "flex-start",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginTop": "20px",
+              "maxWidth": "100%",
+              "msFlexAlign": "center",
+              "msFlexDirection": "row",
+              "msFlexPack": "start",
+              "position": "relative",
+            }
+          }
+        >
+          <div
+            className="css-view-1dbjc4n"
+            style={
+              Object {
+                "WebkitAlignItems": "stretch",
+                "WebkitBoxAlign": "stretch",
+                "WebkitBoxDirection": "normal",
+                "WebkitBoxOrient": "vertical",
+                "WebkitBoxPack": "center",
+                "WebkitFlexDirection": "column",
+                "WebkitJustifyContent": "center",
+                "alignItems": "stretch",
+                "backgroundColor": "rgba(0,0,0,1.00)",
+                "borderBottomColor": "rgba(0,0,0,0.00)",
+                "borderBottomLeftRadius": "0px",
+                "borderBottomRightRadius": "0px",
+                "borderBottomStyle": "solid",
+                "borderBottomWidth": "0px",
+                "borderLeftColor": "rgba(0,0,0,0.00)",
+                "borderLeftStyle": "solid",
+                "borderLeftWidth": "0px",
+                "borderRightColor": "rgba(0,0,0,0.00)",
+                "borderRightStyle": "solid",
+                "borderRightWidth": "0px",
+                "borderTopColor": "rgba(0,0,0,0.00)",
+                "borderTopLeftRadius": "0px",
+                "borderTopRightRadius": "0px",
+                "borderTopStyle": "solid",
+                "borderTopWidth": "0px",
+                "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
+                "flexDirection": "column",
+                "justifyContent": "center",
+                "minWidth": "64px",
+                "msFlexAlign": "stretch",
+                "msFlexDirection": "column",
+                "msFlexPack": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <div
+              className="css-cursor-18t94o4 css-view-1dbjc4n"
+              data-focusable={true}
+              onClick={[Function]}
+              onContextMenu={[Function]}
+              onKeyDown={[Function]}
+              role="button"
+              style={
+                Object {
+                  "borderBottomLeftRadius": "0px",
+                  "borderBottomRightRadius": "0px",
+                  "borderTopLeftRadius": "0px",
+                  "borderTopRightRadius": "0px",
+                  "overflowX": "hidden",
+                  "overflowY": "hidden",
+                  "position": "relative",
+                }
+              }
+              tabIndex="0"
+            >
+              <div
+                className="css-view-1dbjc4n"
+                style={
+                  Object {
+                    "WebkitAlignItems": "center",
+                    "WebkitBoxAlign": "center",
+                    "WebkitBoxDirection": "normal",
+                    "WebkitBoxOrient": "horizontal",
+                    "WebkitBoxPack": "center",
+                    "WebkitFlexDirection": "row",
+                    "WebkitJustifyContent": "center",
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                    "msFlexAlign": "center",
+                    "msFlexDirection": "row",
+                    "msFlexPack": "center",
+                    "width": "100%",
+                  }
+                }
+              >
+                <div
+                  className="css-text-901oao css-textOneLine-bfa6kz"
+                  dir="auto"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "rgba(255,255,255,1.00)",
+                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                      "fontWeight": "500",
+                      "letterSpacing": "1px",
+                      "marginBottom": "9px",
+                      "marginLeft": "16px",
+                      "marginRight": "16px",
+                      "marginTop": "9px",
+                      "textAlign": "center",
+                      "textTransform": "uppercase",
+                    }
+                  }
+                >
+                  Set a comment method
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;

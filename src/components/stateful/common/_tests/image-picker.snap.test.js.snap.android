@@ -60,6 +60,11 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
       </View>
       <View
         accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+          }
+        }
         accessible={true}
         focusable={false}
         hitSlop={
@@ -200,6 +205,11 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
       </View>
       <View
         accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+          }
+        }
         accessible={true}
         focusable={false}
         hitSlop={

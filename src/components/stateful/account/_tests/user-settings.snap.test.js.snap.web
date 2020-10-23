@@ -116,7 +116,6 @@ exports[`UserSettings Matches snapshot 1`] = `
             style={
               Object {
                 "backgroundColor": "rgba(0,0,0,0.00)",
-                "backgroundImage": "url(\\"SvgMock\\")",
                 "backgroundPosition": "center",
                 "backgroundRepeat": "no-repeat",
                 "backgroundSize": "cover",
@@ -130,12 +129,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                 "zIndex": -1,
               }
             }
-          />
-          <img
-            alt=""
-            className="css-accessibilityImage-9pa8cd"
-            draggable={false}
-            src="SvgMock"
           />
         </div>
         <div
@@ -206,14 +199,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                 aria-disabled={true}
                 className="css-view-1dbjc4n"
                 disabled={true}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "WebkitBoxFlex": 1,
@@ -235,6 +223,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                   className="css-reset-4rbku5 css-text-901oao css-textOneLine-bfa6kz"
                   data-focusable={true}
                   dir="auto"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
                   role="heading"
                   style={
                     Object {
@@ -253,16 +243,9 @@ exports[`UserSettings Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -275,7 +258,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -284,27 +266,14 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -343,6 +312,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -351,16 +321,9 @@ exports[`UserSettings Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -373,7 +336,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -382,27 +344,14 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -441,6 +390,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -449,16 +399,9 @@ exports[`UserSettings Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -471,7 +414,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -480,27 +422,14 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -539,6 +468,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -547,16 +477,9 @@ exports[`UserSettings Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -569,7 +492,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -578,27 +500,14 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -637,6 +546,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -647,17 +557,8 @@ exports[`UserSettings Matches snapshot 1`] = `
         </div>
         <div
           className="css-view-1dbjc4n r-scrollbarWidth-2eszeu"
-          onResponderGrant={[Function]}
-          onResponderReject={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminationRequest={[Function]}
           onScroll={[Function]}
-          onScrollShouldSetResponder={[Function]}
-          onStartShouldSetResponder={[Function]}
-          onStartShouldSetResponderCapture={[Function]}
-          onTouchEnd={[Function]}
           onTouchMove={[Function]}
-          onTouchStart={[Function]}
           onWheel={[Function]}
           style={
             Object {
@@ -743,6 +644,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                       "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
                       "maxWidth": "100%",
                       "msFlexItemAlign": "center",
+                      "msGridRowAlign": "center",
                       "paddingBottom": "30px",
                       "paddingLeft": "30px",
                       "paddingRight": "30px",
@@ -755,14 +657,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                     aria-disabled={true}
                     className="css-view-1dbjc4n"
                     disabled={true}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
                     style={
                       Object {
                         "WebkitBoxFlex": 1,
@@ -778,14 +675,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <div
                       className="css-view-1dbjc4n"
                       data-focusable={true}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
                       onKeyDown={[Function]}
-                      onKeyUp={[Function]}
-                      onResponderGrant={[Function]}
-                      onResponderMove={[Function]}
-                      onResponderRelease={[Function]}
-                      onResponderTerminate={[Function]}
-                      onResponderTerminationRequest={[Function]}
-                      onStartShouldSetResponder={[Function]}
                       style={
                         Object {
                           "MozTransitionProperty": "opacity",
@@ -797,7 +689,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           "WebkitBoxPack": "center",
                           "WebkitFlexDirection": "row",
                           "WebkitJustifyContent": "center",
-                          "WebkitTransitionDuration": "0.15s",
+                          "WebkitTransitionDuration": "0s",
                           "WebkitTransitionProperty": "opacity",
                           "WebkitUserSelect": "none",
                           "alignItems": "center",
@@ -812,7 +704,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           "msTouchAction": "manipulation",
                           "msUserSelect": "none",
                           "touchAction": "manipulation",
-                          "transitionDuration": "0.15s",
+                          "transitionDuration": "0s",
                           "transitionProperty": "opacity",
                           "userSelect": "none",
                         }
@@ -860,7 +752,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               style={
                                 Object {
                                   "backgroundColor": "rgba(0,0,0,0.00)",
-                                  "backgroundImage": "url(\\"https://firebasestorage.googleapis.com/v0/b/nutshell-staging-1b98e.appspot.com/o/avatars%2FHYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg?alt=media&token=77f72f02-18cd-418e-aeb8-78c218f8802c\\")",
                                   "backgroundPosition": "center",
                                   "backgroundRepeat": "no-repeat",
                                   "backgroundSize": "cover",
@@ -875,25 +766,15 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 }
                               }
                             />
-                            <img
-                              alt=""
-                              className="css-accessibilityImage-9pa8cd"
-                              draggable={false}
-                              src="https://firebasestorage.googleapis.com/v0/b/nutshell-staging-1b98e.appspot.com/o/avatars%2FHYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg?alt=media&token=77f72f02-18cd-418e-aeb8-78c218f8802c"
-                            />
                           </div>
                         </div>
                         <div
                           aria-disabled={true}
                           className="css-view-1dbjc4n"
                           disabled={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           role="button"
                           style={
                             Object {
@@ -932,23 +813,13 @@ exports[`UserSettings Matches snapshot 1`] = `
                             }
                           }
                         >
-                          <span
-                            className="css-hitSlop-mjp8i1"
-                            style={
-                              Object {
-                                "bottom": "-10px",
-                                "left": "-10px",
-                                "right": "-10px",
-                                "top": "-10px",
-                              }
-                            }
-                          />
                           <div
                             className="css-view-1dbjc4n"
                           >
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -957,16 +828,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <div
                       className="css-text-901oao"
                       dir="auto"
-                      index={1}
-                      siblings={
-                        Array [
-                          "Connect(ShowOrPickImage)",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                        ]
-                      }
+                      onClick={[Function]}
                       style={
                         Object {
                           "color": "rgba(0,0,0,0.87)",
@@ -981,7 +843,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                           "textAlign": "center",
                         }
                       }
-                      total={10}
                     >
                       Welcome 
                       Mentor Palokaj
@@ -1001,16 +862,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <div
                       className="css-text-901oao"
                       dir="auto"
-                      index={4}
-                      siblings={
-                        Array [
-                          "Connect(ShowOrPickImage)",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                        ]
-                      }
+                      onClick={[Function]}
                       style={
                         Object {
                           "color": "rgba(0,0,0,0.87)",
@@ -1025,7 +877,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                           "textAlign": "left",
                         }
                       }
-                      total={10}
                     >
                       About you
                     </div>
@@ -1101,6 +952,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -1124,6 +976,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -1149,27 +1002,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                               autoCapitalize="sentences"
                               autoComplete="on"
                               autoCorrect="on"
-                              className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                              className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                               data-focusable={true}
                               dir="auto"
-                              index={5}
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
                               onKeyDown={[Function]}
-                              onKeyPress={[Function]}
                               onSelect={[Function]}
                               placeholder=""
                               readOnly={false}
-                              siblings={
-                                Array [
-                                  "Connect(ShowOrPickImage)",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
                               spellCheck={true}
                               style={
                                 Object {
@@ -1194,7 +1036,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   "zIndex": 1,
                                 }
                               }
-                              total={10}
                               type="text"
                               value="Mentor Palokaj"
                             />
@@ -1203,21 +1044,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
                               "WebkitBoxPack": "center",
                               "WebkitJustifyContent": "center",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "bottom": "0px",
@@ -1230,7 +1066,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "right": "0px",
                               "top": "0px",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -1258,6 +1094,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "msFlexAlign": "center",
                                 "msFlexItemAlign": "center",
                                 "msFlexPack": "center",
+                                "msGridRowAlign": "center",
                                 "width": "30px",
                               }
                             }
@@ -1265,6 +1102,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -1342,6 +1180,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -1365,6 +1204,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -1390,27 +1230,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                               autoCapitalize="sentences"
                               autoComplete="on"
                               autoCorrect="on"
-                              className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                              className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                               data-focusable={true}
                               dir="auto"
-                              index={6}
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
                               onKeyDown={[Function]}
-                              onKeyPress={[Function]}
                               onSelect={[Function]}
                               placeholder=""
                               readOnly={false}
-                              siblings={
-                                Array [
-                                  "Connect(ShowOrPickImage)",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
                               spellCheck={true}
                               style={
                                 Object {
@@ -1435,7 +1264,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   "zIndex": 1,
                                 }
                               }
-                              total={10}
                               type="text"
                               value="mentor"
                             />
@@ -1444,21 +1272,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
                               "WebkitBoxPack": "center",
                               "WebkitJustifyContent": "center",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "bottom": "0px",
@@ -1471,7 +1294,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "right": "0px",
                               "top": "0px",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -1499,6 +1322,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "msFlexAlign": "center",
                                 "msFlexItemAlign": "center",
                                 "msFlexPack": "center",
+                                "msGridRowAlign": "center",
                                 "width": "30px",
                               }
                             }
@@ -1506,6 +1330,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -1583,6 +1408,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -1606,6 +1432,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -1631,27 +1458,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                               autoCapitalize="sentences"
                               autoComplete="on"
                               autoCorrect="on"
-                              className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                              className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                               data-focusable={true}
                               dir="auto"
-                              index={7}
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
                               onKeyDown={[Function]}
-                              onKeyPress={[Function]}
                               onSelect={[Function]}
                               placeholder=""
                               readOnly={false}
-                              siblings={
-                                Array [
-                                  "Connect(ShowOrPickImage)",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
                               spellCheck={true}
                               style={
                                 Object {
@@ -1676,7 +1492,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   "zIndex": 1,
                                 }
                               }
-                              total={10}
                               type="text"
                               value="My name is mentor!"
                             />
@@ -1685,21 +1500,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
                               "WebkitBoxPack": "center",
                               "WebkitJustifyContent": "center",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "bottom": "0px",
@@ -1712,7 +1522,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "right": "0px",
                               "top": "0px",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -1740,6 +1550,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "msFlexAlign": "center",
                                 "msFlexItemAlign": "center",
                                 "msFlexPack": "center",
+                                "msGridRowAlign": "center",
                                 "width": "30px",
                               }
                             }
@@ -1747,6 +1558,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -1818,16 +1630,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-cursor-18t94o4 css-view-1dbjc4n"
                           data-focusable={true}
-                          disabled={false}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyPress={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           role="button"
                           style={
                             Object {
@@ -1835,12 +1640,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "borderBottomRightRadius": "0px",
                               "borderTopLeftRadius": "0px",
                               "borderTopRightRadius": "0px",
-                              "cursor": "pointer",
-                              "msTouchAction": "manipulation",
                               "overflowX": "hidden",
                               "overflowY": "hidden",
                               "position": "relative",
-                              "touchAction": "manipulation",
                             }
                           }
                           tabIndex="0"
@@ -1869,6 +1671,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao css-textOneLine-bfa6kz"
                               dir="auto"
+                              onClick={[Function]}
                               style={
                                 Object {
                                   "color": "rgba(255,255,255,1.00)",
@@ -1881,7 +1684,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   "marginTop": "9px",
                                   "textAlign": "center",
                                   "textTransform": "uppercase",
-                                  "width": "100%",
                                 }
                               }
                             >
@@ -1919,10 +1721,12 @@ exports[`UserSettings Matches snapshot 1`] = `
                       "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
                       "maxWidth": "100%",
                       "msFlexItemAlign": "center",
+                      "msGridRowAlign": "center",
                       "paddingBottom": "30px",
                       "paddingLeft": "30px",
                       "paddingRight": "30px",
                       "paddingTop": "0px",
+                      "position": "relative",
                       "width": "400px",
                     }
                   }
@@ -1931,14 +1735,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                     aria-disabled={true}
                     className="css-view-1dbjc4n"
                     disabled={true}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
                     onKeyDown={[Function]}
-                    onKeyUp={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
                     style={
                       Object {
                         "WebkitBoxFlex": 1,
@@ -1954,18 +1753,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <div
                       className="css-text-901oao"
                       dir="auto"
-                      index={0}
-                      siblings={
-                        Array [
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                        ]
-                      }
+                      onClick={[Function]}
                       style={
                         Object {
                           "color": "rgba(0,0,0,0.87)",
@@ -1980,7 +1768,897 @@ exports[`UserSettings Matches snapshot 1`] = `
                           "textAlign": "left",
                         }
                       }
-                      total={10}
+                    >
+                      Contact details
+                    </div>
+                    <div
+                      className="css-text-901oao"
+                      dir="auto"
+                      onClick={[Function]}
+                      style={
+                        Object {
+                          "WebkitTransform": "",
+                          "color": "rgba(0,0,0,0.54)",
+                          "direction": "ltr",
+                          "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                          "fontSize": "12px",
+                          "fontWeight": "400",
+                          "opacity": 1,
+                          "paddingBottom": "4px",
+                          "paddingLeft": "0px",
+                          "paddingRight": "12px",
+                          "paddingTop": "4px",
+                          "textAlign": "left",
+                          "transform": "",
+                        }
+                      }
+                    >
+                      These are ways your followers can react to your Nutshells.
+                    </div>
+                    <div
+                      className="css-view-1dbjc4n"
+                      style={
+                        Object {
+                          "maxWidth": "100%",
+                        }
+                      }
+                    >
+                      <div
+                        className="css-view-1dbjc4n"
+                        style={
+                          Object {
+                            "maxWidth": "100%",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <div
+                          className="css-view-1dbjc4n"
+                          style={
+                            Object {
+                              "borderTopLeftRadius": "0px",
+                              "borderTopRightRadius": "0px",
+                              "marginBottom": "10px",
+                              "marginTop": "10px",
+                              "minHeight": "50px",
+                            }
+                          }
+                        >
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitTransform": "scaleY(0.5)",
+                                "backgroundColor": "rgba(0,0,0,0.26)",
+                                "bottom": "0px",
+                                "height": "2px",
+                                "left": "0px",
+                                "position": "absolute",
+                                "right": "0px",
+                                "transform": "scaleY(0.5)",
+                              }
+                            }
+                          />
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "minHeight": "64px",
+                                "paddingBottom": "0px",
+                                "paddingTop": "0px",
+                              }
+                            }
+                          >
+                            <div
+                              className="css-view-1dbjc4n r-pointerEvents-633pao"
+                              style={
+                                Object {
+                                  "WebkitTransform": "translateX(0px)",
+                                  "bottom": "0px",
+                                  "left": "0px",
+                                  "opacity": 1,
+                                  "position": "absolute",
+                                  "right": "0px",
+                                  "top": "0px",
+                                  "transform": "translateX(0px)",
+                                }
+                              }
+                            >
+                              <div
+                                className="css-text-901oao css-textOneLine-bfa6kz"
+                                dir="auto"
+                                onClick={[Function]}
+                                style={
+                                  Object {
+                                    "WebkitTransform": "translateX(0px) translateY(0px) scale(1)",
+                                    "color": "rgba(0,0,0,1.00)",
+                                    "direction": "ltr",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": "16px",
+                                    "left": "0px",
+                                    "opacity": 0,
+                                    "paddingLeft": "12px",
+                                    "paddingRight": "12px",
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": "34px",
+                                    "transform": "translateX(0px) translateY(0px) scale(1)",
+                                  }
+                                }
+                              >
+                                WhatsApp number
+                              </div>
+                              <div
+                                className="css-text-901oao css-textOneLine-bfa6kz"
+                                dir="auto"
+                                onClick={[Function]}
+                                style={
+                                  Object {
+                                    "WebkitTransform": "translateX(0px) translateY(0px) scale(1)",
+                                    "color": "rgba(0,0,0,0.54)",
+                                    "direction": "ltr",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": "16px",
+                                    "left": "0px",
+                                    "opacity": 0,
+                                    "paddingLeft": "12px",
+                                    "paddingRight": "12px",
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": "34px",
+                                    "transform": "translateX(0px) translateY(0px) scale(1)",
+                                  }
+                                }
+                              >
+                                WhatsApp number
+                              </div>
+                            </div>
+                            <input
+                              autoCapitalize="sentences"
+                              autoComplete="on"
+                              autoCorrect="on"
+                              className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
+                              data-focusable={true}
+                              dir="auto"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              onKeyDown={[Function]}
+                              onSelect={[Function]}
+                              placeholder=""
+                              readOnly={false}
+                              spellCheck={true}
+                              style={
+                                Object {
+                                  "WebkitBoxFlex": 1,
+                                  "WebkitFlexGrow": 1,
+                                  "color": "rgba(0,0,0,1.00)",
+                                  "flexGrow": 1,
+                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                  "fontSize": "16px",
+                                  "height": "64px",
+                                  "marginBottom": "0px",
+                                  "marginLeft": "0px",
+                                  "marginRight": "0px",
+                                  "marginTop": "0px",
+                                  "msFlexPositive": 1,
+                                  "paddingBottom": "4px",
+                                  "paddingLeft": "12px",
+                                  "paddingRight": "12px",
+                                  "paddingTop": "24px",
+                                  "textAlign": "left",
+                                  "verticalAlign": "middle",
+                                  "zIndex": 1,
+                                }
+                              }
+                              type="text"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className="css-view-1dbjc4n"
+                          data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          onKeyDown={[Function]}
+                          style={
+                            Object {
+                              "MozTransitionProperty": "opacity",
+                              "MozUserSelect": "none",
+                              "WebkitBoxPack": "center",
+                              "WebkitJustifyContent": "center",
+                              "WebkitTransitionDuration": "0s",
+                              "WebkitTransitionProperty": "opacity",
+                              "WebkitUserSelect": "none",
+                              "bottom": "0px",
+                              "cursor": "pointer",
+                              "justifyContent": "center",
+                              "msFlexPack": "center",
+                              "msTouchAction": "manipulation",
+                              "msUserSelect": "none",
+                              "position": "absolute",
+                              "right": "0px",
+                              "top": "0px",
+                              "touchAction": "manipulation",
+                              "transitionDuration": "0s",
+                              "transitionProperty": "opacity",
+                              "userSelect": "none",
+                            }
+                          }
+                          tabIndex="0"
+                        >
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitAlignItems": "center",
+                                "WebkitAlignSelf": "center",
+                                "WebkitBoxAlign": "center",
+                                "WebkitBoxPack": "center",
+                                "WebkitJustifyContent": "center",
+                                "alignItems": "center",
+                                "alignSelf": "center",
+                                "backgroundColor": "rgba(0,0,0,0.00)",
+                                "borderBottomLeftRadius": "15px",
+                                "borderBottomRightRadius": "15px",
+                                "borderTopLeftRadius": "15px",
+                                "borderTopRightRadius": "15px",
+                                "height": "30px",
+                                "justifyContent": "center",
+                                "msFlexAlign": "center",
+                                "msFlexItemAlign": "center",
+                                "msFlexPack": "center",
+                                "msGridRowAlign": "center",
+                                "width": "30px",
+                              }
+                            }
+                          >
+                            <div
+                              className="css-text-901oao"
+                              dir="auto"
+                              onClick={[Function]}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="css-view-1dbjc4n"
+                      style={
+                        Object {
+                          "maxWidth": "100%",
+                        }
+                      }
+                    >
+                      <div
+                        className="css-view-1dbjc4n"
+                        style={
+                          Object {
+                            "maxWidth": "100%",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <div
+                          className="css-view-1dbjc4n"
+                          style={
+                            Object {
+                              "borderTopLeftRadius": "0px",
+                              "borderTopRightRadius": "0px",
+                              "marginBottom": "10px",
+                              "marginTop": "10px",
+                              "minHeight": "50px",
+                            }
+                          }
+                        >
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitTransform": "scaleY(0.5)",
+                                "backgroundColor": "rgba(0,0,0,0.26)",
+                                "bottom": "0px",
+                                "height": "2px",
+                                "left": "0px",
+                                "position": "absolute",
+                                "right": "0px",
+                                "transform": "scaleY(0.5)",
+                              }
+                            }
+                          />
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "minHeight": "64px",
+                                "paddingBottom": "0px",
+                                "paddingTop": "0px",
+                              }
+                            }
+                          >
+                            <div
+                              className="css-view-1dbjc4n r-pointerEvents-633pao"
+                              style={
+                                Object {
+                                  "WebkitTransform": "translateX(3px)",
+                                  "bottom": "0px",
+                                  "left": "0px",
+                                  "opacity": 0,
+                                  "position": "absolute",
+                                  "right": "0px",
+                                  "top": "0px",
+                                  "transform": "translateX(3px)",
+                                }
+                              }
+                            >
+                              <div
+                                className="css-text-901oao css-textOneLine-bfa6kz"
+                                dir="auto"
+                                onClick={[Function]}
+                                style={
+                                  Object {
+                                    "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
+                                    "color": "rgba(0,0,0,1.00)",
+                                    "direction": "ltr",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": "16px",
+                                    "left": "0px",
+                                    "opacity": 0,
+                                    "paddingLeft": "12px",
+                                    "paddingRight": "12px",
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": "34px",
+                                    "transform": "translateX(0px) translateY(-16px) scale(0.75)",
+                                  }
+                                }
+                              >
+                                Contact email
+                              </div>
+                              <div
+                                className="css-text-901oao css-textOneLine-bfa6kz"
+                                dir="auto"
+                                onClick={[Function]}
+                                style={
+                                  Object {
+                                    "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
+                                    "color": "rgba(0,0,0,0.54)",
+                                    "direction": "ltr",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": "16px",
+                                    "left": "0px",
+                                    "opacity": 0,
+                                    "paddingLeft": "12px",
+                                    "paddingRight": "12px",
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": "34px",
+                                    "transform": "translateX(0px) translateY(-16px) scale(0.75)",
+                                  }
+                                }
+                              >
+                                Contact email
+                              </div>
+                            </div>
+                            <input
+                              autoCapitalize="sentences"
+                              autoComplete="on"
+                              autoCorrect="on"
+                              className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
+                              data-focusable={true}
+                              dir="auto"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              onKeyDown={[Function]}
+                              onSelect={[Function]}
+                              placeholder=""
+                              readOnly={false}
+                              spellCheck={true}
+                              style={
+                                Object {
+                                  "WebkitBoxFlex": 1,
+                                  "WebkitFlexGrow": 1,
+                                  "color": "rgba(0,0,0,1.00)",
+                                  "flexGrow": 1,
+                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                  "fontSize": "16px",
+                                  "height": "64px",
+                                  "marginBottom": "0px",
+                                  "marginLeft": "0px",
+                                  "marginRight": "0px",
+                                  "marginTop": "0px",
+                                  "msFlexPositive": 1,
+                                  "paddingBottom": "4px",
+                                  "paddingLeft": "12px",
+                                  "paddingRight": "12px",
+                                  "paddingTop": "24px",
+                                  "textAlign": "left",
+                                  "verticalAlign": "middle",
+                                  "zIndex": 1,
+                                }
+                              }
+                              type="text"
+                              value="mentor@palokaj.co"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className="css-view-1dbjc4n"
+                          data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          onKeyDown={[Function]}
+                          style={
+                            Object {
+                              "MozTransitionProperty": "opacity",
+                              "MozUserSelect": "none",
+                              "WebkitBoxPack": "center",
+                              "WebkitJustifyContent": "center",
+                              "WebkitTransitionDuration": "0s",
+                              "WebkitTransitionProperty": "opacity",
+                              "WebkitUserSelect": "none",
+                              "bottom": "0px",
+                              "cursor": "pointer",
+                              "justifyContent": "center",
+                              "msFlexPack": "center",
+                              "msTouchAction": "manipulation",
+                              "msUserSelect": "none",
+                              "position": "absolute",
+                              "right": "0px",
+                              "top": "0px",
+                              "touchAction": "manipulation",
+                              "transitionDuration": "0s",
+                              "transitionProperty": "opacity",
+                              "userSelect": "none",
+                            }
+                          }
+                          tabIndex="0"
+                        >
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitAlignItems": "center",
+                                "WebkitAlignSelf": "center",
+                                "WebkitBoxAlign": "center",
+                                "WebkitBoxPack": "center",
+                                "WebkitJustifyContent": "center",
+                                "alignItems": "center",
+                                "alignSelf": "center",
+                                "backgroundColor": "rgba(0,0,0,0.00)",
+                                "borderBottomLeftRadius": "15px",
+                                "borderBottomRightRadius": "15px",
+                                "borderTopLeftRadius": "15px",
+                                "borderTopRightRadius": "15px",
+                                "height": "30px",
+                                "justifyContent": "center",
+                                "msFlexAlign": "center",
+                                "msFlexItemAlign": "center",
+                                "msFlexPack": "center",
+                                "msGridRowAlign": "center",
+                                "width": "30px",
+                              }
+                            }
+                          >
+                            <div
+                              className="css-text-901oao"
+                              dir="auto"
+                              onClick={[Function]}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="css-view-1dbjc4n"
+                      style={
+                        Object {
+                          "WebkitBoxDirection": "normal",
+                          "WebkitBoxOrient": "vertical",
+                          "WebkitFlexDirection": "column",
+                          "flexDirection": "column",
+                          "maxWidth": "100%",
+                          "msFlexDirection": "column",
+                          "width": "100%",
+                        }
+                      }
+                    >
+                      <div
+                        className="css-view-1dbjc4n"
+                        style={
+                          Object {
+                            "WebkitAlignItems": "center",
+                            "WebkitBoxAlign": "center",
+                            "WebkitBoxDirection": "normal",
+                            "WebkitBoxOrient": "horizontal",
+                            "WebkitBoxPack": "start",
+                            "WebkitFlexDirection": "row",
+                            "WebkitJustifyContent": "flex-start",
+                            "alignItems": "center",
+                            "flexDirection": "row",
+                            "justifyContent": "flex-start",
+                            "marginTop": "10px",
+                            "maxWidth": "100%",
+                            "msFlexAlign": "center",
+                            "msFlexDirection": "row",
+                            "msFlexPack": "start",
+                            "width": "100%",
+                          }
+                        }
+                      >
+                        <div
+                          className="css-text-901oao"
+                          dir="auto"
+                          onClick={[Function]}
+                          style={
+                            Object {
+                              "color": "rgba(0,0,0,1.00)",
+                              "cursor": "pointer",
+                              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                              "fontWeight": "400",
+                              "marginRight": "20px",
+                              "opacity": 0.7,
+                              "textAlign": "left",
+                            }
+                          }
+                        >
+                          Allow all followers to contact you
+                        </div>
+                        <div
+                          className="css-view-1dbjc4n"
+                          style={
+                            Object {
+                              "MozUserSelect": "none",
+                              "WebkitUserSelect": "none",
+                              "cursor": "pointer",
+                              "height": "20px",
+                              "marginLeft": "auto",
+                              "msUserSelect": "none",
+                              "userSelect": "none",
+                              "width": "40px",
+                            }
+                          }
+                        >
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitTransitionDuration": "0.1s",
+                                "backgroundColor": "rgba(246,246,246,1.00)",
+                                "borderBottomLeftRadius": "10px",
+                                "borderBottomRightRadius": "10px",
+                                "borderTopLeftRadius": "10px",
+                                "borderTopRightRadius": "10px",
+                                "bottom": "0px",
+                                "height": "70%",
+                                "left": "0px",
+                                "marginBottom": "auto",
+                                "marginLeft": "auto",
+                                "marginRight": "auto",
+                                "marginTop": "auto",
+                                "position": "absolute",
+                                "right": "0px",
+                                "top": "0px",
+                                "transitionDuration": "0.1s",
+                                "width": "100%",
+                              }
+                            }
+                          />
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitAlignSelf": "flex-start",
+                                "WebkitTransform": "translateZ(0px)",
+                                "WebkitTransitionDuration": "0.1s",
+                                "alignSelf": "flex-start",
+                                "backgroundColor": "rgba(246,246,246,1.00)",
+                                "borderBottomLeftRadius": "100%",
+                                "borderBottomRightRadius": "100%",
+                                "borderTopLeftRadius": "100%",
+                                "borderTopRightRadius": "100%",
+                                "boxShadow": "0px 1px 3px rgba(0,0,0,0.5)",
+                                "height": "20px",
+                                "left": "0%",
+                                "marginLeft": "0px",
+                                "msFlexItemAlign": "start",
+                                "transform": "translateZ(0px)",
+                                "transitionDuration": "0.1s",
+                                "width": "20px",
+                              }
+                            }
+                          />
+                          <input
+                            checked={false}
+                            data-focusable={true}
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            style={
+                              Object {
+                                "bottom": "0px",
+                                "cursor": "inherit",
+                                "height": "100%",
+                                "left": "0px",
+                                "marginBottom": "0px",
+                                "marginLeft": "0px",
+                                "marginRight": "0px",
+                                "marginTop": "0px",
+                                "opacity": 0,
+                                "paddingBottom": "0px",
+                                "paddingLeft": "0px",
+                                "paddingRight": "0px",
+                                "paddingTop": "0px",
+                                "position": "absolute",
+                                "right": "0px",
+                                "top": "0px",
+                                "width": "100%",
+                              }
+                            }
+                            type="checkbox"
+                          />
+                        </div>
+                        <div
+                          className="css-view-1dbjc4n"
+                          data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          onKeyDown={[Function]}
+                          style={
+                            Object {
+                              "MozTransitionProperty": "opacity",
+                              "MozUserSelect": "none",
+                              "WebkitTransitionDuration": "0s",
+                              "WebkitTransitionProperty": "opacity",
+                              "WebkitUserSelect": "none",
+                              "cursor": "pointer",
+                              "msTouchAction": "manipulation",
+                              "msUserSelect": "none",
+                              "touchAction": "manipulation",
+                              "transitionDuration": "0s",
+                              "transitionProperty": "opacity",
+                              "userSelect": "none",
+                            }
+                          }
+                          tabIndex="0"
+                        >
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitAlignItems": "center",
+                                "WebkitBoxAlign": "center",
+                                "WebkitBoxPack": "center",
+                                "WebkitJustifyContent": "center",
+                                "alignItems": "center",
+                                "backgroundColor": "rgba(0,0,0,0.00)",
+                                "borderBottomLeftRadius": "12px",
+                                "borderBottomRightRadius": "12px",
+                                "borderTopLeftRadius": "12px",
+                                "borderTopRightRadius": "12px",
+                                "height": "24px",
+                                "justifyContent": "center",
+                                "marginLeft": "10px",
+                                "msFlexAlign": "center",
+                                "msFlexPack": "center",
+                                "width": "24px",
+                              }
+                            }
+                          >
+                            <div
+                              className="css-text-901oao"
+                              dir="auto"
+                              onClick={[Function]}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="css-view-1dbjc4n"
+                      style={
+                        Object {
+                          "WebkitAlignItems": "center",
+                          "WebkitBoxAlign": "center",
+                          "WebkitBoxDirection": "normal",
+                          "WebkitBoxOrient": "horizontal",
+                          "WebkitBoxPack": "start",
+                          "WebkitFlexDirection": "row",
+                          "WebkitJustifyContent": "flex-start",
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "justifyContent": "flex-start",
+                          "marginTop": "20px",
+                          "maxWidth": "100%",
+                          "msFlexAlign": "center",
+                          "msFlexDirection": "row",
+                          "msFlexPack": "start",
+                          "position": "relative",
+                        }
+                      }
+                    >
+                      <div
+                        className="css-view-1dbjc4n"
+                        style={
+                          Object {
+                            "WebkitAlignItems": "stretch",
+                            "WebkitBoxAlign": "stretch",
+                            "WebkitBoxDirection": "normal",
+                            "WebkitBoxOrient": "vertical",
+                            "WebkitBoxPack": "center",
+                            "WebkitFlexDirection": "column",
+                            "WebkitJustifyContent": "center",
+                            "alignItems": "stretch",
+                            "backgroundColor": "rgba(0,0,0,1.00)",
+                            "borderBottomColor": "rgba(0,0,0,0.00)",
+                            "borderBottomLeftRadius": "0px",
+                            "borderBottomRightRadius": "0px",
+                            "borderBottomStyle": "solid",
+                            "borderBottomWidth": "0px",
+                            "borderLeftColor": "rgba(0,0,0,0.00)",
+                            "borderLeftStyle": "solid",
+                            "borderLeftWidth": "0px",
+                            "borderRightColor": "rgba(0,0,0,0.00)",
+                            "borderRightStyle": "solid",
+                            "borderRightWidth": "0px",
+                            "borderTopColor": "rgba(0,0,0,0.00)",
+                            "borderTopLeftRadius": "0px",
+                            "borderTopRightRadius": "0px",
+                            "borderTopStyle": "solid",
+                            "borderTopWidth": "0px",
+                            "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
+                            "flexDirection": "column",
+                            "justifyContent": "center",
+                            "minWidth": "64px",
+                            "msFlexAlign": "stretch",
+                            "msFlexDirection": "column",
+                            "msFlexPack": "center",
+                            "width": "100%",
+                          }
+                        }
+                      >
+                        <div
+                          className="css-cursor-18t94o4 css-view-1dbjc4n"
+                          data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
+                          onKeyDown={[Function]}
+                          role="button"
+                          style={
+                            Object {
+                              "borderBottomLeftRadius": "0px",
+                              "borderBottomRightRadius": "0px",
+                              "borderTopLeftRadius": "0px",
+                              "borderTopRightRadius": "0px",
+                              "overflowX": "hidden",
+                              "overflowY": "hidden",
+                              "position": "relative",
+                            }
+                          }
+                          tabIndex="0"
+                        >
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitAlignItems": "center",
+                                "WebkitBoxAlign": "center",
+                                "WebkitBoxDirection": "normal",
+                                "WebkitBoxOrient": "horizontal",
+                                "WebkitBoxPack": "center",
+                                "WebkitFlexDirection": "row",
+                                "WebkitJustifyContent": "center",
+                                "alignItems": "center",
+                                "flexDirection": "row",
+                                "justifyContent": "center",
+                                "msFlexAlign": "center",
+                                "msFlexDirection": "row",
+                                "msFlexPack": "center",
+                                "width": "100%",
+                              }
+                            }
+                          >
+                            <div
+                              className="css-text-901oao css-textOneLine-bfa6kz"
+                              dir="auto"
+                              onClick={[Function]}
+                              style={
+                                Object {
+                                  "color": "rgba(255,255,255,1.00)",
+                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                  "fontWeight": "500",
+                                  "letterSpacing": "1px",
+                                  "marginBottom": "9px",
+                                  "marginLeft": "16px",
+                                  "marginRight": "16px",
+                                  "marginTop": "9px",
+                                  "textAlign": "center",
+                                  "textTransform": "uppercase",
+                                }
+                              }
+                            >
+                              Save changes
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="css-view-1dbjc4n"
+                style={
+                  Object {
+                    "maxWidth": "100%",
+                    "paddingBottom": "10px",
+                    "paddingTop": "10px",
+                    "width": "500px",
+                  }
+                }
+              >
+                <div
+                  className="css-view-1dbjc4n"
+                  style={
+                    Object {
+                      "WebkitAlignSelf": "center",
+                      "alignSelf": "center",
+                      "backgroundColor": "rgba(255,255,255,1.00)",
+                      "borderBottomLeftRadius": "0px",
+                      "borderBottomRightRadius": "0px",
+                      "borderTopLeftRadius": "0px",
+                      "borderTopRightRadius": "0px",
+                      "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
+                      "maxWidth": "100%",
+                      "msFlexItemAlign": "center",
+                      "msGridRowAlign": "center",
+                      "paddingBottom": "30px",
+                      "paddingLeft": "30px",
+                      "paddingRight": "30px",
+                      "paddingTop": "0px",
+                      "width": "400px",
+                    }
+                  }
+                >
+                  <div
+                    aria-disabled={true}
+                    className="css-view-1dbjc4n"
+                    disabled={true}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onKeyDown={[Function]}
+                    style={
+                      Object {
+                        "WebkitBoxFlex": 1,
+                        "WebkitFlexGrow": 1,
+                        "WebkitFlexShrink": 1,
+                        "flexGrow": 1,
+                        "flexShrink": 1,
+                        "msFlexNegative": 1,
+                        "msFlexPositive": 1,
+                      }
+                    }
+                  >
+                    <div
+                      className="css-text-901oao"
+                      dir="auto"
+                      onClick={[Function]}
+                      style={
+                        Object {
+                          "color": "rgba(0,0,0,0.87)",
+                          "direction": "ltr",
+                          "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                          "fontSize": "16px",
+                          "fontWeight": "400",
+                          "letterSpacing": "0.5px",
+                          "lineHeight": "24px",
+                          "marginBottom": "2px",
+                          "marginTop": "20px",
+                          "textAlign": "left",
+                        }
+                      }
                     >
                       Account settings
                     </div>
@@ -2056,6 +2734,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -2079,6 +2758,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -2104,29 +2784,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                               autoCapitalize="sentences"
                               autoComplete="on"
                               autoCorrect="on"
-                              className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                              className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                               data-focusable={true}
                               dir="auto"
-                              index={1}
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
                               onKeyDown={[Function]}
-                              onKeyPress={[Function]}
                               onSelect={[Function]}
                               placeholder=""
                               readOnly={false}
-                              siblings={
-                                Array [
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
                               spellCheck={true}
                               style={
                                 Object {
@@ -2151,7 +2818,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   "zIndex": 1,
                                 }
                               }
-                              total={10}
                               type="text"
                               value="mentor@palokaj.co"
                             />
@@ -2160,21 +2826,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
                               "WebkitBoxPack": "center",
                               "WebkitJustifyContent": "center",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "bottom": "0px",
@@ -2187,7 +2848,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "right": "0px",
                               "top": "0px",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -2215,6 +2876,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "msFlexAlign": "center",
                                 "msFlexItemAlign": "center",
                                 "msFlexPack": "center",
+                                "msGridRowAlign": "center",
                                 "width": "30px",
                               }
                             }
@@ -2222,6 +2884,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -2299,6 +2962,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(0px) scale(1)",
@@ -2322,6 +2986,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "WebkitTransform": "translateX(0px) translateY(0px) scale(1)",
@@ -2347,29 +3012,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                               autoCapitalize="sentences"
                               autoComplete="on"
                               autoCorrect="on"
-                              className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                              className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                               data-focusable={true}
                               dir="auto"
-                              index={2}
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
                               onKeyDown={[Function]}
-                              onKeyPress={[Function]}
                               onSelect={[Function]}
                               placeholder=""
                               readOnly={false}
-                              siblings={
-                                Array [
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
                               spellCheck={true}
                               style={
                                 Object {
@@ -2394,7 +3046,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   "zIndex": 1,
                                 }
                               }
-                              total={10}
                               type="password"
                               value=""
                             />
@@ -2405,18 +3056,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <div
                       className="css-text-901oao"
                       dir="auto"
-                      index={3}
-                      siblings={
-                        Array [
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                        ]
-                      }
+                      onClick={[Function]}
                       style={
                         Object {
                           "WebkitBoxDirection": "normal",
@@ -2436,7 +3076,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                           "textAlign": "left",
                         }
                       }
-                      total={10}
                     >
                       Notification preferences
                     </div>
@@ -2479,10 +3118,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                       >
                         <div
                           className="css-text-901oao"
-                          data-focusable={true}
                           dir="auto"
                           onClick={[Function]}
-                          onKeyDown={[Function]}
                           style={
                             Object {
                               "color": "rgba(0,0,0,1.00)",
@@ -2494,7 +3131,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "textAlign": "left",
                             }
                           }
-                          tabIndex="0"
                         >
                           Write your Nutshell (weekly)
                         </div>
@@ -2565,7 +3201,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                           <input
                             checked={true}
                             data-focusable={true}
-                            disabled={false}
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -2596,26 +3231,21 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "cursor": "pointer",
                               "msTouchAction": "manipulation",
                               "msUserSelect": "none",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -2648,6 +3278,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -2692,10 +3323,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                       >
                         <div
                           className="css-text-901oao"
-                          data-focusable={true}
                           dir="auto"
                           onClick={[Function]}
-                          onKeyDown={[Function]}
                           style={
                             Object {
                               "color": "rgba(0,0,0,1.00)",
@@ -2707,7 +3336,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "textAlign": "left",
                             }
                           }
-                          tabIndex="0"
                         >
                           Unread Nutshells (weekly)
                         </div>
@@ -2778,7 +3406,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                           <input
                             checked={true}
                             data-focusable={true}
-                            disabled={false}
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -2809,26 +3436,21 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "cursor": "pointer",
                               "msTouchAction": "manipulation",
                               "msUserSelect": "none",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -2861,6 +3483,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -2905,10 +3528,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                       >
                         <div
                           className="css-text-901oao"
-                          data-focusable={true}
                           dir="auto"
                           onClick={[Function]}
-                          onKeyDown={[Function]}
                           style={
                             Object {
                               "color": "rgba(0,0,0,1.00)",
@@ -2920,7 +3541,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "textAlign": "left",
                             }
                           }
-                          tabIndex="0"
                         >
                           New followers (real-time)
                         </div>
@@ -2991,7 +3611,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                           <input
                             checked={true}
                             data-focusable={true}
-                            disabled={false}
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -3022,26 +3641,21 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "cursor": "pointer",
                               "msTouchAction": "manipulation",
                               "msUserSelect": "none",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -3074,6 +3688,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -3118,10 +3733,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                       >
                         <div
                           className="css-text-901oao"
-                          data-focusable={true}
                           dir="auto"
                           onClick={[Function]}
-                          onKeyDown={[Function]}
                           style={
                             Object {
                               "color": "rgba(0,0,0,1.00)",
@@ -3133,7 +3746,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "textAlign": "left",
                             }
                           }
-                          tabIndex="0"
                         >
                           Friend joined (real-time)
                         </div>
@@ -3204,7 +3816,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                           <input
                             checked={false}
                             data-focusable={true}
-                            disabled={false}
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -3235,26 +3846,21 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "cursor": "pointer",
                               "msTouchAction": "manipulation",
                               "msUserSelect": "none",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -3287,6 +3893,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -3358,16 +3965,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                         <div
                           className="css-cursor-18t94o4 css-view-1dbjc4n"
                           data-focusable={true}
-                          disabled={false}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyPress={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           role="button"
                           style={
                             Object {
@@ -3375,12 +3975,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "borderBottomRightRadius": "0px",
                               "borderTopLeftRadius": "0px",
                               "borderTopRightRadius": "0px",
-                              "cursor": "pointer",
-                              "msTouchAction": "manipulation",
                               "overflowX": "hidden",
                               "overflowY": "hidden",
                               "position": "relative",
-                              "touchAction": "manipulation",
                             }
                           }
                           tabIndex="0"
@@ -3409,6 +4006,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                             <div
                               className="css-text-901oao css-textOneLine-bfa6kz"
                               dir="auto"
+                              onClick={[Function]}
                               style={
                                 Object {
                                   "color": "rgba(255,255,255,1.00)",
@@ -3421,7 +4019,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   "marginTop": "9px",
                                   "textAlign": "center",
                                   "textTransform": "uppercase",
-                                  "width": "100%",
                                 }
                               }
                             >
@@ -3429,6 +4026,51 @@ exports[`UserSettings Matches snapshot 1`] = `
                             </div>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                    <div
+                      className="css-view-1dbjc4n"
+                      data-focusable={true}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onKeyDown={[Function]}
+                      style={
+                        Object {
+                          "MozTransitionProperty": "opacity",
+                          "MozUserSelect": "none",
+                          "WebkitTransitionDuration": "0s",
+                          "WebkitTransitionProperty": "opacity",
+                          "WebkitUserSelect": "none",
+                          "cursor": "pointer",
+                          "marginLeft": "5px",
+                          "marginRight": "5px",
+                          "msTouchAction": "manipulation",
+                          "msUserSelect": "none",
+                          "paddingTop": "1px",
+                          "touchAction": "manipulation",
+                          "transitionDuration": "0s",
+                          "transitionProperty": "opacity",
+                          "userSelect": "none",
+                        }
+                      }
+                      tabIndex="0"
+                    >
+                      <div
+                        className="css-text-901oao"
+                        dir="auto"
+                        onClick={[Function]}
+                        style={
+                          Object {
+                            "color": "rgba(255,0,0,1.00)",
+                            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                            "fontWeight": "400",
+                            "marginTop": "20px",
+                            "textAlign": "center",
+                            "textDecoration": "none",
+                          }
+                        }
+                      >
+                        Delete account
                       </div>
                     </div>
                   </div>

@@ -114,6 +114,11 @@ exports[`Navitagion Matches snapshot 1`] = `
         </View>
         <View
           accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
           accessible={true}
           focusable={true}
           hitSlop={
@@ -193,6 +198,11 @@ exports[`Navitagion Matches snapshot 1`] = `
         </View>
         <View
           accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
           accessible={true}
           focusable={true}
           hitSlop={
@@ -272,6 +282,11 @@ exports[`Navitagion Matches snapshot 1`] = `
         </View>
         <View
           accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
           accessible={true}
           focusable={true}
           hitSlop={
@@ -351,6 +366,11 @@ exports[`Navitagion Matches snapshot 1`] = `
         </View>
         <View
           accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
           accessible={true}
           focusable={true}
           hitSlop={

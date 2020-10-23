@@ -188,6 +188,11 @@ exports[`Login and registration Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
+                accessibilityState={
+                  Object {
+                    "disabled": undefined,
+                  }
+                }
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -267,6 +272,11 @@ exports[`Login and registration Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
+                accessibilityState={
+                  Object {
+                    "disabled": undefined,
+                  }
+                }
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -346,6 +356,11 @@ exports[`Login and registration Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
+                accessibilityState={
+                  Object {
+                    "disabled": undefined,
+                  }
+                }
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -425,6 +440,11 @@ exports[`Login and registration Matches snapshot 1`] = `
               </View>
               <View
                 accessibilityRole="button"
+                accessibilityState={
+                  Object {
+                    "disabled": undefined,
+                  }
+                }
                 accessible={true}
                 focusable={true}
                 hitSlop={
@@ -656,7 +676,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "fontWeight": undefined,
                                   "left": 0,
                                   "opacity": 0,
-                                  "paddingHorizontal": 12,
+                                  "paddingLeft": 12,
+                                  "paddingRight": 12,
                                   "position": "absolute",
                                   "textAlign": "left",
                                   "top": 34,
@@ -687,7 +708,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "fontWeight": undefined,
                                   "left": 0,
                                   "opacity": 0,
-                                  "paddingHorizontal": 12,
+                                  "paddingLeft": 12,
+                                  "paddingRight": 12,
                                   "position": "absolute",
                                   "textAlign": "left",
                                   "top": 34,
@@ -722,6 +744,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                             onContentSizeChange={[Function]}
                             onFocus={[Function]}
                             onKeyPress={[Function]}
+                            onPress={[Function]}
                             placeholder=""
                             placeholderTextColor="rgba(0, 0, 0, 0.54)"
                             rejectResponderTermination={true}
@@ -744,7 +767,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "zIndex": 1,
                                 },
                                 Object {
-                                  "paddingHorizontal": 12,
+                                  "paddingLeft": 12,
+                                  "paddingRight": 12,
                                 },
                                 Object {
                                   "height": 64,
@@ -760,6 +784,9 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "fontWeight": undefined,
                                   "textAlignVertical": "center",
                                 },
+                                Array [
+                                  Object {},
+                                ],
                               ]
                             }
                             total={8}
@@ -856,7 +883,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "fontWeight": undefined,
                                   "left": 0,
                                   "opacity": 0,
-                                  "paddingHorizontal": 12,
+                                  "paddingLeft": 12,
+                                  "paddingRight": 12,
                                   "position": "absolute",
                                   "textAlign": "left",
                                   "top": 34,
@@ -887,7 +915,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "fontWeight": undefined,
                                   "left": 0,
                                   "opacity": 0,
-                                  "paddingHorizontal": 12,
+                                  "paddingLeft": 12,
+                                  "paddingRight": 12,
                                   "position": "absolute",
                                   "textAlign": "left",
                                   "top": 34,
@@ -920,6 +949,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                             onContentSizeChange={[Function]}
                             onFocus={[Function]}
                             onKeyPress={[Function]}
+                            onPress={[Function]}
                             placeholder=""
                             placeholderTextColor="rgba(0, 0, 0, 0.54)"
                             rejectResponderTermination={true}
@@ -943,7 +973,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "zIndex": 1,
                                 },
                                 Object {
-                                  "paddingHorizontal": 12,
+                                  "paddingLeft": 12,
+                                  "paddingRight": 12,
                                 },
                                 Object {
                                   "height": 64,
@@ -959,6 +990,9 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "fontWeight": undefined,
                                   "textAlignVertical": "center",
                                 },
+                                Array [
+                                  Object {},
+                                ],
                               ]
                             }
                             total={8}
@@ -1034,6 +1068,11 @@ exports[`Login and registration Matches snapshot 1`] = `
                     >
                       <View
                         accessibilityRole="button"
+                        accessibilityState={
+                          Object {
+                            "disabled": undefined,
+                          }
+                        }
                         accessible={true}
                         focusable={true}
                         onClick={[Function]}
@@ -1110,7 +1149,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   },
                                   Object {
                                     "color": "#ffffff",
-                                    "width": "100%",
                                   },
                                 ],
                               ]
@@ -1181,6 +1219,11 @@ exports[`Login and registration Matches snapshot 1`] = `
                     >
                       <View
                         accessibilityRole="button"
+                        accessibilityState={
+                          Object {
+                            "disabled": undefined,
+                          }
+                        }
                         accessible={true}
                         focusable={true}
                         onClick={[Function]}
@@ -1257,7 +1300,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   },
                                   Object {
                                     "color": "#000000",
-                                    "width": "100%",
                                   },
                                 ],
                               ]

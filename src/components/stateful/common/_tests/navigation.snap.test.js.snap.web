@@ -72,14 +72,9 @@ exports[`Navitagion Matches snapshot 1`] = `
           aria-disabled={true}
           className="css-view-1dbjc4n"
           disabled={true}
+          onClick={[Function]}
+          onContextMenu={[Function]}
           onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "WebkitBoxFlex": 1,
@@ -101,6 +96,8 @@ exports[`Navitagion Matches snapshot 1`] = `
             className="css-reset-4rbku5 css-text-901oao css-textOneLine-bfa6kz"
             data-focusable={true}
             dir="auto"
+            onClick={[Function]}
+            onKeyDown={[Function]}
             role="heading"
             style={
               Object {
@@ -117,16 +114,9 @@ exports[`Navitagion Matches snapshot 1`] = `
         <div
           className="css-cursor-18t94o4 css-view-1dbjc4n"
           data-focusable={true}
-          disabled={false}
+          onClick={[Function]}
+          onContextMenu={[Function]}
           onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onKeyUp={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           role="button"
           style={
             Object {
@@ -139,7 +129,6 @@ exports[`Navitagion Matches snapshot 1`] = `
               "borderBottomRightRadius": "18px",
               "borderTopLeftRadius": "18px",
               "borderTopRightRadius": "18px",
-              "cursor": "pointer",
               "height": "36px",
               "justifyContent": "center",
               "marginBottom": "6px",
@@ -148,27 +137,14 @@ exports[`Navitagion Matches snapshot 1`] = `
               "marginTop": "6px",
               "msFlexAlign": "center",
               "msFlexPack": "center",
-              "msTouchAction": "manipulation",
               "overflowX": "hidden",
               "overflowY": "hidden",
               "position": "relative",
-              "touchAction": "manipulation",
               "width": "36px",
             }
           }
           tabIndex="0"
         >
-          <span
-            className="css-hitSlop-mjp8i1"
-            style={
-              Object {
-                "bottom": "-10px",
-                "left": "-10px",
-                "right": "-10px",
-                "top": "-10px",
-              }
-            }
-          />
           <div
             className="css-view-1dbjc4n"
           >
@@ -207,6 +183,7 @@ exports[`Navitagion Matches snapshot 1`] = `
                 <div
                   className="css-text-901oao"
                   dir="auto"
+                  onClick={[Function]}
                 />
               </div>
             </div>
@@ -215,16 +192,9 @@ exports[`Navitagion Matches snapshot 1`] = `
         <div
           className="css-cursor-18t94o4 css-view-1dbjc4n"
           data-focusable={true}
-          disabled={false}
+          onClick={[Function]}
+          onContextMenu={[Function]}
           onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onKeyUp={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           role="button"
           style={
             Object {
@@ -237,7 +207,6 @@ exports[`Navitagion Matches snapshot 1`] = `
               "borderBottomRightRadius": "18px",
               "borderTopLeftRadius": "18px",
               "borderTopRightRadius": "18px",
-              "cursor": "pointer",
               "height": "36px",
               "justifyContent": "center",
               "marginBottom": "6px",
@@ -246,27 +215,14 @@ exports[`Navitagion Matches snapshot 1`] = `
               "marginTop": "6px",
               "msFlexAlign": "center",
               "msFlexPack": "center",
-              "msTouchAction": "manipulation",
               "overflowX": "hidden",
               "overflowY": "hidden",
               "position": "relative",
-              "touchAction": "manipulation",
               "width": "36px",
             }
           }
           tabIndex="0"
         >
-          <span
-            className="css-hitSlop-mjp8i1"
-            style={
-              Object {
-                "bottom": "-10px",
-                "left": "-10px",
-                "right": "-10px",
-                "top": "-10px",
-              }
-            }
-          />
           <div
             className="css-view-1dbjc4n"
           >
@@ -305,6 +261,7 @@ exports[`Navitagion Matches snapshot 1`] = `
                 <div
                   className="css-text-901oao"
                   dir="auto"
+                  onClick={[Function]}
                 />
               </div>
             </div>
@@ -313,16 +270,9 @@ exports[`Navitagion Matches snapshot 1`] = `
         <div
           className="css-cursor-18t94o4 css-view-1dbjc4n"
           data-focusable={true}
-          disabled={false}
+          onClick={[Function]}
+          onContextMenu={[Function]}
           onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onKeyUp={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           role="button"
           style={
             Object {
@@ -335,7 +285,6 @@ exports[`Navitagion Matches snapshot 1`] = `
               "borderBottomRightRadius": "18px",
               "borderTopLeftRadius": "18px",
               "borderTopRightRadius": "18px",
-              "cursor": "pointer",
               "height": "36px",
               "justifyContent": "center",
               "marginBottom": "6px",
@@ -344,27 +293,14 @@ exports[`Navitagion Matches snapshot 1`] = `
               "marginTop": "6px",
               "msFlexAlign": "center",
               "msFlexPack": "center",
-              "msTouchAction": "manipulation",
               "overflowX": "hidden",
               "overflowY": "hidden",
               "position": "relative",
-              "touchAction": "manipulation",
               "width": "36px",
             }
           }
           tabIndex="0"
         >
-          <span
-            className="css-hitSlop-mjp8i1"
-            style={
-              Object {
-                "bottom": "-10px",
-                "left": "-10px",
-                "right": "-10px",
-                "top": "-10px",
-              }
-            }
-          />
           <div
             className="css-view-1dbjc4n"
           >
@@ -403,6 +339,7 @@ exports[`Navitagion Matches snapshot 1`] = `
                 <div
                   className="css-text-901oao"
                   dir="auto"
+                  onClick={[Function]}
                 />
               </div>
             </div>
@@ -411,16 +348,9 @@ exports[`Navitagion Matches snapshot 1`] = `
         <div
           className="css-cursor-18t94o4 css-view-1dbjc4n"
           data-focusable={true}
-          disabled={false}
+          onClick={[Function]}
+          onContextMenu={[Function]}
           onKeyDown={[Function]}
-          onKeyPress={[Function]}
-          onKeyUp={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           role="button"
           style={
             Object {
@@ -433,7 +363,6 @@ exports[`Navitagion Matches snapshot 1`] = `
               "borderBottomRightRadius": "18px",
               "borderTopLeftRadius": "18px",
               "borderTopRightRadius": "18px",
-              "cursor": "pointer",
               "height": "36px",
               "justifyContent": "center",
               "marginBottom": "6px",
@@ -442,27 +371,14 @@ exports[`Navitagion Matches snapshot 1`] = `
               "marginTop": "6px",
               "msFlexAlign": "center",
               "msFlexPack": "center",
-              "msTouchAction": "manipulation",
               "overflowX": "hidden",
               "overflowY": "hidden",
               "position": "relative",
-              "touchAction": "manipulation",
               "width": "36px",
             }
           }
           tabIndex="0"
         >
-          <span
-            className="css-hitSlop-mjp8i1"
-            style={
-              Object {
-                "bottom": "-10px",
-                "left": "-10px",
-                "right": "-10px",
-                "top": "-10px",
-              }
-            }
-          />
           <div
             className="css-view-1dbjc4n"
           >
@@ -501,6 +417,7 @@ exports[`Navitagion Matches snapshot 1`] = `
                 <div
                   className="css-text-901oao"
                   dir="auto"
+                  onClick={[Function]}
                 />
               </div>
             </div>

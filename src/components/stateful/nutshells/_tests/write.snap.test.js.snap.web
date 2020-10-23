@@ -116,7 +116,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
             style={
               Object {
                 "backgroundColor": "rgba(0,0,0,0.00)",
-                "backgroundImage": "url(\\"SvgMock\\")",
                 "backgroundPosition": "center",
                 "backgroundRepeat": "no-repeat",
                 "backgroundSize": "cover",
@@ -130,12 +129,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                 "zIndex": -1,
               }
             }
-          />
-          <img
-            alt=""
-            className="css-accessibilityImage-9pa8cd"
-            draggable={false}
-            src="SvgMock"
           />
         </div>
         <div
@@ -206,14 +199,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                 aria-disabled={true}
                 className="css-view-1dbjc4n"
                 disabled={true}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "WebkitBoxFlex": 1,
@@ -235,6 +223,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                   className="css-reset-4rbku5 css-text-901oao css-textOneLine-bfa6kz"
                   data-focusable={true}
                   dir="auto"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
                   role="heading"
                   style={
                     Object {
@@ -253,16 +243,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -275,7 +258,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -284,27 +266,14 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -343,6 +312,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -351,16 +321,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -373,7 +336,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -382,27 +344,14 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -441,6 +390,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -449,16 +399,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -471,7 +414,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -480,27 +422,14 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -539,6 +468,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -547,16 +477,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -569,7 +492,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -578,27 +500,14 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -637,6 +546,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -647,17 +557,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
         </div>
         <div
           className="css-view-1dbjc4n r-scrollbarWidth-2eszeu"
-          onResponderGrant={[Function]}
-          onResponderReject={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminationRequest={[Function]}
           onScroll={[Function]}
-          onScrollShouldSetResponder={[Function]}
-          onStartShouldSetResponder={[Function]}
-          onStartShouldSetResponderCapture={[Function]}
-          onTouchEnd={[Function]}
           onTouchMove={[Function]}
-          onTouchStart={[Function]}
           onWheel={[Function]}
           style={
             Object {
@@ -762,14 +663,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       aria-disabled={true}
                       className="css-view-1dbjc4n"
                       disabled={true}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
                       onKeyDown={[Function]}
-                      onKeyUp={[Function]}
-                      onResponderGrant={[Function]}
-                      onResponderMove={[Function]}
-                      onResponderRelease={[Function]}
-                      onResponderTerminate={[Function]}
-                      onResponderTerminationRequest={[Function]}
-                      onStartShouldSetResponder={[Function]}
                       style={
                         Object {
                           "WebkitBoxFlex": 1,
@@ -811,26 +707,21 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         <div
                           className="css-view-1dbjc4n"
                           data-focusable={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
                             Object {
                               "MozTransitionProperty": "opacity",
                               "MozUserSelect": "none",
-                              "WebkitTransitionDuration": "0.15s",
+                              "WebkitTransitionDuration": "0s",
                               "WebkitTransitionProperty": "opacity",
                               "WebkitUserSelect": "none",
                               "cursor": "pointer",
                               "msTouchAction": "manipulation",
                               "msUserSelect": "none",
                               "touchAction": "manipulation",
-                              "transitionDuration": "0.15s",
+                              "transitionDuration": "0s",
                               "transitionProperty": "opacity",
                               "userSelect": "none",
                             }
@@ -876,7 +767,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 style={
                                   Object {
                                     "backgroundColor": "rgba(0,0,0,0.00)",
-                                    "backgroundImage": "url(\\"https://firebasestorage.googleapis.com/v0/b/nutshell-staging-1b98e.appspot.com/o/avatars%2FHYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg?alt=media&token=77f72f02-18cd-418e-aeb8-78c218f8802c\\")",
                                     "backgroundPosition": "center",
                                     "backgroundRepeat": "no-repeat",
                                     "backgroundSize": "cover",
@@ -890,12 +780,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                     "zIndex": -1,
                                   }
                                 }
-                              />
-                              <img
-                                alt=""
-                                className="css-accessibilityImage-9pa8cd"
-                                draggable={false}
-                                src="https://firebasestorage.googleapis.com/v0/b/nutshell-staging-1b98e.appspot.com/o/avatars%2FHYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg?alt=media&token=77f72f02-18cd-418e-aeb8-78c218f8802c"
                               />
                             </div>
                           </div>
@@ -931,6 +815,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "msFlexPack": "justify",
                               "msFlexPositive": 1,
                               "msFlexPreferredSize": "0%",
+                              "msGridRowAlign": "stretch",
                               "paddingBottom": "10px",
                               "paddingTop": "10px",
                               "width": "100%",
@@ -940,6 +825,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           <div
                             className="css-text-901oao"
                             dir="auto"
+                            onClick={[Function]}
                             style={
                               Object {
                                 "color": "rgba(0,0,0,0.87)",
@@ -1005,10 +891,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             >
                               <div
                                 className="css-text-901oao"
-                                data-focusable={true}
                                 dir="auto"
                                 onClick={[Function]}
-                                onKeyDown={[Function]}
                                 style={
                                   Object {
                                     "color": "rgba(0,0,0,1.00)",
@@ -1020,7 +904,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                     "textAlign": "left",
                                   }
                                 }
-                                tabIndex="0"
                               >
                                 Status: scheduled for Sun Jun 28 at midnight
                               </div>
@@ -1091,7 +974,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <input
                                   checked={true}
                                   data-focusable={true}
-                                  disabled={false}
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
@@ -1124,14 +1006,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           <div
                             className="css-view-1dbjc4n"
                             data-focusable={true}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
                             onKeyDown={[Function]}
-                            onKeyUp={[Function]}
-                            onResponderGrant={[Function]}
-                            onResponderMove={[Function]}
-                            onResponderRelease={[Function]}
-                            onResponderTerminate={[Function]}
-                            onResponderTerminationRequest={[Function]}
-                            onStartShouldSetResponder={[Function]}
                             style={
                               Object {
                                 "MozTransitionProperty": "opacity",
@@ -1143,7 +1020,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 "WebkitBoxPack": "center",
                                 "WebkitFlexDirection": "column",
                                 "WebkitJustifyContent": "center",
-                                "WebkitTransitionDuration": "0.15s",
+                                "WebkitTransitionDuration": "0s",
                                 "WebkitTransitionProperty": "opacity",
                                 "WebkitUserSelect": "none",
                                 "alignItems": "center",
@@ -1156,7 +1033,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 "msTouchAction": "manipulation",
                                 "msUserSelect": "none",
                                 "touchAction": "manipulation",
-                                "transitionDuration": "0.15s",
+                                "transitionDuration": "0s",
                                 "transitionProperty": "opacity",
                                 "userSelect": "none",
                                 "width": "100%",
@@ -1186,6 +1063,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "color": "rgba(0,0,0,1.00)",
@@ -1222,6 +1100,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao"
                                   dir="auto"
+                                  onClick={[Function]}
                                 />
                               </div>
                             </div>
@@ -1265,14 +1144,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       aria-disabled={true}
                       className="css-view-1dbjc4n"
                       disabled={true}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
                       onKeyDown={[Function]}
-                      onKeyUp={[Function]}
-                      onResponderGrant={[Function]}
-                      onResponderMove={[Function]}
-                      onResponderRelease={[Function]}
-                      onResponderTerminate={[Function]}
-                      onResponderTerminationRequest={[Function]}
-                      onStartShouldSetResponder={[Function]}
                       style={
                         Object {
                           "WebkitBoxFlex": 1,
@@ -1309,16 +1183,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         <div
                           className="css-cursor-18t94o4 css-view-1dbjc4n"
                           data-focusable={true}
-                          disabled={false}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyPress={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           role="button"
                           style={
                             Object {
@@ -1331,7 +1198,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "borderBottomRightRadius": "11.25px",
                               "borderTopLeftRadius": "11.25px",
                               "borderTopRightRadius": "11.25px",
-                              "cursor": "pointer",
                               "height": "22.5px",
                               "justifyContent": "center",
                               "marginBottom": "6px",
@@ -1340,40 +1206,29 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "marginTop": "6px",
                               "msFlexAlign": "center",
                               "msFlexPack": "center",
-                              "msTouchAction": "manipulation",
                               "opacity": 0.8,
                               "overflowX": "hidden",
                               "overflowY": "hidden",
                               "position": "relative",
-                              "touchAction": "manipulation",
                               "width": "22.5px",
                             }
                           }
                           tabIndex="0"
                         >
-                          <span
-                            className="css-hitSlop-mjp8i1"
-                            style={
-                              Object {
-                                "bottom": "-10px",
-                                "left": "-10px",
-                                "right": "-10px",
-                                "top": "-10px",
-                              }
-                            }
-                          />
                           <div
                             className="css-view-1dbjc4n"
                           >
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
                         <div
                           className="css-text-901oao"
                           dir="auto"
+                          onClick={[Function]}
                           style={
                             Object {
                               "color": "rgba(0,0,0,0.54)",
@@ -1398,16 +1253,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         <div
                           className="css-cursor-18t94o4 css-view-1dbjc4n"
                           data-focusable={true}
-                          disabled={false}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyPress={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           role="button"
                           style={
                             Object {
@@ -1420,7 +1268,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "borderBottomRightRadius": "11.25px",
                               "borderTopLeftRadius": "11.25px",
                               "borderTopRightRadius": "11.25px",
-                              "cursor": "pointer",
                               "height": "22.5px",
                               "justifyContent": "center",
                               "marginBottom": "6px",
@@ -1429,34 +1276,22 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "marginTop": "6px",
                               "msFlexAlign": "center",
                               "msFlexPack": "center",
-                              "msTouchAction": "manipulation",
                               "opacity": 0.8,
                               "overflowX": "hidden",
                               "overflowY": "hidden",
                               "position": "relative",
-                              "touchAction": "manipulation",
                               "width": "22.5px",
                             }
                           }
                           tabIndex="0"
                         >
-                          <span
-                            className="css-hitSlop-mjp8i1"
-                            style={
-                              Object {
-                                "bottom": "-10px",
-                                "left": "-10px",
-                                "right": "-10px",
-                                "top": "-10px",
-                              }
-                            }
-                          />
                           <div
                             className="css-view-1dbjc4n"
                           >
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -1533,6 +1368,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao css-textOneLine-bfa6kz"
                                   dir="auto"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -1557,6 +1393,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao css-textOneLine-bfa6kz"
                                   dir="auto"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -1583,25 +1420,16 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 autoCapitalize="sentences"
                                 autoComplete="on"
                                 autoCorrect="on"
-                                className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                                className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                                 data-focusable={true}
                                 dir="auto"
-                                index={1}
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
                                 onKeyDown={[Function]}
-                                onKeyPress={[Function]}
                                 onSelect={[Function]}
                                 placeholder=""
                                 readOnly={false}
-                                siblings={
-                                  Array [
-                                    "withTheme()",
-                                    "withTheme()",
-                                    "TouchableOpacity",
-                                  ]
-                                }
                                 spellCheck={true}
                                 style={
                                   Object {
@@ -1627,7 +1455,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                     "zIndex": 1,
                                   }
                                 }
-                                total={5}
                                 type="text"
                                 value="Title Derp"
                               />
@@ -1708,6 +1535,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao css-textOneLine-bfa6kz"
                                   dir="auto"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "WebkitTransform": "translateX(0px) translateY(-82px) scale(0.75)",
@@ -1731,6 +1559,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao css-textOneLine-bfa6kz"
                                   dir="auto"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "WebkitTransform": "translateX(0px) translateY(-82px) scale(0.75)",
@@ -1756,26 +1585,17 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 autoCapitalize="sentences"
                                 autoComplete="on"
                                 autoCorrect="on"
-                                className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                                className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                                 data-focusable={true}
                                 dir="auto"
-                                index={2}
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
                                 onKeyDown={[Function]}
-                                onKeyPress={[Function]}
                                 onSelect={[Function]}
                                 placeholder=""
                                 readOnly={false}
                                 rows={1}
-                                siblings={
-                                  Array [
-                                    "withTheme()",
-                                    "withTheme()",
-                                    "TouchableOpacity",
-                                  ]
-                                }
                                 spellCheck={true}
                                 style={
                                   Object {
@@ -1800,7 +1620,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                     "zIndex": 1,
                                   }
                                 }
-                                total={5}
                                 value="Paragraph Derp"
                               />
                             </div>
@@ -1810,14 +1629,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-view-1dbjc4n"
                         data-focusable={true}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
                         onKeyDown={[Function]}
-                        onKeyUp={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
                         style={
                           Object {
                             "MozTransitionProperty": "opacity",
@@ -1829,7 +1643,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "WebkitBoxPack": "center",
                             "WebkitFlexDirection": "row",
                             "WebkitJustifyContent": "center",
-                            "WebkitTransitionDuration": "0.15s",
+                            "WebkitTransitionDuration": "0s",
                             "WebkitTransitionProperty": "opacity",
                             "WebkitUserSelect": "none",
                             "alignItems": "center",
@@ -1843,7 +1657,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "msUserSelect": "none",
                             "paddingTop": "10px",
                             "touchAction": "manipulation",
-                            "transitionDuration": "0.15s",
+                            "transitionDuration": "0s",
                             "transitionProperty": "opacity",
                             "userSelect": "none",
                           }
@@ -1853,6 +1667,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         <div
                           className="css-text-901oao"
                           dir="auto"
+                          onClick={[Function]}
                           style={
                             Object {
                               "color": "rgba(0,0,0,0.54)",
@@ -1875,13 +1690,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           aria-disabled={true}
                           className="css-view-1dbjc4n"
                           disabled={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           role="button"
                           style={
                             Object {
@@ -1910,23 +1721,13 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             }
                           }
                         >
-                          <span
-                            className="css-hitSlop-mjp8i1"
-                            style={
-                              Object {
-                                "bottom": "-10px",
-                                "left": "-10px",
-                                "right": "-10px",
-                                "top": "-10px",
-                              }
-                            }
-                          />
                           <div
                             className="css-view-1dbjc4n"
                           >
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -1934,14 +1735,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
-                        index={4}
-                        siblings={
-                          Array [
-                            "withTheme()",
-                            "withTheme()",
-                            "TouchableOpacity",
-                          ]
-                        }
+                        onClick={[Function]}
                         style={
                           Object {
                             "WebkitTransform": "",
@@ -1960,7 +1754,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "width": "100%",
                           }
                         }
-                        total={5}
                       >
                         All changes saved at 12:11. 
                       </div>
@@ -2001,14 +1794,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       aria-disabled={true}
                       className="css-view-1dbjc4n"
                       disabled={true}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
                       onKeyDown={[Function]}
-                      onKeyUp={[Function]}
-                      onResponderGrant={[Function]}
-                      onResponderMove={[Function]}
-                      onResponderRelease={[Function]}
-                      onResponderTerminate={[Function]}
-                      onResponderTerminationRequest={[Function]}
-                      onStartShouldSetResponder={[Function]}
                       style={
                         Object {
                           "WebkitBoxFlex": 1,
@@ -2093,6 +1881,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao css-textOneLine-bfa6kz"
                                   dir="auto"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -2117,6 +1906,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao css-textOneLine-bfa6kz"
                                   dir="auto"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "WebkitTransform": "translateX(0px) translateY(-16px) scale(0.75)",
@@ -2143,25 +1933,16 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 autoCapitalize="sentences"
                                 autoComplete="on"
                                 autoCorrect="on"
-                                className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                                className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                                 data-focusable={true}
                                 dir="auto"
-                                index={1}
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
                                 onKeyDown={[Function]}
-                                onKeyPress={[Function]}
                                 onSelect={[Function]}
                                 placeholder=""
                                 readOnly={false}
-                                siblings={
-                                  Array [
-                                    "withTheme()",
-                                    "withTheme()",
-                                    "TouchableOpacity",
-                                  ]
-                                }
                                 spellCheck={true}
                                 style={
                                   Object {
@@ -2187,7 +1968,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                     "zIndex": 1,
                                   }
                                 }
-                                total={5}
                                 type="text"
                                 value="Title Derp 2"
                               />
@@ -2268,6 +2048,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao css-textOneLine-bfa6kz"
                                   dir="auto"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "WebkitTransform": "translateX(0px) translateY(-82px) scale(0.75)",
@@ -2291,6 +2072,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 <div
                                   className="css-text-901oao css-textOneLine-bfa6kz"
                                   dir="auto"
+                                  onClick={[Function]}
                                   style={
                                     Object {
                                       "WebkitTransform": "translateX(0px) translateY(-82px) scale(0.75)",
@@ -2316,26 +2098,17 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 autoCapitalize="sentences"
                                 autoComplete="on"
                                 autoCorrect="on"
-                                className="css-textinput-1cwyjr8 r-placeholderTextColor-1qzd3f0"
+                                className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                                 data-focusable={true}
                                 dir="auto"
-                                index={2}
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
                                 onKeyDown={[Function]}
-                                onKeyPress={[Function]}
                                 onSelect={[Function]}
                                 placeholder=""
                                 readOnly={false}
                                 rows={1}
-                                siblings={
-                                  Array [
-                                    "withTheme()",
-                                    "withTheme()",
-                                    "TouchableOpacity",
-                                  ]
-                                }
                                 spellCheck={true}
                                 style={
                                   Object {
@@ -2360,7 +2133,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                     "zIndex": 1,
                                   }
                                 }
-                                total={5}
                                 value="Paragraph Derp 2"
                               />
                             </div>
@@ -2370,14 +2142,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-view-1dbjc4n"
                         data-focusable={true}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
                         onKeyDown={[Function]}
-                        onKeyUp={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
                         style={
                           Object {
                             "MozTransitionProperty": "opacity",
@@ -2389,7 +2156,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "WebkitBoxPack": "center",
                             "WebkitFlexDirection": "row",
                             "WebkitJustifyContent": "center",
-                            "WebkitTransitionDuration": "0.15s",
+                            "WebkitTransitionDuration": "0s",
                             "WebkitTransitionProperty": "opacity",
                             "WebkitUserSelect": "none",
                             "alignItems": "center",
@@ -2403,7 +2170,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "msUserSelect": "none",
                             "paddingTop": "10px",
                             "touchAction": "manipulation",
-                            "transitionDuration": "0.15s",
+                            "transitionDuration": "0s",
                             "transitionProperty": "opacity",
                             "userSelect": "none",
                           }
@@ -2413,6 +2180,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         <div
                           className="css-text-901oao"
                           dir="auto"
+                          onClick={[Function]}
                           style={
                             Object {
                               "color": "rgba(0,0,0,0.54)",
@@ -2435,13 +2203,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           aria-disabled={true}
                           className="css-view-1dbjc4n"
                           disabled={true}
+                          onClick={[Function]}
+                          onContextMenu={[Function]}
                           onKeyDown={[Function]}
-                          onKeyUp={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           role="button"
                           style={
                             Object {
@@ -2470,23 +2234,13 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             }
                           }
                         >
-                          <span
-                            className="css-hitSlop-mjp8i1"
-                            style={
-                              Object {
-                                "bottom": "-10px",
-                                "left": "-10px",
-                                "right": "-10px",
-                                "top": "-10px",
-                              }
-                            }
-                          />
                           <div
                             className="css-view-1dbjc4n"
                           >
                             <div
                               className="css-text-901oao"
                               dir="auto"
+                              onClick={[Function]}
                             />
                           </div>
                         </div>
@@ -2494,14 +2248,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
-                        index={4}
-                        siblings={
-                          Array [
-                            "withTheme()",
-                            "withTheme()",
-                            "TouchableOpacity",
-                          ]
-                        }
+                        onClick={[Function]}
                         style={
                           Object {
                             "WebkitTransform": "",
@@ -2520,7 +2267,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "width": "100%",
                           }
                         }
-                        total={5}
                       >
                         All changes saved at 12:11. 
                       </div>

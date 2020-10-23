@@ -21,14 +21,9 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
   <div
     className="css-view-1dbjc4n"
     data-focusable={true}
+    onClick={[Function]}
+    onContextMenu={[Function]}
     onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "MozTransitionProperty": "opacity",
@@ -40,7 +35,7 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
         "WebkitBoxPack": "center",
         "WebkitFlexDirection": "row",
         "WebkitJustifyContent": "center",
-        "WebkitTransitionDuration": "0.15s",
+        "WebkitTransitionDuration": "0s",
         "WebkitTransitionProperty": "opacity",
         "WebkitUserSelect": "none",
         "alignItems": "center",
@@ -53,7 +48,7 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
         "msTouchAction": "manipulation",
         "msUserSelect": "none",
         "touchAction": "manipulation",
-        "transitionDuration": "0.15s",
+        "transitionDuration": "0s",
         "transitionProperty": "opacity",
         "userSelect": "none",
       }
@@ -101,7 +96,6 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
             style={
               Object {
                 "backgroundColor": "rgba(0,0,0,0.00)",
-                "backgroundImage": "url(\\"/abcd\\")",
                 "backgroundPosition": "center",
                 "backgroundRepeat": "no-repeat",
                 "backgroundSize": "cover",
@@ -116,25 +110,15 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
               }
             }
           />
-          <img
-            alt=""
-            className="css-accessibilityImage-9pa8cd"
-            draggable={false}
-            src="/abcd"
-          />
         </div>
       </div>
       <div
         aria-disabled={true}
         className="css-view-1dbjc4n"
         disabled={true}
+        onClick={[Function]}
+        onContextMenu={[Function]}
         onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         role="button"
         style={
           Object {
@@ -173,23 +157,13 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
           }
         }
       >
-        <span
-          className="css-hitSlop-mjp8i1"
-          style={
-            Object {
-              "bottom": "-10px",
-              "left": "-10px",
-              "right": "-10px",
-              "top": "-10px",
-            }
-          }
-        />
         <div
           className="css-view-1dbjc4n"
         >
           <div
             className="css-text-901oao"
             dir="auto"
+            onClick={[Function]}
           />
         </div>
       </div>
@@ -219,14 +193,9 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
   <div
     className="css-view-1dbjc4n"
     data-focusable={true}
+    onClick={[Function]}
+    onContextMenu={[Function]}
     onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "MozTransitionProperty": "opacity",
@@ -238,7 +207,7 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
         "WebkitBoxPack": "center",
         "WebkitFlexDirection": "row",
         "WebkitJustifyContent": "center",
-        "WebkitTransitionDuration": "0.15s",
+        "WebkitTransitionDuration": "0s",
         "WebkitTransitionProperty": "opacity",
         "WebkitUserSelect": "none",
         "alignItems": "center",
@@ -251,7 +220,7 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
         "msTouchAction": "manipulation",
         "msUserSelect": "none",
         "touchAction": "manipulation",
-        "transitionDuration": "0.15s",
+        "transitionDuration": "0s",
         "transitionProperty": "opacity",
         "userSelect": "none",
       }
@@ -286,19 +255,16 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
         <div
           className="css-text-901oao"
           dir="auto"
+          onClick={[Function]}
         />
       </div>
       <div
         aria-disabled={true}
         className="css-view-1dbjc4n"
         disabled={true}
+        onClick={[Function]}
+        onContextMenu={[Function]}
         onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         role="button"
         style={
           Object {
@@ -337,23 +303,13 @@ exports[`ShowOrPickImage without image Matches snapshot 1`] = `
           }
         }
       >
-        <span
-          className="css-hitSlop-mjp8i1"
-          style={
-            Object {
-              "bottom": "-10px",
-              "left": "-10px",
-              "right": "-10px",
-              "top": "-10px",
-            }
-          }
-        />
         <div
           className="css-view-1dbjc4n"
         >
           <div
             className="css-text-901oao"
             dir="auto"
+            onClick={[Function]}
           />
         </div>
       </div>

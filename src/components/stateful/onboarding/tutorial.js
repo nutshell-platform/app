@@ -15,7 +15,7 @@ class Tutorial extends Component {
 		if( !user?.avatar ) todos.push( { label: 'Set your avatar', to: '/user/settings' } )
 		if( !user?.bio ) todos.push( { label: 'Update your bio', to: '/user/settings' } )
 		if( !user?.following?.length ) todos.push( { label: 'Follow some people', to: '/friends/find' } )
-		if( !user?.contactMethods.whatsapp && !user?.contactMethods.email ) todos.push( { label: 'Set a comment method', to: '/user/settings' } )
+		if( !user?.contactMethods?.whatsapp && !user?.contactMethods?.email ) todos.push( { label: 'Set a comment method', to: '/user/settings' } )
 
 		log( 'Recommended actions: ', todos )
 

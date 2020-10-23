@@ -9,5 +9,273 @@ exports[`Tutorial Matches snapshot 1`] = `
       "flex": 1,
     }
   }
-/>
+>
+  <View
+    style={
+      Object {
+        "maxWidth": "100%",
+        "paddingVertical": 10,
+        "width": 500,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffff",
+          "borderRadius": 0,
+          "elevation": 2,
+          "maxWidth": "100%",
+          "padding": 30,
+          "shadowColor": "#000000",
+          "shadowOffset": Object {
+            "height": 0.75,
+            "width": 0,
+          },
+          "shadowOpacity": 0.24,
+          "shadowRadius": 1.5,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flexGrow": 1,
+            "flexShrink": 1,
+          }
+        }
+      >
+        <Text
+          index={0}
+          siblings={
+            Array [
+              "withTheme(Text)",
+              "withRouter(withTheme())",
+            ]
+          }
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                  "fontWeight": "500",
+                  "textAlign": "left",
+                  "writingDirection": "ltr",
+                },
+                Array [
+                  Object {
+                    "fontSize": 20,
+                    "letterSpacing": 0.15,
+                    "lineHeight": 30,
+                    "marginVertical": 2,
+                  },
+                  undefined,
+                ],
+                Array [
+                  Object {
+                    "fontSize": 20,
+                    "letterSpacing": 0.15,
+                    "lineHeight": 30,
+                    "marginVertical": 2,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          total={3}
+        >
+          Welcome 
+          Mentor Palokaj
+           🎉
+        </Text>
+        <Text
+          index={1}
+          siblings={
+            Array [
+              "withTheme(Text)",
+              "withRouter(withTheme())",
+            ]
+          }
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Object {
+                "paddingTop": 20,
+              },
+            ]
+          }
+          total={3}
+        >
+          To make the most out of Nutshell, we recommend doing the following things:
+        </Text>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginTop": 20,
+              "maxWidth": "100%",
+              "position": "relative",
+            }
+          }
+        >
+          <View
+            index={2}
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            siblings={
+              Array [
+                "withTheme(Text)",
+                "withRouter(withTheme())",
+              ]
+            }
+            style={
+              Object {
+                "alignItems": "stretch",
+                "backgroundColor": "rgb(0,0,0)",
+                "borderColor": "transparent",
+                "borderRadius": 0,
+                "borderStyle": "solid",
+                "borderWidth": 0,
+                "elevation": 2,
+                "flexDirection": "column",
+                "justifyContent": "center",
+                "minWidth": 64,
+                "shadowColor": "#000000",
+                "shadowOffset": Object {
+                  "height": 0.75,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.24,
+                "shadowRadius": 1.5,
+                "width": "100%",
+              }
+            }
+            total={3}
+          >
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "disabled": undefined,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  Object {
+                    "borderRadius": 0,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                    },
+                    Object {
+                      "width": "100%",
+                    },
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#000000",
+                        "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                        "fontWeight": "400",
+                        "textAlign": "left",
+                      },
+                      Array [
+                        Object {
+                          "letterSpacing": 1,
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        undefined,
+                        Object {
+                          "textTransform": "uppercase",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                          "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                          "fontWeight": "500",
+                        },
+                        Object {
+                          "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                          "fontWeight": "500",
+                        },
+                        Object {
+                          "color": "#ffffff",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  Set a comment method
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
 `;

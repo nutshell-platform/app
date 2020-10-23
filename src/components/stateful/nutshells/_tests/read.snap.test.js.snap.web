@@ -116,7 +116,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
             style={
               Object {
                 "backgroundColor": "rgba(0,0,0,0.00)",
-                "backgroundImage": "url(\\"SvgMock\\")",
                 "backgroundPosition": "center",
                 "backgroundRepeat": "no-repeat",
                 "backgroundSize": "cover",
@@ -130,12 +129,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                 "zIndex": -1,
               }
             }
-          />
-          <img
-            alt=""
-            className="css-accessibilityImage-9pa8cd"
-            draggable={false}
-            src="SvgMock"
           />
         </div>
         <div
@@ -206,14 +199,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                 aria-disabled={true}
                 className="css-view-1dbjc4n"
                 disabled={true}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
                     "WebkitBoxFlex": 1,
@@ -235,6 +223,8 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                   className="css-reset-4rbku5 css-text-901oao css-textOneLine-bfa6kz"
                   data-focusable={true}
                   dir="auto"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
                   role="heading"
                   style={
                     Object {
@@ -253,16 +243,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -275,7 +258,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -284,27 +266,14 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -343,6 +312,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -351,16 +321,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -373,7 +336,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -382,27 +344,14 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -441,6 +390,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -449,16 +399,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -471,7 +414,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -480,27 +422,14 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -539,6 +468,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -547,16 +477,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
-                disabled={false}
+                onClick={[Function]}
+                onContextMenu={[Function]}
                 onKeyDown={[Function]}
-                onKeyPress={[Function]}
-                onKeyUp={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 role="button"
                 style={
                   Object {
@@ -569,7 +492,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
-                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -578,27 +500,14 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "marginTop": "6px",
                     "msFlexAlign": "center",
                     "msFlexPack": "center",
-                    "msTouchAction": "manipulation",
                     "overflowX": "hidden",
                     "overflowY": "hidden",
                     "position": "relative",
-                    "touchAction": "manipulation",
                     "width": "36px",
                   }
                 }
                 tabIndex="0"
               >
-                <span
-                  className="css-hitSlop-mjp8i1"
-                  style={
-                    Object {
-                      "bottom": "-10px",
-                      "left": "-10px",
-                      "right": "-10px",
-                      "top": "-10px",
-                    }
-                  }
-                />
                 <div
                   className="css-view-1dbjc4n"
                 >
@@ -637,6 +546,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                       />
                     </div>
                   </div>
@@ -647,17 +557,8 @@ exports[`ReadNutshell Matches snapshot 1`] = `
         </div>
         <div
           className="css-view-1dbjc4n r-scrollbarWidth-2eszeu"
-          onResponderGrant={[Function]}
-          onResponderReject={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminationRequest={[Function]}
           onScroll={[Function]}
-          onScrollShouldSetResponder={[Function]}
-          onStartShouldSetResponder={[Function]}
-          onStartShouldSetResponderCapture={[Function]}
-          onTouchEnd={[Function]}
           onTouchMove={[Function]}
-          onTouchStart={[Function]}
           onWheel={[Function]}
           style={
             Object {
@@ -769,13 +670,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                   aria-disabled={true}
                   className="css-view-1dbjc4n"
                   disabled={true}
+                  onClick={[Function]}
+                  onContextMenu={[Function]}
                   onKeyDown={[Function]}
-                  onKeyUp={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
                   role="button"
                   style={
                     Object {
@@ -813,6 +710,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     <div
                       className="css-text-901oao css-textOneLine-bfa6kz"
                       dir="auto"
+                      onClick={[Function]}
                       style={
                         Object {
                           "color": "rgba(0,0,0,1.00)",
@@ -825,11 +723,10 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                           "marginTop": "9px",
                           "textAlign": "center",
                           "textTransform": "uppercase",
-                          "width": "100%",
                         }
                       }
                     >
-                      Loading your inbox
+                      Updating your inbox
                     </div>
                   </div>
                 </div>
@@ -868,14 +765,228 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                   aria-disabled={true}
                   className="css-view-1dbjc4n"
                   disabled={true}
+                  onClick={[Function]}
+                  onContextMenu={[Function]}
                   onKeyDown={[Function]}
-                  onKeyUp={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Object {
+                      "WebkitBoxFlex": 1,
+                      "WebkitFlexGrow": 1,
+                      "WebkitFlexShrink": 1,
+                      "flexGrow": 1,
+                      "flexShrink": 1,
+                      "msFlexNegative": 1,
+                      "msFlexPositive": 1,
+                    }
+                  }
+                >
+                  <div
+                    className="css-text-901oao"
+                    dir="auto"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "color": "rgba(0,0,0,0.87)",
+                        "direction": "ltr",
+                        "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                        "fontSize": "20px",
+                        "fontWeight": "500",
+                        "letterSpacing": "0.15px",
+                        "lineHeight": "30px",
+                        "marginBottom": "2px",
+                        "marginTop": "2px",
+                        "textAlign": "left",
+                      }
+                    }
+                  >
+                    Welcome 
+                    Mentor Palokaj
+                     🎉
+                  </div>
+                  <div
+                    className="css-text-901oao"
+                    dir="auto"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "color": "rgba(0,0,0,1.00)",
+                        "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                        "fontWeight": "400",
+                        "paddingTop": "20px",
+                        "textAlign": "left",
+                      }
+                    }
+                  >
+                    To make the most out of Nutshell, we recommend doing the following things:
+                  </div>
+                  <div
+                    className="css-view-1dbjc4n"
+                    style={
+                      Object {
+                        "WebkitAlignItems": "center",
+                        "WebkitBoxAlign": "center",
+                        "WebkitBoxDirection": "normal",
+                        "WebkitBoxOrient": "horizontal",
+                        "WebkitBoxPack": "start",
+                        "WebkitFlexDirection": "row",
+                        "WebkitJustifyContent": "flex-start",
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "justifyContent": "flex-start",
+                        "marginTop": "20px",
+                        "maxWidth": "100%",
+                        "msFlexAlign": "center",
+                        "msFlexDirection": "row",
+                        "msFlexPack": "start",
+                        "position": "relative",
+                      }
+                    }
+                  >
+                    <div
+                      className="css-view-1dbjc4n"
+                      style={
+                        Object {
+                          "WebkitAlignItems": "stretch",
+                          "WebkitBoxAlign": "stretch",
+                          "WebkitBoxDirection": "normal",
+                          "WebkitBoxOrient": "vertical",
+                          "WebkitBoxPack": "center",
+                          "WebkitFlexDirection": "column",
+                          "WebkitJustifyContent": "center",
+                          "alignItems": "stretch",
+                          "backgroundColor": "rgba(0,0,0,1.00)",
+                          "borderBottomColor": "rgba(0,0,0,0.00)",
+                          "borderBottomLeftRadius": "0px",
+                          "borderBottomRightRadius": "0px",
+                          "borderBottomStyle": "solid",
+                          "borderBottomWidth": "0px",
+                          "borderLeftColor": "rgba(0,0,0,0.00)",
+                          "borderLeftStyle": "solid",
+                          "borderLeftWidth": "0px",
+                          "borderRightColor": "rgba(0,0,0,0.00)",
+                          "borderRightStyle": "solid",
+                          "borderRightWidth": "0px",
+                          "borderTopColor": "rgba(0,0,0,0.00)",
+                          "borderTopLeftRadius": "0px",
+                          "borderTopRightRadius": "0px",
+                          "borderTopStyle": "solid",
+                          "borderTopWidth": "0px",
+                          "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
+                          "flexDirection": "column",
+                          "justifyContent": "center",
+                          "minWidth": "64px",
+                          "msFlexAlign": "stretch",
+                          "msFlexDirection": "column",
+                          "msFlexPack": "center",
+                          "width": "100%",
+                        }
+                      }
+                    >
+                      <div
+                        className="css-cursor-18t94o4 css-view-1dbjc4n"
+                        data-focusable={true}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        onKeyDown={[Function]}
+                        role="button"
+                        style={
+                          Object {
+                            "borderBottomLeftRadius": "0px",
+                            "borderBottomRightRadius": "0px",
+                            "borderTopLeftRadius": "0px",
+                            "borderTopRightRadius": "0px",
+                            "overflowX": "hidden",
+                            "overflowY": "hidden",
+                            "position": "relative",
+                          }
+                        }
+                        tabIndex="0"
+                      >
+                        <div
+                          className="css-view-1dbjc4n"
+                          style={
+                            Object {
+                              "WebkitAlignItems": "center",
+                              "WebkitBoxAlign": "center",
+                              "WebkitBoxDirection": "normal",
+                              "WebkitBoxOrient": "horizontal",
+                              "WebkitBoxPack": "center",
+                              "WebkitFlexDirection": "row",
+                              "WebkitJustifyContent": "center",
+                              "alignItems": "center",
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                              "msFlexAlign": "center",
+                              "msFlexDirection": "row",
+                              "msFlexPack": "center",
+                              "width": "100%",
+                            }
+                          }
+                        >
+                          <div
+                            className="css-text-901oao css-textOneLine-bfa6kz"
+                            dir="auto"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "color": "rgba(255,255,255,1.00)",
+                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                "fontWeight": "500",
+                                "letterSpacing": "1px",
+                                "marginBottom": "9px",
+                                "marginLeft": "16px",
+                                "marginRight": "16px",
+                                "marginTop": "9px",
+                                "textAlign": "center",
+                                "textTransform": "uppercase",
+                              }
+                            }
+                          >
+                            Set a comment method
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="css-view-1dbjc4n"
+              style={
+                Object {
+                  "maxWidth": "100%",
+                  "paddingBottom": "10px",
+                  "paddingTop": "10px",
+                  "width": "500px",
+                }
+              }
+            >
+              <div
+                className="css-view-1dbjc4n"
+                style={
+                  Object {
+                    "backgroundColor": "rgba(255,255,255,1.00)",
+                    "borderBottomLeftRadius": "0px",
+                    "borderBottomRightRadius": "0px",
+                    "borderTopLeftRadius": "0px",
+                    "borderTopRightRadius": "0px",
+                    "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
+                    "maxWidth": "100%",
+                    "paddingBottom": "30px",
+                    "paddingLeft": "30px",
+                    "paddingRight": "30px",
+                    "paddingTop": "30px",
+                  }
+                }
+              >
+                <div
+                  aria-disabled={true}
+                  className="css-view-1dbjc4n"
+                  disabled={true}
+                  onClick={[Function]}
+                  onContextMenu={[Function]}
+                  onKeyDown={[Function]}
                   style={
                     Object {
                       "WebkitBoxFlex": 1,
@@ -909,6 +1020,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     <div
                       className="css-text-901oao"
                       dir="auto"
+                      onClick={[Function]}
                       style={
                         Object {
                           "color": "rgba(0,0,0,0.87)",
@@ -946,6 +1058,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                       <div
                         className="css-text-901oao"
                         dir="auto"
+                        onClick={[Function]}
                         style={
                           Object {
                             "WebkitTransform": "",
@@ -988,6 +1101,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                             "msFlexDirection": "row",
                             "msFlexItemAlign": "center",
                             "msFlexPack": "start",
+                            "msGridRowAlign": "center",
                             "position": "relative",
                           }
                         }
@@ -1035,16 +1149,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                           <div
                             className="css-cursor-18t94o4 css-view-1dbjc4n"
                             data-focusable={true}
-                            disabled={false}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
                             onKeyDown={[Function]}
-                            onKeyPress={[Function]}
-                            onKeyUp={[Function]}
-                            onResponderGrant={[Function]}
-                            onResponderMove={[Function]}
-                            onResponderRelease={[Function]}
-                            onResponderTerminate={[Function]}
-                            onResponderTerminationRequest={[Function]}
-                            onStartShouldSetResponder={[Function]}
                             role="button"
                             style={
                               Object {
@@ -1052,12 +1159,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                                 "borderBottomRightRadius": "0px",
                                 "borderTopLeftRadius": "0px",
                                 "borderTopRightRadius": "0px",
-                                "cursor": "pointer",
-                                "msTouchAction": "manipulation",
                                 "overflowX": "hidden",
                                 "overflowY": "hidden",
                                 "position": "relative",
-                                "touchAction": "manipulation",
                               }
                             }
                             tabIndex="0"
@@ -1086,6 +1190,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                               <div
                                 className="css-text-901oao css-textOneLine-bfa6kz"
                                 dir="auto"
+                                onClick={[Function]}
                                 style={
                                   Object {
                                     "color": "rgba(255,255,255,1.00)",
@@ -1098,375 +1203,10 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                                     "marginTop": "9px",
                                     "textAlign": "center",
                                     "textTransform": "uppercase",
-                                    "width": "100%",
                                   }
                                 }
                               >
                                 View recommendations
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="css-view-1dbjc4n"
-              style={
-                Object {
-                  "maxWidth": "100%",
-                  "paddingBottom": "10px",
-                  "paddingTop": "10px",
-                  "width": "500px",
-                }
-              }
-            >
-              <div
-                className="css-view-1dbjc4n"
-                style={
-                  Object {
-                    "backgroundColor": "rgba(255,255,255,1.00)",
-                    "borderBottomLeftRadius": "0px",
-                    "borderBottomRightRadius": "0px",
-                    "borderTopLeftRadius": "0px",
-                    "borderTopRightRadius": "0px",
-                    "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
-                    "maxWidth": "100%",
-                    "paddingBottom": "30px",
-                    "paddingLeft": "30px",
-                    "paddingRight": "30px",
-                    "paddingTop": "30px",
-                  }
-                }
-              >
-                <div
-                  aria-disabled={true}
-                  className="css-view-1dbjc4n"
-                  disabled={true}
-                  onKeyDown={[Function]}
-                  onKeyUp={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Object {
-                      "WebkitBoxFlex": 1,
-                      "WebkitFlexGrow": 1,
-                      "WebkitFlexShrink": 1,
-                      "flexGrow": 1,
-                      "flexShrink": 1,
-                      "msFlexNegative": 1,
-                      "msFlexPositive": 1,
-                    }
-                  }
-                >
-                  <div
-                    className="css-view-1dbjc4n"
-                    style={
-                      Object {
-                        "WebkitAlignItems": "center",
-                        "WebkitBoxAlign": "center",
-                        "WebkitBoxDirection": "normal",
-                        "WebkitBoxOrient": "vertical",
-                        "WebkitFlexDirection": "column",
-                        "alignItems": "center",
-                        "flexDirection": "column",
-                        "maxWidth": "100%",
-                        "msFlexAlign": "center",
-                        "msFlexDirection": "column",
-                        "width": "100%",
-                      }
-                    }
-                  >
-                    <div
-                      className="css-text-901oao"
-                      dir="auto"
-                      style={
-                        Object {
-                          "color": "rgba(0,0,0,0.87)",
-                          "direction": "ltr",
-                          "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                          "fontSize": "20px",
-                          "fontWeight": "500",
-                          "letterSpacing": "0.15px",
-                          "lineHeight": "30px",
-                          "marginBottom": "2px",
-                          "marginTop": "2px",
-                          "textAlign": "left",
-                        }
-                      }
-                    >
-                      Edit
-                       your 
-                      scheduled 
-                      Nutshell
-                    </div>
-                    <div
-                      className="css-view-1dbjc4n"
-                      style={
-                        Object {
-                          "WebkitAlignItems": "flex-start",
-                          "WebkitBoxAlign": "start",
-                          "WebkitBoxPack": "center",
-                          "WebkitJustifyContent": "center",
-                          "alignItems": "flex-start",
-                          "justifyContent": "center",
-                          "maxWidth": "100%",
-                          "msFlexAlign": "start",
-                          "msFlexPack": "center",
-                          "width": "100%",
-                        }
-                      }
-                    >
-                      <div
-                        className="css-view-1dbjc4n"
-                        data-focusable={true}
-                        onKeyDown={[Function]}
-                        onKeyUp={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
-                        style={
-                          Object {
-                            "MozTransitionProperty": "opacity",
-                            "MozUserSelect": "none",
-                            "WebkitAlignItems": "center",
-                            "WebkitBoxAlign": "center",
-                            "WebkitBoxDirection": "normal",
-                            "WebkitBoxOrient": "vertical",
-                            "WebkitBoxPack": "center",
-                            "WebkitFlexDirection": "column",
-                            "WebkitJustifyContent": "center",
-                            "WebkitTransitionDuration": "0.15s",
-                            "WebkitTransitionProperty": "opacity",
-                            "WebkitUserSelect": "none",
-                            "alignItems": "center",
-                            "cursor": "pointer",
-                            "flexDirection": "column",
-                            "justifyContent": "center",
-                            "msFlexAlign": "center",
-                            "msFlexDirection": "column",
-                            "msFlexPack": "center",
-                            "msTouchAction": "manipulation",
-                            "msUserSelect": "none",
-                            "touchAction": "manipulation",
-                            "transitionDuration": "0.15s",
-                            "transitionProperty": "opacity",
-                            "userSelect": "none",
-                            "width": "100%",
-                          }
-                        }
-                        tabIndex="0"
-                      >
-                        <div
-                          className="css-view-1dbjc4n"
-                          style={
-                            Object {
-                              "WebkitAlignItems": "center",
-                              "WebkitBoxAlign": "center",
-                              "WebkitBoxDirection": "normal",
-                              "WebkitBoxOrient": "horizontal",
-                              "WebkitFlexDirection": "row",
-                              "alignItems": "center",
-                              "flexDirection": "row",
-                              "maxWidth": "100%",
-                              "msFlexAlign": "center",
-                              "msFlexDirection": "row",
-                              "paddingBottom": "10px",
-                              "paddingTop": "10px",
-                            }
-                          }
-                        >
-                          <div
-                            className="css-text-901oao"
-                            dir="auto"
-                            style={
-                              Object {
-                                "color": "rgba(0,0,0,1.00)",
-                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                "fontWeight": "400",
-                                "textAlign": "center",
-                              }
-                            }
-                          >
-                            Next Nutshells release: midnight Sun Jun 28.
-                          </div>
-                          <div
-                            className="css-view-1dbjc4n"
-                            style={
-                              Object {
-                                "WebkitAlignItems": "center",
-                                "WebkitBoxAlign": "center",
-                                "WebkitBoxPack": "center",
-                                "WebkitJustifyContent": "center",
-                                "alignItems": "center",
-                                "backgroundColor": "rgba(0,0,0,0.00)",
-                                "borderBottomLeftRadius": "15px",
-                                "borderBottomRightRadius": "15px",
-                                "borderTopLeftRadius": "15px",
-                                "borderTopRightRadius": "15px",
-                                "height": "30px",
-                                "justifyContent": "center",
-                                "msFlexAlign": "center",
-                                "msFlexPack": "center",
-                                "width": "30px",
-                              }
-                            }
-                          >
-                            <div
-                              className="css-text-901oao"
-                              dir="auto"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        className="css-view-1dbjc4n"
-                        style={
-                          Object {
-                            "WebkitAlignItems": "center",
-                            "WebkitAlignSelf": "center",
-                            "WebkitBoxAlign": "center",
-                            "WebkitBoxDirection": "normal",
-                            "WebkitBoxOrient": "horizontal",
-                            "WebkitBoxPack": "start",
-                            "WebkitFlexDirection": "row",
-                            "WebkitJustifyContent": "flex-start",
-                            "alignItems": "center",
-                            "alignSelf": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "flex-start",
-                            "marginTop": "20px",
-                            "maxWidth": "100%",
-                            "msFlexAlign": "center",
-                            "msFlexDirection": "row",
-                            "msFlexItemAlign": "center",
-                            "msFlexPack": "start",
-                            "position": "relative",
-                          }
-                        }
-                      >
-                        <div
-                          className="css-view-1dbjc4n"
-                          style={
-                            Object {
-                              "WebkitAlignItems": "stretch",
-                              "WebkitBoxAlign": "stretch",
-                              "WebkitBoxDirection": "normal",
-                              "WebkitBoxOrient": "vertical",
-                              "WebkitBoxPack": "center",
-                              "WebkitFlexDirection": "column",
-                              "WebkitJustifyContent": "center",
-                              "alignItems": "stretch",
-                              "backgroundColor": "rgba(0,0,0,1.00)",
-                              "borderBottomColor": "rgba(0,0,0,0.00)",
-                              "borderBottomLeftRadius": "0px",
-                              "borderBottomRightRadius": "0px",
-                              "borderBottomStyle": "solid",
-                              "borderBottomWidth": "0px",
-                              "borderLeftColor": "rgba(0,0,0,0.00)",
-                              "borderLeftStyle": "solid",
-                              "borderLeftWidth": "0px",
-                              "borderRightColor": "rgba(0,0,0,0.00)",
-                              "borderRightStyle": "solid",
-                              "borderRightWidth": "0px",
-                              "borderTopColor": "rgba(0,0,0,0.00)",
-                              "borderTopLeftRadius": "0px",
-                              "borderTopRightRadius": "0px",
-                              "borderTopStyle": "solid",
-                              "borderTopWidth": "0px",
-                              "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
-                              "flexDirection": "column",
-                              "justifyContent": "center",
-                              "minWidth": "64px",
-                              "msFlexAlign": "stretch",
-                              "msFlexDirection": "column",
-                              "msFlexPack": "center",
-                              "width": "100%",
-                            }
-                          }
-                        >
-                          <div
-                            className="css-cursor-18t94o4 css-view-1dbjc4n"
-                            data-focusable={true}
-                            disabled={false}
-                            onKeyDown={[Function]}
-                            onKeyPress={[Function]}
-                            onKeyUp={[Function]}
-                            onResponderGrant={[Function]}
-                            onResponderMove={[Function]}
-                            onResponderRelease={[Function]}
-                            onResponderTerminate={[Function]}
-                            onResponderTerminationRequest={[Function]}
-                            onStartShouldSetResponder={[Function]}
-                            role="button"
-                            style={
-                              Object {
-                                "borderBottomLeftRadius": "0px",
-                                "borderBottomRightRadius": "0px",
-                                "borderTopLeftRadius": "0px",
-                                "borderTopRightRadius": "0px",
-                                "cursor": "pointer",
-                                "msTouchAction": "manipulation",
-                                "overflowX": "hidden",
-                                "overflowY": "hidden",
-                                "position": "relative",
-                                "touchAction": "manipulation",
-                              }
-                            }
-                            tabIndex="0"
-                          >
-                            <div
-                              className="css-view-1dbjc4n"
-                              style={
-                                Object {
-                                  "WebkitAlignItems": "center",
-                                  "WebkitBoxAlign": "center",
-                                  "WebkitBoxDirection": "normal",
-                                  "WebkitBoxOrient": "horizontal",
-                                  "WebkitBoxPack": "center",
-                                  "WebkitFlexDirection": "row",
-                                  "WebkitJustifyContent": "center",
-                                  "alignItems": "center",
-                                  "flexDirection": "row",
-                                  "justifyContent": "center",
-                                  "msFlexAlign": "center",
-                                  "msFlexDirection": "row",
-                                  "msFlexPack": "center",
-                                  "width": "100%",
-                                }
-                              }
-                            >
-                              <div
-                                className="css-text-901oao css-textOneLine-bfa6kz"
-                                dir="auto"
-                                style={
-                                  Object {
-                                    "color": "rgba(255,255,255,1.00)",
-                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                    "fontWeight": "500",
-                                    "letterSpacing": "1px",
-                                    "marginBottom": "9px",
-                                    "marginLeft": "16px",
-                                    "marginRight": "16px",
-                                    "marginTop": "9px",
-                                    "textAlign": "center",
-                                    "textTransform": "uppercase",
-                                    "width": "100%",
-                                  }
-                                }
-                              >
-                                Edit
-                                 your Nutshell
                               </div>
                             </div>
                           </div>
