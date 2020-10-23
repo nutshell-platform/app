@@ -90,6 +90,14 @@ class ReadNutshell extends Component {
 		nutshells = nutshells.filter( n => !n.delete )
 		nutshells = nutshells.filter( n => !markedReadOffline.includes( n.uid ) )
 
+		// Sort with recent edits up top
+		nutshells.sort( ( one, two ) => {
+			if( one.updated > two.updated ) return 1
+			if( one.updated < two.updated ) return -1
+			return 0
+
+		} )
+
 		return nutshells
 		
 	}
@@ -169,7 +177,7 @@ class ReadNutshell extends Component {
 		return <Container Background={ People }>
 			<Navigation title='Home' />
 			<Main.Top>
-				{ loading && <Button style={ { width: '90%', marginBottom: 20 } } mode='flat' loading={ true }>Updating your inbox</Button> }
+				{ loading && <Button style={ { width: 500, marginBottom: 20 } } mode='flat' loading={ true }>Updating your inbox</Button> }
 				<Tutorial />
 				{ renderInbox?.length > 0 && renderInbox.map( nutshell => <NutshellCard isAdmin={ user.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				<ViewRecs recAmount={ user.recommendations?.length } />
