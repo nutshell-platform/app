@@ -105,18 +105,16 @@ export const updateUser = async ( app, userUpdates ) => {
 		// If this is a sensitive change, reauthenticate
 		if( currentpassword ) {
 			const { EmailAuthProvider } = app.Auth
-			await currentUser.reauthenticateWithCredential( EmailAuthProvider.credential( currentUser.email, password ) )
+			await currentUser.reauthenticateWithCredential( EmailAuthProvider.credential( currentUser.email, currentpassword ) )
 		}
 
 		// If email change was requested, set to firebase auth object
 		if( email && currentpassword ) {
-			await app.loginUser( currentUser.email, currentpassword )
 			await currentUser.updateEmail( email )
 			// Set email fingerprint
 			await setEmailFingerprint( app )
 		}
 		if( newpassword && currentpassword ) {
-			await app.loginUser( currentUser.email, currentpassword )
 			await currentUser.updatePassword( newpassword )
 		}
 
