@@ -103,6 +103,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
               "minHeight": "100%",
               "minWidth": "100%",
               "msFlexPreferredSize": "auto",
+              "opacity": 0.5,
               "overflowX": "hidden",
               "overflowY": "hidden",
               "position": "absolute",
@@ -623,7 +624,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                   "msFlexDirection": "row",
                   "msFlexPack": "start",
                   "position": "relative",
-                  "width": "90%",
+                  "width": "500px",
                 }
               }
             >

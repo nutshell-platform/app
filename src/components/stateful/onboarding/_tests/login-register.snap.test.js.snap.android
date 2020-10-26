@@ -50,6 +50,7 @@ exports[`Login and registration Matches snapshot 1`] = `
               "left": 0,
               "minHeight": "100%",
               "minWidth": "100%",
+              "opacity": 0.5,
               "position": "absolute",
               "top": 0,
             }
