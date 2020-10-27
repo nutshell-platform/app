@@ -53,6 +53,7 @@ class NutshellModerator extends Component {
 						<Text>Reason: { report.reason }</Text>
 						<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
 							{ nutshell.entries.map( entry => <Entry key={ entry.uid } entry={ entry } /> ) }
+							{ !nutshell.entries?.length && <Text>Nothing to moderate</Text> }
 							<Button onPress={ f => this.censor( item ) }>Guilty your honour</Button>
 							<Button onPress={ f => this.setFree( item ) }>You're free to leave son</Button>
 						</View>

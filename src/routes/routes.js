@@ -37,6 +37,7 @@ import ManageFriends from '../components/stateful/account/friends-manage'
 
 // System
 import FourOhFour from '../components/stateless/common/404'
+import Debug from '../components/stateful/common/debug'
 
 // Route maneger class
 class Routes extends Component {
@@ -151,8 +152,11 @@ class Routes extends Component {
 				{ /* Account specific */ }
 				<Route path='/user/settings' component={ UserSettings } />
 
-				{ /* Home */ }
+				{ /* 404 */ }
 				<Route path='/404' component={ FourOhFour } />
+
+				{ /* 404 */ }
+				<Route path='/debug' component={ Debug } />
 
 				{ /* Unknown url? Check if it is a user */ }
 				<Route path='/:handle' component={ UserProfile } />

@@ -88,18 +88,16 @@ const NutshellActions = ( { gutter, archive, contactMethods={} } ) => {
 	const { whatsapp, email } = contactMethods
 
 	// Button styling
-	const buttonStyles = { flexShrink: 1, maxWidth: '100%', marginHorizontal: 10 }
+	const buttonStyles = { maxWidth: 118, marginHorizontal: 2 }
 	const buttonLabel = { fontSize: 12 }
 
 	const message = 'Hey! I was reading your Nutshell and wanted to respond.'
 
 	// If none, render none
-	return <View>
-		<View style={ { alignItems: 'center', justifyContent: 'center', flexDirection: 'row', paddingHorizontal: 5 } }>
-			{ whatsapp && <Button labelStyle={ buttonLabel } onPress={ f => sendWhatsapp( whatsapp, message ) } style={ buttonStyles } icon='whatsapp'>WhatsApp</Button> }
-			{ email && <Button labelStyle={ buttonLabel } onPress={ f => sendEmail( email, 'Your Nutshell', message ) } style={ buttonStyles } icon='email-plus-outline'>Email</Button> }
-			<Button labelStyle={ buttonLabel } style={ buttonStyles } loading={ deleting } icon='archive' onPress={ sendToArchive }>Archive</Button>
-		</View>
+	return <View style={ { alignItems: 'center', justifyContent: 'center', flexDirection: 'row', paddingHorizontal: 5, flexWrap: 'wrap' } }>
+		{ whatsapp && <Button labelStyle={ buttonLabel } onPress={ f => sendWhatsapp( whatsapp, message ) } style={ buttonStyles } icon='whatsapp'>WhatsApp</Button> }
+		{ email && <Button labelStyle={ buttonLabel } onPress={ f => sendEmail( email, 'Your Nutshell', message ) } style={ buttonStyles } icon='email-plus-outline'>Email</Button> }
+		<Button labelStyle={ buttonLabel } style={ buttonStyles } loading={ deleting } icon='archive' onPress={ sendToArchive }>Archive</Button>
 	</View>
 }
 

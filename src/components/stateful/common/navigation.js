@@ -135,6 +135,14 @@ class Navigation extends Component {
 			]
 		 } )
 
+		// Add debugging link
+		if( user?.admin ) links.push( { 
+			label: 'Admin',
+			links: [
+				{ label: 'Debugging', to: '/debug' }
+			]
+		 } )
+
 		// Add bug/feedback links
 		if( user ) links.push( {
 			label: 'Help & support',
