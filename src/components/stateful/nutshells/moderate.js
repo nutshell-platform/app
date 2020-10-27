@@ -43,7 +43,7 @@ class NutshellModerator extends Component {
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container>
-			<Navigation title='' />
+			<Navigation title='Moderation' />
 			<Main.Top style={ { width: 500 } }>
 				{ queue?.map( item => {
 					const { nutshell, report } = item
@@ -53,12 +53,12 @@ class NutshellModerator extends Component {
 						<Text>Reason: { report.reason }</Text>
 						<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>
 							{ nutshell.entries.map( entry => <Entry key={ entry.uid } entry={ entry } /> ) }
-							{ !nutshell.entries?.length && <Text>Nothing to moderate</Text> }
 							<Button onPress={ f => this.censor( item ) }>Guilty your honour</Button>
 							<Button onPress={ f => this.setFree( item ) }>You're free to leave son</Button>
 						</View>
 					</Card>
-				}) }
+				} ) }
+				{ !queue?.length && <Text>Nothing to moderate</Text> }
 			</Main.Top>
 		</Container>
 

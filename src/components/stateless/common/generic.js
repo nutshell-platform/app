@@ -148,14 +148,15 @@ export const Button = withRouter( withTheme( ( { style, mode='contained', loadin
 	return <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 20, ...style } }>
 		<PaperButton
 			onPress={ to ? f => handleLink( to ) : onPress }
-			style={ { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', width: '100%' } }
+			style={ { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', flexGrow: 1, flexShrink: 1 } }
 			contentStyle={ { width: '100%' } }
 			labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface } }		
 			mode={ mode } { ...props }
 		>
 			{ children }
+			{ loading && <ActivityIndicator size={ 10 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { height: 20, width: 20, paddingLeft: 20 } } /> }
 		</PaperButton>
-		{ loading && <ActivityIndicator size={ 15 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { height: 20, width: 20 } } /> }
+		
 	</View>
 } ) )
 

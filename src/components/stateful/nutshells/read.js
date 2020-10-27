@@ -85,20 +85,27 @@ class ReadNutshell extends Component {
 		const { user } = this.props
 		const { markedReadOffline } = this.state
 
+		log( 'Unfiltered nutshells: ', nutshells )
 		if( user.muted?.length  ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
+		log( 'Removed muted nutshells: ', nutshells )
 		if( markedReadOffline?.length ) nutshells = nutshells.filter( n => !markedReadOffline.includes( n.uid ) )
-	
+		log( 'Removed marked as read (offline): ', nutshells )
+
 		nutshells = nutshells.filter( n => !n.hidden )
+		log( 'Removed hidden nutshells: ', nutshells )
 		nutshells = nutshells.filter( n => !n.delete )
+		log( 'Remove deleted nutshells: ', nutshells )
 		
 
 		// Sort with recent edits up top
-		nutshells.sort( ( one, two ) => {
-			if( one.updated > two.updated ) return 1
-			if( one.updated < two.updated ) return -1
+		nutshells = nutshells.sort( ( one, two ) => {
+			if( one.updated > two.updated ) return -1
+			if( one.updated < two.updated ) return 1
 			return 0
 
 		} )
+
+		log( 'Sorted by updated nutshells: ', nutshells )
 
 		return nutshells
 		
