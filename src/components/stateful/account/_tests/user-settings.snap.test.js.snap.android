@@ -1638,6 +1638,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                             "borderWidth": 0,
                             "elevation": 2,
                             "flexDirection": "column",
+                            "flexGrow": 1,
+                            "flexShrink": 1,
                             "justifyContent": "center",
                             "minWidth": 64,
                             "shadowColor": "#000000",
@@ -1647,7 +1649,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                             },
                             "shadowOpacity": 0.24,
                             "shadowRadius": 1.5,
-                            "width": "100%",
                           }
                         }
                         total={10}
@@ -2519,6 +2520,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                             "borderWidth": 0,
                             "elevation": 2,
                             "flexDirection": "column",
+                            "flexGrow": 1,
+                            "flexShrink": 1,
                             "justifyContent": "center",
                             "minWidth": 64,
                             "shadowColor": "#000000",
@@ -2528,7 +2531,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                             },
                             "shadowOpacity": 0.24,
                             "shadowRadius": 1.5,
-                            "width": "100%",
                           }
                         }
                         total={6}
@@ -3727,6 +3729,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                             "borderWidth": 0,
                             "elevation": 2,
                             "flexDirection": "column",
+                            "flexGrow": 1,
+                            "flexShrink": 1,
                             "justifyContent": "center",
                             "minWidth": 64,
                             "shadowColor": "#000000",
@@ -3736,7 +3740,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                             },
                             "shadowOpacity": 0.24,
                             "shadowRadius": 1.5,
-                            "width": "100%",
                           }
                         }
                         total={11}
