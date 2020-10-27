@@ -85,10 +85,10 @@ class ReadNutshell extends Component {
 		const { user } = this.props
 		const { markedReadOffline } = this.state
 
-		nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
+		nutshells = nutshells.filter( n => !user.muted?.includes( n.uid ) )
 		nutshells = nutshells.filter( n => !n.hidden )
 		nutshells = nutshells.filter( n => !n.delete )
-		nutshells = nutshells.filter( n => !markedReadOffline.includes( n.uid ) )
+		nutshells = nutshells.filter( n => !markedReadOffline?.includes( n.uid ) )
 
 		// Sort with recent edits up top
 		nutshells.sort( ( one, two ) => {
