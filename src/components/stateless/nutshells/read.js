@@ -39,7 +39,7 @@ export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize
 			</View>
 
 			{ /* Nutshell actions methods */ }
-			<NutshellActions gutter={ gutter } archive={ f => markRead( uid ) } contactMethods={ user?.contactMethods } />
+			{ !isSelf && <NutshellActions gutter={ gutter } archive={ f => markRead( uid ) } contactMethods={ user?.contactMethods } /> }
 
 			{ /* If this is your nutshell */ }
 			{ status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} Nutshell</Button> }
