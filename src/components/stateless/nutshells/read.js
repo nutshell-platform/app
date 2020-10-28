@@ -6,7 +6,7 @@ import { timestampToHuman, dateOfNext } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
 import { sendEmail, sendWhatsapp } from '../../../modules/apis/messaging'
 
-export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, isSelf, isAdmin, deleteNutshell } ) => {
+export const NutshellCard = ( { nutshell={}, showActions=true, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, isSelf, isAdmin, deleteNutshell } ) => {
 
 	const { entries, updated, published, user, uid, readcount } = nutshell
 	
@@ -38,11 +38,11 @@ export const NutshellCard = ( { nutshell={}, block, report, markRead, avatarSize
 
 			</View>
 
-			{ /* Nutshell actions methods */ }
-			{ !isSelf && <NutshellActions gutter={ gutter } archive={ f => markRead( uid ) } contactMethods={ user?.contactMethods } /> }
+			{ /* If this is not your nutshell, and it is published */ }
+			{ !isSelf && showActions && <NutshellActions gutter={ gutter } archive={ f => markRead( uid ) } contactMethods={ user?.contactMethods } /> }
 
-			{ /* If this is your nutshell */ }
-			{ status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} Nutshell</Button> }
+			{ /* If this is your nutshell and it is not yet published */ }
+			{ isSelf && status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} Nutshell</Button> }
 
 
 			{ /* Menu dots */ }

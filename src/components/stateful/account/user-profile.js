@@ -111,7 +111,6 @@ class UserProfile extends Component {
 		const noDraft = !( draft?.entries?.length > 0 )
 		const blocked = user.blocked?.includes( profile.uid )
 
-
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Background }>

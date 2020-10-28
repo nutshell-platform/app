@@ -34,8 +34,7 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, isAdmin, 
 			</Card>
 
 			{ /* isSelf && noDraft && <Placeholder /> */ }
-
-			{ !blocked && nutshells.map( nutshell => <NutshellCard report={ report } isAdmin={ isAdmin } deleteNutshell={ deleteNutshell } isSelf={ isSelf } mute={ f => mute( nutshell.uid ) } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+			{ !blocked && nutshells.map( nutshell => <NutshellCard showActions={ false } report={ report } isAdmin={ isAdmin } deleteNutshell={ deleteNutshell } isSelf={ isSelf } mute={ f => mute( nutshell.uid ) } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 
 		</View>
 	</Main.Center>
