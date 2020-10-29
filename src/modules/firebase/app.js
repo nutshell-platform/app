@@ -7,6 +7,7 @@ import 'firebase/functions'
 
 // Helpers
 import { dev, isWeb } from '../apis/platform'
+import { log } from '../helpers'
 
 // Analytics
 import * as Analytics from 'expo-firebase-analytics'
@@ -123,19 +124,25 @@ class Firebase {
 	// Register user listener in a promise wrapper that resolved when initial auth state is received
 	init = async history => {
 
-		// Keep a reference to the history object
-		if( history ) this.history = history
+		try {
 
-		this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
-			{ name: 'profile', listener: listenUserChanges, action: setUserAction },
-			{ name: 'meta', listener: listenUserMetaChanges, action: setUserMetaAction },
-			{ name: 'settings', listener: listenSettings, action: setSettingsAction },
-			{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft },
-			{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox },
-			{ name: 'contactmethods', listener: listenContactMethods, action: setUserContactMethodsAction }
-		] )
+			// Keep a reference to the history object
+			if( history ) this.history = history
 
-		setLocalTimeToSettings( this )
+			this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
+				{ name: 'profile', listener: listenUserChanges, action: setUserAction },
+				{ name: 'meta', listener: listenUserMetaChanges, action: setUserMetaAction },
+				{ name: 'settings', listener: listenSettings, action: setSettingsAction },
+				{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft },
+				{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox },
+				{ name: 'contactmethods', listener: listenContactMethods, action: setUserContactMethodsAction }
+			] )
+
+			setLocalTimeToSettings( this )
+
+		} catch( e ) {
+			log( 'Firebase init error: ', e )
+		}
 
 	}
 

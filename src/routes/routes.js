@@ -18,6 +18,7 @@ import { Component, Loading, Provider as PaperProvider } from '../components/sta
 import { Switch, Route, withRouter } from './router'
 
 // Helpers
+import { isWeb } from '../modules/apis/platform'
 import { log } from '../modules/helpers'
 
 // Components
@@ -48,6 +49,13 @@ class Routes extends Component {
 	}
 
 	componentDidMount = async () => {
+
+		// Handle purge requests
+		if( isWeb && typeof location != 'undefined' && location.href.includes( 'purge' ) ) {
+			log( 'Purge request detected' )
+			await firebase.logout()
+			location.href = '/'
+		}
 
 		const { history, user } = this.props
 
@@ -173,6 +181,6 @@ class Routes extends Component {
 
 export default withRouter( connect( store => ( {
 	user: store.user,
-	theme: store.settings.theme,
+	theme: store.settings?.theme,
 	settings: store.settings
 } ) )( Routes ) )

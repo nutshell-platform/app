@@ -111,6 +111,6 @@ class ReportNutshell extends Component {
 }
 
 export default connect( store => ( {
-	inbox: store.nutshells.inbox || [],
+	inbox: store.nutshells?.inbox || [],
 	user: store.user
 } ) )( ReportNutshell )

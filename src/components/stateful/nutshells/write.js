@@ -265,5 +265,5 @@ class WriteNutshell extends Component {
 export default connect( store => ( {
 	user: store.user || {},
 	nutshell: store.nutshells?.draft || {},
-	theme: store.settings.theme
+	theme: store.settings?.theme
 } ) )( WriteNutshell )

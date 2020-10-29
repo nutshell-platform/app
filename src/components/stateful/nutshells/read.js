@@ -203,7 +203,7 @@ class ReadNutshell extends Component {
 
 export default connect( store => ( {
 	user: store.user,
-	inbox: store.nutshells.inbox || [],
-	offlineInbox: store.nutshells.offline || [],
+	inbox: store.nutshells?.inbox || [],
+	offlineInbox: store.nutshells?.offline || [],
 	draft: store.nutshells?.draft || {}
 } ) )( ReadNutshell )

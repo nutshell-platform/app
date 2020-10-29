@@ -40,7 +40,7 @@ export const StatusBar = withTheme( ( { theme } ) => <View>
 export const Subheading = ( { style, ...props } ) => <PaperSubheading style={ { marginTop: 20, ...style } } { ...props } />
 
 // Generic card
-export const Card = ( { containerStyle, style, children } ) => <View style={ { ...containerStyle, paddingVertical: 10, width: 500, maxWidth: '100%' } }>
+export const Card = ( { containerStyle, style, children, ...props } ) => <View style={ { ...containerStyle, paddingVertical: 10, width: 500, maxWidth: '100%' } } { ...props } >
 	<PaperCard elevation={ 2 } style={ { padding: 30, maxWidth: '100%', ...style } }>
 		{ children }
 	</PaperCard>
@@ -85,11 +85,11 @@ export const HelperText = ( { icon, ...props } ) => !icon ? <PaperHelperText { .
 export const Link = withTheme( ( { style, theme, children, to, onPress, underline=true, ...props } ) => {
 
 	const text = <Text style={ { color: theme.colors.text, textDecorationLine: 'none', ...theme.fonts.regular, ...style } }>{ children }</Text>
-	if( to?.includes( 'http' ) || to?.includes( 'mailto' ) || onPress ) return <TouchableOpacity onPress={ onPress || ( f => Linking.openURL( to ) ) } style={ { paddingTop: 1, marginHorizontal: 5, ...( underline && { borderBottomWidth: .2 } ) } }>
+	if( to?.includes( 'http' ) || to?.includes( 'mailto' ) || onPress ) return <TouchableOpacity { ...props } onPress={ onPress || ( f => Linking.openURL( to ) ) } style={ { paddingTop: 1, marginHorizontal: 5, ...( underline && { borderBottomWidth: .2 } ) } }>
 		{ text }
 	</TouchableOpacity>
 
-	return <TouchableOpacity onPress={ onPress }>
+	return <TouchableOpacity onPress={ onPress } { ...props }>
 		<NativeLink style={ { textDecorationLine: 'none' } } to={ to }>
 			{ text }
 		</NativeLink>
@@ -190,7 +190,7 @@ export const Search = ( { style, searching, ...props } ) => <View>
 </View>
 
 // Checkbox
-export const Checkbox = ( { checked, children, onPress, style, ...props } ) => <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', ...style } }>
+export const Checkbox = ( { checked, children, onPress, style, ...props } ) => <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', ...style } } { ...props }>
 	<PaperCheckbox.Android onPress={ onPress } status={ checked ? 'checked' : 'unchecked' } />
 	{ children }
 </View>

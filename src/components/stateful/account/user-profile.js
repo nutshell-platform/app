@@ -126,5 +126,5 @@ class UserProfile extends Component {
 
 export default connect( store => ( {
 	user: store.user,
-	draft: store.nutshells.draft
+	draft: store.nutshells?.draft
 } ) )( UserProfile )

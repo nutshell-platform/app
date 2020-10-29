@@ -21,7 +21,8 @@
     "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all && jest --clearCache",
     "baseline": "source ~/.nvm/nvm.sh && nvm use && npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
     "diagnostics": "expo diagnostics",
-    "i": "source ~/.nvm/nvm.sh && nvm use && expo install"
+    "i": "source ~/.nvm/nvm.sh && nvm use && expo install",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@babel/core": "^7.12.1",
@@ -35,6 +36,8 @@
     "expo-constants": "~9.2.0",
     "expo-contacts": "~8.6.0",
     "expo-file-system": "~9.2.0",
+    "expo-firebase-analytics": "~2.5.1",
+    "expo-firebase-core": "~1.2.0",
     "expo-image-manipulator": "~8.3.0",
     "expo-image-picker": "~9.1.1",
     "expo-linking": "^1.0.4",
@@ -62,11 +65,10 @@
     "redux-persist": "^6.0.0",
     "redux-promise-middleware": "^6.1.2",
     "sentry-expo": "^3.0.2",
-    "uuid": "^8.3.1",
-    "expo-firebase-analytics": "~2.5.1",
-    "expo-firebase-core": "~1.2.0"
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
+    "cypress": "^5.5.0",
     "dotenv": "^8.2.0",
     "firebase-tools": "^8.12.1",
     "jest": "^26.5.3",

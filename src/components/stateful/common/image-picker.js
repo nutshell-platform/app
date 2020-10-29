@@ -70,5 +70,5 @@ class ShowOrPickImage extends Component {
 }
 
 export default connect( store => ( {
-	theme: store.settings.theme
+	theme: store.settings?.theme
 } ) )( ShowOrPickImage )

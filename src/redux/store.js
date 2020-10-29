@@ -26,7 +26,7 @@ const metaReducer = ( state, action ) => {
 		
 		case "RESETAPP":
 			log( 'Resetting app storage' )
-			state = undefined
+			return {}
 		break
 
 	}
@@ -44,10 +44,3 @@ const middleware = dev ? applyMiddleware( logger, promise ) : applyMiddleware( p
 // Export store and persistor
 export const store = createStore( persistedReducer, middleware )
 export const persistor = persistStore( store )
-
-// Have a persistor purge query option
-if( isWeb && typeof location != 'undefined' && location.href.indexOf( 'purge' ) != -1 ) {
-	log( 'Purge request detected' )
-	persistor.purge()
-	location.href = '/'
-}

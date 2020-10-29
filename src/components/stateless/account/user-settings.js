@@ -12,7 +12,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 		<View style={ { paddingVertical: avatarSize/2 } }>
 
 			{ /* About you  */ }
-			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
+			<Card nativeID='settings-user' style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
 				<ImagePicker image={ user.newavatar || user.avatar } size={ avatarSize } style={ { marginTop: -avatarSize/2, marginBottom: 20 } } onSelected={ image => changeUser( 'newavatar', image ) } />
 				<Title style={ { textAlign: 'center' } }>{ !user?.settings?.notifications && 'Welcome ' }{ user.name || user.email }{ user?.settings?.notifications ? '\'s settings' : '!' }</Title>
 				{ newUser && <Text style={ { marginTop: 10, textAlign: 'center' } }>Welcome to Nutshell { user.name }! Please let us know if these settings are ok with you, you can change them any time in the 'settings' section.</Text> }
@@ -33,7 +33,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 			</Card>
 
 			{ /* Contact preferences */ }
-			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center', position: 'relative' } } >
+			<Card nativeID='settings-contact' style={ { paddingTop: 0, width: 400, alignSelf: 'center', position: 'relative' } } >
 
 
 				<Subheading>Contact details</Subheading>
@@ -51,7 +51,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 			</Card>
 
 			{ /* Account settings */ }
-			<Card style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
+			<Card nativeID='settings-account' style={ { paddingTop: 0, width: 400, alignSelf: 'center' } } >
 
 
 				<Subheading>Account settings</Subheading>
@@ -67,7 +67,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 
 				{ /* Password required */ }
 				{ passwordRequired && <React.Fragment>
-					<Input secureTextEntry label='current password' info='Current password required for this change' error={ true } value={ user.currentpassword || '' } onChangeText={ t => changeUser( 'currentpassword', t ) } />
+					<Input nativeID='settings-currentpassword' secureTextEntry label='current password' info='Current password required for this change' error={ true } value={ user.currentpassword || '' } onChangeText={ t => changeUser( 'currentpassword', t ) } />
 				</React.Fragment> }
 
 				
@@ -89,6 +89,6 @@ export const DeleteAccount = ( { confirmIntent, deleteAccount } ) => {
 		confirmIntent( )
 	}
 
-	if( !iamsure ) return <Link underline={ false } style={ { color: 'red', marginTop: 20, textAlign: 'center' } } onPress={ confirm }>Delete account</Link>
-	return <Button onPress={ deleteAccount } icon='alert-outline'>Confirm account deletion</Button>
+	if( !iamsure ) return <Link nativeID='settings-triggerdelete' underline={ false } style={ { color: 'red', marginTop: 20, textAlign: 'center' } } onPress={ confirm }>Delete account</Link>
+	return <Button nativeID='settings-confirmdelete' onPress={ deleteAccount } icon='alert-outline'>Confirm account deletion</Button>
 }

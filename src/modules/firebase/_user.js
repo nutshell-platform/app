@@ -1,4 +1,4 @@
-import { catcher, log } from '../helpers'
+import { catcher, log, wait } from '../helpers'
 import { dataFromSnap } from './helpers'
 import { resetApp } from '../../redux/actions/settingsActions'
 import { unregisterListeners, registerListeners } from './listeners'
@@ -14,30 +14,36 @@ export const listenUserLogin = ( app, dispatch, action, listeners ) => new Promi
 	// Listen to the user object
 	const authListener = app.auth.onAuthStateChanged( async user => {
 
-		// Register listeners if we are logged in
-		if( user ) {
-			registerListeners( app, dispatch, listeners )
+		try {
 
-			const profile = await getUserProfile( app.db, user )
-			await dispatch( action( profile ) )
-			
-			// Set email fingerprint
-			await setEmailFingerprint( app )
+			// Register listeners if we are logged in
+			if( user ) {
+				registerListeners( app, dispatch, listeners )
 
-			// If user has no score, but does have a bio or avatar, update the score
-			const scoreUser = app.func.httpsCallable( 'scoreUser' )
-			if( !profile.score && ( profile.avatar || profile.bio ) ) await scoreUser( profile.uid )
+				const profile = await getUserProfile( app.db, user )
+				await dispatch( action( profile ) )
+				
+				// Set email fingerprint
+				await setEmailFingerprint( app )
 
+				// If user has no score, but does have a bio or avatar, update the score
+				const scoreUser = app.func.httpsCallable( 'scoreUser' )
+				if( !profile.score && ( profile.avatar || profile.bio ) ) await scoreUser( profile.uid )
+
+			}
+
+			// Unregister listeners and reset app if we are not logged in
+			if( !user ) {
+				unregisterListeners( app.listeners )
+				await dispatch( resetApp( ) )
+			}
+
+			// Resolve when done
+			resolve( authListener )
+
+		} catch( e ) {
+			log( 'User listen error: ', e )
 		}
-
-		// Unregister listeners and reset app if we are not logged in
-		if( !user ) {
-			unregisterListeners( app.listeners )
-			await dispatch( resetApp( ) )
-		}
-
-		// Resolve when done
-		resolve( authListener )
 
 	} )
 } ) 
@@ -181,9 +187,11 @@ export const resetPassword = ( auth, email ) => auth.sendPasswordResetEmail( ema
 
 // Logout
 export const logoutUser = async app => {
+
 	const { auth, listeners } = app
 	unregisterListeners( listeners )
 	await auth.signOut()
+	await resetApp()
 }
 
 // Delete

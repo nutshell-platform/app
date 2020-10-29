@@ -16,7 +16,7 @@ export const Header = ( { style, back, title, subtitle, toggle, pan, drawer, dra
 		{ back && <Appbar.BackAction onPress={ back } /> }
 		<Appbar.Content title={ title } subtitle={ subtitle }/>
 		{ children }
-		<Appbar.Action icon="menu" onPress={ toggle } />
+		<Appbar.Action nativeID='navigation-toggle' icon="menu" onPress={ toggle } />
 	</Appbar.Header>
 	{ drawer && <Menu links={ links } go={ go } toggleDark={ toggleDark } translate={ drawerTranslate } width={ drawerWidth } pan={ pan } toggle={ toggle } /> }
 </View>
@@ -72,7 +72,7 @@ export const Menu = withTheme( ( { width, links, go, theme, toggle, pan, transla
 		<Animated.View style={ [ translate, { flex: 1 } ] }>
 
 			{ /* Visual surface element */ }
-			<Surface style={ { flex: 1, elevation: 5 } }>
+			<Surface nativeID='navigation-surface' style={ { flex: 1, elevation: 5 } }>
 				<SafeAreaView style={ { flex: 1, backgroundColor: theme.colors.surface } }>
 
 					{ /* Title */ }
