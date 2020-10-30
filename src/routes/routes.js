@@ -104,12 +104,16 @@ class Routes extends Component {
 
 		// Not logged in but not on the home page => go to home
 		if( pathname != '/' && !user ) {
+			log( 'Redirect: ', `pathname != '/' && !user` )
 			history.push( '/' )
 			// Do not update router since the history is changing
 			return false
 		}
 		// If logged in but at slash => go to profile
-		if( pathname == '/' && user ) history.push( '/nutshells/read' )
+		if( pathname == '/' && user ) {
+			log( 'Redirect: ', `pathname == '/' && user` )
+			history.push( '/nutshells/read' )
+		}
 
 		// Log user screen
 		if( pathname ) firebase.analyticsSetScreen( pathname )

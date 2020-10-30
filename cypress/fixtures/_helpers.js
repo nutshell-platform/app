@@ -6,11 +6,17 @@ const scrollTo = els => {
 
 export const find = ( selectorOrText, onlyText ) => {
 
-	if( selectorOrText ) return cy.contains( selectorOrText, onlyText, { matchCase: false } ).then( scrollTo ).should( 'be.visible' )
-	else return cy.contains( onlyText, { matchCase: false } ).then( scrollTo ).should( 'be.visible' )
+	if( selectorOrText && onlyText ) return cy.contains( selectorOrText, onlyText, { matchCase: false } ).then( scrollTo ).should( 'be.visible' )
+	else return cy.contains( selectorOrText, { matchCase: false } ).then( scrollTo ).should( 'be.visible' )
 }
 
-export const fill = ( selector, text ) => cy.get( selector ).then( scrollTo ).should( 'be.visible' ).type( text ).should( 'have.value', text )
+export const exclude = ( selectorOrText, onlyText ) => {
+
+	if( selectorOrText && onlyText ) return cy.contains( selectorOrText, onlyText, { matchCase: false } ).should( 'not.exist' )
+	else return cy.contains( selectorOrText, { matchCase: false } ).should( 'not.exist' )
+}
+
+export const fill = ( selector, text ) => cy.get( selector ).then( scrollTo ).should( 'be.visible' ).type( text, { force: true } ).should( 'have.value', text )
 
 export const click = ( selector, contains ) => {
 	if( contains ) return cy.get( selector ).contains( contains, { matchCase: false } ).then( scrollTo ).should( 'be.visible' ).click(  )

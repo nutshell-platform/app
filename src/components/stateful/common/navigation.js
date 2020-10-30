@@ -163,9 +163,9 @@ class Navigation extends Component {
 			toggleDark={ this.toggleDarkMode }
 			go={ to => history.push( to ) }
 			links={ links } >
-				{ user && <Appbar.Action icon='home' onPress={ f => history.push( `/` ) } /> }
-				{ user && <Appbar.Action icon='account-plus' onPress={ f => history.push( `/friends/find` ) } /> }
-				{ user && <Appbar.Action icon='pencil-outline' onPress={ f => history.push( `/nutshells/write` ) } /> }
+				{ user && <Appbar.Action nativeID='navigation-home' icon='home' onPress={ f => history.push( `/` ) } /> }
+				{ user && <Appbar.Action nativeID='navigation-findfriends' icon='account-plus' onPress={ f => history.push( `/friends/find` ) } /> }
+				{ user && <Appbar.Action nativeID='navigation-writenutshel' icon='pencil-outline' onPress={ f => history.push( `/nutshells/write` ) } /> }
 		</Header>
 	}
 

@@ -22,7 +22,7 @@ class Tutorial extends Component {
 		// No todos? No component
 		if( !todos.length ) return null
 
-		return <Card>
+		return <Card nativeID='tutorial'>
 			<Title>Welcome {user.name} 🎉</Title>
 			<Text style={ { paddingTop: 20 } }>To make the most out of Nutshell, we recommend doing the following things:</Text>
 			{ todos.map( ( { label, to } ) => <Button key={ label } to={ to }>{ label }</Button> ) }
