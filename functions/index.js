@@ -10,12 +10,12 @@ exports.follow = functions.firestore.document( 'relationships/{relationId}' ).on
 // ///////////////////////////////
 // Cron
 // ///////////////////////////////
-const { publish, deleteFromInboxesOnNutshellDelete, scheduledNutshells, showQueue } = require( './modules/nutshells' )
+const { publish, deleteFromInboxesOnNutshellDelete, scheduledNutshells, showQueue, createTestNutshell } = require( './modules/nutshells' )
 // cron: Every hour monday and tuesday 0 * * * 1,2
 exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( '0 * * * 1,2' ).onRun( publish )
 exports.deleteFromInboxesOnNutshellDelete = functions.firestore.document( 'nutshells/{nutshellUid}' ).onDelete( deleteFromInboxesOnNutshellDelete )
 exports.scheduledNutshells = functions.https.onRequest( showQueue )
-
+exports.createTestNutshell = functions.https.onCall( ( data, context ) => createTestNutshell( context.auth.uid ) )
 
 // ///////////////////////////////
 // Push notification handling

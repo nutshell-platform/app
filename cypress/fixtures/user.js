@@ -5,5 +5,5 @@ module.exports = {
 	handle: `testymctestface`,
 	email: `groundhogdaymeetsphoenix@testymctestface.com`,
 	password: `password`,
-	bio: `Hello this is my bio ${ random() }.`
+	bio: `Hello this is my bio sir.`
 }

@@ -120,7 +120,7 @@ class ManageFriends extends Component {
 		return <Container Background={ Friends }>
 			<Navigation title='Friends' />
 			<Main.Top style={ { width: 500 } }>
-				<Search searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
+				<Search nativeID='friends-manage-search' searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
 				<ListResults unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } filter='friends' />
 			</Main.Top>
 		</Container>

@@ -1,11 +1,12 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start",
-    "android": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --android",
-    "ios": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --ios",
-    "web": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --web",
-    "hybrid": "export development=true && source ~/.nvm/nvm.sh && nvm use && expo start --android --web",
+    "nvm": "unset PREFIX && source ~/.nvm/nvm.sh && nvm use",
+    "start": "export development=true && npm run nvm && expo start",
+    "android": "export development=true && npm run nvm && expo start --android",
+    "ios": "export development=true && npm run nvm && expo start --ios",
+    "web": "export development=true && npm run nvm && expo start --web",
+    "hybrid": "export development=true && npm run nvm &&  expo start --android --web",
     "test": "./node_modules/jest/bin/jest.js --colors --silent",
     "refresh": "adb shell am force-stop host.exp.exponent",
     "debug": "adb shell input keyevent 82",
@@ -19,10 +20,11 @@
     "upload:ios": "expo upload:ios",
     "publish": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web",
     "bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all && jest --clearCache",
-    "baseline": "source ~/.nvm/nvm.sh && nvm use && npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
+    "baseline": "npm run nvm && npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
     "diagnostics": "expo diagnostics",
-    "i": "source ~/.nvm/nvm.sh && nvm use && expo install",
-    "cypress:open": "cypress open"
+    "i": "npm run nvm && expo install",
+    "cypress:open": "cypress open",
+    "cypress:ci": "npm run web & wait-on http://localhost:19006/ && echo now"
   },
   "dependencies": {
     "@babel/core": "^7.12.1",

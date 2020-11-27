@@ -47,6 +47,12 @@ context( 'Onboarding tutorial', (  ) => {
 		cy.get( '#tutorial' ).should( 'be.visible' )
 		exclude( 'follow some people' )
 
+		// Use FAB to get to friend addition instead
+		click( '[data-testid="fab-toggle"]' )
+		find( 'Add friends' ).click()
+		find( 'Loading some people. Nice people.' )
+		exclude( 'Loading some people. Nice people.' )
+
 
 	} )
 

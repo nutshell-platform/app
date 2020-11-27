@@ -25,8 +25,8 @@ const metaReducer = ( state, action ) => {
 	switch( action.type ) {
 		
 		case "RESETAPP":
-			log( 'Resetting app storage' )
-			return {}
+			console.log( 'Resetting app storage' )
+			return reducers( undefined, action )
 		break
 
 	}

@@ -28,6 +28,7 @@ class Fab extends Component {
 		return <Provider>
 			<Portal>
 				<FAB.Group
+					testID="fab-toggle"
 					open={ open }
 					icon={ open ? 'close' : 'plus'}
 					fabStyle={ { backgroundColor: theme.colors.primary } }

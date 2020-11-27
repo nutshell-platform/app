@@ -21,7 +21,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 					<View style={ { flex: 1, paddingVertical: 10, alignSelf: 'stretch', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' } }>
 
 						<Title style={ { marginVertical: 0, paddingVertical: 20, textAlign: 'center', width: '100%' } }>{ user.name ? `${user.name}'s` : `Your` } Nutshell for week { weekNumber() }</Title>
-						<Toggle style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
+						<Toggle nativeID='nutshell-write-toggle-scheduled' style={ { padding: 10, backgroundColor: background } } onToggle={ toggleStatus } label={ statusMessage } value={ status == 'scheduled' } />
 						<ToolTip label='What is a Nutshell?' info={
 							`A Nutshell is a summary of what's been going on in your life since your last Nutshell, such as what you've been doing or how you've been feeling.\n\n Scheduled Nutshells will be published on Mondays, and all users only get one Nutshell per week.
 						` } />
@@ -64,13 +64,14 @@ export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxT
 	const onFocus = f => setOpaque( true )
 	const onBlur = f => setOpaque( title.length > 0 || paragraph.length > 0 || ( entrynr == 0 ) )
 
-	return <Card style={ { paddingVertical: 20, opacity: opaque ? 1 : .5 } }>
+	return <Card nativeID={ `nutshell-write-entry-${ entrynr }` } style={ { paddingVertical: 20, opacity: opaque ? 1 : .5 } }>
 		{ entrynr < ( entries - 1 ) && <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
-			<IconButton onPress={ f => move( entrynr, 'up' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-up' />
+			<IconButton nativeID={ `nutshell-write-entry-${ entrynr }-moveup` } onPress={ f => move( entrynr, 'up' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-up' />
 			<Caption>Entry { entrynr + 1 } of { entries - 1 } (max 10)</Caption>
-			<IconButton onPress={ f => move( entrynr, 'down' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-down' />
+			<IconButton nativeID={ `nutshell-write-entry-${ entrynr }-movedown` }  onPress={ f => move( entrynr, 'down' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-down' />
 		</View> }
 		<Input
+			nativeID={ `nutshell-write-entry-${ entrynr }-headline` }
 			onFocus={ onFocus }
 			onBlur={ onBlur }
 			hideInfo={ true }
@@ -83,6 +84,7 @@ export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxT
 			dense={ false }
 		/>
 		<Input
+			nativeID={ `nutshell-write-entry-${ entrynr }-content` }
 			onFocus={ onFocus }
 			onBlur={ onBlur }
 			hideInfo={ true }

@@ -57,6 +57,13 @@ class Routes extends Component {
 			location.href = '/'
 		}
 
+		// Make test nutshell if needed
+		if( isWeb && typeof location != 'undefined' && location.href.includes( 'createDemoNutshell' ) ) {
+			log( '🛑 Demo nutshell requested' )
+			await firebase.createTestNutshell().catch( e => log( 'Error creating test nutshell: ', e ) )
+		}
+		
+
 		const { history, user } = this.props
 
 		// If url is wrongly using hash (for example due to a direct link), fix it
@@ -137,6 +144,7 @@ class Routes extends Component {
 		}, 5000 )
 
 	}
+
 
 	render() {
 

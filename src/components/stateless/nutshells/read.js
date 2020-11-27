@@ -6,7 +6,7 @@ import { timestampToHuman, dateOfNext } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
 import { sendEmail, sendWhatsapp } from '../../../modules/apis/messaging'
 
-export const NutshellCard = ( { nutshell={}, showActions=true, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, isSelf, isAdmin, deleteNutshell } ) => {
+export const NutshellCard = ( { index, nutshell={}, showActions=true, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, isSelf, isAdmin, deleteNutshell } ) => {
 
 	const { entries, updated, published, user, uid, readcount } = nutshell
 	
@@ -15,7 +15,7 @@ export const NutshellCard = ( { nutshell={}, showActions=true, block, report, ma
 	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
 
 		{ /* Nutshell card */ }
-		<Card style={ { paddingTop: user ? 0 : 30, paddingHorizontal: 0 } }>
+		<Card nativeID={ `nutshell-card-${index}` } style={ { paddingTop: user ? 0 : 30, paddingHorizontal: 0 } }>
 
 			{ /* Avatar */ }
 			{ user && <TouchableOpacity onPress={ f => go( `/${ user.handle }` ) } style={ { marginTop: -avatarSize/2, marginBottom: 20, width: '100%', alignItems: 'center', justifyContent: 'center' } }>
@@ -132,7 +132,7 @@ const NutshellOptions = ( { isSelf, style, block, report, mute, deleteNutshell, 
 
 	const [ isOpen, setOpen ] = useState( false )
 
-	return <TouchableOpacity onPress={ f => setOpen( true ) } style={ { ...style } }>
+	return <TouchableOpacity testID='menudots' onPress={ f => setOpen( true ) } style={ { ...style } }>
 		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton style={ { opacity: .5, width: 50, height: 50, zIndex: 2 } } onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
 			{ !isSelf && <Menu.Item onPress={ report } title="Report abuse" /> }
 			{ !isSelf && <Menu.Item onPress={ block }  title="Block & unfollow this user" /> }

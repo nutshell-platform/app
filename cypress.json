@@ -1,1 +1,5 @@
-{}
+{
+	"noteToSelf": "Due to firebase request times being unpredicatble the timeouts below are very high. If they are lower there are unpredicatble moments of test fails purely due to slow network.",
+	"defaultCommandTimeout": 10000,
+	"requestTimeout": 10000
+}

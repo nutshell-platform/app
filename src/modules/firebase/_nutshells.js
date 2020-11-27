@@ -43,6 +43,17 @@ export const getNutshellByUid = async ( db, uid ) => {
 // ///////////////////////////////
 // Editors
 // ///////////////////////////////
+export const createTestNutshell = app => {
+
+	// Get funcs and data
+	const { func } = app
+	const makeTestNutshell = func.httpsCallable( 'createTestNutshell' )
+
+	// Generare recommendations
+	return makeTestNutshell()
+
+}
+
 export const createNutshell = ( app, nutshell ) => {
 
 	const { uid, ...nutshellContent } = nutshell
@@ -87,7 +98,7 @@ export const deleteNutshell = ( app, uid ) => {
 }
 
 // ///////////////////////////////
-// Abose
+// Abuse
 // ///////////////////////////////
 
 export const reportNutshell = ( app, report ) => {

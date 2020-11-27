@@ -95,6 +95,22 @@ Cypress.Commands.add( 'openSettings', user => {
 
 } )
 
+Cypress.Commands.add( 'openMyProfile', user => {
+
+	click( '#navigation-toggle' )
+	click( '#navigation-surface *', 'Your profile' )
+	cy.get( '#user-profile-self' ).should( 'be.visible' )
+
+} )
+
+Cypress.Commands.add( 'openFriendManager', user => {
+
+	click( '#navigation-toggle' )
+	click( '#navigation-surface *', 'Manage Friends' )
+	cy.get( '#friends-manage-search' ).should( 'be.visible' )
+
+} )
+
 Cypress.Commands.add( 'goHome', user => {
 
 	click( '#navigation-home' )

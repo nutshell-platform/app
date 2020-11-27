@@ -33,7 +33,7 @@ import * as Network from 'expo-network'
 import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges, updateContactMethods, listenContactMethods } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell } from './_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
 import { getAndSaveFingerprints } from './_fingerprints'
@@ -82,6 +82,7 @@ class Firebase {
 	createNutshell     = nutshell => createNutshell( this, nutshell )
 	updateNutshell     = nutshell => updateNutshell( this, nutshell )
 	deleteNutshell 	   = uid 	  => deleteNutshell( this, uid )
+	createTestNutshell = f 		  => createTestNutshell( this )
 	getNutshellsOfUser = uid 	  => getNutshellsOfUser( this, uid )
 	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid )
 	markNutshellRead   = uid 	  => markNutshellRead( this, uid )

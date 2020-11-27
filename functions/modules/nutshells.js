@@ -46,6 +46,34 @@ exports.makeDemo = async f => {
 
 }
 
+exports.createTestNutshell = async myUid => {
+
+	try {
+
+		if( !myUid ) throw 'No nutshell or uid provided'
+
+		const nutshell = {
+			uid: `test-${ myUid }`,
+			owner: myUid,
+			created: Date.now(),
+			updated: Date.now(),
+			published: Date.now(),
+			status: 'publish',
+			entries: [
+				{ uid: 1, title: 'test 1', paragraph: 'content 1' },
+				{ uid: 2, title: 'test 2', paragraph: 'content 2' }
+			]
+		}
+		
+		await db.collection( 'nutshells' ).doc( nutshell.uid ).set( nutshell )
+		await db.collection( 'inbox' ).doc( myUid ).set( { nutshells: FieldValue.arrayUnion( nutshell.uid ) }, { merge: true } )
+
+	} catch( e ) {
+		log( 'createTestNutshell error: ', e.message || e )
+	}
+
+}
+
 // ///////////////////////////////
 // Admin checking
 // ///////////////////////////////

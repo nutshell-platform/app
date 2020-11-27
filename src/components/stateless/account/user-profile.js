@@ -9,7 +9,7 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, isAdmin, 
 	const gutter = 25
 
 	return <Main.Center>
-		<View style={ { paddingVertical: avatarSize/2 } }>
+		<View nativeID={ `user-profile-${ isSelf ? 'self' : 'other' }` } style={ { paddingVertical: avatarSize/2 } }>
 			<Card style={ { paddingTop: 0, width: '100%', paddingHorizontal: 0 } } >
 
 				{ /* Avatar */ }
