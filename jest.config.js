@@ -20,8 +20,8 @@ const handleAsyncQueue = '<rootDir>/_test/_handle-async-queue.js'
 const universalSetup = [ mockNativAnimationDriver, mockTimers, handleUnhandlesRejections, firebaseMock, handleAsyncQueue ]
 
 module.exports = {
-	testPathIgnorePatterns: ['lib/', 'node_modules/'],
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+	testPathIgnorePatterns: [ 'lib/', 'node_modules/', '<rootDir>/cypress/' ],
+    moduleFileExtensions: [ 'ts', 'tsx', 'js', 'jsx', 'json', 'node' ],
     testEnvironment: 'node',
 	"projects": [
 		{
