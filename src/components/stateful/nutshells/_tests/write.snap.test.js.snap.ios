@@ -204,6 +204,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-home"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -288,6 +289,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-findfriends"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -372,6 +374,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-writenutshel"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -456,6 +459,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-toggle"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -798,6 +802,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               </Text>
                               <RCTSwitch
                                 accessibilityRole="switch"
+                                nativeID="nutshell-write-toggle-scheduled"
                                 onChange={[Function]}
                                 onResponderTerminationRequest={[Function]}
                                 onStartShouldSetResponder={[Function]}
@@ -891,6 +896,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                   </View>
                 </View>
                 <View
+                  nativeID="nutshell-write-entry-0"
                   style={
                     Object {
                       "maxWidth": "100%",
@@ -971,6 +977,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "top": 6,
                             }
                           }
+                          nativeID="nutshell-write-entry-0-moveup"
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -1069,6 +1076,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "top": 6,
                             }
                           }
+                          nativeID="nutshell-write-entry-0-movedown"
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -1252,6 +1260,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 editable={true}
                                 index={1}
                                 multiline={false}
+                                nativeID="nutshell-write-entry-0-headline"
                                 onBlur={[Function]}
                                 onChangeText={[Function]}
                                 onContentSizeChange={[Function]}
@@ -1453,6 +1462,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 editable={true}
                                 index={2}
                                 multiline={true}
+                                nativeID="nutshell-write-entry-0-content"
                                 onBlur={[Function]}
                                 onChangeText={[Function]}
                                 onContentSizeChange={[Function]}
@@ -1656,6 +1666,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                   </View>
                 </View>
                 <View
+                  nativeID="nutshell-write-entry-1"
                   style={
                     Object {
                       "maxWidth": "100%",
@@ -1847,6 +1858,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 editable={true}
                                 index={1}
                                 multiline={false}
+                                nativeID="nutshell-write-entry-1-headline"
                                 onBlur={[Function]}
                                 onChangeText={[Function]}
                                 onContentSizeChange={[Function]}
@@ -2048,6 +2060,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 editable={true}
                                 index={2}
                                 multiline={true}
+                                nativeID="nutshell-write-entry-1-content"
                                 onBlur={[Function]}
                                 onChangeText={[Function]}
                                 onContentSizeChange={[Function]}

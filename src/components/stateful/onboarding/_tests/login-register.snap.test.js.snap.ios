@@ -204,6 +204,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-home"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -288,6 +289,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-findfriends"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -372,6 +374,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-writenutshel"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -456,6 +459,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-toggle"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -740,6 +744,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                             index={2}
                             keyboardType="email-address"
                             multiline={false}
+                            nativeID="loginreg-email"
                             onBlur={[Function]}
                             onChangeText={[Function]}
                             onContentSizeChange={[Function]}
@@ -945,6 +950,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                             editable={true}
                             index={3}
                             multiline={false}
+                            nativeID="loginreg-password"
                             onBlur={[Function]}
                             onChangeText={[Function]}
                             onContentSizeChange={[Function]}
@@ -1034,6 +1040,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           "url": "/",
                         }
                       }
+                      nativeID="loginreg-submit"
                       siblings={
                         Array [
                           "withTheme()",
@@ -1193,6 +1200,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           "url": "/",
                         }
                       }
+                      nativeID="loginreg-toggle"
                       siblings={
                         Array [
                           "withTheme()",
@@ -1317,6 +1325,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                   </View>
                   <Text
                     index={7}
+                    nativeID="loginreg-forgotpassword"
                     onPress={[Function]}
                     siblings={
                       Array [

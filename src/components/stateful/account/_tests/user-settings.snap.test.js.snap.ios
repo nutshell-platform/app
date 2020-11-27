@@ -204,6 +204,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-home"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -288,6 +289,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-findfriends"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -372,6 +374,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-writenutshel"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -456,6 +459,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-toggle"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -555,6 +559,7 @@ exports[`UserSettings Matches snapshot 1`] = `
               }
             >
               <View
+                nativeID="settings-user"
                 style={
                   Object {
                     "maxWidth": "100%",
@@ -1493,6 +1498,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               editable={true}
                               index={7}
                               multiline={false}
+                              nativeID="settings-bio"
                               onBlur={[Function]}
                               onChangeText={[Function]}
                               onContentSizeChange={[Function]}
@@ -1747,6 +1753,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                 </View>
               </View>
               <View
+                nativeID="settings-contact"
                 style={
                   Object {
                     "maxWidth": "100%",
@@ -2634,6 +2641,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                 </View>
               </View>
               <View
+                nativeID="settings-account"
                 style={
                   Object {
                     "maxWidth": "100%",
@@ -3862,6 +3870,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <View
                       accessible={true}
                       focusable={true}
+                      nativeID="settings-triggerdelete"
                       onClick={[Function]}
                       onResponderGrant={[Function]}
                       onResponderMove={[Function]}

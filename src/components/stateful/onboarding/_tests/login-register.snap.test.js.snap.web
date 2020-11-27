@@ -244,6 +244,7 @@ exports[`Login and registration Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-home"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -322,6 +323,7 @@ exports[`Login and registration Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-findfriends"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -400,6 +402,7 @@ exports[`Login and registration Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-writenutshel"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -478,6 +481,7 @@ exports[`Login and registration Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-toggle"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -784,6 +788,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                             className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                             data-focusable={true}
                             dir="auto"
+                            id="loginreg-email"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -947,6 +952,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                             className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                             data-focusable={true}
                             dir="auto"
+                            id="loginreg-password"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -1010,6 +1016,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                   >
                     <div
                       className="css-view-1dbjc4n"
+                      id="loginreg-submit"
                       style={
                         Object {
                           "WebkitAlignItems": "stretch",
@@ -1161,6 +1168,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                   >
                     <div
                       className="css-view-1dbjc4n"
+                      id="loginreg-toggle"
                       style={
                         Object {
                           "WebkitAlignItems": "stretch",
@@ -1289,6 +1297,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                   <div
                     className="css-text-901oao"
                     dir="auto"
+                    id="loginreg-forgotpassword"
                     onClick={[Function]}
                     style={
                       Object {

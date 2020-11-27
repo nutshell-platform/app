@@ -204,6 +204,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-home"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -288,6 +289,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-findfriends"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -372,6 +374,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-writenutshel"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -456,6 +459,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     "top": 6,
                   }
                 }
+                nativeID="navigation-toggle"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -678,6 +682,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
               </View>
             </View>
             <View
+              nativeID="tutorial"
               style={
                 Object {
                   "maxWidth": "100%",

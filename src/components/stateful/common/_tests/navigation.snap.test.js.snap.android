@@ -129,6 +129,7 @@ exports[`Navitagion Matches snapshot 1`] = `
               "top": 6,
             }
           }
+          nativeID="navigation-home"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -213,6 +214,7 @@ exports[`Navitagion Matches snapshot 1`] = `
               "top": 6,
             }
           }
+          nativeID="navigation-findfriends"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -297,6 +299,7 @@ exports[`Navitagion Matches snapshot 1`] = `
               "top": 6,
             }
           }
+          nativeID="navigation-writenutshel"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -381,6 +384,7 @@ exports[`Navitagion Matches snapshot 1`] = `
               "top": 6,
             }
           }
+          nativeID="navigation-toggle"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}

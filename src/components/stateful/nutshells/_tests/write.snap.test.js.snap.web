@@ -244,6 +244,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-home"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -322,6 +323,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-findfriends"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -400,6 +402,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-writenutshel"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -478,6 +481,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-toggle"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -910,6 +914,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               </div>
                               <div
                                 className="css-view-1dbjc4n"
+                                id="nutshell-write-toggle-scheduled"
                                 style={
                                   Object {
                                     "MozUserSelect": "none",
@@ -1113,6 +1118,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                 </div>
                 <div
                   className="css-view-1dbjc4n"
+                  id="nutshell-write-entry-0"
                   style={
                     Object {
                       "maxWidth": "100%",
@@ -1184,6 +1190,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         <div
                           className="css-cursor-18t94o4 css-view-1dbjc4n"
                           data-focusable={true}
+                          id="nutshell-write-entry-0-moveup"
                           onClick={[Function]}
                           onContextMenu={[Function]}
                           onKeyDown={[Function]}
@@ -1254,6 +1261,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         <div
                           className="css-cursor-18t94o4 css-view-1dbjc4n"
                           data-focusable={true}
+                          id="nutshell-write-entry-0-movedown"
                           onClick={[Function]}
                           onContextMenu={[Function]}
                           onKeyDown={[Function]}
@@ -1424,6 +1432,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                                 data-focusable={true}
                                 dir="auto"
+                                id="nutshell-write-entry-0-headline"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -1589,6 +1598,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                                 data-focusable={true}
                                 dir="auto"
+                                id="nutshell-write-entry-0-content"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -1763,6 +1773,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                 </div>
                 <div
                   className="css-view-1dbjc4n"
+                  id="nutshell-write-entry-1"
                   style={
                     Object {
                       "maxWidth": "100%",
@@ -1937,6 +1948,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                                 data-focusable={true}
                                 dir="auto"
+                                id="nutshell-write-entry-1-headline"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
@@ -2102,6 +2114,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                                 data-focusable={true}
                                 dir="auto"
+                                id="nutshell-write-entry-1-content"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}

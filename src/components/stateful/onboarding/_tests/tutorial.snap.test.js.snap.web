@@ -20,6 +20,7 @@ exports[`Tutorial Matches snapshot 1`] = `
 >
   <div
     className="css-view-1dbjc4n"
+    id="tutorial"
     style={
       Object {
         "maxWidth": "100%",

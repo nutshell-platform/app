@@ -244,6 +244,7 @@ exports[`UserSettings Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-home"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -322,6 +323,7 @@ exports[`UserSettings Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-findfriends"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -400,6 +402,7 @@ exports[`UserSettings Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-writenutshel"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -478,6 +481,7 @@ exports[`UserSettings Matches snapshot 1`] = `
               <div
                 className="css-cursor-18t94o4 css-view-1dbjc4n"
                 data-focusable={true}
+                id="navigation-toggle"
                 onClick={[Function]}
                 onContextMenu={[Function]}
                 onKeyDown={[Function]}
@@ -622,6 +626,7 @@ exports[`UserSettings Matches snapshot 1`] = `
             >
               <div
                 className="css-view-1dbjc4n"
+                id="settings-user"
                 style={
                   Object {
                     "maxWidth": "100%",
@@ -1462,6 +1467,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                               className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                               data-focusable={true}
                               dir="auto"
+                              id="settings-bio"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -1705,6 +1711,7 @@ exports[`UserSettings Matches snapshot 1`] = `
               </div>
               <div
                 className="css-view-1dbjc4n"
+                id="settings-contact"
                 style={
                   Object {
                     "maxWidth": "100%",
@@ -2603,6 +2610,7 @@ exports[`UserSettings Matches snapshot 1`] = `
               </div>
               <div
                 className="css-view-1dbjc4n"
+                id="settings-account"
                 style={
                   Object {
                     "maxWidth": "100%",
@@ -4050,6 +4058,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <div
                       className="css-view-1dbjc4n"
                       data-focusable={true}
+                      id="settings-triggerdelete"
                       onClick={[Function]}
                       onContextMenu={[Function]}
                       onKeyDown={[Function]}

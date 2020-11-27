@@ -114,6 +114,7 @@ exports[`Navitagion Matches snapshot 1`] = `
         <div
           className="css-cursor-18t94o4 css-view-1dbjc4n"
           data-focusable={true}
+          id="navigation-home"
           onClick={[Function]}
           onContextMenu={[Function]}
           onKeyDown={[Function]}
@@ -192,6 +193,7 @@ exports[`Navitagion Matches snapshot 1`] = `
         <div
           className="css-cursor-18t94o4 css-view-1dbjc4n"
           data-focusable={true}
+          id="navigation-findfriends"
           onClick={[Function]}
           onContextMenu={[Function]}
           onKeyDown={[Function]}
@@ -270,6 +272,7 @@ exports[`Navitagion Matches snapshot 1`] = `
         <div
           className="css-cursor-18t94o4 css-view-1dbjc4n"
           data-focusable={true}
+          id="navigation-writenutshel"
           onClick={[Function]}
           onContextMenu={[Function]}
           onKeyDown={[Function]}
@@ -348,6 +351,7 @@ exports[`Navitagion Matches snapshot 1`] = `
         <div
           className="css-cursor-18t94o4 css-view-1dbjc4n"
           data-focusable={true}
+          id="navigation-toggle"
           onClick={[Function]}
           onContextMenu={[Function]}
           onKeyDown={[Function]}
