@@ -6,6 +6,7 @@
     "expo:android": "export development=true && npm run sys:nvm && expo start --android",
     "expo:ios": "export development=true && npm run sys:nvm && expo start --ios",
     "expo:web": "export development=true && npm run sys:nvm && expo start --web",
+    "expo:web:ci": "npm run sys:nvm && expo start --web",
     "expo:hybrid": "export development=true && npm run sys:nvm &&  expo start --android --web",
     "expo:install": "npm run sys:nvm && expo install",
     "expo:refresh": "adb shell am force-stop host.exp.exponent",
@@ -33,7 +34,7 @@
     "TEST:SECTION": "-------------------  TEST SECTION -------------------",
     "test:all": "npm run test:e2e && jest --colors --silent snap && jest --colors --silent unit",
     "test:e2e:dev": "cypress open",
-    "test:e2e": "start-server-and-test 'npm run expo:web' http://localhost:19006 'cypress run --quiet' ",
+    "test:e2e": "start-server-and-test 'npm run expo:web:ci' http://localhost:19006 'cypress run --quiet' ",
     "test:update": "jest --colors --updateSnapshot snap"
 
   },

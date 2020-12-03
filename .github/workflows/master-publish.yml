@@ -58,8 +58,16 @@ jobs:
           echo -e "${{ secrets.GOOGLE_SERVICES_PLIST }}" > GoogleService-Info.plist
           
 
+      # Automated testing
       - name: Automated testing
         run: npm run test:all
+
+      - name: Testing failed
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-videos
+          path: cypress/videos # or path/to/artifact
 
       - uses: expo/expo-github-action@v5
         with:
