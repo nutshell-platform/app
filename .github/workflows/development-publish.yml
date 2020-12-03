@@ -1,10 +1,10 @@
-name: Deploy expo updates ( master )
+name: Deploy expo updates ( development )
 
 on:
   # Trigger: on new tag push
   push:
     branches:
-      - master
+      - development
     paths:
       - 'src/**'
       - '*.json'
@@ -22,6 +22,10 @@ jobs:
       # Get the repo files from current commit
       - name: Cloning repository
         uses: actions/checkout@v1
+
+      - name: Checkout development
+        run: git checkout development
+
 
       # Install frontend dependencies based on nvmrc
       - name: Read .nvmrc
@@ -51,16 +55,17 @@ jobs:
       - name: Install frontend dependencies
         run: npm i
 
+      
+      # Run the deployment scripts
       - name: Create environment files
         run: |
-          echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
+          echo -e "${{ secrets.DOTENV_STAGING }}" > .env
           echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
           echo -e "${{ secrets.GOOGLE_SERVICES_PLIST }}" > GoogleService-Info.plist
-          
 
       - name: Automated testing
         run: npm run test:all
-
+        
       - uses: expo/expo-github-action@v5
         with:
           expo-version: 3.x
@@ -69,11 +74,11 @@ jobs:
 
 
       - name: Publish
-        run: npm run deploy:production
+        run: npm run deploy:development
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --force --project=production
+          args: deploy --force --project=development
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
