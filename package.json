@@ -39,7 +39,7 @@
 
   },
   "dependencies": {
-    "@babel/core": "^7.12.1",
+    "@babel/core": "^7.12.9",
     "@neverdull-agency/expo-unlimited-secure-store": "^1.0.10",
     "@sentry/browser": "^5.26.0",
     "babel-preset-expo": "^8.3.0",

@@ -1,3 +1,0 @@
-- Test whether contact methods can be read from users who follow you
-- Add contact buttons for those methods
-- Build new expo app and deploy to stores
