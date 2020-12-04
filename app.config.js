@@ -21,6 +21,8 @@ const conf = {
   version: 10, // ⚠️ Update on build
 }
 
+console.log( conf )
+
 export default {
   "expo": {
 

@@ -51,13 +51,13 @@ jobs:
       - name: Install frontend dependencies
         run: npm i
 
+      # Run the deployment scripts
       - name: Create environment files
         run: |
           echo -e "${{ secrets.DOTENV_PRODUCTION }}" > .env
           echo -e "${{ secrets.GOOGLE_SERVICES_JSON }}" > google-services.json
           echo -e "${{ secrets.GOOGLE_SERVICES_PLIST }}" > GoogleService-Info.plist
           
-
       # Automated testing
       - name: Automated testing
         run: npm run test:all
