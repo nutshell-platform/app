@@ -33,19 +33,17 @@ class FindFriends extends Component {
 
 		let { following, followers } = this.props.user
 
-		try {			
+		try {
 
-			// If there are no recommendations, load the default search and trigger recommendation generation
-			await Promise.all( [
-				// Load reccs
-				await this.loadRecommendations(),
+			// Trigger reccs in the background
+			this.loadRecommendations() // is async
 
-				// Load default results
-				this.defaultSearch(),
+			// If not followers or not following anyone, get recommendations
+			if( ( following?.length || followers?.length ) ) app.getContactRecommendations() // is Async
 
-				// If not followers or not following anyone, get recommendations
-				( following?.length || followers?.length ) && app.getContactRecommendations()
-			] )
+			// Load the default search in a blocking fashion
+			await this.defaultSearch()
+
 
 		} catch( e ) {
 			alert( e )

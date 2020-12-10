@@ -7,8 +7,8 @@ export const Login = ( { toggle, proceed, onInput, action='login', name, handle,
 		{ /* User input */ }
 		{ action == 'register' && <Input nativeID='loginreg-name' autoCompleteType='name' onSubmit={ proceed } value={ name } onChangeText={ t => onInput( 'name', t ) } label='name' /> }
 		{ action == 'register' && <Input nativeID='loginreg-username' autoCompleteType='username' autoCapitalize='none' onSubmit={ proceed } error={ !available && 'This handle is taken' } info={ 'Your handle is a unique username you can share with your friends so they can easily find you.' } value={ handle } onChangeText={ t => onInput( 'handle', t ) } label='username/handle' /> }
-		<Input nativeID='loginreg-email' autoCompleteType='password' autoCapitalize='none' onSubmit={ proceed } value={ email } onChangeText={ t => onInput( 'email', t ) } label='email' keyboardType='email-address'/>
-		{ action != 'recover' && <Input nativeID='loginreg-password' autoCapitalize='none' onSubmit={ proceed } value={ password } onChangeText={ t => onInput( 'password', t ) } secureTextEntry={ true } label='password' /> }
+		<Input nativeID='loginreg-email' autoCompleteType='email' autoCapitalize='none' onSubmit={ proceed } value={ email } onChangeText={ t => onInput( 'email', t ) } label='email' keyboardType='email-address'/>
+		{ action != 'recover' && <Input autoCompleteType='password' nativeID='loginreg-password' autoCapitalize='none' onSubmit={ proceed } value={ password } onChangeText={ t => onInput( 'password', t ) } secureTextEntry={ true } label='password' /> }
 
 		{ action == 'register' && <Checkbox nativeID='loginreg-toc' onPress={ f => onInput( 'tos', !tos ) } checked={ tos } style={ { marginTop: 10 } }>
 			<Text onPress={ f => onInput( 'tos', !tos ) }>I accept the </Text>
