@@ -733,7 +733,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           <TextInput
                             allowFontScaling={true}
                             autoCapitalize="none"
-                            autoCompleteType="password"
+                            autoCompleteType="email"
                             editable={true}
                             index={2}
                             keyboardType="email-address"
@@ -941,6 +941,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           <TextInput
                             allowFontScaling={true}
                             autoCapitalize="none"
+                            autoCompleteType="password"
                             editable={true}
                             index={3}
                             multiline={false}

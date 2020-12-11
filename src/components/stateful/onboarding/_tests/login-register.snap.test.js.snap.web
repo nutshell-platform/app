@@ -783,7 +783,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           </div>
                           <input
                             autoCapitalize="none"
-                            autoComplete="password"
+                            autoComplete="email"
                             autoCorrect="on"
                             className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                             data-focusable={true}
@@ -947,7 +947,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           </div>
                           <input
                             autoCapitalize="none"
-                            autoComplete="on"
+                            autoComplete="password"
                             autoCorrect="on"
                             className="css-textinput-11aywtz r-placeholderTextColor-1qzd3f0"
                             data-focusable={true}
