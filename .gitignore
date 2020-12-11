@@ -16,6 +16,7 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+cypress/videos/
 
 # macOS
 .DS_Store
