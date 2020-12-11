@@ -4,6 +4,7 @@ import { BackHandler } from 'react-native'
 // Redux
 import { connect } from 'react-redux'
 import { Light, Dark } from '../modules/visual/themes'
+import { toggleDarkMode } from '../redux/actions/settingsActions'
 
 // Firebase api
 import firebase from '../modules/firebase/app'
@@ -18,7 +19,7 @@ import { Component, Loading, Provider as PaperProvider } from '../components/sta
 import { Switch, Route, withRouter } from './router'
 
 // Helpers
-import { isWeb } from '../modules/apis/platform'
+import { isWeb, getIsDarkMode } from '../modules/apis/platform'
 import { log } from '../modules/helpers'
 
 // Components
@@ -86,6 +87,10 @@ class Routes extends Component {
 
 		// Set the state to initialised if a user is already in stor
 		this.setState( { init: !!user } )
+
+		// Set dark mode if need be, but only on mount so the user can override it
+		this.smartDarkMode()
+
 		// Init firebase
 		await firebase.init( history )
 		
@@ -96,8 +101,25 @@ class Routes extends Component {
 
 	shouldComponentUpdate = ( nextProps, nextState ) => {
 
-		const { history, user, settings } = nextProps
+		const { history, user } = nextProps
 		const { pathname } = history.location
+		
+		// Redirect rules, if redirected, do not rerender router
+		const wasRedirected = this.handleRedirects( pathname, user )
+
+		// If redirect was triggered, do not rerender as history will trigger it
+		if( wasRedirected ) return false
+
+		// Always update by default
+		return true
+
+	}
+
+	componentDidUpdate = f => {
+
+		const { history } = this.props
+		const { pathname } = history.location
+
 
 		// Development-only logging of path
 		log( 'Current path: ', pathname )
@@ -105,27 +127,49 @@ class Routes extends Component {
 		// Update trigger
 		this.scheduleUpdateCheck()
 
-		// ///////////////////////////////
-		// Redirect rules
-		// ///////////////////////////////
+		// Log user screen
+		if( pathname ) firebase.analyticsSetScreen( pathname )
+
+
+	}
+
+	smartDarkMode = f => {
+
+		const { dispatch, theme } = this.props
+
+		// Determint whether it is night time ( arbitrary time chosen )
+		const theHour = new Date().getHours()
+		const nightTime = theHour > 20 || theHour < 7
+
+		// If system wants dark mode or it is late, set darkmode if it is not yet set
+		if( ( getIsDarkMode() || nightTime ) && !theme?.dark ) return dispatch( toggleDarkMode() )
+
+	}
+
+	handleRedirects = ( pathname, user ) => {
+
+		const { history } = this.props
 
 		// Not logged in but not on the home page => go to home
 		if( pathname != '/' && !user ) {
 			log( 'Redirect: ', `pathname != '/' && !user` )
 			history.push( '/' )
-			// Do not update router since the history is changing
-			return false
+
+			// Signal that a redirect happened
+			return true
 		}
 		// If logged in but at slash => go to profile
 		if( pathname == '/' && user ) {
 			log( 'Redirect: ', `pathname == '/' && user` )
 			history.push( '/nutshells/read' )
+
+			// Signal that a redirect happened
+			return true
+
 		}
 
-		// Log user screen
-		if( pathname ) firebase.analyticsSetScreen( pathname )
-
-		return true
+		// Signal that no redirect happened
+		return false
 
 	}
 
