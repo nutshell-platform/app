@@ -1,7 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    
     "EXPO:SECTION": "-------------------  EXPO SECTION -------------------",
     "expo:android": "npm run sys:nvm && expo start --android",
     "expo:ios": "npm run sys:nvm && expo start --ios",
@@ -10,33 +9,26 @@
     "expo:hybrid": "export development=true && npm run sys:nvm &&  expo start --android --web",
     "expo:install": "npm run sys:nvm && expo install",
     "expo:refresh": "adb shell am force-stop host.exp.exponent",
-
-    
     "firebase:stage": "firebase use development && firebase deploy",
     "firebase:production": "firebase use production && firebase deploy",
     "firebase:functions": "export development=true && firebase functions:shell",
-
     "COMPILE:SECTION": "-------------------  COMPILE SECTION -------------------",
     "compile:web": "export $(grep '^[a-zA-Z_]*=.*' .env.production | xargs) && expo build:web",
     "compile:android": "export $(grep '^[a-zA-Z_]*=.*' .env.production | xargs) && expo build:android",
     "compile:ios": "export $(grep '^[a-zA-Z_]*=.*' .env.production | xargs) && export SENTRY_LOG_LEVEL='debug' && expo build:ios && expo upload:ios",
-
     "DEPLOY:SECTION": "-------------------  DEPLOY SECTION -------------------",
     "upload:ios": "expo upload:ios",
     "deploy:development": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish -c --release-channel development && npm run compile:web",
     "deploy:production": "export $(grep '^[a-zA-Z_]*=.*' .env | xargs) && expo publish && npm run compile:web",
-
     "SYS:SECTION": "-------------------  SYS SECTION -------------------",
     "sys:bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all && jest --clearCache",
     "sys:baseline": "npm run sys:nvm && npm run bust && rm package-lock.json && rm -rf node_modules && npm i",
     "sys:nvm": "unset PREFIX && source ~/.nvm/nvm.sh && nvm use || echo 'No NVM available'",
-
     "TEST:SECTION": "-------------------  TEST SECTION -------------------",
     "test:all": "npm run test:e2e && jest --colors --silent snap && jest --colors --silent unit",
     "test:e2e:dev": "cypress open",
     "test:e2e": "start-server-and-test 'npm run expo:web:ci' http://localhost:19006 'cypress run --quiet' ",
     "test:update": "jest --colors --updateSnapshot snap"
-
   },
   "dependencies": {
     "@babel/core": "^7.12.9",

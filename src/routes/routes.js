@@ -141,8 +141,12 @@ class Routes extends Component {
 		const theHour = new Date().getHours()
 		const nightTime = theHour > 20 || theHour < 7
 
-		// If system wants dark mode or it is late, set darkmode if it is not yet set
-		if( ( getIsDarkMode() || nightTime ) && !theme?.dark ) return dispatch( toggleDarkMode() )
+		// Set dark mode based on combination of system and time
+		const wantDark = ( getIsDarkMode() || nightTime ) || ( !getIsDarkMode() && !nightTime )
+		const isDark = theme?.dark
+
+		if( wantDark && !isDark ) return dispatch( toggleDarkMode() )
+		if( !wantDark && isDark ) return dispatch( toggleDarkMode() )
 
 	}
 
