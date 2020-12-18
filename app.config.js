@@ -22,7 +22,7 @@ const conf = {
 }
 
 
-export default {
+module.exports = {
   "expo": {
 
     // Publically visible

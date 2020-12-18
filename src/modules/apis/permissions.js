@@ -11,7 +11,7 @@ import Storage from './storage'
 // ///////////////////////////////
 // Push
 // ///////////////////////////////
-const getPushToken = f => Storage.getItemAsync( 'pushtoken' )
+const getPushToken = f => Storage.getItemAsync( 'pushtoken' ).catch( f => undefined )
 export const checkOrRequestPushAccess = async f => {
 
 	try {
