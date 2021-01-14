@@ -1,6 +1,6 @@
 // Data helpers
 const { dataFromSnap, log, error } = require( './helpers' )
-const { db, FieldValue } = require( './firebase' )
+const { db, FieldValue, FieldPath } = require( './firebase' )
 
 // ///////////////////////////////
 //  Show queue
@@ -38,7 +38,7 @@ exports.makeDemo = async f => {
 
 		} ) )
 
-		console.log( 'Creation success' )
+		// console.log( 'Creation success' )
 
 	} catch( e ) {
 		console.log( 'creation problem, ', e )
@@ -52,9 +52,12 @@ exports.createTestNutshell = async myUid => {
 
 		if( !myUid ) throw 'No nutshell or uid provided'
 
+		// Get a random user to set the nutshell to
+		const [ randomUser ] = await db.collection( 'users' ).where( FieldPath.documentId(), '!=', myUid ).limit( 1 ).get().then( dataFromSnap )
+
 		const nutshell = {
 			uid: `test-${ myUid }`,
-			owner: myUid,
+			owner: randomUser.uid,
 			created: Date.now(),
 			updated: Date.now(),
 			published: Date.now(),
@@ -79,18 +82,14 @@ exports.createTestNutshell = async myUid => {
 // ///////////////////////////////
 exports.scheduledNutshells = async all => {
 	
-	try {
-		const nutshells = await ( all ? db.collection( 'nutshells' ).get().then( dataFromSnap ) : db.collection( 'nutshells' ).where( 'status', '==', 'scheduled' ).get().then( dataFromSnap ) )
-		const humanReadable = await Promise.all( nutshells.map( async nutshell => ( {
-			...nutshell,
-			pusbishAt: new Date( nutshell.published ),
-			updatedAt: new Date( nutshell.updated ),
-			owner: await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
-		} ) ) )
-		return humanReadable
-	} catch( e ) {
-		throw e
-	}
+	const nutshells = await ( all ? db.collection( 'nutshells' ).get().then( dataFromSnap ) : db.collection( 'nutshells' ).where( 'status', '==', 'scheduled' ).get().then( dataFromSnap ) )
+	const humanReadable = await Promise.all( nutshells.map( async nutshell => ( {
+		...nutshell,
+		pusbishAt: new Date( nutshell.published ),
+		updatedAt: new Date( nutshell.updated ),
+		owner: await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
+	} ) ) )
+	return humanReadable
 
 }
 

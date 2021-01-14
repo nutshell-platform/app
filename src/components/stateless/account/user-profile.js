@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton } from '../common/generic'
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
 
-export const UserCard = ( { children, avatarSize=100, user={}, isSelf, isAdmin, noDraft, following, followMan, nutshells=[], blockPerson, unblockPerson, blocked, mute, deleteNutshell, report } ) => {
+export const UserCard = ( { children, avatarSize=100, user={}, noDraft, following, followMan, nutshells=[], blockPerson, unblockPerson, blocked, mute, deleteNutshell, report } ) => {
 
+	// Check if user being viewed is me and whether I am an admin
+	const myUid = useSelector( store => store?.user?.uid )
+	const isSelf = user?.uid == myUid
+
+	// Component management
 	const [ followed, setFollowed ] = useState( following )
 	const gutter = 25
 
@@ -33,8 +39,8 @@ export const UserCard = ( { children, avatarSize=100, user={}, isSelf, isAdmin, 
 
 			</Card>
 
-			{ /* isSelf && noDraft && <Placeholder /> */ }
-			{ !blocked && nutshells.map( nutshell => <NutshellCard showActions={ false } report={ report } isAdmin={ isAdmin } deleteNutshell={ deleteNutshell } isSelf={ isSelf } mute={ f => mute( nutshell.uid ) } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+			{ /* List this user's nutshells */ }
+			{ !blocked && nutshells.map( nutshell => <NutshellCard showActions={ false } report={ report } deleteNutshell={ deleteNutshell } mute={ f => mute( nutshell.uid ) } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 
 		</View>
 	</Main.Center>

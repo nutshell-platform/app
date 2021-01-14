@@ -1,14 +1,23 @@
 import React, { useState } from 'react'
-import { Card, Title, Paragraph, View, HelperText, IconButton, Divider, Button, ToolTip, UserAvatar, Menu } from '../common/generic'
+import { Card, Title, Paragraph, View, HelperText, IconButton, Button, ToolTip, UserAvatar, Menu } from '../common/generic'
+
+// Redux
+import { useSelector } from 'react-redux'
 
 // Helper functions
 import { timestampToHuman, dateOfNext } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
 import { sendEmail, sendWhatsapp } from '../../../modules/apis/messaging'
 
-export const NutshellCard = ( { index, nutshell={}, showActions=true, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, isSelf, isAdmin, deleteNutshell } ) => {
+export const NutshellCard = ( { index, nutshell={}, showActions=true, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, deleteNutshell } ) => {
 
+	// Extract data
 	const { entries, updated, published, user, uid, readcount } = nutshell
+
+	// Check if this is my nutshell
+	const myUid = useSelector( store => store?.user?.uid )
+	const isSelf = user?.uid == myUid
+
 	
 	const gutter = 40
 
@@ -46,7 +55,7 @@ export const NutshellCard = ( { index, nutshell={}, showActions=true, block, rep
 
 
 			{ /* Menu dots */ }
-			<NutshellOptions isAdmin={ isAdmin } isSelf={ isSelf } deleteNutshell={ f => deleteNutshell( nutshell.uid ) } mute={ f => mute( nutshell.uid ) } block={ f => block( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
+			<NutshellOptions isSelf={ isSelf } deleteNutshell={ f => deleteNutshell( nutshell.uid ) } mute={ f => mute( nutshell.uid ) } block={ f => block( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
 
 
 		</Card>
@@ -128,7 +137,10 @@ export const ViewRecs = ( { recAmount } ) => <Card>
 </Card>
 
 // Report users
-const NutshellOptions = ( { isSelf, style, block, report, mute, deleteNutshell, isAdmin, ...props } ) => {
+const NutshellOptions = ( { isSelf, style, block, report, mute, deleteNutshell, ...props } ) => {
+
+	// Redux
+	const isAdmin = useSelector( store => store?.user?.admin )
 
 	const [ isOpen, setOpen ] = useState( false )
 

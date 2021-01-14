@@ -116,7 +116,7 @@ class UserProfile extends Component {
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard report={ this.report } isAdmin={ user?.admin } deleteNutshell={ this.deleteNutshell } mute={ this.mute } blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } isSelf={ isSelf } following={ following } user={ profile } />
+				<UserCard report={ this.report } deleteNutshell={ this.deleteNutshell } mute={ this.mute } blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } following={ following } user={ profile } />
 			</Main.Top>
 		</Container>
 
