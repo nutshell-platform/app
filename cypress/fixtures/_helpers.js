@@ -4,10 +4,17 @@ const scrollTo = els => {
 	return els
 }
 
-export const find = ( selectorOrText, onlyText ) => {
+export const find = ( selectorOrText, onlyText, mustbeVisible=false ) => {
 
-	if( selectorOrText && onlyText ) return cy.contains( selectorOrText, onlyText, { matchCase: false } ).then( scrollTo ).should( 'be.visible' )
-	else return cy.contains( selectorOrText, { matchCase: false } ).then( scrollTo ).should( 'be.visible' )
+	if( !mustbeVisible ) {
+		if( selectorOrText && onlyText ) return cy.contains( selectorOrText, onlyText, { matchCase: false } ).then( scrollTo )
+		else return cy.contains( selectorOrText, { matchCase: false } ).then( scrollTo )
+	} else {
+		if( selectorOrText && onlyText ) return cy.contains( selectorOrText, onlyText, { matchCase: false } ).then( scrollTo ).should( 'be.visible' )
+		else return cy.contains( selectorOrText, { matchCase: false } ).then( scrollTo ).should( 'be.visible' )
+	}
+
+	
 }
 
 export const exclude = ( selectorOrText, onlyText ) => {

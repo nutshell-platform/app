@@ -19,7 +19,7 @@ import { Component, Loading, Provider as PaperProvider } from '../components/sta
 import { Switch, Route, withRouter } from './router'
 
 // Helpers
-import { isWeb, getIsDarkMode } from '../modules/apis/platform'
+import { isWeb, getIsDarkMode, dev } from '../modules/apis/platform'
 import { log } from '../modules/helpers'
 
 // Components
@@ -128,7 +128,7 @@ class Routes extends Component {
 		this.scheduleUpdateCheck()
 
 		// Log user screen
-		if( pathname ) firebase.analyticsSetScreen( pathname )
+		if( pathname && !dev ) firebase.analyticsSetScreen( pathname )
 
 
 	}

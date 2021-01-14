@@ -27,7 +27,6 @@ const metaReducer = ( state, action ) => {
 		case "RESETAPP":
 			console.log( 'Resetting app storage' )
 			return reducers( undefined, action )
-		break
 
 	}
 
@@ -44,3 +43,16 @@ const middleware = dev ? applyMiddleware( logger, promise ) : applyMiddleware( p
 // Export store and persistor
 export const store = createStore( persistedReducer, middleware )
 export const persistor = persistStore( store )
+
+const testing = f => {
+
+	try {
+		createStore( persistedReducer, middleware )
+		persistStore( store )
+	} catch( e ) {
+		log( 'testing error: ', e )
+	}
+
+}
+
+testing(  )
