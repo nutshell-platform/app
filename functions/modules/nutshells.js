@@ -56,7 +56,7 @@ exports.createTestNutshell = async myUid => {
 		const [ randomUser ] = await db.collection( 'users' ).where( FieldPath.documentId(), '!=', myUid ).limit( 1 ).get().then( dataFromSnap )
 
 		const nutshell = {
-			uid: `test-${ myUid }`,
+			uid: `testfor-${ myUid }-${ Date.now() }`,
 			owner: randomUser.uid,
 			created: Date.now(),
 			updated: Date.now(),

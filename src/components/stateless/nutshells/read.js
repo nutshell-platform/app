@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Card, Title, Paragraph, View, HelperText, IconButton, Button, ToolTip, UserAvatar, Menu } from '../common/generic'
 
-// Redux
+// Hooks
 import { useSelector } from 'react-redux'
+import { useHistory } from '../../../routes/router'
+import app from '../../../modules/firebase/app'
 
 // Helper functions
-import { timestampToHuman, dateOfNext } from '../../../modules/helpers'
+import { timestampToHuman, dateOfNext, catcher } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
 import { sendEmail, sendWhatsapp } from '../../../modules/apis/messaging'
 
-export const NutshellCard = ( { index, nutshell={}, showActions=true, block, report, markRead, avatarSize=100, status=false, follow, unfollow, go, mute, deleteNutshell } ) => {
+export const NutshellCard = ( { gutter=40, index, nutshell={}, showActions=true, avatarSize=100, status=false } ) => {
 
 	// Extract data
 	const { entries, updated, published, user, uid, readcount } = nutshell
@@ -18,8 +20,21 @@ export const NutshellCard = ( { index, nutshell={}, showActions=true, block, rep
 	const myUid = useSelector( store => store?.user?.uid )
 	const isSelf = user?.uid == myUid
 
-	
-	const gutter = 40
+	// Helpers
+	const history = useHistory()
+	const go = to => to && history.push( to )
+
+	// Preventing self render, used by the underlying menu
+	const [ selfIsHidden, hideSelf ] = useState( false )
+	if( selfIsHidden ) return null
+
+	// Mark nutshell as read
+	function markRead() {
+
+		hideSelf( true )
+		return app.markNutshellRead( uid )
+		
+	}
 
 	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
 
@@ -48,19 +63,17 @@ export const NutshellCard = ( { index, nutshell={}, showActions=true, block, rep
 			</View>
 
 			{ /* If this is not your nutshell, and it is published */ }
-			{ !isSelf && showActions && <NutshellActions gutter={ gutter } archive={ f => markRead( uid ) } contactMethods={ user?.contactMethods } /> }
+			{ !isSelf && showActions && <NutshellActions gutter={ gutter } archive={ markRead } contactMethods={ user?.contactMethods } /> }
 
 			{ /* If this is your nutshell and it is not yet published */ }
 			{ isSelf && status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} Nutshell</Button> }
 
 
 			{ /* Menu dots */ }
-			<NutshellOptions isSelf={ isSelf } deleteNutshell={ f => deleteNutshell( nutshell.uid ) } mute={ f => mute( nutshell.uid ) } block={ f => block( user.uid, uid ) } report={ f => report( uid ) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
+			<NutshellOptions hideSelf={ hideSelf } isSelf={ isSelf } nutshell={ nutshell } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } />
 
 
 		</Card>
-
-
 
 	</View>
 
@@ -137,19 +150,65 @@ export const ViewRecs = ( { recAmount } ) => <Card>
 </Card>
 
 // Report users
-const NutshellOptions = ( { isSelf, style, block, report, mute, deleteNutshell, ...props } ) => {
+const NutshellOptions = ( { nutshell, hideSelf, isSelf, style, ...props } ) => {
 
-	// Redux
+	// Data
 	const isAdmin = useSelector( store => store?.user?.admin )
+	const { uid: nutshellUid, user } = nutshell
 
+	// ///////////////////////////////
+	// States
+	// ///////////////////////////////
+	const [ blocking, setBlocking ] = useState( false )
+	const [ muting, setMuting ] = useState( false )
+	const [ deleting, setDeleting ] = useState( false )
 	const [ isOpen, setOpen ] = useState( false )
+
+	// ///////////////////////////////
+	// Menu functionality
+	// ///////////////////////////////
+	const history = useHistory()
+
+	// Block user
+	async function block() {
+
+		setBlocking( true )
+		await Promise.all( [ app.unfollowPerson( user.uid ), app.blockPerson( user.uid ) ] ).catch( catcher )
+		setBlocking( false )
+		hideSelf( true )
+
+	}
+
+	// Report nutshell
+	const report = f => history.push( `/nutshells/report/${ nutshellUid }` )
+
+	// Mute nutshell
+	async function mute() {
+
+		setMuting( true )
+		await Promise.all( [ app.markNutshellRead( nutshellUid ), app.muteNutshell( nutshellUid ) ] ).catch( catcher )
+		setMuting( false )
+		hideSelf( true )
+
+	}
+
+	// Delete nutshell
+	async function deleteNutshell() {
+
+		setDeleting( true )
+		await app.deleteNutshell( nutshellUid ).catch( catcher )
+		setDeleting( false )
+		hideSelf( true )
+
+	}
+	
 
 	return <TouchableOpacity testID='menudots' onPress={ f => setOpen( true ) } style={ { ...style } }>
 		<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton style={ { opacity: .5, width: 50, height: 50, zIndex: 2 } } onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
 			{ !isSelf && <Menu.Item onPress={ report } title="Report abuse" /> }
-			{ !isSelf && <Menu.Item onPress={ block }  title="Block & unfollow this user" /> }
-			{ !isSelf && <Menu.Item onPress={ mute }  title="Mute this Nutshell" /> }
-			{ ( isSelf || isAdmin ) && <Menu.Item onPress={ deleteNutshell }  title="Delete this Nutshell" /> }
+			{ !isSelf && <Menu.Item onPress={ block }  title={ blocking ? 'Blocking user...' : "Block & unfollow this user" } /> }
+			{ !isSelf && <Menu.Item onPress={ mute }   title={ muting ? 'Muting user...' : "Mute this Nutshell" } /> }
+			{ ( isSelf || isAdmin ) && <Menu.Item onPress={ deleteNutshell }  title={ deleting ? 'Deleting nutshell...' : "Delete this Nutshell" } /> }
 		</Menu>
 	</TouchableOpacity>
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Visual
-import { Component, Container, Loading, Main, Link, Button } from '../../stateless/common/generic'
+import { Component, Container, Main, Button } from '../../stateless/common/generic'
 import Tutorial from '../onboarding/tutorial'
 import FAB from '../common/fab'
 import { Placeholder, NutshellCard, ViewRecs } from '../../stateless/nutshells/read'
@@ -29,7 +29,7 @@ class ReadNutshell extends Component {
 	inboxLoader = undefined
 
 	// Load inbox
-	loadInbox = async ( silent=false ) => {
+	loadInbox = async ( visualFeedback=true ) => {
 
 		// Set loading tracker
 		if( this.loading ) return
@@ -43,9 +43,9 @@ class ReadNutshell extends Component {
 
 			log( 'Start nutshell loading' )
 			this.loading = true
-			if( !silent ) await this.updateState( { loading: true } )
+			if( !visualFeedback ) await this.updateState( { loading: true } )
 
-			const { inbox, user, offlineInbox, dispatch } = this.props
+			const { inbox, offlineInbox, dispatch } = this.props
 			log( 'Load nutshells' )
 
 			// Load nutshells, but with a minimum duration of 2 secs for UX
@@ -59,7 +59,7 @@ class ReadNutshell extends Component {
 			log( 'Loaded ', newNutshells, ' based on inbox ', inbox )
 
 			// Update offline inbox based on new inbox data
-			await dispatch( updateOfflineInbox( newNutshells, inbox ) )
+			if( newNutshells?.length ) await dispatch( updateOfflineInbox( newNutshells, inbox ) )
 
 			// If the loading process took shorter than a second, wait for 2 seconds
 			if( Date.now() - start < 1000 ) await wait( 2000 )
@@ -67,10 +67,13 @@ class ReadNutshell extends Component {
 			// If a nutshell is marked for deletion, remove it from the queue
 			const markRead = newNutshells.filter( nutshell => nutshell.delete )
 
-			// Delete nutshells that failed to load
+			// Delete nutshells that failed to load, first offline and then online in the background
 			log( 'Mark read because of loading error: ', markRead )
-			await Promise.all( markRead.map( nutshell => this.markRead( nutshell.delete ) ) ).catch( e => log( e ) )
-
+			if( markRead?.length ) {
+				await this.updateState( { markedReadOffline: [ ...this.state.markedReadOffline, ...markRead ] } )
+				await Promise.all( markRead.map( nutshell => app.markNutshellRead( nutshell.delete ) ) ).catch( e => log( e ) )
+			}
+			
 		} catch( e ) {
 			Dialogue( 'Something went wrong', e )
 		} finally {
@@ -136,45 +139,6 @@ class ReadNutshell extends Component {
 	// Input handler
 	onInput = ( key, value ) => this.updateState( { [key]: value } )
 
-	go = to => to && this.props.history.push( to )
-
-	markRead = async uid => {
-
-		// Track offline
-		await this.updateState( { markedReadOffline: [ ...this.state.markedReadOffline, uid ] } )
-
-		// Track online
-		await app.markNutshellRead( uid )
-	}
-
-
-	block = ( userUid, nutshellUid ) => Promise.all( [
-		app.markNutshellRead( nutshellUid ),
-		app.unfollowPerson( userUid ),
-		app.blockPerson( userUid )
-	] )
-
-	mute = nutshellUid => Promise.all( [
-		app.markNutshellRead( nutshellUid ),
-		app.muteNutshell( nutshellUid ),
-		// Filter out the blocked onw from current state
-		this.updateState( { inbox: this.state.inbox.filter( ( { uid } ) => uid != nutshellUid ) } )
-	] )
-
-	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
-
-	deleteNutshell = uidToDelete => Dialogue(
-		'⚠️ Confirm deletion',
-		'Are you sure you want to delete this nutshell?',
-		[
-			{ text: 'Yes', onPress: f => Promise.all( [
-				app.deleteNutshell( uidToDelete ),
-				// Filter out the blocked onw from current state
-				this.updateState( { inbox: this.state.inbox.filter( ( { uid } ) => uid != uidToDelete ) } )
-			] ) },
-			{ text: 'No, keep nutshell' }
-		]
-	)
 
 	render() {
 
@@ -188,7 +152,7 @@ class ReadNutshell extends Component {
 			<Main.Top>
 				{ loading && <Button style={ { width: 500, marginBottom: 20, maxWidth: '100%' } } mode='flat' loading={ true }>Updating your inbox</Button> }
 				<Tutorial />
-				{ renderInbox?.length > 0 && renderInbox.map( ( nutshell, index ) => <NutshellCard index={ index } deleteNutshell={ this.deleteNutshell } mute={ this.mute } report={ this.report } block={ this.block } markRead={ this.markRead } go={ this.go } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+				{ renderInbox?.length > 0 && renderInbox.map( ( nutshell, index ) => <NutshellCard index={ index } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 				<ViewRecs recAmount={ user.recommendations?.length } />
 				{ inbox.length == 0 && <Placeholder status={ draft.status } hasDraft={ draft.entries?.length != 0 } /> }
 

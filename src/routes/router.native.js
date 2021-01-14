@@ -13,3 +13,5 @@ export { Route } from 'react-router-native'
 export { Link } from 'react-router-native'
 
 export { withRouter } from 'react-router-native'
+
+export { useHistory } from 'react-router-native'

@@ -3,16 +3,27 @@ import { useSelector } from 'react-redux'
 import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton } from '../common/generic'
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
+import app from '../../../modules/firebase/app'
 
-export const UserCard = ( { children, avatarSize=100, user={}, noDraft, following, followMan, nutshells=[], blockPerson, unblockPerson, blocked, mute, deleteNutshell, report } ) => {
+export const UserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraft, nutshells=[] } ) => {
 
 	// Check if user being viewed is me and whether I am an admin
 	const myUid = useSelector( store => store?.user?.uid )
 	const isSelf = user?.uid == myUid
 
-	// Component management
+	// Following management
+	const followlist = useSelector( store => store?.user?.following )
+	const following = followlist.includes( user.uid )
 	const [ followed, setFollowed ] = useState( following )
-	const gutter = 25
+	const toggleFollowed = f => Promise.all( [
+		followed ? app.unfollowPerson( user.uid ) : app.followPerson( user.uid ),
+		setFollowed( !following )
+	] )
+
+	// User blocking
+	const blocklist = useSelector( store => store?.user?.blocked || [] )
+	const isBlocked = blocklist.includes( user.uid )
+	const [ blocked, setBlocked ] = useState( isBlocked )
 
 	return <Main.Center>
 		<View nativeID={ `user-profile-${ isSelf ? 'self' : 'other' }` } style={ { paddingVertical: avatarSize/2 } }>
@@ -25,38 +36,39 @@ export const UserCard = ( { children, avatarSize=100, user={}, noDraft, followin
 				
 				{ /* About */ }
 				<View style={ { alignItems: 'center', justifyContent: 'center', paddingHorizontal: gutter } }>
-					<Title>{ user.name }</Title>
+					<Title>{ user.name }{ blocked ? ' (blocked)' : '' }</Title>
 					<Text>{ user.bio }</Text>
 					<Text style={ { marginTop: 10, opacity: .7 } }>Following { user.following?.length || 0 } | Followers { user.followers?.length || 0 }</Text>
 				</View>
 
-				{ !isSelf && !blocked && <Button style={ { paddingHorizontal: gutter } } mode={ followed && 'text' } onPress={ f => followMan( followed, setFollowed ) }>{ followed ? 'Unfollow' : 'Follow' }</Button> }
-				{ blocked && <Button style={ { paddingHorizontal: gutter } } mode={ 'text' } onPress={ f => unblockPerson( user.uid ) }>Press to unblock</Button> }
+				{ !isSelf && !blocked && <Button style={ { paddingHorizontal: gutter } } mode={ followed && 'text' } onPress={ toggleFollowed }>{ followed ? 'Unfollow' : 'Follow' }</Button> }
 
 				{ /* Menu dots */ }
-				{ !isSelf && <BlockUser blocked={ blocked } unblock={ f => unblockPerson( user.uid ) } block={ f => blockPerson( user.uid) } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } /> }
+				{ !isSelf && <BlockUser blocked={ blocked } setBlocked={ setBlocked } userUid={ user.uid } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } /> }
 
 
 			</Card>
 
 			{ /* List this user's nutshells */ }
-			{ !blocked && nutshells.map( nutshell => <NutshellCard showActions={ false } report={ report } deleteNutshell={ deleteNutshell } mute={ f => mute( nutshell.uid ) } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+			{ !blocked && nutshells.map( nutshell => <NutshellCard showActions={ false } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 
 		</View>
 	</Main.Center>
 }
 
 // Report users
-const BlockUser = ( { style, blocked, unblock, block, ...props } ) => {
+const BlockUser = ( { style, blocked, setBlocked, userUid, ...props } ) => {
 
 	const [ isOpen, setOpen ] = useState( false )
 	const doblock = f => {
 		setOpen( false )
-		block()
+		setBlocked( true )
+		return app.blockPerson( userUid )
 	}
 	const doUnblock = f => {
 		setOpen( false )
-		unblock(  )
+		setBlocked( false )
+		return app.unblockPerson( userUid )
 	}
 
 	return <TouchableOpacity onPress={ f => setOpen( true ) } style={ { ...style } }>

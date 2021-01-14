@@ -60,63 +60,18 @@ class UserProfile extends Component {
 		}
 	}
 
-	followMan = ( following, setLocal ) => {
-
-		const { profile } = this.state
-
-		// Do the ( un )following but do not await the result
-		if( following ) app.unfollowPerson( profile.uid )
-		if( !following ) app.followPerson( profile.uid )
-
-		// internal state of the pure component
-		setLocal( !following )
-
-	}
-
-	blockPerson = theirUid => Promise.all( [
-		app.unfollowPerson( theirUid ),
-		app.blockPerson( theirUid )
-	] )
-
-	unblockPerson = theirUid => app.unblockPerson( theirUid )
-
-	report = async nutshellUid => this.props.history.push( `/nutshells/report/${nutshellUid}` )
-
-	mute = nutshellUid => Promise.all( [
-		app.markNutshellRead( nutshellUid ),
-		app.muteNutshell( nutshellUid ),
-		// Filter out the blocked onw from current state
-		this.updateState( { nutshells: this.state.nutshells.filter( ( { uid } ) => uid != nutshellUid ) } )
-	] )
-
-	deleteNutshell = uidToDelete => Dialogue(
-		'⚠️ Confirm deletion',
-		'Are you sure you want to delete this nutshell?',
-		[
-			{ text: 'Yes', onPress: f => Promise.all( [
-				app.deleteNutshell( uidToDelete ),
-				// Filter out the blocked onw from current state
-				this.updateState( { nutshells: this.state.nutshells.filter( ( { uid } ) => uid != uidToDelete ) } )
-			] ) },
-			{ text: 'No, keep nutshell' }
-		]
-	)
-
 	render() {
 
-		const { loading, handle, profile, nutshells } = this.state
-		const { user, draft } = this.props
-		const following = user.following?.includes( profile.uid )
-		const isSelf = user?.uid == profile?.uid
+		const { loading, profile, nutshells } = this.state
+		const { draft } = this.props
 		const noDraft = !( draft?.entries?.length > 0 )
-		const blocked = user.blocked?.includes( profile.uid )
 
 		if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard report={ this.report } deleteNutshell={ this.deleteNutshell } mute={ this.mute } blocked={ blocked } unblockPerson={ this.unblockPerson } blockPerson={ !isSelf && this.blockPerson } noDraft={ noDraft } nutshells={ nutshells } followMan={ this.followMan } following={ following } user={ profile } />
+				<UserCard noDraft={ noDraft } nutshells={ nutshells } user={ profile } />
 			</Main.Top>
 		</Container>
 

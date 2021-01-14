@@ -26,10 +26,10 @@
     "sys:nvm": "unset PREFIX && source ~/.nvm/nvm.sh && nvm install && nvm use && node -v || echo 'No NVM available'",
     "sys:update": "npm run sys:nvm && ncu -u && npm i",
     "TEST:SECTION": "-------------------  TEST SECTION -------------------",
-    "test:all": "npm run test:e2e && jest --colors --silent snap && jest --colors --silent unit",
-    "test:e2e:dev": "cypress open",
-    "test:e2e": "start-server-and-test 'npm run expo:web:ci' http://localhost:19006 'cypress run --quiet' ",
-    "test:update": "jest --colors --updateSnapshot snap"
+    "test:all": "npm run sys:nvm && npm run test:e2e && jest --colors --silent snap && jest --colors --silent unit",
+    "test:e2e:dev": "npm run sys:nvm && cypress open",
+    "test:e2e": "npm run sys:nvm && start-server-and-test 'npm run expo:web:ci' http://localhost:19006 'cypress run --quiet' ",
+    "test:update": "npm run sys:nvm && jest --colors --updateSnapshot snap"
   },
   "dependencies": {
     "@babel/core": "~7.12.10",

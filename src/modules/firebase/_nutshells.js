@@ -11,7 +11,14 @@ export const getNutshellsOfUser = ( app, uid ) => {
 	return app.db.collection( 'nutshells' )
 		.where( 'owner', '==', uid)
 		.where( 'status', isMe ? 'in' : '==', isMe ? [ 'published', 'draft', 'scheduled' ] : 'published' )
-		.limit( 52 ).get().then( dataFromSnap )
+		.limit( 52 ).get()
+		.then( dataFromSnap )
+		.then( nutshells => nutshells.map( nutshell => ( {
+			...nutshell,
+			user: {
+				uid: uid
+			}
+		} ) ) )
 }
 
 // Get Nutshell info by uid
@@ -92,8 +99,11 @@ export const markNutshellRead = ( app, uid ) => {
 
 export const deleteNutshell = ( app, uid ) => {
 
-	const { db } = app
-	return db.collection( 'nutshells' ).doc( uid ).delete()
+	const { db, FieldValue } = app
+	return Promise.all( [
+		db.collection( 'nutshells' ).doc( uid ).delete(),
+		db.collection( 'inbox' ).doc( app.auth.currentUser.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } )		
+	] )
 
 }
 
