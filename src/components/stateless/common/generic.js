@@ -32,7 +32,7 @@ export class Component extends React.Component {
 }
 
 // Profiling
-export const Profiler = ( { children, threshold=1, ...props } ) => {
+export const Profiler = ( { children, threshold=10, ...props } ) => {
 
 	const logPerformance = ( id, phase, actualDuration, baseDuration, startTime, commitTime, interactions ) => {
 		if( threshold < actualDuration ) log( `[ profiler ] ${ Math.floor( actualDuration ) } ms - ${ id } - ${ phase } ` )
@@ -149,7 +149,7 @@ export const Input = React.memo( ( { style, info, hideInfo=false, error, onSubmi
 
 	// Scroll input into view when it is selected
 	const ref = useRef()
-	const focusOnMe = f => ref?.current?.scrollIntoView()
+	const focusOnMe = f => ref?.current?.scrollIntoView && ref?.current?.scrollIntoView()
 
 
 	return <Pressable ref={ ref } onPress={ focusOnMe }>
