@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Visual
-import { Component, Container, Loading, Main } from '../../stateless/common/generic'
+import { Component, Container, Loading, Main, Profiler } from '../../stateless/common/generic'
 import { Editor } from '../../stateless/nutshells/write'
 import Navigation from '../common/navigation'
 import Write from '../../../../assets/undraw_typewriter_i8xd.svg'
@@ -10,6 +10,7 @@ import Write from '../../../../assets/undraw_typewriter_i8xd.svg'
 import { log, getuid, dateOfNext, Dialogue } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 import { isCI } from '../../../modules/apis/platform'
+
 
 // Redux
 import { connect } from 'react-redux'
@@ -70,7 +71,9 @@ class WriteNutshell extends Component {
 			updated = true
 		}
 
-		if( updated ) return this.updateState( { nutshell: { ...nutshell, entries: entries } } )
+		if( updated ) await this.updateState( { nutshell: { ...nutshell, entries: entries } } )
+
+
 	}
 	// Set initial context
 	componentDidMount = f => this.updateEntryInterface()
@@ -160,6 +163,7 @@ class WriteNutshell extends Component {
 	// Entry updates
 	updateEntry = async ( uid, key, value ) => {
 
+	
 		const { nutshell, maxTitleLength, maxParagraphLength } = this.state
 		const { entries } = nutshell
 
@@ -175,7 +179,10 @@ class WriteNutshell extends Component {
 		this.scheduleAutosave()
 		this.scheduleTipCheck()
 
-		return this.updateState( { unsavedChanges: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
+
+		await this.updateState( { unsavedChanges: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
+
+
 	}
 
 	// Inspiration
@@ -254,7 +261,20 @@ class WriteNutshell extends Component {
 		return <Container Background={ Write }>
 			<Navigation title='Write' />
 			<Main.Center>
-				<Editor moveCard={ this.moveCard } inspire={ this.inspire } background={ theme.colors.background } unsavedChanges={ unsavedChanges } toggleStatus={ this.toggleStatus } saveDraft={ this.saveDraft } user={ user } status={ nutshell.status } entries={ nutshell.entries } updateEntry={ this.updateEntry } maxTitleLength={ maxTitleLength } maxParagraphLength={ maxParagraphLength } />
+				<Editor
+					moveCard={ this.moveCard  }
+					inspire={ this.inspire }
+					background={ theme.colors.background }
+					unsavedChanges={ unsavedChanges }
+					toggleStatus={ this.toggleStatus }
+					saveDraft={ this.saveDraft  }
+					user={ user }
+					status={ nutshell.status }
+					entries={ nutshell.entries }
+					updateEntry={ this.updateEntry  }
+					maxTitleLength={ maxTitleLength }
+					maxParagraphLength={ maxParagraphLength }
+				/>
 			</Main.Center>
 		</Container>
 

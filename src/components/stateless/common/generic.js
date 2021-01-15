@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, Profiler as ReactProfiler } from 'react'
+import { useSelector } from 'react-redux'
+import { log } from '../../../modules/helpers'
 
 // Visual
 const Color = require('color')
-import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Pressable, Image, KeyboardAvoidingView } from 'react-native'
 import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator as PaperActivityIndicator, Title, Text, Button as PaperButton, HelperText as PaperHelperText, Avatar, Subheading as PaperSubheading, Searchbar, Checkbox as PaperCheckbox, IconButton } from 'react-native-paper'
-import { Link as NativeLink, withRouter } from '../../../routes/router'
+import { Link as NativeLink, withRouter, useHistory } from '../../../routes/router'
 import { isWeb, isIos, isCI } from '../../../modules/apis/platform'
 
 // CI config
@@ -22,9 +24,23 @@ export class Component extends React.Component {
     // Class-wide functions
     this.promiseState = newState => new Promise( resolve => this.setState( newState, resolve ) )
     this.updateState = updates => this.promiseState( { ...this.state, ...updates } )
+    this.updateStateSync = updates => this.setState( { ...this.state, ...updates } )
+
 
   }
 
+}
+
+// Profiling
+export const Profiler = ( { children, threshold=1, ...props } ) => {
+
+	const logPerformance = ( id, phase, actualDuration, baseDuration, startTime, commitTime, interactions ) => {
+		if( threshold < actualDuration ) log( `[ profiler ] ${ Math.floor( actualDuration ) } ms - ${ id } - ${ phase } ` )
+	}
+
+	return <ReactProfiler { ...props } onRender={ logPerformance }>
+		{ children }
+	</ReactProfiler>
 }
 
 // ///////////////////////////////
@@ -53,14 +69,20 @@ export const View = ( { style, ...props } ) => <NativeView style={ { maxWidth: '
 export const Divider = ( { style, ...props } ) => <PaperDivider style={ { marginVertical: 20, ...style } } { ...props } />
 
 // Profile image
-export const UserAvatar = withRouter( ( { size=100, user, history, ...props } ) => <TouchableOpacity onPress={ f => history.push( `/${user.handle}` ) }>
-	{ user.avatar && <Avatar.Image { ...props } size={ size } source={ user.avatar } /> }
-	{ !user.avatar && <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' /> }
-</TouchableOpacity> )
+export const UserAvatar = React.memo( ( { size=100, user, ...props } ) => {
+
+	const history = useHistory()
+
+	return <TouchableOpacity onPress={ f => history.push( `/${user.handle}` ) }>
+		{ user.avatar && <Avatar.Image { ...props } size={ size } source={ user.avatar } /> }
+		{ !user.avatar && <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' /> }
+	</TouchableOpacity>
+} )
 
 // Tooltip
-export const ToolTip = withTheme( ( { iconSize=30, containerStyle, tooltipStyle, textStyle, label, info, theme, ...props } ) => {
+export const ToolTip = React.memo( ( { iconSize=30, containerStyle, tooltipStyle, textStyle, label, info, ...props } ) => {
 
+	const theme = useSelector( store => store?.settings?.theme || {} )
 	const [ showInfo, setInfo ] = useState( false )
 
 	return <TouchableOpacity style={ { width: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', ...containerStyle } } onPress={ f => setInfo( !showInfo ) } { ...props }>
@@ -101,7 +123,12 @@ export const Link = withTheme( ( { style, theme, children, to, onPress, underlin
 // ///////////////////////////////
 
 // Generic text input
-export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, onSubmit, multiline, iconSize=30, value, ref=f=>f, ...props } ) => {
+const inputMemoCompare = ( prev, next ) => prev.hideInfo == next.hideInfo && prev.value == next.value
+
+export const Input = React.memo( ( { style, info, hideInfo=false, error, onSubmit, multiline, iconSize=30, value, ...props } ) => {
+
+	// Theme
+	const theme = useSelector( store => store?.settings?.theme )
 
 	// Internal variables
 	const gutter = multiline ? 200 : undefined
@@ -114,17 +141,22 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 	// Internal helpers
 	const adjustHeight = ( { nativeEvent } ) => {
 		if( multiline ) setHeight( nativeEvent?.contentSize?.height + ( isIos ? 35 : 0 ) )
+		focusOnMe(  )
 	}
 	const manageEnter = ( { nativeEvent } ) => {
 		if( nativeEvent.key == 'Enter' ) return onSubmit()
 	}
 
+	// Scroll input into view when it is selected
+	const ref = useRef()
+	const focusOnMe = f => ref?.current?.scrollIntoView()
 
-	return <View>
+
+	return <Pressable ref={ ref } onPress={ focusOnMe }>
 		<View style={ { position: 'relative' } }>
 
 			{ /* The actual input */ }
-			<TextInput onPress={ f => console.log( 'Focus' ) } ref={ ref } onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ inputStyles } />
+			<TextInput onKeyPress={ onSubmit ? manageEnter : f => f } value={ value || '' } onContentSizeChange={ adjustHeight } multiline={ multiline } mode='flat' dense={ false } { ...props } style={ inputStyles } />
 
 			{ /* The info icon */ }
 			{ info && ( !hideInfo || ( hideInfo && !value ) ) && <TouchableOpacity tabindex={ -1 } style={ { position: 'absolute', right: 0, top: 0, bottom: 0, justifyContent: 'center' } } onPress={ f => setInfo( !showInfo ) }>
@@ -134,8 +166,8 @@ export const Input = withTheme( ( { theme, style, info, hideInfo=false, error, o
 
 		{ /* the help message triggeres by the info icon */ }
 		{ ( showInfo || error ) && ( info || error ) && <PaperHelperText type={ error ? 'error' : 'info' }>{ error || info }</PaperHelperText> }
-	</View>
-} )
+	</Pressable>
+}, inputMemoCompare )
 
 // Button
 export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => {
@@ -162,8 +194,10 @@ export const Button = withRouter( withTheme( ( { style, mode='contained', loadin
 
 
 // Toggle
-export const Toggle = withTheme( ( { style, theme, value, label, onToggle, info, error, ...props } ) => {
+const toggleMemoCompare = ( prev, next ) => prev.value == next.value
+export const Toggle = React.memo( ( { style, value, label, onToggle, info, error, ...props } ) => {
 
+	const theme = useSelector( store => store?.settings?.theme || {} )
 	const [ showInfo, setInfo ] = useState( false )
 
 	return <View style={ { flexDirection: 'column', width: '100%' } }>
@@ -181,7 +215,7 @@ export const Toggle = withTheme( ( { style, theme, value, label, onToggle, info,
 		{ info && ( showInfo || error ) && <PaperHelperText style={ { paddingLeft: 0, paddingVertical: 20 } } type={ error ? 'error' : 'info' }>{ info }</PaperHelperText> }
 
 	</View>
-} )
+}, toggleMemoCompare )
 
 // Search bar
 export const Search = ( { style, searching, ...props } ) => <View>

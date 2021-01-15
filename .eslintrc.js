@@ -38,7 +38,9 @@ module.exports = {
     // What global variables should be assumed to exist
     globals: {
         context: false,
-        cy: true
+        cy: true,
+        window: true,
+        location: true
     },
 
     // Plugins

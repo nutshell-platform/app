@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 // Visual
 import { TouchableOpacity } from 'react-native'
-import { Card, Main, Title, Input, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View, ToolTip, Caption, IconButton } from '../common/generic'
+import { Card, Main, Title, Input, Subheading, Divider, Toggle, HelperText, Text, UserAvatar, View, ToolTip, Caption, IconButton, Profiler } from '../common/generic'
 
 // Data
 import { weekNumber, dateOfNext, timestampToHuman, timestampToTime } from '../../../modules/helpers'
@@ -13,6 +13,8 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 
 	return <View>
 		<View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
+
+		<Profiler id='editor-header'>
 			<Card style={ { paddingTop: 0, width: 500 } } >
 
 				{ /* Meta overview */ }
@@ -29,8 +31,9 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 				</View>
 
 			</Card>
+		</Profiler>
 
-
+		<Profiler id='editor-entries'>
 			{ entries.map( ( { uid, title, paragraph }, i ) => <Entry
 					entrynr={ i }
 					entries={ entries.length }
@@ -45,12 +48,13 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 					move={ moveCard }
 				/>
 			) }
+		</Profiler>
 
 		</View>
 	</View>
 }
 
-export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxTitleLength, maxParagraphLength, inspire, unsavedChanges, move } ) => {
+const UnoptimisedEntry = ( { title='', paragraph='', onInput, entrynr, entries, maxTitleLength, maxParagraphLength, inspire, unsavedChanges, move } ) => {
 
 	const [ opaque, setOpaque ] = useState( title.length > 0 || paragraph.length > 0 || ( entrynr == 0 )  )
 	const [ inspiration, setInspiration ] = useState( inspire() )
@@ -60,46 +64,85 @@ export const Entry = ( { title='', paragraph='', onInput, entrynr, entries, maxT
 		setInspiration( newOne )
 	}
 
-	let hasContent = title.length > 0 || paragraph.length > 0
+	// Internal state management
+	const updateTitle = text =>  onInput( 'title', text )
+	const updateParagraph = text => onInput( 'paragraph', text )
+
 	const onFocus = f => setOpaque( true )
 	const onBlur = f => setOpaque( title.length > 0 || paragraph.length > 0 || ( entrynr == 0 ) )
 
-	return <Card nativeID={ `nutshell-write-entry-${ entrynr }` } style={ { paddingVertical: 20, opacity: opaque ? 1 : .5 } }>
-		{ entrynr < ( entries - 1 ) && <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
-			<IconButton nativeID={ `nutshell-write-entry-${ entrynr }-moveup` } onPress={ f => move( entrynr, 'up' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-up' />
-			<Caption>Entry { entrynr + 1 } of { entries - 1 } (max 10)</Caption>
-			<IconButton nativeID={ `nutshell-write-entry-${ entrynr }-movedown` }  onPress={ f => move( entrynr, 'down' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-down' />
-		</View> }
-		<Input
-			nativeID={ `nutshell-write-entry-${ entrynr }-headline` }
-			onFocus={ onFocus }
-			onBlur={ onBlur }
-			hideInfo={ true }
-			style={ { fontWeight: 'bold' } }
-			value={ title }
-			label={ `Headline (${ title.length }/${ maxTitleLength })` }
-			info={ `A short summary of at most ${ maxTitleLength } characters about what you want to say.\n
-			Examples: "Struggling to focus this week" or "My new routine is really nice".` }
-			onChangeText={ text => onInput( 'title', text ) }
-			dense={ false }
-		/>
-		<Input
-			nativeID={ `nutshell-write-entry-${ entrynr }-content` }
-			onFocus={ onFocus }
-			onBlur={ onBlur }
-			hideInfo={ true }
-			value={ paragraph }
-			label={ `Message (${ paragraph.length }/${ maxParagraphLength })` }
-			info={ `Tell the headline's story in at most ${ maxParagraphLength } characters.\n
-			In the Nutshell feed, this paragraph will collapse under the headline. Better make sure your headline is catchy!` }
-			onChangeText={ text => onInput( 'paragraph', text ) }
-			multiline={ true }
-		/>
+	return <Profiler id={ `nutshell-${ entrynr }-card` }>
+		<Card nativeID={ `nutshell-write-entry-${ entrynr }` } style={ { paddingVertical: 20, opacity: opaque ? 1 : .5 } }>
 
-		<TouchableOpacity style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingTop: 10 } } onPress={ newInspiration }>
-			<Caption>Inspiration: { inspiration }</Caption>
-			<IconButton style={ { opacity: .8 } } size={ 15 } icon='reload' />
-		</TouchableOpacity>
-		<HelperText style={ {  textAlign: 'center', width: '100%' } }>{ unsavedChanges ? 'Unsaved changes. ' : `All changes saved at ${timestampToTime()}. ` }</HelperText>
-	</Card>
+
+			<Profiler id={ `nutshell-${ entrynr }-head` }>
+				
+				{ entrynr < ( entries - 1 ) && <View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
+					<IconButton nativeID={ `nutshell-write-entry-${ entrynr }-moveup` } onPress={ f => move( entrynr, 'up' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-up' />
+					<Caption>Entry { entrynr + 1 } of { entries - 1 } (max 10)</Caption>
+					<IconButton nativeID={ `nutshell-write-entry-${ entrynr }-movedown` }  onPress={ f => move( entrynr, 'down' ) } size={ 15 } style={ { opacity: .8 } } icon='arrow-down' />
+				</View> }
+
+			</Profiler>
+
+
+			<Profiler id={ `nutshell-${ entrynr }-input-header` }>
+				<Input
+					nativeID={ `nutshell-write-entry-${ entrynr }-headline` }
+					onFocus={ onFocus }
+					onBlur={ onBlur }
+					hideInfo={ true }
+					style={ { fontWeight: 'bold' } }
+					value={ title }
+					label={ `Headline (${ title.length }/${ maxTitleLength })` }
+					info={ `A short summary of at most ${ maxTitleLength } characters about what you want to say.\n
+					Examples: "Struggling to focus this week" or "My new routine is really nice".` }
+					onChangeText={ updateTitle }
+					dense={ false }
+				/>
+			</Profiler>
+
+			<Profiler id={ `nutshell-${ entrynr }-input-paragraph` }>
+				<Input
+					nativeID={ `nutshell-write-entry-${ entrynr }-content` }
+					onFocus={ onFocus }
+					onBlur={ onBlur }
+					hideInfo={ true }
+					value={ paragraph }
+					label={ `Message (${ paragraph.length }/${ maxParagraphLength })` }
+					info={ `Tell the headline's story in at most ${ maxParagraphLength } characters.\n
+					In the Nutshell feed, this paragraph will collapse under the headline. Better make sure your headline is catchy!` }
+					onChangeText={ updateParagraph }
+					multiline={ true }
+				/>
+			</Profiler>
+
+			<Profiler id={ `nutshell-${ entrynr }-inspiration` }>
+
+				<TouchableOpacity style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingTop: 10 } } onPress={ newInspiration }>
+					<Caption>Inspiration: { inspiration }</Caption>
+					<IconButton style={ { opacity: .8 } } size={ 15 } icon='reload' />
+				</TouchableOpacity>
+
+			</Profiler>
+
+			<Profiler id={ `nutshell-${ entrynr }-lastsaved` }>
+				<HelperText style={ {  textAlign: 'center', width: '100%' } }>{ unsavedChanges ? 'Unsaved changes. ' : `All changes saved at ${timestampToTime()}. ` }</HelperText>
+			</Profiler>
+
+		</Card>
+	</Profiler>
 }
+
+export const Entry = React.memo( UnoptimisedEntry, ( prev, next ) => {
+
+	if( prev.title != next.title ) return false
+	if( prev.paragraph != next.paragraph ) return false
+	if( prev.entrynr != next.entrynr ) return false
+	if( prev.entries != next.entries ) return false
+	if( prev.unsavedChanges != next.unsavedChanges ) return false
+
+	// No changed? Memo yes
+	return true
+
+} )

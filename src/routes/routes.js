@@ -142,8 +142,10 @@ class Routes extends Component {
 		const nightTime = theHour > 20 || theHour < 7
 
 		// Set dark mode based on combination of system and time
-		const wantDark = ( getIsDarkMode() || nightTime ) || ( !getIsDarkMode() && !nightTime )
+		const wantDark = ( getIsDarkMode() || nightTime ) || ( !getIsDarkMode() && nightTime )
 		const isDark = theme?.dark
+
+		log( `Setting dark mode to ${ wantDark } from current state ${ isDark } since ${ theHour } is ${ nightTime ? 'night time': 'day time' } and system setting is ${ getIsDarkMode() }` )
 
 		if( wantDark && !isDark ) return dispatch( toggleDarkMode() )
 		if( !wantDark && isDark ) return dispatch( toggleDarkMode() )
