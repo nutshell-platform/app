@@ -180,7 +180,7 @@ class WriteNutshell extends Component {
 		this.scheduleTipCheck()
 
 
-		await this.updateState( { unsavedChanges: true, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
+		await this.updateState( { unsavedChanges: uid, nutshell: { ...nutshell, entries: [ ...updatedEntries ] } } )
 
 
 	}

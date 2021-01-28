@@ -51,28 +51,11 @@ class Routes extends Component {
 
 	componentDidMount = async () => {
 
-		// Handle purge requests
-		if( isWeb && typeof location != 'undefined' && location.href.includes( 'purge' ) ) {
-			log( 'Purge request detected' )
-			await firebase.logout()
-			location.href = '/'
-		}
-
-		// Make test nutshell if needed
-		if( isWeb && typeof location != 'undefined' && location.href.includes( 'createDemoNutshell' ) ) {
-			log( '🛑 Demo nutshell requested' )
-			await firebase.createTestNutshell().catch( e => log( 'Error creating test nutshell: ', e ) )
-		}
-		
+		// Handle query strings
+		this.handleQueryAndParams()
 
 		const { history, user } = this.props
 
-		// If url is wrongly using hash (for example due to a direct link), fix it
-		if( window?.location ) {
-			const { href, host } = window.location
-			const [ fullMatch, pathMatch ] = href.match( /(\w+)#/ ) || []
-			if( pathMatch ) window.history.replaceState( null, '', `/#/${pathMatch}` )
-		}
 
 		// Register back button handler
 		this.backHandler = BackHandler.addEventListener( 'hardwareBackPress', f => {
@@ -97,6 +80,31 @@ class Routes extends Component {
 		// Disable loading screen
 		return this.setState( { init: true } )
 		
+	}
+
+	handleQueryAndParams = async f => {
+
+		// If url is wrongly using hash (for example due to a direct link), fix it
+		if( window?.location ) {
+			const { href, host } = window.location
+			const [ fullMatch, pathMatch ] = href.match( /(\w+)#/ ) || []
+			if( pathMatch ) window.history.replaceState( null, '', `/#/${pathMatch}` )
+		}
+
+		// Handle purge requests
+		if( isWeb && typeof location != 'undefined' && location.href.includes( 'purge' ) ) {
+			log( 'Purge request detected' )
+			await firebase.logout()
+			location.href = '/'
+		}
+
+		// Make test nutshell if needed
+		if( isWeb && typeof location != 'undefined' && location.href.includes( 'createDemoNutshell' ) ) {
+			log( '🛑 Demo nutshell requested' )
+			await firebase.createTestNutshell().catch( e => log( 'Error creating test nutshell: ', e ) )
+		}
+		
+
 	}
 
 	shouldComponentUpdate = ( nextProps, nextState ) => {

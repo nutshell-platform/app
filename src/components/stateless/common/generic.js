@@ -131,9 +131,8 @@ export const Input = React.memo( ( { style, info, hideInfo=false, error, onSubmi
 	const theme = useSelector( store => store?.settings?.theme )
 
 	// Internal variables
-	const gutter = multiline ? 200 : undefined
 	const [ showInfo, setInfo ] = useState( false )
-	const [ height, setHeight ] = useState( gutter )
+	const [ height, setHeight ] = useState( multiline ? 100 : undefined )
 
 	// Styles
 	const inputStyles = { ...( height && { height: height } ), minHeight: 50, marginVertical: 10, backgroundColor: multiline ? theme.colors.background : 'none', ...style }
@@ -270,4 +269,4 @@ export const Container = withTheme( ( { style, children, theme, Background } ) =
 // ///////////////////////////////
 // Pass through exports straignt from paper
 // ///////////////////////////////
-export { Drawer, Provider, FAB, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, Avatar, Caption, IconButton, Menu } from 'react-native-paper'
+export { ProgressBar, Drawer, Provider, FAB, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, Avatar, Caption, IconButton, Menu } from 'react-native-paper'
