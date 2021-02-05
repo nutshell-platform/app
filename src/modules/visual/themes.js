@@ -6,7 +6,9 @@ export const Light = {
 	colors: {
 		...theme.colors,
 		divider: 'rgba(0,0,0,.1)',
-		primary: 'rgb(0,0,0)'
+		primary: 'rgb(0,0,0)',
+		warning: '#f9a825',
+		success: '#64dd17'
 	},
 	roundness: 0,
 	dark: false

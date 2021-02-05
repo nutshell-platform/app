@@ -15,7 +15,7 @@ export const Dialogue = ( title, message, options=[ { text: 'ok', onPress: f => 
 		message,
 		options.map( option => ( { ...option, onPress: f => option.onPress && option.onPress().then( res => resolve( res ) ) } ) ),
 		{ cancelable: true }
-	 )
+	)
 
 	if( isWeb ) {
 		if( confirm( `${title}\n\n${message}` ) ) options[0].onPress().then( resolve )

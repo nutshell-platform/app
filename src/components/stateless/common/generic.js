@@ -169,7 +169,11 @@ export const Input = React.memo( ( { style, info, hideInfo=false, error, onSubmi
 }, inputMemoCompare )
 
 // Button
-export const Button = withRouter( withTheme( ( { style, mode='contained', loading=false, children, to, theme, history, onPress, ...props } ) => {
+export const Button = ( { style, color, mode='contained', loading=false, children, to, onPress, ...props } ) => {
+
+	const theme = useSelector( store => store?.settings?.theme || {} )
+	const history = useHistory()
+	const buttonStyle = { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', flexGrow: 1, flexShrink: 1 }
 
 	const handleLink = link => {
 		if( link.includes( 'http' ) || link.includes( 'mailto:' ) ) return Linking.openURL( link )
@@ -177,19 +181,24 @@ export const Button = withRouter( withTheme( ( { style, mode='contained', loadin
 	}
 
 	return <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 20, ...style } }>
-		<PaperButton
+		{ children && <PaperButton
+				onPress={ to ? f => handleLink( to ) : onPress }
+				style={ buttonStyle }
+				contentStyle={ { width: '100%' } }
+				labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface } }		
+				mode={ mode } { ...props }
+			>
+				{ children }
+				{ loading && <ActivityIndicator size={ 10 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { height: 20, width: 20, paddingLeft: 20 } } /> }
+			</PaperButton> }
+		{ !children && <IconButton
+			color={ color || theme?.colors?.primary }
 			onPress={ to ? f => handleLink( to ) : onPress }
-			style={ { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', flexGrow: 1, flexShrink: 1 } }
-			contentStyle={ { width: '100%' } }
-			labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface } }		
-			mode={ mode } { ...props }
-		>
-			{ children }
-			{ loading && <ActivityIndicator size={ 10 } color={ mode != 'contained' ? theme.colors.text : theme.colors.background } style={ { height: 20, width: 20, paddingLeft: 20 } } /> }
-		</PaperButton>
+			{ ...props }
+		/> }
 		
 	</View>
-} ) )
+}
 
 
 // Toggle
