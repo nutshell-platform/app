@@ -8,13 +8,24 @@ service firebase.storage {
 
     // Allow creation if size is not too big and resource does not exist
     match /avatars/{fileName} {
-    	// 5MB max, more that we should ever need
-    	allow create: if request.auth != null && request.resource.size < 5 * 1024 * 1024
-    	// Read only if logged in
-    	allow read: if request.auth != null
+      // 5MB max, more that we should ever need
+      allow create: if request.auth != null && request.resource.size < 5 * 1024 * 1024
+      // Read only if logged in
+      allow read: if request.auth != null
 
-    	// Delete only if filename has myUid-uuidAccordingToRFC
-    	allow delete: if fileName.matches( request.auth.uid + '(-[a-z0-9]+){5}.jpg' )
+      // Delete only if filename has myUid-uuidAccordingToRFC
+      allow delete: if fileName.matches( request.auth.uid + '(-[a-z0-9]+){5}.jpg' )
+
+    }
+
+     // Allow full write permissions for own file
+    match /audioNutshells/{userUid}/{filename} {
+
+      // 10MB max, more that we should ever need
+      allow write: if request.auth.uid == userUid && request.resource.size < 10 * 1024 * 1024
+
+      // Read only if logged in
+      allow read: if request.auth != null
 
     }
 

@@ -1,4 +1,4 @@
-import { Notifications } from 'expo'
+import * as Notifications from 'expo-notifications'
 import { checkOrRequestPushAccess } from './apis/permissions'
 import { isWeb, isAndroid } from './apis/platform'
 import { log } from './helpers'
@@ -22,7 +22,7 @@ export const getTokenIfNeeded = async settings => {
 export const registerNotificationListeners = history => {
 
 	// Set andriod notification category
-	if( isAndroid ) Notifications.createChannelAndroidAsync( 'default', {
+	if( isAndroid ) Notifications.setNotificationChannelAsync( 'default', {
 		name: 'default',
 		default: 'Notifications as configured in your settings.',
         sound: true,
@@ -30,15 +30,16 @@ export const registerNotificationListeners = history => {
         vibrate: true
 	} )
 
-	Notifications.addListener( notification => {
+	Notifications.addNotificationResponseReceivedListener( ( { notification } ) => {
 
 		log( notification )
+		const { request: { content } } = notification
 
 		// Check if data was sent with the notification
-		const { origin, data } = notification
+		const { data } = content
 
 		// If the user tapped the notification and there is route info
-		if( origin == 'selected' && data.goto ) history.push( data.goto )
+		if( data?.goto ) history.push( data.goto )
 
 	} )
 }

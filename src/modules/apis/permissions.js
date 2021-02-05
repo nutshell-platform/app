@@ -1,6 +1,6 @@
 // Permission APIs
 import * as Permissions from 'expo-permissions'
-import { Notifications } from 'expo'
+import * as Notifications from 'expo-notifications'
 import * as Contacts from 'expo-contacts'
 
 // Device apis and helpers

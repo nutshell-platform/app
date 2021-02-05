@@ -34,6 +34,7 @@ import { unregisterListeners, registerListeners } from './listeners'
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges, updateContactMethods, listenContactMethods } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell } from './_nutshells'
+import { saveAudioEntry } from './_audio_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson } from './_friends'
 import { getModerationQueue, markAbuseModerated  } from './_system'
 import { getAndSaveFingerprints } from './_fingerprints'
@@ -88,6 +89,9 @@ class Firebase {
 	markNutshellRead   = uid 	  => markNutshellRead( this, uid )
 	reportNutshell	   = report   => reportNutshell( this, report )
 	muteNutshell	   = uid 	  => muteNutshell( this, uid )
+
+	// Audio
+	saveAudioEntry = ( uidOfNutshell, audioBlob ) => saveAudioEntry( this, uidOfNutshell, audioBlob )
 
 	// ///////////////////////////////
 	// System functions

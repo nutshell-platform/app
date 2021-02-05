@@ -15,8 +15,7 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 
 	const statusMessage = status == 'draft' ? 'Draft: will not auto-publish' : `Status: scheduled for ${ timestampToHuman( dateOfNext( 'sunday' ) ) } at midnight`
 
-	return <View>
-		<View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
+	return <View style={ { paddingVertical: avatarSize/2, width: '100%' } }>
 
 		<Card style={ { paddingVertical: 0, width: 500 } } >
 
@@ -54,5 +53,4 @@ export const Editor = ( { children, avatarSize=100, user={}, status, entries, up
 		) }
 
 		</View>
-	</View>
 }

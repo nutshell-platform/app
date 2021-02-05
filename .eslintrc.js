@@ -40,7 +40,8 @@ module.exports = {
         context: false,
         cy: true,
         window: true,
-        location: true
+        location: true,
+        fetch: true
     },
 
     // Plugins

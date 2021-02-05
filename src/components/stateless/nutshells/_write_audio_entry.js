@@ -4,27 +4,62 @@ import { Animated } from 'react-native'
 
 // Visual
 import { Pressable } from 'react-native'
-import { Card, Input, HelperText, View, Caption, Button, IconButton, Profiler, ToolTip, Avatar, Title, Text } from '../common/generic'
+import { Card, Input, HelperText, View, Caption, Button, IconButton, Profiler, ToolTip, Avatar, Title, Text, ActivityIndicator } from '../common/generic'
 
 // Data
 import { catcher, log, Dialogue } from '../../../modules/helpers'
 import { isWeb } from '../../../modules/apis/platform'
+import app from '../../../modules/firebase/app'
 
 // Recording
 import useInterval from 'use-interval'
 import { Audio } from 'expo-av'
 import * as Permissions from 'expo-permissions'
 
-export const UnoptimisedAudioEntry = ( { ...props } ) => {
+export const AudioEntry = ( { ...props } ) => {
+
+	// Grab audio array ( length max 1 for now )
+	const [ existingAudioURI ] = useSelector( store => store?.nutshells?.draft?.audio || [] )
+
+	return  <AudioRecorder existingAudioURI={ existingAudioURI } />
+
+}
+
+export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 
 	// Permissions
 	const [ audioPermission, askPermission ] = Permissions.usePermissions( Permissions.AUDIO_RECORDING )
 
+	// Uid of nutshell draft
+	const uidOfDraftNutshell = useSelector( store => store?.nutshells?.draft?.uid )
+
 	// Recording variables
 	const maxLength = 60
 	const [ isRecording, setIsRecording ] = useState( false )
-	const [ sound, setSound ] = useState( undefined )
-	const [ timeRecorded, setTimeRecorded ] = useState( 0 )
+	const [ sound, setSound ] = useState( )
+	const [ timeRecorded, setTimeRecorded ] = useState( )
+
+	// If existing sound, load it
+	const [ loadingExisting, setLoadingExisting ] = useState( !!existingAudioURI )
+	useEffect( f => {
+		
+		if( existingAudioURI ) Audio.Sound.createAsync( { uri: existingAudioURI } )
+		.then( ( { sound, ...rest } ) => {
+
+			// Set the sound to state
+			setSound( sound )
+
+			// Set the metadata of the recording
+			sound.getStatusAsync().then( ( { durationMillis } ) => setTimeRecorded( Math.floor( durationMillis / 1000 ) ) )
+			
+			setLoadingExisting( false )
+
+		} )
+
+		// If the file changed, unload old
+		return f => setSound( undefined )
+
+	}, [ existingAudioURI ] )
 
 	// Incrementor
 	useInterval( async f => {
@@ -76,7 +111,6 @@ export const UnoptimisedAudioEntry = ( { ...props } ) => {
 
 	}
 
-
 	const resetIsRecording = async f => {
 		try {
 
@@ -85,42 +119,73 @@ export const UnoptimisedAudioEntry = ( { ...props } ) => {
 			setSound( undefined )
 			setTimeRecorded( 0 )
 			setIsRecording( false )
+			setIsSaved( false )
 
 		} catch( e ) {
 			catcher( e )
 			Dialogue( 'Reset error', e )
 		}
 	}
+
+	// Saving
+	const [ isSaved, setIsSaved ] = useState( !!existingAudioURI )
+	const [ isSaving, setIsSaving ] = useState( false )
+	const saveRecording = async f => {
+
+		try {
+
+			setIsSaving( true )
+			const audioURI = await recorder.getURI( )
+
+			// Create file blob for upload
+			const file = await fetch( audioURI )
+			const audioBlob = await file.blob()
+
+			// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
+			await app.saveAudioEntry( uidOfDraftNutshell, audioBlob )
+			
+			setIsSaved( true )
+			setIsSaving( false )
+
+		} catch( e ) {
+			catcher( e )
+			Dialogue( 'Error saving audio: ', e.message )
+		}
+
+	}
+
+	if( loadingExisting || isSaving ) return <Card>
+		<ActivityIndicator />
+	</Card>
 	
 
 	return <Card>
 
 			{ /* Recorder */ }
-			<Pressable onPress={ toggleRecording } style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
+			<Pressable onPress={ loadingExisting ? f => f : toggleRecording } style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' } }>
 
 				
 				<RecordIcon isDone={ !isRecording && sound } isRecording={ isRecording } maxedOut={ timeRecorded == maxLength } />
 
 				<View style={ { flexDirection: 'column', height: 50 } }>
-					<Title style={ { marginTop: 0 } }>Audio Nutshell</Title>
+					<Title style={ { marginTop: 0 } }>{ loadingExisting ? 'Loading ' : '' }Audio Nutshell</Title>
 					{ timeRecorded != 60 && <Text>00:{ timeRecorded < 10 ? `0${timeRecorded}` : timeRecorded }/01:00</Text> }
 					{ timeRecorded == 60 && <Text>01:00/01:00</Text> }
 				</View>
 
 			</Pressable>
 
-			<RecordingMeta sound={ sound } reset={ resetIsRecording } timeRecorded={ timeRecorded } />
+			<RecordingMeta save={ saveRecording } isSaved={ isSaved } sound={ sound } reset={ resetIsRecording } timeRecorded={ timeRecorded } />
 
 	</Card>
-}
+} )
 
-const RecordingMeta = memo( ( { sound, reset } ) => {
+const RecordingMeta = memo( ( { sound, reset, save, isSaved } ) => {
 
 	// Show nothing if recording has not started
 	if( !sound ) return null
 
 	// Saved audio handling
-	const [ isSaved, setIsSaved ] = useState( false )
 	const [ isPlaying, setIsPlaying ] = useState( false )
 
 	// Set auto-stop in interface based on playbeck
@@ -148,7 +213,6 @@ const RecordingMeta = memo( ( { sound, reset } ) => {
 
 	}
 
-	const save = f => setIsSaved( true )
 
 	return <View style={ { flex: 1, flexDirection: 'column' } }>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
@@ -156,7 +220,6 @@ const RecordingMeta = memo( ( { sound, reset } ) => {
 			<Button style={ { marginTop: 10 } } onPress={ togglePreview } icon={ isPlaying ? 'stop' : 'play' } />
 			<Button style={ { marginTop: 10 } } onPress={ reset } icon='delete' />
 		</View>
-		
 		<HelperText style={ {  textAlign: 'center', width: '100%', color: isSaved ? 'green' : 'orange', paddingBottom: 0, marginBottom: -10 } }>{ isSaved ? '' : 'Un' }saved nutshell</HelperText>
 
 	</View>
@@ -188,5 +251,3 @@ const RecordIcon = memo( ( { isRecording=false } ) => {
 		<Avatar.Icon color={ isRecording ? 'red' : 'white' } icon={ icon } size={ 50 }/>
 	</Animated.View>
 } )
-
-export const AudioEntry = memo( UnoptimisedAudioEntry )

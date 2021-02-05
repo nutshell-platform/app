@@ -147,6 +147,7 @@ export const updateUser = async ( app, userUpdates ) => {
 
 
 	} catch( e ) {
+		log( 'User update error: ', e )
 		throw e
 	}
 
