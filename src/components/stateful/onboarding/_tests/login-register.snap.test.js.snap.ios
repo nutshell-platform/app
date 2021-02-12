@@ -542,6 +542,12 @@ exports[`Login and registration Matches snapshot 1`] = `
               "paddingVertical": 40,
             }
           }
+          refreshControl={
+            <RefreshControlMock
+              onRefresh={[Function]}
+              refreshing={false}
+            />
+          }
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           style={
@@ -550,6 +556,7 @@ exports[`Login and registration Matches snapshot 1`] = `
             }
           }
         >
+          <RCTRefreshControl />
           <View>
             <View
               style={
@@ -596,11 +603,17 @@ exports[`Login and registration Matches snapshot 1`] = `
                   }
                 >
                   <View
-                    style={
-                      Object {
-                        "maxWidth": "100%",
-                      }
-                    }
+                    accessible={true}
+                    focusable={true}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
                   >
                     <View
                       style={
@@ -750,18 +763,13 @@ exports[`Login and registration Matches snapshot 1`] = `
                             onContentSizeChange={[Function]}
                             onFocus={[Function]}
                             onKeyPress={[Function]}
-                            onPress={[Function]}
                             placeholder=""
                             placeholderTextColor="rgba(0, 0, 0, 0.54)"
                             rejectResponderTermination={true}
                             selectionColor="rgb(0,0,0)"
                             siblings={
                               Array [
-                                "withTheme()",
-                                "withTheme()",
-                                "withRouter(withTheme())",
-                                "withRouter(withTheme())",
-                                "withTheme(Text)",
+                                "withTheme(undefined)",
                               ]
                             }
                             style={
@@ -769,7 +777,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                                 Object {
                                   "flexGrow": 1,
                                   "margin": 0,
-                                  "textAlign": "left",
                                   "zIndex": 1,
                                 },
                                 Object {
@@ -788,6 +795,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                   "fontSize": 16,
                                   "fontWeight": undefined,
+                                  "textAlign": "left",
                                   "textAlignVertical": "center",
                                 },
                                 Array [
@@ -804,11 +812,17 @@ exports[`Login and registration Matches snapshot 1`] = `
                     </View>
                   </View>
                   <View
-                    style={
-                      Object {
-                        "maxWidth": "100%",
-                      }
-                    }
+                    accessible={true}
+                    focusable={true}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
                   >
                     <View
                       style={
@@ -957,7 +971,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                             onContentSizeChange={[Function]}
                             onFocus={[Function]}
                             onKeyPress={[Function]}
-                            onPress={[Function]}
                             placeholder=""
                             placeholderTextColor="rgba(0, 0, 0, 0.54)"
                             rejectResponderTermination={true}
@@ -965,11 +978,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                             selectionColor="rgb(0,0,0)"
                             siblings={
                               Array [
-                                "withTheme()",
-                                "withTheme()",
-                                "withRouter(withTheme())",
-                                "withRouter(withTheme())",
-                                "withTheme(Text)",
+                                "withTheme(undefined)",
                               ]
                             }
                             style={
@@ -977,7 +986,6 @@ exports[`Login and registration Matches snapshot 1`] = `
                                 Object {
                                   "flexGrow": 1,
                                   "margin": 0,
-                                  "textAlign": "left",
                                   "zIndex": 1,
                                 },
                                 Object {
@@ -996,6 +1004,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                   "fontSize": 16,
                                   "fontWeight": undefined,
+                                  "textAlign": "left",
                                   "textAlignVertical": "center",
                                 },
                                 Array [
@@ -1025,30 +1034,10 @@ exports[`Login and registration Matches snapshot 1`] = `
                   >
                     <View
                       index={5}
-                      location={
-                        Object {
-                          "hash": "",
-                          "pathname": "/",
-                          "search": "",
-                          "state": undefined,
-                        }
-                      }
-                      match={
-                        Object {
-                          "isExact": true,
-                          "params": Object {},
-                          "path": "/",
-                          "url": "/",
-                        }
-                      }
                       nativeID="loginreg-submit"
                       siblings={
                         Array [
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                          "withRouter(withTheme())",
-                          "withTheme(Text)",
+                          "withTheme(undefined)",
                         ]
                       }
                       style={
@@ -1129,6 +1118,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           </View>
                           <Text
                             numberOfLines={1}
+                            selectable={false}
                             style={
                               Array [
                                 Object {
@@ -1185,30 +1175,10 @@ exports[`Login and registration Matches snapshot 1`] = `
                   >
                     <View
                       index={6}
-                      location={
-                        Object {
-                          "hash": "",
-                          "pathname": "/",
-                          "search": "",
-                          "state": undefined,
-                        }
-                      }
-                      match={
-                        Object {
-                          "isExact": true,
-                          "params": Object {},
-                          "path": "/",
-                          "url": "/",
-                        }
-                      }
                       nativeID="loginreg-toggle"
                       siblings={
                         Array [
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                          "withRouter(withTheme())",
-                          "withTheme(Text)",
+                          "withTheme(undefined)",
                         ]
                       }
                       style={
@@ -1282,6 +1252,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                           </View>
                           <Text
                             numberOfLines={1}
+                            selectable={false}
                             style={
                               Array [
                                 Object {
@@ -1330,11 +1301,7 @@ exports[`Login and registration Matches snapshot 1`] = `
                     onPress={[Function]}
                     siblings={
                       Array [
-                        "withTheme()",
-                        "withTheme()",
-                        "withRouter(withTheme())",
-                        "withRouter(withTheme())",
-                        "withTheme(Text)",
+                        "withTheme(undefined)",
                       ]
                     }
                     style={

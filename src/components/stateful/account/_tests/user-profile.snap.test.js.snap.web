@@ -5,16 +5,9 @@ exports[`UserProfile Matches snapshot 1`] = `
   className="css-view-1dbjc4n r-pointerEvents-12vffkv"
   style={
     Object {
-      "WebkitBoxFlex": 1,
-      "WebkitFlexBasis": "0%",
-      "WebkitFlexGrow": 1,
-      "WebkitFlexShrink": 1,
-      "flexBasis": "0%",
-      "flexGrow": 1,
-      "flexShrink": 1,
-      "msFlexNegative": 1,
-      "msFlexPositive": 1,
-      "msFlexPreferredSize": "0%",
+      "WebkitFlex": 1,
+      "flex": 1,
+      "msFlex": "1 1 0%",
     }
   }
 >
@@ -22,16 +15,9 @@ exports[`UserProfile Matches snapshot 1`] = `
     className="css-view-1dbjc4n"
     style={
       Object {
-        "WebkitBoxFlex": 1,
-        "WebkitFlexBasis": "0%",
-        "WebkitFlexGrow": 1,
-        "WebkitFlexShrink": 1,
-        "flexBasis": "0%",
-        "flexGrow": 1,
-        "flexShrink": 1,
-        "msFlexNegative": 1,
-        "msFlexPositive": 1,
-        "msFlexPreferredSize": "0%",
+        "WebkitFlex": 1,
+        "flex": 1,
+        "msFlex": "1 1 0%",
       }
     }
   >
@@ -39,17 +25,10 @@ exports[`UserProfile Matches snapshot 1`] = `
       className="css-view-1dbjc4n"
       style={
         Object {
-          "WebkitBoxFlex": 1,
-          "WebkitFlexBasis": "0%",
-          "WebkitFlexGrow": 1,
-          "WebkitFlexShrink": 1,
+          "WebkitFlex": 1,
           "backgroundColor": "rgba(0,0,0,1.00)",
-          "flexBasis": "0%",
-          "flexGrow": 1,
-          "flexShrink": 1,
-          "msFlexNegative": 1,
-          "msFlexPositive": 1,
-          "msFlexPreferredSize": "0%",
+          "flex": 1,
+          "msFlex": "1 1 0%",
           "paddingBottom": "env(safe-area-inset-bottom)",
           "paddingLeft": "env(safe-area-inset-left)",
           "paddingRight": "env(safe-area-inset-right)",
@@ -65,28 +44,21 @@ exports[`UserProfile Matches snapshot 1`] = `
             "WebkitAlignItems": "center",
             "WebkitBoxAlign": "center",
             "WebkitBoxDirection": "normal",
-            "WebkitBoxFlex": 1,
             "WebkitBoxOrient": "vertical",
             "WebkitBoxPack": "center",
-            "WebkitFlexBasis": "0%",
+            "WebkitFlex": 1,
             "WebkitFlexDirection": "column",
-            "WebkitFlexGrow": 1,
-            "WebkitFlexShrink": 1,
             "WebkitJustifyContent": "center",
             "alignItems": "center",
             "backgroundColor": "rgba(246,246,246,1.00)",
-            "flexBasis": "0%",
+            "flex": 1,
             "flexDirection": "column",
-            "flexGrow": 1,
-            "flexShrink": 1,
             "justifyContent": "center",
             "maxWidth": "100%",
+            "msFlex": "1 1 0%",
             "msFlexAlign": "center",
             "msFlexDirection": "column",
-            "msFlexNegative": 1,
             "msFlexPack": "center",
-            "msFlexPositive": 1,
-            "msFlexPreferredSize": "0%",
             "overflowX": "hidden",
             "overflowY": "hidden",
           }

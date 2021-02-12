@@ -118,6 +118,7 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
             allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
@@ -126,6 +127,7 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
                 },
                 Array [
                   Object {
+                    "lineHeight": 15,
                     "transform": Array [
                       Object {
                         "scaleX": 1,
@@ -145,7 +147,7 @@ exports[`ShowOrPickImage with image Matches snapshot 1`] = `
               ]
             }
           >
-            
+            󰏫
           </Text>
         </View>
       </View>

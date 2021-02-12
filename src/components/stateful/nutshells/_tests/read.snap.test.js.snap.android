@@ -534,6 +534,12 @@ exports[`ReadNutshell Matches snapshot 1`] = `
               "paddingVertical": 40,
             }
           }
+          refreshControl={
+            <RefreshControlMock
+              onRefresh={[Function]}
+              refreshing={true}
+            />
+          }
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           style={
@@ -542,139 +548,8 @@ exports[`ReadNutshell Matches snapshot 1`] = `
             }
           }
         >
+          <RCTRefreshControl />
           <View>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "flex-start",
-                  "marginBottom": 20,
-                  "marginTop": 20,
-                  "maxWidth": "100%",
-                  "position": "relative",
-                  "width": 500,
-                }
-              }
-            >
-              <View
-                location={
-                  Object {
-                    "hash": "",
-                    "pathname": "/",
-                    "search": "",
-                    "state": undefined,
-                  }
-                }
-                match={
-                  Object {
-                    "isExact": true,
-                    "params": Object {},
-                    "path": "/",
-                    "url": "/",
-                  }
-                }
-                style={
-                  Object {
-                    "alignItems": "stretch",
-                    "backgroundColor": "transparent",
-                    "borderColor": "transparent",
-                    "borderRadius": 0,
-                    "borderStyle": "solid",
-                    "borderWidth": 0,
-                    "elevation": 0,
-                    "flexDirection": "column",
-                    "flexGrow": 1,
-                    "flexShrink": 1,
-                    "justifyContent": "center",
-                    "minWidth": 64,
-                  }
-                }
-              >
-                <View
-                  accessibilityRole="button"
-                  accessibilityState={
-                    Object {
-                      "disabled": undefined,
-                    }
-                  }
-                  accessible={true}
-                  focusable={false}
-                  onClick={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
-                  style={
-                    Array [
-                      Object {
-                        "overflow": "hidden",
-                      },
-                      Object {
-                        "borderRadius": 0,
-                      },
-                    ]
-                  }
-                >
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "alignItems": "center",
-                          "flexDirection": "row",
-                          "justifyContent": "center",
-                        },
-                        Object {
-                          "width": "100%",
-                        },
-                      ]
-                    }
-                  >
-                    <Text
-                      numberOfLines={1}
-                      style={
-                        Array [
-                          Object {
-                            "color": "#000000",
-                            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                            "fontWeight": "400",
-                            "textAlign": "left",
-                          },
-                          Array [
-                            Object {
-                              "letterSpacing": 1,
-                              "marginHorizontal": 16,
-                              "marginVertical": 9,
-                              "textAlign": "center",
-                            },
-                            undefined,
-                            Object {
-                              "textTransform": "uppercase",
-                            },
-                            Object {
-                              "color": "rgb(0,0,0)",
-                              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                              "fontWeight": "500",
-                            },
-                            Object {
-                              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                              "fontWeight": "500",
-                            },
-                            Object {
-                              "color": "#000000",
-                            },
-                          ],
-                        ]
-                      }
-                    >
-                      Updating your inbox
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
             <View
               nativeID="tutorial"
               style={
@@ -724,8 +599,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     index={0}
                     siblings={
                       Array [
-                        "withTheme(Text)",
-                        "withRouter(withTheme())",
+                        "withTheme(undefined)",
                       ]
                     }
                     style={
@@ -753,15 +627,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                             },
                             undefined,
                           ],
-                          Array [
-                            Object {
-                              "fontSize": 20,
-                              "letterSpacing": 0.15,
-                              "lineHeight": 30,
-                              "marginVertical": 2,
-                            },
-                            undefined,
-                          ],
                         ],
                       ]
                     }
@@ -775,8 +640,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                     index={1}
                     siblings={
                       Array [
-                        "withTheme(Text)",
-                        "withRouter(withTheme())",
+                        "withTheme(undefined)",
                       ]
                     }
                     style={
@@ -810,26 +674,9 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                   >
                     <View
                       index={2}
-                      location={
-                        Object {
-                          "hash": "",
-                          "pathname": "/",
-                          "search": "",
-                          "state": undefined,
-                        }
-                      }
-                      match={
-                        Object {
-                          "isExact": true,
-                          "params": Object {},
-                          "path": "/",
-                          "url": "/",
-                        }
-                      }
                       siblings={
                         Array [
-                          "withTheme(Text)",
-                          "withRouter(withTheme())",
+                          "withTheme(undefined)",
                         ]
                       }
                       style={
@@ -900,6 +747,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                         >
                           <Text
                             numberOfLines={1}
+                            selectable={false}
                             style={
                               Array [
                                 Object {
@@ -1030,18 +878,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                                 "textAlign": "center",
                               },
                             ],
-                            Array [
-                              Object {
-                                "fontSize": 20,
-                                "letterSpacing": 0.15,
-                                "lineHeight": 30,
-                                "marginVertical": 2,
-                              },
-                              Object {
-                                "marginBottom": 15,
-                                "textAlign": "center",
-                              },
-                            ],
                           ],
                         ]
                       }
@@ -1091,22 +927,6 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                         }
                       >
                         <View
-                          location={
-                            Object {
-                              "hash": "",
-                              "pathname": "/",
-                              "search": "",
-                              "state": undefined,
-                            }
-                          }
-                          match={
-                            Object {
-                              "isExact": true,
-                              "params": Object {},
-                              "path": "/",
-                              "url": "/",
-                            }
-                          }
                           style={
                             Object {
                               "alignItems": "stretch",
@@ -1174,6 +994,7 @@ exports[`ReadNutshell Matches snapshot 1`] = `
                             >
                               <Text
                                 numberOfLines={1}
+                                selectable={false}
                                 style={
                                   Array [
                                     Object {

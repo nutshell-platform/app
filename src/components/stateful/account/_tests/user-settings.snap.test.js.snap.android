@@ -536,6 +536,12 @@ exports[`UserSettings Matches snapshot 1`] = `
               "paddingVertical": 40,
             }
           }
+          refreshControl={
+            <RefreshControlMock
+              onRefresh={[Function]}
+              refreshing={false}
+            />
+          }
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           style={
@@ -544,6 +550,7 @@ exports[`UserSettings Matches snapshot 1`] = `
             }
           }
         >
+          <RCTRefreshControl />
           <View>
             <View
               style={
@@ -716,10 +723,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                       siblings={
                         Array [
                           "Connect(ShowOrPickImage)",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
                         ]
                       }
                       style={
@@ -749,17 +752,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "textAlign": "center",
                               },
                             ],
-                            Array [
-                              Object {
-                                "fontSize": 20,
-                                "letterSpacing": 0.15,
-                                "lineHeight": 30,
-                                "marginVertical": 2,
-                              },
-                              Object {
-                                "textAlign": "center",
-                              },
-                            ],
                           ],
                         ]
                       }
@@ -774,10 +766,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                       siblings={
                         Array [
                           "Connect(ShowOrPickImage)",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
                         ]
                       }
                       style={
@@ -799,10 +787,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                       siblings={
                         Array [
                           "Connect(ShowOrPickImage)",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
                         ]
                       }
                       style={
@@ -832,17 +816,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "marginTop": 20,
                               },
                             ],
-                            Array [
-                              Object {
-                                "fontSize": 16,
-                                "letterSpacing": 0.5,
-                                "lineHeight": 24,
-                                "marginVertical": 2,
-                              },
-                              Object {
-                                "marginTop": 20,
-                              },
-                            ],
                           ],
                         ]
                       }
@@ -851,11 +824,17 @@ exports[`UserSettings Matches snapshot 1`] = `
                       About you
                     </Text>
                     <View
-                      style={
-                        Object {
-                          "maxWidth": "100%",
-                        }
-                      }
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
                     >
                       <View
                         style={
@@ -1001,7 +980,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               onContentSizeChange={[Function]}
                               onFocus={[Function]}
                               onKeyPress={[Function]}
-                              onPress={[Function]}
                               placeholder=""
                               placeholderTextColor="rgba(0, 0, 0, 0.54)"
                               rejectResponderTermination={true}
@@ -1009,10 +987,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               siblings={
                                 Array [
                                   "Connect(ShowOrPickImage)",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
                                 ]
                               }
                               style={
@@ -1020,7 +994,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   Object {
                                     "flexGrow": 1,
                                     "margin": 0,
-                                    "textAlign": "left",
                                     "zIndex": 1,
                                   },
                                   Object {
@@ -1039,6 +1012,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": 16,
                                     "fontWeight": undefined,
+                                    "textAlign": "left",
                                     "textAlignVertical": "center",
                                   },
                                   Array [
@@ -1099,11 +1073,17 @@ exports[`UserSettings Matches snapshot 1`] = `
                       </View>
                     </View>
                     <View
-                      style={
-                        Object {
-                          "maxWidth": "100%",
-                        }
-                      }
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
                     >
                       <View
                         style={
@@ -1249,7 +1229,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               onContentSizeChange={[Function]}
                               onFocus={[Function]}
                               onKeyPress={[Function]}
-                              onPress={[Function]}
                               placeholder=""
                               placeholderTextColor="rgba(0, 0, 0, 0.54)"
                               rejectResponderTermination={true}
@@ -1257,10 +1236,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               siblings={
                                 Array [
                                   "Connect(ShowOrPickImage)",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
                                 ]
                               }
                               style={
@@ -1268,7 +1243,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   Object {
                                     "flexGrow": 1,
                                     "margin": 0,
-                                    "textAlign": "left",
                                     "zIndex": 1,
                                   },
                                   Object {
@@ -1287,6 +1261,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": 16,
                                     "fontWeight": undefined,
+                                    "textAlign": "left",
                                     "textAlignVertical": "center",
                                   },
                                   Array [
@@ -1347,11 +1322,17 @@ exports[`UserSettings Matches snapshot 1`] = `
                       </View>
                     </View>
                     <View
-                      style={
-                        Object {
-                          "maxWidth": "100%",
-                        }
-                      }
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
                     >
                       <View
                         style={
@@ -1498,7 +1479,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               onContentSizeChange={[Function]}
                               onFocus={[Function]}
                               onKeyPress={[Function]}
-                              onPress={[Function]}
                               placeholder=""
                               placeholderTextColor="rgba(0, 0, 0, 0.54)"
                               rejectResponderTermination={true}
@@ -1506,10 +1486,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               siblings={
                                 Array [
                                   "Connect(ShowOrPickImage)",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
                                 ]
                               }
                               style={
@@ -1517,7 +1493,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                   Object {
                                     "flexGrow": 1,
                                     "margin": 0,
-                                    "textAlign": "left",
                                     "zIndex": 1,
                                   },
                                   Object {
@@ -1536,6 +1511,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": 16,
                                     "fontWeight": undefined,
+                                    "textAlign": "left",
                                     "textAlignVertical": "center",
                                   },
                                   Array [
@@ -1609,29 +1585,9 @@ exports[`UserSettings Matches snapshot 1`] = `
                     >
                       <View
                         index={9}
-                        location={
-                          Object {
-                            "hash": "",
-                            "pathname": "/",
-                            "search": "",
-                            "state": undefined,
-                          }
-                        }
-                        match={
-                          Object {
-                            "isExact": true,
-                            "params": Object {},
-                            "path": "/",
-                            "url": "/",
-                          }
-                        }
                         siblings={
                           Array [
                             "Connect(ShowOrPickImage)",
-                            "withTheme()",
-                            "withTheme()",
-                            "withTheme()",
-                            "withRouter(withTheme())",
                           ]
                         }
                         style={
@@ -1702,6 +1658,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           >
                             <Text
                               numberOfLines={1}
+                              selectable={false}
                               style={
                                 Array [
                                   Object {
@@ -1797,14 +1754,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                   >
                     <Text
                       index={0}
-                      siblings={
-                        Array [
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                        ]
-                      }
+                      siblings={Array []}
                       style={
                         Array [
                           Object {
@@ -1832,17 +1782,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "marginTop": 20,
                               },
                             ],
-                            Array [
-                              Object {
-                                "fontSize": 16,
-                                "letterSpacing": 0.5,
-                                "lineHeight": 24,
-                                "marginVertical": 2,
-                              },
-                              Object {
-                                "marginTop": 20,
-                              },
-                            ],
                           ],
                         ]
                       }
@@ -1853,14 +1792,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     <Text
                       index={1}
                       onLayout={[Function]}
-                      siblings={
-                        Array [
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                        ]
-                      }
+                      siblings={Array []}
                       style={
                         Object {
                           "color": "rgba(0, 0, 0, 0.54)",
@@ -1881,11 +1813,17 @@ exports[`UserSettings Matches snapshot 1`] = `
                       These are ways your followers can react to your Nutshells.
                     </Text>
                     <View
-                      style={
-                        Object {
-                          "maxWidth": "100%",
-                        }
-                      }
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
                     >
                       <View
                         style={
@@ -2031,25 +1969,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                               onContentSizeChange={[Function]}
                               onFocus={[Function]}
                               onKeyPress={[Function]}
-                              onPress={[Function]}
                               placeholder=""
                               placeholderTextColor="rgba(0, 0, 0, 0.54)"
                               rejectResponderTermination={true}
                               selectionColor="rgb(0,0,0)"
-                              siblings={
-                                Array [
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
+                              siblings={Array []}
                               style={
                                 Array [
                                   Object {
                                     "flexGrow": 1,
                                     "margin": 0,
-                                    "textAlign": "left",
                                     "zIndex": 1,
                                   },
                                   Object {
@@ -2068,6 +1997,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": 16,
                                     "fontWeight": undefined,
+                                    "textAlign": "left",
                                     "textAlignVertical": "center",
                                   },
                                   Array [
@@ -2128,11 +2058,17 @@ exports[`UserSettings Matches snapshot 1`] = `
                       </View>
                     </View>
                     <View
-                      style={
-                        Object {
-                          "maxWidth": "100%",
-                        }
-                      }
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
                     >
                       <View
                         style={
@@ -2278,25 +2214,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                               onContentSizeChange={[Function]}
                               onFocus={[Function]}
                               onKeyPress={[Function]}
-                              onPress={[Function]}
                               placeholder=""
                               placeholderTextColor="rgba(0, 0, 0, 0.54)"
                               rejectResponderTermination={true}
                               selectionColor="rgb(0,0,0)"
-                              siblings={
-                                Array [
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
+                              siblings={Array []}
                               style={
                                 Array [
                                   Object {
                                     "flexGrow": 1,
                                     "margin": 0,
-                                    "textAlign": "left",
                                     "zIndex": 1,
                                   },
                                   Object {
@@ -2315,6 +2242,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": 16,
                                     "fontWeight": undefined,
+                                    "textAlign": "left",
                                     "textAlignVertical": "center",
                                   },
                                   Array [
@@ -2422,14 +2350,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
                           onStartShouldSetResponder={[Function]}
-                          siblings={
-                            Array [
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withRouter(withTheme())",
-                            ]
-                          }
+                          siblings={Array []}
                           style={
                             Object {
                               "marginLeft": "auto",
@@ -2493,30 +2414,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     >
                       <View
                         index={5}
-                        location={
-                          Object {
-                            "hash": "",
-                            "pathname": "/",
-                            "search": "",
-                            "state": undefined,
-                          }
-                        }
-                        match={
-                          Object {
-                            "isExact": true,
-                            "params": Object {},
-                            "path": "/",
-                            "url": "/",
-                          }
-                        }
-                        siblings={
-                          Array [
-                            "withTheme()",
-                            "withTheme()",
-                            "withTheme()",
-                            "withRouter(withTheme())",
-                          ]
-                        }
+                        siblings={Array []}
                         style={
                           Object {
                             "alignItems": "stretch",
@@ -2585,6 +2483,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           >
                             <Text
                               numberOfLines={1}
+                              selectable={false}
                               style={
                                 Array [
                                   Object {
@@ -2679,17 +2578,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                   >
                     <Text
                       index={0}
-                      siblings={
-                        Array [
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                        ]
-                      }
+                      siblings={Array []}
                       style={
                         Array [
                           Object {
@@ -2717,17 +2606,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "marginTop": 20,
                               },
                             ],
-                            Array [
-                              Object {
-                                "fontSize": 16,
-                                "letterSpacing": 0.5,
-                                "lineHeight": 24,
-                                "marginVertical": 2,
-                              },
-                              Object {
-                                "marginTop": 20,
-                              },
-                            ],
                           ],
                         ]
                       }
@@ -2736,11 +2614,17 @@ exports[`UserSettings Matches snapshot 1`] = `
                       Account settings
                     </Text>
                     <View
-                      style={
-                        Object {
-                          "maxWidth": "100%",
-                        }
-                      }
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
                     >
                       <View
                         style={
@@ -2886,28 +2770,16 @@ exports[`UserSettings Matches snapshot 1`] = `
                               onContentSizeChange={[Function]}
                               onFocus={[Function]}
                               onKeyPress={[Function]}
-                              onPress={[Function]}
                               placeholder=""
                               placeholderTextColor="rgba(0, 0, 0, 0.54)"
                               rejectResponderTermination={true}
                               selectionColor="rgb(0,0,0)"
-                              siblings={
-                                Array [
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
+                              siblings={Array []}
                               style={
                                 Array [
                                   Object {
                                     "flexGrow": 1,
                                     "margin": 0,
-                                    "textAlign": "left",
                                     "zIndex": 1,
                                   },
                                   Object {
@@ -2926,6 +2798,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": 16,
                                     "fontWeight": undefined,
+                                    "textAlign": "left",
                                     "textAlignVertical": "center",
                                   },
                                   Array [
@@ -2986,11 +2859,17 @@ exports[`UserSettings Matches snapshot 1`] = `
                       </View>
                     </View>
                     <View
-                      style={
-                        Object {
-                          "maxWidth": "100%",
-                        }
-                      }
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
                     >
                       <View
                         style={
@@ -3136,29 +3015,17 @@ exports[`UserSettings Matches snapshot 1`] = `
                               onContentSizeChange={[Function]}
                               onFocus={[Function]}
                               onKeyPress={[Function]}
-                              onPress={[Function]}
                               placeholder=""
                               placeholderTextColor="rgba(0, 0, 0, 0.54)"
                               rejectResponderTermination={true}
                               secureTextEntry={true}
                               selectionColor="rgb(0,0,0)"
-                              siblings={
-                                Array [
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withTheme()",
-                                  "withRouter(withTheme())",
-                                ]
-                              }
+                              siblings={Array []}
                               style={
                                 Array [
                                   Object {
                                     "flexGrow": 1,
                                     "margin": 0,
-                                    "textAlign": "left",
                                     "zIndex": 1,
                                   },
                                   Object {
@@ -3177,6 +3044,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": 16,
                                     "fontWeight": undefined,
+                                    "textAlign": "left",
                                     "textAlignVertical": "center",
                                   },
                                   Array [
@@ -3194,17 +3062,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     </View>
                     <Text
                       index={3}
-                      siblings={
-                        Array [
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withTheme()",
-                          "withRouter(withTheme())",
-                        ]
-                      }
+                      siblings={Array []}
                       style={
                         Array [
                           Object {
@@ -3221,19 +3079,6 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "textAlign": "left",
                               "writingDirection": "ltr",
                             },
-                            Array [
-                              Object {
-                                "fontSize": 16,
-                                "letterSpacing": 0.5,
-                                "lineHeight": 24,
-                                "marginVertical": 2,
-                              },
-                              Object {
-                                "flexDirection": "row",
-                                "marginTop": 20,
-                                "marginVertical": 20,
-                              },
-                            ],
                             Array [
                               Object {
                                 "fontSize": 16,
@@ -3302,17 +3147,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
                           onStartShouldSetResponder={[Function]}
-                          siblings={
-                            Array [
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withRouter(withTheme())",
-                            ]
-                          }
+                          siblings={Array []}
                           style={
                             Object {
                               "marginLeft": "auto",
@@ -3410,17 +3245,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
                           onStartShouldSetResponder={[Function]}
-                          siblings={
-                            Array [
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withRouter(withTheme())",
-                            ]
-                          }
+                          siblings={Array []}
                           style={
                             Object {
                               "marginLeft": "auto",
@@ -3518,17 +3343,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
                           onStartShouldSetResponder={[Function]}
-                          siblings={
-                            Array [
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withRouter(withTheme())",
-                            ]
-                          }
+                          siblings={Array []}
                           style={
                             Object {
                               "marginLeft": "auto",
@@ -3626,17 +3441,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           onChange={[Function]}
                           onResponderTerminationRequest={[Function]}
                           onStartShouldSetResponder={[Function]}
-                          siblings={
-                            Array [
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withTheme()",
-                              "withRouter(withTheme())",
-                            ]
-                          }
+                          siblings={Array []}
                           style={
                             Object {
                               "marginLeft": "auto",
@@ -3700,33 +3505,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                     >
                       <View
                         index={9}
-                        location={
-                          Object {
-                            "hash": "",
-                            "pathname": "/",
-                            "search": "",
-                            "state": undefined,
-                          }
-                        }
-                        match={
-                          Object {
-                            "isExact": true,
-                            "params": Object {},
-                            "path": "/",
-                            "url": "/",
-                          }
-                        }
-                        siblings={
-                          Array [
-                            "withTheme()",
-                            "withTheme()",
-                            "withTheme()",
-                            "withTheme()",
-                            "withTheme()",
-                            "withTheme()",
-                            "withRouter(withTheme())",
-                          ]
-                        }
+                        siblings={Array []}
                         style={
                           Object {
                             "alignItems": "stretch",
@@ -3795,6 +3574,7 @@ exports[`UserSettings Matches snapshot 1`] = `
                           >
                             <Text
                               numberOfLines={1}
+                              selectable={false}
                               style={
                                 Array [
                                   Object {

@@ -69,18 +69,6 @@ exports[`FriendManager Matches snapshot 1`] = `
                     "textAlign": "center",
                   },
                 ],
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  Object {
-                    "marginTop": 20,
-                    "textAlign": "center",
-                  },
-                ],
               ],
             ]
           }

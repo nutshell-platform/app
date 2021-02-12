@@ -535,6 +535,12 @@ exports[`FriendFinder Matches snapshot 1`] = `
               "width": 500,
             }
           }
+          refreshControl={
+            <RefreshControlMock
+              onRefresh={[Function]}
+              refreshing={false}
+            />
+          }
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           style={
@@ -543,6 +549,7 @@ exports[`FriendFinder Matches snapshot 1`] = `
             }
           }
         >
+          <RCTRefreshControl />
           <View>
             <View
               style={
@@ -731,22 +738,6 @@ exports[`FriendFinder Matches snapshot 1`] = `
                 }
               >
                 <View
-                  location={
-                    Object {
-                      "hash": "",
-                      "pathname": "/",
-                      "search": "",
-                      "state": undefined,
-                    }
-                  }
-                  match={
-                    Object {
-                      "isExact": true,
-                      "params": Object {},
-                      "path": "/",
-                      "url": "/",
-                    }
-                  }
                   style={
                     Object {
                       "alignItems": "stretch",
@@ -814,6 +805,7 @@ exports[`FriendFinder Matches snapshot 1`] = `
                     >
                       <Text
                         numberOfLines={1}
+                        selectable={false}
                         style={
                           Array [
                             Object {

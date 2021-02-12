@@ -5,16 +5,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
   className="css-view-1dbjc4n r-pointerEvents-12vffkv"
   style={
     Object {
-      "WebkitBoxFlex": 1,
-      "WebkitFlexBasis": "0%",
-      "WebkitFlexGrow": 1,
-      "WebkitFlexShrink": 1,
-      "flexBasis": "0%",
-      "flexGrow": 1,
-      "flexShrink": 1,
-      "msFlexNegative": 1,
-      "msFlexPositive": 1,
-      "msFlexPreferredSize": "0%",
+      "WebkitFlex": 1,
+      "flex": 1,
+      "msFlex": "1 1 0%",
     }
   }
 >
@@ -22,16 +15,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
     className="css-view-1dbjc4n"
     style={
       Object {
-        "WebkitBoxFlex": 1,
-        "WebkitFlexBasis": "0%",
-        "WebkitFlexGrow": 1,
-        "WebkitFlexShrink": 1,
-        "flexBasis": "0%",
-        "flexGrow": 1,
-        "flexShrink": 1,
-        "msFlexNegative": 1,
-        "msFlexPositive": 1,
-        "msFlexPreferredSize": "0%",
+        "WebkitFlex": 1,
+        "flex": 1,
+        "msFlex": "1 1 0%",
       }
     }
   >
@@ -39,17 +25,10 @@ exports[`WriteNutshell Matches snapshot 1`] = `
       className="css-view-1dbjc4n"
       style={
         Object {
-          "WebkitBoxFlex": 1,
-          "WebkitFlexBasis": "0%",
-          "WebkitFlexGrow": 1,
-          "WebkitFlexShrink": 1,
+          "WebkitFlex": 1,
           "backgroundColor": "rgba(0,0,0,1.00)",
-          "flexBasis": "0%",
-          "flexGrow": 1,
-          "flexShrink": 1,
-          "msFlexNegative": 1,
-          "msFlexPositive": 1,
-          "msFlexPreferredSize": "0%",
+          "flex": 1,
+          "msFlex": "1 1 0%",
           "paddingBottom": "env(safe-area-inset-bottom)",
           "paddingLeft": "env(safe-area-inset-left)",
           "paddingRight": "env(safe-area-inset-right)",
@@ -65,28 +44,21 @@ exports[`WriteNutshell Matches snapshot 1`] = `
             "WebkitAlignItems": "center",
             "WebkitBoxAlign": "center",
             "WebkitBoxDirection": "normal",
-            "WebkitBoxFlex": 1,
             "WebkitBoxOrient": "vertical",
             "WebkitBoxPack": "start",
-            "WebkitFlexBasis": "0%",
+            "WebkitFlex": 1,
             "WebkitFlexDirection": "column",
-            "WebkitFlexGrow": 1,
-            "WebkitFlexShrink": 1,
             "WebkitJustifyContent": "flex-start",
             "alignItems": "center",
             "backgroundColor": "rgba(246,246,246,1.00)",
-            "flexBasis": "0%",
+            "flex": 1,
             "flexDirection": "column",
-            "flexGrow": 1,
-            "flexShrink": 1,
             "justifyContent": "flex-start",
             "maxWidth": "100%",
+            "msFlex": "1 1 0%",
             "msFlexAlign": "center",
             "msFlexDirection": "column",
-            "msFlexNegative": 1,
             "msFlexPack": "start",
-            "msFlexPositive": 1,
-            "msFlexPreferredSize": "0%",
             "overflowX": "hidden",
             "overflowY": "hidden",
           }
@@ -117,6 +89,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
             style={
               Object {
                 "backgroundColor": "rgba(0,0,0,0.00)",
+                "backgroundImage": "url(\\"SvgMock\\")",
                 "backgroundPosition": "center",
                 "backgroundRepeat": "no-repeat",
                 "backgroundSize": "cover",
@@ -130,6 +103,12 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                 "zIndex": -1,
               }
             }
+          />
+          <img
+            alt=""
+            className="css-accessibilityImage-9pa8cd"
+            draggable={false}
+            src="SvgMock"
           />
         </div>
         <div
@@ -205,16 +184,9 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                 onKeyDown={[Function]}
                 style={
                   Object {
-                    "WebkitBoxFlex": 1,
-                    "WebkitFlexBasis": "0%",
-                    "WebkitFlexGrow": 1,
-                    "WebkitFlexShrink": 1,
-                    "flexBasis": "0%",
-                    "flexGrow": 1,
-                    "flexShrink": 1,
-                    "msFlexNegative": 1,
-                    "msFlexPositive": 1,
-                    "msFlexPreferredSize": "0%",
+                    "WebkitFlex": 1,
+                    "flex": 1,
+                    "msFlex": "1 1 0%",
                     "paddingLeft": "12px",
                     "paddingRight": "12px",
                   }
@@ -260,6 +232,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
+                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -339,6 +312,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
+                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -418,6 +392,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
+                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -497,6 +472,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     "borderBottomRightRadius": "18px",
                     "borderTopLeftRadius": "18px",
                     "borderTopRightRadius": "18px",
+                    "cursor": "pointer",
                     "height": "36px",
                     "justifyContent": "center",
                     "marginBottom": "6px",
@@ -561,10 +537,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
           </div>
         </div>
         <div
-          className="css-view-1dbjc4n r-scrollbarWidth-2eszeu"
-          onScroll={[Function]}
-          onTouchMove={[Function]}
-          onWheel={[Function]}
+          className="css-view-1dbjc4n"
           style={
             Object {
               "WebkitBoxDirection": "normal",
@@ -589,29 +562,29 @@ exports[`WriteNutshell Matches snapshot 1`] = `
           }
         >
           <div
-            className="css-view-1dbjc4n"
+            className="css-view-1dbjc4n r-scrollbarWidth-2eszeu"
+            onScroll={[Function]}
+            onTouchMove={[Function]}
+            onWheel={[Function]}
             style={
               Object {
-                "WebkitAlignItems": "center",
-                "WebkitBoxAlign": "center",
+                "WebkitBoxDirection": "normal",
                 "WebkitBoxFlex": 1,
-                "WebkitBoxPack": "center",
+                "WebkitBoxOrient": "vertical",
+                "WebkitFlexDirection": "column",
                 "WebkitFlexGrow": 1,
-                "WebkitFlexShrink": 0,
-                "WebkitJustifyContent": "center",
-                "alignItems": "center",
+                "WebkitFlexShrink": 1,
+                "WebkitOverflowScrolling": "touch",
+                "WebkitTransform": "translateZ(0px)",
+                "flexDirection": "column",
                 "flexGrow": 1,
-                "flexShrink": 0,
-                "justifyContent": "center",
-                "maxWidth": "100%",
-                "msFlexAlign": "center",
-                "msFlexNegative": 0,
-                "msFlexPack": "center",
+                "flexShrink": 1,
+                "msFlexDirection": "column",
+                "msFlexNegative": 1,
                 "msFlexPositive": 1,
-                "paddingBottom": "40px",
-                "paddingLeft": "10px",
-                "paddingRight": "10px",
-                "paddingTop": "40px",
+                "overflowX": "hidden",
+                "overflowY": "auto",
+                "transform": "translateZ(0px)",
               }
             }
           >
@@ -619,7 +592,26 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               className="css-view-1dbjc4n"
               style={
                 Object {
+                  "WebkitAlignItems": "center",
+                  "WebkitBoxAlign": "center",
+                  "WebkitBoxFlex": 1,
+                  "WebkitBoxPack": "center",
+                  "WebkitFlexGrow": 1,
+                  "WebkitFlexShrink": 0,
+                  "WebkitJustifyContent": "center",
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "flexShrink": 0,
+                  "justifyContent": "center",
                   "maxWidth": "100%",
+                  "msFlexAlign": "center",
+                  "msFlexNegative": 0,
+                  "msFlexPack": "center",
+                  "msFlexPositive": 1,
+                  "paddingBottom": "40px",
+                  "paddingLeft": "10px",
+                  "paddingRight": "10px",
+                  "paddingTop": "40px",
                 }
               }
             >
@@ -656,7 +648,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "borderTopRightRadius": "0px",
                         "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
                         "maxWidth": "100%",
-                        "paddingBottom": "30px",
+                        "paddingBottom": "0px",
                         "paddingLeft": "30px",
                         "paddingRight": "30px",
                         "paddingTop": "0px",
@@ -772,6 +764,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                 style={
                                   Object {
                                     "backgroundColor": "rgba(0,0,0,0.00)",
+                                    "backgroundImage": "url(\\"https://firebasestorage.googleapis.com/v0/b/nutshell-staging-1b98e.appspot.com/o/avatars%2FHYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg?alt=media&token=77f72f02-18cd-418e-aeb8-78c218f8802c\\")",
                                     "backgroundPosition": "center",
                                     "backgroundRepeat": "no-repeat",
                                     "backgroundSize": "cover",
@@ -786,6 +779,12 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   }
                                 }
                               />
+                              <img
+                                alt=""
+                                className="css-accessibilityImage-9pa8cd"
+                                draggable={false}
+                                src="https://firebasestorage.googleapis.com/v0/b/nutshell-staging-1b98e.appspot.com/o/avatars%2FHYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg?alt=media&token=77f72f02-18cd-418e-aeb8-78c218f8802c"
+                              />
                             </div>
                           </div>
                         </div>
@@ -797,32 +796,25 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "WebkitAlignSelf": "stretch",
                               "WebkitBoxAlign": "start",
                               "WebkitBoxDirection": "normal",
-                              "WebkitBoxFlex": 1,
                               "WebkitBoxOrient": "vertical",
                               "WebkitBoxPack": "justify",
-                              "WebkitFlexBasis": "0%",
+                              "WebkitFlex": 1,
                               "WebkitFlexDirection": "column",
-                              "WebkitFlexGrow": 1,
-                              "WebkitFlexShrink": 1,
                               "WebkitJustifyContent": "space-between",
                               "alignItems": "flex-start",
                               "alignSelf": "stretch",
-                              "flexBasis": "0%",
+                              "flex": 1,
                               "flexDirection": "column",
-                              "flexGrow": 1,
-                              "flexShrink": 1,
                               "justifyContent": "space-between",
                               "maxWidth": "100%",
+                              "msFlex": "1 1 0%",
                               "msFlexAlign": "start",
                               "msFlexDirection": "column",
                               "msFlexItemAlign": "stretch",
-                              "msFlexNegative": 1,
                               "msFlexPack": "justify",
-                              "msFlexPositive": 1,
-                              "msFlexPreferredSize": "0%",
                               "msGridRowAlign": "stretch",
-                              "paddingBottom": "10px",
-                              "paddingTop": "10px",
+                              "paddingBottom": "0px",
+                              "paddingTop": "0px",
                               "width": "100%",
                             }
                           }
@@ -983,6 +975,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
+                                  role="switch"
                                   style={
                                     Object {
                                       "bottom": "0px",
@@ -1118,6 +1111,195 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                 </div>
                 <div
                   className="css-view-1dbjc4n"
+                  style={
+                    Object {
+                      "maxWidth": "100%",
+                      "paddingBottom": "10px",
+                      "paddingTop": "10px",
+                      "width": "500px",
+                    }
+                  }
+                >
+                  <div
+                    className="css-view-1dbjc4n"
+                    style={
+                      Object {
+                        "backgroundColor": "rgba(255,255,255,1.00)",
+                        "borderBottomLeftRadius": "0px",
+                        "borderBottomRightRadius": "0px",
+                        "borderTopLeftRadius": "0px",
+                        "borderTopRightRadius": "0px",
+                        "boxShadow": "0px 0.75px 1.5px rgba(0,0,0,0.24)",
+                        "maxWidth": "100%",
+                        "paddingBottom": "30px",
+                        "paddingLeft": "30px",
+                        "paddingRight": "30px",
+                        "paddingTop": "30px",
+                      }
+                    }
+                  >
+                    <div
+                      aria-disabled={true}
+                      className="css-view-1dbjc4n"
+                      disabled={true}
+                      onClick={[Function]}
+                      onContextMenu={[Function]}
+                      onKeyDown={[Function]}
+                      style={
+                        Object {
+                          "WebkitBoxFlex": 1,
+                          "WebkitFlexGrow": 1,
+                          "WebkitFlexShrink": 1,
+                          "flexGrow": 1,
+                          "flexShrink": 1,
+                          "msFlexNegative": 1,
+                          "msFlexPositive": 1,
+                        }
+                      }
+                    >
+                      <div
+                        className="css-view-1dbjc4n"
+                        data-focusable={true}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "WebkitAlignItems": "center",
+                            "WebkitBoxAlign": "center",
+                            "WebkitBoxDirection": "normal",
+                            "WebkitBoxOrient": "horizontal",
+                            "WebkitBoxPack": "center",
+                            "WebkitFlexDirection": "row",
+                            "WebkitJustifyContent": "center",
+                            "alignItems": "center",
+                            "cursor": "pointer",
+                            "flexDirection": "row",
+                            "justifyContent": "center",
+                            "msFlexAlign": "center",
+                            "msFlexDirection": "row",
+                            "msFlexPack": "center",
+                            "msTouchAction": "manipulation",
+                            "touchAction": "manipulation",
+                          }
+                        }
+                        tabIndex="0"
+                      >
+                        <div
+                          className="css-view-1dbjc4n"
+                          style={
+                            Object {
+                              "WebkitAlignItems": "center",
+                              "WebkitBoxAlign": "center",
+                              "WebkitBoxPack": "center",
+                              "WebkitJustifyContent": "center",
+                              "alignItems": "center",
+                              "backgroundColor": "rgba(255,255,255,1.00)",
+                              "borderBottomLeftRadius": "50px",
+                              "borderBottomRightRadius": "50px",
+                              "borderTopLeftRadius": "50px",
+                              "borderTopRightRadius": "50px",
+                              "justifyContent": "center",
+                              "marginRight": "20px",
+                              "msFlexAlign": "center",
+                              "msFlexPack": "center",
+                              "paddingBottom": "2px",
+                              "paddingLeft": "2px",
+                              "paddingRight": "2px",
+                              "paddingTop": "2px",
+                            }
+                          }
+                        >
+                          <div
+                            className="css-view-1dbjc4n"
+                            style={
+                              Object {
+                                "WebkitAlignItems": "center",
+                                "WebkitBoxAlign": "center",
+                                "WebkitBoxPack": "center",
+                                "WebkitJustifyContent": "center",
+                                "alignItems": "center",
+                                "backgroundColor": "rgba(0,0,0,1.00)",
+                                "borderBottomLeftRadius": "25px",
+                                "borderBottomRightRadius": "25px",
+                                "borderTopLeftRadius": "25px",
+                                "borderTopRightRadius": "25px",
+                                "height": "50px",
+                                "justifyContent": "center",
+                                "msFlexAlign": "center",
+                                "msFlexPack": "center",
+                                "width": "50px",
+                              }
+                            }
+                          >
+                            <div
+                              className="css-text-901oao"
+                              dir="auto"
+                              onClick={[Function]}
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className="css-view-1dbjc4n"
+                          style={
+                            Object {
+                              "WebkitBoxDirection": "normal",
+                              "WebkitBoxOrient": "vertical",
+                              "WebkitFlexDirection": "column",
+                              "flexDirection": "column",
+                              "height": "50px",
+                              "maxWidth": "100%",
+                              "msFlexDirection": "column",
+                            }
+                          }
+                        >
+                          <div
+                            className="css-text-901oao"
+                            dir="auto"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "color": "rgba(0,0,0,0.87)",
+                                "direction": "ltr",
+                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                "fontSize": "20px",
+                                "fontWeight": "500",
+                                "letterSpacing": "0.15px",
+                                "lineHeight": "30px",
+                                "marginBottom": "2px",
+                                "marginTop": "0px",
+                                "textAlign": "left",
+                              }
+                            }
+                          >
+                            
+                            Audio Nutshell
+                          </div>
+                          <div
+                            className="css-text-901oao"
+                            dir="auto"
+                            onClick={[Function]}
+                            style={
+                              Object {
+                                "color": "rgba(0,0,0,1.00)",
+                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                "fontWeight": "400",
+                                "textAlign": "left",
+                              }
+                            }
+                          >
+                            00:
+                            /01:00
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="css-view-1dbjc4n"
                   id="nutshell-write-entry-0"
                   style={
                     Object {
@@ -1141,8 +1323,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "maxWidth": "100%",
                         "opacity": 1,
                         "paddingBottom": "20px",
-                        "paddingLeft": "30px",
-                        "paddingRight": "30px",
+                        "paddingLeft": "10px",
+                        "paddingRight": "10px",
                         "paddingTop": "20px",
                       }
                     }
@@ -1168,150 +1350,94 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     >
                       <div
                         className="css-view-1dbjc4n"
+                        data-focusable={true}
+                        data-testid="menudots"
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
                         style={
                           Object {
-                            "WebkitAlignItems": "center",
-                            "WebkitBoxAlign": "center",
-                            "WebkitBoxDirection": "normal",
-                            "WebkitBoxOrient": "horizontal",
-                            "WebkitBoxPack": "center",
-                            "WebkitFlexDirection": "row",
-                            "WebkitJustifyContent": "center",
-                            "alignItems": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "center",
-                            "maxWidth": "100%",
-                            "msFlexAlign": "center",
-                            "msFlexDirection": "row",
-                            "msFlexPack": "center",
+                            "cursor": "pointer",
+                            "msTouchAction": "manipulation",
+                            "position": "absolute",
+                            "right": "-10px",
+                            "top": "-20px",
+                            "touchAction": "manipulation",
+                            "zIndex": 99,
                           }
                         }
+                        tabIndex="0"
                       >
                         <div
-                          className="css-cursor-18t94o4 css-view-1dbjc4n"
-                          data-focusable={true}
-                          id="nutshell-write-entry-0-moveup"
-                          onClick={[Function]}
-                          onContextMenu={[Function]}
-                          onKeyDown={[Function]}
-                          role="button"
-                          style={
-                            Object {
-                              "WebkitAlignItems": "center",
-                              "WebkitBoxAlign": "center",
-                              "WebkitBoxPack": "center",
-                              "WebkitJustifyContent": "center",
-                              "alignItems": "center",
-                              "borderBottomLeftRadius": "11.25px",
-                              "borderBottomRightRadius": "11.25px",
-                              "borderTopLeftRadius": "11.25px",
-                              "borderTopRightRadius": "11.25px",
-                              "height": "22.5px",
-                              "justifyContent": "center",
-                              "marginBottom": "6px",
-                              "marginLeft": "6px",
-                              "marginRight": "6px",
-                              "marginTop": "6px",
-                              "msFlexAlign": "center",
-                              "msFlexPack": "center",
-                              "opacity": 0.8,
-                              "overflowX": "hidden",
-                              "overflowY": "hidden",
-                              "position": "relative",
-                              "width": "22.5px",
-                            }
-                          }
-                          tabIndex="0"
+                          className="css-view-1dbjc4n"
                         >
                           <div
-                            className="css-view-1dbjc4n"
+                            className="css-cursor-18t94o4 css-view-1dbjc4n"
+                            data-focusable={true}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onKeyDown={[Function]}
+                            role="button"
+                            style={
+                              Object {
+                                "WebkitAlignItems": "center",
+                                "WebkitBoxAlign": "center",
+                                "WebkitBoxPack": "center",
+                                "WebkitJustifyContent": "center",
+                                "alignItems": "center",
+                                "borderBottomLeftRadius": "18px",
+                                "borderBottomRightRadius": "18px",
+                                "borderTopLeftRadius": "18px",
+                                "borderTopRightRadius": "18px",
+                                "cursor": "pointer",
+                                "height": "50px",
+                                "justifyContent": "center",
+                                "marginBottom": "6px",
+                                "marginLeft": "6px",
+                                "marginRight": "6px",
+                                "marginTop": "6px",
+                                "msFlexAlign": "center",
+                                "msFlexPack": "center",
+                                "opacity": 0.5,
+                                "overflowX": "hidden",
+                                "overflowY": "hidden",
+                                "position": "relative",
+                                "width": "50px",
+                                "zIndex": 2,
+                              }
+                            }
+                            tabIndex="0"
                           >
                             <div
-                              className="css-text-901oao"
-                              dir="auto"
-                              onClick={[Function]}
-                            />
-                          </div>
-                        </div>
-                        <div
-                          className="css-text-901oao"
-                          dir="auto"
-                          onClick={[Function]}
-                          style={
-                            Object {
-                              "color": "rgba(0,0,0,0.54)",
-                              "direction": "ltr",
-                              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                              "fontSize": "12px",
-                              "fontWeight": "400",
-                              "letterSpacing": "0.4px",
-                              "lineHeight": "20px",
-                              "marginBottom": "2px",
-                              "marginTop": "2px",
-                              "textAlign": "left",
-                            }
-                          }
-                        >
-                          Entry 
-                          1
-                           of 
-                          1
-                           (max 10)
-                        </div>
-                        <div
-                          className="css-cursor-18t94o4 css-view-1dbjc4n"
-                          data-focusable={true}
-                          id="nutshell-write-entry-0-movedown"
-                          onClick={[Function]}
-                          onContextMenu={[Function]}
-                          onKeyDown={[Function]}
-                          role="button"
-                          style={
-                            Object {
-                              "WebkitAlignItems": "center",
-                              "WebkitBoxAlign": "center",
-                              "WebkitBoxPack": "center",
-                              "WebkitJustifyContent": "center",
-                              "alignItems": "center",
-                              "borderBottomLeftRadius": "11.25px",
-                              "borderBottomRightRadius": "11.25px",
-                              "borderTopLeftRadius": "11.25px",
-                              "borderTopRightRadius": "11.25px",
-                              "height": "22.5px",
-                              "justifyContent": "center",
-                              "marginBottom": "6px",
-                              "marginLeft": "6px",
-                              "marginRight": "6px",
-                              "marginTop": "6px",
-                              "msFlexAlign": "center",
-                              "msFlexPack": "center",
-                              "opacity": 0.8,
-                              "overflowX": "hidden",
-                              "overflowY": "hidden",
-                              "position": "relative",
-                              "width": "22.5px",
-                            }
-                          }
-                          tabIndex="0"
-                        >
-                          <div
-                            className="css-view-1dbjc4n"
-                          >
-                            <div
-                              className="css-text-901oao"
-                              dir="auto"
-                              onClick={[Function]}
-                            />
+                              className="css-view-1dbjc4n"
+                            >
+                              <div
+                                className="css-text-901oao"
+                                dir="auto"
+                                onClick={[Function]}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div
                         className="css-view-1dbjc4n"
+                        data-focusable={true}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
                         style={
                           Object {
-                            "maxWidth": "100%",
+                            "cursor": "pointer",
+                            "msTouchAction": "manipulation",
+                            "touchAction": "manipulation",
                           }
                         }
+                        tabIndex="0"
                       >
                         <div
                           className="css-view-1dbjc4n"
@@ -1474,11 +1600,20 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       </div>
                       <div
                         className="css-view-1dbjc4n"
+                        data-focusable={true}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
                         style={
                           Object {
-                            "maxWidth": "100%",
+                            "cursor": "pointer",
+                            "msTouchAction": "manipulation",
+                            "touchAction": "manipulation",
                           }
                         }
+                        tabIndex="0"
                       >
                         <div
                           className="css-view-1dbjc4n"
@@ -1521,7 +1656,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               className="css-view-1dbjc4n"
                               style={
                                 Object {
-                                  "minHeight": "200px",
+                                  "minHeight": "100px",
                                   "paddingBottom": "0px",
                                   "paddingTop": "0px",
                                 }
@@ -1548,7 +1683,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   onClick={[Function]}
                                   style={
                                     Object {
-                                      "WebkitTransform": "translateX(0px) translateY(-82px) scale(0.75)",
+                                      "WebkitTransform": "translateX(0px) translateY(-32px) scale(0.75)",
                                       "color": "rgba(0,0,0,1.00)",
                                       "direction": "ltr",
                                       "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
@@ -1559,8 +1694,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                       "paddingRight": "12px",
                                       "position": "absolute",
                                       "textAlign": "left",
-                                      "top": "100px",
-                                      "transform": "translateX(0px) translateY(-82px) scale(0.75)",
+                                      "top": "50px",
+                                      "transform": "translateX(0px) translateY(-32px) scale(0.75)",
                                     }
                                   }
                                 >
@@ -1572,7 +1707,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   onClick={[Function]}
                                   style={
                                     Object {
-                                      "WebkitTransform": "translateX(0px) translateY(-82px) scale(0.75)",
+                                      "WebkitTransform": "translateX(0px) translateY(-32px) scale(0.75)",
                                       "color": "rgba(0,0,0,0.54)",
                                       "direction": "ltr",
                                       "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
@@ -1583,8 +1718,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                       "paddingRight": "12px",
                                       "position": "absolute",
                                       "textAlign": "left",
-                                      "top": "100px",
-                                      "transform": "translateX(0px) translateY(-82px) scale(0.75)",
+                                      "top": "50px",
+                                      "transform": "translateX(0px) translateY(-32px) scale(0.75)",
                                     }
                                   }
                                 >
@@ -1616,7 +1751,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                     "flexGrow": 1,
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": "16px",
-                                    "height": "200px",
+                                    "height": "100px",
                                     "marginBottom": "0px",
                                     "marginLeft": "0px",
                                     "marginRight": "0px",
@@ -1640,13 +1775,13 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-view-1dbjc4n"
                         data-focusable={true}
+                        onBlur={[Function]}
                         onClick={[Function]}
                         onContextMenu={[Function]}
+                        onFocus={[Function]}
                         onKeyDown={[Function]}
                         style={
                           Object {
-                            "MozTransitionProperty": "opacity",
-                            "MozUserSelect": "none",
                             "WebkitAlignItems": "center",
                             "WebkitBoxAlign": "center",
                             "WebkitBoxDirection": "normal",
@@ -1654,9 +1789,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "WebkitBoxPack": "center",
                             "WebkitFlexDirection": "row",
                             "WebkitJustifyContent": "center",
-                            "WebkitTransitionDuration": "0s",
-                            "WebkitTransitionProperty": "opacity",
-                            "WebkitUserSelect": "none",
                             "alignItems": "center",
                             "cursor": "pointer",
                             "flexDirection": "row",
@@ -1665,12 +1797,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "msFlexDirection": "row",
                             "msFlexPack": "center",
                             "msTouchAction": "manipulation",
-                            "msUserSelect": "none",
                             "paddingTop": "10px",
                             "touchAction": "manipulation",
-                            "transitionDuration": "0s",
-                            "transitionProperty": "opacity",
-                            "userSelect": "none",
                           }
                         }
                         tabIndex="0"
@@ -1716,6 +1844,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "borderBottomRightRadius": "11.25px",
                               "borderTopLeftRadius": "11.25px",
                               "borderTopRightRadius": "11.25px",
+                              "cursor": "pointer",
                               "height": "22.5px",
                               "justifyContent": "center",
                               "marginBottom": "6px",
@@ -1742,31 +1871,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             />
                           </div>
                         </div>
-                      </div>
-                      <div
-                        className="css-text-901oao"
-                        dir="auto"
-                        onClick={[Function]}
-                        style={
-                          Object {
-                            "WebkitTransform": "",
-                            "color": "rgba(0,0,0,0.54)",
-                            "direction": "ltr",
-                            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                            "fontSize": "12px",
-                            "fontWeight": "400",
-                            "opacity": 1,
-                            "paddingBottom": "4px",
-                            "paddingLeft": "12px",
-                            "paddingRight": "12px",
-                            "paddingTop": "4px",
-                            "textAlign": "center",
-                            "transform": "",
-                            "width": "100%",
-                          }
-                        }
-                      >
-                        All changes saved at 12:11. 
                       </div>
                     </div>
                   </div>
@@ -1796,8 +1900,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         "maxWidth": "100%",
                         "opacity": 1,
                         "paddingBottom": "20px",
-                        "paddingLeft": "30px",
-                        "paddingRight": "30px",
+                        "paddingLeft": "10px",
+                        "paddingRight": "10px",
                         "paddingTop": "20px",
                       }
                     }
@@ -1823,11 +1927,94 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                     >
                       <div
                         className="css-view-1dbjc4n"
+                        data-focusable={true}
+                        data-testid="menudots"
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
                         style={
                           Object {
-                            "maxWidth": "100%",
+                            "cursor": "pointer",
+                            "msTouchAction": "manipulation",
+                            "position": "absolute",
+                            "right": "-10px",
+                            "top": "-20px",
+                            "touchAction": "manipulation",
+                            "zIndex": 99,
                           }
                         }
+                        tabIndex="0"
+                      >
+                        <div
+                          className="css-view-1dbjc4n"
+                        >
+                          <div
+                            className="css-cursor-18t94o4 css-view-1dbjc4n"
+                            data-focusable={true}
+                            onClick={[Function]}
+                            onContextMenu={[Function]}
+                            onKeyDown={[Function]}
+                            role="button"
+                            style={
+                              Object {
+                                "WebkitAlignItems": "center",
+                                "WebkitBoxAlign": "center",
+                                "WebkitBoxPack": "center",
+                                "WebkitJustifyContent": "center",
+                                "alignItems": "center",
+                                "borderBottomLeftRadius": "18px",
+                                "borderBottomRightRadius": "18px",
+                                "borderTopLeftRadius": "18px",
+                                "borderTopRightRadius": "18px",
+                                "cursor": "pointer",
+                                "height": "50px",
+                                "justifyContent": "center",
+                                "marginBottom": "6px",
+                                "marginLeft": "6px",
+                                "marginRight": "6px",
+                                "marginTop": "6px",
+                                "msFlexAlign": "center",
+                                "msFlexPack": "center",
+                                "opacity": 0.5,
+                                "overflowX": "hidden",
+                                "overflowY": "hidden",
+                                "position": "relative",
+                                "width": "50px",
+                                "zIndex": 2,
+                              }
+                            }
+                            tabIndex="0"
+                          >
+                            <div
+                              className="css-view-1dbjc4n"
+                            >
+                              <div
+                                className="css-text-901oao"
+                                dir="auto"
+                                onClick={[Function]}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="css-view-1dbjc4n"
+                        data-focusable={true}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "cursor": "pointer",
+                            "msTouchAction": "manipulation",
+                            "touchAction": "manipulation",
+                          }
+                        }
+                        tabIndex="0"
                       >
                         <div
                           className="css-view-1dbjc4n"
@@ -1990,11 +2177,20 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       </div>
                       <div
                         className="css-view-1dbjc4n"
+                        data-focusable={true}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onContextMenu={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
                         style={
                           Object {
-                            "maxWidth": "100%",
+                            "cursor": "pointer",
+                            "msTouchAction": "manipulation",
+                            "touchAction": "manipulation",
                           }
                         }
+                        tabIndex="0"
                       >
                         <div
                           className="css-view-1dbjc4n"
@@ -2037,7 +2233,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               className="css-view-1dbjc4n"
                               style={
                                 Object {
-                                  "minHeight": "200px",
+                                  "minHeight": "100px",
                                   "paddingBottom": "0px",
                                   "paddingTop": "0px",
                                 }
@@ -2064,7 +2260,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   onClick={[Function]}
                                   style={
                                     Object {
-                                      "WebkitTransform": "translateX(0px) translateY(-82px) scale(0.75)",
+                                      "WebkitTransform": "translateX(0px) translateY(-32px) scale(0.75)",
                                       "color": "rgba(0,0,0,1.00)",
                                       "direction": "ltr",
                                       "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
@@ -2075,8 +2271,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                       "paddingRight": "12px",
                                       "position": "absolute",
                                       "textAlign": "left",
-                                      "top": "100px",
-                                      "transform": "translateX(0px) translateY(-82px) scale(0.75)",
+                                      "top": "50px",
+                                      "transform": "translateX(0px) translateY(-32px) scale(0.75)",
                                     }
                                   }
                                 >
@@ -2088,7 +2284,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   onClick={[Function]}
                                   style={
                                     Object {
-                                      "WebkitTransform": "translateX(0px) translateY(-82px) scale(0.75)",
+                                      "WebkitTransform": "translateX(0px) translateY(-32px) scale(0.75)",
                                       "color": "rgba(0,0,0,0.54)",
                                       "direction": "ltr",
                                       "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
@@ -2099,8 +2295,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                       "paddingRight": "12px",
                                       "position": "absolute",
                                       "textAlign": "left",
-                                      "top": "100px",
-                                      "transform": "translateX(0px) translateY(-82px) scale(0.75)",
+                                      "top": "50px",
+                                      "transform": "translateX(0px) translateY(-32px) scale(0.75)",
                                     }
                                   }
                                 >
@@ -2132,7 +2328,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                     "flexGrow": 1,
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontSize": "16px",
-                                    "height": "200px",
+                                    "height": "100px",
                                     "marginBottom": "0px",
                                     "marginLeft": "0px",
                                     "marginRight": "0px",
@@ -2156,13 +2352,13 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                       <div
                         className="css-view-1dbjc4n"
                         data-focusable={true}
+                        onBlur={[Function]}
                         onClick={[Function]}
                         onContextMenu={[Function]}
+                        onFocus={[Function]}
                         onKeyDown={[Function]}
                         style={
                           Object {
-                            "MozTransitionProperty": "opacity",
-                            "MozUserSelect": "none",
                             "WebkitAlignItems": "center",
                             "WebkitBoxAlign": "center",
                             "WebkitBoxDirection": "normal",
@@ -2170,9 +2366,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "WebkitBoxPack": "center",
                             "WebkitFlexDirection": "row",
                             "WebkitJustifyContent": "center",
-                            "WebkitTransitionDuration": "0s",
-                            "WebkitTransitionProperty": "opacity",
-                            "WebkitUserSelect": "none",
                             "alignItems": "center",
                             "cursor": "pointer",
                             "flexDirection": "row",
@@ -2181,12 +2374,8 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             "msFlexDirection": "row",
                             "msFlexPack": "center",
                             "msTouchAction": "manipulation",
-                            "msUserSelect": "none",
                             "paddingTop": "10px",
                             "touchAction": "manipulation",
-                            "transitionDuration": "0s",
-                            "transitionProperty": "opacity",
-                            "userSelect": "none",
                           }
                         }
                         tabIndex="0"
@@ -2232,6 +2421,7 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "borderBottomRightRadius": "11.25px",
                               "borderTopLeftRadius": "11.25px",
                               "borderTopRightRadius": "11.25px",
+                              "cursor": "pointer",
                               "height": "22.5px",
                               "justifyContent": "center",
                               "marginBottom": "6px",
@@ -2258,31 +2448,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                             />
                           </div>
                         </div>
-                      </div>
-                      <div
-                        className="css-text-901oao"
-                        dir="auto"
-                        onClick={[Function]}
-                        style={
-                          Object {
-                            "WebkitTransform": "",
-                            "color": "rgba(0,0,0,0.54)",
-                            "direction": "ltr",
-                            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                            "fontSize": "12px",
-                            "fontWeight": "400",
-                            "opacity": 1,
-                            "paddingBottom": "4px",
-                            "paddingLeft": "12px",
-                            "paddingRight": "12px",
-                            "paddingTop": "4px",
-                            "textAlign": "center",
-                            "transform": "",
-                            "width": "100%",
-                          }
-                        }
-                      >
-                        All changes saved at 12:11. 
                       </div>
                     </div>
                   </div>

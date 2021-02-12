@@ -536,6 +536,12 @@ exports[`WriteNutshell Matches snapshot 1`] = `
               "paddingVertical": 40,
             }
           }
+          refreshControl={
+            <RefreshControlMock
+              onRefresh={[Function]}
+              refreshing={false}
+            />
+          }
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           style={
@@ -544,11 +550,14 @@ exports[`WriteNutshell Matches snapshot 1`] = `
             }
           }
         >
+          <RCTRefreshControl />
           <View>
             <View
               style={
                 Object {
                   "maxWidth": "100%",
+                  "paddingVertical": 50,
+                  "width": "100%",
                 }
               }
             >
@@ -556,398 +565,1216 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                 style={
                   Object {
                     "maxWidth": "100%",
-                    "paddingVertical": 50,
-                    "width": "100%",
+                    "paddingVertical": 10,
+                    "width": 500,
                   }
                 }
               >
                 <View
                   style={
                     Object {
+                      "backgroundColor": "#ffffff",
+                      "borderRadius": 0,
+                      "elevation": 2,
                       "maxWidth": "100%",
-                      "paddingVertical": 10,
+                      "padding": 30,
+                      "paddingVertical": 0,
+                      "shadowColor": "#000000",
+                      "shadowOffset": Object {
+                        "height": 0.75,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.24,
+                      "shadowRadius": 1.5,
                       "width": 500,
                     }
                   }
                 >
                   <View
+                    accessible={true}
+                    focusable={false}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
                     style={
                       Object {
-                        "backgroundColor": "#ffffff",
-                        "borderRadius": 0,
-                        "elevation": 2,
-                        "maxWidth": "100%",
-                        "padding": 30,
-                        "paddingTop": 0,
-                        "shadowColor": "#000000",
-                        "shadowOffset": Object {
-                          "height": 0.75,
-                          "width": 0,
-                        },
-                        "shadowOpacity": 0.24,
-                        "shadowRadius": 1.5,
-                        "width": 500,
+                        "flexGrow": 1,
+                        "flexShrink": 1,
                       }
                     }
                   >
                     <View
-                      accessible={true}
-                      focusable={false}
-                      onClick={[Function]}
-                      onResponderGrant={[Function]}
-                      onResponderMove={[Function]}
-                      onResponderRelease={[Function]}
-                      onResponderTerminate={[Function]}
-                      onResponderTerminationRequest={[Function]}
-                      onStartShouldSetResponder={[Function]}
+                      index={0}
+                      siblings={Array []}
                       style={
                         Object {
-                          "flexGrow": 1,
-                          "flexShrink": 1,
+                          "alignItems": "center",
+                          "flexDirection": "column",
+                          "flexWrap": "wrap",
+                          "justifyContent": "flex-start",
+                          "maxWidth": "100%",
+                          "width": "100%",
                         }
                       }
+                      total={1}
                     >
                       <View
-                        index={0}
-                        siblings={Array []}
+                        accessible={true}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
                         style={
                           Object {
-                            "alignItems": "center",
-                            "flexDirection": "column",
-                            "flexWrap": "wrap",
-                            "justifyContent": "flex-start",
-                            "maxWidth": "100%",
-                            "width": "100%",
+                            "opacity": 1,
                           }
                         }
-                        total={1}
                       >
                         <View
-                          accessible={true}
-                          focusable={true}
-                          onClick={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
                           style={
-                            Object {
-                              "opacity": 1,
-                            }
+                            Array [
+                              Object {
+                                "backgroundColor": "rgb(0,0,0)",
+                                "borderRadius": 50,
+                                "height": 100,
+                                "width": 100,
+                              },
+                              Object {
+                                "marginTop": -50,
+                              },
+                            ]
                           }
                         >
-                          <View
-                            location={
+                          <Image
+                            source={
                               Object {
-                                "hash": "",
-                                "pathname": "/",
-                                "search": "",
-                                "state": undefined,
-                              }
-                            }
-                            match={
-                              Object {
-                                "isExact": true,
-                                "params": Object {},
-                                "path": "/",
-                                "url": "/",
+                                "path": "avatars/HYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg",
+                                "uri": "https://firebasestorage.googleapis.com/v0/b/nutshell-staging-1b98e.appspot.com/o/avatars%2FHYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg?alt=media&token=77f72f02-18cd-418e-aeb8-78c218f8802c",
                               }
                             }
                             style={
+                              Object {
+                                "borderRadius": 50,
+                                "height": 100,
+                                "width": 100,
+                              }
+                            }
+                          />
+                        </View>
+                      </View>
+                      <View
+                        style={
+                          Object {
+                            "alignItems": "flex-start",
+                            "alignSelf": "stretch",
+                            "flex": 1,
+                            "flexDirection": "column",
+                            "justifyContent": "space-between",
+                            "maxWidth": "100%",
+                            "paddingVertical": 0,
+                            "width": "100%",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            Array [
+                              Object {
+                                "color": "#000000",
+                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                "fontWeight": "400",
+                                "textAlign": "left",
+                              },
                               Array [
                                 Object {
-                                  "backgroundColor": "rgb(0,0,0)",
-                                  "borderRadius": 50,
-                                  "height": 100,
-                                  "width": 100,
+                                  "color": "rgba(0, 0, 0, 0.87)",
+                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                  "fontWeight": "500",
+                                  "textAlign": "left",
+                                  "writingDirection": "ltr",
                                 },
-                                Object {
-                                  "marginTop": -50,
-                                },
-                              ]
-                            }
-                          >
-                            <Image
-                              source={
-                                Object {
-                                  "path": "avatars/HYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg",
-                                  "uri": "https://firebasestorage.googleapis.com/v0/b/nutshell-staging-1b98e.appspot.com/o/avatars%2FHYmfM9Pkp4S88qJwxuJ1N5q4Igp1-504296be-0e6b-410b-8dc0-852db875afe3.jpg?alt=media&token=77f72f02-18cd-418e-aeb8-78c218f8802c",
-                                }
-                              }
-                              style={
-                                Object {
-                                  "borderRadius": 50,
-                                  "height": 100,
-                                  "width": 100,
-                                }
-                              }
-                            />
-                          </View>
-                        </View>
+                                Array [
+                                  Object {
+                                    "fontSize": 20,
+                                    "letterSpacing": 0.15,
+                                    "lineHeight": 30,
+                                    "marginVertical": 2,
+                                  },
+                                  Object {
+                                    "marginVertical": 0,
+                                    "paddingVertical": 20,
+                                    "textAlign": "center",
+                                    "width": "100%",
+                                  },
+                                ],
+                              ],
+                            ]
+                          }
+                        >
+                          Mentor Palokaj's
+                           Nutshell for week 
+                          2635
+                        </Text>
                         <View
                           style={
                             Object {
-                              "alignItems": "flex-start",
-                              "alignSelf": "stretch",
-                              "flex": 1,
                               "flexDirection": "column",
-                              "justifyContent": "space-between",
                               "maxWidth": "100%",
-                              "paddingVertical": 10,
                               "width": "100%",
                             }
                           }
                         >
-                          <Text
-                            style={
-                              Array [
-                                Object {
-                                  "color": "#000000",
-                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                  "fontWeight": "400",
-                                  "textAlign": "left",
-                                },
-                                Array [
-                                  Object {
-                                    "color": "rgba(0, 0, 0, 0.87)",
-                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                    "fontWeight": "500",
-                                    "textAlign": "left",
-                                    "writingDirection": "ltr",
-                                  },
-                                  Array [
-                                    Object {
-                                      "fontSize": 20,
-                                      "letterSpacing": 0.15,
-                                      "lineHeight": 30,
-                                      "marginVertical": 2,
-                                    },
-                                    Object {
-                                      "marginVertical": 0,
-                                      "paddingVertical": 20,
-                                      "textAlign": "center",
-                                      "width": "100%",
-                                    },
-                                  ],
-                                  Array [
-                                    Object {
-                                      "fontSize": 20,
-                                      "letterSpacing": 0.15,
-                                      "lineHeight": 30,
-                                      "marginVertical": 2,
-                                    },
-                                    Object {
-                                      "marginVertical": 0,
-                                      "paddingVertical": 20,
-                                      "textAlign": "center",
-                                      "width": "100%",
-                                    },
-                                  ],
-                                ],
-                              ]
-                            }
-                          >
-                            Mentor Palokaj's
-                             Nutshell for week 
-                            2635
-                          </Text>
                           <View
-                            style={
-                              Object {
-                                "flexDirection": "column",
-                                "maxWidth": "100%",
-                                "width": "100%",
-                              }
-                            }
-                          >
-                            <View
-                              style={
-                                Object {
-                                  "alignItems": "center",
-                                  "backgroundColor": "#f6f6f6",
-                                  "flexDirection": "row",
-                                  "justifyContent": "flex-start",
-                                  "maxWidth": "100%",
-                                  "padding": 10,
-                                  "width": "100%",
-                                }
-                              }
-                            >
-                              <Text
-                                onPress={[Function]}
-                                style={
-                                  Array [
-                                    Object {
-                                      "color": "#000000",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontWeight": "400",
-                                      "textAlign": "left",
-                                    },
-                                    Object {
-                                      "marginRight": 20,
-                                      "opacity": 0.7,
-                                    },
-                                  ]
-                                }
-                              >
-                                Status: scheduled for Sun Jun 28 at midnight
-                              </Text>
-                              <AndroidSwitch
-                                accessibilityRole="switch"
-                                enabled={true}
-                                nativeID="nutshell-write-toggle-scheduled"
-                                on={true}
-                                onChange={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                                style={
-                                  Object {
-                                    "marginLeft": "auto",
-                                  }
-                                }
-                                thumbTintColor="rgb(0,0,0)"
-                              />
-                            </View>
-                          </View>
-                          <View
-                            accessible={true}
-                            focusable={true}
-                            onClick={[Function]}
-                            onResponderGrant={[Function]}
-                            onResponderMove={[Function]}
-                            onResponderRelease={[Function]}
-                            onResponderTerminate={[Function]}
-                            onResponderTerminationRequest={[Function]}
-                            onStartShouldSetResponder={[Function]}
                             style={
                               Object {
                                 "alignItems": "center",
-                                "flexDirection": "column",
-                                "justifyContent": "center",
-                                "opacity": 1,
+                                "backgroundColor": "#f6f6f6",
+                                "flexDirection": "row",
+                                "justifyContent": "flex-start",
+                                "maxWidth": "100%",
+                                "padding": 10,
                                 "width": "100%",
                               }
                             }
                           >
-                            <View
+                            <Text
+                              onPress={[Function]}
+                              style={
+                                Array [
+                                  Object {
+                                    "color": "#000000",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontWeight": "400",
+                                    "textAlign": "left",
+                                  },
+                                  Object {
+                                    "marginRight": 20,
+                                    "opacity": 0.7,
+                                  },
+                                ]
+                              }
+                            >
+                              Status: scheduled for Sun Jun 28 at midnight
+                            </Text>
+                            <AndroidSwitch
+                              accessibilityRole="switch"
+                              enabled={true}
+                              nativeID="nutshell-write-toggle-scheduled"
+                              on={true}
+                              onChange={[Function]}
+                              onResponderTerminationRequest={[Function]}
+                              onStartShouldSetResponder={[Function]}
                               style={
                                 Object {
+                                  "marginLeft": "auto",
+                                }
+                              }
+                              thumbTintColor="rgb(0,0,0)"
+                            />
+                          </View>
+                        </View>
+                        <View
+                          accessible={true}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
+                          style={
+                            Object {
+                              "alignItems": "center",
+                              "flexDirection": "column",
+                              "justifyContent": "center",
+                              "opacity": 1,
+                              "width": "100%",
+                            }
+                          }
+                        >
+                          <View
+                            style={
+                              Object {
+                                "alignItems": "center",
+                                "flexDirection": "row",
+                                "maxWidth": "100%",
+                                "paddingBottom": 10,
+                                "paddingTop": 10,
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                Array [
+                                  Object {
+                                    "color": "#000000",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontWeight": "400",
+                                    "textAlign": "left",
+                                  },
+                                  Object {},
+                                ]
+                              }
+                            >
+                              What is a Nutshell?
+                            </Text>
+                            <View
+                              color="#000000"
+                              style={
+                                Array [
+                                  Object {
+                                    "backgroundColor": "rgba(0,0,0,0)",
+                                    "borderRadius": 15,
+                                    "height": 30,
+                                    "width": 30,
+                                  },
+                                  Object {
+                                    "alignItems": "center",
+                                    "justifyContent": "center",
+                                  },
+                                  Object {},
+                                ]
+                              }
+                            >
+                              <Text />
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={
+                  Object {
+                    "maxWidth": "100%",
+                    "paddingVertical": 10,
+                    "width": 500,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "backgroundColor": "#ffffff",
+                      "borderRadius": 0,
+                      "elevation": 2,
+                      "maxWidth": "100%",
+                      "padding": 30,
+                      "shadowColor": "#000000",
+                      "shadowOffset": Object {
+                        "height": 0.75,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.24,
+                      "shadowRadius": 1.5,
+                    }
+                  }
+                >
+                  <View
+                    accessible={true}
+                    focusable={false}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Object {
+                        "flexGrow": 1,
+                        "flexShrink": 1,
+                      }
+                    }
+                  >
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      index={0}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      siblings={
+                        Array [
+                          "Pressable",
+                        ]
+                      }
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                        }
+                      }
+                      total={2}
+                    >
+                      <View
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "backgroundColor": "rgba(255, 255, 255, 1)",
+                            "borderRadius": 50,
+                            "justifyContent": "center",
+                            "marginRight": 20,
+                            "padding": 2,
+                          }
+                        }
+                      >
+                        <View
+                          color="white"
+                          style={
+                            Array [
+                              Object {
+                                "backgroundColor": "rgb(0,0,0)",
+                                "borderRadius": 25,
+                                "height": 50,
+                                "width": 50,
+                              },
+                              Object {
+                                "alignItems": "center",
+                                "justifyContent": "center",
+                              },
+                              Object {},
+                            ]
+                          }
+                        >
+                          <Text />
+                        </View>
+                      </View>
+                      <View
+                        style={
+                          Object {
+                            "flexDirection": "column",
+                            "height": 50,
+                            "maxWidth": "100%",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            Array [
+                              Object {
+                                "color": "#000000",
+                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                "fontWeight": "400",
+                                "textAlign": "left",
+                              },
+                              Array [
+                                Object {
+                                  "color": "rgba(0, 0, 0, 0.87)",
+                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                  "fontWeight": "500",
+                                  "textAlign": "left",
+                                  "writingDirection": "ltr",
+                                },
+                                Array [
+                                  Object {
+                                    "fontSize": 20,
+                                    "letterSpacing": 0.15,
+                                    "lineHeight": 30,
+                                    "marginVertical": 2,
+                                  },
+                                  Object {
+                                    "marginTop": 0,
+                                  },
+                                ],
+                              ],
+                            ]
+                          }
+                        >
+                          
+                          Audio Nutshell
+                        </Text>
+                        <Text
+                          style={
+                            Array [
+                              Object {
+                                "color": "#000000",
+                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                "fontWeight": "400",
+                                "textAlign": "left",
+                              },
+                              undefined,
+                            ]
+                          }
+                        >
+                          00:
+                          /01:00
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                nativeID="nutshell-write-entry-0"
+                style={
+                  Object {
+                    "maxWidth": "100%",
+                    "paddingVertical": 10,
+                    "width": 500,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "backgroundColor": "#ffffff",
+                      "borderRadius": 0,
+                      "elevation": 2,
+                      "maxWidth": "100%",
+                      "opacity": 1,
+                      "padding": 30,
+                      "paddingHorizontal": 10,
+                      "paddingVertical": 20,
+                      "shadowColor": "#000000",
+                      "shadowOffset": Object {
+                        "height": 0.75,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.24,
+                      "shadowRadius": 1.5,
+                    }
+                  }
+                >
+                  <View
+                    accessible={true}
+                    focusable={false}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Object {
+                        "flexGrow": 1,
+                        "flexShrink": 1,
+                      }
+                    }
+                  >
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      index={0}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      siblings={
+                        Array [
+                          "Pressable",
+                          "Pressable",
+                        ]
+                      }
+                      style={
+                        Object {
+                          "position": "absolute",
+                          "right": -10,
+                          "top": -20,
+                          "zIndex": 99,
+                        }
+                      }
+                      testID="menudots"
+                      total={5}
+                    >
+                      <View
+                        collapsable={false}
+                      >
+                        <View
+                          accessibilityRole="button"
+                          accessibilityState={
+                            Object {
+                              "disabled": undefined,
+                            }
+                          }
+                          accessible={true}
+                          focusable={true}
+                          hitSlop={
+                            Object {
+                              "bottom": 6,
+                              "left": 6,
+                              "right": 6,
+                              "top": 6,
+                            }
+                          }
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
+                          style={
+                            Array [
+                              Object {
+                                "overflow": "hidden",
+                              },
+                              Array [
+                                Object {
                                   "alignItems": "center",
-                                  "flexDirection": "row",
-                                  "maxWidth": "100%",
-                                  "paddingBottom": 10,
-                                  "paddingTop": 10,
+                                  "justifyContent": "center",
+                                  "margin": 6,
+                                  "overflow": "hidden",
+                                },
+                                Object {
+                                  "borderRadius": 18,
+                                  "height": 36,
+                                  "width": 36,
+                                },
+                                undefined,
+                                Object {
+                                  "height": 50,
+                                  "opacity": 0.5,
+                                  "width": 50,
+                                  "zIndex": 2,
+                                },
+                              ],
+                            ]
+                          }
+                        >
+                          <View>
+                            <Text />
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                    >
+                      <View
+                        style={
+                          Object {
+                            "maxWidth": "100%",
+                            "position": "relative",
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            Array [
+                              Object {
+                                "backgroundColor": "rgb(231, 231, 231)",
+                                "borderTopLeftRadius": 0,
+                                "borderTopRightRadius": 0,
+                              },
+                              Object {
+                                "backgroundColor": "none",
+                                "marginVertical": 10,
+                                "minHeight": 50,
+                              },
+                            ]
+                          }
+                        >
+                          <View
+                            style={
+                              Object {
+                                "backgroundColor": "rgba(0, 0, 0, 0.26)",
+                                "bottom": 0,
+                                "height": 2,
+                                "left": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "transform": Array [
+                                  Object {
+                                    "scaleY": 0.5,
+                                  },
+                                ],
+                              }
+                            }
+                          />
+                          <View
+                            style={
+                              Object {
+                                "minHeight": 64,
+                                "paddingBottom": 0,
+                                "paddingTop": 0,
+                              }
+                            }
+                          >
+                            <View
+                              pointerEvents="none"
+                              style={
+                                Object {
+                                  "bottom": 0,
+                                  "left": 0,
+                                  "opacity": 0,
+                                  "position": "absolute",
+                                  "right": 0,
+                                  "top": 0,
+                                  "transform": Array [
+                                    Object {
+                                      "translateX": 3,
+                                    },
+                                  ],
                                 }
                               }
                             >
                               <Text
+                                numberOfLines={1}
+                                onLayout={[Function]}
                                 style={
-                                  Array [
-                                    Object {
-                                      "color": "#000000",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontWeight": "400",
-                                      "textAlign": "left",
-                                    },
-                                    Object {},
-                                  ]
+                                  Object {
+                                    "color": "rgb(0,0,0)",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": "bold",
+                                    "left": 0,
+                                    "opacity": 0,
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": 34,
+                                    "transform": Array [
+                                      Object {
+                                        "translateX": 0,
+                                      },
+                                      Object {
+                                        "translateY": -16,
+                                      },
+                                      Object {
+                                        "scale": 0.75,
+                                      },
+                                    ],
+                                    "writingDirection": "ltr",
+                                  }
                                 }
                               >
-                                What is a Nutshell?
+                                Headline (10/75)
                               </Text>
-                              <View
-                                color="#000000"
+                              <Text
+                                numberOfLines={1}
                                 style={
+                                  Object {
+                                    "color": "rgba(0, 0, 0, 0.54)",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": "bold",
+                                    "left": 0,
+                                    "opacity": 0,
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": 34,
+                                    "transform": Array [
+                                      Object {
+                                        "translateX": 0,
+                                      },
+                                      Object {
+                                        "translateY": -16,
+                                      },
+                                      Object {
+                                        "scale": 0.75,
+                                      },
+                                    ],
+                                    "writingDirection": "ltr",
+                                  }
+                                }
+                              >
+                                Headline (10/75)
+                              </Text>
+                            </View>
+                            <TextInput
+                              allowFontScaling={true}
+                              editable={true}
+                              index={1}
+                              multiline={false}
+                              nativeID="nutshell-write-entry-0-headline"
+                              onBlur={[Function]}
+                              onChangeText={[Function]}
+                              onContentSizeChange={[Function]}
+                              onFocus={[Function]}
+                              onKeyPress={[Function]}
+                              placeholder=""
+                              placeholderTextColor="rgba(0, 0, 0, 0.54)"
+                              rejectResponderTermination={true}
+                              selectionColor="rgb(0,0,0)"
+                              siblings={
+                                Array [
+                                  "Pressable",
+                                  "Pressable",
+                                ]
+                              }
+                              style={
+                                Array [
+                                  Object {
+                                    "flexGrow": 1,
+                                    "margin": 0,
+                                    "zIndex": 1,
+                                  },
+                                  Object {
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                  },
+                                  Object {
+                                    "height": 64,
+                                  },
+                                  Object {
+                                    "paddingBottom": 4,
+                                    "paddingTop": 24,
+                                  },
+                                  Object {
+                                    "color": "#000000",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": "bold",
+                                    "textAlign": "left",
+                                    "textAlignVertical": "center",
+                                  },
                                   Array [
-                                    Object {
-                                      "backgroundColor": "rgba(0,0,0,0)",
-                                      "borderRadius": 15,
-                                      "height": 30,
-                                      "width": 30,
-                                    },
-                                    Object {
-                                      "alignItems": "center",
-                                      "justifyContent": "center",
-                                    },
                                     Object {},
-                                  ]
-                                }
-                              >
-                                <Text />
-                              </View>
-                            </View>
+                                  ],
+                                ]
+                              }
+                              total={5}
+                              underlineColorAndroid="transparent"
+                              value="Title Derp"
+                            />
                           </View>
                         </View>
                       </View>
                     </View>
-                  </View>
-                </View>
-                <View
-                  nativeID="nutshell-write-entry-0"
-                  style={
-                    Object {
-                      "maxWidth": "100%",
-                      "paddingVertical": 10,
-                      "width": 500,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      Object {
-                        "backgroundColor": "#ffffff",
-                        "borderRadius": 0,
-                        "elevation": 2,
-                        "maxWidth": "100%",
-                        "opacity": 1,
-                        "padding": 30,
-                        "paddingVertical": 20,
-                        "shadowColor": "#000000",
-                        "shadowOffset": Object {
-                          "height": 0.75,
-                          "width": 0,
-                        },
-                        "shadowOpacity": 0.24,
-                        "shadowRadius": 1.5,
-                      }
-                    }
-                  >
                     <View
                       accessible={true}
-                      focusable={false}
+                      focusable={true}
+                      onBlur={[Function]}
                       onClick={[Function]}
+                      onFocus={[Function]}
                       onResponderGrant={[Function]}
                       onResponderMove={[Function]}
                       onResponderRelease={[Function]}
                       onResponderTerminate={[Function]}
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
-                      style={
-                        Object {
-                          "flexGrow": 1,
-                          "flexShrink": 1,
-                        }
-                      }
                     >
                       <View
-                        index={0}
-                        siblings={
-                          Array [
-                            "withTheme()",
-                            "withTheme()",
-                          ]
-                        }
                         style={
                           Object {
-                            "alignItems": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "center",
                             "maxWidth": "100%",
+                            "position": "relative",
                           }
                         }
-                        total={5}
+                      >
+                        <View
+                          style={
+                            Array [
+                              Object {
+                                "backgroundColor": "rgb(231, 231, 231)",
+                                "borderTopLeftRadius": 0,
+                                "borderTopRightRadius": 0,
+                              },
+                              Object {
+                                "backgroundColor": "#f6f6f6",
+                                "marginVertical": 10,
+                                "minHeight": 50,
+                              },
+                            ]
+                          }
+                        >
+                          <View
+                            style={
+                              Object {
+                                "backgroundColor": "rgba(0, 0, 0, 0.26)",
+                                "bottom": 0,
+                                "height": 2,
+                                "left": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "transform": Array [
+                                  Object {
+                                    "scaleY": 0.5,
+                                  },
+                                ],
+                              }
+                            }
+                          />
+                          <View
+                            style={
+                              Object {
+                                "minHeight": 100,
+                                "paddingBottom": 0,
+                                "paddingTop": 0,
+                              }
+                            }
+                          >
+                            <View
+                              pointerEvents="none"
+                              style={
+                                Object {
+                                  "bottom": 0,
+                                  "left": 0,
+                                  "opacity": 0,
+                                  "position": "absolute",
+                                  "right": 0,
+                                  "top": 0,
+                                  "transform": Array [
+                                    Object {
+                                      "translateX": 3,
+                                    },
+                                  ],
+                                }
+                              }
+                            >
+                              <Text
+                                numberOfLines={1}
+                                onLayout={[Function]}
+                                style={
+                                  Object {
+                                    "color": "rgb(0,0,0)",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": undefined,
+                                    "left": 0,
+                                    "opacity": 0,
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": 50,
+                                    "transform": Array [
+                                      Object {
+                                        "translateX": 0,
+                                      },
+                                      Object {
+                                        "translateY": -32,
+                                      },
+                                      Object {
+                                        "scale": 0.75,
+                                      },
+                                    ],
+                                    "writingDirection": "ltr",
+                                  }
+                                }
+                              >
+                                Message (14/2500)
+                              </Text>
+                              <Text
+                                numberOfLines={1}
+                                style={
+                                  Object {
+                                    "color": "rgba(0, 0, 0, 0.54)",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": undefined,
+                                    "left": 0,
+                                    "opacity": 0,
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": 50,
+                                    "transform": Array [
+                                      Object {
+                                        "translateX": 0,
+                                      },
+                                      Object {
+                                        "translateY": -32,
+                                      },
+                                      Object {
+                                        "scale": 0.75,
+                                      },
+                                    ],
+                                    "writingDirection": "ltr",
+                                  }
+                                }
+                              >
+                                Message (14/2500)
+                              </Text>
+                            </View>
+                            <TextInput
+                              allowFontScaling={true}
+                              editable={true}
+                              index={2}
+                              multiline={true}
+                              nativeID="nutshell-write-entry-0-content"
+                              onBlur={[Function]}
+                              onChangeText={[Function]}
+                              onContentSizeChange={[Function]}
+                              onFocus={[Function]}
+                              onKeyPress={[Function]}
+                              placeholder=""
+                              placeholderTextColor="rgba(0, 0, 0, 0.54)"
+                              rejectResponderTermination={true}
+                              selectionColor="rgb(0,0,0)"
+                              siblings={
+                                Array [
+                                  "Pressable",
+                                  "Pressable",
+                                ]
+                              }
+                              style={
+                                Array [
+                                  Object {
+                                    "flexGrow": 1,
+                                    "margin": 0,
+                                    "zIndex": 1,
+                                  },
+                                  Object {
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                  },
+                                  Object {
+                                    "height": 100,
+                                  },
+                                  Object {
+                                    "paddingBottom": 4,
+                                    "paddingTop": 24,
+                                  },
+                                  Object {
+                                    "color": "#000000",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": undefined,
+                                    "textAlign": "left",
+                                    "textAlignVertical": "top",
+                                  },
+                                  Array [
+                                    Object {},
+                                  ],
+                                ]
+                              }
+                              total={5}
+                              underlineColorAndroid="transparent"
+                              value="Paragraph Derp"
+                            />
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      index={3}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      siblings={
+                        Array [
+                          "Pressable",
+                          "Pressable",
+                        ]
+                      }
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                          "paddingTop": 10,
+                        }
+                      }
+                      total={5}
+                    >
+                      <Text
+                        style={
+                          Array [
+                            Object {
+                              "color": "#000000",
+                              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                              "fontWeight": "400",
+                              "textAlign": "left",
+                            },
+                            Array [
+                              Object {
+                                "color": "rgba(0, 0, 0, 0.54)",
+                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                "fontWeight": "400",
+                                "textAlign": "left",
+                                "writingDirection": "ltr",
+                              },
+                              Array [
+                                Object {
+                                  "fontSize": 12,
+                                  "letterSpacing": 0.4,
+                                  "lineHeight": 20,
+                                  "marginVertical": 2,
+                                },
+                                undefined,
+                              ],
+                            ],
+                          ]
+                        }
+                      >
+                        Inspiration: 
+                        what are you struggling with?
+                      </Text>
+                      <View
+                        accessibilityRole="button"
+                        accessibilityState={
+                          Object {
+                            "disabled": undefined,
+                          }
+                        }
+                        accessible={true}
+                        focusable={false}
+                        hitSlop={
+                          Object {
+                            "bottom": 6,
+                            "left": 6,
+                            "right": 6,
+                            "top": 6,
+                          }
+                        }
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          Array [
+                            Object {
+                              "overflow": "hidden",
+                            },
+                            Array [
+                              Object {
+                                "alignItems": "center",
+                                "justifyContent": "center",
+                                "margin": 6,
+                                "overflow": "hidden",
+                              },
+                              Object {
+                                "borderRadius": 11.25,
+                                "height": 22.5,
+                                "width": 22.5,
+                              },
+                              undefined,
+                              Object {
+                                "opacity": 0.8,
+                              },
+                            ],
+                          ]
+                        }
+                      >
+                        <View>
+                          <Text />
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                nativeID="nutshell-write-entry-1"
+                style={
+                  Object {
+                    "maxWidth": "100%",
+                    "paddingVertical": 10,
+                    "width": 500,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "backgroundColor": "#ffffff",
+                      "borderRadius": 0,
+                      "elevation": 2,
+                      "maxWidth": "100%",
+                      "opacity": 1,
+                      "padding": 30,
+                      "paddingHorizontal": 10,
+                      "paddingVertical": 20,
+                      "shadowColor": "#000000",
+                      "shadowOffset": Object {
+                        "height": 0.75,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.24,
+                      "shadowRadius": 1.5,
+                    }
+                  }
+                >
+                  <View
+                    accessible={true}
+                    focusable={false}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      Object {
+                        "flexGrow": 1,
+                        "flexShrink": 1,
+                      }
+                    }
+                  >
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      index={0}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      siblings={
+                        Array [
+                          "Pressable",
+                          "Pressable",
+                        ]
+                      }
+                      style={
+                        Object {
+                          "position": "absolute",
+                          "right": -10,
+                          "top": -20,
+                          "zIndex": 99,
+                        }
+                      }
+                      testID="menudots"
+                      total={5}
+                    >
+                      <View
+                        collapsable={false}
                       >
                         <View
                           accessibilityRole="button"
@@ -966,7 +1793,6 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                               "top": 6,
                             }
                           }
-                          nativeID="nutshell-write-entry-0-moveup"
                           onClick={[Function]}
                           onResponderGrant={[Function]}
                           onResponderMove={[Function]}
@@ -987,112 +1813,16 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                                   "overflow": "hidden",
                                 },
                                 Object {
-                                  "borderRadius": 11.25,
-                                  "height": 22.5,
-                                  "width": 22.5,
+                                  "borderRadius": 18,
+                                  "height": 36,
+                                  "width": 36,
                                 },
                                 undefined,
                                 Object {
-                                  "opacity": 0.8,
-                                },
-                              ],
-                            ]
-                          }
-                        >
-                          <View>
-                            <Text />
-                          </View>
-                        </View>
-                        <Text
-                          style={
-                            Array [
-                              Object {
-                                "color": "#000000",
-                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                "fontWeight": "400",
-                                "textAlign": "left",
-                              },
-                              Array [
-                                Object {
-                                  "color": "rgba(0, 0, 0, 0.54)",
-                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                  "fontWeight": "400",
-                                  "textAlign": "left",
-                                  "writingDirection": "ltr",
-                                },
-                                Array [
-                                  Object {
-                                    "fontSize": 12,
-                                    "letterSpacing": 0.4,
-                                    "lineHeight": 20,
-                                    "marginVertical": 2,
-                                  },
-                                  undefined,
-                                ],
-                                Array [
-                                  Object {
-                                    "fontSize": 12,
-                                    "letterSpacing": 0.4,
-                                    "lineHeight": 20,
-                                    "marginVertical": 2,
-                                  },
-                                  undefined,
-                                ],
-                              ],
-                            ]
-                          }
-                        >
-                          Entry 
-                          1
-                           of 
-                          1
-                           (max 10)
-                        </Text>
-                        <View
-                          accessibilityRole="button"
-                          accessibilityState={
-                            Object {
-                              "disabled": undefined,
-                            }
-                          }
-                          accessible={true}
-                          focusable={true}
-                          hitSlop={
-                            Object {
-                              "bottom": 6,
-                              "left": 6,
-                              "right": 6,
-                              "top": 6,
-                            }
-                          }
-                          nativeID="nutshell-write-entry-0-movedown"
-                          onClick={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
-                          style={
-                            Array [
-                              Object {
-                                "overflow": "hidden",
-                              },
-                              Array [
-                                Object {
-                                  "alignItems": "center",
-                                  "justifyContent": "center",
-                                  "margin": 6,
-                                  "overflow": "hidden",
-                                },
-                                Object {
-                                  "borderRadius": 11.25,
-                                  "height": 22.5,
-                                  "width": 22.5,
-                                },
-                                undefined,
-                                Object {
-                                  "opacity": 0.8,
+                                  "height": 50,
+                                  "opacity": 0.5,
+                                  "width": 50,
+                                  "zIndex": 2,
                                 },
                               ],
                             ]
@@ -1103,1011 +1833,500 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                           </View>
                         </View>
                       </View>
-                      <View
-                        style={
-                          Object {
-                            "maxWidth": "100%",
-                          }
-                        }
-                      >
-                        <View
-                          style={
-                            Object {
-                              "maxWidth": "100%",
-                              "position": "relative",
-                            }
-                          }
-                        >
-                          <View
-                            style={
-                              Array [
-                                Object {
-                                  "backgroundColor": "rgb(231, 231, 231)",
-                                  "borderTopLeftRadius": 0,
-                                  "borderTopRightRadius": 0,
-                                },
-                                Object {
-                                  "backgroundColor": "none",
-                                  "marginVertical": 10,
-                                  "minHeight": 50,
-                                },
-                              ]
-                            }
-                          >
-                            <View
-                              style={
-                                Object {
-                                  "backgroundColor": "rgba(0, 0, 0, 0.26)",
-                                  "bottom": 0,
-                                  "height": 2,
-                                  "left": 0,
-                                  "position": "absolute",
-                                  "right": 0,
-                                  "transform": Array [
-                                    Object {
-                                      "scaleY": 0.5,
-                                    },
-                                  ],
-                                }
-                              }
-                            />
-                            <View
-                              style={
-                                Object {
-                                  "minHeight": 64,
-                                  "paddingBottom": 0,
-                                  "paddingTop": 0,
-                                }
-                              }
-                            >
-                              <View
-                                pointerEvents="none"
-                                style={
-                                  Object {
-                                    "bottom": 0,
-                                    "left": 0,
-                                    "opacity": 0,
-                                    "position": "absolute",
-                                    "right": 0,
-                                    "top": 0,
-                                    "transform": Array [
-                                      Object {
-                                        "translateX": 3,
-                                      },
-                                    ],
-                                  }
-                                }
-                              >
-                                <Text
-                                  numberOfLines={1}
-                                  onLayout={[Function]}
-                                  style={
-                                    Object {
-                                      "color": "rgb(0,0,0)",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": "bold",
-                                      "left": 0,
-                                      "opacity": 0,
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                      "position": "absolute",
-                                      "textAlign": "left",
-                                      "top": 34,
-                                      "transform": Array [
-                                        Object {
-                                          "translateX": 0,
-                                        },
-                                        Object {
-                                          "translateY": -16,
-                                        },
-                                        Object {
-                                          "scale": 0.75,
-                                        },
-                                      ],
-                                      "writingDirection": "ltr",
-                                    }
-                                  }
-                                >
-                                  Headline (10/75)
-                                </Text>
-                                <Text
-                                  numberOfLines={1}
-                                  style={
-                                    Object {
-                                      "color": "rgba(0, 0, 0, 0.54)",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": "bold",
-                                      "left": 0,
-                                      "opacity": 0,
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                      "position": "absolute",
-                                      "textAlign": "left",
-                                      "top": 34,
-                                      "transform": Array [
-                                        Object {
-                                          "translateX": 0,
-                                        },
-                                        Object {
-                                          "translateY": -16,
-                                        },
-                                        Object {
-                                          "scale": 0.75,
-                                        },
-                                      ],
-                                      "writingDirection": "ltr",
-                                    }
-                                  }
-                                >
-                                  Headline (10/75)
-                                </Text>
-                              </View>
-                              <TextInput
-                                allowFontScaling={true}
-                                editable={true}
-                                index={1}
-                                multiline={false}
-                                nativeID="nutshell-write-entry-0-headline"
-                                onBlur={[Function]}
-                                onChangeText={[Function]}
-                                onContentSizeChange={[Function]}
-                                onFocus={[Function]}
-                                onKeyPress={[Function]}
-                                onPress={[Function]}
-                                placeholder=""
-                                placeholderTextColor="rgba(0, 0, 0, 0.54)"
-                                rejectResponderTermination={true}
-                                selectionColor="rgb(0,0,0)"
-                                siblings={
-                                  Array [
-                                    "withTheme()",
-                                    "withTheme()",
-                                  ]
-                                }
-                                style={
-                                  Array [
-                                    Object {
-                                      "flexGrow": 1,
-                                      "margin": 0,
-                                      "textAlign": "left",
-                                      "zIndex": 1,
-                                    },
-                                    Object {
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                    },
-                                    Object {
-                                      "height": 64,
-                                    },
-                                    Object {
-                                      "paddingBottom": 4,
-                                      "paddingTop": 24,
-                                    },
-                                    Object {
-                                      "color": "#000000",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": "bold",
-                                      "textAlignVertical": "center",
-                                    },
-                                    Array [
-                                      Object {},
-                                    ],
-                                  ]
-                                }
-                                total={5}
-                                underlineColorAndroid="transparent"
-                                value="Title Derp"
-                              />
-                            </View>
-                          </View>
-                        </View>
-                      </View>
-                      <View
-                        style={
-                          Object {
-                            "maxWidth": "100%",
-                          }
-                        }
-                      >
-                        <View
-                          style={
-                            Object {
-                              "maxWidth": "100%",
-                              "position": "relative",
-                            }
-                          }
-                        >
-                          <View
-                            style={
-                              Array [
-                                Object {
-                                  "backgroundColor": "rgb(231, 231, 231)",
-                                  "borderTopLeftRadius": 0,
-                                  "borderTopRightRadius": 0,
-                                },
-                                Object {
-                                  "backgroundColor": "#f6f6f6",
-                                  "marginVertical": 10,
-                                  "minHeight": 50,
-                                },
-                              ]
-                            }
-                          >
-                            <View
-                              style={
-                                Object {
-                                  "backgroundColor": "rgba(0, 0, 0, 0.26)",
-                                  "bottom": 0,
-                                  "height": 2,
-                                  "left": 0,
-                                  "position": "absolute",
-                                  "right": 0,
-                                  "transform": Array [
-                                    Object {
-                                      "scaleY": 0.5,
-                                    },
-                                  ],
-                                }
-                              }
-                            />
-                            <View
-                              style={
-                                Object {
-                                  "minHeight": 200,
-                                  "paddingBottom": 0,
-                                  "paddingTop": 0,
-                                }
-                              }
-                            >
-                              <View
-                                pointerEvents="none"
-                                style={
-                                  Object {
-                                    "bottom": 0,
-                                    "left": 0,
-                                    "opacity": 0,
-                                    "position": "absolute",
-                                    "right": 0,
-                                    "top": 0,
-                                    "transform": Array [
-                                      Object {
-                                        "translateX": 3,
-                                      },
-                                    ],
-                                  }
-                                }
-                              >
-                                <Text
-                                  numberOfLines={1}
-                                  onLayout={[Function]}
-                                  style={
-                                    Object {
-                                      "color": "rgb(0,0,0)",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": undefined,
-                                      "left": 0,
-                                      "opacity": 0,
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                      "position": "absolute",
-                                      "textAlign": "left",
-                                      "top": 100,
-                                      "transform": Array [
-                                        Object {
-                                          "translateX": 0,
-                                        },
-                                        Object {
-                                          "translateY": -82,
-                                        },
-                                        Object {
-                                          "scale": 0.75,
-                                        },
-                                      ],
-                                      "writingDirection": "ltr",
-                                    }
-                                  }
-                                >
-                                  Message (14/2500)
-                                </Text>
-                                <Text
-                                  numberOfLines={1}
-                                  style={
-                                    Object {
-                                      "color": "rgba(0, 0, 0, 0.54)",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": undefined,
-                                      "left": 0,
-                                      "opacity": 0,
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                      "position": "absolute",
-                                      "textAlign": "left",
-                                      "top": 100,
-                                      "transform": Array [
-                                        Object {
-                                          "translateX": 0,
-                                        },
-                                        Object {
-                                          "translateY": -82,
-                                        },
-                                        Object {
-                                          "scale": 0.75,
-                                        },
-                                      ],
-                                      "writingDirection": "ltr",
-                                    }
-                                  }
-                                >
-                                  Message (14/2500)
-                                </Text>
-                              </View>
-                              <TextInput
-                                allowFontScaling={true}
-                                editable={true}
-                                index={2}
-                                multiline={true}
-                                nativeID="nutshell-write-entry-0-content"
-                                onBlur={[Function]}
-                                onChangeText={[Function]}
-                                onContentSizeChange={[Function]}
-                                onFocus={[Function]}
-                                onKeyPress={[Function]}
-                                onPress={[Function]}
-                                placeholder=""
-                                placeholderTextColor="rgba(0, 0, 0, 0.54)"
-                                rejectResponderTermination={true}
-                                selectionColor="rgb(0,0,0)"
-                                siblings={
-                                  Array [
-                                    "withTheme()",
-                                    "withTheme()",
-                                  ]
-                                }
-                                style={
-                                  Array [
-                                    Object {
-                                      "flexGrow": 1,
-                                      "margin": 0,
-                                      "textAlign": "left",
-                                      "zIndex": 1,
-                                    },
-                                    Object {
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                    },
-                                    Object {
-                                      "height": 200,
-                                    },
-                                    Object {
-                                      "paddingBottom": 4,
-                                      "paddingTop": 24,
-                                    },
-                                    Object {
-                                      "color": "#000000",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": undefined,
-                                      "textAlignVertical": "top",
-                                    },
-                                    Array [
-                                      Object {},
-                                    ],
-                                  ]
-                                }
-                                total={5}
-                                underlineColorAndroid="transparent"
-                                value="Paragraph Derp"
-                              />
-                            </View>
-                          </View>
-                        </View>
-                      </View>
-                      <View
-                        accessible={true}
-                        focusable={true}
-                        onClick={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
-                        style={
-                          Object {
-                            "alignItems": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "center",
-                            "opacity": 1,
-                            "paddingTop": 10,
-                          }
-                        }
-                      >
-                        <Text
-                          style={
-                            Array [
-                              Object {
-                                "color": "#000000",
-                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                "fontWeight": "400",
-                                "textAlign": "left",
-                              },
-                              Array [
-                                Object {
-                                  "color": "rgba(0, 0, 0, 0.54)",
-                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                  "fontWeight": "400",
-                                  "textAlign": "left",
-                                  "writingDirection": "ltr",
-                                },
-                                Array [
-                                  Object {
-                                    "fontSize": 12,
-                                    "letterSpacing": 0.4,
-                                    "lineHeight": 20,
-                                    "marginVertical": 2,
-                                  },
-                                  undefined,
-                                ],
-                                Array [
-                                  Object {
-                                    "fontSize": 12,
-                                    "letterSpacing": 0.4,
-                                    "lineHeight": 20,
-                                    "marginVertical": 2,
-                                  },
-                                  undefined,
-                                ],
-                              ],
-                            ]
-                          }
-                        >
-                          Inspiration: 
-                          what are you struggling with?
-                        </Text>
-                        <View
-                          accessibilityRole="button"
-                          accessibilityState={
-                            Object {
-                              "disabled": undefined,
-                            }
-                          }
-                          accessible={true}
-                          focusable={false}
-                          hitSlop={
-                            Object {
-                              "bottom": 6,
-                              "left": 6,
-                              "right": 6,
-                              "top": 6,
-                            }
-                          }
-                          onClick={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
-                          style={
-                            Array [
-                              Object {
-                                "overflow": "hidden",
-                              },
-                              Array [
-                                Object {
-                                  "alignItems": "center",
-                                  "justifyContent": "center",
-                                  "margin": 6,
-                                  "overflow": "hidden",
-                                },
-                                Object {
-                                  "borderRadius": 11.25,
-                                  "height": 22.5,
-                                  "width": 22.5,
-                                },
-                                undefined,
-                                Object {
-                                  "opacity": 0.8,
-                                },
-                              ],
-                            ]
-                          }
-                        >
-                          <View>
-                            <Text />
-                          </View>
-                        </View>
-                      </View>
-                      <Text
-                        index={4}
-                        onLayout={[Function]}
-                        siblings={
-                          Array [
-                            "withTheme()",
-                            "withTheme()",
-                          ]
-                        }
-                        style={
-                          Object {
-                            "color": "rgba(0, 0, 0, 0.54)",
-                            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                            "fontSize": 12,
-                            "fontWeight": "400",
-                            "opacity": 1,
-                            "paddingHorizontal": 12,
-                            "paddingVertical": 4,
-                            "textAlign": "center",
-                            "transform": Array [],
-                            "width": "100%",
-                            "writingDirection": "ltr",
-                          }
-                        }
-                        total={5}
-                      >
-                        All changes saved at 12:11. 
-                      </Text>
                     </View>
-                  </View>
-                </View>
-                <View
-                  nativeID="nutshell-write-entry-1"
-                  style={
-                    Object {
-                      "maxWidth": "100%",
-                      "paddingVertical": 10,
-                      "width": 500,
-                    }
-                  }
-                >
-                  <View
-                    style={
-                      Object {
-                        "backgroundColor": "#ffffff",
-                        "borderRadius": 0,
-                        "elevation": 2,
-                        "maxWidth": "100%",
-                        "opacity": 1,
-                        "padding": 30,
-                        "paddingVertical": 20,
-                        "shadowColor": "#000000",
-                        "shadowOffset": Object {
-                          "height": 0.75,
-                          "width": 0,
-                        },
-                        "shadowOpacity": 0.24,
-                        "shadowRadius": 1.5,
-                      }
-                    }
-                  >
                     <View
                       accessible={true}
-                      focusable={false}
+                      focusable={true}
+                      onBlur={[Function]}
                       onClick={[Function]}
+                      onFocus={[Function]}
                       onResponderGrant={[Function]}
                       onResponderMove={[Function]}
                       onResponderRelease={[Function]}
                       onResponderTerminate={[Function]}
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
-                      style={
-                        Object {
-                          "flexGrow": 1,
-                          "flexShrink": 1,
-                        }
-                      }
                     >
                       <View
                         style={
                           Object {
                             "maxWidth": "100%",
+                            "position": "relative",
                           }
                         }
                       >
                         <View
                           style={
-                            Object {
-                              "maxWidth": "100%",
-                              "position": "relative",
-                            }
+                            Array [
+                              Object {
+                                "backgroundColor": "rgb(231, 231, 231)",
+                                "borderTopLeftRadius": 0,
+                                "borderTopRightRadius": 0,
+                              },
+                              Object {
+                                "backgroundColor": "none",
+                                "marginVertical": 10,
+                                "minHeight": 50,
+                              },
+                            ]
                           }
                         >
                           <View
                             style={
-                              Array [
-                                Object {
-                                  "backgroundColor": "rgb(231, 231, 231)",
-                                  "borderTopLeftRadius": 0,
-                                  "borderTopRightRadius": 0,
-                                },
-                                Object {
-                                  "backgroundColor": "none",
-                                  "marginVertical": 10,
-                                  "minHeight": 50,
-                                },
-                              ]
+                              Object {
+                                "backgroundColor": "rgba(0, 0, 0, 0.26)",
+                                "bottom": 0,
+                                "height": 2,
+                                "left": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "transform": Array [
+                                  Object {
+                                    "scaleY": 0.5,
+                                  },
+                                ],
+                              }
+                            }
+                          />
+                          <View
+                            style={
+                              Object {
+                                "minHeight": 64,
+                                "paddingBottom": 0,
+                                "paddingTop": 0,
+                              }
                             }
                           >
                             <View
+                              pointerEvents="none"
                               style={
                                 Object {
-                                  "backgroundColor": "rgba(0, 0, 0, 0.26)",
                                   "bottom": 0,
-                                  "height": 2,
                                   "left": 0,
+                                  "opacity": 0,
                                   "position": "absolute",
                                   "right": 0,
+                                  "top": 0,
                                   "transform": Array [
                                     Object {
-                                      "scaleY": 0.5,
+                                      "translateX": 3,
                                     },
                                   ],
                                 }
                               }
-                            />
-                            <View
-                              style={
-                                Object {
-                                  "minHeight": 64,
-                                  "paddingBottom": 0,
-                                  "paddingTop": 0,
-                                }
-                              }
                             >
-                              <View
-                                pointerEvents="none"
+                              <Text
+                                numberOfLines={1}
+                                onLayout={[Function]}
                                 style={
                                   Object {
-                                    "bottom": 0,
+                                    "color": "rgb(0,0,0)",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": "bold",
                                     "left": 0,
                                     "opacity": 0,
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
                                     "position": "absolute",
-                                    "right": 0,
-                                    "top": 0,
+                                    "textAlign": "left",
+                                    "top": 34,
                                     "transform": Array [
                                       Object {
-                                        "translateX": 3,
+                                        "translateX": 0,
+                                      },
+                                      Object {
+                                        "translateY": -16,
+                                      },
+                                      Object {
+                                        "scale": 0.75,
                                       },
                                     ],
+                                    "writingDirection": "ltr",
                                   }
                                 }
                               >
-                                <Text
-                                  numberOfLines={1}
-                                  onLayout={[Function]}
-                                  style={
-                                    Object {
-                                      "color": "rgb(0,0,0)",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": "bold",
-                                      "left": 0,
-                                      "opacity": 0,
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                      "position": "absolute",
-                                      "textAlign": "left",
-                                      "top": 34,
-                                      "transform": Array [
-                                        Object {
-                                          "translateX": 0,
-                                        },
-                                        Object {
-                                          "translateY": -16,
-                                        },
-                                        Object {
-                                          "scale": 0.75,
-                                        },
-                                      ],
-                                      "writingDirection": "ltr",
-                                    }
-                                  }
-                                >
-                                  Headline (12/75)
-                                </Text>
-                                <Text
-                                  numberOfLines={1}
-                                  style={
-                                    Object {
-                                      "color": "rgba(0, 0, 0, 0.54)",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": "bold",
-                                      "left": 0,
-                                      "opacity": 0,
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                      "position": "absolute",
-                                      "textAlign": "left",
-                                      "top": 34,
-                                      "transform": Array [
-                                        Object {
-                                          "translateX": 0,
-                                        },
-                                        Object {
-                                          "translateY": -16,
-                                        },
-                                        Object {
-                                          "scale": 0.75,
-                                        },
-                                      ],
-                                      "writingDirection": "ltr",
-                                    }
-                                  }
-                                >
-                                  Headline (12/75)
-                                </Text>
-                              </View>
-                              <TextInput
-                                allowFontScaling={true}
-                                editable={true}
-                                index={1}
-                                multiline={false}
-                                nativeID="nutshell-write-entry-1-headline"
-                                onBlur={[Function]}
-                                onChangeText={[Function]}
-                                onContentSizeChange={[Function]}
-                                onFocus={[Function]}
-                                onKeyPress={[Function]}
-                                onPress={[Function]}
-                                placeholder=""
-                                placeholderTextColor="rgba(0, 0, 0, 0.54)"
-                                rejectResponderTermination={true}
-                                selectionColor="rgb(0,0,0)"
-                                siblings={
-                                  Array [
-                                    "withTheme()",
-                                    "withTheme()",
-                                  ]
-                                }
+                                Headline (12/75)
+                              </Text>
+                              <Text
+                                numberOfLines={1}
                                 style={
-                                  Array [
-                                    Object {
-                                      "flexGrow": 1,
-                                      "margin": 0,
-                                      "textAlign": "left",
-                                      "zIndex": 1,
-                                    },
-                                    Object {
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                    },
-                                    Object {
-                                      "height": 64,
-                                    },
-                                    Object {
-                                      "paddingBottom": 4,
-                                      "paddingTop": 24,
-                                    },
-                                    Object {
-                                      "color": "#000000",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": "bold",
-                                      "textAlignVertical": "center",
-                                    },
-                                    Array [
-                                      Object {},
+                                  Object {
+                                    "color": "rgba(0, 0, 0, 0.54)",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": "bold",
+                                    "left": 0,
+                                    "opacity": 0,
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": 34,
+                                    "transform": Array [
+                                      Object {
+                                        "translateX": 0,
+                                      },
+                                      Object {
+                                        "translateY": -16,
+                                      },
+                                      Object {
+                                        "scale": 0.75,
+                                      },
                                     ],
-                                  ]
+                                    "writingDirection": "ltr",
+                                  }
                                 }
-                                total={5}
-                                underlineColorAndroid="transparent"
-                                value="Title Derp 2"
-                              />
+                              >
+                                Headline (12/75)
+                              </Text>
                             </View>
+                            <TextInput
+                              allowFontScaling={true}
+                              editable={true}
+                              index={1}
+                              multiline={false}
+                              nativeID="nutshell-write-entry-1-headline"
+                              onBlur={[Function]}
+                              onChangeText={[Function]}
+                              onContentSizeChange={[Function]}
+                              onFocus={[Function]}
+                              onKeyPress={[Function]}
+                              placeholder=""
+                              placeholderTextColor="rgba(0, 0, 0, 0.54)"
+                              rejectResponderTermination={true}
+                              selectionColor="rgb(0,0,0)"
+                              siblings={
+                                Array [
+                                  "Pressable",
+                                  "Pressable",
+                                ]
+                              }
+                              style={
+                                Array [
+                                  Object {
+                                    "flexGrow": 1,
+                                    "margin": 0,
+                                    "zIndex": 1,
+                                  },
+                                  Object {
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                  },
+                                  Object {
+                                    "height": 64,
+                                  },
+                                  Object {
+                                    "paddingBottom": 4,
+                                    "paddingTop": 24,
+                                  },
+                                  Object {
+                                    "color": "#000000",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": "bold",
+                                    "textAlign": "left",
+                                    "textAlignVertical": "center",
+                                  },
+                                  Array [
+                                    Object {},
+                                  ],
+                                ]
+                              }
+                              total={5}
+                              underlineColorAndroid="transparent"
+                              value="Title Derp 2"
+                            />
                           </View>
                         </View>
                       </View>
+                    </View>
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                    >
                       <View
                         style={
                           Object {
                             "maxWidth": "100%",
+                            "position": "relative",
                           }
                         }
                       >
                         <View
                           style={
-                            Object {
-                              "maxWidth": "100%",
-                              "position": "relative",
-                            }
+                            Array [
+                              Object {
+                                "backgroundColor": "rgb(231, 231, 231)",
+                                "borderTopLeftRadius": 0,
+                                "borderTopRightRadius": 0,
+                              },
+                              Object {
+                                "backgroundColor": "#f6f6f6",
+                                "marginVertical": 10,
+                                "minHeight": 50,
+                              },
+                            ]
                           }
                         >
                           <View
                             style={
-                              Array [
-                                Object {
-                                  "backgroundColor": "rgb(231, 231, 231)",
-                                  "borderTopLeftRadius": 0,
-                                  "borderTopRightRadius": 0,
-                                },
-                                Object {
-                                  "backgroundColor": "#f6f6f6",
-                                  "marginVertical": 10,
-                                  "minHeight": 50,
-                                },
-                              ]
+                              Object {
+                                "backgroundColor": "rgba(0, 0, 0, 0.26)",
+                                "bottom": 0,
+                                "height": 2,
+                                "left": 0,
+                                "position": "absolute",
+                                "right": 0,
+                                "transform": Array [
+                                  Object {
+                                    "scaleY": 0.5,
+                                  },
+                                ],
+                              }
+                            }
+                          />
+                          <View
+                            style={
+                              Object {
+                                "minHeight": 100,
+                                "paddingBottom": 0,
+                                "paddingTop": 0,
+                              }
                             }
                           >
                             <View
+                              pointerEvents="none"
                               style={
                                 Object {
-                                  "backgroundColor": "rgba(0, 0, 0, 0.26)",
                                   "bottom": 0,
-                                  "height": 2,
                                   "left": 0,
+                                  "opacity": 0,
                                   "position": "absolute",
                                   "right": 0,
+                                  "top": 0,
                                   "transform": Array [
                                     Object {
-                                      "scaleY": 0.5,
+                                      "translateX": 3,
                                     },
                                   ],
                                 }
                               }
-                            />
-                            <View
-                              style={
-                                Object {
-                                  "minHeight": 200,
-                                  "paddingBottom": 0,
-                                  "paddingTop": 0,
-                                }
-                              }
                             >
-                              <View
-                                pointerEvents="none"
+                              <Text
+                                numberOfLines={1}
+                                onLayout={[Function]}
                                 style={
                                   Object {
-                                    "bottom": 0,
+                                    "color": "rgb(0,0,0)",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": undefined,
                                     "left": 0,
                                     "opacity": 0,
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
                                     "position": "absolute",
-                                    "right": 0,
-                                    "top": 0,
+                                    "textAlign": "left",
+                                    "top": 50,
                                     "transform": Array [
                                       Object {
-                                        "translateX": 3,
+                                        "translateX": 0,
+                                      },
+                                      Object {
+                                        "translateY": -32,
+                                      },
+                                      Object {
+                                        "scale": 0.75,
                                       },
                                     ],
+                                    "writingDirection": "ltr",
                                   }
                                 }
                               >
-                                <Text
-                                  numberOfLines={1}
-                                  onLayout={[Function]}
-                                  style={
-                                    Object {
-                                      "color": "rgb(0,0,0)",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": undefined,
-                                      "left": 0,
-                                      "opacity": 0,
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                      "position": "absolute",
-                                      "textAlign": "left",
-                                      "top": 100,
-                                      "transform": Array [
-                                        Object {
-                                          "translateX": 0,
-                                        },
-                                        Object {
-                                          "translateY": -82,
-                                        },
-                                        Object {
-                                          "scale": 0.75,
-                                        },
-                                      ],
-                                      "writingDirection": "ltr",
-                                    }
-                                  }
-                                >
-                                  Message (16/2500)
-                                </Text>
-                                <Text
-                                  numberOfLines={1}
-                                  style={
-                                    Object {
-                                      "color": "rgba(0, 0, 0, 0.54)",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": undefined,
-                                      "left": 0,
-                                      "opacity": 0,
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                      "position": "absolute",
-                                      "textAlign": "left",
-                                      "top": 100,
-                                      "transform": Array [
-                                        Object {
-                                          "translateX": 0,
-                                        },
-                                        Object {
-                                          "translateY": -82,
-                                        },
-                                        Object {
-                                          "scale": 0.75,
-                                        },
-                                      ],
-                                      "writingDirection": "ltr",
-                                    }
-                                  }
-                                >
-                                  Message (16/2500)
-                                </Text>
-                              </View>
-                              <TextInput
-                                allowFontScaling={true}
-                                editable={true}
-                                index={2}
-                                multiline={true}
-                                nativeID="nutshell-write-entry-1-content"
-                                onBlur={[Function]}
-                                onChangeText={[Function]}
-                                onContentSizeChange={[Function]}
-                                onFocus={[Function]}
-                                onKeyPress={[Function]}
-                                onPress={[Function]}
-                                placeholder=""
-                                placeholderTextColor="rgba(0, 0, 0, 0.54)"
-                                rejectResponderTermination={true}
-                                selectionColor="rgb(0,0,0)"
-                                siblings={
-                                  Array [
-                                    "withTheme()",
-                                    "withTheme()",
-                                  ]
-                                }
+                                Message (16/2500)
+                              </Text>
+                              <Text
+                                numberOfLines={1}
                                 style={
-                                  Array [
-                                    Object {
-                                      "flexGrow": 1,
-                                      "margin": 0,
-                                      "textAlign": "left",
-                                      "zIndex": 1,
-                                    },
-                                    Object {
-                                      "paddingLeft": 12,
-                                      "paddingRight": 12,
-                                    },
-                                    Object {
-                                      "height": 200,
-                                    },
-                                    Object {
-                                      "paddingBottom": 4,
-                                      "paddingTop": 24,
-                                    },
-                                    Object {
-                                      "color": "#000000",
-                                      "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                      "fontSize": 16,
-                                      "fontWeight": undefined,
-                                      "textAlignVertical": "top",
-                                    },
-                                    Array [
-                                      Object {},
+                                  Object {
+                                    "color": "rgba(0, 0, 0, 0.54)",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": undefined,
+                                    "left": 0,
+                                    "opacity": 0,
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                    "position": "absolute",
+                                    "textAlign": "left",
+                                    "top": 50,
+                                    "transform": Array [
+                                      Object {
+                                        "translateX": 0,
+                                      },
+                                      Object {
+                                        "translateY": -32,
+                                      },
+                                      Object {
+                                        "scale": 0.75,
+                                      },
                                     ],
-                                  ]
+                                    "writingDirection": "ltr",
+                                  }
                                 }
-                                total={5}
-                                underlineColorAndroid="transparent"
-                                value="Paragraph Derp 2"
-                              />
+                              >
+                                Message (16/2500)
+                              </Text>
                             </View>
+                            <TextInput
+                              allowFontScaling={true}
+                              editable={true}
+                              index={2}
+                              multiline={true}
+                              nativeID="nutshell-write-entry-1-content"
+                              onBlur={[Function]}
+                              onChangeText={[Function]}
+                              onContentSizeChange={[Function]}
+                              onFocus={[Function]}
+                              onKeyPress={[Function]}
+                              placeholder=""
+                              placeholderTextColor="rgba(0, 0, 0, 0.54)"
+                              rejectResponderTermination={true}
+                              selectionColor="rgb(0,0,0)"
+                              siblings={
+                                Array [
+                                  "Pressable",
+                                  "Pressable",
+                                ]
+                              }
+                              style={
+                                Array [
+                                  Object {
+                                    "flexGrow": 1,
+                                    "margin": 0,
+                                    "zIndex": 1,
+                                  },
+                                  Object {
+                                    "paddingLeft": 12,
+                                    "paddingRight": 12,
+                                  },
+                                  Object {
+                                    "height": 100,
+                                  },
+                                  Object {
+                                    "paddingBottom": 4,
+                                    "paddingTop": 24,
+                                  },
+                                  Object {
+                                    "color": "#000000",
+                                    "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                    "fontSize": 16,
+                                    "fontWeight": undefined,
+                                    "textAlign": "left",
+                                    "textAlignVertical": "top",
+                                  },
+                                  Array [
+                                    Object {},
+                                  ],
+                                ]
+                              }
+                              total={5}
+                              underlineColorAndroid="transparent"
+                              value="Paragraph Derp 2"
+                            />
                           </View>
                         </View>
                       </View>
+                    </View>
+                    <View
+                      accessible={true}
+                      focusable={true}
+                      index={3}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      siblings={
+                        Array [
+                          "Pressable",
+                          "Pressable",
+                        ]
+                      }
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                          "paddingTop": 10,
+                        }
+                      }
+                      total={5}
+                    >
+                      <Text
+                        style={
+                          Array [
+                            Object {
+                              "color": "#000000",
+                              "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                              "fontWeight": "400",
+                              "textAlign": "left",
+                            },
+                            Array [
+                              Object {
+                                "color": "rgba(0, 0, 0, 0.54)",
+                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
+                                "fontWeight": "400",
+                                "textAlign": "left",
+                                "writingDirection": "ltr",
+                              },
+                              Array [
+                                Object {
+                                  "fontSize": 12,
+                                  "letterSpacing": 0.4,
+                                  "lineHeight": 20,
+                                  "marginVertical": 2,
+                                },
+                                undefined,
+                              ],
+                            ],
+                          ]
+                        }
+                      >
+                        Inspiration: 
+                        what are you struggling with?
+                      </Text>
                       <View
+                        accessibilityRole="button"
+                        accessibilityState={
+                          Object {
+                            "disabled": undefined,
+                          }
+                        }
                         accessible={true}
-                        focusable={true}
+                        focusable={false}
+                        hitSlop={
+                          Object {
+                            "bottom": 6,
+                            "left": 6,
+                            "right": 6,
+                            "top": 6,
+                          }
+                        }
                         onClick={[Function]}
                         onResponderGrant={[Function]}
                         onResponderMove={[Function]}
@@ -2116,139 +2335,34 @@ exports[`WriteNutshell Matches snapshot 1`] = `
                         onResponderTerminationRequest={[Function]}
                         onStartShouldSetResponder={[Function]}
                         style={
-                          Object {
-                            "alignItems": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "center",
-                            "opacity": 1,
-                            "paddingTop": 10,
-                          }
-                        }
-                      >
-                        <Text
-                          style={
+                          Array [
+                            Object {
+                              "overflow": "hidden",
+                            },
                             Array [
                               Object {
-                                "color": "#000000",
-                                "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                "fontWeight": "400",
-                                "textAlign": "left",
-                              },
-                              Array [
-                                Object {
-                                  "color": "rgba(0, 0, 0, 0.54)",
-                                  "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                                  "fontWeight": "400",
-                                  "textAlign": "left",
-                                  "writingDirection": "ltr",
-                                },
-                                Array [
-                                  Object {
-                                    "fontSize": 12,
-                                    "letterSpacing": 0.4,
-                                    "lineHeight": 20,
-                                    "marginVertical": 2,
-                                  },
-                                  undefined,
-                                ],
-                                Array [
-                                  Object {
-                                    "fontSize": 12,
-                                    "letterSpacing": 0.4,
-                                    "lineHeight": 20,
-                                    "marginVertical": 2,
-                                  },
-                                  undefined,
-                                ],
-                              ],
-                            ]
-                          }
-                        >
-                          Inspiration: 
-                          what are you struggling with?
-                        </Text>
-                        <View
-                          accessibilityRole="button"
-                          accessibilityState={
-                            Object {
-                              "disabled": undefined,
-                            }
-                          }
-                          accessible={true}
-                          focusable={false}
-                          hitSlop={
-                            Object {
-                              "bottom": 6,
-                              "left": 6,
-                              "right": 6,
-                              "top": 6,
-                            }
-                          }
-                          onClick={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
-                          style={
-                            Array [
-                              Object {
+                                "alignItems": "center",
+                                "justifyContent": "center",
+                                "margin": 6,
                                 "overflow": "hidden",
                               },
-                              Array [
-                                Object {
-                                  "alignItems": "center",
-                                  "justifyContent": "center",
-                                  "margin": 6,
-                                  "overflow": "hidden",
-                                },
-                                Object {
-                                  "borderRadius": 11.25,
-                                  "height": 22.5,
-                                  "width": 22.5,
-                                },
-                                undefined,
-                                Object {
-                                  "opacity": 0.8,
-                                },
-                              ],
-                            ]
-                          }
-                        >
-                          <View>
-                            <Text />
-                          </View>
-                        </View>
-                      </View>
-                      <Text
-                        index={4}
-                        onLayout={[Function]}
-                        siblings={
-                          Array [
-                            "withTheme()",
-                            "withTheme()",
+                              Object {
+                                "borderRadius": 11.25,
+                                "height": 22.5,
+                                "width": 22.5,
+                              },
+                              undefined,
+                              Object {
+                                "opacity": 0.8,
+                              },
+                            ],
                           ]
                         }
-                        style={
-                          Object {
-                            "color": "rgba(0, 0, 0, 0.54)",
-                            "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
-                            "fontSize": 12,
-                            "fontWeight": "400",
-                            "opacity": 1,
-                            "paddingHorizontal": 12,
-                            "paddingVertical": 4,
-                            "textAlign": "center",
-                            "transform": Array [],
-                            "width": "100%",
-                            "writingDirection": "ltr",
-                          }
-                        }
-                        total={5}
                       >
-                        All changes saved at 12:11. 
-                      </Text>
+                        <View>
+                          <Text />
+                        </View>
+                      </View>
                     </View>
                   </View>
                 </View>

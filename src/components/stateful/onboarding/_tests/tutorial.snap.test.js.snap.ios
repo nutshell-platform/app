@@ -59,8 +59,7 @@ exports[`Tutorial Matches snapshot 1`] = `
           index={0}
           siblings={
             Array [
-              "withTheme(Text)",
-              "withRouter(withTheme())",
+              "withTheme(undefined)",
             ]
           }
           style={
@@ -88,15 +87,6 @@ exports[`Tutorial Matches snapshot 1`] = `
                   },
                   undefined,
                 ],
-                Array [
-                  Object {
-                    "fontSize": 20,
-                    "letterSpacing": 0.15,
-                    "lineHeight": 30,
-                    "marginVertical": 2,
-                  },
-                  undefined,
-                ],
               ],
             ]
           }
@@ -110,8 +100,7 @@ exports[`Tutorial Matches snapshot 1`] = `
           index={1}
           siblings={
             Array [
-              "withTheme(Text)",
-              "withRouter(withTheme())",
+              "withTheme(undefined)",
             ]
           }
           style={
@@ -145,26 +134,9 @@ exports[`Tutorial Matches snapshot 1`] = `
         >
           <View
             index={2}
-            location={
-              Object {
-                "hash": "",
-                "pathname": "/",
-                "search": "",
-                "state": undefined,
-              }
-            }
-            match={
-              Object {
-                "isExact": true,
-                "params": Object {},
-                "path": "/",
-                "url": "/",
-              }
-            }
             siblings={
               Array [
-                "withTheme(Text)",
-                "withRouter(withTheme())",
+                "withTheme(undefined)",
               ]
             }
             style={
@@ -235,6 +207,7 @@ exports[`Tutorial Matches snapshot 1`] = `
               >
                 <Text
                   numberOfLines={1}
+                  selectable={false}
                   style={
                     Array [
                       Object {

@@ -5,16 +5,9 @@ exports[`Tutorial Matches snapshot 1`] = `
   className="css-view-1dbjc4n r-pointerEvents-12vffkv"
   style={
     Object {
-      "WebkitBoxFlex": 1,
-      "WebkitFlexBasis": "0%",
-      "WebkitFlexGrow": 1,
-      "WebkitFlexShrink": 1,
-      "flexBasis": "0%",
-      "flexGrow": 1,
-      "flexShrink": 1,
-      "msFlexNegative": 1,
-      "msFlexPositive": 1,
-      "msFlexPreferredSize": "0%",
+      "WebkitFlex": 1,
+      "flex": 1,
+      "msFlex": "1 1 0%",
     }
   }
 >
@@ -188,6 +181,7 @@ exports[`Tutorial Matches snapshot 1`] = `
                   "borderBottomRightRadius": "0px",
                   "borderTopLeftRadius": "0px",
                   "borderTopRightRadius": "0px",
+                  "cursor": "pointer",
                   "overflowX": "hidden",
                   "overflowY": "hidden",
                   "position": "relative",
@@ -222,6 +216,8 @@ exports[`Tutorial Matches snapshot 1`] = `
                   onClick={[Function]}
                   style={
                     Object {
+                      "MozUserSelect": "none",
+                      "WebkitUserSelect": "none",
                       "color": "rgba(255,255,255,1.00)",
                       "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                       "fontWeight": "500",
@@ -230,8 +226,10 @@ exports[`Tutorial Matches snapshot 1`] = `
                       "marginLeft": "16px",
                       "marginRight": "16px",
                       "marginTop": "9px",
+                      "msUserSelect": "none",
                       "textAlign": "center",
                       "textTransform": "uppercase",
+                      "userSelect": "none",
                     }
                   }
                 >
