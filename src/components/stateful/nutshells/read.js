@@ -2,15 +2,15 @@ import React from 'react'
 
 // Visual
 import { Component, Container, Main, Button } from '../../stateless/common/generic'
-import Tutorial from '../onboarding/tutorial'
 import FAB from '../common/fab'
-import { Placeholder, NutshellCard, ViewRecs } from '../../stateless/nutshells/read'
+import { InboxTimeline } from '../../stateless/nutshells/read'
 import Navigation from '../common/navigation'
 import People from '../../../../assets/undraw_people_tax5.svg'
 
 // Data
 import { log, Dialogue, wait } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
+import { isWeb } from '../../../modules/apis/platform'
 
 // Redux
 import { connect } from 'react-redux'
@@ -43,10 +43,10 @@ class ReadNutshell extends Component {
 
 			log( 'Start nutshell loading' )
 			this.loading = true
-			if( !visualFeedback ) await this.updateState( { loading: true } )
+			if( visualFeedback ) await this.updateState( { loading: true } )
 
 			const { inbox, offlineInbox, dispatch } = this.props
-			log( 'Load nutshells' )
+			if( inbox?.length != offlineInbox?.length ) log( 'Load nutshell discrepancy from: ', inbox, offlineInbox )
 
 			// Load nutshells, but with a minimum duration of 2 secs for UX
 			const start = Date.now()
@@ -55,25 +55,34 @@ class ReadNutshell extends Component {
 			const nutshellsToFetch = inbox.filter( uidInInbox => !offlineInbox.find( nutshell => nutshell.uid == uidInInbox ) )
 
 			// Load those unavablable offline from remote
+			if( nutshellsToFetch.length ) log( 'Not available offline: ', nutshellsToFetch )
 			let newNutshells = await Promise.all( nutshellsToFetch.map( uid => app.getNutshellByUid( uid ).catch( e => log( 'Error loading nutshell', uid, e ) ) ) )
-			log( 'Loaded ', newNutshells, ' based on inbox ', inbox )
+			if( newNutshells.length ) log( 'Loaded ', newNutshells, ' based on inbox ', inbox )
 
 			// Update offline inbox based on new inbox data
-			if( newNutshells?.length ) await dispatch( updateOfflineInbox( newNutshells, inbox ) )
+			await dispatch( updateOfflineInbox( newNutshells ) )
 
 			// If the loading process took shorter than a second, wait for 2 seconds
 			if( Date.now() - start < 1000 ) await wait( 2000 )
 
-			// If a nutshell is marked for deletion, remove it from the queue
-			const markRead = newNutshells.filter( nutshell => nutshell.delete )
+			// If a nutshell is marked for deletion, or is not in remote inbox, remove it from the queue
+			const markRead = newNutshells?.filter( nutshell => nutshell.delete )
 
 			// Delete nutshells that failed to load, first offline and then online in the background
-			log( 'Mark read because of loading error: ', markRead )
 			if( markRead?.length ) {
+
+				log( 'Mark read because of loading error: ', markRead )
+
+				// Add more to marked read offline
 				await this.updateState( { markedReadOffline: [ ...this.state.markedReadOffline, ...markRead ] } )
-				await Promise.all( markRead.map( nutshell => app.markNutshellRead( nutshell.delete ) ) ).catch( e => log( e ) )
+
+				// Mark as read on remote
+				await Promise.all( markRead.map( nutshell => app.markNutshellRead( nutshell.uid ) ) ).catch( e => log( e ) )
+
 			}
-			
+
+
+
 		} catch( e ) {
 			Dialogue( 'Something went wrong', e )
 		} finally {
@@ -83,12 +92,16 @@ class ReadNutshell extends Component {
 		}
 	}
 
-	cleanNutshells = ( nutshells=[] ) => {
+	sortAndCleanNutshells = ( nutshells=[] ) => {
 
 		const { user } = this.props
 		const { markedReadOffline } = this.state
 
-		log( 'Unfiltered nutshells: ', nutshells )
+		// Create new nutshell object to work with
+		nutshells = [ ...nutshells ]
+
+		// log( 'Unfiltered/sorted nutshells: ', nutshells )
+
 		if( user.muted?.length  ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
 		// log( 'Removed muted nutshells: ', nutshells )
 		if( markedReadOffline?.length ) nutshells = nutshells.filter( n => !markedReadOffline.includes( n.uid ) )
@@ -108,7 +121,7 @@ class ReadNutshell extends Component {
 
 		} )
 
-		log( 'Sorted by updated nutshells: ', nutshells )
+		// log( 'Filtered/sorted nutshells: ', nutshells )
 
 		return nutshells
 		
@@ -126,6 +139,7 @@ class ReadNutshell extends Component {
 
 		// If remote inbox are more than local, get inbox details with a small delay
 		if( remoteInbox?.length != offlineInbox?.length ) {
+			log( 'Scheduling inbox load. Remote is  ', remoteInbox, ' and local is ', offlineInbox )
 			if( this.inboxLoader ) clearTimeout( this.inboxLoader )
 			// Trigger inbox load, but keep it silent if we are probably more current
 			this.inboxLoader = setTimeout( f => this.loadInbox( !!markedReadOffline.length ), 2000 )
@@ -136,25 +150,20 @@ class ReadNutshell extends Component {
 
 	}
 
-	// Input handler
-	onInput = ( key, value ) => this.updateState( { [key]: value } )
-
 
 	render() {
 
 		const { loading } = this.state
-		const { user, history, draft, inbox, offlineInbox } = this.props
-		const renderInbox = this.cleanNutshells( offlineInbox )
+		const { history, offlineInbox } = this.props
+		const renderInbox = this.sortAndCleanNutshells( offlineInbox )
 
 
 		return <Container Background={ People }>
 			<Navigation title='Home' />
-			<Main.Top>
-				{ loading && <Button style={ { width: 500, marginBottom: 20, maxWidth: '100%' } } mode='flat' loading={ true }>Updating your inbox</Button> }
-				<Tutorial />
-				{ renderInbox?.length > 0 && renderInbox.map( ( nutshell, index ) => <NutshellCard index={ index } key={ nutshell.uid } nutshell={ nutshell } /> ) }
-				<ViewRecs recAmount={ user.recommendations?.length } />
-				{ inbox.length == 0 && <Placeholder status={ draft.status } hasDraft={ draft.entries?.length != 0 } /> }
+			<Main.Top refreshing={ loading } onRefresh={ this.loadInbox }>
+
+				{ isWeb && loading && <Button style={ { width: 500, marginBottom: 20, maxWidth: '100%' } } mode='flat' loading={ true }>Updating your inbox</Button> }
+				<InboxTimeline renderInbox={ renderInbox } />
 
 			</Main.Top>
 

@@ -7,24 +7,24 @@ export default ( state = {}, action ) => {
 
 		case "SETDRAFT":
 			return { ...state, draft: payload || {} }
-		break
+
 
 		case "SETINBOX":
 			return { ...state, inbox: payload || [] }
-		break
+
 
 		case "UPDATEOFFLINEINBOX":
-			const { newNutshells, inbox } = payload
+			const newNutshells = payload
 
 			// Remove offline nutshells no longer in inbox
-			const oldWitoutNewlyReadONutshells = [ ...( state.offline || [] ) ].filter( ( { uid } ) => inbox.includes( uid ) )
+			const { offline=[], inbox } = state
+			const oldWitoutNewlyReadONutshells = [ ...offline ].filter( ( { uid } ) => inbox.includes( uid ) )
 
 			// Add the new nutshells to the old ones available offline
 			const oldWithNewNutshells = [ ...oldWitoutNewlyReadONutshells, ...newNutshells ]
-
 			return { ...state, offline: [ ...oldWithNewNutshells ] }
 
-		break
+
 
 		// Just return the state if no known action is specified
 		default:

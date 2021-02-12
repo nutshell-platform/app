@@ -4,7 +4,7 @@ import { log } from '../../../modules/helpers'
 
 // Visual
 const Color = require('color')
-import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Pressable, Image, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, View as NativeView, StatusBar as Bar, SafeAreaView, Switch, TouchableOpacity, Pressable, Image, KeyboardAvoidingView, RefreshControl } from 'react-native'
 import { Card as PaperCard, Divider as PaperDivider, TextInput, Appbar, withTheme, ActivityIndicator as PaperActivityIndicator, Title, Text, Button as PaperButton, HelperText as PaperHelperText, Avatar, Subheading as PaperSubheading, Searchbar, Checkbox as PaperCheckbox, IconButton } from 'react-native-paper'
 import { Link as NativeLink, withRouter, useHistory } from '../../../routes/router'
 import { isWeb, isIos, isCI } from '../../../modules/apis/platform'
@@ -123,7 +123,7 @@ export const Link = withTheme( ( { style, theme, children, to, onPress, underlin
 // ///////////////////////////////
 
 // Generic text input
-const inputMemoCompare = ( prev, next ) => prev.hideInfo == next.hideInfo && prev.value == next.value
+const inputMemoCompare = ( prev, next ) => prev.hideInfo == next.hideInfo && prev.value == next.value && prev.nativeID == next.nativeID
 
 export const Input = React.memo( ( { style, info, hideInfo=false, error, onSubmit, multiline, iconSize=30, value, ...props } ) => {
 
@@ -247,15 +247,16 @@ export const Loading = ( { message } ) => <Container style={ { justifyContent: '
 		<Title style={ { textAlign: 'center', marginTop: 20 } }>{ message || 'Loading' }</Title>
 </Container>
 
+
 // ///////////////////////////////
 // Positioning
 // ///////////////////////////////
 const sharedStyles = { paddingHorizontal: 10, paddingVertical: 40, maxWidth: '100%', flexGrow: 1, flexShrink: 0 }
 export const Main = {
-	Center: ( { children, style } ) => ( <ScrollView style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, alignItems: 'center', justifyContent: 'center',  ...style } }>
+	Center: ( { refreshing=false, onRefresh=f=>f, children, style } ) => ( <ScrollView refreshControl={ <RefreshControl refreshing={ refreshing } onRefresh={ onRefresh } /> } style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, alignItems: 'center', justifyContent: 'center',  ...style } }>
 			{ children }
 	</ScrollView> ),
-	Top: ( { children, style } ) => ( <ScrollView style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
+	Top: ( { refreshing=false, onRefresh=f=>f, children, style } ) => ( <ScrollView refreshControl={ <RefreshControl refreshing={ refreshing } onRefresh={ onRefresh } /> } style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
 }
 
 // General app container

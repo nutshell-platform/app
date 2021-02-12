@@ -29,7 +29,7 @@ context( 'View profile', (  ) => {
 		cy.openFriendManager()
 
 		// Click the first profile and view it
-		cy.get( `#friends-find-search-result-link-0` ).click()
+		click( `#friends-find-search-result-link-0` )
 
 		// Thigns we would expect on a profile
 		find( 'Following' )

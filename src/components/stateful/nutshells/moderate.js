@@ -3,7 +3,7 @@ import React from 'react'
 // Visual
 import { Component, Container, Loading, Main, Card, View, Text, Button } from '../../stateless/common/generic'
 import Navigation from '../common/navigation'
-import { Entry } from '../../stateless/nutshells/read'
+import { Entry } from '../../stateless/nutshells/_read_text_entry'
 
 // Data
 import { log, catcher } from '../../../modules/helpers'

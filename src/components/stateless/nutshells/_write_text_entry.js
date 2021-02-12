@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 
 // Visual
 import { Pressable } from 'react-native'
-import { Card, Input, HelperText, View, Caption, IconButton, Menu } from '../common/generic'
+import { Card, Input, HelperText, Caption, IconButton, Menu } from '../common/generic'
 
 // Data
 import { timestampToTime } from '../../../modules/helpers'
@@ -52,8 +52,8 @@ export const UnoptimisedTextEntry = ( { uid, title='', paragraph='', onInput, en
 			{ /* Move nutshell menu */ }
 			<Pressable testID='menudots' style={ { position: 'absolute', right: -horizontalPadding, top: -verticalPadding, zIndex: 99 } } onPress={ f => setOpen( true ) }>
 				<Menu onDismiss={ f => setOpen( false ) } visible={ isOpen } anchor={ <IconButton style={ { opacity: .5, width: 50, height: 50, zIndex: 2 } } onPress={ f => setOpen( true ) } icon="dots-vertical" /> }>
-					<Menu.Item onPress={ f => menuMove( entrynr, 'up' ) } title="Move entry up" />
-					<Menu.Item onPress={ f => menuMove( entrynr, 'down' ) } title="Move entry down" />
+					<Menu.Item testID={ `nutshell-write-entry-${ entrynr }-moveup` } onPress={ f => menuMove( 'up' ) } title="Move entry up" />
+					<Menu.Item testID={ `nutshell-write-entry-${ entrynr }-movedown` } onPress={ f => menuMove( 'down' ) } title="Move entry down" />
 				</Menu>
 			</Pressable>
 
@@ -95,7 +95,7 @@ export const UnoptimisedTextEntry = ( { uid, title='', paragraph='', onInput, en
 		</Card>
 }
 
-export const OptimizedTextEntry = React.memo( UnoptimisedTextEntry, ( prev, next ) => {
+export const OptimizedTextEntry = memo( UnoptimisedTextEntry, ( prev, next ) => {
 
 	if( prev.title != next.title ) return false
 	if( prev.paragraph != next.paragraph ) return false

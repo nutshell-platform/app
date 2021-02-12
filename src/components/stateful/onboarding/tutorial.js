@@ -17,8 +17,6 @@ class Tutorial extends Component {
 		if( !user?.following?.length ) todos.push( { label: 'Follow some people', to: '/friends/find' } )
 		if( !user?.contactMethods?.whatsapp && !user?.contactMethods?.email ) todos.push( { label: 'Set a comment method', to: '/user/settings' } )
 
-		log( 'Recommended actions: ', todos )
-
 		// No todos? No component
 		if( !todos.length ) return null
 

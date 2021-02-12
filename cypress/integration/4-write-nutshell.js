@@ -26,27 +26,33 @@ context( 'Write nutshell', (  ) => {
 		fill( '#nutshell-write-entry-0-headline', nutshell.entries[0].headline )
 		fill( '#nutshell-write-entry-0-content', nutshell.entries[0].content )
 		find( 'Unsaved changes' )
-		find( 'All changes saved at' )
+		exclude( 'Unsaved changes' )
 
 		// And entry 2
 		fill( '#nutshell-write-entry-1-headline', nutshell.entries[1].headline )
 		fill( '#nutshell-write-entry-1-content', nutshell.entries[1].content )
 		find( 'Unsaved changes' )
-		find( 'All changes saved at' )
+		exclude( 'Unsaved changes' )
 
 		// Shuffle the entries around with the down button
-		click( '#nutshell-write-entry-0-movedown' )
+		click( '#nutshell-write-entry-0 [data-testid="menudots"]' )
+		click( '[data-testid="nutshell-write-entry-0-movedown"]' )
 		cy.get( '#nutshell-write-entry-0-headline' ).should( 'have.value', nutshell.entries[1].headline )
 		cy.get( '#nutshell-write-entry-0-content' ).should( 'have.value', nutshell.entries[1].content )
-		click( '#nutshell-write-entry-0-movedown' )
+
+		click( '#nutshell-write-entry-0 [data-testid="menudots"]' )
+		click( '[data-testid="nutshell-write-entry-0-movedown"]' )
 		cy.get( '#nutshell-write-entry-0-headline' ).should( 'have.value', nutshell.entries[0].headline )
 		cy.get( '#nutshell-write-entry-0-content' ).should( 'have.value', nutshell.entries[0].content )
 
 		// Shuffle the entries around with the up button
-		click( '#nutshell-write-entry-1-moveup' )
+		click( '#nutshell-write-entry-1 [data-testid="menudots"]' )
+		click( '[data-testid="nutshell-write-entry-1-moveup"]' )
 		cy.get( '#nutshell-write-entry-1-headline' ).should( 'have.value', nutshell.entries[0].headline )
 		cy.get( '#nutshell-write-entry-1-content' ).should( 'have.value', nutshell.entries[0].content )
-		click( '#nutshell-write-entry-1-moveup' )
+
+		click( '#nutshell-write-entry-1 [data-testid="menudots"]' )
+		click( '[data-testid="nutshell-write-entry-1-moveup"]' )
 		cy.get( '#nutshell-write-entry-1-headline' ).should( 'have.value', nutshell.entries[1].headline )
 		cy.get( '#nutshell-write-entry-1-content' ).should( 'have.value', nutshell.entries[1].content )
 

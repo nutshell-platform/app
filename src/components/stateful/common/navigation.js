@@ -8,7 +8,6 @@ import { Header, Menu } from '../../stateless/common/navigation'
 // Data & routing
 import { connect } from 'react-redux'
 import { withRouter } from '../../../routes/router'
-import { toggleDarkMode } from '../../../redux/actions/settingsActions'
 import app from '../../../modules/firebase/app'
 
 // Helpers
@@ -32,12 +31,12 @@ class Navigation extends Component {
 		const force = config == 'force'
 
 		// If the drawer is open, move it to closed position
-		if( drawer && !force ) Animated.timing( this.pan, { toValue: { x: drawerWidth, y: 0 }, duration: drawerSpeed } ).start( f => this.updateState( { drawer: !drawer } ) )
+		if( drawer && !force ) Animated.timing( this.pan, { toValue: { x: drawerWidth, y: 0 }, duration: drawerSpeed, useNativeDriver: false } ).start( f => this.updateState( { drawer: !drawer } ) )
 		
 		// If drawer is closed, dirst mount, then animate open
 		else if( !drawer || force ) {
 			if( !force ) await this.updateState( { drawer: !drawer } )
-			Animated.timing( this.pan, { toValue: { x: 0, y: 0 }, duration: drawerSpeed } ).start()
+			Animated.timing( this.pan, { toValue: { x: 0, y: 0 }, duration: drawerSpeed, useNativeDriver: false } ).start()
 		}
 	}
 
@@ -65,8 +64,6 @@ class Navigation extends Component {
 		else return this.toggleDrawer( 'force' )
 
 	}
-
-	toggleDarkMode = f => this.props.dispatch( toggleDarkMode() )
 
 	mailBugreport = async f => {
 
@@ -133,15 +130,16 @@ class Navigation extends Component {
 			links: [
 				{ label: 'Moderation', to: '/nutshells/moderate' }
 			]
-		 } )
+		} )
 
 		// Add debugging link
 		if( user?.admin ) links.push( { 
 			label: 'Admin',
 			links: [
-				{ label: 'Debugging', to: '/debug' }
+				{ label: 'Debugging', to: '/debug' },
+				{ label: 'Request demo Nutshells', onPress: app.createTestNutshell }
 			]
-		 } )
+		} )
 
 		// Add bug/feedback links
 		if( user ) links.push( {
@@ -160,8 +158,6 @@ class Navigation extends Component {
 			toggle={ this.toggleDrawer } 
 			title={ capitalize( title ) }
 			drawer={ drawer }
-			toggleDark={ this.toggleDarkMode }
-			go={ to => history.push( to ) }
 			links={ links } >
 				{ user && <Appbar.Action nativeID='navigation-home' icon='home' onPress={ f => history.push( `/` ) } /> }
 				{ user && <Appbar.Action nativeID='navigation-findfriends' icon='account-plus' onPress={ f => history.push( `/friends/find` ) } /> }

@@ -57,7 +57,10 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 		} )
 
 		// If the file changed, unload old
-		return f => setSound( undefined )
+		return async f => {
+			if( sound ) await sound.unloadAsync()
+			setSound( undefined )
+		}
 
 	}, [ existingAudioURI ] )
 
@@ -104,7 +107,7 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 		} catch( e ) {
 
 			setIsRecording( false )
-			log( e )
+			catcher( e )
 			Dialogue( 'Recording error', e.message )
 
 		}

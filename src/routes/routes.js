@@ -3,7 +3,7 @@ import { BackHandler } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
-import { Light, Dark } from '../modules/visual/themes'
+import { Light } from '../modules/visual/themes'
 import { toggleDarkMode } from '../redux/actions/settingsActions'
 
 // Firebase api

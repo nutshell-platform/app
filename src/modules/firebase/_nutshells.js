@@ -38,7 +38,6 @@ export const getNutshellByUid = async ( db, uid ) => {
 		// Get user data
 		const user = await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
 		const contactMethods = await db.collection( 'userContacts' ).doc( user.uid ).get().then( doc => doc.data() ).catch( f => { console.log( f ); return false } )
-		console.log( user, contactMethods )
 		return { ...nutshell, user: { ...user, contactMethods: contactMethods || {} } }
 
 	} catch( e ) {

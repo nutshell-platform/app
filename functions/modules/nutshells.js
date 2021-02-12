@@ -53,7 +53,7 @@ exports.createTestNutshell = async myUid => {
 		if( !myUid ) throw 'No nutshell or uid provided'
 
 		// Get a random user to set the nutshell to
-		const [ randomUser ] = await db.collection( 'users' ).where( FieldPath.documentId(), '!=', myUid ).limit( 1 ).get().then( dataFromSnap )
+		const [ randomUser ] = await db.collection( 'users' ).where( FieldPath.documentId(), '!=', myUid ).limit( 1 ).get().then( dataFromSnap ) || []
 
 		const nutshell = {
 			uid: `testfor-${ myUid }-${ Date.now() }`,
@@ -67,7 +67,14 @@ exports.createTestNutshell = async myUid => {
 				{ uid: 2, title: 'test 2', paragraph: 'content 2' }
 			]
 		}
+
+		// Grab my current draft nutshell if there is one
+		const [ myDraftNutshell ] = await db.collection( 'nutshells' ).where( 'owner', '==', myUid ).where( 'status', 'in', [ 'draft', 'scheduled' ] ).limit( 1 ).get().then( dataFromSnap ) || []
 		
+		// Add current draft to my inbox
+		if( myDraftNutshell ) await db.collection( 'inbox' ).doc( myUid ).set( { nutshells: FieldValue.arrayUnion( myDraftNutshell.uid ) }, { merge: true } )
+
+		// Create test nutshell and add it to my inbox
 		await db.collection( 'nutshells' ).doc( nutshell.uid ).set( nutshell )
 		await db.collection( 'inbox' ).doc( myUid ).set( { nutshells: FieldValue.arrayUnion( nutshell.uid ) }, { merge: true } )
 

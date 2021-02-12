@@ -15,7 +15,7 @@ context( 'Read nutshell', (  ) => {
 		cy.goHome()
 
 		// See if the test nutshell is added to the feed
-		find( 'test 1' )
+		find( 'test 1', undefined, false, 60000 ) // Long timeout for sync of func result
 		find( 'test 2' )
 
 		// See if the content showed up
@@ -31,7 +31,7 @@ context( 'Read nutshell', (  ) => {
 		cy.login( user )
 
 		// Click first menu and check if all options are there
-		cy.get( '#nutshell-card-0 [data-testid="menudots"]' ).click()
+		click( '#nutshell-card-0 [data-testid="menudots"]' )
 		find( 'report abuse' )
 		find( 'block & unfollow this user' )
 		find( 'mute this nutshell' )

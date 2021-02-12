@@ -3,5 +3,6 @@
 	"defaultCommandTimeout": 60000,
 	"requestTimeout": 60000,
 	"video": true,
-	"animationDistanceThreshold": 1
+	"animationDistanceThreshold": 1,
+	"watchForFileChanges": false
 }

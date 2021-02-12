@@ -97,7 +97,7 @@ class WriteNutshell extends Component {
 		const entry = { ...entries[ index ] }
 
 		log( `Swapping ${ index }`, entry )
-		log( `With ${ swapIndex }`, swapEntry )
+		log( direction, `with ${ swapIndex }`, swapEntry )
 
 		// Use splice to replace the entries
 		const orderedEntries = [ ...entries ]
