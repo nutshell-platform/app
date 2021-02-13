@@ -28,7 +28,8 @@
     "sys:update": "npm run sys:nvm && ncu -u --target minor && npm i",
     "sys:upgrade": "npm run sys:nvm && ncu -u expo-cli && npm i && expo upgrade && npm i",
     "TEST:SECTION": "-------------------  TEST SECTION -------------------",
-    "test:all": "npm run sys:nvm && npm run test:e2e && jest --colors --silent snap && jest --colors --silent unit",
+    "test:all": "npm run sys:nvm && npm run test:jest && npm run test:e2e",
+    "test:jest": "jest --colors --silent snap && jest --colors --silent unit",
     "test:e2e:dev": "npm run sys:nvm && cypress open --config video=false,defaultCommandTimeout=5000,requestTimeout=2000",
     "test:e2e": "npm run sys:nvm && start-server-and-test 'npm run expo:web:ci' http://localhost:19006 'cypress run --quiet' ",
     "test:update": "npm run sys:nvm && jest --colors --updateSnapshot snap"

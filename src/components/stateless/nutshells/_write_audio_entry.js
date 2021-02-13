@@ -28,7 +28,7 @@ export const AudioEntry = ( { ...props } ) => {
 export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 
 	// Permissions
-	const [ audioPermission, askPermission ] = Permissions.usePermissions( Permissions.AUDIO_RECORDING )
+	const [ audioPermission, askPermission, getPermission ] = Permissions.usePermissions( Permissions.AUDIO_RECORDING )
 
 	// Uid of nutshell draft
 	const uidOfDraftNutshell = useSelector( store => store?.nutshells?.draft?.uid )
@@ -50,7 +50,7 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			setSound( sound )
 
 			// Set the metadata of the recording
-			return sound.getStatusAsync().then( ( { durationMillis } ) => setTimeRecorded( Math.floor( durationMillis / 1000 ) ) )
+			sound.getStatusAsync().then( ( { durationMillis } ) => setTimeRecorded( Math.floor( durationMillis / 1000 ) ) )
 			
 			setLoadingExisting( false )
 
@@ -87,7 +87,9 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 		try {
 
 			// Prep for recording
-			if( !audioPermission ) askPermission()
+			getPermission()
+			if( !audioPermission?.granted ) return Dialogue( 'Please give the app audio permissions in order to record' ).finally( askPermission )
+			
 			const { canRecord } = await recorder.getStatusAsync()
 			if( !canRecord ) await recorder.prepareToRecordAsync( Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY )
 

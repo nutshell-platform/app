@@ -12,6 +12,7 @@ context( 'Read nutshell', (  ) => {
 
 		// Create test nutshell
 		cy.visit( `${ url }/#/?createDemoNutshell` )
+		wait( 6000 )
 		cy.goHome()
 
 		// See if the test nutshell is added to the feed
