@@ -37,7 +37,7 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 	const maxLength = 60
 	const [ isRecording, setIsRecording ] = useState( false )
 	const [ sound, setSound ] = useState( )
-	const [ timeRecorded, setTimeRecorded ] = useState( )
+	const [ timeRecorded, setTimeRecorded ] = useState( 0 )
 
 	// If existing sound, load it
 	const [ loadingExisting, setLoadingExisting ] = useState( !!existingAudioURI )
