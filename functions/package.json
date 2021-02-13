@@ -2,7 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "nvm": "unset PREFIX && source ~/.nvm/nvm.sh && nvm use || echo 'No NVM available'",
+    "nvm": "unset PREFIX && source ~/.nvm/nvm.sh && nvm install && nvm use || echo 'No NVM available'",
     "serve": "export development=true && firebase emulators:start --only functions",
     "shell": "npm run nvm && export development=true && export GOOGLE_APPLICATION_CREDENTIALS=\"$(pwd)/../nutshell-staging.json\" && firebase functions:shell",
     "shell:production": "source ~/.nvm/nvm.sh && nvm use && export development=true && export GOOGLE_APPLICATION_CREDENTIALS=\"$(pwd)/../nutshell-production.json\" && firebase functions:shell",

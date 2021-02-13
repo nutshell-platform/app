@@ -18,33 +18,33 @@ exports.showQueue = async ( req, res ) => {
 // ///////////////////////////////
 // Demo data
 // ///////////////////////////////
-exports.makeDemo = async f => {
+// exports.makeDemo = async f => {
 
-	const nutshells = [ 1,2,3,4,5 ]
+// 	const nutshells = [ 1,2,3,4,5 ]
 
-	try {
-		await Promise.all( nutshells.map( nutshell => {
+// 	try {
+// 		await Promise.all( nutshells.map( nutshell => {
 
-			return db.collection( 'nutshells' ).add( {
-				created: Date.now(),
-				owner: 'bHOwM0nKgPNMet0JGMCczdbfIrz2', // Derpface
-				published: Date.now(),
-				status: 'scheduled',
-				updated: Date.now(),
-				entries: [
-					{ uuid: Math.random(), title: 'Demo', paragraph: 'Hello' }
-				]
-			} )
+// 			return db.collection( 'nutshells' ).add( {
+// 				created: Date.now(),
+// 				owner: 'bHOwM0nKgPNMet0JGMCczdbfIrz2', // Derpface
+// 				published: Date.now(),
+// 				status: 'scheduled',
+// 				updated: Date.now(),
+// 				entries: [
+// 					{ uuid: Math.random(), title: 'Demo', paragraph: 'Hello' }
+// 				]
+// 			} )
 
-		} ) )
+// 		} ) )
 
-		// console.log( 'Creation success' )
+// 		// console.log( 'Creation success' )
 
-	} catch( e ) {
-		console.log( 'creation problem, ', e )
-	}
+// 	} catch( e ) {
+// 		console.log( 'creation problem, ', e )
+// 	}
 
-}
+// }
 
 exports.createTestNutshell = async myUid => {
 
@@ -71,8 +71,13 @@ exports.createTestNutshell = async myUid => {
 		// Grab my current draft nutshell if there is one
 		const [ myDraftNutshell ] = await db.collection( 'nutshells' ).where( 'owner', '==', myUid ).where( 'status', 'in', [ 'draft', 'scheduled' ] ).limit( 1 ).get().then( dataFromSnap ) || []
 		
+
 		// Add current draft to my inbox
-		if( myDraftNutshell ) await db.collection( 'inbox' ).doc( myUid ).set( { nutshells: FieldValue.arrayUnion( myDraftNutshell.uid ) }, { merge: true } )
+		if( myDraftNutshell ) {
+			const demoBasedOnOwnNutshell = { ...myDraftNutshell, uid: `test-${ myDraftNutshell }`, owner: randomUser.uid }
+			await db.collection( 'nutshells' ).doc( demoBasedOnOwnNutshell.uid ).set( demoBasedOnOwnNutshell )
+			await db.collection( 'inbox' ).doc( myUid ).set( { nutshells: FieldValue.arrayUnion( demoBasedOnOwnNutshell.uid ) }, { merge: true } )
+		}
 
 		// Create test nutshell and add it to my inbox
 		await db.collection( 'nutshells' ).doc( nutshell.uid ).set( nutshell )

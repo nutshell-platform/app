@@ -50,11 +50,11 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			setSound( sound )
 
 			// Set the metadata of the recording
-			sound.getStatusAsync().then( ( { durationMillis } ) => setTimeRecorded( Math.floor( durationMillis / 1000 ) ) )
+			return sound.getStatusAsync().then( ( { durationMillis } ) => setTimeRecorded( Math.floor( durationMillis / 1000 ) ) )
 			
 			setLoadingExisting( false )
 
-		} )
+		} ).catch( e => Dialogue( 'Playback error: ', e.message ) )
 
 		// If the file changed, unload old
 		return async f => {
