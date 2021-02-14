@@ -8,7 +8,7 @@ import { Card, Input, HelperText, View, Caption, Button, IconButton, Profiler, T
 
 // Data
 import { catcher, log, Dialogue } from '../../../modules/helpers'
-import { isWeb } from '../../../modules/apis/platform'
+import { isWeb, isIos } from '../../../modules/apis/platform'
 import app from '../../../modules/firebase/app'
 
 // Recording
@@ -52,9 +52,9 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			// Set the metadata of the recording
 			sound.getStatusAsync().then( ( { durationMillis } ) => setTimeRecorded( Math.floor( durationMillis / 1000 ) ) )
 			
-			setLoadingExisting( false )
-
-		} ).catch( e => Dialogue( 'Playback error: ', e.message ) )
+		} )
+		.catch( e => Dialogue( 'Playback error: ', e.message ) )
+		.finally( f => setLoadingExisting( false ) )
 
 		// If the file changed, unload old
 		return async f => {
@@ -89,9 +89,10 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			// Prep for recording
 			getPermission()
 			if( !audioPermission?.granted ) return Dialogue( 'Please give the app audio permissions in order to record' ).finally( askPermission )
+			if( isIos ) await Audio.setAudioModeAsync( { allowsRecordingIOS: true, playsInSilentModeIOS: true } )
 			
 			const { canRecord } = await recorder.getStatusAsync()
-			if( !canRecord ) await recorder.prepareToRecordAsync( Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY )
+			if( !canRecord ) await recorder.prepareToRecordAsync( Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY )
 
 			// Exit if recording stopped
 			if( isRecording ) {
@@ -101,7 +102,10 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			}
 
 			// Start recording
-			if( !isRecording ) await recorder.startAsync()
+			if( !isRecording ) {
+				
+				await recorder.startAsync()
+			}
 
 			// Set visual recording state
 			setIsRecording( !isRecording )
@@ -125,6 +129,7 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			setTimeRecorded( 0 )
 			setIsRecording( false )
 			setIsSaved( false )
+			if( existingAudioURI ) await app.deleteAudioEntry( uidOfDraftNutshell )
 
 		} catch( e ) {
 			catcher( e )

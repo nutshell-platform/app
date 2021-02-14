@@ -26,3 +26,28 @@ export const saveAudioEntry = async ( app, uidOfNutshell, audioBlob ) => {
 	}
 
 }
+
+export const deleteAudioEntry = async ( app, uidOfNutshell ) => {
+
+	try {
+
+		const { storage, auth } = app
+
+		// User-settings
+		const { uid } = auth.currentUser
+		const path = `audioNutshells/${uid}/${ uidOfNutshell }`
+
+		// Delete old file
+		await storage.child( path ).delete().catch( e => log( e ) )
+		
+		// Add newly updated file to firebase
+		await app.db.collection( 'nutshells' ).doc( uidOfNutshell ).set( {
+			audio: [],
+			updated: Date.now(),
+		}, { merge: true } )
+
+	} catch( e ) {
+		catcher( `Error deleting audio nutshell for ${ uidOfNutshell }: ${ e.message }` )
+	}
+
+}
