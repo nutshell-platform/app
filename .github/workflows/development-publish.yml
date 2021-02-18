@@ -72,6 +72,10 @@ jobs:
         with:
           name: cypress-videos
           path: cypress/videos # or path/to/artifact
+
+      - name: Send failure push notification
+        if: ${{ failure() }}
+        run: curl -f -X POST -d "token=${{ secrets.PUSHOVER_TOKEN }}&user=${{ secrets.PUSHOVER_USER }}&title=X Nutshell Error&message=Development branch failed to deploy&url=https://github.com/nutshell-platform/app/actions&priority=1" https://api.pushover.net/1/messages.json
         
       - uses: expo/expo-github-action@v5
         with:
@@ -90,5 +94,5 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
-      - name: Send push notification
+      - name: Send success push notification
         run: curl -f -X POST -d "token=${{ secrets.PUSHOVER_TOKEN }}&user=${{ secrets.PUSHOVER_USER }}&title=Nutshell Deployed&message=Development branch is now live&url=https://beta.nutshell.social/&priority=1" https://api.pushover.net/1/messages.json
