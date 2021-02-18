@@ -92,7 +92,7 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			if( isIos ) await Audio.setAudioModeAsync( { allowsRecordingIOS: true, playsInSilentModeIOS: true } )
 			
 			const { canRecord } = await recorder.getStatusAsync()
-			if( !canRecord ) await recorder.prepareToRecordAsync( Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY )
+			if( !canRecord ) await recorder.prepareToRecordAsync( Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY )
 
 			// Exit if recording stopped
 			if( isRecording ) {
