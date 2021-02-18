@@ -1,6 +1,7 @@
 import * as Notifications from 'expo-notifications'
+import * as Linking from 'expo-linking'
 import { checkOrRequestPushAccess } from './apis/permissions'
-import { isWeb, isAndroid } from './apis/platform'
+import { isWeb, isAndroid, isIos } from './apis/platform'
 import { log } from './helpers'
 
 export const getTokenIfNeeded = async settings => {
@@ -21,6 +22,19 @@ export const getTokenIfNeeded = async settings => {
 
 export const registerNotificationListeners = history => {
 
+	const openLink = link => {
+		log( 'Opening ', link )
+		return link.includes( 'http' ) ? Linking.openURL( link ) : history.push( link )
+	}
+
+	Notifications.setNotificationHandler( {
+		handleNotification: async () => ( {
+			shouldShowAlert: true,
+			shouldPlaySound: false,
+			shouldSetBadge: false,
+		} )
+	} )
+
 	// Set andriod notification category
 	if( isAndroid ) Notifications.setNotificationChannelAsync( 'default', {
 		name: 'default',
@@ -39,7 +53,19 @@ export const registerNotificationListeners = history => {
 		const { data } = content
 
 		// If the user tapped the notification and there is route info
-		if( data?.goto ) history.push( data.goto )
+		if( data?.links ) {
+
+			const { android, ios, web } = data.links
+
+			// Platform specific redirects
+			if( isAndroid && android ) return openLink( android )
+			if( isIos && ios ) return openLink( ios )
+			else return openLink( web )
+
+		}
+	
+		if( data?.goto ) return openLink( data.goto )
+		
 
 	} )
 }

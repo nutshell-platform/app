@@ -6,7 +6,7 @@ export const ListResults = ( { results=[], follow, unfollow, recommendedProfiles
 
 	{ /* Recommendartions */ }
 	{ [ 'all' ].includes( filter ) && recommendedProfiles.length > 0 && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Recommendations:</Text> }
-	{ [ 'all' ].includes( filter ) && recommendedProfiles.length > 0 && recommendedProfiles.map( user => <Card key={ user.uid }>
+	{ [ 'all' ].includes( filter ) && recommendedProfiles.length > 0 && recommendedProfiles.map( user => <Card key={ `recc-${ user.uid }` }>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />
 			<View style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
@@ -20,7 +20,7 @@ export const ListResults = ( { results=[], follow, unfollow, recommendedProfiles
 
 	{ /* Seaech results */ }
 	{ [ 'all' ].includes( filter ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Interesting people:</Text> }
-	{ [ 'all', 'search', 'friends' ].includes( filter ) && results.length > 0 && results.map( ( user, i ) => <Card key={ user.uid }>
+	{ [ 'all', 'search', 'friends' ].includes( filter ) && results.length > 0 && results.map( ( user, i ) => <Card key={ `search-${ user.uid }` }>
 		<View nativeID={ `friends-find-search-result-${i}` } style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />
 			<View style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>

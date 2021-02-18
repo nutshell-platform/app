@@ -197,6 +197,52 @@ exports.rememberToWrite = async f => {
 
 }
 
+exports.sendMassMessage = async ( data={}, context={} ) => {
+
+	const logs = []
+
+	logs.push( 'sendMassMessage: Starting mass notification process' )
+
+	try {
+
+		// Validate requesting user
+		const { uid } = context.auth
+		if( !uid ) throw 'User not logged in'
+		const { admin } = await db.collection( 'specialPowers' ).doc( uid ).get().then( dataFromSnap )
+		if( !admin ) {
+			logs.push( `User ${ uid } does not have admin rights` )
+			throw 'You do not have permission to send push notifications, your action has been reported to the admins.'
+		}
+
+		// Get push noti data
+		const { title, message, ...messageData } = data
+		if( !title || !message ) throw 'Message data incomplete'
+
+		// Load push notification tokens
+		const allUsers = await db.collection( 'settings' ).orderBy( 'pushTokens' ).get().then( dataFromSnap )
+		const allPushTokens = allUsers.map( ( { pushTokens } ) => pushTokens ).flat()
+
+		logs.push( `Sending message to ${ allPushTokens.length } tokens of ${ allUsers.length } users` )
+		logs.push( `First token: `, allPushTokens[0] )
+
+		// Notify those will full inboxes
+		const notification = {
+			title: title,
+			body: message,
+			data: { ...messageData }
+		}
+
+		await sendPushNotifications( allPushTokens, notification )
+
+
+	} catch( e ) {
+		error( 'sendMassMessage error: ', e )
+	} finally {
+		log( 'sendMassMessage log: ', logs )
+	}
+
+}
+
 exports.resetNotificationTimes = async f => {
 
 	try {

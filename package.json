@@ -23,7 +23,7 @@
     "SYS:SECTION": "-------------------  SYS SECTION -------------------",
     "sys:bust": "npm cache clean --force && rm -fr $TMPDIR/metro* && watchman watch-del-all && jest --clearCache || npm i -g jest && jest --clearCache || echo 'Failed to bust Jest, try manually'",
     "sys:baseline": "npm run sys:nvm && npm run sys:bust && rm package-lock.json && rm -rf node_modules && npm i",
-    "sys:nvm": "nodever=$(<.nvmrc) && node -v | grep -q \"v$nodever\" && echo \"Correct node version\" || exit 1",
+    "sys:nvm": "nodever=$(<.nvmrc) && node -v | grep -q \"v$nodever\" && echo \"Correct node version\" && npm i || exit 1",
     "sys:ncu:dry": "npm run sys:nvm && ncu",
     "sys:update": "npm run sys:nvm && ncu -u --target minor && npm i",
     "sys:upgrade": "npm run sys:nvm && ncu -u expo-cli && npm i && expo upgrade && npm i",

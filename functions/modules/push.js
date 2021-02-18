@@ -47,16 +47,20 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 
 	if( !tokens || tokens.length == 0 ) return null
 
+	const logs = [ 'start sendPushNotifications', message ]
+
 	try {
 
 		// Format messages and make chunks
 		const messages = createMessages( tokens, message )
+		logs.push( `Created ${ messages.length } messages` )
 
 		const mChunks = toChunks( messages )
-
+		logs.push( `Created ${ mChunks.length } chunks` )
 		// Sent notifications
 
 		const tickets = await sendChunksReceiveTickets( mChunks )
+		logs.push( `Received ${ tickets.length } tockets` )
 
 		// Format tickets and register them
 		const formatTicket = ticket => ( {
@@ -65,9 +69,10 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 		} )
 
 		await Promise.all( tickets.map( ticket => db.collection( 'pushLogs' ).doc( ticket.id ).set( formatTicket( ticket ) ) ) )
+		logs.push( 'Pushed tickets to log' )
 
 	} catch( e ) {
-		error( 'Push notification error: ', e )
+		error( 'Push notification error: ', e, logs )
 		throw e
 	}
 

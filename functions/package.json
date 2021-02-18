@@ -2,7 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "nvm": "unset PREFIX && source ~/.nvm/nvm.sh && nvm install && nvm use || echo 'No NVM available'",
+    "nvm": "nodever=$(<.nvmrc) && node -v | grep -q \"v$nodever\" && echo \"Correct node version\" && npm i || exit 1",
     "serve": "export development=true && firebase emulators:start --only functions",
     "shell": "npm run nvm && export development=true && export GOOGLE_APPLICATION_CREDENTIALS=\"$(pwd)/../nutshell-staging.json\" && firebase functions:shell",
     "shell:production": "source ~/.nvm/nvm.sh && nvm use && export development=true && export GOOGLE_APPLICATION_CREDENTIALS=\"$(pwd)/../nutshell-production.json\" && firebase functions:shell",
@@ -12,18 +12,18 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "dependencies": {
     "array-flatten": "^3.0.0",
     "expo-server-sdk": "^3.6.0",
-    "firebase-admin": "^9.4.2",
-    "firebase-functions": "^3.13.0",
+    "firebase-admin": "^9.5.0",
+    "firebase-functions": "^3.13.1",
     "promise-parallel-throttle": "^3.3.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.3",
-    "firebase-tools": "^9.2.0"
+    "firebase-tools": "^9.4.0"
   },
   "private": true
 }

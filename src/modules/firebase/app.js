@@ -36,7 +36,7 @@ import { updateSettings, listenSettings, setLocalTimeToSettings } from './_setti
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell } from './_nutshells'
 import { saveAudioEntry, deleteAudioEntry } from './_audio_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson } from './_friends'
-import { getModerationQueue, markAbuseModerated  } from './_system'
+import { getModerationQueue, markAbuseModerated, sendMassMessage } from './_system'
 import { getAndSaveFingerprints } from './_fingerprints'
 
 // ///////////////////////////////
@@ -99,6 +99,7 @@ class Firebase {
 	// ///////////////////////////////
 	getModerationQueue  = f => getModerationQueue( this )
 	markAbuseModerated  = reportUid => markAbuseModerated( this, reportUid )
+	sendMassMessage = message => sendMassMessage( this, message )
 
 	// ///////////////////////////////
 	// friends

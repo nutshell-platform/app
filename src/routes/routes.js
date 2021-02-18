@@ -40,6 +40,7 @@ import ManageFriends from '../components/stateful/account/friends-manage'
 // System
 import FourOhFour from '../components/stateless/common/404'
 import Debug from '../components/stateful/common/debug'
+import { Marketing } from '../components/hook/system/marketing'
 
 // Route maneger class
 class Routes extends Component {
@@ -233,8 +234,11 @@ class Routes extends Component {
 				{ /* 404 */ }
 				<Route path='/404' component={ FourOhFour } />
 
-				{ /* 404 */ }
+				{ /* Debugging data */ }
 				<Route path='/debug' component={ Debug } />
+
+				{ /* Mass push notifications */ }
+				<Route path='/system/marketing' component={ Marketing } />
 
 				{ /* Unknown url? Check if it is a user */ }
 				<Route path='/:handle' component={ UserProfile } />

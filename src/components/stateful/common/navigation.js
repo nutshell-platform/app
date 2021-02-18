@@ -136,6 +136,7 @@ class Navigation extends Component {
 		if( user?.admin ) links.push( { 
 			label: 'Admin',
 			links: [
+				{ label: 'Marketing', to: '/system/marketing' },
 				{ label: 'Debugging', to: '/debug' },
 				{ label: 'Request demo Nutshells', onPress: app.createTestNutshell }
 			]
