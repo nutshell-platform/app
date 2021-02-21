@@ -53,7 +53,7 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			sound.getStatusAsync().then( ( { durationMillis } ) => setTimeRecorded( Math.floor( durationMillis / 1000 ) ) )
 			
 		} )
-		.catch( e => Dialogue( 'Playback error: ', e.message ) )
+		.catch( e => Dialogue( 'Playback error: ', `${ isIos ? 'iOS support is coming next week!\n\n' : '' }${ e.message || e }` ) )
 		.finally( f => setLoadingExisting( false ) )
 
 		// If the file changed, unload old
