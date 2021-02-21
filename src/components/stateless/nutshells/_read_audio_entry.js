@@ -94,7 +94,7 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 
 			if( error ) throw error
 
-		} ).catch( e => Dialogue( 'Playback error: ', e.message ) )
+		} ).catch( e => Dialogue( 'Playback error: ', e.message || e ) )
 
 		// If the file changed, unload old
 		return async f => {
