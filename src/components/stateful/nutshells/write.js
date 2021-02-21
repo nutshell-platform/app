@@ -76,7 +76,10 @@ class WriteNutshell extends Component {
 
 	}
 	// Set initial context
-	componentDidMount = f => this.updateEntryInterface()
+	componentDidMount = f => {
+		this.updateEntryInterface()
+		this.saveDraft() // Save draft so we have a uid
+	}
 	componentDidUpdate = f => this.updateEntryInterface()
 
 	// Input handler
