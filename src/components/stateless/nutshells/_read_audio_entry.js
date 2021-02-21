@@ -36,7 +36,10 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 	const togglePlayback = async f => {
 
 		// Since audio doesn't work on web and ios, open in browser
-		if( isWeb || isIos ) return Linking.openURL( audioURI )
+		if( isWeb || isIos ) {
+			await Dialogue( 'Opening in browser', `Audio playback is not yet supported on ${ isWeb ? 'the web interface' : '' }${ isIos ? 'the Android app' : '' }. I'll open the audio in your browser instead.` )
+			return Linking.openURL( audioURI )
+		}
 
 		try {
 			if( isPlaying ) await sound.pauseAsync()
