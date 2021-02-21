@@ -53,6 +53,12 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 	const [ assets, error ] = useAssets( [ audioURI ] )
 	useEffect( f => {
 
+		if( isWeb || isIos ) {
+			setLoadingExisting( false )
+			setDurationMillis( 60000 ) // Set to one minute (arbitrary)
+			return log( 'Not loading audio file, unsupported platform' )
+		}
+
 		const [ audioNutshellAsset ] = assets || []
 		log( 'Loaded remote asset: ', audioNutshellAsset )
 
