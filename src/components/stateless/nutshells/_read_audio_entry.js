@@ -7,11 +7,12 @@ import { useSelector } from 'react-redux'
 // Helper functions
 import { catcher, Dialogue, log } from '../../../modules/helpers'
 import { Pressable } from 'react-native'
-import { isWeb } from '../../../modules/apis/platform'
+import { isWeb, isIos } from '../../../modules/apis/platform'
 
 // Audio
 import { Audio } from 'expo-av'
 import { useAssets } from 'expo-asset'
+import * as Linking from 'expo-linking'
 
 // Single collapsble entry
 export const AudioEntry = memo( ( { audioURI } ) => {
@@ -34,7 +35,8 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 	const [ durationMillis, setDurationMillis ] = useState( 60 )
 	const togglePlayback = async f => {
 
-		if( isWeb ) return Dialogue( 'No web support yet', 'Please use the app to listen to audio messages.' )
+		// Since audio doesn't work on web and ios, open in browser
+		if( isWeb || isIos ) return Linking.openURL( audioURI )
 
 		try {
 			if( isPlaying ) await sound.pauseAsync()
@@ -52,9 +54,12 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 	useEffect( f => {
 
 		const [ audioNutshellAsset ] = assets || []
-		
+		log( 'Loaded remote asset: ', audioNutshellAsset )
+
 		if( audioNutshellAsset ) Audio.Sound.createAsync( audioNutshellAsset )
 		.then( async ( { sound, ...rest } ) => {
+
+			log( 'Loaded sound: ', sound )
 
 			// Set the sound to state
 			setSound( sound )
