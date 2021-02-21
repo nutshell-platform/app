@@ -22,7 +22,8 @@ service firebase.storage {
     match /audioNutshells/{userUid}/{filename} {
 
       // 10MB max, more that we should ever need
-      allow write: if request.auth.uid == userUid && ( !request.resource || request.resource.size < 10 * 1024 * 1024 )
+      allow write: if request.auth.uid == userUid && request.resource.size < 10 * 1024 * 1024
+      allow write: if request.auth.uid == userUid && request.resource == null 
 
       // Read only if logged in
       // allow read: if request.auth != null
