@@ -11,6 +11,7 @@ import { isWeb } from '../../../modules/apis/platform'
 
 // Audio
 import { Audio } from 'expo-av'
+import { useAssets } from 'expo-asset'
 
 // Single collapsble entry
 export const AudioEntry = memo( ( { audioURI } ) => {
@@ -47,9 +48,12 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 	}
 
 	// Load audio file
+	const [ assets, error ] = useAssets( [ audioURI ] )
 	useEffect( f => {
+
+		const [ audioNutshellAsset ] = assets || []
 		
-		if( audioURI ) Audio.Sound.createAsync( { uri: audioURI } )
+		if( audioNutshellAsset ) Audio.Sound.createAsync( audioNutshellAsset )
 		.then( async ( { sound, ...rest } ) => {
 
 			// Set the sound to state
@@ -74,6 +78,8 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 			// Set the metadata of the recording
 			setLoadingExisting( false )
 
+			if( error ) throw error
+
 		} ).catch( e => Dialogue( 'Playback error: ', e.message ) )
 
 		// If the file changed, unload old
@@ -82,7 +88,7 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 			setSound( undefined )
 		}
 
-	}, [ audioURI ] )
+	}, [ audioURI, assets ] )
 
 	// Visual variables
 	const recordingDuration = Math.floor( durationMillis / 1000 )
