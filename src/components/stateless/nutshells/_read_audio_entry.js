@@ -43,6 +43,7 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 		// if( isIos ) return Dialogue( 'Sorry no iOS yet', 'iOS audio playback does not work yet. ETA next week! In the meantime you can open Nutshell in a browser on a desktop!' )
 
 		try {
+			if( !sound ) throw 'Sound file did not load'
 			if( isPlaying ) await sound.pauseAsync()
 			else await sound.playAsync( )
 			setPlaying( !isPlaying )
@@ -57,7 +58,7 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 	const [ assets, error ] = useAssets( [ audioURI ] )
 	useEffect( f => {
 
-		if( isWeb || isIos ) {
+		if( isWeb ) {
 			setLoadingExisting( false )
 			setDurationMillis( 60000 ) // Set to one minute (arbitrary)
 			return log( 'Not loading audio file, unsupported platform' )
