@@ -21,7 +21,7 @@ class NutshellModerator extends Component {
 	componentDidMount = async f => {
 		const { history, user } = this.props
 		if( !user.moderator ) return history.push( '/' )
-		const queue = await app.getModerationQueue()
+		const queue = await app.getModerationQueue().catch( catcher )
 		return this.updateState( { loading: false, queue: queue } )
 	}
 
@@ -29,12 +29,12 @@ class NutshellModerator extends Component {
 		app.updateNutshell( { uid: report.nutshell.uid, hidden: true, entries: [ { title: '<Deleted>', paragraph: 'This Nutshell broke the rules. We gave it to a moose passing by.' } ] } ),
 		app.markAbuseModerated( report.uid ),
 		this.updateState( { queue: this.state.queue.filter( rep => rep.uid != report.uid ) } )
-	] )
+	] ).catch( catcher )
 
 	setFree = report => Promise.all( [
 		app.markAbuseModerated( report.uid ),
 		this.updateState( { queue: this.state.queue.filter( rep => rep.uid != report.uid ) } )
-	] )
+	] ).catch( catcher )
 
 	render() {
 

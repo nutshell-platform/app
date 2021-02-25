@@ -47,10 +47,10 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 			if( isPlaying ) await sound.pauseAsync()
 			else await sound.playAsync( )
 			setPlaying( !isPlaying )
-	} catch( e ) {
-		Dialogue( 'Playback error: ', e.message )
-		catcher( e )
-	}
+		} catch( e ) {
+			Dialogue( 'Playback error: ', e.message )
+			catcher( e )
+		}
 
 	}
 
@@ -96,11 +96,11 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 
 			if( error ) throw error
 
-		} ).catch( e => Dialogue( 'Playback error: ', e.message || e ) )
+		} ).catch( catcher )
 
 		// If the file changed, unload old
 		return async f => {
-			if( sound ) await sound.unloadAsync()
+			if( sound ) await sound.unloadAsync().catch( catcher )
 			setSound( undefined )
 		}
 

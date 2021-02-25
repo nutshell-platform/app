@@ -46,10 +46,11 @@ class FindFriends extends Component {
 
 
 		} catch( e ) {
+			catcher( e )
 			alert( e )
 		} finally {
 
-			return this.updateState( { loading: false } )
+			await this.updateState( { loading: false } )
 
 		}
 
@@ -75,14 +76,20 @@ class FindFriends extends Component {
 	// Set random people as results
 	defaultSearch = async f => {
 
-		// Offline checker
-		if( !( await app.isOnline() ) ) return Promise.all( [
-			Dialogue( 'You are offline', `We can't load any new data and any changes will not be saved.` ),
-			this.updateState( { loading: false } )
-		] )
+		try {
 
-		const people = await app.getRandomPeople(  )
-		return this.updateState( { results: people } )
+			// Offline checker
+			if( !( await app.isOnline() ) ) return Promise.all( [
+				Dialogue( 'You are offline', `We can't load any new data and any changes will not be saved.` ),
+				this.updateState( { loading: false } )
+			] )
+
+			const people = await app.getRandomPeople(  )
+			return this.updateState( { results: people } )
+
+		} catch( e ) {
+			catcher( e )
+		}
 	}
 
 	// Load recommendation data
@@ -90,7 +97,7 @@ class FindFriends extends Component {
 
 		const { recommendations } = this.props.user
 		if( !recommendations ) return
-		const people = await Promise.all( recommendations.map( uid => app.getPerson( uid, 'uid' ) ) )
+		const people = await Promise.all( recommendations.map( uid => app.getPerson( uid, 'uid' ) ) ).catch( catcher )
 		return this.updateState( { recommendedProfiles: people } )
 
 	}
@@ -103,7 +110,7 @@ class FindFriends extends Component {
 		if( query.length == 0 ) return Promise.all( [
 			results.length == 0 && this.defaultSearch(),
 			this.updateState( { filter: 'all', query: undefined, searching: false } )
-		] )
+		] ).catch( catcher )
 		return this.updateState( { filter: 'search', query: query, searching: true, autoSearch: setTimeout( f => this.searchBackend( query ), timeout ) } )
 	}
 
@@ -132,7 +139,7 @@ class FindFriends extends Component {
 				newFollows: [ ...newFollows, uid ],
 				newUnfollows: [ ...newUnfollows.filter( fuid => fuid != uid ) ]
 			} )
-		] )
+		] ).catch( catcher )
 	}
 
 	unfollow = uid => {
@@ -144,7 +151,7 @@ class FindFriends extends Component {
 				newFollows: [ ...newFollows.filter( fuid => fuid != uid ) ],
 				newUnfollows: [ ...newUnfollows, uid ]
 			} )
-		] )
+		] ).catch( catcher )
 	}
 
 	// Split following vs not yet
@@ -200,7 +207,7 @@ class FindFriends extends Component {
 
 		} catch( e ) {
 			Dialogue( `Something went wrong with your contacts, sorry about that. Try again in a few minutes? We'll get some coffee.` )
-			log( e )
+			catcher( e )
 		} finally {
 			await this.updateState( { loading: false } )
 			Dialogue( '🔥 All set!', `We are running our cross-referencing in the backgroud. You will be notified when we find a match.` )

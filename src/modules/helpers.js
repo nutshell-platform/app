@@ -1,5 +1,6 @@
 import { Alert as NativeAlert, LogBox } from 'react-native'
 import { dev, isWeb, isCI } from './apis/platform'
+import { Sentry } from './sentry/sentry'
 import { v4 as uuidv4 } from 'uuid'
 import * as Random from 'expo-random'
 import * as Linking from 'expo-linking'
@@ -36,17 +37,18 @@ export const log = ( ...messages ) => {
 	if( dev ) console.log( ...messages )
 }
 
-export const error = msg => {
+export const error = ( ...messages ) => {
 	if( dev ) {
-		console.log( msg )
+		console.error( ...messages )
+		console.error( 'Stack trace:' )
 		console.trace()
 	}
 }
 
-export const catcher = e => {
-	error( e )
+export const catcher = ( ...errors ) => {
+	error( ...errors )
 	// throw to sentry
-	throw e
+	Sentry.captureException( errors )
 }
 
 export const ignoreErrors = arr => LogBox && LogBox.ignoreLogs( arr )

@@ -29,7 +29,7 @@ class UserProfile extends Component {
 		const { handle: paramHandle } = this.props.match.params
 		if( handle != paramHandle ) {
 			await this.updateState( { handle: paramHandle, loading: 'Finding user data' } )
-			await this.getUserByHandle()
+			await this.getUserByHandle().catch( catcher )
 		}
 
 	}
@@ -52,7 +52,7 @@ class UserProfile extends Component {
 
 		} catch( e ) {
 
-			log( 'Trouble getting user by handle: ', e )
+			catcher( 'Trouble getting user by handle: ', e )
 			// Unable to find user
 			const { history } = this.props
 			history.push( '/404' )

@@ -85,6 +85,7 @@ class ReadNutshell extends Component {
 
 		} catch( e ) {
 			Dialogue( 'Something went wrong', e )
+			catcher( e )
 		} finally {
 			log( 'Nutshell loading done, set loading tracker to false' )
 			this.loading = false

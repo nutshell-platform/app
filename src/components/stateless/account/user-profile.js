@@ -4,6 +4,7 @@ import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton } f
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
 import app from '../../../modules/firebase/app'
+import { catcher } from '../../../modules/helpers'
 
 export const UserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraft, nutshells=[] } ) => {
 
@@ -18,7 +19,7 @@ export const UserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraf
 	const toggleFollowed = f => Promise.all( [
 		followed ? app.unfollowPerson( user.uid ) : app.followPerson( user.uid ),
 		setFollowed( !following )
-	] )
+	] ).catch( catcher )
 
 	// User blocking
 	const blocklist = useSelector( store => store?.user?.blocked || [] )
@@ -63,12 +64,12 @@ const BlockUser = ( { style, blocked, setBlocked, userUid, ...props } ) => {
 	const doblock = f => {
 		setOpen( false )
 		setBlocked( true )
-		return app.blockPerson( userUid )
+		return app.blockPerson( userUid ).catch( catcher )
 	}
 	const doUnblock = f => {
 		setOpen( false )
 		setBlocked( false )
-		return app.unblockPerson( userUid )
+		return app.unblockPerson( userUid ).catch( catcher )
 	}
 
 	return <TouchableOpacity onPress={ f => setOpen( true ) } style={ { ...style } }>

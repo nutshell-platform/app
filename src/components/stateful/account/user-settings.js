@@ -113,34 +113,34 @@ class UserSettings extends Component {
 		// Handle is available?
 		if( !handleAvailable ) return alert( 'This handle is taken, please choose another' )
 
-		// Avatar processing
-		if( user.newavatar ) {
-
-			// Check if extension is valid
-			const dataUriExt = user.newavatar.uri.match( /(?:image\/)(.*)(?:;)/ )
-			const extension = dataUriExt ? dataUriExt[1] : 'jpg'
-			if( ![ 'png', 'jpg', 'jpeg' ].includes( extension ) ) return alert( 'Please select a png or jpg image.' )
-
-			// Compress the image, setting only width in resize makes height auto
-			const resize = [ { resize: { width: 500} } ]
-			const options = { compress: .8 }
-			user.newavatar = await ImageManipulator.manipulateAsync( user.newavatar.uri, resize, options )
-
-			// Create file blob for upload
-			const file = await fetch( user.newavatar.uri )
-			user.newavatar.blob = await file.blob()
-
-			// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
-			const path = `avatars/${ uid }-${ await getuid() }.jpg`
-			user.newavatar.path = path
-
-			// Append old avatar data in order to parse it in the api module
-			user.oldavatar = originalUser.avatar
-		}
-
-		await this.updateState( { loading: 'Saving settings...' } )
-
 		try {
+
+			// Avatar processing
+			if( user.newavatar ) {
+
+				// Check if extension is valid
+				const dataUriExt = user.newavatar.uri.match( /(?:image\/)(.*)(?:;)/ )
+				const extension = dataUriExt ? dataUriExt[1] : 'jpg'
+				if( ![ 'png', 'jpg', 'jpeg' ].includes( extension ) ) return alert( 'Please select a png or jpg image.' )
+
+				// Compress the image, setting only width in resize makes height auto
+				const resize = [ { resize: { width: 500} } ]
+				const options = { compress: .8 }
+				user.newavatar = await ImageManipulator.manipulateAsync( user.newavatar.uri, resize, options )
+
+				// Create file blob for upload
+				const file = await fetch( user.newavatar.uri )
+				user.newavatar.blob = await file.blob()
+
+				// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
+				const path = `avatars/${ uid }-${ await getuid() }.jpg`
+				user.newavatar.path = path
+
+				// Append old avatar data in order to parse it in the api module
+				user.oldavatar = originalUser.avatar
+			}
+
+			await this.updateState( { loading: 'Saving settings...' } )
 
 			// Double check handle availability
 			if( user.handle ) {
@@ -181,7 +181,7 @@ class UserSettings extends Component {
 				await app.logout()
 			} catch( e ) {
 				await Dialogue( 'Something went wrong', e )
-				log( e )
+				catcher( e )
 			}
 
 		}
@@ -197,6 +197,7 @@ class UserSettings extends Component {
 			} ] )
 
 		} catch( e ) {
+			catcher( e )
 			await Dialogue( 'Error: ', e )
 		}
 

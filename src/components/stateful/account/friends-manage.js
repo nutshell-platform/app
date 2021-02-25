@@ -57,7 +57,7 @@ class ManageFriends extends Component {
 		if( query.length == 0 ) return Promise.all( [
 			results.length == 0 && this.defaultSearch(),
 			this.updateState( { query: undefined, searching: false } )
-		] )
+		] ).catch( catcher )
 		return this.updateState( { query: query, searching: true, autoSearch: setTimeout( f => this.searchBackend( query ), timeout ) } )
 	}
 
@@ -83,7 +83,7 @@ class ManageFriends extends Component {
 				newFollows: [ ...newFollows, uid ],
 				newUnfollows: [ ...newUnfollows.filter( fuid => fuid != uid ) ]
 			} )
-		] )
+		] ).catch( catcher )
 	}
 
 	unfollow = uid => {
@@ -95,7 +95,7 @@ class ManageFriends extends Component {
 				newFollows: [ ...newFollows.filter( fuid => fuid != uid ) ],
 				newUnfollows: [ ...newUnfollows, uid ]
 			} )
-		] )
+		] ).catch( catcher )
 	}
 
 	// Split following vs not yet

@@ -18,7 +18,7 @@ import { Placeholder, ViewRecs } from '../common/home'
 
 
 // Helper functions
-import { timestampToHuman, log } from '../../../modules/helpers'
+import { timestampToHuman, log, catcher } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
 
 export const InboxTimeline = memo( ( { renderInbox, ...props } ) => {
@@ -56,7 +56,7 @@ export const NutshellCard = memo( ( { gutter=40, index, nutshell={}, showActions
 	function markRead() {
 
 		hideSelf( true )
-		return app.markNutshellRead( uid )
+		return app.markNutshellRead( uid ).catch( catcher )
 		
 	}
 

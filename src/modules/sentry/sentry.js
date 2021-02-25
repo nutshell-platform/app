@@ -1,19 +1,19 @@
-import * as Sentry from 'sentry-expo'
+import * as ExpoSentry from 'sentry-expo'
 import { SENTRY_DSN } from '@env'
 import Constants from 'expo-constants'
 
-const SentryInit = f => {
+export const SentryInit = f => {
 	if( SENTRY_DSN ) {
 
-		Sentry.init( {
+		ExpoSentry.init( {
 			dsn: SENTRY_DSN
 			// enableInExpoDevelopment: true
 		} )
 
 		// Doesn't work on web, only expo's package
-		if( Constants?.manifest?.revisionId ) Sentry.setRelease( Constants.manifest.revisionId )
+		if( Constants?.manifest?.revisionId ) ExpoSentry.setRelease( Constants.manifest.revisionId )
 
 	}
 }
 
-export default SentryInit
+export const Sentry = ExpoSentry

@@ -40,8 +40,8 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				<HelperText style={ { paddingLeft: 0 } }>These are ways your followers can react to your Nutshells.</HelperText>
 
 				{ /* Add contact methods */ }
-			    <Input label='WhatsApp number' value={ contactMethods.whatsapp } info='What is your number including country code?' onChangeText={ t => changeContactMethod( 'whatsapp', t ) } />
-			    <Input label='Contact email' value={ user.email || contactMethods.email } info='This does not have to be the same as your account email, but we autofilled it that way' onChangeText={ t => changeContactMethod( 'email', t ) } />
+			   <Input label='WhatsApp number' value={ contactMethods.whatsapp } info='What is your number including country code?' onChangeText={ t => changeContactMethod( 'whatsapp', t ) } />
+			   <Input label='Contact email' value={ user.email || contactMethods.email } info='This does not have to be the same as your account email, but we autofilled it that way' onChangeText={ t => changeContactMethod( 'email', t ) } />
 
 				{ /* Notification prefs */ }
 				<Toggle onToggle={ f => changeSetting( 'anyoneCanRespond', !settings.anyoneCanRespond ) } value={ settings.anyoneCanRespond } style={ { marginTop: 10 } } label='Allow all followers to contact you' info="By default only people *you* follow can react to your Nutshells. If you want anyone who follows you to be able to respond to your messages toggle this." />

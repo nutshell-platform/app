@@ -4,6 +4,7 @@ import React, { useState, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleDarkMode } from '../../../redux/actions/settingsActions'
 import { useHistory } from '../../../routes/router'
+import { catcher } from '../../../modules/helpers'
 
 // Visual
 import { TouchableOpacity, View, Animated, SafeAreaView } from 'react-native'
@@ -71,7 +72,7 @@ export const Menu = ( { width, links, toggle, pan, translate, ...props } ) => {
 	const [ checkedAt, setCheckedAt ] = useState( undefined )
 	const check = async f => {
 		setCheckingUpdates( true )
-		const available = await updateIfAvailable()
+		const available = await updateIfAvailable().catch( catcher )
 		setUpdatesAvailable( available )
 		setCheckingUpdates( false )
 		setCheckedAt( `${new Date().getHours()}:${new Date().getMinutes()}` )

@@ -54,6 +54,7 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			
 		} )
 		.catch( e => {
+			catcher( e )
 			const [ fm, extension ] = existingAudioURI.match( /(?:\.)(\w*)(?:\?)/ )
 			if( !extension ) Dialogue( 'Unsupported audio', 'This is not your fault, some old Nutshell messages have a bug that makes them impossble to play. Sorry about that.' )
 			else Dialogue( 'Playback error: ', `${ e.message || e }` )
@@ -73,7 +74,7 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 
 		// If max length achieved, stop recodring
 		if( isRecording && timeRecorded == maxLength ) {
-			await recorder.stopAndUnloadAsync()
+			await recorder.stopAndUnloadAsync().catch( catcher )
 			return setIsRecording( false )
 		}
 		if( isRecording ) setTimeRecorded( timeRecorded + 1 )
@@ -217,13 +218,14 @@ const RecordingMeta = memo( ( { sound, reset, save, isSaved } ) => {
 		try {
 
 			// Control playback
-			if( isPlaying ) sound.stopAsync()
-			else sound.setStatusAsync( { shouldPlay: true, positionMillis: 0 } )
+			if( isPlaying ) sound.stopAsync().catch( catcher )
+			else sound.setStatusAsync( { shouldPlay: true, positionMillis: 0 } ).catch( catcher )
 			
 			// Set interface
 			setIsPlaying( !isPlaying )
 
 		} catch( e ) {
+			catcher( e )
 			Dialogue( 'Playback error', e.message )
 		}
 

@@ -7,7 +7,7 @@ import Navigation from '../common/navigation'
 import Write from '../../../../assets/undraw_typewriter_i8xd.svg'
 
 // Data
-import { log, getuid, dateOfNext, Dialogue } from '../../../modules/helpers'
+import { log, getuid, dateOfNext, Dialogue, catcher } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 import { isCI } from '../../../modules/apis/platform'
 
@@ -145,20 +145,26 @@ class WriteNutshell extends Component {
 
 		const longestEntry = [ ...entries ].sort( ( a, b ) => a.paragraph.length > b.paragraph.length )[0]
 
-		// Tip about having multiple cards
-		if( tips.cards && longestEntry.paragraph.length > 500 ) {
-			const newTips = { ...tips }
-			delete newTips.cards
-			await this.updateState( { tips: newTips } )
-			await Dialogue( 'Tip', tips.cards )
-		}
+		try {
 
-		// Offline checker
-		if( !( await app.isOnline() ) ) {
-			const newTips = { ...tips }
-			delete newTips.offline
-			await this.updateState( { tips: newTips } )
-			await Dialogue( 'You are offline', tips.offline )
+			// Tip about having multiple cards
+			if( tips.cards && longestEntry.paragraph.length > 500 ) {
+				const newTips = { ...tips }
+				delete newTips.cards
+				await this.updateState( { tips: newTips } )
+				await Dialogue( 'Tip', tips.cards )
+			}
+
+			// Offline checker
+			if( !( await app.isOnline() ) ) {
+				const newTips = { ...tips }
+				delete newTips.offline
+				await this.updateState( { tips: newTips } )
+				await Dialogue( 'You are offline', tips.offline )
+			}
+
+		} catch( e ) {
+			catcher( e )
 		}
 
 	}
@@ -243,6 +249,7 @@ class WriteNutshell extends Component {
 
 		} catch( e ) {
 			alert( e )
+			catcher( e )
 		}
 
 	}
