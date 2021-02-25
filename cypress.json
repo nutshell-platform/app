@@ -1,7 +1,7 @@
 {
 	"noteToSelf": "Due to firebase request times being unpredicatble the timeouts below are very high. If they are lower there are unpredicatble moments of test fails purely due to slow network.",
-	"defaultCommandTimeout": 60000,
-	"requestTimeout": 60000,
+	"defaultCommandTimeout": 120000,
+	"requestTimeout": 120000,
 	"video": true,
 	"videoCompression": false,
 	"screenscreenshotOnRunFailureshots": true,
