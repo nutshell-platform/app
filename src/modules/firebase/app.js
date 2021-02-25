@@ -91,7 +91,7 @@ class Firebase {
 	muteNutshell	   = uid 	  => muteNutshell( this, uid )
 
 	// Audio
-	saveAudioEntry = ( uidOfNutshell, audioBlob ) => saveAudioEntry( this, uidOfNutshell, audioBlob )
+	saveAudioEntry = ( uidOfNutshell, audioBlob, extension ) => saveAudioEntry( this, uidOfNutshell, audioBlob, extension )
 	deleteAudioEntry = uidOfNutshell => deleteAudioEntry( this, uidOfNutshell )
 
 	// ///////////////////////////////

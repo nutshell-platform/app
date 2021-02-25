@@ -53,7 +53,11 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			sound.getStatusAsync().then( ( { durationMillis } ) => setTimeRecorded( Math.floor( durationMillis / 1000 ) ) )
 			
 		} )
-		.catch( e => Dialogue( 'Playback error: ', `${ isIos ? 'iOS support is coming next week!\n\n' : '' }${ e.message || e }` ) )
+		.catch( e => {
+			const [ fm, extension ] = existingAudioURI.match( /(?:\.)(\w*)(?:\?)/ )
+			if( !extension ) Dialogue( 'Unsupported audio', 'This is not your fault, some old Nutshell messages have a bug that makes them impossble to play. Sorry about that.' )
+			else Dialogue( 'Playback error: ', `${ e.message || e }` )
+		} )
 		.finally( f => setLoadingExisting( false ) )
 
 		// If the file changed, unload old
@@ -146,20 +150,22 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 
 			setIsSaving( true )
 			const audioURI = await recorder.getURI( )
+			const [ fm, extension ] = audioURI.match( /(?:\.)(\w*$)/ )
+			if( !extension ) throw 'Error getting extension'
 
 			// Create file blob for upload
 			const file = await fetch( audioURI )
 			const audioBlob = await file.blob()
 
 			// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
-			await app.saveAudioEntry( uidOfDraftNutshell, audioBlob )
+			await app.saveAudioEntry( uidOfDraftNutshell, audioBlob, extension )
 			
 			setIsSaved( true )
 			setIsSaving( false )
 
 		} catch( e ) {
 			catcher( e )
-			Dialogue( 'Error saving audio: ', e.message )
+			Dialogue( 'Error saving audio: ', e.message || e )
 		}
 
 	}

@@ -1,7 +1,7 @@
 // import { dataFromSnap } from './helpers'
 import { log, catcher, getuid } from '../helpers'
 
-export const saveAudioEntry = async ( app, uidOfNutshell, audioBlob ) => {
+export const saveAudioEntry = async ( app, uidOfNutshell, audioBlob, extension ) => {
 
 	try {
 
@@ -9,7 +9,7 @@ export const saveAudioEntry = async ( app, uidOfNutshell, audioBlob ) => {
 
 		// User-settings
 		const { uid } = auth.currentUser
-		const path = `audioNutshells/${uid}/${ uidOfNutshell }`
+		const path = `audioNutshells/${uid}/${ uidOfNutshell }.${extension}`
 
 		// Upload new file	
 		const { ref } = await storage.child( path ).put( audioBlob )
