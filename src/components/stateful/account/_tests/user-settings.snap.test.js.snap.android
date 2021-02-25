@@ -162,6 +162,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                         "color": "#000000",
                         "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -731,14 +733,18 @@ exports[`UserSettings Matches snapshot 1`] = `
                             "color": "#000000",
                             "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                             "fontWeight": "400",
+                          },
+                          Object {
                             "textAlign": "left",
                           },
                           Array [
                             Object {
+                              "textAlign": "left",
+                            },
+                            Object {
                               "color": "rgba(0, 0, 0, 0.87)",
                               "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                               "fontWeight": "500",
-                              "textAlign": "left",
                               "writingDirection": "ltr",
                             },
                             Array [
@@ -795,14 +801,18 @@ exports[`UserSettings Matches snapshot 1`] = `
                             "color": "#000000",
                             "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                             "fontWeight": "400",
+                          },
+                          Object {
                             "textAlign": "left",
                           },
                           Array [
                             Object {
+                              "textAlign": "left",
+                            },
+                            Object {
                               "color": "rgba(0, 0, 0, 0.87)",
                               "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                               "fontWeight": "400",
-                              "textAlign": "left",
                               "writingDirection": "ltr",
                             },
                             Array [
@@ -879,11 +889,15 @@ exports[`UserSettings Matches snapshot 1`] = `
                           />
                           <View
                             style={
-                              Object {
-                                "minHeight": 64,
-                                "paddingBottom": 0,
-                                "paddingTop": 0,
-                              }
+                              Array [
+                                Object {
+                                  "paddingBottom": 0,
+                                  "paddingTop": 0,
+                                },
+                                Object {
+                                  "minHeight": 64,
+                                },
+                              ]
                             }
                           >
                             <View
@@ -1128,11 +1142,15 @@ exports[`UserSettings Matches snapshot 1`] = `
                           />
                           <View
                             style={
-                              Object {
-                                "minHeight": 64,
-                                "paddingBottom": 0,
-                                "paddingTop": 0,
-                              }
+                              Array [
+                                Object {
+                                  "paddingBottom": 0,
+                                  "paddingTop": 0,
+                                },
+                                Object {
+                                  "minHeight": 64,
+                                },
+                              ]
                             }
                           >
                             <View
@@ -1377,11 +1395,15 @@ exports[`UserSettings Matches snapshot 1`] = `
                           />
                           <View
                             style={
-                              Object {
-                                "minHeight": 64,
-                                "paddingBottom": 0,
-                                "paddingTop": 0,
-                              }
+                              Array [
+                                Object {
+                                  "paddingBottom": 0,
+                                  "paddingTop": 0,
+                                },
+                                Object {
+                                  "minHeight": 64,
+                                },
+                              ]
                             }
                           >
                             <View
@@ -1665,6 +1687,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "color": "#000000",
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontWeight": "400",
+                                  },
+                                  Object {
                                     "textAlign": "left",
                                   },
                                   Array [
@@ -1761,14 +1785,18 @@ exports[`UserSettings Matches snapshot 1`] = `
                             "color": "#000000",
                             "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                             "fontWeight": "400",
+                          },
+                          Object {
                             "textAlign": "left",
                           },
                           Array [
                             Object {
+                              "textAlign": "left",
+                            },
+                            Object {
                               "color": "rgba(0, 0, 0, 0.87)",
                               "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                               "fontWeight": "400",
-                              "textAlign": "left",
                               "writingDirection": "ltr",
                             },
                             Array [
@@ -1868,11 +1896,15 @@ exports[`UserSettings Matches snapshot 1`] = `
                           />
                           <View
                             style={
-                              Object {
-                                "minHeight": 64,
-                                "paddingBottom": 0,
-                                "paddingTop": 0,
-                              }
+                              Array [
+                                Object {
+                                  "paddingBottom": 0,
+                                  "paddingTop": 0,
+                                },
+                                Object {
+                                  "minHeight": 64,
+                                },
+                              ]
                             }
                           >
                             <View
@@ -2113,11 +2145,15 @@ exports[`UserSettings Matches snapshot 1`] = `
                           />
                           <View
                             style={
-                              Object {
-                                "minHeight": 64,
-                                "paddingBottom": 0,
-                                "paddingTop": 0,
-                              }
+                              Array [
+                                Object {
+                                  "paddingBottom": 0,
+                                  "paddingTop": 0,
+                                },
+                                Object {
+                                  "minHeight": 64,
+                                },
+                              ]
                             }
                           >
                             <View
@@ -2331,6 +2367,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "color": "#000000",
                                 "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                 "fontWeight": "400",
+                              },
+                              Object {
                                 "textAlign": "left",
                               },
                               Object {
@@ -2490,6 +2528,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "color": "#000000",
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontWeight": "400",
+                                  },
+                                  Object {
                                     "textAlign": "left",
                                   },
                                   Array [
@@ -2585,14 +2625,18 @@ exports[`UserSettings Matches snapshot 1`] = `
                             "color": "#000000",
                             "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                             "fontWeight": "400",
+                          },
+                          Object {
                             "textAlign": "left",
                           },
                           Array [
                             Object {
+                              "textAlign": "left",
+                            },
+                            Object {
                               "color": "rgba(0, 0, 0, 0.87)",
                               "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                               "fontWeight": "400",
-                              "textAlign": "left",
                               "writingDirection": "ltr",
                             },
                             Array [
@@ -2669,11 +2713,15 @@ exports[`UserSettings Matches snapshot 1`] = `
                           />
                           <View
                             style={
-                              Object {
-                                "minHeight": 64,
-                                "paddingBottom": 0,
-                                "paddingTop": 0,
-                              }
+                              Array [
+                                Object {
+                                  "paddingBottom": 0,
+                                  "paddingTop": 0,
+                                },
+                                Object {
+                                  "minHeight": 64,
+                                },
+                              ]
                             }
                           >
                             <View
@@ -2914,11 +2962,15 @@ exports[`UserSettings Matches snapshot 1`] = `
                           />
                           <View
                             style={
-                              Object {
-                                "minHeight": 64,
-                                "paddingBottom": 0,
-                                "paddingTop": 0,
-                              }
+                              Array [
+                                Object {
+                                  "paddingBottom": 0,
+                                  "paddingTop": 0,
+                                },
+                                Object {
+                                  "minHeight": 64,
+                                },
+                              ]
                             }
                           >
                             <View
@@ -3069,14 +3121,18 @@ exports[`UserSettings Matches snapshot 1`] = `
                             "color": "#000000",
                             "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                             "fontWeight": "400",
+                          },
+                          Object {
                             "textAlign": "left",
                           },
                           Array [
                             Object {
+                              "textAlign": "left",
+                            },
+                            Object {
                               "color": "rgba(0, 0, 0, 0.87)",
                               "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                               "fontWeight": "400",
-                              "textAlign": "left",
                               "writingDirection": "ltr",
                             },
                             Array [
@@ -3128,6 +3184,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "color": "#000000",
                                 "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                 "fontWeight": "400",
+                              },
+                              Object {
                                 "textAlign": "left",
                               },
                               Object {
@@ -3226,6 +3284,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "color": "#000000",
                                 "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                 "fontWeight": "400",
+                              },
+                              Object {
                                 "textAlign": "left",
                               },
                               Object {
@@ -3324,6 +3384,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "color": "#000000",
                                 "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                 "fontWeight": "400",
+                              },
+                              Object {
                                 "textAlign": "left",
                               },
                               Object {
@@ -3422,6 +3484,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                                 "color": "#000000",
                                 "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                 "fontWeight": "400",
+                              },
+                              Object {
                                 "textAlign": "left",
                               },
                               Object {
@@ -3581,6 +3645,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                                     "color": "#000000",
                                     "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                     "fontWeight": "400",
+                                  },
+                                  Object {
                                     "textAlign": "left",
                                   },
                                   Array [
@@ -3642,6 +3708,8 @@ exports[`UserSettings Matches snapshot 1`] = `
                               "color": "#000000",
                               "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Object {

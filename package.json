@@ -81,6 +81,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.4",
     "cypress": "^6.6.0",
+    "cypress-fail-fast": "^2.2.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.20.0",
     "eslint-config-universe": "^7.0.1",

@@ -19,6 +19,8 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+// Fail fast
+import "cypress-fail-fast"
 
 // Reset app before every test
 import { url } from '../fixtures/platform'

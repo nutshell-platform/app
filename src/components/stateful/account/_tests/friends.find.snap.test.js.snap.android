@@ -162,6 +162,8 @@ exports[`FriendFinder Matches snapshot 1`] = `
                         "color": "#000000",
                         "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -812,6 +814,8 @@ exports[`FriendFinder Matches snapshot 1`] = `
                               "color": "#000000",
                               "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                               "fontWeight": "400",
+                            },
+                            Object {
                               "textAlign": "left",
                             },
                             Array [
@@ -864,6 +868,8 @@ exports[`FriendFinder Matches snapshot 1`] = `
                       "color": "#000000",
                       "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                       "fontWeight": "400",
+                    },
+                    Object {
                       "textAlign": "left",
                     },
                     Object {
@@ -881,6 +887,8 @@ exports[`FriendFinder Matches snapshot 1`] = `
                       "color": "#000000",
                       "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                       "fontWeight": "400",
+                    },
+                    Object {
                       "textAlign": "left",
                     },
                     Object {

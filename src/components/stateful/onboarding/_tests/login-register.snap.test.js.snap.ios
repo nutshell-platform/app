@@ -168,6 +168,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                         "color": "#000000",
                         "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                         "fontWeight": "400",
+                      },
+                      Object {
                         "textAlign": "left",
                       },
                       Array [
@@ -658,11 +660,15 @@ exports[`Login and registration Matches snapshot 1`] = `
                         />
                         <View
                           style={
-                            Object {
-                              "minHeight": 64,
-                              "paddingBottom": 0,
-                              "paddingTop": 0,
-                            }
+                            Array [
+                              Object {
+                                "paddingBottom": 0,
+                                "paddingTop": 0,
+                              },
+                              Object {
+                                "minHeight": 64,
+                              },
+                            ]
                           }
                         >
                           <View
@@ -867,11 +873,15 @@ exports[`Login and registration Matches snapshot 1`] = `
                         />
                         <View
                           style={
-                            Object {
-                              "minHeight": 64,
-                              "paddingBottom": 0,
-                              "paddingTop": 0,
-                            }
+                            Array [
+                              Object {
+                                "paddingBottom": 0,
+                                "paddingTop": 0,
+                              },
+                              Object {
+                                "minHeight": 64,
+                              },
+                            ]
                           }
                         >
                           <View
@@ -1125,6 +1135,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "color": "#000000",
                                   "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                   "fontWeight": "400",
+                                },
+                                Object {
                                   "textAlign": "left",
                                 },
                                 Array [
@@ -1259,6 +1271,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                                   "color": "#000000",
                                   "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                                   "fontWeight": "400",
+                                },
+                                Object {
                                   "textAlign": "left",
                                 },
                                 Array [
@@ -1310,6 +1324,8 @@ exports[`Login and registration Matches snapshot 1`] = `
                           "color": "#000000",
                           "fontFamily": "Roboto, \\"Helvetica Neue\\", Helvetica, Arial, sans-serif",
                           "fontWeight": "400",
+                        },
+                        Object {
                           "textAlign": "left",
                         },
                         Object {
