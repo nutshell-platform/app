@@ -39,8 +39,8 @@ export const log = ( ...messages ) => {
 
 export const error = ( ...messages ) => {
 	if( dev ) {
-		console.error( ...messages )
-		console.error( 'Stack trace:' )
+		console.log( ...messages )
+		console.log( 'Stack trace:' )
 		console.trace()
 	}
 }
@@ -48,7 +48,7 @@ export const error = ( ...messages ) => {
 export const catcher = ( ...errors ) => {
 	error( ...errors )
 	// throw to sentry
-	Sentry.captureException( errors )
+	if( Sentry?.captureException ) Sentry.captureException( errors )
 }
 
 export const ignoreErrors = arr => LogBox && LogBox.ignoreLogs( arr )

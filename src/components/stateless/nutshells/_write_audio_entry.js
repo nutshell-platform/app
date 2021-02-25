@@ -97,7 +97,16 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			if( isIos ) await Audio.setAudioModeAsync( { allowsRecordingIOS: true, playsInSilentModeIOS: true } )
 			
 			const { canRecord } = await recorder.getStatusAsync()
-			if( !canRecord ) await recorder.prepareToRecordAsync( Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY )
+			const { ios, android } = Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
+			if( !canRecord ) await recorder.prepareToRecordAsync( {
+				android: android,
+				ios: {
+					...ios,
+					extension: '.mp4',
+					outputFormat: Audio.RECORDING_OPTION_IOS_OUTPUT_FORMAT_MPEG4AAC
+				}
+
+			} )
 
 			// Exit if recording stopped
 			if( isRecording ) {
