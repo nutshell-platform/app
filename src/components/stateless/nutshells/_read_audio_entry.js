@@ -40,7 +40,7 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 			await Dialogue( 'Opening in browser', `Audio playback is not yet supported on ${ isWeb ? 'the web interface' : '' }${ isIos ? 'the Android app' : '' }. I'll open the audio in your browser instead.` )
 			return Linking.openURL( audioURI )
 		}
-		if( isIos ) return Dialogue( 'Sorry no iOS yet', 'iOS audio playback does not work yet. ETA next week! In the meantime you can open Nutshell in a browser on a desktop!' )
+		// if( isIos ) return Dialogue( 'Sorry no iOS yet', 'iOS audio playback does not work yet. ETA next week! In the meantime you can open Nutshell in a browser on a desktop!' )
 
 		try {
 			if( isPlaying ) await sound.pauseAsync()
