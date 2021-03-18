@@ -4,7 +4,7 @@ import { checkOrRequestPushAccess } from './apis/permissions'
 import { isWeb, isAndroid, isIos } from './apis/platform'
 import { log } from './helpers'
 
-export const getTokenIfNeeded = async settings => {
+export const getExpoPushTokenIfNeeded = async settings => {
 
 	// Exit if web or no notifications enabled
 	if( isWeb || !Object.values( settings.notifications ).includes( true ) ) return false

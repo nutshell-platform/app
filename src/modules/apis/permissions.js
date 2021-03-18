@@ -6,12 +6,10 @@ import * as Contacts from 'expo-contacts'
 // Device apis and helpers
 import { log, catcher } from '../helpers'
 import { isWeb, isIos } from './platform'
-import Storage from './storage'
 
 // ///////////////////////////////
 // Push
 // ///////////////////////////////
-const getPushToken = f => Storage.getItemAsync( 'pushtoken' ).catch( f => undefined )
 export const checkOrRequestPushAccess = async f => {
 
 	try {
@@ -36,22 +34,14 @@ export const checkOrRequestPushAccess = async f => {
 
 		}
 
-		// Check for token
-		const oldToken = await getPushToken()
-		if( oldToken ) return oldToken
-
 		// Request new token
-		const newToken = await Notifications.getExpoPushTokenAsync()
-		if( !newToken ) throw 'Token generation failed'
-
-		// Store new token
-		await Storage.setItemAsync( 'pushtoken', newToken, isIos ? { keychainAccessible: Storage.ALWAYS } : {} )
+		const expoTokenBasedOnDeviceToken = await Notifications.getExpoPushTokenAsync()
+		if( !expoTokenBasedOnDeviceToken ) throw 'Token generation failed'
 
 		// Return the token
-		return newToken
+		return expoTokenBasedOnDeviceToken
 		
 	} catch( e ) {
-		log( `Token error ${JSON.stringify( e )}` )
 		catcher( e )
 	}
 
