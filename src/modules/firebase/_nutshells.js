@@ -81,6 +81,13 @@ export const updateNutshell = ( app, nutshell ) => {
 
 	const { uid, ...nutshellContent } = nutshell
 
+	// Delete remote nutshell entry if there is no content in the draft
+	const { entries, audio } = nutshellContent
+	if( !entries?.length && !audio?.length ) {
+		log( 'Updated nutshell has no content, deleting from remote' )
+		return app.db.collection( 'nutshells' ).doc( uid ).delete()
+	}
+
 	return app.db.collection( 'nutshells' ).doc( uid ).set( {
 		...nutshellContent,
 		updated: Date.now(),

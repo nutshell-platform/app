@@ -31,7 +31,9 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 	const [ audioPermission, askPermission, getPermission ] = Permissions.usePermissions( Permissions.AUDIO_RECORDING )
 
 	// Uid of nutshell draft
-	const uidOfDraftNutshell = useSelector( store => store?.nutshells?.draft?.uid )
+	const draftNutshell = useSelector( store => store?.nutshells?.draft || {} )
+	const uidOfDraftNutshell = draftNutshell.uid
+	const statusOfDraftNutshell = draftNutshell.status
 
 	// Recording variables
 	const maxLength = 60
@@ -113,13 +115,11 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 				await recorder.stopAndUnloadAsync()
 				const { sound } = await recorder.createNewLoadedSoundAsync()
 				setSound( sound )
+				saveRecording()
 			}
 
 			// Start recording
-			if( !isRecording ) {
-				
-				await recorder.startAsync()
-			}
+			if( !isRecording ) await recorder.startAsync()
 
 			// Set visual recording state
 			setIsRecording( !isRecording )
@@ -142,8 +142,19 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			setSound( undefined )
 			setTimeRecorded( 0 )
 			setIsRecording( false )
-			setIsSaved( false )
-			if( existingAudioURI ) await app.deleteAudioEntry( uidOfDraftNutshell )
+
+			// Delete remote file from storage and nutshell object
+			if( existingAudioURI ) {
+
+				await app.updateNutshell( { ...draftNutshell, audio: [] } )
+
+				// Delete remote file
+				log( 'Deletion: ', existingAudioURI )
+				const [ fm, extension ] = existingAudioURI.match( /(?:\.)(\w*)(?:\?)/ ) || []
+				if( !extension ) throw 'Error getting extension'
+				await app.deleteAudioEntry( uidOfDraftNutshell, extension )
+				
+			}
 
 		} catch( e ) {
 			catcher( e )
@@ -152,7 +163,6 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 	}
 
 	// Saving
-	const [ isSaved, setIsSaved ] = useState( !!existingAudioURI )
 	const [ isSaving, setIsSaving ] = useState( false )
 	const saveRecording = async f => {
 
@@ -163,14 +173,15 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 			const [ fm, extension ] = audioURI.match( /(?:\.)(\w*$)/ )
 			if( !extension ) throw 'Error getting extension'
 
+			log( 'Saving audio entry with extension: ', extension )
+
 			// Create file blob for upload
 			const file = await fetch( audioURI )
 			const audioBlob = await file.blob()
 
 			// If extension valid, add path to avatar, extension is always jpg because of the image manipulator's jpeg output
-			await app.saveAudioEntry( uidOfDraftNutshell, audioBlob, extension )
+			await app.saveAudioEntry( uidOfDraftNutshell, statusOfDraftNutshell, audioBlob, extension )
 			
-			setIsSaved( true )
 			setIsSaving( false )
 
 		} catch( e ) {
@@ -195,18 +206,22 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 
 				<View style={ { flexDirection: 'column', height: 50 } }>
 					<Title style={ { marginTop: 0 } }>{ loadingExisting ? 'Loading ' : '' }Audio Nutshell</Title>
-					{ timeRecorded != 60 && <Text>00:{ timeRecorded < 10 ? `0${timeRecorded}` : timeRecorded }/01:00</Text> }
-					{ timeRecorded == 60 && <Text>01:00/01:00</Text> }
+
+					{ /* Audio length indicator */ }
+					{ isWeb && <Text>Audio only available in mobile apps</Text> }
+					{ !isWeb && timeRecorded != 60 && <Text>00:{ timeRecorded < 10 ? `0${timeRecorded}` : timeRecorded }/01:00</Text> }
+					{ !isWeb && timeRecorded == 60 && <Text>01:00/01:00</Text> }
+
 				</View>
 
 			</Pressable>
 
-			<RecordingMeta save={ saveRecording } isSaved={ isSaved } sound={ sound } reset={ resetIsRecording } timeRecorded={ timeRecorded } />
+			{ !isWeb && <RecordingMeta sound={ sound } reset={ resetIsRecording } timeRecorded={ timeRecorded } /> }
 
 	</Card>
 } )
 
-const RecordingMeta = memo( ( { sound, reset, save, isSaved } ) => {
+const RecordingMeta = memo( ( { sound, reset } ) => {
 
 	// Show nothing if recording has not started
 	if( !sound ) return null
@@ -243,12 +258,9 @@ const RecordingMeta = memo( ( { sound, reset, save, isSaved } ) => {
 
 	return <View style={ { flex: 1, flexDirection: 'column' } }>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
-			<Button style={ { marginTop: 10 } } color={ isSaved ? 'green' : 'orange' } onPress={ save } icon='content-save' />
 			<Button style={ { marginTop: 10 } } onPress={ togglePreview } icon={ isPlaying ? 'stop' : 'play' } />
 			<Button style={ { marginTop: 10 } } onPress={ reset } icon='delete' />
 		</View>
-		<HelperText style={ {  textAlign: 'center', width: '100%', color: isSaved ? 'green' : 'orange', paddingBottom: 0, marginBottom: -10 } }>{ isSaved ? '' : 'Un' }saved nutshell</HelperText>
-
 	</View>
 
 } )
