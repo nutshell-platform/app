@@ -4,6 +4,7 @@ import { Animated } from 'react-native'
 // Visual
 import { Component, Appbar } from '../../stateless/common/generic'
 import { Header, Menu } from '../../stateless/common/navigation'
+import { Share } from 'react-native'
 
 // Data & routing
 import { connect } from 'react-redux'
@@ -107,6 +108,11 @@ class Navigation extends Component {
 
 	}
 
+	inviteFriend = f => Share.share( {
+		message: `I found an app called Nutshell, I think you might like it!\n\nIt's an app where you can only send one (text/audio) message a week.\n\nYou can find it here: https://nutshell.social/, my handle there is @${ this.props.user.handle }.`,
+		url: `https://nutshell.social/`
+	} )
+
 	render( ) {
 
 		const { title, user, history } = this.props
@@ -146,8 +152,9 @@ class Navigation extends Component {
 		if( user ) links.push( {
 			label: 'Help & support',
 			links: [
-				{ label: 'Report a problem', onPress: this.mailBugreport },
+				{ label: '🎉 Invite a friend', onPress: this.inviteFriend },
 				{ label: 'Request a feature', onPress: this.mailFeaturerequest },
+				{ label: 'Report a problem', onPress: this.mailBugreport },
 			]
 		} )
 
