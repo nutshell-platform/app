@@ -38,7 +38,7 @@ const tokenFromMessage = message => {
 	const token = typeof message == 'string' && message.match( tokenRegex )
 	return token ? { token: token[0] } : { token: 'unknown' }
 }
-const resToError = ( { id, status, message, details } ) => ( { id: id, status: status, message: message, error: details.error, ...tokenFromMessage( tokenRegex ) } )
+const resToError = ( { id, status, message, details } ) => ( { id: id, status: status, message: message, error: details.error, ...tokenFromMessage( message ) } )
 
 // ///////////////////////////////
 // Push notification sending

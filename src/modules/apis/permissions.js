@@ -35,7 +35,7 @@ export const checkOrRequestPushAccess = async f => {
 		}
 
 		// Request new token
-		const expoTokenBasedOnDeviceToken = await Notifications.getExpoPushTokenAsync()
+		const { data: expoTokenBasedOnDeviceToken } = await Notifications.getExpoPushTokenAsync() || {}
 		if( !expoTokenBasedOnDeviceToken ) throw 'Token generation failed'
 
 		// Return the token
