@@ -50,7 +50,7 @@ const today = new Date()
 const oneJan = new Date( today.getFullYear(), 0, 1 )
 const oneJanDayType = oneJan.getDay()
 
-exports.timestampToHuman = ms => new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ )[0]
+exports.timestampToHuman = ms => new Date( ms || Date.now() ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ )[0]
 
 // Weeks are defined by the number of 7 day increments that have elapsed
 exports.weekNumber = f => {
