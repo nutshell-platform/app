@@ -1,6 +1,6 @@
 const { Expo } = require( 'expo-server-sdk' )
 const expo = new Expo()
-const { log, error, dataFromSnap } = require( './helpers' )
+const { log, error, dataFromSnap, timestampToHuman } = require( './helpers' )
 const { flatten } = require( 'array-flatten' )
 const { db } = require( './firebase' )
 
@@ -38,7 +38,7 @@ const tokenFromMessage = message => {
 	const token = typeof message == 'string' && message.match( tokenRegex )
 	return token ? { token: token[0] } : { token: 'unknown' }
 }
-const resToError = ( { id, status, message, details } ) => ( { id: id, status: status, message: message, error: details.error, ...tokenFromMessage( message ) } )
+const resToError = ( { id, status, message, details } ) => ( { id: id, status: status, message: message, error: details.error, date: timestampToHuman(), timestamp: Date.now(), ...tokenFromMessage( message ) } )
 
 // ///////////////////////////////
 // Push notification sending
