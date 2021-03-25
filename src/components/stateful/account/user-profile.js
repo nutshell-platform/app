@@ -48,6 +48,9 @@ class UserProfile extends Component {
 			// If we have muted items, filter them
 			if( user.muted ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
 
+			// Add user data to the nutshells
+			nutshells = nutshells.map( nutshell => ( { ...nutshell, user: user } ) )
+
 			await this.updateState( { profile: profile, nutshells: nutshells, loading: false } )
 
 		} catch( e ) {
@@ -65,6 +68,8 @@ class UserProfile extends Component {
 		const { loading, profile, nutshells } = this.state
 		const { draft } = this.props
 		const noDraft = !( draft?.entries?.length > 0 )
+
+		log( 'render: ', profile )
 
 		if( loading ) return <Loading message={ loading } />
 

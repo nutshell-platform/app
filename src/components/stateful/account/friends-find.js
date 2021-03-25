@@ -85,7 +85,7 @@ class FindFriends extends Component {
 			] )
 
 			const people = await app.getRandomPeople(  )
-			return this.updateState( { results: people } )
+			return this.updateState( { results: people, filter: 'all' } )
 
 		} catch( e ) {
 			catcher( e )
@@ -111,6 +111,7 @@ class FindFriends extends Component {
 			results.length == 0 && this.defaultSearch(),
 			this.updateState( { filter: 'all', query: undefined, searching: false } )
 		] ).catch( catcher )
+
 		return this.updateState( { filter: 'search', query: query, searching: true, autoSearch: setTimeout( f => this.searchBackend( query ), timeout ) } )
 	}
 
@@ -119,7 +120,7 @@ class FindFriends extends Component {
 
 		try {
 			const results = await app.findPerson( query )
-			return this.updateState( { results: results, searching: false } )
+			return this.updateState( { results: results, filter: results?.length ? 'search' : 'all', searching: false } )
 		} catch( e ) {
 			catcher( e )
 			alert( e )

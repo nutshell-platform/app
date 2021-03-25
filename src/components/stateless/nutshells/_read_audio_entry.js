@@ -96,7 +96,10 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 
 			if( error ) throw error
 
-		} ).catch( catcher )
+		} ).catch( e => {
+			Dialogue( 'Error loading file: ', e.message )
+			catcher( e )
+		} )
 
 		// If the file changed, unload old
 		return async f => {

@@ -3,19 +3,6 @@ const { dataFromSnap, log, error } = require( './helpers' )
 const { db, FieldValue, FieldPath } = require( './firebase' )
 
 // ///////////////////////////////
-//  Show queue
-// ///////////////////////////////
-exports.showQueue = async ( req, res ) => {
-	if( req.query.secret != 42 ) return res.send( 'Invalid authentication' )
-	try {
-		const nutshells = await scheduledNutshells( !!req.query.all )
-		return res.send( nutshells )
-	} catch( e ) {
-		return res.send( { error: e } )
-	}
-}
-
-// ///////////////////////////////
 // Demo data
 // ///////////////////////////////
 // exports.makeDemo = async f => {
@@ -92,16 +79,28 @@ exports.createTestNutshell = async myUid => {
 // ///////////////////////////////
 // Admin checking
 // ///////////////////////////////
-exports.scheduledNutshells = async all => {
-	
-	const nutshells = await ( all ? db.collection( 'nutshells' ).get().then( dataFromSnap ) : db.collection( 'nutshells' ).where( 'status', '==', 'scheduled' ).get().then( dataFromSnap ) )
-	const humanReadable = await Promise.all( nutshells.map( async nutshell => ( {
-		...nutshell,
-		pusbishAt: new Date( nutshell.published ),
-		updatedAt: new Date( nutshell.updated ),
-		owner: await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
-	} ) ) )
-	return humanReadable
+exports.getScheduledNutshells = async userUid => {
+
+
+	try {
+
+		const { admin, moderator } = await db.collection( 'specialPowers' ).doc( userUid ).get().then( dataFromSnap )
+
+		if( !admin ) throw `User ${ userUid } is not an admin`
+
+		const nutshells = await db.collection( 'nutshells' ).where( 'status', '==', 'scheduled' ).get().then( dataFromSnap )
+		const humanReadable = await Promise.all( nutshells.map( async nutshell => ( {
+			...nutshell,
+			pusbishAt: new Date( nutshell.published ),
+			updatedAt: new Date( nutshell.updated ),
+			owner: await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
+		} ) ) )
+		
+		return humanReadable
+
+	} catch( e ) {
+		error( 'scheduledNutshells error: ', e )
+	}
 
 }
 

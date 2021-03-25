@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton } from '../common/generic'
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
 import app from '../../../modules/firebase/app'
-import { catcher } from '../../../modules/helpers'
+import { catcher, log } from '../../../modules/helpers'
 
-export const UserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraft, nutshells=[] } ) => {
+const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraft, nutshells=[] } ) => {
 
 	// Check if user being viewed is me and whether I am an admin
 	const myUid = useSelector( store => store?.user?.uid )
 	const isSelf = user?.uid == myUid
+	log( 'UserCard: ', user )
 
 	// Following management
 	const followlist = useSelector( store => store?.user?.following )
@@ -56,6 +57,15 @@ export const UserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraf
 		</View>
 	</Main.Center>
 }
+
+export const UserCard = memo( UnoptimisedUserCard, ( prev, next ) => {
+
+	if( prev.nutshells.length != next.nutshells.length ) return false
+	if( prev.user.uid != next.user.uid ) return false
+
+	return true
+
+} )
 
 // Report users
 const BlockUser = ( { style, blocked, setBlocked, userUid, ...props } ) => {

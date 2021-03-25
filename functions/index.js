@@ -10,11 +10,11 @@ exports.follow = functions.firestore.document( 'relationships/{relationId}' ).on
 // ///////////////////////////////
 // Cron
 // ///////////////////////////////
-const { publish, deleteFromInboxesOnNutshellDelete, scheduledNutshells, showQueue, createTestNutshell } = require( './modules/nutshells' )
+const { publish, deleteFromInboxesOnNutshellDelete, getScheduledNutshells, createTestNutshell } = require( './modules/nutshells' )
 // cron: Every hour monday and tuesday 0 * * * 1,2
 exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( '0 * * * 1,2' ).onRun( publish )
 exports.deleteFromInboxesOnNutshellDelete = functions.firestore.document( 'nutshells/{nutshellUid}' ).onDelete( deleteFromInboxesOnNutshellDelete )
-exports.scheduledNutshells = functions.https.onRequest( showQueue )
+exports.getScheduledNutshells = functions.https.onCall( ( data, context ) => getScheduledNutshells( context.auth.uid ) )
 exports.createTestNutshell = functions.https.onCall( ( data, context ) => createTestNutshell( context.auth.uid ) )
 
 // ///////////////////////////////
@@ -55,6 +55,14 @@ const { scoreUser, getContactRecommendations, refreshAllReccs } = require( './mo
 exports.scoreUser = functions.https.onCall( ( data, context ) => scoreUser( context.auth.uid ) )
 exports.getContactRecommendations = functions.https.onCall( ( data, context ) => getContactRecommendations( context.auth.uid ) )
 // exports.refreshAllReccs = functions.https.onCall( ( data, context ) => refreshAllReccs( ) )
+
+// ///////////////////////////////
+// Algolia search support
+// ///////////////////////////////
+const { updateAlgoliaAccountOnWrite, updateAllAlgoliaAccountEntries, searchAlgoliaAccountEntries } = require( './modules/algolia' )
+exports.updateAllAlgoliaAccountEntries = functions.https.onCall( ( data, context ) => updateAllAlgoliaAccountEntries( context.auth.uid ) )
+exports.onAccountWritten = functions.firestore.document( 'users/{uid}' ).onWrite(  updateAlgoliaAccountOnWrite )
+exports.searchAlgoliaAccountEntries = functions.https.onCall( searchAlgoliaAccountEntries )
 
 // ///////////////////////////////
 // Debugging

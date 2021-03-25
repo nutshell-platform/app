@@ -49,6 +49,8 @@ export const catcher = ( ...errors ) => {
 	error( ...errors )
 	// throw to sentry
 	if( Sentry?.captureException ) Sentry.captureException( errors )
+	// if it can't be done gracefully, do it bloody
+	else throw errors
 }
 
 export const ignoreErrors = arr => LogBox && LogBox.ignoreLogs( arr )

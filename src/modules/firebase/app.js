@@ -35,8 +35,8 @@ import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell } from './_nutshells'
 import { saveAudioEntry, deleteAudioEntry } from './_audio_nutshells'
-import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson } from './_friends'
-import { getModerationQueue, markAbuseModerated, sendMassMessage } from './_system'
+import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson, ignoreRecommendation } from './_friends'
+import { getModerationQueue, markAbuseModerated, sendMassMessage, getScheduledNutshells, updateAllAlgoliaAccountEntries } from './_system'
 import { getAndSaveFingerprints } from './_fingerprints'
 
 // ///////////////////////////////
@@ -100,6 +100,8 @@ class Firebase {
 	getModerationQueue  = f => getModerationQueue( this )
 	markAbuseModerated  = reportUid => markAbuseModerated( this, reportUid )
 	sendMassMessage = message => sendMassMessage( this, message )
+	getScheduledNutshells = f => getScheduledNutshells( this )
+	updateAllAlgoliaAccountEntries = f => updateAllAlgoliaAccountEntries( this )
 
 	// ///////////////////////////////
 	// friends
@@ -111,6 +113,7 @@ class Firebase {
 	getPerson 		= ( query, by='handle' ) => getPerson( this.db, query, by )
 	blockPerson 	= uid => blockPerson( this, uid )
 	unblockPerson 	= uid => unblockPerson( this, uid )
+	ignoreRecommendation = uid => ignoreRecommendation( this, uid )
 
 	// ///////////////////////////////
 	// Fingerprints & recommendations

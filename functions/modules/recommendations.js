@@ -81,11 +81,14 @@ exports.getContactRecommendations = async uid => {
 
 		// Get user's meta
 		logs.push( 'Getting user follow list, recommendations and followers' )
-		let { recommendations=[], following=[], followers=[], muted=[], blocked=[] } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
+		let { recommendations=[], following=[], followers=[], muted=[], blocked=[], neverRecommend=[] } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
 		
 		// Ignore yourself, muted people, blocked people and preople you already follow
-		const personaNonGrata = [ ...muted, ...blocked, ...following, uid ]
+		const personaNonGrata = [ ...muted, ...blocked, ...following, ...neverRecommend, uid ]
 		logs.push( 'Persona non grata: ', personaNonGrata )
+
+		// If the recommendations are over 20, scratch the recc log since it is bad UX
+		if( recommendations.length > 20 ) await db.collection( 'userMeta' ).doc( uid ).set( { recommendations: [] }, { merge: true } )
 
 		// ///////////////////////////////
 		// Remove persona non grata from current recommendations

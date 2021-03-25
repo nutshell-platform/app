@@ -1,5 +1,5 @@
 import { dataFromSnap, hash } from './helpers'
-import { uniqueByProp } from '../helpers'
+import { uniqueByProp, error, log } from '../helpers'
 
 // Find people and filter out myself
 export const getRandomPeople = async app => {
@@ -77,38 +77,33 @@ export const findPerson = async ( app, query ) => {
 	const readProfile = ( { uid } ) => app.db.collection( 'users' ).doc( uid ).get().then( dataFromSnap )
 	const notMe = users => users.filter( ( { uid } ) => uid != myUid )
 
-	// Sanetise
+	// Sanetise ( trim )
 	query = query[0] == '@' ? query.substring( 1 ).trim() : query.trim()
 
 	try {
 
-		if( isEmail ) {
-			const matches = await app.db.collection( 'fingerprints' ).where( 'email', '==', hash( query ) ).get().then( dataFromSnap )
-			return Promise.all( notMe( matches ).map( readProfile ) )
-		} else {
-			const handleMatches = await app.db.collection( 'users' ).where( 'handle', '==', query.toLowerCase() ).get().then( dataFromSnap ).then( notMe )
-			const nameMatches = await app.db.collection( 'users' ).where( 'name', '==', query.toLowerCase() ).get().then( dataFromSnap ).then( notMe )
-			return uniqueByProp( [ ...handleMatches, ...nameMatches  ], 'uid' )
-		}
+		// Algolia searches
+		const algoliaSearch = app.func.httpsCallable( 'searchAlgoliaAccountEntries' )
+		const { data: algoliaMatches } = await algoliaSearch( query )
+		log( 'Algolia hits: ', algoliaMatches?.hits?.map( hit => ( { ...hit, uid: hit.objectID } ) ) )
+		return algoliaMatches?.hits?.map( ( { objectID, ...hit } ) => ( { ...hit, uid: objectID } ) ) || []
 
 	} catch( e ) {
-		throw e
+		error( 'findPerson error: ', e )
+		return []
 	}
 
 }
 
 export const getPerson = async ( db, query, by ) => {
 
-	try {
-		let user
-		if( by == 'uid' ) user = await db.collection( 'users' ).doc( query ).get().then( dataFromSnap )
-		else user = await db.collection( 'users' ).where( by, '==', query ).get().then( dataFromSnap ).then( hits => hits[0] || {} )
-		if( !user.uid ) throw 'User not found'
-		const meta = await db.collection( 'userMeta' ).doc( user.uid ).get().then( dataFromSnap )
-		return { ...user, ...meta }
-	} catch( e ) {
-		throw e
-	}
+	let user
+	if( by == 'uid' ) user = await db.collection( 'users' ).doc( query ).get().then( dataFromSnap )
+	else user = await db.collection( 'users' ).where( by, '==', query ).get().then( dataFromSnap ).then( hits => hits[0] || {} )
+	if( !user.uid ) throw 'User not found'
+	const meta = await db.collection( 'userMeta' ).doc( user.uid ).get().then( dataFromSnap )
+	return { ...user, ...meta }
+
 
 }
 
@@ -131,3 +126,15 @@ export const unrecommendPerson = async ( app, uidToUnrecommend ) => {
 	return db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( uidToUnrecommend ) }, { merge: true } )
 
 }
+
+export const ignoreRecommendation = async ( app, uidToIgnore ) => {
+
+	// Get current user
+	const { auth: { currentUser: { uid } }, db, FieldValue } = app
+
+	return db.collection( 'userMeta' ).doc( uid ).set( {
+		recommendations: FieldValue.arrayRemove( uidToIgnore ),
+		neverRecommend: FieldValue.arrayUnion( uidToIgnore )
+	}, { merge: true } )
+
+} 
