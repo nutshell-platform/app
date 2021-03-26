@@ -4,6 +4,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/functions'
+import 'firebase/messaging'
 
 // Helpers
 import { dev, isWeb } from '../apis/platform'
@@ -52,6 +53,7 @@ class Firebase {
 	storage 	= this.fb.storage().ref()
 	func 		= this.fb.functions()
 	auth 		= this.fb.auth()
+	messaging 	= this.fb.messaging()
 	listeners 	= {}
 	FieldValue  = firebase.firestore.FieldValue
 	Auth 		= firebase.auth
@@ -149,6 +151,8 @@ class Firebase {
 			] )
 
 			setLocalTimeToSettings( this )
+
+			if( isWeb ) log( 'Firebase debugging: ', this.fb, this.messaging )
 
 		} catch( e ) {
 			log( 'Firebase init error: ', e )
