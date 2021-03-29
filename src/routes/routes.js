@@ -47,7 +47,7 @@ class Routes extends Component {
 
 	state = {
 		// If there is a saved user, no loading screen, otherwise loading screen
-		init: false
+		loading: true
 	}
 
 	componentDidMount = async () => {
@@ -70,7 +70,7 @@ class Routes extends Component {
 		} )
 
 		// Set the state to initialised if a user is already in stor
-		this.setState( { init: !!user } )
+		this.setState( { loading: !user } )
 
 		// Set dark mode if need be, but only on mount so the user can override it
 		this.smartDarkMode()
@@ -79,7 +79,7 @@ class Routes extends Component {
 		await firebase.init( history )
 		
 		// Disable loading screen
-		return this.setState( { init: true } )
+		return this.setState( { loading: false } )
 		
 	}
 
@@ -102,7 +102,9 @@ class Routes extends Component {
 		// Make test nutshell if needed
 		if( isWeb && typeof location != 'undefined' && location.href.includes( 'createDemoNutshell' ) ) {
 			log( '🛑 Demo nutshell requested' )
+			await this.updateState( { loading: 'requesting demo nutshell' } )
 			await firebase.createTestNutshell().catch( e => log( 'Error creating test nutshell: ', e ) )
+			await this.updateState( { loading: false } )
 		}
 		
 
@@ -208,13 +210,13 @@ class Routes extends Component {
 	render() {
 
 		const { theme } = this.props
-		const { init } = this.state
+		const { loading } = this.state
 
 		{ /* Paper theme provider */ }
 		return <PaperProvider theme={ theme || Light }>
-			{ !init && <Loading message='Loading your stuff' /> }
+			{ loading && <Loading message={ loading || 'Loading your stuff' } /> }
 			{ /* App router */ }
-			{ init && <Switch>
+			{ !loading && <Switch>
 
 				{ /* Friends */ }
 				<Route path='/friends/find' component={ FindFriends } />
