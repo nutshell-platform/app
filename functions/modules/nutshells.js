@@ -5,33 +5,6 @@ const { db, FieldValue, FieldPath } = require( './firebase' )
 // ///////////////////////////////
 // Demo data
 // ///////////////////////////////
-// exports.makeDemo = async f => {
-
-// 	const nutshells = [ 1,2,3,4,5 ]
-
-// 	try {
-// 		await Promise.all( nutshells.map( nutshell => {
-
-// 			return db.collection( 'nutshells' ).add( {
-// 				created: Date.now(),
-// 				owner: 'bHOwM0nKgPNMet0JGMCczdbfIrz2', // Derpface
-// 				published: Date.now(),
-// 				status: 'scheduled',
-// 				updated: Date.now(),
-// 				entries: [
-// 					{ uuid: Math.random(), title: 'Demo', paragraph: 'Hello' }
-// 				]
-// 			} )
-
-// 		} ) )
-
-// 		// console.log( 'Creation success' )
-
-// 	} catch( e ) {
-// 		console.log( 'creation problem, ', e )
-// 	}
-
-// }
 
 exports.createTestNutshell = async myUid => {
 
@@ -39,21 +12,29 @@ exports.createTestNutshell = async myUid => {
 
 		if( !myUid ) throw 'No nutshell or uid provided'
 
+		// Delete old data
+		await deleteDemoDataFor( myUid )
+
 		// Get a random user to set the nutshell to
 		const [ randomUser ] = await db.collection( 'users' ).where( FieldPath.documentId(), '!=', myUid ).limit( 1 ).get().then( dataFromSnap ) || []
 
+		const tenMinutes = 1000 * 60 * 10
 		const nutshell = {
-			uid: `testfor-${ myUid }-${ Date.now() }`,
+			uid: `testfor-${ myUid }`,
+			autoDelete: Date.now() + tenMinutes,
 			owner: randomUser.uid,
 			created: Date.now(),
 			updated: Date.now(),
 			published: Date.now(),
-			status: 'publish',
+			status: 'published',
 			entries: [
 				{ uid: 1, title: 'test 1', paragraph: 'content 1' },
 				{ uid: 2, title: 'test 2', paragraph: 'content 2' }
 			]
 		}
+
+		// Log out data
+		log( `Creatign nutshell testfor-${ myUid }` )
 
 		// Grab my current draft nutshell if there is one
 		const [ myDraftNutshell ] = await db.collection( 'nutshells' ).where( 'owner', '==', myUid ).where( 'status', 'in', [ 'draft', 'scheduled' ] ).limit( 1 ).get().then( dataFromSnap ) || []
@@ -70,9 +51,27 @@ exports.createTestNutshell = async myUid => {
 		await db.collection( 'nutshells' ).doc( nutshell.uid ).set( nutshell )
 		await db.collection( 'inbox' ).doc( myUid ).set( { nutshells: FieldValue.arrayUnion( nutshell.uid ) }, { merge: true } )
 
+		log( `Nutshell testfor-${ myUid } created` )
+
 	} catch( e ) {
 		log( 'createTestNutshell error: ', e.message || e )
 	}
+
+}
+
+const deleteDemoDataFor = async uid => {
+
+	if( !uid ) uid = placeholderUid
+
+	log( `Delete demo data for ${ uid }` )
+
+	await Promise.all( [
+		// Delete data of this test
+		db.collection( 'nutshells' ).where( 'owner', '==', `testfor-${ uid }` ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) ),
+		// Delete data of incomplete tests
+		db.collection( 'nutshells' ).where( 'autoDelete', '<', Date.now() ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) )
+	] )
+
 
 }
 

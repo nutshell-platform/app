@@ -15,8 +15,8 @@ const saveAccountEntry = entry => {
 	return index.saveObject( entry )
 }
 
-exports.updateAlgoliaAccountOnWrite = ( snap, context ) => saveAccountEntry( {
-	...dataFromSnap( snap, false ),
+exports.updateAlgoliaAccountOnWrite = ( change, context ) => saveAccountEntry( {
+	...change.after.data(),
 	objectID: context.params.uid
 } )
 

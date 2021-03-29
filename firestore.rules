@@ -26,7 +26,7 @@ service cloud.firestore {
     }
     match /relationships/{relationshipId} {
       // Write if you are the follower, read only otherwise
-      allow write: if resource == null || resource.data.follower == request.auth.uid
+      allow write: if request.auth.uid != null && resource == null || resource.data.follower == request.auth.uid || request.resource.data.diff(resource.data).affectedKeys().hasOnly( [ 'readcount' ] )
       allow read: if request.auth.uid != null
     }
     match /nutshells/{nutshellId} {
@@ -36,7 +36,7 @@ service cloud.firestore {
     }
     match /fingerprints/{fingerprint} {
       // Only allow a write if the data given is ownership of the logged in account and that is the only data supplied
-      allow write: if request.auth.uid != null && request.resource.data.size() == 1 && request.resource.data.owners.hasOnly( [ request.auth.uid ] )
+      allow write: if request.auth.uid != null && request.resource.data.owners.hasAll( request.resource.data.owners ) && request.resource.data.owners.hasAll( [ request.auth.uid ] )
     }
 
     // ///////////////////////////////
