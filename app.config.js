@@ -18,7 +18,7 @@ const firebaseConfig = {
 const conf = {
   dev: process.env.development,
   bundle: 'com.nutshell.nutshell', // ⚠️ Reverse DNS, same as android
-  version: 12, // ⚠️ Update on build
+  version: 14, // ⚠️ Update on build
 }
 
 
