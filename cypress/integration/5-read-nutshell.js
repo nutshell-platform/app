@@ -12,9 +12,8 @@ context( 'Read nutshell', (  ) => {
 
 		// Create test nutshell
 		cy.visit( `${ url }/#/?createDemoNutshell` )
-		find( 'requesting demo nutshell' )
 		cy.goHome()
-		exclude( 'requesting demo nutshell' )
+
 
 		// See if the test nutshell is added to the feed
 		find( 'test 1', undefined, false, 60000 ) // Long timeout for sync of func result

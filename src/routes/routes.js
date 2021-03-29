@@ -20,7 +20,7 @@ import { Switch, Route, withRouter } from './router'
 
 // Helpers
 import { isWeb, getIsDarkMode, dev } from '../modules/apis/platform'
-import { log } from '../modules/helpers'
+import { log, wait } from '../modules/helpers'
 
 // Components
 import LoginRegistration from '../components/stateful/onboarding/login-register'
@@ -102,15 +102,14 @@ class Routes extends Component {
 		// Make test nutshell if needed
 		if( isWeb && typeof location != 'undefined' && location.href.includes( 'createDemoNutshell' ) ) {
 			log( '🛑 Demo nutshell requested' )
-			await this.updateState( { loading: 'requesting demo nutshell' } )
 			await firebase.createTestNutshell().catch( e => log( 'Error creating test nutshell: ', e ) )
-			await this.updateState( { loading: false } )
+			log( '✅ Demo nutshell created' )
 		}
 		
 
 	}
 
-	shouldComponentUpdate = ( nextProps, nextState ) => {
+	shouldComponentUpdate = async ( nextProps, nextState ) => {
 
 		const { history, user } = nextProps
 		const { pathname } = history.location
@@ -167,8 +166,10 @@ class Routes extends Component {
 
 		const { history } = this.props
 
+		const noRedir = isWeb && typeof location != 'undefined' && location.href.includes( 'noredir' )
+
 		// Not logged in but not on the home page => go to home
-		if( pathname != '/' && !user ) {
+		if( !noRedir && pathname != '/' && !user ) {
 			log( 'Redirect: ', `pathname != '/' && !user` )
 			history.push( '/' )
 
@@ -176,7 +177,7 @@ class Routes extends Component {
 			return true
 		}
 		// If logged in but at slash => go to profile
-		if( pathname == '/' && user ) {
+		if( !noRedir && pathname == '/' && user ) {
 			log( 'Redirect: ', `pathname == '/' && user` )
 			history.push( '/nutshells/read' )
 

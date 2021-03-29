@@ -23,7 +23,7 @@ import { TouchableOpacity } from 'react-native'
 
 export const InboxTimeline = memo( ( { renderInbox, ...props } ) => {
 
-	const user = useSelector( store => store?.user )
+	const user = useSelector( store => store?.user || {} )
 	const { inbox={}, draft={} } = useSelector( store => store?.nutshells )
 
 	return <React.Fragment>

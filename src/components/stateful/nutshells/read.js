@@ -103,7 +103,7 @@ class ReadNutshell extends Component {
 
 		// log( 'Unfiltered/sorted nutshells: ', nutshells )
 
-		if( user.muted?.length  ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
+		if( user?.muted?.length  ) nutshells = nutshells.filter( n => !user?.muted.includes( n.uid ) )
 		// log( 'Removed muted nutshells: ', nutshells )
 		if( markedReadOffline?.length ) nutshells = nutshells.filter( n => !markedReadOffline.includes( n.uid ) )
 		// log( 'Removed marked as read (offline): ', nutshells )
