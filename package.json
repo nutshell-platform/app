@@ -27,6 +27,8 @@
     "sys:ncu:dry": "npm run sys:nvm && ncu",
     "sys:update": "npm run sys:nvm && ncu -u --target minor && npm i",
     "sys:upgrade": "npm run sys:nvm && ncu -u expo-cli && npm i && expo upgrade && npm i",
+    "env:production": "cp .env.production .env",
+    "env:development": "cp .env.development .env",
     "TEST:SECTION": "-------------------  TEST SECTION -------------------",
     "test:all": "npm run sys:nvm && npm run test:e2e:clear && npm run test:e2e",
     "test:jest:bak": "jest --colors --silent snap && jest --colors --silent unit",

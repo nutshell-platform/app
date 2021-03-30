@@ -1,5 +1,7 @@
 // Firebase configs
-require('dotenv').config()
+require('dotenv').config( {
+  path: process.env.development ? '.env' : '.env.production'
+} )
 
 
 // Firebase config
@@ -18,8 +20,10 @@ const firebaseConfig = {
 const conf = {
   dev: process.env.development,
   bundle: 'com.nutshell.nutshell', // ⚠️ Reverse DNS, same as android
-  version: 14, // ⚠️ Update on build
+  version: 15, // ⚠️ Update on build
 }
+
+console.log( conf, firebaseConfig )
 
 
 module.exports = {
