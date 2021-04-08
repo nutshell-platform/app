@@ -48,9 +48,6 @@ class UserProfile extends Component {
 			// If we have muted items, filter them
 			if( user.muted ) nutshells = nutshells.filter( n => !user.muted.includes( n.uid ) )
 
-			// Add user data to the nutshells
-			nutshells = nutshells.map( nutshell => ( { ...nutshell, user: user } ) )
-
 			await this.updateState( { profile: profile, nutshells: nutshells, loading: false } )
 
 		} catch( e ) {

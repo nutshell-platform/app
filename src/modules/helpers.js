@@ -97,14 +97,29 @@ const today = new Date()
 const oneJan = new Date( today.getFullYear(), 0, 1 )
 const oneJanDayType = oneJan.getDay()
 
-export const timestampToHuman = ms => new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ )[0]
+export const timestampToHuman = ( ms, view ) => {
+	if( view == 'dmy' ) return new Date( ms ).toString().match( /([a-zA-Z]* )(\d+ )(\d+)/ )[0]
+	if( view == 'y' ) return new Date( ms ).getFullYear()
+	return new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ )[0]
+}
+
 // Give timestamp of now, except in CI
 export const timestampToTime = ms => isCI ? '12:11' : new Date( ms || Date.now() ).toString().match( /\d{1,2}:\d{1,2}/ )[0]
 
 // Weeks are defined by the number of 7 day increments that have elapsed
-export const weekNumber = f => {
+export const weekNumber = day => {
 
-    const daysPassedSinceOneJan = Math.floor( ( today.getTime() - oneJan.getTime() ) / msInADay )
+	let baseline
+	if( day ) {
+		day = new Date( day )
+		baseline = new Date( day.getFullYear(), 0, 1 )
+	}
+	if( !day ) {
+		day = today
+		baseline = oneJan
+	}
+
+    const daysPassedSinceOneJan = Math.floor( ( day.getTime() - baseline.getTime() ) / msInADay )
 
     // Compose week number
     const weekNumber = Math.ceil( ( daysPassedSinceOneJan + oneJanDayType ) / 7 )

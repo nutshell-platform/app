@@ -1,11 +1,11 @@
 import { dataFromSnap } from './helpers'
-import { log } from '../helpers'
+import { log, catcher } from '../helpers'
 
 // ///////////////////////////////
 // Getters
 // ///////////////////////////////
 // Get Nutshells belonging to specific user
-export const getNutshellsOfUser = ( app, uid ) => {
+export const getNutshellsOfUser = async ( app, uid ) => {
 
 	const isMe = app.auth.currentUser.uid == uid
 
@@ -14,12 +14,7 @@ export const getNutshellsOfUser = ( app, uid ) => {
 		.where( 'status', isMe ? 'in' : '==', isMe ? [ 'published', 'draft', 'scheduled' ] : 'published' )
 		.limit( 52 ).get()
 		.then( dataFromSnap )
-		.then( nutshells => nutshells.map( nutshell => ( {
-			...nutshell,
-			user: {
-				uid: uid
-			}
-		} ) ) )
+
 }
 
 // Get Nutshell info by uid

@@ -8,7 +8,7 @@ import Navigation from '../common/navigation'
 import People from '../../../../assets/undraw_people_tax5.svg'
 
 // Data
-import { log, Dialogue, wait } from '../../../modules/helpers'
+import { log, Dialogue, wait, catcher } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 import { isWeb } from '../../../modules/apis/platform'
 

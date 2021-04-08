@@ -18,7 +18,7 @@ import { Placeholder, ViewRecs } from '../common/home'
 
 
 // Helper functions
-import { timestampToHuman, log, catcher } from '../../../modules/helpers'
+import { timestampToHuman, weekNumber, log, catcher } from '../../../modules/helpers'
 import { TouchableOpacity } from 'react-native'
 
 export const InboxTimeline = memo( ( { renderInbox, ...props } ) => {
@@ -73,13 +73,18 @@ export const NutshellCard = memo( ( { gutter=40, index, nutshell={}, showActions
 			{ /* Nutshell content */ }
 			<View style={ { flexDirection: 'column', alignItems: 'center', width: '100%', paddingHorizontal: gutter } }>
 
-				{ user && <Title onPress={ f => go( `/${ user.handle }` ) }>{user.name}</Title> }
-				<HelperText style={ { paddingBottom: 10 } }>
-					{ user && `@${user.handle}, ` }
-					{ timestampToHuman( published || updated ) }
-					{ readcount > 0 && `, read by ${readcount}` }
-				</HelperText>
-
+				{ /* If user attached to nutshell (wall view) show user data */ }
+				{ user && <React.Fragment>
+					<Title onPress={ f => go( `/${ user.handle }` ) }>{user.name}</Title>
+					<HelperText style={ { paddingBottom: 10 } }>
+						{ user && `@${user.handle}, ` }
+						{ user && timestampToHuman( published || updated ) }
+						{ /* readcount > 0 && `, read by ${readcount}` */ }
+					</HelperText>
+				</React.Fragment> }
+				
+				{ /* If no attached user (profile view) make date prominent */ }
+				{ !user && <Title style={ { marginBottom: 30, fontSize: 17 } }>Week { weekNumber( published || updated ) }, { timestampToHuman( published || updated, 'y' ) }</Title> }
 
 				
 				<View style={ { width: '100%', alignItems: 'flex-start', justifyContent: 'center' } }>

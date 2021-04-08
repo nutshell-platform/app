@@ -97,7 +97,8 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 			if( error ) throw error
 
 		} ).catch( e => {
-			Dialogue( 'Error loading file: ', e.message )
+			setSound()
+			Dialogue( 'Error loading file: ', `${ e.message }. This error has been recorded, you can dismiss it safely.` )
 			catcher( e )
 		} )
 
