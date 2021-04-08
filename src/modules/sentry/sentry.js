@@ -1,19 +1,18 @@
 import * as ExpoSentry from 'sentry-expo'
 import { SENTRY_DSN } from '@env'
-import Constants from 'expo-constants'
+import { dev, isWeb } from '../apis/platform'
+import { log } from '../helpers'
 
 export const SentryInit = f => {
-	if( SENTRY_DSN ) {
 
-		ExpoSentry.init( {
-			dsn: SENTRY_DSN
-			// enableInExpoDevelopment: true
-		} )
+	if( !SENTRY_DSN ) return log( 'Missing sentry DSN' )
 
-		// Doesn't work on web, only expo's package
-		if( Constants?.manifest?.revisionId ) ExpoSentry.setRelease( Constants.manifest.revisionId )
+	ExpoSentry.init( {
+		dsn: SENTRY_DSN,
+		// enableInExpoDevelopment: true,
+		debug: dev
+	} )
 
-	}
 }
 
-export const Sentry = ExpoSentry
+export const Sentry = isWeb ? ExpoSentry.Browser : ExpoSentry.Native
