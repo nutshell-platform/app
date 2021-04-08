@@ -29,6 +29,7 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 
 	// playback controls
 	const [ sound, setSound ] = useState( )
+	const [ hideEntry, setHideEntry ] = useState( false )
 	const [ loadingExisting, setLoadingExisting ] = useState( true )
 	const [ isPlaying, setPlaying ] = useState( false )
 	const [ playedMillis, setPlayedMillis ] = useState( 0 )
@@ -97,8 +98,7 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 			if( error ) throw error
 
 		} ).catch( e => {
-			setSound()
-			Dialogue( 'Error loading file: ', `${ e.message }. This error has been recorded, you can dismiss it safely.` )
+			setHideEntry( true )
 			catcher( e )
 		} )
 
@@ -113,6 +113,8 @@ export const AudioEntry = memo( ( { audioURI } ) => {
 	// Visual variables
 	const recordingDuration = Math.floor( durationMillis / 1000 )
 	const playedSeconds = Math.floor( playedMillis / 1000 )
+
+	if( hideEntry ) return null
 	return <View style={ { width: '100%', flexDirection: 'column', alignItems: 'flex-start', padding: 10, backgroundColor: theme?.colors?.divider, marginBottom: 10 } }>
 
 		<Pressable onPress={ togglePlayback } style={ { flex: 1, flexDirection: 'row', width: '100%' } }>
