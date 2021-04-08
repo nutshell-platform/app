@@ -25,7 +25,6 @@ const conf = {
 
 if( !process.env.development ) console.log( conf, firebaseConfig )
 
-
 module.exports = {
   "expo": {
 
