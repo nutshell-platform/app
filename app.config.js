@@ -23,7 +23,7 @@ const conf = {
   version: 15, // ⚠️ Update on build
 }
 
-console.log( conf, firebaseConfig )
+if( !process.env.development ) console.log( conf, firebaseConfig )
 
 
 module.exports = {

@@ -22,13 +22,16 @@ exports.scoreUser = async uid => {
 	try {
 
 		logs.push( `Getting data for ${ uid }` )
-		const { bio, avatar } = await db.collection( 'users' ).doc( uid ).get().then( dataFromSnap )
+		const { name, bio, avatar } = await db.collection( 'users' ).doc( uid ).get().then( dataFromSnap )
 		const { followers, following } = await db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap )
 
 		logs.push( 'Computing score' )
 		let score = 0
 
 
+		// ///////////////////////////////
+		// Scoring algorothm
+		// ///////////////////////////////
 		// Has set their settings
 		if( bio ) score += 1
 		if( avatar ) score += 1
@@ -46,6 +49,11 @@ exports.scoreUser = async uid => {
 			if( ( followers && following ) && ( followers.length / following.length  ) > 1 ) score += 1
 
 		}
+
+		// ///////////////////////////////
+		// Algorithm overrides
+		// ///////////////////////////////
+		if( !name ) score = 0
 
 		logs.push( `Score determined as ${ score }` )
 
@@ -107,7 +115,10 @@ exports.getContactRecommendations = async uid => {
 		// ///////////////////////////////
 		// Get second degree
 		logs.push( 'Get meta of followers and followees' )
-		const secondDegree = await Promise.all( [ ...followers, ...following ].map( uid => db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap ) ) )
+		let secondDegree = await Promise.all( [ ...followers, ...following ].map( uid => db.collection( 'userMeta' ).doc( uid ).get().then( dataFromSnap ) ) )
+
+		// Remove users with score 0 or no score
+		secondDegree = secondDegree.filter( ( { score } ) => !!score )
 
 		// Transform into persons of interest ( array of users )
 		logs.push( 'Transforming second degree into single list that excludes blocked and muted people.' )
@@ -122,7 +133,9 @@ exports.getContactRecommendations = async uid => {
 		personsOfInterest = personsOfInterest.filter( uid => !personaNonGrata.includes( uid ) )
 		logs.push( 'Persons of interest: ', personsOfInterest )
 
-		
+		// ///////////////////////////////
+		// Rank the persons of interest
+		// ///////////////////////////////		
 
 		logs.push( 'Making a ranked object' )
 		const rankedPersons = {}
