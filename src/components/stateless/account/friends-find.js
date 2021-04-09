@@ -49,34 +49,36 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 	</View>
 }
 
-export const ListResults = memo( UnoptimisedListResults, ( prev, next ) => {
+export const ListResults = UnoptimisedListResults
 
-	// If array lengths do not match, rerender anyway
-	if( prev.results?.length != next.results?.length ) return false
-	if( prev.recommendedProfiles?.length != next.recommendedProfiles?.length ) return false
-	if( prev.filter != next.filter ) return false
+// memo( UnoptimisedListResults, ( prev, next ) => {
 
-	// If loading status changed
-	if( prev.loading != next.loading ) return false
+// 	// If array lengths do not match, rerender anyway
+// 	if( prev.results?.length != next.results?.length ) return false
+// 	if( prev.recommendedProfiles?.length != next.recommendedProfiles?.length ) return false
+// 	if( prev.filter != next.filter ) return false
 
-	for ( let i = prev.results?.length - 1; i >= 0; i-- ) {
-		// There is an element in the new results that is not in the old ones
-		if( !next.results?.find( ( { uid } ) => uid == prev.results[i].uid ) ) {
-			return false
-		}
-	}
+// 	// If loading status changed
+// 	if( prev.loading != next.loading ) return false
 
-	for ( let i = prev.recommendedProfiles?.length - 1; i >= 0; i-- ) {
-		// There is an element in the new results that is not in the old ones
-		if( !next.recommendedProfiles?.find( ( { uid } ) => prev.recommendedProfiles[i].uid ) ) {
-			return false
-		}
-	}
+// 	for ( let i = prev.results?.length - 1; i >= 0; i-- ) {
+// 		// There is an element in the new results that is not in the old ones
+// 		if( !next.results?.find( ( { uid } ) => uid == prev.results[i].uid ) ) {
+// 			return false
+// 		}
+// 	}
 
-	// No changed? Memo yes
-	return true
+// 	for ( let i = prev.recommendedProfiles?.length - 1; i >= 0; i-- ) {
+// 		// There is an element in the new results that is not in the old ones
+// 		if( !next.recommendedProfiles?.find( ( { uid } ) => prev.recommendedProfiles[i].uid ) ) {
+// 			return false
+// 		}
+// 	}
 
-} )
+// 	// No changed? Memo yes
+// 	return true
+
+// } )
 
 export const LinkContacts = ( { linkContacts, ...props } ) => <View style={ { width: '100%', paddingTop: 20 } }>
 	<Button onPress={ linkContacts }>Improve my recommendations</Button>
