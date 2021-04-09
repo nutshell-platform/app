@@ -115,13 +115,13 @@ class ManageFriends extends Component {
 
 		const { loading, query, searching } = this.state
 
-		if( loading ) return <Loading message={ loading } />
+		// if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Friends }>
 			<Navigation title='Friends' />
 			<Main.Top style={ { width: 500 } }>
 				<Search nativeID='friends-manage-search' searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
-				<ListResults unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } filter='friends' />
+				<ListResults loading={ loading } unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } filter='friends' />
 			</Main.Top>
 		</Container>
 

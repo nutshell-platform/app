@@ -7,7 +7,7 @@ import { log, catcher } from '../helpers'
 // Get Nutshells belonging to specific user
 export const getNutshellsOfUser = async ( app, uid ) => {
 
-	const isMe = app.auth.currentUser.uid == uid
+	const isMe = app.auth.currentUser?.uid == uid
 
 	return app.db.collection( 'nutshells' )
 		.where( 'owner', '==', uid)
@@ -61,13 +61,13 @@ export const createTestNutshell = app => {
 
 export const createNutshell = ( app, nutshell ) => {
 
-	const { uid, ...nutshellContent } = nutshell
+	const { uid } = nutshell
 
 	return app.db.collection( 'nutshells' ).doc( uid ).set( {
 		...nutshell,
 		created: Date.now(),
 		updated: Date.now(),
-		owner: app.auth.currentUser.uid
+		owner: app.auth.currentUser?.uid
 	}, { merge: true } )
 
 }
@@ -96,8 +96,8 @@ export const markNutshellRead = ( app, uid ) => {
 
 	return Promise.all( [
 		db.collection( 'nutshells' ).doc( uid ).set( { readcount: FieldValue.increment( 1 ) }, { merge: true } ),
-		db.collection( 'inbox' ).doc( app.auth.currentUser.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } ),
-		db.collection( 'archive' ).doc( app.auth.currentUser.uid ).set( { nutshells: FieldValue.arrayUnion( uid ) }, { merge: true } )
+		db.collection( 'inbox' ).doc( app.auth.currentUser?.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } ),
+		db.collection( 'archive' ).doc( app.auth.currentUser?.uid ).set( { nutshells: FieldValue.arrayUnion( uid ) }, { merge: true } )
 	] )
 
 }
@@ -107,7 +107,7 @@ export const deleteNutshell = ( app, uid ) => {
 	const { db, FieldValue } = app
 	return Promise.all( [
 		db.collection( 'nutshells' ).doc( uid ).delete(),
-		db.collection( 'inbox' ).doc( app.auth.currentUser.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } )		
+		db.collection( 'inbox' ).doc( app.auth.currentUser?.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } )		
 	] )
 
 }
@@ -118,7 +118,7 @@ export const deleteNutshell = ( app, uid ) => {
 
 export const reportNutshell = ( app, report ) => {
 
-	const { db, FieldValue } = app
+	const { db } = app
 
 	return db.collection( 'reportedAbuse' ).add( { ...report, moderated: false } )
 
@@ -127,8 +127,7 @@ export const reportNutshell = ( app, report ) => {
 export const muteNutshell = ( app, nutshellUid ) => {
 
 	const { db, auth, FieldValue } = app
-	const { currentUser: { uid: myUid } } = auth
-	return db.collection( 'userMeta' ).doc( myUid ).set( { muted: FieldValue.arrayUnion( nutshellUid ) }, { merge: true } )
+	return db.collection( 'userMeta' ).doc( auth.currentUser?.uid ).set( { muted: FieldValue.arrayUnion( nutshellUid ) }, { merge: true } )
 
 }
 
@@ -137,8 +136,10 @@ export const muteNutshell = ( app, nutshellUid ) => {
 // ///////////////////////////////
 export const listenToLatestNutshell = ( app, dispatch, action ) => {
 
+	if( !app.auth.currentUser?.uid ) return
+
 	return app.db.collection( 'nutshells' )
-		.where( 'owner', '==', app.auth.currentUser.uid )
+		.where( 'owner', '==', app.auth.currentUser?.uid )
 		.where( 'status', 'in', [ 'draft', 'scheduled' ] )
 		.orderBy( 'updated', 'desc' )
 		.limit( 1 ).onSnapshot( doc => {
@@ -152,8 +153,10 @@ export const listenToLatestNutshell = ( app, dispatch, action ) => {
 
 export const listenToNutshellInbox = ( app, dispatch, action ) => {
 
+	if( !app.auth.currentUser?.uid ) return
+
 	return app.db.collection( 'inbox' )
-		.doc( app.auth.currentUser.uid )
+		.doc( app.auth.currentUser?.uid )
 		.onSnapshot( doc => {
 			const { nutshells } = dataFromSnap( doc )
 			return dispatch( action( nutshells || [] ) )

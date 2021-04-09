@@ -68,12 +68,12 @@ class UserProfile extends Component {
 
 		log( 'render: ', profile )
 
-		if( loading ) return <Loading message={ loading } />
+		// if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard noDraft={ noDraft } nutshells={ nutshells } user={ profile } />
+				<UserCard loading={ loading } noDraft={ noDraft } nutshells={ nutshells } user={ profile } />
 			</Main.Top>
 		</Container>
 

@@ -81,7 +81,7 @@ export default class LoginRegister extends Component {
 		const { action, email, password, name, handle } = this.state
 		const { history } = this.props
 
-		await this.updateState( { loading: `Best app ${action} ever...` } )
+		// await this.updateState( { loading: `Best app ${action} ever...` } )
 
 		try {
 			if( action == 'login' ) await app.loginUser( email.trim(), password )
@@ -90,16 +90,15 @@ export default class LoginRegister extends Component {
 			return history.push( '/' )
 		} catch( e ) {
 			alert( e )
-			return this.updateState( { loading: false } )
+			// return this.updateState( { loading: false } )
 		}
 	}
 
 	render() {
 
 		const { action, email, password, name, handle, loading, available, tos } = this.state
-		const { history } = this.props
 
-		if( loading ) return <Loading message={ loading } />
+		// if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Park }>
 			<Navigation title={ action } />

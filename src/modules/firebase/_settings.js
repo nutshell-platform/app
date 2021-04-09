@@ -5,14 +5,15 @@ import { getExpoPushTokenIfNeeded, registerNotificationListeners } from '../push
 export const listenSettings = ( app, dispatch, action ) => {
 
 	const { db, FieldValue, auth, history } = app
+	if( !auth.currentUser?.uid ) return
 
-	return db.collection( 'settings' ).doc( auth.currentUser.uid ).onSnapshot( async doc => {
+	return db.collection( 'settings' ).doc( auth.currentUser?.uid ).onSnapshot( async doc => {
 
 		const settings = dataFromSnap( doc, false )
 		const pushToken = await getExpoPushTokenIfNeeded( settings )
 		
 		// New token? Send to firebase
-		if( pushToken ) await db.collection( 'settings' ).doc( auth.currentUser.uid ).set( {
+		if( pushToken ) await db.collection( 'settings' ).doc( auth.currentUser?.uid ).set( {
 			// Add push token
 			pushTokens: FieldValue.arrayUnion( pushToken )
 			
@@ -42,7 +43,7 @@ export const setLocalTimeToSettings = async app => {
 		const sundayNoon = dateOfNext( 'sunday' ).setHours( 10, 0, 0, 0 )
 		const mondayNoon = dateOfNext( 'monday' ).setHours( 10, 0, 0, 0 )
 
-		const { times } = await db.collection( 'settings' ).doc( auth.currentUser.uid ).get().then( dataFromSnap )
+		const { times } = await db.collection( 'settings' ).doc( auth.currentUser?.uid ).get().then( dataFromSnap )
 
 		// If the server timestamp is bigger than the local one, keep the remote because notification has been sent
 		const newTimes = {
@@ -52,7 +53,7 @@ export const setLocalTimeToSettings = async app => {
 		}
 
 		// Set the local times to the server
-		return db.collection( 'settings' ).doc( auth.currentUser.uid ).set( { times: newTimes }, { merge: true } )
+		return db.collection( 'settings' ).doc( auth.currentUser?.uid ).set( { times: newTimes }, { merge: true } )
 
 	} catch( e ) {
 		catcher( e )
@@ -60,4 +61,8 @@ export const setLocalTimeToSettings = async app => {
 
 }
 
-export const updateSettings = ( app, settings ) => app.db.collection( 'settings' ).doc( app.auth.currentUser.uid ).set( settings, { merge: true } )
+export const updateSettings = ( app, settings ) => {
+	if( !app.auth.currentUser?.uid ) return
+	app.db.collection( 'settings' ).doc( app.auth.currentUser?.uid ).set( settings, { merge: true } )
+}
+

@@ -30,7 +30,7 @@ export const getRandomPeople = async app => {
 	} )
 
 	// Return all that are not self
-	return users.filter( friend => friend.uid != app.auth.currentUser.uid )
+	return users.filter( friend => friend.uid != app.auth.currentUser?.uid )
 
 }
 
@@ -38,17 +38,19 @@ export const getRandomPeople = async app => {
 // Following
 // ///////////////////////////////
 export const followPerson = ( app, theirUid ) => {
-	const { currentUser: { uid: myUid } } = app.auth
+	const { currentUser } = app.auth
+	log( `Following ${ theirUid } on behalf of ${ currentUser?.uid }` )
+
 	return app.db.collection( 'relationships' ).add( {
-		follower: myUid,
+		follower: currentUser?.uid,
 		author: theirUid
 	} )
 }
 
 export const unfollowPerson = ( app, theirUid ) => {
-	const { currentUser: { uid: myUid } } = app.auth
+	const { currentUser } = app.auth
 	return app.db.collection( 'relationships' )
-	.where( 'follower', '==', myUid )
+	.where( 'follower', '==', currentUser.uid )
 	.where( 'author', '==', theirUid )
 	.get()
 	.then( snap => snap.docs.map( doc => doc.ref.delete() ) )
@@ -56,14 +58,14 @@ export const unfollowPerson = ( app, theirUid ) => {
 
 export const blockPerson = ( app, theirUid ) => {
 	const { db, auth, FieldValue } = app
-	const { currentUser: { uid: myUid } } = auth
-	return db.collection( 'userMeta' ).doc( myUid ).set( { blocked: FieldValue.arrayUnion( theirUid ) }, { merge: true } )
+	const { currentUser } = auth
+	return db.collection( 'userMeta' ).doc( currentUser.uid ).set( { blocked: FieldValue.arrayUnion( theirUid ) }, { merge: true } )
 }
 
 export const unblockPerson = ( app, theirUid ) => {
 	const { db, auth, FieldValue } = app
-	const { currentUser: { uid: myUid } } = auth
-	return db.collection( 'userMeta' ).doc( myUid ).set( { blocked: FieldValue.arrayRemove( theirUid ) }, { merge: true } )
+	const { currentUser } = auth
+	return db.collection( 'userMeta' ).doc( currentUser.uid ).set( { blocked: FieldValue.arrayRemove( theirUid ) }, { merge: true } )
 }
 
 
@@ -72,10 +74,10 @@ export const unblockPerson = ( app, theirUid ) => {
 // ///////////////////////////////
 export const findPerson = async ( app, query ) => {
 
-	const { currentUser: { uid: myUid } } = app.auth
-	const isEmail = query.match( /[\w-]+?@{1}[\w-]+?[\w\.]+/ )
-	const readProfile = ( { uid } ) => app.db.collection( 'users' ).doc( uid ).get().then( dataFromSnap )
-	const notMe = users => users.filter( ( { uid } ) => uid != myUid )
+	// const { currentUser } = app.auth
+	// const isEmail = query.match( /[\w-]+?@{1}[\w-]+?[\w\.]+/ )
+	// const readProfile = ( { uid } ) => app.db.collection( 'users' ).doc( uid ).get().then( dataFromSnap )
+	// const notMe = users => users.filter( ( { uid } ) => uid != currentUser.uid )
 
 	// Sanetise ( trim )
 	query = query[0] == '@' ? query.substring( 1 ).trim() : query.trim()
@@ -110,7 +112,7 @@ export const getPerson = async ( db, query, by ) => {
 export const getContactRecommendations = async app => {
 
 	// Get funcs and data
-	const { func, auth: { currentUser } } = app
+	const { func } = app
 	const getRecs = func.httpsCallable( 'getContactRecommendations' )
 
 	// Generare recommendations
@@ -121,18 +123,18 @@ export const getContactRecommendations = async app => {
 export const unrecommendPerson = async ( app, uidToUnrecommend ) => {
 
 	// Get current user
-	const { auth: { currentUser: { uid } }, db, FieldValue } = app
+	const { auth: { currentUser }, db, FieldValue } = app
 
-	return db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayRemove( uidToUnrecommend ) }, { merge: true } )
+	return db.collection( 'userMeta' ).doc( currentUser.uid ).set( { recommendations: FieldValue.arrayRemove( uidToUnrecommend ) }, { merge: true } )
 
 }
 
 export const ignoreRecommendation = async ( app, uidToIgnore ) => {
 
 	// Get current user
-	const { auth: { currentUser: { uid } }, db, FieldValue } = app
+	const { auth: { currentUser }, db, FieldValue } = app
 
-	return db.collection( 'userMeta' ).doc( uid ).set( {
+	return db.collection( 'userMeta' ).doc( currentUser.uid ).set( {
 		recommendations: FieldValue.arrayRemove( uidToIgnore ),
 		neverRecommend: FieldValue.arrayUnion( uidToIgnore )
 	}, { merge: true } )

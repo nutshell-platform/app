@@ -1,12 +1,12 @@
-import React, { useState, memo } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { useSelector } from 'react-redux'
-import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton } from '../common/generic'
+import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton, ActivityIndicator } from '../common/generic'
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
 import app from '../../../modules/firebase/app'
 import { catcher, log } from '../../../modules/helpers'
 
-const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraft, nutshells=[] } ) => {
+const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraft, nutshells=[], loading } ) => {
 
 	// Check if user being viewed is me and whether I am an admin
 	const myUid = useSelector( store => store?.user?.uid )
@@ -15,12 +15,18 @@ const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, no
 
 	// Following management
 	const followlist = useSelector( store => store?.user?.following )
-	const following = followlist.includes( user.uid )
-	const [ followed, setFollowed ] = useState( following )
+	
+	const [ followed, setFollowed ] = useState()
 	const toggleFollowed = f => Promise.all( [
 		followed ? app.unfollowPerson( user.uid ) : app.followPerson( user.uid ),
-		setFollowed( !following )
+		setFollowed( !followed )
 	] ).catch( catcher )
+
+	// On card update, update state
+	useEffect( f => {
+		const following = followlist.includes( user.uid )
+		setFollowed( following )
+	}, [ user ] )
 
 	// User blocking
 	const blocklist = useSelector( store => store?.user?.blocked || [] )
@@ -37,21 +43,24 @@ const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, no
 				</View>
 				
 				{ /* About */ }
-				<View style={ { alignItems: 'center', justifyContent: 'center', paddingHorizontal: gutter } }>
+				{ !loading && <View style={ { alignItems: 'center', justifyContent: 'center', paddingHorizontal: gutter } }>
 					<Title>{ user.name }{ blocked ? ' (blocked)' : '' }</Title>
 					<Text>{ user.bio }</Text>
 					<Text style={ { marginTop: 10, opacity: .7 } }>Following { user.following?.length || 0 } | Followers { user.followers?.length || 0 }</Text>
-				</View>
+				</View> }
 
-				{ !isSelf && !blocked && <Button style={ { paddingHorizontal: gutter } } mode={ followed && 'text' } onPress={ toggleFollowed }>{ followed ? 'Unfollow' : 'Follow' }</Button> }
+				{ !loading && !isSelf && !blocked && <Button style={ { paddingHorizontal: gutter } } mode={ followed && 'text' } onPress={ toggleFollowed }>{ followed ? 'Unfollow' : 'Follow' }</Button> }
 
 				{ /* Menu dots */ }
-				{ !isSelf && <BlockUser blocked={ blocked } setBlocked={ setBlocked } userUid={ user.uid } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } /> }
+				{ !loading && !isSelf && <BlockUser blocked={ blocked } setBlocked={ setBlocked } userUid={ user.uid } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } /> }
 
 
 			</Card>
 
 			{ /* List this user's nutshells */ }
+			{ loading && [ 0, 1, 2, 3 ].map( i => <Card key={ `nutshell-placeholder-${ i }` }>
+					<ActivityIndicator />
+			</Card> ) }
 			{ !blocked && nutshells.map( nutshell => <NutshellCard showActions={ false } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 
 		</View>
@@ -60,8 +69,13 @@ const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, no
 
 export const UserCard = memo( UnoptimisedUserCard, ( prev, next ) => {
 
-	if( prev.nutshells.length != next.nutshells.length ) return false
-	if( prev.user.uid != next.user.uid ) return false
+	if( prev.nutshells?.length != next.nutshells?.length ) return false
+	if( prev.user?.uid != next.user?.uid ) return false
+
+	for( let property in next.user ) {
+		if( prev[ property ] != next[ property ] ) return false
+	}
+
 
 	return true
 

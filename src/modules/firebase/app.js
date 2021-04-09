@@ -150,8 +150,6 @@ class Firebase {
 
 			setLocalTimeToSettings( this )
 
-			if( isWeb ) log( 'Firebase debugging: ', this.fb )
-
 		} catch( e ) {
 			log( 'Firebase init error: ', e )
 		}

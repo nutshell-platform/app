@@ -1,8 +1,11 @@
+// ///////////////////////////////
+// Environment variables
+
+// ///////////////////////////////
 // Firebase configs
 require('dotenv').config( {
   path: process.env.development ? '.env' : '.env.production'
 } )
-
 
 // Firebase config
 const { FIREBASE_apiKey, FIREBASE_authDomain, FIREBASE_databaseURL, FIREBASE_projectId, FIREBASE_storageBucket, FIREBASE_messagingSenderId, FIREBASE_appId, FIREBASE_measurementId } = process.env
@@ -17,13 +20,18 @@ const firebaseConfig = {
   measurementId: FIREBASE_measurementId
 }
 
+// ///////////////////////////////
+// Expo configs
+// ///////////////////////////////
+
+// Verbose printing
+console.log( 'Process.env.development: ', !!process.env.development, ' firebase project: ', firebaseConfig.projectId )
+
 const conf = {
   dev: process.env.development,
   bundle: 'com.nutshell.nutshell', // ⚠️ Reverse DNS, same as android
   version: 15, // ⚠️ Update on build
 }
-
-if( !process.env.development ) console.log( conf, firebaseConfig )
 
 module.exports = {
   "expo": {

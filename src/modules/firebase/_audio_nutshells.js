@@ -8,7 +8,7 @@ export const saveAudioEntry = async ( app, uidOfNutshell, statusOfDraftNutshell,
 		const { storage, auth } = app
 
 		// User-settings
-		const { uid } = auth.currentUser
+		const { uid } = auth.currentUser || {}
 		uidOfNutshell = uidOfNutshell || await getuid()
 		const path = `audioNutshells/${uid}/${ uidOfNutshell }.${extension}`
 
@@ -42,7 +42,7 @@ export const deleteAudioEntry = async ( app, uidOfNutshell, extension='.mp4' ) =
 		const { storage, auth } = app
 
 		// User-settings
-		const { uid } = auth.currentUser
+		const { uid } = auth.currentUser || {}
 		const path = `audioNutshells/${uid}/${ uidOfNutshell }.${ extension }`
 
 		// Delete old file

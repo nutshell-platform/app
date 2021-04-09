@@ -12,7 +12,7 @@ export const getAndSaveFingerprints = async app => {
 	try {
 
 		// Get relevant functions and data
-		const { func, auth: currentUser } = app
+		const { func } = app
 		const save = func.httpsCallable( 'saveFingerprints' )
 
 		// Grab prints from contact book

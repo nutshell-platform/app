@@ -143,7 +143,7 @@ class ReadNutshell extends Component {
 			log( 'Scheduling inbox load. Remote is  ', remoteInbox, ' and local is ', offlineInbox )
 			if( this.inboxLoader ) clearTimeout( this.inboxLoader )
 			// Trigger inbox load, but keep it silent if we are probably more current
-			this.inboxLoader = setTimeout( f => this.loadInbox( !!markedReadOffline.length ), 2000 )
+			this.inboxLoader = setTimeout( f => this.loadInbox( ) )
 		}
 
 		// Always trigger rerender ( default behavior )

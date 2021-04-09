@@ -19,7 +19,7 @@ class FindFriends extends Component {
 
 	// initialise state
 	state = {
-		loading: 'Loading some people. Nice people.',
+		loading: true,
 		newFollows: [],
 		newUnfollows: [],
 		timeout: 1000,
@@ -128,46 +128,17 @@ class FindFriends extends Component {
 
 	}
 
-	// Follow function
-	follow = uid => { 
-		const { newFollows, newUnfollows } = this.state
-		const { user } = this.props
-
-		return Promise.all( [
-			app.followPerson( uid ),
-			user?.recommendations?.includes( uid ) && app.unrecommendPerson( uid ),
-			this.updateState( {
-				newFollows: [ ...newFollows, uid ],
-				newUnfollows: [ ...newUnfollows.filter( fuid => fuid != uid ) ]
-			} )
-		] ).catch( catcher )
-	}
-
-	unfollow = uid => {
-		const { newFollows, newUnfollows } = this.state
-
-		return Promise.all( [
-			app.unfollowPerson( uid ),
-			this.updateState( {
-				newFollows: [ ...newFollows.filter( fuid => fuid != uid ) ],
-				newUnfollows: [ ...newUnfollows, uid ]
-			} )
-		] ).catch( catcher )
-	}
-
 	// Split following vs not yet
 	sortedResults = f => {
 
 		// Grab data
-		const { results, newFollows, newUnfollows, filter } = this.state
-		const { following: oldFollows, blocked } = this.props.user
+		const { results } = this.state
+		const { blocked } = this.props.user
 
 		// Filter data
 		const onlyUnblocked = blocked?.length ? results.filter( ( { uid } ) => !blocked.includes( uid ) ) : results
-		const allFollows = [ ...oldFollows, ...newFollows ].filter( fuid => !newUnfollows.includes( fuid ) )
 
-		
-		const sortedResults = onlyUnblocked.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
+		const sortedResults = onlyUnblocked
 		return sortedResults
 
 
@@ -176,15 +147,13 @@ class FindFriends extends Component {
 	sortedReccs = f => {
 
 		// Grab data
-		const { recommendedProfiles=[], newFollows, newUnfollows, filter } = this.state
-		const { following: oldFollows, blocked } = this.props.user
+		const { recommendedProfiles=[] } = this.state
+		const { blocked } = this.props.user
 
 		// Filter data
 		const onlyUnblocked = blocked?.length ? recommendedProfiles.filter( ( { uid } ) => !blocked.includes( uid ) ) : recommendedProfiles
-		const allFollows = [ ...oldFollows, ...newFollows ].filter( fuid => !newUnfollows.includes( fuid ) )
-
 		
-		const sortedResults = onlyUnblocked.map( res => ( { ...res, following: allFollows.includes( res.uid ) } ) )
+		const sortedResults = onlyUnblocked
 		return sortedResults
 
 
@@ -218,10 +187,8 @@ class FindFriends extends Component {
 
 	render() {
 
-		const { loading, query, searching, recommendations, filter } = this.state
+		const { loading, query, searching, filter } = this.state
 		const { user } = this.props
-
-		if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Friends }>
 			<Navigation title='Friends' />
@@ -231,7 +198,7 @@ class FindFriends extends Component {
 				{ !isWeb && !user.contactBookSaved && <LinkContacts linkContacts={ this.linkContacts } /> }
 
 				{ /* Search results */ }
-				<ListResults filter={ filter } unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } recommendedProfiles={ this.sortedReccs() } />
+				<ListResults loading={ loading } filter={ filter } results={ this.sortedResults() } recommendedProfiles={ this.sortedReccs() } />
 			</Main.Top>
 		</Container>
 

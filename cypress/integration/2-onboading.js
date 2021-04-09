@@ -38,8 +38,6 @@ context( 'Onboarding tutorial', (  ) => {
 		find( 'follow some people' ).click()
 
 		// Wait for loading to start and end
-		find( 'Loading some people. Nice people.' )
-		exclude( 'Loading some people. Nice people.' )
 		find( 'follow' ).click()
 
 		cy.goHome()
@@ -50,8 +48,7 @@ context( 'Onboarding tutorial', (  ) => {
 		// Use FAB to get to friend addition instead
 		click( '[data-testid="fab-toggle"]' )
 		find( 'Add friends' ).click()
-		find( 'Loading some people. Nice people.' )
-		exclude( 'Loading some people. Nice people.' )
+		find( 'follow' )
 
 
 	} )

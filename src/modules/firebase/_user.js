@@ -49,7 +49,7 @@ export const listenUserLogin = ( app, dispatch, action, listeners ) => new Promi
 } ) 
 
 // Listen to user changes
-export const listenUserChanges = ( app, dispatch, action ) => app.db.collection( 'users' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
+export const listenUserChanges = ( app, dispatch, action ) => app.db.collection( 'users' ).doc( app.auth.currentUser?.uid ).onSnapshot( doc => {
 
 	return dispatch( action( {
 		email: app.auth.currentUser.email,
@@ -58,13 +58,13 @@ export const listenUserChanges = ( app, dispatch, action ) => app.db.collection(
 
 } )
 
-export const listenUserMetaChanges = ( app, dispatch, action ) => app.db.collection( 'userMeta' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
+export const listenUserMetaChanges = ( app, dispatch, action ) => app.db.collection( 'userMeta' ).doc( app.auth.currentUser?.uid ).onSnapshot( doc => {
 
 	return dispatch( action( dataFromSnap( doc, false ) ) )
 
 } )
 
-export const listenContactMethods = ( app, dispatch, action ) => app.db.collection( 'userContacts' ).doc( app.auth.currentUser.uid ).onSnapshot( doc => {
+export const listenContactMethods = ( app, dispatch, action ) => app.db.collection( 'userContacts' ).doc( app.auth.currentUser?.uid ).onSnapshot( doc => {
 
 	return dispatch( action( { contactMethods: dataFromSnap( doc, false ) } ) )
 
@@ -105,6 +105,7 @@ export const updateUser = async ( app, userUpdates ) => {
 
 	let { uid, email, newpassword, currentpassword, newavatar, oldavatar, handle, ...updates } = userUpdates
 	const { currentUser } = app.auth
+	if( !currentUser ) return
 	
 	try {
 
@@ -201,6 +202,7 @@ export const deleteUser = async ( app, password ) => {
 	const { auth, db, FieldValue } = app
 	const { currentUser } = auth
 	const { EmailAuthProvider } = app.Auth
+	if( !currentUser ) return
 
 	try {
 

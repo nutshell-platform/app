@@ -74,8 +74,8 @@ export const UserAvatar = React.memo( ( { size=100, user, ...props } ) => {
 	const history = useHistory()
 
 	return <TouchableOpacity onPress={ f => history.push( `/${user.handle}` ) }>
-		{ user.avatar && <Avatar.Image { ...props } size={ size } source={ user.avatar } /> }
-		{ !user.avatar && <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' /> }
+		{ user?.avatar && <Avatar.Image { ...props } size={ size } source={ user.avatar } /> }
+		{ !user?.avatar && <Avatar.Icon { ...props } size={ size } icon='account-circle-outline' /> }
 	</TouchableOpacity>
 } )
 
