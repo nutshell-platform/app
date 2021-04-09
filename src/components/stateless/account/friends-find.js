@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Card, Text, Link, View, UserAvatar, Button, Profiler, ActivityIndicator } from '../common/generic'
 import { log } from '../../../modules/helpers'
@@ -97,6 +97,12 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 		unfollowInstead ? app.unfollowPerson( uid ) : app.followPerson( uid )
 		setFollowing( !following )
 	}
+
+	// update follow status when redux updates
+	useEffect( f => {
+		const currentlyFollowing = user.following || alreadyFollowing.includes( uid => user.uid == uid )
+		if( following != currentlyFollowing ) setFollowing( currentlyFollowing )
+	}, [ alreadyFollowing ] )
 
 	return <Card>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
