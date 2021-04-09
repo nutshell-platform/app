@@ -88,7 +88,8 @@ export const LinkContacts = ( { linkContacts, ...props } ) => <View style={ { wi
 
 const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 
-	const [ following, setFollowing ] = useState( user.following )
+	const alreadyFollowing = useSelector( store => store?.user?.following || [] )
+	const [ following, setFollowing ] = useState( user.following || alreadyFollowing.includes( uid => user.uid == uid ) )
 
 	const follow = ( uid, unfollowInstead ) => {
 		unfollowInstead ? app.unfollowPerson( uid ) : app.followPerson( uid )
