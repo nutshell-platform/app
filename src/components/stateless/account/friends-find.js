@@ -98,8 +98,8 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 	return <Card>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />
-			<View nativeID={ typeof i != 'undefined' && `friends-find-search-result-${i}` } style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
-				<Link nativeID={ typeof i != 'undefined' && `friends-find-search-result-link-${i}` } to={ `/${user.handle}` }>{ user.name }</Link>
+			<View nativeID={ typeof i != 'undefined' ? `friends-find-search-result-${i}` : `friends-recc-${ user?.uid }` } style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
+				<Link nativeID={ typeof i != 'undefined' ? `friends-find-search-result-link-${i}` : `friends-recc-link-${ user?.uid }` } to={ `/${user.handle}` }>{ user.name }</Link>
 				<Text style={ { flex: 1,fontStyle: 'italic', opacity: .8 } }>{ user.bio || `This person has nothing to say about themselves. It's ok to be shy though. ` }</Text>
 				<View style={ { flexDirection: 'row' } }>
 					{ !following && <Button style={ { width: 100, alignItems: 'flex-start' } } onPress={ f => follow( user.uid ) }>Follow</Button> }
