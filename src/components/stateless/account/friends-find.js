@@ -7,27 +7,41 @@ import app from '../../../modules/firebase/app'
 
 const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='all', loading } ) => {
 
+	// Internal state management
 	const [ ignored, setIgnored ] = useState( [] )
+	const blocked = useSelector( store => store.user?.blocked || [] )
 	const ignoreRecommendation = uid => {
 		setIgnored( [ ...ignored, uid ] )
 		app.ignoreRecommendation( uid )
 	}
 
-	// Parse ignored results
-	recommendedProfiles = recommendedProfiles.filter( ( { uid } ) => !ignored.includes( uid ) )
+	// Sanitisation
+	// Sanetised data
+	const [ saneResults, setSaneResults ] = useState( results.filter( ( { uid, name } ) => name && !ignored.includes( uid ) && !blocked.includes( uid ) ) )
+	const [ saneReccs, setSaneReccs ] = useState( recommendedProfiles.filter( ( { uid, name } ) => name && !ignored.includes( uid ) && !blocked.includes( uid ) ) )
+
+
+	useEffect( f => {
+
+		// Update internal state
+		setSaneResults( results.filter( ( { uid, name } ) => name && !ignored.includes( uid ) && !blocked.includes( uid ) ) )
+		setSaneReccs( recommendedProfiles.filter( ( { uid, name } ) => name && !ignored.includes( uid ) && !blocked.includes( uid ) ) )
+
+	}, [ results.length, recommendedProfiles.length, ignored.length, blocked.length ] )
+
 
 	return <View style={ { width: '100%', paddingTop: 20 } }>
 	
-		{ !loading && results.length == 0 && <Text style={ { textAlign: 'center' } }>No users found, try a different query</Text> }
+		{ !loading && saneResults.length == 0 && <Text style={ { textAlign: 'center' } }>No users found, try a different query</Text> }
 
 
 
 		{ /* Recommendartions */ }
-		{ [ 'all' ].includes( filter ) && ( loading || recommendedProfiles.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Recommendations:</Text> }
+		{ [ 'all' ].includes( filter ) && ( loading || saneReccs.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Recommendations:</Text> }
 		{ loading && [ 0, 1, 2, 3 ].map( i => <Card key={ `recc-placeholder-${ i }` }>
 				<ActivityIndicator />
 		</Card> ) }
-		{ [ 'all' ].includes( filter ) && recommendedProfiles.length > 0 && recommendedProfiles.map( user => <UserResultCard
+		{ [ 'all' ].includes( filter ) && saneReccs.length > 0 && saneReccs.map( user => <UserResultCard
 			key={ `recc-${ user.uid }` }
 			user={ user }
 			ignoreRecommendation={ ignoreRecommendation }
@@ -36,11 +50,11 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 		
 
 		{ /* Seaech results */ }
-		{ [ 'all' ].includes( filter ) && ( loading || results.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Interesting people:</Text> }
+		{ [ 'all' ].includes( filter ) && ( loading || saneResults.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Interesting people:</Text> }
 		{ loading && [ 0, 1, 2, 3 ].map( i => <Card key={ `search-placeholder-${ i }` }>
 				<ActivityIndicator />
 		</Card> ) }
-		{ [ 'all', 'search', 'friends' ].includes( filter ) && results.length > 0 && results.map( ( user, i ) => <UserResultCard
+		{ [ 'all', 'search', 'friends' ].includes( filter ) && saneResults.length > 0 && saneResults.map( ( user, i ) => <UserResultCard
 			i={ i }
 			key={ `search-${ user.uid }` }
 			user={ user }
@@ -91,7 +105,7 @@ export const LinkContacts = ( { linkContacts, ...props } ) => <View style={ { wi
 const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 
 	const alreadyFollowing = useSelector( store => store?.user?.following || [] )
-	const [ following, setFollowing ] = useState( user.following || alreadyFollowing.includes( uid => user.uid == uid ) )
+	const [ following, setFollowing ] = useState( user.following || !!alreadyFollowing.find( uid => user.uid == uid ) )
 
 	const follow = ( uid, unfollowInstead ) => {
 		unfollowInstead ? app.unfollowPerson( uid ) : app.followPerson( uid )
@@ -100,9 +114,10 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 
 	// update follow status when redux updates
 	useEffect( f => {
-		const currentlyFollowing = user.following || alreadyFollowing.includes( uid => user.uid == uid )
+		const currentlyFollowing = user.following || !!alreadyFollowing.find( uid => user.uid == uid )
 		if( following != currentlyFollowing ) setFollowing( currentlyFollowing )
-	}, [ alreadyFollowing ] )
+	}, [ alreadyFollowing.length ] )
+
 
 	return <Card>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>

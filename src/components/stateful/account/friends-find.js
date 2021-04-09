@@ -128,36 +128,6 @@ class FindFriends extends Component {
 
 	}
 
-	// Split following vs not yet
-	sortedResults = f => {
-
-		// Grab data
-		const { results } = this.state
-		const { blocked } = this.props.user
-
-		// Filter data
-		const onlyUnblocked = blocked?.length ? results.filter( ( { uid } ) => !blocked.includes( uid ) ) : results
-
-		const sortedResults = onlyUnblocked
-		return sortedResults
-
-
-	}
-
-	sortedReccs = f => {
-
-		// Grab data
-		const { recommendedProfiles=[] } = this.state
-		const { blocked } = this.props.user
-
-		// Filter data
-		const onlyUnblocked = blocked?.length ? recommendedProfiles.filter( ( { uid } ) => !blocked.includes( uid ) ) : recommendedProfiles
-		
-		const sortedResults = onlyUnblocked
-		return sortedResults
-
-
-	}
 
 	linkContacts = async f => {
 
@@ -187,7 +157,7 @@ class FindFriends extends Component {
 
 	render() {
 
-		const { loading, query, searching, filter } = this.state
+		const { loading, query, searching, filter, recommendedProfiles, results } = this.state
 		const { user } = this.props
 
 		return <Container Background={ Friends }>
@@ -198,7 +168,7 @@ class FindFriends extends Component {
 				{ !isWeb && !user.contactBookSaved && <LinkContacts linkContacts={ this.linkContacts } /> }
 
 				{ /* Search results */ }
-				<ListResults loading={ loading } filter={ filter } results={ this.sortedResults() } recommendedProfiles={ this.sortedReccs() } />
+				<ListResults loading={ loading } filter={ filter } results={ results } recommendedProfiles={ recommendedProfiles } />
 			</Main.Top>
 		</Container>
 
