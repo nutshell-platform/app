@@ -27,7 +27,7 @@ exports.refreshAllReccsAndScores = async ( data={}, context={} ) => {
 
 }
 
-exports.scoreUser = scoreUser
+
 const scoreUser = async uid => {
 
 	const logs = []
@@ -89,8 +89,9 @@ const scoreUser = async uid => {
 	return
 
 }
+exports.scoreUser = scoreUser
 
-exports.getContactRecommendations = getContactRecommendations
+
 const getContactRecommendations = async uid => {
 
 	const logs = []
@@ -204,3 +205,5 @@ const getContactRecommendations = async uid => {
 	return
 
 }
+
+exports.getContactRecommendations = getContactRecommendations
