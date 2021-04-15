@@ -78,6 +78,8 @@ class FindFriends extends Component {
 
 		try {
 
+			log( 'Triggering default search' )
+
 			// Offline checker
 			if( !( await app.isOnline() ) ) return Promise.all( [
 				Dialogue( 'You are offline', `We can't load any new data and any changes will not be saved.` ),
@@ -85,6 +87,7 @@ class FindFriends extends Component {
 			] )
 
 			const people = await app.getRandomPeople(  )
+			log( 'defaultSearch found ', people )
 			return this.updateState( { results: people, filter: 'all' } )
 
 		} catch( e ) {

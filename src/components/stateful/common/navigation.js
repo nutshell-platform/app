@@ -144,7 +144,8 @@ class Navigation extends Component {
 			links: [
 				{ label: 'Marketing', to: '/system/marketing' },
 				{ label: 'Debugging', to: '/debug' },
-				{ label: 'Request demo Nutshells', onPress: app.createTestNutshell }
+				{ label: 'Request demo Nutshells', onPress: app.createTestNutshell },
+				{ label: 'Reset all scores and reccs', onPress: app.refreshAllReccsAndScores }
 			]
 		} )
 

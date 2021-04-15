@@ -11,6 +11,7 @@ export const getRandomPeople = async app => {
 
 	// If there are not enough scored users, get unscored ones to fill them up
 	if( users.length < searchLimit ) {
+		log( `Only ${ users.length } scored users found, finding unscored users` )
 		const unscoredUsers = await app.db.collection( 'users' ).limit( searchLimit - users.length ).get().then( dataFromSnap )
 		users = [ ...users, ...unscoredUsers  ]
 	}

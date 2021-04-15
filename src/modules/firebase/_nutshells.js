@@ -55,7 +55,7 @@ export const createTestNutshell = app => {
 	const makeTestNutshell = func.httpsCallable( 'createTestNutshell' )
 
 	// Generare recommendations
-	return makeTestNutshell()
+	return makeTestNutshell().then( f => alert( 'Success' ) ).catch( e => alert( `Fail ${ e.message }` ) )
 
 }
 

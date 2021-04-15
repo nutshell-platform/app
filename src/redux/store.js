@@ -44,15 +44,15 @@ const middleware = dev ? applyMiddleware( logger, promise ) : applyMiddleware( p
 export const store = createStore( persistedReducer, middleware )
 export const persistor = persistStore( store )
 
-const testing = f => {
+// const testing = f => {
 
-	try {
-		createStore( persistedReducer, middleware )
-		persistStore( store )
-	} catch( e ) {
-		log( 'testing error: ', e )
-	}
+// 	try {
+// 		createStore( persistedReducer, middleware )
+// 		persistStore( store )
+// 	} catch( e ) {
+// 		log( 'testing error: ', e )
+// 	}
 
-}
+// }
 
-testing(  )
+// testing(  )

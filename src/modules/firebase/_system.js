@@ -6,6 +6,8 @@ export const markAbuseModerated = ( app, reportUid ) => app.db.collection( 'repo
 
 export const sendMassMessage = ( app, message ) => app.func.httpsCallable( 'sendMassMessage' )( message )
 
+export const refreshAllReccsAndScores = app => app.func.httpsCallable( 'refreshAllReccsAndScores' )( ).then( f => alert( 'Success' ) ).catch( e => alert( `Fail ${ e.message }` ) )
+
 export const getScheduledNutshells = app => app.func.httpsCallable( 'getScheduledNutshells' )()
 
 export const updateAllAlgoliaAccountEntries = app => app.func.httpsCallable( 'updateAllAlgoliaAccountEntries' )()

@@ -2,20 +2,33 @@
 const { dataFromSnap, log, error } = require( './helpers' )
 const { db, FieldValue } = require( './firebase' )
 
-exports.refreshAllReccs = async f => {
+exports.refreshAllReccsAndScores = async ( data={}, context={} ) => {
+
+
 
 	try {
+
+		// Validate requesting user
+		const { uid } = context.auth
+		if( !uid ) throw 'User not logged in'
+		const { admin } = await db.collection( 'specialPowers' ).doc( uid ).get().then( dataFromSnap )
+		if( !admin ) {
+			throw 'You do not have permission to send push notifications, your action has been reported to the admins.'
+		}
+
+		// Score all users and refresh all reccs
 		const users = await db.collection( 'userMeta' ).get().then( dataFromSnap )
+		await Promise.all( users.map( ( { uid } ) => scoreUser( uid ) ) )
 		await Promise.all( users.map( ( { uid } ) => getContactRecommendations( uid ) ) )
+
 	} catch( e ) {
 		error( e )
-	} finally {
-		
 	}
 
 }
 
-exports.scoreUser = async uid => {
+exports.scoreUser = scoreUser
+const scoreUser = async uid => {
 
 	const logs = []
 
@@ -77,7 +90,8 @@ exports.scoreUser = async uid => {
 
 }
 
-exports.getContactRecommendations = async uid => {
+exports.getContactRecommendations = getContactRecommendations
+const getContactRecommendations = async uid => {
 
 	const logs = []
 

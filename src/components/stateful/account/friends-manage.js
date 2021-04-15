@@ -74,29 +74,6 @@ class ManageFriends extends Component {
 
 	}
 
-	// Follow function
-	follow = uid => { 
-		const { newFollows, newUnfollows } = this.state
-		return Promise.all( [
-			app.followPerson( uid ),
-			this.updateState( {
-				newFollows: [ ...newFollows, uid ],
-				newUnfollows: [ ...newUnfollows.filter( fuid => fuid != uid ) ]
-			} )
-		] ).catch( catcher )
-	}
-
-	unfollow = uid => {
-		const { newFollows, newUnfollows } = this.state
-
-		return Promise.all( [
-			app.unfollowPerson( uid ),
-			this.updateState( {
-				newFollows: [ ...newFollows.filter( fuid => fuid != uid ) ],
-				newUnfollows: [ ...newUnfollows, uid ]
-			} )
-		] ).catch( catcher )
-	}
 
 	// Split following vs not yet
 	sortedResults = f => {
@@ -111,7 +88,7 @@ class ManageFriends extends Component {
 
 	render() {
 
-		log( 'Friends state: ', this.state )
+		log( 'Friends state: ', this.state, ' sorted results: ', this.sortedResults() )
 
 		const { loading, query, searching } = this.state
 
@@ -121,7 +98,7 @@ class ManageFriends extends Component {
 			<Navigation title='Friends' />
 			<Main.Top style={ { width: 500 } }>
 				<Search nativeID='friends-manage-search' searching={ searching } onChangeText={ this.search } value={ query || '' } placeholder='Search by handle or email' />
-				<ListResults loading={ loading } unfollow={ this.unfollow } follow={ this.follow } results={ this.sortedResults() } filter='friends' />
+				<ListResults loading={ loading } results={ this.sortedResults() } filter='friends' />
 			</Main.Top>
 		</Container>
 

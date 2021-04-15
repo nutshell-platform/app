@@ -10,24 +10,39 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 	// Internal state management
 	const [ ignored, setIgnored ] = useState( [] )
 	const blocked = useSelector( store => store.user?.blocked || [] )
+	const following = useSelector( store => store.user?.following || [] )
 	const ignoreRecommendation = uid => {
 		setIgnored( [ ...ignored, uid ] )
 		app.ignoreRecommendation( uid )
 	}
 
 	// Sanitisation
-	// Sanetised data
-	const [ saneResults, setSaneResults ] = useState( results.filter( ( { uid, name } ) => name && !ignored.includes( uid ) && !blocked.includes( uid ) ) )
-	const [ saneReccs, setSaneReccs ] = useState( recommendedProfiles.filter( ( { uid, name } ) => name && !ignored.includes( uid ) && !blocked.includes( uid ) ) )
+	const filter_ignores_blocks_nameless = ( { uid, name} ) => {
+		if( !name || !uid ) return false
+		if( ignored.includes( uid ) ) return false
+		if( blocked.includes( uid ) ) return false
+		return true
+	}
+	// Filter out friends, unless filter == 'friends'
+	const filter_friends = ( { uid, name } ) => {
+		if( filter == 'friends' || filter == 'search' ) return true
+		return !following.includes( uid )
+	}
+
+	// Set sane results to state
+	const [ saneResults, setSaneResults ] = useState( results.filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
+	const [ saneReccs, setSaneReccs ] = useState( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
 
 
 	useEffect( f => {
 
-		// Update internal state
-		setSaneResults( results.filter( ( { uid, name } ) => name && !ignored.includes( uid ) && !blocked.includes( uid ) ) )
-		setSaneReccs( recommendedProfiles.filter( ( { uid, name } ) => name && !ignored.includes( uid ) && !blocked.includes( uid ) ) )
+		log( 'Updating friend interface' )
 
-	}, [ results.length, recommendedProfiles.length, ignored.length, blocked.length ] )
+		// Update internal state
+		setSaneResults( results.filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
+		setSaneReccs( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
+
+	}, [ results.length, recommendedProfiles.length, ignored.length, blocked.length, following.length ] )
 
 
 	return <View style={ { width: '100%', paddingTop: 20 } }>
