@@ -120,7 +120,7 @@ export const LinkContacts = ( { linkContacts, ...props } ) => <View style={ { wi
 const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 
 	const alreadyFollowing = useSelector( store => store?.user?.following || [] )
-	const [ following, setFollowing ] = useState( user.following || !!alreadyFollowing.find( uid => user.uid == uid ) )
+	const [ following, setFollowing ] = useState( !!alreadyFollowing.find( uid => user.uid == uid ) )
 
 	const follow = ( uid, unfollowInstead ) => {
 		unfollowInstead ? app.unfollowPerson( uid ) : app.followPerson( uid )
@@ -129,7 +129,7 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 
 	// update follow status when redux updates
 	useEffect( f => {
-		const currentlyFollowing = user.following || !!alreadyFollowing.find( uid => user.uid == uid )
+		const currentlyFollowing = !!alreadyFollowing.find( uid => user.uid == uid )
 		if( following != currentlyFollowing ) setFollowing( currentlyFollowing )
 	}, [ alreadyFollowing.length ] )
 
