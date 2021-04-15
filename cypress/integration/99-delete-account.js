@@ -8,7 +8,9 @@ context( 'User deletion', (  ) => {
 	it( 'Deletes the newly created user', () => {
 
 		// Deletion confirmations
-		cy.on('window:confirm', f => true )
+		cy.on('window:confirm', f => {
+			return true
+		} )
 
 		cy.login( user )
 

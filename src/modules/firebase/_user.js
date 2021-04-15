@@ -188,12 +188,16 @@ export const getUserProfile = async ( db, user ) => {
 export const resetPassword = ( auth, email ) => auth.sendPasswordResetEmail( email )
 
 // Logout
-export const logoutUser = async app => {
+export const logoutUser = async ( app, dispatch ) => {
 
-	const { auth, listeners } = app
-	unregisterListeners( listeners )
-	await auth.signOut()
-	await resetApp()
+	try {
+		const { auth, listeners } = app
+		unregisterListeners( listeners )
+		await auth.signOut()
+		await dispatch( resetApp() )
+	} catch( e ) {
+		log( 'Logout error: ', e )
+	}
 }
 
 // Delete
