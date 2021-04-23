@@ -1,5 +1,6 @@
 import { dataFromSnap } from './helpers'
 import { log, catcher } from '../helpers'
+import { updateOfflineInbox } from '../../redux/actions/nutshellActions'
 
 // ///////////////////////////////
 // Getters
@@ -18,7 +19,7 @@ export const getNutshellsOfUser = async ( app, uid ) => {
 }
 
 // Get Nutshell info by uid
-export const getNutshellByUid = async ( db, uid ) => {
+export const getNutshellByUid = async ( db, uid, dispatch ) => {
 
 	try {
 
@@ -37,7 +38,11 @@ export const getNutshellByUid = async ( db, uid ) => {
 			log( 'Problem reading contacts for ', user.uid, e )
 			return false
 		} )
-		return { ...nutshell, user: { ...user, contactMethods: contactMethods || {} } }
+
+		nutshell = { ...nutshell, user: { ...user, contactMethods: contactMethods || {} } }
+		log( `Nutshell ${ uid } to store: `, nutshell )
+		await dispatch( updateOfflineInbox( [ nutshell ] ) )
+		return nutshell
 
 	} catch( e ) {
 		alert( e )
@@ -156,6 +161,19 @@ export const listenToNutshellInbox = ( app, dispatch, action ) => {
 	if( !app.auth.currentUser?.uid ) return
 
 	return app.db.collection( 'inbox' )
+		.doc( app.auth.currentUser?.uid )
+		.onSnapshot( doc => {
+			const { nutshells } = dataFromSnap( doc )
+			return dispatch( action( nutshells || [] ) )
+
+		} )
+}
+
+export const listenToNutshellArchive = ( app, dispatch, action ) => {
+
+	if( !app.auth.currentUser?.uid ) return
+
+	return app.db.collection( 'archive' )
 		.doc( app.auth.currentUser?.uid )
 		.onSnapshot( doc => {
 			const { nutshells } = dataFromSnap( doc )

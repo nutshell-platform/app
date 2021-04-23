@@ -8,6 +8,11 @@ export const setNutshellInbox = inbox => ( {
 	payload: inbox
 } )
 
+export const setNutshellArchive = archive => ( {
+	type: 'SETARCHIVE',
+	payload: archive
+} )
+
 export const updateOfflineInbox = ( newNutshells=[] ) => ( {
 	type: 'UPDATEOFFLINEINBOX',
 	payload: newNutshells

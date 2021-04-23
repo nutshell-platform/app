@@ -1,4 +1,5 @@
-// Theming
+import { uniqueByProp } from '../../modules/helpers'
+
 export default ( state = {}, action ) => {
 
 	const { type, payload } = action
@@ -12,17 +13,17 @@ export default ( state = {}, action ) => {
 		case "SETINBOX":
 			return { ...state, inbox: payload || [] }
 
+		case "SETARCHIVE":
+			return { ...state, archive: payload || [] }
+
 
 		case "UPDATEOFFLINEINBOX":
 			const newNutshells = payload
-
-			// Remove offline nutshells no longer in inbox
 			const { offline=[], inbox } = state
-			const oldWitoutNewlyReadONutshells = [ ...offline ].filter( ( { uid } ) => inbox.includes( uid ) )
 
 			// Add the new nutshells to the old ones available offline
-			const oldWithNewNutshells = [ ...oldWitoutNewlyReadONutshells, ...newNutshells ]
-			return { ...state, offline: [ ...oldWithNewNutshells ] }
+			// never keep more than 300 old ones
+			return { ...state, offline: uniqueByProp( [ ...offline.slice( 0, 300 ), ...newNutshells ], 'uid' ) }
 
 
 

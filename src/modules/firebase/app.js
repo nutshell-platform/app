@@ -21,7 +21,7 @@ const { dispatch } = store
 // Actions
 import { setUserAction, setUserMetaAction, setUserContactMethodsAction } from '../../redux/actions/userActions'
 import { setSettingsAction } from '../../redux/actions/settingsActions'
-import { setNutshellDraft, setNutshellInbox } from '../../redux/actions/nutshellActions'
+import { setNutshellDraft, setNutshellInbox, setNutshellArchive } from '../../redux/actions/nutshellActions'
 
 // Config
 import config from './config'
@@ -32,7 +32,7 @@ import * as Network from 'expo-network'
 // Functions
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges, updateContactMethods, listenContactMethods } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell, listenToNutshellArchive } from './_nutshells'
 import { saveAudioEntry, deleteAudioEntry } from './_audio_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson, ignoreRecommendation } from './_friends'
 import { getModerationQueue, markAbuseModerated, sendMassMessage, getScheduledNutshells, updateAllAlgoliaAccountEntries, refreshAllReccsAndScores } from './_system'
@@ -84,7 +84,7 @@ class Firebase {
 	deleteNutshell 	   = uid 	  => deleteNutshell( this, uid )
 	createTestNutshell = f 		  => createTestNutshell( this )
 	getNutshellsOfUser = uid 	  => getNutshellsOfUser( this, uid )
-	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid )
+	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid, dispatch )
 	markNutshellRead   = uid 	  => markNutshellRead( this, uid )
 	reportNutshell	   = report   => reportNutshell( this, report )
 	muteNutshell	   = uid 	  => muteNutshell( this, uid )
@@ -145,6 +145,7 @@ class Firebase {
 				{ name: 'settings', listener: listenSettings, action: setSettingsAction },
 				{ name: 'lastnutshell', listener: listenToLatestNutshell, action: setNutshellDraft },
 				{ name: 'nutshellinbox', listener: listenToNutshellInbox, action: setNutshellInbox },
+				{ name: 'nutshellarchive', listener: listenToNutshellArchive, action: setNutshellArchive },
 				{ name: 'contactmethods', listener: listenContactMethods, action: setUserContactMethodsAction }
 			] )
 

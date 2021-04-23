@@ -224,7 +224,7 @@ class Routes extends Component {
 				<Route path='/friends/manage' component={ ManageFriends } />
 
 				{ /* Platform */ }
-				<Route path='/nutshells/read' component={ ReadNutshell } />
+				<Route path='/nutshells/read/:filter?' component={ ReadNutshell } />
 				<Route path='/nutshells/write' component={ WriteNutshell } />
 
 				{ /* Moderation */ }

@@ -3,7 +3,7 @@ import React from 'react'
 // Visual
 import { Component, Container, Main, Button } from '../../stateless/common/generic'
 import FAB from '../common/fab'
-import { InboxTimeline } from '../../stateless/nutshells/read'
+import { InboxTimeline, BottomTabs, ArchiveTimeline } from '../../stateless/nutshells/read'
 import Navigation from '../common/navigation'
 import People from '../../../../assets/undraw_people_tax5.svg'
 
@@ -93,15 +93,13 @@ class ReadNutshell extends Component {
 		}
 	}
 
-	sortAndCleanNutshells = ( nutshells=[] ) => {
+	sortFormatAndCleanNutshells = (  ) => {
 
-		const { user } = this.props
+		const { user={}, inbox=[], offlineInbox=[] } = this.props
 		const { markedReadOffline } = this.state
 
-		// Create new nutshell object to work with
-		nutshells = [ ...nutshells ]
-
-		// log( 'Unfiltered/sorted nutshells: ', nutshells )
+		// Grab the nutshell content based on the passed ids,
+		let nutshells = inbox?.map( nutshellUid => offlineInbox.find( ( { uid } ) => uid == nutshellUid ) || false ).filter( exists => !!exists )
 
 		if( user?.muted?.length  ) nutshells = nutshells.filter( n => !user?.muted.includes( n.uid ) )
 		// log( 'Removed muted nutshells: ', nutshells )
@@ -138,37 +136,50 @@ class ReadNutshell extends Component {
 		// If loading or no inbox, do nothing
 		if( loading || this.loading || !remoteInbox ) return false
 
-		// If remote inbox are more than local, get inbox details with a small delay
-		if( remoteInbox?.length != offlineInbox?.length ) {
-			log( 'Scheduling inbox load. Remote is  ', remoteInbox, ' and local is ', offlineInbox )
+		// If remote inbox has en entry the offline doesn't trigger load
+		for ( let i = remoteInbox.length - 1; i >= 0; i-- ) {
+			if( offlineInbox.find( ( { uid } ) => uid == remoteInbox[i] ) ) continue
+			log( 'Scheduling inbox load because ', remoteInbox[i], ' is missing from ', offlineInbox )
 			if( this.inboxLoader ) clearTimeout( this.inboxLoader )
 			// Trigger inbox load, but keep it silent if we are probably more current
 			this.inboxLoader = setTimeout( f => this.loadInbox( ) )
+			return true
 		}
+
 
 		// Always trigger rerender ( default behavior )
 		return true
 
 	}
 
+	handleScroll = ( { nativeEvent } ) => {
+		const lazyLoadOffset = 200
+		const height = nativeEvent.contentSize?.height
+		const positionY = nativeEvent.contentOffset?.y + nativeEvent.layoutMeasurement?.height
+		if( ( positionY + lazyLoadOffset ) > height ) return this.updateState( { endReached: true } )
+		return this.updateState( { endReached: false } ) 
+	}
+
 
 	render() {
 
-		const { loading } = this.state
-		const { history, offlineInbox } = this.props
-		const renderInbox = this.sortAndCleanNutshells( offlineInbox )
+		const { loading, endReached } = this.state
+		const { history, match } = this.props
 
+		return <Container style={ { maxHeight: isWeb ? '100vh' : '100%' } } Background={ People }>
+			<Navigation title={ match?.params?.filter || 'Inbox' } />
+			<Main.Top scrollEventThrottle={ 0 } onScroll={ this.handleScroll } style={ { paddingBottom: 80, flexGrow: 0 } } refreshing={ loading } onRefresh={ this.loadInbox }>
 
-		return <Container Background={ People }>
-			<Navigation title='Home' />
-			<Main.Top refreshing={ loading } onRefresh={ this.loadInbox }>
-
-				{ isWeb && loading && <Button style={ { width: 500, marginBottom: 20, maxWidth: '100%' } } mode='flat' loading={ true }>Updating your inbox</Button> }
-				<InboxTimeline renderInbox={ renderInbox } />
+				{ isWeb && loading && <Button style={ { width: 500, marginBottom: 20, maxWidth: '100%' } } mode='flat' loading={ true }>Updating your { match?.params?.filter || 'Inbox' }</Button> }
+				{ match?.params?.filter == 'archive' && <ArchiveTimeline endReached={ endReached } /> }
+				{ match?.params?.filter != 'archive' && <InboxTimeline renderInbox={ this.sortFormatAndCleanNutshells( ) } /> }
 
 			</Main.Top>
 
-			<FAB go={ to => history.push( to ) } />
+			
+			<BottomTabs current={ match?.params?.filter || 'inbox' } style={ { position: 'absolute', bottom: 0 } } />
+			{ /* <FAB go={ to => history.push( to ) } /> */ }
+
 		</Container>
 
 	}

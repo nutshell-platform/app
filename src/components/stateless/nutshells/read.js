@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useEffect } from 'react'
 
 
 // Visual
@@ -11,7 +11,7 @@ import { useHistory } from '../../../routes/router'
 import app from '../../../modules/firebase/app'
 
 // Visual
-import { Card, Title, Paragraph, View, HelperText, IconButton, Button, UserAvatar } from '../common/generic'
+import { Card, Title, Text, Paragraph, View, HelperText, IconButton, Button, UserAvatar, Appbar, ActivityIndicator, TouchableRipple, Badge } from '../common/generic'
 import Tutorial from '../../stateful/onboarding/tutorial'
 import { Placeholder, ViewRecs } from '../common/home'
 
@@ -24,7 +24,7 @@ import { TouchableOpacity } from 'react-native'
 export const InboxTimeline = memo( ( { renderInbox, ...props } ) => {
 
 	const user = useSelector( store => store?.user || {} )
-	const { inbox={}, draft={} } = useSelector( store => store?.nutshells )
+	const { inbox=[], draft={} } = useSelector( store => store?.nutshells )
 
 	return <React.Fragment>
 		<Tutorial />
@@ -35,7 +35,78 @@ export const InboxTimeline = memo( ( { renderInbox, ...props } ) => {
 
 } )
 
-export const NutshellCard = memo( ( { gutter=40, index, nutshell={}, showActions=true, avatarSize=100, status=false } ) => {
+export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
+
+	// ///////////////////////////////
+	// State management
+	// ///////////////////////////////
+	const user = useSelector( store => store.user || {} )
+	const { archive=[], offline=[] } = useSelector( store => store?.nutshells )
+	const getRichNutshells = f => sortFormatAndCleanNutshells( archive.map( nutshellUid => offline.find( ( { uid } ) => nutshellUid == uid ) || { unavailable: nutshellUid } ) )
+	const [ nutshells, setNutshells ] = useState( getRichNutshells() )
+
+	const [ loading, setLoading ] = useState( false )
+	const [ visible, setVisible ] = useState( 10 )
+
+	// ///////////////////////////////
+	// Offline cache
+	// ///////////////////////////////
+	useEffect( f => {
+
+		setNutshells( getRichNutshells() )
+
+		if( loading ) return
+
+		// Download nutshells not in cache
+		const unavailableUids = getRichNutshells().filter( ( { unavailable } ) => !!unavailable ).map( ( { unavailable } ) => unavailable )
+		setLoading( true )
+
+		log( 'Retreiving unavailable uids: ', unavailableUids )
+		Promise.all( unavailableUids.map( uid => app.getNutshellByUid( uid ) ) ).then( f => setLoading( false ) ).catch( e => catcher( 'Error bulk-getting offline nutshells: ', e ) )
+
+
+	}, [ offline.length ] )
+
+	// Lazyu load
+	useEffect( f => {
+		if( endReached && !loading ) setVisible( visible + 10 )
+	}, [ endReached ] )
+
+	// ///////////////////////////////
+	// Sorting adn filtering
+	// ///////////////////////////////
+	function sortFormatAndCleanNutshells( nutshells=[] ) {
+
+		// Filter out unavailable
+		nutshells = nutshells.filter( ( { unavailable } ) => !unavailable )
+		if( user?.muted?.length  ) nutshells = nutshells.filter( n => !user?.muted.includes( n.uid ) )
+		nutshells = nutshells.filter( n => !n?.hidden )
+		nutshells = nutshells.filter( n => !n?.delete )
+		
+
+		// Sort with recent edits up top
+		nutshells = nutshells.sort( ( one, two ) => {
+			if( one.updated > two.updated ) return -1
+			if( one.updated < two.updated ) return 1
+			return 0
+
+		} )
+
+		return nutshells
+		
+	}
+
+	return <React.Fragment>
+		
+		{ nutshells.slice( 0, visible ).map( nutshell => <NutshellCard isArchive={ true } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+		{ !nutshells.length && <NutshellCard /> }
+		{ visible < archive.length && <NutshellCard />  }
+
+	</React.Fragment>
+
+} )
+
+export const NutshellCard = memo( ( { gutter=40, index, isArchive=false, nutshell={}, showActions=true, avatarSize=100, status=false } ) => {
 
 	// Extract data
 	const { entries=[], audio=[], updated, published, user, uid, readcount } = nutshell
@@ -59,6 +130,14 @@ export const NutshellCard = memo( ( { gutter=40, index, nutshell={}, showActions
 		return app.markNutshellRead( uid ).catch( catcher )
 		
 	}
+
+	// During loading, show loading
+	if( !uid ) return <Card>
+			<ActivityIndicator />
+	</Card>
+
+	// If essential data is missing, do not render
+	if( !entries.length || !user.handle ) return null
 
 	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
 
@@ -100,7 +179,7 @@ export const NutshellCard = memo( ( { gutter=40, index, nutshell={}, showActions
 			</View>
 
 			{ /* If this is not your nutshell, and it is published */ }
-			{ !isSelf && showActions && <NutshellActions gutter={ gutter } archive={ markRead } contactMethods={ user?.contactMethods } /> }
+			{ !isArchive && !isSelf && showActions && <NutshellActions gutter={ gutter } archive={ markRead } contactMethods={ user?.contactMethods } /> }
 
 			{ /* If this is your nutshell and it is not yet published */ }
 			{ isSelf && status && <Button style={ { marginHorizontal: gutter } } to='/nutshells/write'>Edit this {status} Nutshell</Button> }
@@ -115,3 +194,39 @@ export const NutshellCard = memo( ( { gutter=40, index, nutshell={}, showActions
 	</View>
 
 } )
+
+export const BottomTabs = ( { current, style, ...props } ) => {
+
+	const history = useHistory()
+	const theme = useSelector( store => store?.settings?.theme || {} )
+	const unread = useSelector( store => store?.nutshells?.inbox?.length || 0 )
+
+	// Nv shortcurs
+	const inbox = f => history.push( '/nutshells/read/inbox' )
+	const archive = f => history.push( '/nutshells/read/archive' )
+	const isInbox = current == 'inbox'
+	const isArchive = current == 'archive'
+
+	return <Appbar style={ { width: '100%', paddingLeft: 0, paddingRight: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: theme?.colors?.background, ...style } }>
+		
+
+				<TouchableRipple onPress={ inbox } style={ { flexDirection: 'row', flex: 1, height: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: isInbox ? theme.colors?.primary : theme.colors?.surface } } >
+					<React.Fragment>
+						<Appbar.Action onPress={ inbox } color={ isInbox ? theme.colors?.surface : theme.colors?.primary } icon='mail' />
+						<View style={ { flexDirection: 'row' } }>
+							<Text style={ { color: isInbox ? theme.colors?.surface : theme.colors?.primary } }>Inbox</Text>
+							{ unread && <Badge style={ { marginLeft: 10, backgroundColor: 'red' } }>{ unread }</Badge> }
+						</View>
+						
+					</React.Fragment>
+				</TouchableRipple>
+
+				<TouchableRipple onPress={ archive } style={ { flexDirection: 'row', flex: 1, height: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: isArchive ? theme.colors?.primary : theme.colors?.surface } } >
+					<React.Fragment>
+						<Appbar.Action onPress={ archive } color={ isArchive ? theme.colors?.surface : theme.colors?.primary } icon='archive' />
+						<Text style={ { color: isArchive ? theme.colors?.surface : theme.colors?.primary } }>Archive</Text>
+					</React.Fragment>
+				</TouchableRipple>
+
+	</Appbar>
+}

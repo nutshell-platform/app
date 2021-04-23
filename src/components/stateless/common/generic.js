@@ -253,10 +253,10 @@ export const Loading = ( { message } ) => <Container style={ { justifyContent: '
 // ///////////////////////////////
 const sharedStyles = { paddingHorizontal: 10, paddingVertical: 40, maxWidth: '100%', flexGrow: 1, flexShrink: 0 }
 export const Main = {
-	Center: ( { refreshing=false, onRefresh=f=>f, children, style } ) => ( <ScrollView refreshControl={ <RefreshControl refreshing={ refreshing } onRefresh={ onRefresh } /> } style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, alignItems: 'center', justifyContent: 'center',  ...style } }>
+	Center: ( { refreshing=false, onRefresh=f=>f, children, style, ...props } ) => ( <ScrollView { ...props } refreshControl={ <RefreshControl refreshing={ refreshing } onRefresh={ onRefresh } /> } style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, alignItems: 'center', justifyContent: 'center',  ...style } }>
 			{ children }
 	</ScrollView> ),
-	Top: ( { refreshing=false, onRefresh=f=>f, children, style } ) => ( <ScrollView refreshControl={ <RefreshControl refreshing={ refreshing } onRefresh={ onRefresh } /> } style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
+	Top: ( { refreshing=false, onRefresh=f=>f, children, style, ...props } ) => ( <ScrollView { ...props } refreshControl={ <RefreshControl refreshing={ refreshing } onRefresh={ onRefresh } /> } style={ { maxWidth: '100%' } } showsHorizontalScrollIndicator={ false } showsVerticalScrollIndicator={ false } contentContainerStyle={ { ...sharedStyles, ...style } }>{ children }</ScrollView> )
 }
 
 // General app container
@@ -279,4 +279,4 @@ export const Container = withTheme( ( { style, children, theme, Background } ) =
 // ///////////////////////////////
 // Pass through exports straignt from paper
 // ///////////////////////////////
-export { ProgressBar, Drawer, Provider, FAB, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, Avatar, Caption, IconButton, Menu, ActivityIndicator } from 'react-native-paper'
+export { ProgressBar, Badge, TouchableRipple, Drawer, Provider, FAB, Portal, Appbar, withTheme, Surface, Text, Paragraph, Title, Avatar, Caption, IconButton, Menu, ActivityIndicator, BottomNavigation } from 'react-native-paper'

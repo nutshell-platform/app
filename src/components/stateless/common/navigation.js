@@ -8,7 +8,7 @@ import { catcher } from '../../../modules/helpers'
 
 // Visual
 import { TouchableOpacity, View, Animated, SafeAreaView } from 'react-native'
-import { Drawer, Portal, Appbar, withTheme, Surface, Text, StatusBar, Toggle } from './generic'
+import { Drawer, Portal, Appbar, Surface, Text, StatusBar, Toggle } from './generic'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import { isWeb, version } from '../../../modules/apis/platform'
 import { updateIfAvailable } from '../../../modules/apis/updates'

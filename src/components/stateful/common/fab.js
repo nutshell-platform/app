@@ -26,13 +26,13 @@ class Fab extends Component {
 		const { theme, go } = this.props
 
 		return <Provider>
-			<Portal>
+			<Portal style={ { zIndex: 99 } }>
 				<FAB.Group
 					testID="fab-toggle"
 					open={ open }
 					icon={ open ? 'close' : 'plus'}
 					fabStyle={ { backgroundColor: theme.colors.primary } }
-					style={ { paddingBottom: 20, paddingRight: 10 } }
+					style={ { position: 'absolute', paddingBottom: 20, paddingRight: 10 } }
 					actions={[
 						{ icon: 'pencil', label: 'Write Nutshell', onPress: f => go( '/nutshells/write' ) },
 						{ icon: 'account-plus', label: 'Add friends', onPress: f => go( '/friends/find' ) },

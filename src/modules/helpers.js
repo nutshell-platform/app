@@ -101,9 +101,9 @@ const oneJan = new Date( today.getFullYear(), 0, 1 )
 const oneJanDayType = oneJan.getDay()
 
 export const timestampToHuman = ( ms, view ) => {
-	if( view == 'dmy' ) return new Date( ms ).toString().match( /([a-zA-Z]* )(\d+ )(\d+)/ )[0]
+	if( view == 'dmy' ) return ( new Date( ms ).toString().match( /([a-zA-Z]* )(\d+ )(\d+)/ ) || [] )[0]
 	if( view == 'y' ) return new Date( ms ).getFullYear()
-	return new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ )[0]
+	return ( new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ ) || [] )[0]
 }
 
 // Give timestamp of now, except in CI
