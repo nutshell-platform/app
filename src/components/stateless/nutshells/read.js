@@ -42,7 +42,7 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 	// ///////////////////////////////
 	const user = useSelector( store => store.user || {} )
 	const { archive=[], offline=[] } = useSelector( store => store?.nutshells )
-	const getRichNutshells = f => sortFormatAndCleanNutshells( archive.map( nutshellUid => offline.find( ( { uid } ) => nutshellUid == uid ) || { unavailable: nutshellUid } ) )
+	const getRichNutshells = f => archive.map( nutshellUid => offline.find( ( { uid } ) => nutshellUid == uid ) || { unavailable: nutshellUid } )
 	const [ nutshells, setNutshells ] = useState( getRichNutshells() )
 
 	const [ loading, setLoading ] = useState( false )
@@ -53,7 +53,7 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 	// ///////////////////////////////
 	useEffect( f => {
 
-		setNutshells( getRichNutshells() )
+		setNutshells( sortFormatAndCleanNutshells( getRichNutshells() ) )
 
 		if( loading ) return
 
@@ -65,7 +65,7 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 		Promise.all( unavailableUids.map( uid => app.getNutshellByUid( uid ) ) ).then( f => setLoading( false ) ).catch( e => catcher( 'Error bulk-getting offline nutshells: ', e ) )
 
 
-	}, [ offline.length ] )
+	}, [ offline.length, archive.length ] )
 
 	// Lazyu load
 	useEffect( f => {
@@ -100,7 +100,7 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 		
 		{ nutshells.slice( 0, visible ).map( nutshell => <NutshellCard isArchive={ true } key={ nutshell.uid } nutshell={ nutshell } /> ) }
 		{ !nutshells.length && <NutshellCard /> }
-		{ visible < archive.length && <NutshellCard />  }
+		{ ( visible < archive.length ) || loading && <NutshellCard />  }
 
 	</React.Fragment>
 
