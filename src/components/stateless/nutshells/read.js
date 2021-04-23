@@ -215,7 +215,7 @@ export const BottomTabs = ( { current, style, ...props } ) => {
 						<Appbar.Action onPress={ inbox } color={ isInbox ? theme.colors?.surface : theme.colors?.primary } icon='mail' />
 						<View style={ { flexDirection: 'row' } }>
 							<Text style={ { color: isInbox ? theme.colors?.surface : theme.colors?.primary } }>Inbox</Text>
-							{ unread && <Badge style={ { marginLeft: 10, backgroundColor: 'red' } }>{ unread }</Badge> }
+							{ !!unread && <Badge style={ { marginLeft: 10, backgroundColor: 'red' } }>{ unread }</Badge> }
 						</View>
 						
 					</React.Fragment>

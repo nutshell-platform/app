@@ -11,8 +11,11 @@ import { setEmailFingerprint } from './_fingerprints'
 
 // Listen to user authentication
 export const listenUserLogin = ( app, dispatch, action, listeners ) => new Promise( resolve => {
+
 	// Listen to the user object
 	const authListener = app.auth.onAuthStateChanged( async user => {
+
+		log( 'Auth change: ', user )
 
 		try {
 
@@ -195,6 +198,8 @@ export const logoutUser = async ( app, dispatch ) => {
 		unregisterListeners( listeners )
 		await auth.signOut()
 		await dispatch( resetApp() )
+		// Re-init the user listener
+		await app.init()
 	} catch( e ) {
 		log( 'Logout error: ', e )
 	}

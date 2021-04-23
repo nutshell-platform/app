@@ -149,6 +149,8 @@ class Firebase {
 				{ name: 'contactmethods', listener: listenContactMethods, action: setUserContactMethodsAction }
 			] )
 
+			log( 'Listeners created: ', this.listeners )
+
 			setLocalTimeToSettings( this )
 
 		} catch( e ) {
