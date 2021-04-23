@@ -137,7 +137,7 @@ export const NutshellCard = memo( ( { gutter=40, index, isArchive=false, nutshel
 	</Card>
 
 	// If essential data is missing, do not render
-	if( !entries.length || !user.handle ) return null
+	if( !entries?.length || !user?.handle ) return null
 
 	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
 

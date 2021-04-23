@@ -178,7 +178,7 @@ class ReadNutshell extends Component {
 
 			
 			<BottomTabs current={ match?.params?.filter || 'inbox' } style={ { position: 'absolute', bottom: 0 } } />
-			{ /* <FAB go={ to => history.push( to ) } /> */ }
+			{ <FAB go={ to => history.push( to ) } /> }
 
 		</Container>
 
