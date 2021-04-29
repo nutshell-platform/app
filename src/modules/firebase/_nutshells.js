@@ -27,7 +27,10 @@ export const getNutshellByUid = async ( db, uid, dispatch ) => {
 		let nutshell = await db.collection( 'nutshells' ).doc( uid ).get()
 
 		// If nutshell doesn't exist send the delete signal
-		if( !nutshell.exists ) return { delete: true, uid: uid }
+		if( !nutshell.exists ) {
+			log( `Nutshell ${ uid } was unavailable` )
+			return { delete: true, uid: uid }
+		}
 
 		// Retreive nutshell data
 		nutshell = dataFromSnap( nutshell )	
@@ -104,6 +107,16 @@ export const markNutshellRead = ( app, uid ) => {
 		db.collection( 'inbox' ).doc( app.auth.currentUser?.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } ),
 		db.collection( 'archive' ).doc( app.auth.currentUser?.uid ).set( { nutshells: FieldValue.arrayUnion( uid ) }, { merge: true } )
 	] )
+
+}
+
+export const removeNutshellFromArchive = ( app, uid ) => {
+
+	const { db, FieldValue } = app
+
+	log( `Removing ${ uid } from archive` )
+
+	return db.collection( 'archive' ).doc( app.auth.currentUser?.uid ).set( { nutshells: FieldValue.arrayRemove( uid ) }, { merge: true } )
 
 }
 

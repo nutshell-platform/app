@@ -17,8 +17,9 @@ context( 'Write nutshell', (  ) => {
 		cy.goHome()
 
 		// Go home and try the FAB
-		click( '[data-testid="fab-toggle"]' )
-		find( 'Write Nutshell' ).click()
+		// click( '[data-testid="fab-toggle"]' )
+		// find( 'Write Nutshell' ).click()
+		click( '#navigation-writenutshel' )
 		find( `${ user.name }'s Nutshell for` )
 		find( 'What is a Nutshell?' )
 

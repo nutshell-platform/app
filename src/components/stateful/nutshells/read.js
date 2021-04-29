@@ -153,21 +153,29 @@ class ReadNutshell extends Component {
 	}
 
 	handleScroll = ( { nativeEvent } ) => {
+
+		// Lazyload variables
 		const lazyLoadOffset = 200
 		const height = nativeEvent.contentSize?.height
 		const positionY = nativeEvent.contentOffset?.y + nativeEvent.layoutMeasurement?.height
-		if( ( positionY + lazyLoadOffset ) > height ) return this.updateState( { endReached: true } )
-		return this.updateState( { endReached: false } ) 
+
+		// Scrolltrack variables
+		const { lastY=0 } = this.state
+
+		// Set end reached and last known pos to state
+		const posTrack = { lastY: positionY, direction: ( lastY - positionY ) < 0 ? 'down' : 'up' }
+		if( ( positionY + lazyLoadOffset ) > height ) return this.updateState( { endReached: true, ...posTrack } )
+		return this.updateState( { endReached: false, ...posTrack } )
 	}
 
 
 	render() {
 
-		const { loading, endReached } = this.state
+		const { loading, endReached, direction } = this.state
 		const { history, match } = this.props
 
 		return <Container style={ { maxHeight: isWeb ? '100vh' : '100%' } } Background={ People }>
-			<Navigation title={ match?.params?.filter || 'Inbox' } />
+			{ direction != 'down' && <Navigation title={ match?.params?.filter || 'Inbox' } /> }
 			<Main.Top scrollEventThrottle={ 0 } onScroll={ this.handleScroll } style={ { paddingBottom: 80, flexGrow: 0 } } refreshing={ loading } onRefresh={ this.loadInbox }>
 
 				{ isWeb && loading && <Button style={ { width: 500, marginBottom: 20, maxWidth: '100%' } } mode='flat' loading={ true }>Updating your { match?.params?.filter || 'Inbox' }</Button> }
@@ -177,8 +185,8 @@ class ReadNutshell extends Component {
 			</Main.Top>
 
 			
-			<BottomTabs current={ match?.params?.filter || 'inbox' } style={ { position: 'absolute', bottom: 0 } } />
-			{ <FAB go={ to => history.push( to ) } /> }
+			{ direction != 'down' && <BottomTabs current={ match?.params?.filter || 'inbox' } style={ { position: 'absolute', bottom: 0 } } /> }
+			{ direction == 'down' &&<FAB go={ to => history.push( to ) } /> }
 
 		</Container>
 

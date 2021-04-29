@@ -16,7 +16,6 @@ import { connect } from 'react-redux'
 class UserProfile extends Component {
 
 	state = {
-		loading: 'Loading user data',
 		handle: this.props.match.params.handle,
 		profile: {}
 	}
@@ -62,13 +61,9 @@ class UserProfile extends Component {
 
 	render() {
 
-		const { loading, profile, nutshells } = this.state
+		const { profile, nutshells } = this.state
 		const { draft } = this.props
 		const noDraft = !( draft?.entries?.length > 0 )
-
-		log( 'render: ', profile )
-
-		// if( loading ) return <Loading message={ loading } />
 
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />

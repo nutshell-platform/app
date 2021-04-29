@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from 'react'
+import React, { useState, memo, useEffect, useRef } from 'react'
 
 
 // Visual
@@ -48,12 +48,17 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 	const [ loading, setLoading ] = useState( false )
 	const [ visible, setVisible ] = useState( 10 )
 
+	let throttle = useRef( undefined ).current
+
 	// ///////////////////////////////
 	// Offline cache
 	// ///////////////////////////////
 	useEffect( f => {
 
-		setNutshells( sortFormatAndCleanNutshells( getRichNutshells() ) )
+		// Schedule interface update (prevent mega-render bottleneck through redux)
+		const throttleMs = 1000
+		if( throttle ) clearTimeout( throttle )
+		throttle = setTimeout( f => setNutshells( sortFormatAndCleanNutshells( getRichNutshells() ) ), throttleMs )
 
 		if( loading ) return
 
@@ -62,7 +67,17 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 		setLoading( true )
 
 		log( 'Retreiving unavailable uids: ', unavailableUids )
-		Promise.all( unavailableUids.map( uid => app.getNutshellByUid( uid ) ) ).then( f => setLoading( false ) ).catch( e => catcher( 'Error bulk-getting offline nutshells: ', e ) )
+		Promise.all(
+			unavailableUids.map( uid => {
+				return app.getNutshellByUid( uid )
+				// Remove from archive if nutshell was deleted from remote
+				.then( n => {
+					if( n.delete ) app.removeNutshellFromArchive( n.uid )
+				} )
+			} ) )
+			.then( f => setLoading( false ) )
+			.catch( e => catcher( 'Error bulk-getting offline nutshells: ', e )
+		)
 
 
 	}, [ offline.length, archive.length ] )
@@ -98,9 +113,9 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 
 	return <React.Fragment>
 		
-		{ nutshells.slice( 0, visible ).map( nutshell => <NutshellCard isArchive={ true } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+		{ nutshells.slice( 0, visible ).map( nutshell => <NutshellCard isArchive={ true } key={ nutshell.uid || Date.now() } nutshell={ nutshell } /> ) }
 		{ !nutshells.length && <NutshellCard /> }
-		{ ( visible < archive.length ) || loading && <NutshellCard />  }
+		{ ( ( visible < archive.length ) || loading ) && <NutshellCard />  }
 
 	</React.Fragment>
 
@@ -137,7 +152,7 @@ export const NutshellCard = memo( ( { gutter=40, index, isArchive=false, nutshel
 	</Card>
 
 	// If essential data is missing, do not render
-	if( !entries?.length || !user?.handle ) return null
+	if( !entries?.length ) return null
 
 	return <View style={ { ...( user && { paddingVertical: avatarSize/2 } ) } }>
 
@@ -156,7 +171,7 @@ export const NutshellCard = memo( ( { gutter=40, index, isArchive=false, nutshel
 				{ user && <React.Fragment>
 					<Title onPress={ f => go( `/${ user.handle }` ) }>{user.name}</Title>
 					<HelperText style={ { paddingBottom: 10 } }>
-						{ user && `@${user.handle}, ` }
+						{ user?.handle && `@${user.handle}, ` }
 						{ user && timestampToHuman( published || updated ) }
 						{ /* readcount > 0 && `, read by ${readcount}` */ }
 					</HelperText>
