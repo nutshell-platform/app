@@ -56,7 +56,7 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 	useEffect( f => {
 
 		// Schedule interface update (prevent mega-render bottleneck through redux)
-		const throttleMs = 1000
+		const throttleMs = 2000
 		if( throttle ) clearTimeout( throttle )
 		throttle = setTimeout( f => setNutshells( sortFormatAndCleanNutshells( getRichNutshells() ) ), throttleMs )
 

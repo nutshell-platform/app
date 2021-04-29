@@ -46,8 +46,9 @@ context( 'Onboarding tutorial', (  ) => {
 		exclude( 'follow some people' )
 
 		// Use FAB to get to friend addition instead
-		click( '[data-testid="fab-toggle"]' )
-		find( 'Add friends' ).click()
+		// click( '[data-testid="fab-toggle"]' )
+		// find( 'Add friends' ).click()
+		click( '#navigation-findfriends' )
 		find( 'follow' )
 
 

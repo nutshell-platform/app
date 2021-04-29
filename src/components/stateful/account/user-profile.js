@@ -61,7 +61,7 @@ class UserProfile extends Component {
 
 	render() {
 
-		const { profile, nutshells } = this.state
+		const { profile, nutshells, loading } = this.state
 		const { draft } = this.props
 		const noDraft = !( draft?.entries?.length > 0 )
 

@@ -164,6 +164,10 @@ class ReadNutshell extends Component {
 
 		// Set end reached and last known pos to state
 		const posTrack = { lastY: positionY, direction: ( lastY - positionY ) < 0 ? 'down' : 'up' }
+		// Do not hide bars at the top of the interfce
+		if( nativeEvent.contentOffset?.y < 100 ) posTrack.direction = undefined
+
+		// Set to state
 		if( ( positionY + lazyLoadOffset ) > height ) return this.updateState( { endReached: true, ...posTrack } )
 		return this.updateState( { endReached: false, ...posTrack } )
 	}
