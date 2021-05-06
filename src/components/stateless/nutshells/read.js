@@ -222,7 +222,7 @@ export const BottomTabs = ( { current, style, ...props } ) => {
 	const isInbox = current == 'inbox'
 	const isArchive = current == 'archive'
 
-	return <Appbar style={ { width: '100%', paddingLeft: 0, paddingRight: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: theme?.colors?.background, ...style } }>
+	return <Appbar style={ { elevation: 3, shadowOffset: { height: -1, width: 0 }, shadowRadius: 5, width: '100%', paddingLeft: 0, paddingRight: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: theme?.colors?.background, ...style } }>
 		
 
 				<TouchableRipple onPress={ inbox } style={ { flexDirection: 'row', flex: 1, height: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: isInbox ? theme.colors?.primary : theme.colors?.surface } } >

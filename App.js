@@ -42,7 +42,7 @@ export default class App extends React.Component {
 		ignoreErrors( [ 'Setting a timer' ] )
 
 		// Put upside down if developing on mobile, but not in browser
-		await setOrientation()
+		// await setOrientation()
 		injectWebCss()
 
 		// Check for updates, ask user if they want to restart
