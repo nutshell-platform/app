@@ -94,6 +94,7 @@ export const updateNutshell = ( app, nutshell ) => {
 	return app.db.collection( 'nutshells' ).doc( uid ).set( {
 		...nutshellContent,
 		updated: Date.now(),
+		owner: app.auth.currentUser?.uid
 	}, { merge: true } )
 
 }
