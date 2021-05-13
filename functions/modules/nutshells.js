@@ -5,6 +5,7 @@ const { db, FieldValue, FieldPath } = require( './firebase' )
 // ///////////////////////////////
 // Demo data
 // ///////////////////////////////
+const placeholderUid = 'HYmfM9Pkp4S88qJwxuJ1N5q4Igp1'
 
 exports.createTestNutshell = async myUid => {
 

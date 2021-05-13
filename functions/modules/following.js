@@ -41,7 +41,7 @@ exports.follow = async change => {
 		// Send push notification to author
 		await sendPushNotifications( pushTokens, {
 			title: `${ name || handle || 'Someone' } followed you!`,
-			body: `Tap to view ${ handle ? `${ handle || name }'s` : 'their' } profile.`,
+			body: `Tap to view ${ handle ? `${ `@${ handle }` || name }'s` : 'their' } profile.`,
 			data: {
 				goto: handle ? `/${ handle }` : '/friends/find'
 			}

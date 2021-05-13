@@ -22,6 +22,8 @@ export const getExpoPushTokenIfNeeded = async settings => {
 
 export const registerNotificationListeners = history => {
 
+	log( 'Notification listener registered' )
+
 	const openLink = link => {
 		log( 'Opening ', link )
 		return link.includes( 'http' ) ? Linking.openURL( link ) : history.push( link )
@@ -46,7 +48,7 @@ export const registerNotificationListeners = history => {
 
 	Notifications.addNotificationResponseReceivedListener( ( { notification } ) => {
 
-		log( notification )
+		log( 'Notification received: ', notification )
 		const { request: { content } } = notification
 
 		// Check if data was sent with the notification
