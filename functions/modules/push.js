@@ -5,6 +5,10 @@ const { flatten } = require( 'array-flatten' )
 const { db } = require( './firebase' )
 
 
+// ///////////////////////////////
+// Expo message handling
+// ///////////////////////////////
+
 // Parse tokens into message objects
 // Message syntax: https://docs.expo.io/versions/latest/guides/push-notifications
 const createMessages = ( tokens, message ) => tokens.filter( token => Expo.isExpoPushToken( token ) ).map( token => ( { to: token, ...message } ) )
@@ -43,7 +47,8 @@ const resToError = ( { id, status, message, details } ) => ( { id: id, status: s
 // ///////////////////////////////
 // Push notification sending
 // ///////////////////////////////
-exports.sendPushNotifications = async ( tokens, message={ title: undefined, body: undefined } ) => {
+
+const sendPushNotifications = async ( tokens, message={ title: undefined, body: undefined } ) => {
 
 	if( !tokens || tokens.length == 0 ) return null
 
@@ -75,6 +80,27 @@ exports.sendPushNotifications = async ( tokens, message={ title: undefined, body
 		error( 'Push notification error: ', e, logs )
 		throw e
 	}
+
+}
+
+exports.sendPushNotifications = sendPushNotifications
+
+exports.sendPushNotificationsByUserUid = async ( userUid, message ) => {
+
+	try {
+		// Check if author has push tokens, exit if not
+		const { pushTokens=[] } = await db.collection( 'settings' ).doc( userUid ).get().then( dataFromSnap ) || {}
+		if( !pushTokens || pushTokens.length == 0 ) return null
+
+		// Actually send notifications
+		await sendPushNotifications( pushTokens, message )
+
+
+	} catch( e ) {
+		error( 'sendPushNotificationsByUserUid error: ', e )
+	}
+
+	
 
 }
 

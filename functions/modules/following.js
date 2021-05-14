@@ -1,6 +1,6 @@
 const { db, FieldValue } = require( './firebase' )
 const { dataFromSnap, log, error } = require( './helpers' )
-const { sendPushNotifications } = require( './push' )
+const { sendPushNotificationsByUserUid } = require( './push' )
 
 // ( snap, context ) =>
 exports.unfollow = snap => {
@@ -31,15 +31,15 @@ exports.follow = async change => {
 			db.collection( 'userMeta' ).doc( follower ).set( { following: FieldValue.arrayUnion( author ) }, { merge: true } )
 		] )
 
-		// Check if author has push tokens, exit if not
-		const { pushTokens=[] } = await db.collection( 'settings' ).doc( author ).get().then( dataFromSnap ) || {}
-		if( !pushTokens.length ) return
+		// Check if author has push tokens, and wants to get notified, exit if not
+		const { pushTokens=[], notifications={} } = await db.collection( 'settings' ).doc( author ).get().then( dataFromSnap ) || {}
+		if( !notifications.newFollower || !pushTokens.length ) return
 
 		// Get the data of the new follower
 		const { name, handle } = await db.collection( 'users' ).doc( follower ).get().then( dataFromSnap ) || {}
 
 		// Send push notification to author
-		await sendPushNotifications( pushTokens, {
+		await sendPushNotificationsByUserUid( author, {
 			title: `${ name || handle || 'Someone' } followed you!`,
 			body: `Tap to view ${ handle ? `${ `@${ handle }` || name }'s` : 'their' } profile.`,
 			data: {
