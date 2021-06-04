@@ -35,6 +35,7 @@ class UserSettings extends Component {
 					newFollower: true,
 					friendJoined: true
 				},
+				privateProfile: false,
 				...settings
 			},
 			contactMethods: { ...contactMethods },
@@ -112,6 +113,19 @@ class UserSettings extends Component {
 
 		// Handle is available?
 		if( !handleAvailable ) return alert( 'This handle is taken, please choose another' )
+
+		// Change account privacy? Confirm
+		if( !originalSettings.privateProfile && settings.privateProfile ) {
+			const confirmed = await Dialogue(
+				'Change profile to private?',
+				`This will change all your followers from 'allowed' to 'to be reviewed', you will have to manually go through them to approve the ones you want.`,
+				[
+					{ text: 'Yes, make profile private', onPress: async f => true },
+					{ text: 'No, keep my profile the same', onPress: async f => false }
+				]
+			)
+			if( !confirmed ) return
+		}
 
 		try {
 

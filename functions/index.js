@@ -3,9 +3,11 @@ const functions = require('firebase-functions')
 // ///////////////////////////////
 // On relation create
 // ///////////////////////////////
-const { follow, unfollow } = require( './modules/following' )
+const { follow, unfollow, makePrivate } = require( './modules/following' )
 exports.unFollow = functions.firestore.document( 'relationships/{relationId}' ).onDelete( unfollow )
 exports.follow = functions.firestore.document( 'relationships/{relationId}' ).onWrite( follow )
+exports.makeAccountPrivate = functions.firestore.document( 'settings/{userUid}' ).onWrite( makePrivate )
+
 
 // ///////////////////////////////
 // Cron

@@ -7,6 +7,19 @@ import app from '../../../modules/firebase/app'
 
 const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='all', loading } ) => {
 
+	// Load follow requests
+	const unconfirmedFollowers = useSelector( store => store?.user?.unconfirmedFollowers || [] )
+	const [ requestedFollows, setRequestedFollows ] = useState( unconfirmedFollowers )
+	useEffect( f => {
+
+		Promise.all( unconfirmedFollowers.map( uid => app.getPerson( uid, 'uid' ) ) )
+		.then( users => {
+			log( 'Loaded requested followers: ', users, ' based on ', unconfirmedFollowers )
+			setRequestedFollows( users )
+		} )
+
+	}, unconfirmedFollowers.length )
+
 	// Internal state management
 	const [ ignored, setIgnored ] = useState( [] )
 	const blocked = useSelector( store => store.user?.blocked || [] )
@@ -14,6 +27,11 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 	const ignoreRecommendation = uid => {
 		setIgnored( [ ...ignored, uid ] )
 		app.ignoreRecommendation( uid )
+	}
+
+	const ignoreRequest = uid => {
+		setIgnored( [ ...ignored, uid ] )
+		app.ignoreRequest( uid )
 	}
 
 	// Sanitisation
@@ -32,6 +50,7 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 	// Set sane results to state
 	const [ saneResults, setSaneResults ] = useState( results.filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
 	const [ saneReccs, setSaneReccs ] = useState( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
+	const [ saneRequests, setSaneRequests ] = useState( requestedFollows.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
 
 
 	useEffect( f => {
@@ -41,15 +60,26 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 		// Update internal state
 		setSaneResults( results.filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
 		setSaneReccs( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
+		setSaneRequests( requestedFollows.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
 
-	}, [ results.length, recommendedProfiles.length, ignored.length, blocked.length, following.length ] )
+	}, [ results.length, recommendedProfiles.length, requestedFollows, ignored.length, blocked.length, following.length ] )
 
 
 	return <View style={ { width: '100%', paddingTop: 20 } }>
 	
 		{ !loading && saneResults.length == 0 && <Text style={ { textAlign: 'center' } }>No users found, try a different query</Text> }
 
-
+		{ /* Follow requests */ }
+		{ [ 'all' ].includes( filter ) && ( loading || saneRequests.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Follow requests:</Text> }
+		{ loading && [ 0, 1, 2, 3 ].map( i => <Card key={ `req-placeholder-${ i }` }>
+				<ActivityIndicator />
+		</Card> ) }
+		{ [ 'all' ].includes( filter ) && saneRequests.length > 0 && saneRequests.map( user => <UserResultCard
+			key={ `req-${ user.uid }` }
+			user={ user }
+			isRequest={ true }
+			ignoreUser={ ignoreRecommendation }
+		/> ) }
 
 		{ /* Recommendartions */ }
 		{ [ 'all' ].includes( filter ) && ( loading || saneReccs.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Recommendations:</Text> }
@@ -59,7 +89,7 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 		{ [ 'all' ].includes( filter ) && saneReccs.length > 0 && saneReccs.map( user => <UserResultCard
 			key={ `recc-${ user.uid }` }
 			user={ user }
-			ignoreRecommendation={ ignoreRecommendation }
+			ignoreUser={ ignoreRequest }
 		/> ) }
 
 		
@@ -117,7 +147,7 @@ export const LinkContacts = ( { linkContacts, ...props } ) => <View style={ { wi
 // Entry cards
 // ///////////////////////////////
 
-const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
+const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) => {
 
 	const alreadyFollowing = useSelector( store => store?.user?.following || [] )
 	const [ following, setFollowing ] = useState( !!alreadyFollowing.find( uid => user.uid == uid ) )
@@ -127,6 +157,11 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 		setFollowing( !following )
 	}
 
+	const allowFollow = uid => {
+		app.followPerson( allowFollow )
+		setFollowing( true )
+	}
+
 	// update follow status when redux updates
 	useEffect( f => {
 		const currentlyFollowing = !!alreadyFollowing.find( uid => user.uid == uid )
@@ -134,16 +169,17 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreRecommendation } ) => {
 	}, [ alreadyFollowing.length ] )
 
 
-	return <Card>
+	// If is an accepted request, render null
+	return ( isRequest && following ) ? null : <Card>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />
 			<View nativeID={ typeof i != 'undefined' ? `friends-find-search-result-${i}` : `friends-recc-${ user?.uid }` } style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
 				<Link nativeID={ typeof i != 'undefined' ? `friends-find-search-result-link-${i}` : `friends-recc-link-${ user?.uid }` } to={ `/${user.handle}` }>{ user.name }</Link>
 				<Text style={ { flex: 1,fontStyle: 'italic', opacity: .8 } }>{ user.bio || `This person has nothing to say about themselves. It's ok to be shy though. ` }</Text>
 				<View style={ { flexDirection: 'row' } }>
-					{ !following && <Button style={ { width: 100, alignItems: 'flex-start' } } onPress={ f => follow( user.uid ) }>Follow</Button> }
-					{ following && <Button mode='outlined' style={ { width: 120 } } onPress={ f => follow( user.uid, true ) }>Unfollow</Button> }
-					{ ignoreRecommendation && <Button mode='text' style={ { width: 120 } } onPress={ f => ignoreRecommendation( user.uid ) }>Ignore</Button> }
+					{ !following && <Button style={ { width: 100, alignItems: 'flex-start' } } onPress={ f => isRequest ? allowFollow( user.uid ) : follow( user.uid ) }>{ isRequest ? 'Accept' : 'Follow' }</Button> }
+					{ following && !isRequest && <Button mode='outlined' style={ { width: 120 } } onPress={ f => follow( user.uid, true ) }>Unfollow</Button> }
+					{ ignoreUser && <Button mode='text' style={ { width: 120 } } onPress={ f => ignoreUser( user.uid ) }>Ignore</Button> }
 				</View>
 			</View>
 		</View>

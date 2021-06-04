@@ -160,7 +160,7 @@ class FindFriends extends Component {
 
 	render() {
 
-		const { loading, query, searching, filter, recommendedProfiles, results } = this.state
+		const { loading, query, searching, filter, recommendedProfiles,results } = this.state
 		const { user } = this.props
 
 		return <Container Background={ Friends }>

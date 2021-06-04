@@ -18,6 +18,9 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				{ newUser && <Text style={ { marginTop: 10, textAlign: 'center' } }>Welcome to Nutshell { user.name }! Please let us know if these settings are ok with you, you can change them any time in the 'settings' section.</Text> }
 				<Divider />
 
+				{  /* Account privacy */ }
+				<Toggle onToggle={ f => changeSetting( 'privateProfile', !settings.privateProfile ) } value={ settings.privateProfile } style={ { marginTop: 10 } } label='Private account' info="Puclic profiles can be followed by anyone, private profiles require you to manually accept follow requests." />
+
 				{ /* User data */ }
 				<Subheading>About you</Subheading>
 				<Input error={ user.name?.length == 0 } label='name' value={ user.name } info='This lets your friends find you.' onChangeText={ t => changeUser( 'name', t ) } />
@@ -40,8 +43,8 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				<HelperText style={ { paddingLeft: 0 } }>These are ways your followers can react to your Nutshells.</HelperText>
 
 				{ /* Add contact methods */ }
-			   <Input label='WhatsApp number' value={ contactMethods.whatsapp } info='What is your number including country code?' onChangeText={ t => changeContactMethod( 'whatsapp', t ) } />
-			   <Input label='Contact email' value={ user.email || contactMethods.email } info='This does not have to be the same as your account email, but we autofilled it that way' onChangeText={ t => changeContactMethod( 'email', t ) } />
+				<Input label='WhatsApp number' value={ contactMethods.whatsapp } info='What is your number including country code?' onChangeText={ t => changeContactMethod( 'whatsapp', t ) } />
+				<Input label='Contact email' value={ user.email || contactMethods.email } info='This does not have to be the same as your account email, but we autofilled it that way' onChangeText={ t => changeContactMethod( 'email', t ) } />
 
 				{ /* Notification prefs */ }
 				<Toggle onToggle={ f => changeSetting( 'anyoneCanRespond', !settings.anyoneCanRespond ) } value={ settings.anyoneCanRespond } style={ { marginTop: 10 } } label='Allow all followers to contact you' info="By default only people *you* follow can react to your Nutshells. If you want anyone who follows you to be able to respond to your messages toggle this." />
