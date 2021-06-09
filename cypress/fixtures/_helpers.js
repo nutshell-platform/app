@@ -26,6 +26,7 @@ export const exclude = ( selectorOrText, onlyText ) => {
 export const fill = ( selector, text ) => cy.get( selector ).then( scrollTo ).clear().type( text, { force: true } ).should( 'have.value', text )
 
 export const click = ( selector, contains, force=false ) => {
+
 	if( contains ) return cy.get( selector ).contains( contains, { matchCase: false } ).then( scrollTo ).click( { force: force } )
 	else return cy.get( selector ).then( scrollTo ).click( { force: force } )
 }

@@ -9,18 +9,30 @@ import { catcher, log } from '../../../modules/helpers'
 const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, noDraft, nutshells=[], loading } ) => {
 
 	// Check if user being viewed is me and whether I am an admin
-	const myUid = useSelector( store => store?.user?.uid )
-	const isSelf = user?.uid == myUid
+	const self = useSelector( store => store?.user )
+	const isSelf = user?.uid == self.uid
 	log( 'UserCard: ', user )
 
 	// Following management
 	const followlist = useSelector( store => store?.user?.following )
 	
 	const [ followed, setFollowed ] = useState()
-	const toggleFollowed = f => Promise.all( [
-		followed ? app.unfollowPerson( user.uid ) : app.followPerson( user.uid ),
-		setFollowed( !followed )
-	] ).catch( catcher )
+	const [ requestedFollows, setRequestedFollows ] = useState( self.requestedFollows || [] )
+	const toggleFollowed = async forceUnfollow => {
+
+		log( `Toggling follow from ${ followed } to ${ !followed } with force set to ${ forceUnfollow }` )
+		if( followed || forceUnfollow ) {
+			await app.unfollowPerson( user.uid )
+			setFollowed( false )
+			setRequestedFollows( prev => ( [ ...prev.filter( uid => uid != user.uid ) ] ) )
+		}
+		else {
+			await app.followPerson( user.uid )
+			if( user.privateProfile ) setRequestedFollows( prev => ( [ ...prev, user.uid ] ) )
+		}
+
+	}
+
 
 	// On card update, update state
 	useEffect( f => {
@@ -28,10 +40,22 @@ const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, no
 		setFollowed( following )
 	}, [ user ] )
 
+	// If requested follows updated remotelu, overwrite local
+	useEffect( f => {
+		setRequestedFollows( self.requestedFollows )
+	}, [ self.requestedFollows ] )
+
 	// User blocking
 	const blocklist = useSelector( store => store?.user?.blocked || [] )
 	const isBlocked = blocklist.includes( user.uid )
 	const [ blocked, setBlocked ] = useState( isBlocked )
+
+	// Loading card
+	if( !Object.keys( user ).length ) return <Main.Center>
+		<Card key={ `profile-placeholder` }>
+					<ActivityIndicator />
+		</Card>
+	</Main.Center>
 
 	return <Main.Center>
 		<View nativeID={ `user-profile-${ isSelf ? 'self' : 'other' }` } style={ { paddingVertical: avatarSize/2 } }>
@@ -49,7 +73,22 @@ const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, no
 					<Text style={ { marginTop: 10, opacity: .7 } }>Following { user.following?.length || 0 } | Followers { user.followers?.length || 0 }</Text>
 				</View> }
 
-				{ !loading && !isSelf && !blocked && <Button style={ { paddingHorizontal: gutter } } mode={ followed && 'text' } onPress={ toggleFollowed }>{ followed ? 'Unfollow' : 'Follow' }</Button> }
+				{ /* Either public or no unconfirmed */ }
+				{ !loading && !isSelf && !blocked && ( !user.privateProfile || !requestedFollows?.includes( user.uid ) ) && <Button
+					style={ { paddingHorizontal: gutter } }
+					mode={ followed && 'text' }
+					onPress={ f => toggleFollowed() }>
+					{ /* Public profile */ }
+					{ !user.privateProfile && ( followed ? 'Unfollow' : 'Follow' ) }
+					{ /* Private profile: no request pending */ }
+					{ user.privateProfile && ( followed ? 'Unfollow' : 'Request follow' ) }
+				</Button> }
+
+				{  /* Unconfirmed follow request */ }
+				{ user.privateProfile && requestedFollows?.includes( user.uid ) && <Button
+					style={ { paddingHorizontal: gutter } }
+					mode={ followed && 'text' }
+					onPress={ f => toggleFollowed( true ) }>{ 'Cancel follow request' }</Button> }
 
 				{ /* Menu dots */ }
 				{ !loading && !isSelf && <BlockUser blocked={ blocked } setBlocked={ setBlocked } userUid={ user.uid } style={ { position: 'absolute', right: 0, top: 0, marginTop: user ? 0 : -30, zIndex: 1 } } /> }

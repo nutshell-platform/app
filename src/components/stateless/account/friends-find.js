@@ -18,7 +18,7 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 			setRequestedFollows( users )
 		} )
 
-	}, unconfirmedFollowers.length )
+	}, [ unconfirmedFollowers.length ] )
 
 	// Internal state management
 	const [ ignored, setIgnored ] = useState( [] )
@@ -78,7 +78,7 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 			key={ `req-${ user.uid }` }
 			user={ user }
 			isRequest={ true }
-			ignoreUser={ ignoreRecommendation }
+			ignoreUser={ ignoreRequest }
 		/> ) }
 
 		{ /* Recommendartions */ }
@@ -108,36 +108,34 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 	</View>
 }
 
-export const ListResults = UnoptimisedListResults
+export const ListResults = memo( UnoptimisedListResults, ( prev, next ) => {
 
-// memo( UnoptimisedListResults, ( prev, next ) => {
+	// If array lengths do not match, rerender anyway
+	if( prev.results?.length != next.results?.length ) return false
+	if( prev.recommendedProfiles?.length != next.recommendedProfiles?.length ) return false
+	if( prev.filter != next.filter ) return false
 
-// 	// If array lengths do not match, rerender anyway
-// 	if( prev.results?.length != next.results?.length ) return false
-// 	if( prev.recommendedProfiles?.length != next.recommendedProfiles?.length ) return false
-// 	if( prev.filter != next.filter ) return false
+	// If loading status changed
+	if( prev.loading != next.loading ) return false
 
-// 	// If loading status changed
-// 	if( prev.loading != next.loading ) return false
+	for ( let i = prev.results?.length - 1; i >= 0; i-- ) {
+		// There is an element in the new results that is not in the old ones
+		if( !next.results?.find( ( { uid } ) => uid == prev.results[i].uid ) ) {
+			return false
+		}
+	}
 
-// 	for ( let i = prev.results?.length - 1; i >= 0; i-- ) {
-// 		// There is an element in the new results that is not in the old ones
-// 		if( !next.results?.find( ( { uid } ) => uid == prev.results[i].uid ) ) {
-// 			return false
-// 		}
-// 	}
+	for ( let i = prev.recommendedProfiles?.length - 1; i >= 0; i-- ) {
+		// There is an element in the new results that is not in the old ones
+		if( !next.recommendedProfiles?.find( ( { uid } ) => prev.recommendedProfiles[i].uid ) ) {
+			return false
+		}
+	}
 
-// 	for ( let i = prev.recommendedProfiles?.length - 1; i >= 0; i-- ) {
-// 		// There is an element in the new results that is not in the old ones
-// 		if( !next.recommendedProfiles?.find( ( { uid } ) => prev.recommendedProfiles[i].uid ) ) {
-// 			return false
-// 		}
-// 	}
+	// No changed? Memo yes
+	return true
 
-// 	// No changed? Memo yes
-// 	return true
-
-// } )
+} )
 
 export const LinkContacts = ( { linkContacts, ...props } ) => <View style={ { width: '100%', paddingTop: 20 } }>
 	<Button onPress={ linkContacts }>Improve my recommendations</Button>
@@ -152,13 +150,24 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 	const alreadyFollowing = useSelector( store => store?.user?.following || [] )
 	const [ following, setFollowing ] = useState( !!alreadyFollowing.find( uid => user.uid == uid ) )
 
+	// In case of private account
+	const alreadyRequested = useSelector( store => store?.user?.requestedFollows || [] )
+	const [ requested, setRequested ] = useState( !!alreadyRequested.find( uid => user.uid == uid ) )
+
 	const follow = ( uid, unfollowInstead ) => {
-		unfollowInstead ? app.unfollowPerson( uid ) : app.followPerson( uid )
-		setFollowing( !following )
+		if( unfollowInstead ) {
+			app.unfollowPerson( uid )
+			setFollowing( false )
+			setRequested( false )
+		}
+		if( !unfollowInstead ) {
+			app.followPerson( uid )
+			user.privateProfile ? setRequested( true ) : setFollowing( true )
+		}
 	}
 
 	const allowFollow = uid => {
-		app.followPerson( allowFollow )
+		app.acceptFollower( uid )
 		setFollowing( true )
 	}
 
@@ -166,7 +175,10 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 	useEffect( f => {
 		const currentlyFollowing = !!alreadyFollowing.find( uid => user.uid == uid )
 		if( following != currentlyFollowing ) setFollowing( currentlyFollowing )
-	}, [ alreadyFollowing.length ] )
+
+		const currentlyRequested = !!alreadyRequested.find( uid => user.uid == uid )
+		if( requested != currentlyRequested ) setRequested( currentlyRequested )
+	}, [ alreadyFollowing.length, alreadyRequested.length ] )
 
 
 	// If is an accepted request, render null
@@ -177,8 +189,30 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 				<Link nativeID={ typeof i != 'undefined' ? `friends-find-search-result-link-${i}` : `friends-recc-link-${ user?.uid }` } to={ `/${user.handle}` }>{ user.name }</Link>
 				<Text style={ { flex: 1,fontStyle: 'italic', opacity: .8 } }>{ user.bio || `This person has nothing to say about themselves. It's ok to be shy though. ` }</Text>
 				<View style={ { flexDirection: 'row' } }>
-					{ !following && <Button style={ { width: 100, alignItems: 'flex-start' } } onPress={ f => isRequest ? allowFollow( user.uid ) : follow( user.uid ) }>{ isRequest ? 'Accept' : 'Follow' }</Button> }
-					{ following && !isRequest && <Button mode='outlined' style={ { width: 120 } } onPress={ f => follow( user.uid, true ) }>Unfollow</Button> }
+
+					{  /* Not yet following */ }
+					{ !following && !requested && <Button
+						nativeID={ typeof i != 'undefined' ? `friends-find-search-result-follow-${i}` : `friends-recc-follow-${ user?.uid }` }
+						style={ { alignItems: 'flex-start' } }
+						onPress={ f => isRequest ? allowFollow( user.uid ) : follow( user.uid ) }>
+
+						{ isRequest && 'Accept' }
+						{ !isRequest && ( user.privateProfile ? 'Request follow' : 'Follow' ) }
+
+					</Button> }
+
+					{ requested && <Button
+						nativeID={ typeof i != 'undefined' ? `friends-find-search-result-follow-${i}` : `friends-recc-follow-${ user?.uid }` }
+						style={ { alignItems: 'flex-start' } }
+						onPress={ f => follow( user.uid, true ) }>Cancel follow request</Button> }
+
+					{ following && !isRequest && <Button
+						mode='outlined'
+						style={ { width: 120 } }
+						onPress={ f => follow( user.uid, true ) }>
+						Unfollow
+					</Button> }
+
 					{ ignoreUser && <Button mode='text' style={ { width: 120 } } onPress={ f => ignoreUser( user.uid ) }>Ignore</Button> }
 				</View>
 			</View>

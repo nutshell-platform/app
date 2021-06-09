@@ -26,7 +26,7 @@ service cloud.firestore {
     }
     match /relationships/{relationshipId} {
       // Write if you are the follower, read only otherwise
-      allow write: if request.auth.uid != null && resource == null || resource.data.follower == request.auth.uid || request.resource.data.diff(resource.data).affectedKeys().hasOnly( [ 'readcount' ] )
+      allow write: if request.auth.uid != null && resource == null || resource.data.follower == request.auth.uid || resource.data.author == request.auth.uid || request.resource.data.diff(resource.data).affectedKeys().hasOnly( [ 'readcount' ] )
       allow read: if request.auth.uid != null
     }
     match /nutshells/{nutshellId} {

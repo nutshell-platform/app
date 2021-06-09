@@ -38,7 +38,13 @@ context( 'Onboarding tutorial', (  ) => {
 		find( 'follow some people' ).click()
 
 		// Wait for loading to start and end
-		find( 'follow' ).click()
+		find( 'Interesting people' )
+		find( 'Follow' )
+
+		// Wait because of cypress dom detaching bullshit
+		cy.get( '#friends-find-search-result-follow-1' ).click()
+		cy.get( '#friends-find-search-result-follow-2' ).click()
+		cy.get( '#friends-find-search-result-follow-3' ).click()
 
 		cy.goHome()
 

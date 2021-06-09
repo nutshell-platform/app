@@ -34,7 +34,7 @@ import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
 import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell, listenToNutshellArchive, removeNutshellFromArchive } from './_nutshells'
 import { saveAudioEntry, deleteAudioEntry } from './_audio_nutshells'
-import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson, ignoreRecommendation } from './_friends'
+import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson, ignoreRecommendation, ignoreRequest, acceptFollower } from './_friends'
 import { getModerationQueue, markAbuseModerated, sendMassMessage, getScheduledNutshells, updateAllAlgoliaAccountEntries, refreshAllReccsAndScores } from './_system'
 import { getAndSaveFingerprints } from './_fingerprints'
 
@@ -115,6 +115,8 @@ class Firebase {
 	blockPerson 	= uid => blockPerson( this, uid )
 	unblockPerson 	= uid => unblockPerson( this, uid )
 	ignoreRecommendation = uid => ignoreRecommendation( this, uid )
+	ignoreRequest = uid => ignoreRequest( this, uid )
+	acceptFollower = uid => acceptFollower( this, uid )
 
 	// ///////////////////////////////
 	// Fingerprints & recommendations

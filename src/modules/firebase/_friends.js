@@ -30,6 +30,12 @@ export const getRandomPeople = async app => {
 
 	} )
 
+	// Add user meta to the data
+	users = await Promise.all( users.map( async user => ( {
+		...user,
+		...( await app.db.collection( 'userMeta' ).doc( user.uid ).get().then( dataFromSnap ) )
+	} ) ) )
+
 	// Return all that are not self
 	return users.filter( friend => friend.uid != app.auth.currentUser?.uid )
 
@@ -44,12 +50,14 @@ export const followPerson = ( app, theirUid ) => {
 
 	return app.db.collection( 'relationships' ).add( {
 		follower: currentUser?.uid,
-		author: theirUid
+		author: theirUid,
+		updated: Date.now()
 	} )
 }
 
 export const unfollowPerson = ( app, theirUid ) => {
 	const { currentUser } = app.auth
+	log( `Unfollowing ${ theirUid } on behalf of ${ currentUser?.uid }` )
 	return app.db.collection( 'relationships' )
 	.where( 'follower', '==', currentUser.uid )
 	.where( 'author', '==', theirUid )
@@ -140,4 +148,44 @@ export const ignoreRecommendation = async ( app, uidToIgnore ) => {
 		neverRecommend: FieldValue.arrayUnion( uidToIgnore )
 	}, { merge: true } )
 
-} 
+}
+
+export const ignoreRequest = async ( app, uidToIgnore ) => {
+
+	// Get current user
+	const { auth: { currentUser }, db, FieldValue } = app
+
+	// Update relationship to ignore user
+	await db.collection( 'relationships' )
+		.where( 'author', '==', currentUser.uid )
+		.where( 'follower', '==', uidToIgnore )
+		.get()
+		.then( snap => snap.docs.map( doc => doc.ref.set( { ignored: true, updated: Date.now() }, { merge: true } ) ) )
+
+
+}
+
+export const acceptFollower = async ( app, uidToIgnore ) => {
+
+	// Get current user
+	const { auth: { currentUser }, db, FieldValue } = app
+
+	// Remove from my unconfirmed and add to never recommend
+	await db.collection( 'userMeta' ).doc( currentUser.uid ).set( {
+		unconfirmedFollowers: FieldValue.arrayRemove( uidToIgnore ),
+		neverRecommend: FieldValue.arrayUnion( uidToIgnore )
+	}, { merge: true } )
+
+	// Update relationship to accept user
+	await db.collection( 'relationships' )
+		.where( 'author', '==', currentUser.uid )
+		.where( 'follower', '==', uidToIgnore )
+		.get()
+		.then( snap => snap.docs.map( doc => doc.ref.set( {
+			ignored: false,
+			confirmed: true,
+			updated: Date.now()
+		}, { merge: true } ) ) )
+
+
+}
