@@ -14,7 +14,8 @@ context( 'View profile', (  ) => {
 
 		// Check if details match what they should based on onboarding test actions
 		find( user.bio )
-		find( new RegExp( `Following \\d` ) )
+		// find( new RegExp( `Following \\d` ) )
+		find( 'Following 1' )
 		find( `Followers 0` )
 
 		cy.goHome()

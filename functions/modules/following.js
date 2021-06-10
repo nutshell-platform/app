@@ -2,6 +2,17 @@ const { db, FieldValue } = require( './firebase' )
 const { dataFromSnap, log, error } = require( './helpers' )
 const { sendPushNotificationsByUserUid } = require( './push' )
 
+exports.userWasDeleted = async ( snap, context ) => {
+
+	// Delete the relationships involving this user
+	const myUid = context.params.userUid
+	await Promise.all( [
+		db.collection( 'relationships' ).where( 'author', '==', myUid ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) ),
+		db.collection( 'relationships' ).where( 'folower', '==', myUid ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) )
+	] )
+
+}
+
 exports.addMultipleTestFollowers = async myUid => {
 
 

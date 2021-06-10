@@ -1,23 +1,27 @@
 const functions = require('firebase-functions')
 
 // ///////////////////////////////
-// On relation create
+// Relationship management
 // ///////////////////////////////
-const { follow, unfollow, makePrivate, addMultipleTestFollowers } = require( './modules/following' )
+const { follow, unfollow, makePrivate, addMultipleTestFollowers, userWasDeleted } = require( './modules/following' )
 exports.unFollow = functions.firestore.document( 'relationships/{relationId}' ).onDelete( unfollow )
 exports.follow = functions.firestore.document( 'relationships/{relationId}' ).onWrite( follow )
 exports.makeAccountPrivate = functions.firestore.document( 'settings/{userUid}' ).onWrite( makePrivate )
-exports.addMultipleTestFollowers = functions.https.onCall( ( data, context ) => addMultipleTestFollowers( context.auth.uid ) )
+exports.userWasDeleted = functions.firestore.document( 'users/{userUid}' ).onDelete( userWasDeleted )
+
 
 
 // ///////////////////////////////
-// Cron
+// Automated data management
 // ///////////////////////////////
 const { publish, deleteFromInboxesOnNutshellDelete, getScheduledNutshells, createTestNutshell, deleteDemoDataFor } = require( './modules/nutshells' )
 // cron: Every hour monday and tuesday 0 * * * 1,2
 exports.publish = functions.runWith( { timeoutSeconds: 540, memory: '2GB' } ).pubsub.schedule( '0 * * * 1,2' ).onRun( publish )
 exports.deleteFromInboxesOnNutshellDelete = functions.firestore.document( 'nutshells/{nutshellUid}' ).onDelete( deleteFromInboxesOnNutshellDelete )
 exports.getScheduledNutshells = functions.https.onCall( ( data, context ) => getScheduledNutshells( context.auth.uid ) )
+
+// Demo data management
+exports.addMultipleTestFollowers = functions.https.onCall( ( data, context ) => addMultipleTestFollowers( context.auth.uid ) )
 exports.createTestNutshell = functions.https.onCall( ( data, context ) => createTestNutshell( context.auth.uid ) )
 exports.deleteDemoDataFor = functions.https.onCall( ( data, context ) => deleteDemoDataFor( context.auth.uid ) )
 

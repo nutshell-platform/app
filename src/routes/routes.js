@@ -86,6 +86,7 @@ class Routes extends Component {
 	handleQueryAndParams = async f => {
 
 		const { history } = this.props
+		const { queryAction } = this.state
 
 		// If url is wrongly using hash (for example due to a direct link), fix it
 		if( window?.location ) {
@@ -103,25 +104,34 @@ class Routes extends Component {
 
 		// Make test nutshell if needed
 		if( isWeb && typeof location != 'undefined' && location.href.includes( 'createDemoNutshell' ) ) {
+			if( queryAction ) return
+			await this.updateState( { queryAction: true } )
 			log( '🛑 Demo nutshell requested' )
 			await firebase.createTestNutshell().catch( e => log( 'Error creating test nutshell: ', e ) )
 			log( '✅ Demo nutshell created' )
 			history.replace( { search: '' } )
+			await this.updateState( { queryAction: false } )
 		}
 
 		// Add test followers if needed
 		if( isWeb && typeof location != 'undefined' && location.href.includes( 'addMultipleTestFollowers' ) ) {
+			if( queryAction ) return
+			await this.updateState( { queryAction: true } )
 			log( '🛑 Demo followers requested' )
 			await firebase.addMultipleTestFollowers().catch( e => log( 'Error creating test followers: ', e ) )
 			log( '✅ Demo followers created' )
 			history.replace( { search: '' } )
+			await this.updateState( { queryAction: false } )
 		}
 
 		if( isWeb && typeof location != 'undefined' && location.href.includes( 'deleteMyDemoData' ) ) {
+			if( queryAction ) return
+			await this.updateState( { queryAction: true } )
 			log( '🛑 Demo data deletion requested' )
 			await firebase.deleteMyDemoData().catch( e => log( 'Error deleting test data: ', e ) )
 			log( '✅ Demo data deleted' )
 			history.replace( { search: '' } )
+			await this.updateState( { queryAction: false } )
 		}
 		
 

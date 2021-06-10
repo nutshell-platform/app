@@ -15,7 +15,7 @@ context( 'Private accounts tests', (  ) => {
 			return true
 		} )
 		cy.on('window:alert', response => {
-			expect( response ).to.equal( 'Success' )
+			expect( response ).to.equal( 'Follower addition success' )
 		} )
 
 		// Create test followers
@@ -57,7 +57,7 @@ context( 'Private accounts tests', (  ) => {
 		find( 'This is a private profile' )
 		exclude( 'week' )
 		find( 'Request follow' ).click()
-		find( 'Cancel follow request' ).click()
+		find( 'Cancel follow request' )
 
 	} )
 

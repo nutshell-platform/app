@@ -42,9 +42,10 @@ context( 'Onboarding tutorial', (  ) => {
 		find( 'Follow' )
 
 		// Wait because of cypress dom detaching bullshit
-		cy.get( '#friends-find-search-result-follow-1' ).click()
-		cy.get( '#friends-find-search-result-follow-2' ).click()
-		cy.get( '#friends-find-search-result-follow-3' ).click()
+		cy.get( '#friends-find-search-result-follow-1' )
+		cy.get( '#friends-find-search-result-follow-2' )
+		cy.get( '#friends-find-search-result-follow-3' )
+		find( 'follow' ).click()
 
 		cy.goHome()
 
