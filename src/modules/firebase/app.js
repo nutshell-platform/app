@@ -32,10 +32,10 @@ import * as Network from 'expo-network'
 // Functions
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges, updateContactMethods, listenContactMethods } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell, listenToNutshellArchive, removeNutshellFromArchive } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell, listenToNutshellArchive, removeNutshellFromArchive, getNutshellsByUids } from './_nutshells'
 import { saveAudioEntry, deleteAudioEntry } from './_audio_nutshells'
-import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson, ignoreRecommendation, ignoreRequest, acceptFollower } from './_friends'
-import { getModerationQueue, markAbuseModerated, sendMassMessage, getScheduledNutshells, updateAllAlgoliaAccountEntries, refreshAllReccsAndScores } from './_system'
+import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson, ignoreRecommendation, ignoreRequest, acceptFollower, addMultipleTestFollowers } from './_friends'
+import { getModerationQueue, markAbuseModerated, sendMassMessage, getScheduledNutshells, updateAllAlgoliaAccountEntries, refreshAllReccsAndScores, deleteMyDemoData } from './_system'
 import { getAndSaveFingerprints } from './_fingerprints'
 
 // ///////////////////////////////
@@ -85,10 +85,12 @@ class Firebase {
 	createTestNutshell = f 		  => createTestNutshell( this )
 	getNutshellsOfUser = uid 	  => getNutshellsOfUser( this, uid )
 	getNutshellByUid   = uid 	  => getNutshellByUid( this.db, uid, dispatch )
+	getNutshellsByUids   = uids 	  => getNutshellsByUids( this.db, uids, dispatch )
 	markNutshellRead   = uid 	  => markNutshellRead( this, uid )
 	removeNutshellFromArchive   = uid 	  => removeNutshellFromArchive( this, uid )
 	reportNutshell	   = report   => reportNutshell( this, report )
 	muteNutshell	   = uid 	  => muteNutshell( this, uid )
+
 
 	// Audio
 	saveAudioEntry = ( uidOfNutshell, status, audioBlob, extension ) => saveAudioEntry( this, uidOfNutshell, status, audioBlob, extension )
@@ -103,6 +105,7 @@ class Firebase {
 	refreshAllReccsAndScores = f => refreshAllReccsAndScores( this )
 	getScheduledNutshells = f => getScheduledNutshells( this )
 	updateAllAlgoliaAccountEntries = f => updateAllAlgoliaAccountEntries( this )
+	deleteMyDemoData = f => deleteMyDemoData( this )
 
 	// ///////////////////////////////
 	// friends
@@ -117,6 +120,7 @@ class Firebase {
 	ignoreRecommendation = uid => ignoreRecommendation( this, uid )
 	ignoreRequest = uid => ignoreRequest( this, uid )
 	acceptFollower = uid => acceptFollower( this, uid )
+	addMultipleTestFollowers = f => addMultipleTestFollowers( this )
 
 	// ///////////////////////////////
 	// Fingerprints & recommendations

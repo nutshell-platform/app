@@ -42,7 +42,7 @@ const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, no
 
 	// If requested follows updated remotelu, overwrite local
 	useEffect( f => {
-		setRequestedFollows( self.requestedFollows )
+		setRequestedFollows( self.requestedFollows || [] )
 	}, [ self.requestedFollows ] )
 
 	// User blocking
@@ -101,6 +101,11 @@ const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, no
 					<ActivityIndicator />
 			</Card> ) }
 			{ !blocked && nutshells.map( nutshell => <NutshellCard showActions={ false } status={ nutshell.status != 'published' ? nutshell.status : false } key={ nutshell.uid } nutshell={ nutshell } /> ) }
+			{ user.accessDenied && <Card>
+				<Text>This is a private profile, the user needs to manually accept your follow request.</Text>
+				{ !self.privateProfile && <Text style={ { marginTop: 20 } }>Do you want a private profile as well? You can enable it in the settings panel.</Text> }
+			</Card> }
+
 
 		</View>
 	</Main.Center>

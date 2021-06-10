@@ -70,11 +70,16 @@ const deleteDemoDataFor = async uid => {
 		// Delete data of this test
 		db.collection( 'nutshells' ).where( 'owner', '==', `testfor-${ uid }` ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) ),
 		// Delete data of incomplete tests
-		db.collection( 'nutshells' ).where( 'autoDelete', '<', Date.now() ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) )
+		db.collection( 'nutshells' ).where( 'autoDelete', '<', Date.now() ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) ),
+		// Delete data of this test
+		db.collection( 'relationships' ).where( 'owner', '==', `testfor-${ uid }` ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) ),
+		// Delete data of incomplete tests
+		db.collection( 'relationships' ).where( 'autoDelete', '<', Date.now() ).get().then( snap => snap.docs.map( doc => doc.ref.delete() ) ),
 	] )
 
 
 }
+exports.deleteDemoDataFor = deleteDemoDataFor
 
 // ///////////////////////////////
 // Admin checking

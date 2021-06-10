@@ -1,6 +1,17 @@
 import { dataFromSnap, hash } from './helpers'
 import { uniqueByProp, error, log } from '../helpers'
 
+export const addMultipleTestFollowers = app => {
+
+	// Get funcs and data
+	const { func } = app
+	const doAddMultipleTestFollowers = func.httpsCallable( 'addMultipleTestFollowers' )
+
+	// Generare recommendations
+	return doAddMultipleTestFollowers().then( f => alert( 'Follower addition success' ) ).catch( e => alert( `Fail ${ e.message }` ) )
+
+}
+
 // Find people and filter out myself
 export const getRandomPeople = async app => {
 
@@ -51,6 +62,8 @@ export const followPerson = ( app, theirUid ) => {
 	return app.db.collection( 'relationships' ).add( {
 		follower: currentUser?.uid,
 		author: theirUid,
+		// Make sure test user follows silently
+		...( currentUser.email?.includes( 'testymctestface' ) && { silent: true } ),
 		updated: Date.now()
 	} )
 }
@@ -160,7 +173,10 @@ export const ignoreRequest = async ( app, uidToIgnore ) => {
 		.where( 'author', '==', currentUser.uid )
 		.where( 'follower', '==', uidToIgnore )
 		.get()
-		.then( snap => snap.docs.map( doc => doc.ref.set( { ignored: true, updated: Date.now() }, { merge: true } ) ) )
+		.then( snap => {
+			log( `Found ${ snap.docs.length } relationships to mark as ignored for author ${ currentUser.uid } and follower ${ uidToIgnore }` )
+			return snap.docs.map( doc => doc.ref.set( { ignored: true, updated: Date.now() }, { merge: true } ) )
+		} )
 
 
 }

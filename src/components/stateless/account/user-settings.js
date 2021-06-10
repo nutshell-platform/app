@@ -19,7 +19,7 @@ export const Settings = ( { children, avatarSize=100, user={}, changeUser, setti
 				<Divider />
 
 				{  /* Account privacy */ }
-				<Toggle onToggle={ f => changeSetting( 'privateProfile', !settings.privateProfile ) } value={ settings.privateProfile } style={ { marginTop: 10 } } label='Private account' info="Puclic profiles can be followed by anyone, private profiles require you to manually accept follow requests." />
+				<Toggle nativeID="settings-private-toggle" onToggle={ f => changeSetting( 'privateProfile', !settings.privateProfile ) } value={ settings.privateProfile } style={ { marginTop: 10 } } label={ `Private account ${ settings.privateProfile ? 'enabled' : 'disabled' }` } info="Puclic profiles can be followed by anyone, private profiles require you to manually accept follow requests." />
 
 				{ /* User data */ }
 				<Subheading>About you</Subheading>

@@ -25,7 +25,7 @@ const metaReducer = ( state, action ) => {
 	switch( action.type ) {
 		
 		case "RESETAPP":
-			console.log( 'Resetting app storage' )
+			log( '[store.js] Resetting app storage from meta reducer' )
 			return reducers( undefined, action )
 
 	}

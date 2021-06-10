@@ -38,14 +38,66 @@ export const getNutshellByUid = async ( db, uid, dispatch ) => {
 		// Get user data
 		const user = await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
 		const contactMethods = await db.collection( 'userContacts' ).doc( user.uid ).get().then( doc => doc.data() ).catch( e => {
-			log( 'Problem reading contacts for ', user.uid, e )
+			// log( 'Problem reading contacts for ', user.uid, e )
 			return false
 		} )
 
 		nutshell = { ...nutshell, user: { ...user, contactMethods: contactMethods || {} } }
-		log( `Nutshell ${ uid } to store: `, nutshell )
+		// log( `Nutshell ${ uid } to store: `, nutshell )
 		await dispatch( updateOfflineInbox( [ nutshell ] ) )
 		return nutshell
+
+	} catch( e ) {
+		alert( e )
+	}
+
+}
+
+export const getNutshellsByUids = async ( db, uids, dispatch ) => {
+
+	try {
+
+		const allUsers = {}
+		const allContactMethods = {}
+
+		const nutshells = await Promise.all( uids.map( async uid => {
+
+			try {
+
+				// get nutshell data
+				let nutshell = await db.collection( 'nutshells' ).doc( uid ).get()
+
+				// If nutshell doesn't exist send the delete signal
+				if( !nutshell.exists ) {
+					log( `Nutshell ${ uid } was unavailable` )
+					return { delete: true, uid: uid }
+				}
+
+				// Retreive nutshell data
+				nutshell = dataFromSnap( nutshell )	
+				
+				// Get user data
+				const user = allUsers[ nutshell.owner ] || await db.collection( 'users' ).doc( nutshell.owner ).get().then( dataFromSnap )
+				const contactMethods = allContactMethods[user.uid] || await db.collection( 'userContacts' ).doc( user.uid ).get().then( doc => doc.data() ).catch( e => {
+					// log( 'Problem reading contacts for ', user.uid, e )
+					return false
+				} )
+
+				nutshell = { ...nutshell, user: { ...user, contactMethods: contactMethods || {} } }
+
+				return nutshell
+				
+			} catch {
+				return {}
+			}
+
+
+		} ) )
+
+		
+		log( `Loaded ${ nutshells?.length } nutshells from remote to local redux` )
+		await dispatch( updateOfflineInbox( nutshells ) )
+		return nutshells
 
 	} catch( e ) {
 		alert( e )

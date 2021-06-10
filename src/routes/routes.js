@@ -52,9 +52,6 @@ class Routes extends Component {
 
 	componentDidMount = async () => {
 
-		// Handle query strings
-		this.handleQueryAndParams()
-
 		const { history, user } = this.props
 
 
@@ -75,6 +72,9 @@ class Routes extends Component {
 		// Set dark mode if need be, but only on mount so the user can override it
 		this.smartDarkMode()
 
+		// Handle query strings
+		await this.handleQueryAndParams()
+
 		// Init firebase
 		await firebase.init( history )
 		
@@ -85,6 +85,8 @@ class Routes extends Component {
 
 	handleQueryAndParams = async f => {
 
+		const { history } = this.props
+
 		// If url is wrongly using hash (for example due to a direct link), fix it
 		if( window?.location ) {
 			const { href, host } = window.location
@@ -94,9 +96,9 @@ class Routes extends Component {
 
 		// Handle purge requests
 		if( isWeb && typeof location != 'undefined' && location.href.includes( 'purge' ) ) {
-			log( 'Purge request detected' )
+			log( '🛑🛑🛑 Purge request detected' )
 			await firebase.logout()
-			location.href = '/'
+			// location.href = '/'
 		}
 
 		// Make test nutshell if needed
@@ -104,6 +106,22 @@ class Routes extends Component {
 			log( '🛑 Demo nutshell requested' )
 			await firebase.createTestNutshell().catch( e => log( 'Error creating test nutshell: ', e ) )
 			log( '✅ Demo nutshell created' )
+			history.replace( { search: '' } )
+		}
+
+		// Add test followers if needed
+		if( isWeb && typeof location != 'undefined' && location.href.includes( 'addMultipleTestFollowers' ) ) {
+			log( '🛑 Demo followers requested' )
+			await firebase.addMultipleTestFollowers().catch( e => log( 'Error creating test followers: ', e ) )
+			log( '✅ Demo followers created' )
+			history.replace( { search: '' } )
+		}
+
+		if( isWeb && typeof location != 'undefined' && location.href.includes( 'deleteMyDemoData' ) ) {
+			log( '🛑 Demo data deletion requested' )
+			await firebase.deleteMyDemoData().catch( e => log( 'Error deleting test data: ', e ) )
+			log( '✅ Demo data deleted' )
+			history.replace( { search: '' } )
 		}
 		
 
@@ -133,6 +151,9 @@ class Routes extends Component {
 
 		// Development-only logging of path
 		log( 'Current path: ', pathname )
+
+		// Handle query strings
+		this.handleQueryAndParams()
 
 		// Update trigger
 		this.scheduleUpdateCheck()

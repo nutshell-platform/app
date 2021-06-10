@@ -11,3 +11,14 @@ export const refreshAllReccsAndScores = app => app.func.httpsCallable( 'refreshA
 export const getScheduledNutshells = app => app.func.httpsCallable( 'getScheduledNutshells' )()
 
 export const updateAllAlgoliaAccountEntries = app => app.func.httpsCallable( 'updateAllAlgoliaAccountEntries' )()
+
+export const deleteMyDemoData = app => {
+
+	// Get funcs and data
+	const { func } = app
+	const doDeleteDemoDataFor = func.httpsCallable( 'deleteDemoDataFor' )
+
+	// Generare recommendations
+	return doDeleteDemoDataFor().then( f => alert( 'Demo data deletion success' ) ).catch( e => alert( `Fail ${ e.message }` ) )
+
+}

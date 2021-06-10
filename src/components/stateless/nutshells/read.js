@@ -42,13 +42,13 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 	// ///////////////////////////////
 	const user = useSelector( store => store.user || {} )
 	const { archive=[], offline=[] } = useSelector( store => store?.nutshells )
-	const getRichNutshells = f => archive.map( nutshellUid => offline.find( ( { uid } ) => nutshellUid == uid ) || { unavailable: nutshellUid } )
-	const [ nutshells, setNutshells ] = useState( getRichNutshells() )
+	const getRichOfflineNusthells = f => archive.map( nutshellUid => offline.find( ( { uid } ) => nutshellUid == uid ) || { unavailable: nutshellUid } )
+	const [ nutshells, setNutshells ] = useState( getRichOfflineNusthells() )
 
 	const [ loading, setLoading ] = useState( false )
 	const [ visible, setVisible ] = useState( 10 )
 
-	let throttle = useRef( undefined ).current
+	// let throttle = useRef( undefined ).current
 
 	// ///////////////////////////////
 	// Offline cache
@@ -56,31 +56,44 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 	useEffect( f => {
 
 		// Schedule interface update (prevent mega-render bottleneck through redux)
-		const throttleMs = 2000
-		if( throttle ) clearTimeout( throttle )
-		throttle = setTimeout( f => setNutshells( sortFormatAndCleanNutshells( getRichNutshells() ) ), throttleMs )
+		// const throttleMs = 2000
+		// if( throttle ) clearTimeout( throttle )
+		// throttle = setTimeout( f => setNutshells( sortFormatAndCleanNutshells( getRichOfflineNusthells() ) ), throttleMs )
 
-		if( loading ) return
+		if( loading ) {
+			log( 'Waiting for nutshell load to complete' )
+			return null
+		}
 
 		// Download nutshells not in cache
-		const unavailableUids = getRichNutshells().filter( ( { unavailable } ) => !!unavailable ).map( ( { unavailable } ) => unavailable )
+		const unavailableUids = getRichOfflineNusthells().filter( ( { unavailable } ) => !!unavailable ).map( ( { unavailable } ) => unavailable )
 		setLoading( true )
 
 		log( 'Retreiving unavailable uids: ', unavailableUids )
-		Promise.all(
-			unavailableUids.map( uid => {
-				return app.getNutshellByUid( uid )
-				// Remove from archive if nutshell was deleted from remote
-				.then( n => {
-					if( n.delete ) app.removeNutshellFromArchive( n.uid )
-				} )
-			} ) )
-			.then( f => setLoading( false ) )
-			.catch( e => catcher( 'Error bulk-getting offline nutshells: ', e )
-		)
+		app.getNutshellsByUids( unavailableUids )
+		.then( nutshells => nutshells.filter( n => {
+			if( n.delete ) app.removeNutshellFromArchive( n.uid )
+			return !n.delete
+		} ) )
+		.then( nutshells => {
+			setNutshells( prev => ( [ ...prev, ...nutshells ] ) )
+		} )
+		.catch( e => catcher( 'Error bulk-getting offline nutshells: ', e ) )
+		.finally( f => {
+			log( 'Archive loading done' )
+			setLoading( false )
+		} )
 
 
-	}, [ offline.length, archive.length ] )
+	}, [ archive.length ] )
+
+	// Update rich state based on redux
+	useEffect( f => {
+
+		const archiveNutshells = sortFormatAndCleanNutshells( getRichOfflineNusthells() )
+		setNutshells( archiveNutshells )
+
+	}, [ offline.length ] )
 
 	// Lazyu load
 	useEffect( f => {
@@ -113,7 +126,7 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 
 	return <React.Fragment>
 		
-		{ nutshells.slice( 0, visible ).map( nutshell => <NutshellCard isArchive={ true } key={ nutshell.uid || Date.now() } nutshell={ nutshell } /> ) }
+		{ nutshells.slice( 0, visible ).map( nutshell => nutshell.uid ? <NutshellCard isArchive={ true } key={ nutshell.uid } nutshell={ nutshell } /> : null ) }
 		{ !nutshells.length && <NutshellCard /> }
 		{ ( ( visible < archive.length ) || loading ) && <NutshellCard />  }
 

@@ -2,6 +2,30 @@ const { db, FieldValue } = require( './firebase' )
 const { dataFromSnap, log, error } = require( './helpers' )
 const { sendPushNotificationsByUserUid } = require( './push' )
 
+exports.addMultipleTestFollowers = async myUid => {
+
+
+	try {
+
+		// Grab highest scoring users
+		const users = await db.collection( 'userMeta' ).orderBy( 'score', 'desc' ).limit( 5 ).get().then( dataFromSnap )
+		const userUids = users.map( ( { uid } ) => uid ).filter( uid => uid != myUid )
+
+		// Create relationships for me and these users
+		await Promise.all( userUids.map( uid => db.collection( 'relationships' ).add( {
+			follower: uid,
+			author: myUid,
+			updated: Date.now(),
+			autoDelete: Date.now() + ( 1000 * 60 * 15 ),
+			owner: `testfor-${ myUid }`
+		} ) ) )
+
+	} catch( e ) {
+		error( 'haveSomeoneFollowMe error: ', e )
+	}
+
+}
+
 // ( snap, context ) =>
 exports.unfollow = snap => {
 	const { author, follower } = snap.data()
@@ -27,11 +51,17 @@ exports.follow = async ( change, context ) => {
 		// Ignore deletions
 		if( !change.after.exists ) return null
 			
-		let { author, follower, confirmed, ignored } = change.after.data()
+		let { author, follower, confirmed, ignored, silent } = change.after.data()
+		const { ignored: prevIgnored } = change.before.data() || {}
 
 		// ///////////////////////////////
 		// Automatic tagging
 		// ///////////////////////////////
+
+		// If this was a new ignore, remove from user array
+		if( !prevIgnored && ignored ) await db.collection( 'userMeta' ).doc( author ).set( {
+			unconfirmedFollowers: FieldValue.arrayRemove( follower )
+		}, { merge: true } )
 
 		// If after write it is not confirmed, this was a system marking
 		if( confirmed === false ) return null
@@ -78,6 +108,9 @@ exports.follow = async ( change, context ) => {
 		// ///////////////////////////////
 		// Push notificatioin handler
 		// ///////////////////////////////
+
+		// If this is a demo user, do not send notis
+		if( silent ) return null
 
 		// Exit if this profile is unconfirmed and private
 		if( privateProfile && !confirmed ) return null
