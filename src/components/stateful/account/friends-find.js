@@ -62,10 +62,20 @@ class FindFriends extends Component {
 		const { recommendations: oldRecs } = this.props.user
 		const { recommendations: newRecs } = nextprops.user
 
-		// New data was added?
-		if( ( !oldRecs && newRecs ) || ( oldRecs?.length < newRecs?.length ) ) Dialogue( '🕵️‍♀️ I found new friend recommendations!', 'Load them now?', [ { text: 'Yes, load them', onPress: this.loadRecommendations } ] )
+		// New recc data was added?
+		if( ( !oldRecs && newRecs ) || ( oldRecs?.length < newRecs?.length ) ) this.scheduleNewReccPopup()
 
 		return true
+
+	}
+
+	// Throttled recc dialogue
+	recThrottle = undefined
+	scheduleNewReccPopup = f => {
+
+		const throttleMs = 5000
+		if( this.recThrottle ) clearTimeout( this.recThrottle )
+		this.recThrottle = setTimeout( f => Dialogue( '🕵️‍♀️ I found new friend recommendations!', 'Load them now?', [ { text: 'Yes, load them', onPress: this.loadRecommendations } ] ), throttleMs )
 
 	}
 

@@ -29,7 +29,7 @@ class ReadNutshell extends Component {
 	inboxLoader = undefined
 
 	// scrott throttler
-	scrollHandler
+	scrollHandler = undefined
 
 	// Load inbox
 	loadInbox = async ( visualFeedback=true ) => {
