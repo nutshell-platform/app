@@ -169,23 +169,23 @@ export const Input = React.memo( ( { style, info, hideInfo=false, error, onSubmi
 }, inputMemoCompare )
 
 // Button
-export const Button = ( { style, color, mode='contained', loading=false, children, to, onPress, ...props } ) => {
+export const Button = ( { style, labelStyle={}, color, mode='contained', loading=false, children, to, onPress, ...props } ) => {
 
 	const theme = useSelector( store => store?.settings?.theme || {} )
 	const history = useHistory()
-	const buttonStyle = { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', flexGrow: 1, flexShrink: 1 }
+	const buttonStyle = { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', flexGrow: 0, flexShrink: 1 }
 
 	const handleLink = link => {
 		if( link.includes( 'http' ) || link.includes( 'mailto:' ) ) return Linking.openURL( link )
 		return history.push( link )
 	}
 
-	return <View style={ { position: 'relative', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 20, ...style } }>
+	return <View style={ { position: 'relative', flexDirection: 'row', flexShrink: 1, alignItems: 'center', justifyContent: 'flex-start', marginTop: 20, ...style } }>
 		{ children && <PaperButton
 				onPress={ to ? f => handleLink( to ) : onPress }
 				style={ buttonStyle }
 				contentStyle={ { width: '100%' } }
-				labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface } }		
+				labelStyle={ { color: mode != 'contained' ? theme.colors.text : theme.colors.surface, ...labelStyle } }		
 				mode={ mode } { ...props }
 			>
 				{ children }

@@ -156,6 +156,7 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 	const alreadyFollowing = useSelector( store => store?.user?.following || [] )
 	const [ following, setFollowing ] = useState( !!alreadyFollowing.find( uid => user.uid == uid ) )
 	const followers = useSelector( store => store?.user?.followers || [] )
+	const [ accepted, setAccepted ] = useState( false )
 
 	// In case of private account
 	const alreadyRequested = useSelector( store => store?.user?.requestedFollows || [] )
@@ -175,6 +176,7 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 
 	const allowFollow = uid => {
 		app.acceptFollower( uid )
+		setAccepted( true )
 		setFollowing( true )
 	}
 
@@ -188,18 +190,24 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 	}, [ alreadyFollowing.length, alreadyRequested.length ] )
 
 
+	
+	const labelStyle = { fontSize: 12 }
+
 	// If is an accepted request, render null
-	return ( isRequest && followers.includes( user.uid ) ) ? null : <Card>
+	if( isRequest && ( accepted || followers.includes( user.uid ) ) ) return null
+
+	return <Card>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />
 			<View nativeID={ typeof i != 'undefined' ? `friends-find-search-result-${i}` : `friends-recc-${ user?.uid }` } style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
 				<Link nativeID={ typeof i != 'undefined' ? `friends-find-search-result-link-${i}` : `friends-recc-link-${ user?.uid }` } to={ `/${user.handle}` }>{ user.name }</Link>
 				<Text style={ { flex: 1,fontStyle: 'italic', opacity: .8 } }>{ user.bio || `This person has nothing to say about themselves. It's ok to be shy though. ` }</Text>
-				<View style={ { flexDirection: 'row', flexWrap: 'wrap' } }>
+				<View style={ { flexDirection: 'row', width: '100%' } }>
 
 					{  /* is request, not yet accepted */ }
 					{  /* Not yet following */ }
 					{ ( ( !following && !requested ) || ( isRequest && !followers.includes( user.uid ) ) ) && <Button
+						labelStyle={ labelStyle }
 						nativeID={ typeof i != 'undefined' ? `friends-find-search-result-follow-${i}` : `friends-recc-follow-${ user?.uid }` }
 						style={ { alignItems: 'flex-start' } }
 						onPress={ f => isRequest ? allowFollow( user.uid ) : follow( user.uid ) }>
@@ -210,18 +218,20 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 					</Button> }
 
 					{ requested && <Button
+						labelStyle={ labelStyle }
 						nativeID={ typeof i != 'undefined' ? `friends-find-search-result-follow-${i}` : `friends-recc-follow-${ user?.uid }` }
 						style={ { alignItems: 'flex-start' } }
 						onPress={ f => follow( user.uid, true ) }>Cancel follow request</Button> }
 
 					{ following && !isRequest && <Button
+						labelStyle={ labelStyle }
 						mode='outlined'
 						style={ { width: 120 } }
 						onPress={ f => follow( user.uid, true ) }>
 						Unfollow
 					</Button> }
 
-					{ ignoreUser && <Button mode='text' style={ { width: 120 } } onPress={ f => ignoreUser( user.uid ) }>Ignore</Button> }
+					{ ignoreUser && <Button labelStyle={ labelStyle } mode='text' style={ { width: 120 } } onPress={ f => ignoreUser( user.uid ) }>Ignore</Button> }
 				</View>
 			</View>
 		</View>
