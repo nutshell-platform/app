@@ -7,6 +7,8 @@ import app from '../../../modules/firebase/app'
 
 const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='all', loading } ) => {
 
+	const privateProfile = useSelector( store => store?.user?.privateProfile )
+
 	// Load follow requests
 	const unconfirmedFollowers = useSelector( store => store?.user?.unconfirmedFollowers || [] )
 	const [ requestedFollows, setRequestedFollows ] = useState( [] )
@@ -68,14 +70,14 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 
 	}, [ results.length, recommendedProfiles.length, requestedFollows.length, ignored.length, blocked.length, following.length ] )
 
-
+	log( 'Rendering with ', saneResults )
 	return <View style={ { width: '100%', paddingTop: 20 } }>
 	
 		{ !loading && saneResults.length == 0 && <Text style={ { textAlign: 'center' } }>No users found, try a different query</Text> }
 
 		{ /* Follow requests */ }
-		{ [ 'all' ].includes( filter ) && ( loading || saneRequests.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Follow requests:</Text> }
-		{ loading && [ 0, 1, 2, 3 ].map( i => <Card key={ `req-placeholder-${ i }` }>
+		{ privateProfile && [ 'all' ].includes( filter ) && ( loading || saneRequests.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Follow requests:</Text> }
+		{ privateProfile && loading && [ 0, 1, 2, 3 ].map( i => <Card key={ `req-placeholder-${ i }` }>
 				<ActivityIndicator />
 		</Card> ) }
 		{ [ 'all' ].includes( filter ) && saneRequests.length > 0 && saneRequests.map( user => <UserResultCard
@@ -153,6 +155,7 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 
 	const alreadyFollowing = useSelector( store => store?.user?.following || [] )
 	const [ following, setFollowing ] = useState( !!alreadyFollowing.find( uid => user.uid == uid ) )
+	const followers = useSelector( store => store?.user?.followers || [] )
 
 	// In case of private account
 	const alreadyRequested = useSelector( store => store?.user?.requestedFollows || [] )
@@ -186,7 +189,7 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 
 
 	// If is an accepted request, render null
-	return ( isRequest && following ) ? null : <Card>
+	return ( isRequest && followers.includes( user.uid ) ) ? null : <Card>
 		<View style={ { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 } }>
 			<UserAvatar size={ 75 } user={ user } />
 			<View nativeID={ typeof i != 'undefined' ? `friends-find-search-result-${i}` : `friends-recc-${ user?.uid }` } style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
@@ -194,8 +197,9 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 				<Text style={ { flex: 1,fontStyle: 'italic', opacity: .8 } }>{ user.bio || `This person has nothing to say about themselves. It's ok to be shy though. ` }</Text>
 				<View style={ { flexDirection: 'row', flexWrap: 'wrap' } }>
 
+					{  /* is request, not yet accepted */ }
 					{  /* Not yet following */ }
-					{ !following && !requested && <Button
+					{ ( ( !following && !requested ) || ( isRequest && !followers.includes( user.uid ) ) ) && <Button
 						nativeID={ typeof i != 'undefined' ? `friends-find-search-result-follow-${i}` : `friends-recc-follow-${ user?.uid }` }
 						style={ { alignItems: 'flex-start' } }
 						onPress={ f => isRequest ? allowFollow( user.uid ) : follow( user.uid ) }>
