@@ -87,6 +87,23 @@ export const uniqueByProp = ( array, propToFilterBy ) => {
 
 }
 
+export const uniqueStrings = array => {
+
+	const matches = []
+
+	return array.filter( item => {
+
+		// If already found, exclude
+		if( matches.includes( item ) ) return false
+
+		// Otherwise register and keep it
+		matches.push( item )
+		return true
+
+	} )
+
+}
+
 
 // ///////////////////////////////
 // Dates

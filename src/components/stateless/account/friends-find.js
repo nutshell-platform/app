@@ -1,7 +1,7 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Card, Text, Link, View, UserAvatar, Button, Profiler, ActivityIndicator } from '../common/generic'
-import { log } from '../../../modules/helpers'
+import { log, uniqueStrings } from '../../../modules/helpers'
 import app from '../../../modules/firebase/app'
 
 
@@ -9,13 +9,15 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 
 	// Load follow requests
 	const unconfirmedFollowers = useSelector( store => store?.user?.unconfirmedFollowers || [] )
-	const [ requestedFollows, setRequestedFollows ] = useState( unconfirmedFollowers )
+	const [ requestedFollows, setRequestedFollows ] = useState( [] )
+
+	// On page load, load follow request user data
 	useEffect( f => {
 
-		Promise.all( unconfirmedFollowers.map( uid => app.getPerson( uid, 'uid' ) ) )
+		Promise.all( uniqueStrings( unconfirmedFollowers ).map( uid => app.getPerson( uid, 'uid' ) ) )
 		.then( users => {
-			log( 'Loaded requested followers: ', users, ' based on ', unconfirmedFollowers )
-			setRequestedFollows( users )
+			log( 'Loaded requested followers: ', users, ' based on ', unconfirmedFollowers, uniqueStrings( unconfirmedFollowers ) )
+			setRequestedFollows( users.filter( filter_ignores_blocks_nameless ) )
 		} )
 
 	}, [ unconfirmedFollowers.length ] )
@@ -62,7 +64,9 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 		setSaneReccs( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
 		setSaneRequests( requestedFollows.filter( filter_ignores_blocks_nameless ) )
 
-	}, [ results.length, recommendedProfiles.length, requestedFollows, ignored.length, blocked.length, following.length ] )
+		log( 'Requested follows filtered and unfiltered: ', requestedFollows, requestedFollows.filter( filter_ignores_blocks_nameless ) )
+
+	}, [ results.length, recommendedProfiles.length, requestedFollows.length, ignored.length, blocked.length, following.length ] )
 
 
 	return <View style={ { width: '100%', paddingTop: 20 } }>
@@ -213,7 +217,7 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 						Unfollow
 					</Button> }
 
-					{ ignoreUser && <Button mode='outlined' style={ { width: 120 } } onPress={ f => ignoreUser( user.uid ) }>Ignore</Button> }
+					{ ignoreUser && <Button mode='text' style={ { width: 120 } } onPress={ f => ignoreUser( user.uid ) }>Ignore</Button> }
 				</View>
 			</View>
 		</View>
