@@ -60,7 +60,7 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 		// Update internal state
 		setSaneResults( results.filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
 		setSaneReccs( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
-		setSaneRequests( requestedFollows.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
+		setSaneRequests( requestedFollows.filter( filter_ignores_blocks_nameless ) )
 
 	}, [ results.length, recommendedProfiles.length, requestedFollows, ignored.length, blocked.length, following.length ] )
 
