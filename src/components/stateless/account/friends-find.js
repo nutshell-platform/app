@@ -50,7 +50,7 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 	// Set sane results to state
 	const [ saneResults, setSaneResults ] = useState( results.filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
 	const [ saneReccs, setSaneReccs ] = useState( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
-	const [ saneRequests, setSaneRequests ] = useState( requestedFollows.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
+	const [ saneRequests, setSaneRequests ] = useState( requestedFollows.filter( filter_ignores_blocks_nameless ) )
 
 
 	useEffect( f => {

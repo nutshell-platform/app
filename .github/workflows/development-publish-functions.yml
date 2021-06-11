@@ -1,4 +1,4 @@
-name: Deploy expo updates ( development )
+name: Deploy functions updates ( development )
 
 on:
   # Trigger: on new tag push
