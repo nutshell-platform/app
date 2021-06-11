@@ -188,7 +188,7 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 			<View nativeID={ typeof i != 'undefined' ? `friends-find-search-result-${i}` : `friends-recc-${ user?.uid }` } style={ { flex: 1, alignSelf: 'stretch', paddingLeft: 20, paddingVertical: 10, flexDirection: 'column', justifyContent: 'space-between' } }>
 				<Link nativeID={ typeof i != 'undefined' ? `friends-find-search-result-link-${i}` : `friends-recc-link-${ user?.uid }` } to={ `/${user.handle}` }>{ user.name }</Link>
 				<Text style={ { flex: 1,fontStyle: 'italic', opacity: .8 } }>{ user.bio || `This person has nothing to say about themselves. It's ok to be shy though. ` }</Text>
-				<View style={ { flexDirection: 'row' } }>
+				<View style={ { flexDirection: 'row', flexWrap: 'wrap' } }>
 
 					{  /* Not yet following */ }
 					{ !following && !requested && <Button
@@ -213,7 +213,7 @@ const UnoptimisedUserResultCard = ( { i, user, ignoreUser, isRequest=false } ) =
 						Unfollow
 					</Button> }
 
-					{ ignoreUser && <Button mode='text' style={ { width: 120 } } onPress={ f => ignoreUser( user.uid ) }>Ignore</Button> }
+					{ ignoreUser && <Button mode='outlined' style={ { width: 120 } } onPress={ f => ignoreUser( user.uid ) }>Ignore</Button> }
 				</View>
 			</View>
 		</View>
