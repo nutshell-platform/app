@@ -28,6 +28,9 @@ class ReadNutshell extends Component {
 	loading = undefined
 	inboxLoader = undefined
 
+	// scrott throttler
+	scrollHandler
+
 	// Load inbox
 	loadInbox = async ( visualFeedback=true ) => {
 
@@ -158,18 +161,32 @@ class ReadNutshell extends Component {
 		const lazyLoadOffset = 200
 		const height = nativeEvent.contentSize?.height
 		const positionY = nativeEvent.contentOffset?.y + nativeEvent.layoutMeasurement?.height
+		const atTop = nativeEvent.contentOffset?.y < 100
 
 		// Scrolltrack variables
 		const { lastY=0 } = this.state
 
+		// Limit sensitivity
+		const distance = Math.abs( lastY - positionY )
+		log( `Scrolled from ${ lastY } to ${ positionY } which is ${ distance }` )
+		if( distance < 100 && !atTop ) return
+
 		// Set end reached and last known pos to state
 		const posTrack = { lastY: positionY, direction: ( lastY - positionY ) < 0 ? 'down' : 'up' }
 		// Do not hide bars at the top of the interfce
-		if( nativeEvent.contentOffset?.y < 100 ) posTrack.direction = undefined
+		if( atTop ) posTrack.direction = undefined
 
 		// Set to state
 		if( ( positionY + lazyLoadOffset ) > height ) return this.updateState( { endReached: true, ...posTrack } )
 		return this.updateState( { endReached: false, ...posTrack } )
+	}
+
+	throttledHandleScroll = event => {
+
+		const throttleMs = 500
+		if( this.scrollHandler ) clearTimeout( this.scrollHandler )
+		this.scrollHandler = setTimeout( f => this.handleScroll( event ), throttleMs )
+
 	}
 
 
