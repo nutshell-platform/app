@@ -26,21 +26,6 @@ jobs:
       # Install frontend dependencies based on nvmrc
       - name: Read .nvmrc
         run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-        id: nvmfunctions
-        working-directory: functions
-
-      - name: Set Node.js (.nvmrc)
-        uses: actions/setup-node@v1
-        with:
-          node-version: "${{ steps.nvmfunctions.outputs.NVMRC }}"
-
-      - name: Install functions dependencies
-        run: npm i
-        working-directory: functions
-
-      # Install frontend dependencies based on nvmrc
-      - name: Read .nvmrc
-        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
         id: nvm
 
       - name: Set Node.js (.nvmrc)
@@ -87,7 +72,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --force --project=production
+          args: deploy --only hosting,storage,firestore --force --project=production
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 

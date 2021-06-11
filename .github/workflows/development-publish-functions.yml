@@ -1,0 +1,61 @@
+name: Deploy expo updates ( development )
+
+on:
+  # Trigger: on new tag push
+  push:
+    branches:
+      - development
+    paths:
+      - '.github/**'
+      - 'functions/**'
+
+jobs:
+  build:
+    name: Publish changes
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Get the repo files from current commit
+      - name: Cloning repository
+        uses: actions/checkout@v1
+
+      - name: Checkout development
+        run: git checkout development
+
+
+      # Install frontend dependencies based on nvmrc
+      - name: Read .nvmrc
+        run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
+        id: nvmfunctions
+        working-directory: functions
+
+      - name: Set Node.js (.nvmrc)
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ steps.nvmfunctions.outputs.NVMRC }}"
+
+      - name: Install functions dependencies
+        run: npm i
+        working-directory: functions
+
+      
+      # Run the deployment scripts
+      - name: Create environment files
+        run: |
+          echo -e "${{ secrets.DOTENV_DEVELOPMENT }}" > .env
+          echo -e "${{ secrets.GOOGLE_SERVICES_JSON_DEVELOPMENT }}" > google-services-development.json
+          echo -e "${{ secrets.GOOGLE_SERVICES_PLIST_DEVELOPMENT }}" > GoogleService-Info-development.plist
+
+      - name: Publish
+        run: npm run deploy:development
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions --force --project=development
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Send success push notification
+        run: curl -f -X POST -d "token=${{ secrets.PUSHOVER_TOKEN }}&user=${{ secrets.PUSHOVER_USER }}&title=Nutshell Functions Deployed&message=Development branch is now live&url=https://beta.nutshell.social/&priority=1" https://api.pushover.net/1/messages.json
