@@ -181,21 +181,15 @@ export const ignoreRequest = async ( app, uidToIgnore ) => {
 
 }
 
-export const acceptFollower = async ( app, uidToIgnore ) => {
+export const acceptFollower = async ( app, uidToAccept ) => {
 
 	// Get current user
 	const { auth: { currentUser }, db, FieldValue } = app
 
-	// Remove from my unconfirmed and add to never recommend
-	await db.collection( 'userMeta' ).doc( currentUser.uid ).set( {
-		unconfirmedFollowers: FieldValue.arrayRemove( uidToIgnore ),
-		neverRecommend: FieldValue.arrayUnion( uidToIgnore )
-	}, { merge: true } )
-
 	// Update relationship to accept user
 	await db.collection( 'relationships' )
 		.where( 'author', '==', currentUser.uid )
-		.where( 'follower', '==', uidToIgnore )
+		.where( 'follower', '==', uidToAccept )
 		.get()
 		.then( snap => snap.docs.map( doc => doc.ref.set( {
 			ignored: false,

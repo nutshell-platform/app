@@ -79,7 +79,7 @@ exports.follow = async ( change, context ) => {
 
 		// Get account type and set relation status if needed
 		const { privateProfile } = await db.collection( 'settings' ).doc( author ).get().then( dataFromSnap )
-		if( privateProfile || confirmed === undefined ) {
+		if( privateProfile && confirmed === undefined ) {
 			// Set confirmed to false, also set it so this function knows it
 			await db.collection( 'relationships' ).doc( context.params.relationId ).set( { confirmed: false }, { merge: true } )
 			confirmed = false
@@ -110,6 +110,7 @@ exports.follow = async ( change, context ) => {
 				unconfirmedFollowers: FieldValue.arrayRemove( follower ),
 				followers: FieldValue.arrayUnion( follower )
 			}, { merge: true } ),
+			// Add me to the follower's list
 			db.collection( 'userMeta' ).doc( follower ).set( {
 				requestedFollows: FieldValue.arrayRemove( author ),
 				following: FieldValue.arrayUnion( author )
@@ -170,7 +171,8 @@ exports.makePrivate = async ( change, context ) => {
 			const meta = await db.collection( 'userMeta' ).doc( userUid ).get().then( dataFromSnap )
 			await db.collection( 'userMeta' ).doc( userUid ).set( {
 				privateProfile: false,
-				recommendations: FieldValue.arrayUnion( ...meta.unconfirmedFollowers )
+				followers: FieldValue.arrayUnion( ...meta.unconfirmedFollowers ),
+				unconfirmedFollowers: []
 			}, { merge: true } )
 		}
 

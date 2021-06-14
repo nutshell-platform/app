@@ -76,7 +76,7 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 		{ !loading && saneResults.length == 0 && <Text style={ { textAlign: 'center' } }>No users found, try a different query</Text> }
 
 		{ /* Follow requests */ }
-		{ privateProfile && [ 'all' ].includes( filter ) && ( loading || saneRequests.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Follow requests:</Text> }
+		{ privateProfile && [ 'all' ].includes( filter ) && ( loading || saneRequests.length > 0 ) && <Text style={ { fontSize: 18, paddingTop: 20, paddingBottom: 10 } }>Follow requests { !!saneRequests.length && `(${ saneRequests.length })` }</Text> }
 		{ privateProfile && loading && [ 0, 1, 2, 3 ].map( i => <Card key={ `req-placeholder-${ i }` }>
 				<ActivityIndicator />
 		</Card> ) }
