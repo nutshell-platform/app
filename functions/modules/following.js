@@ -13,6 +13,30 @@ exports.userWasDeleted = async ( snap, context ) => {
 
 }
 
+exports.userMetaChanged = async ( change, context ) => {
+
+	try {
+
+		// Ignore deletions and things other than account privacy
+		if( !change.after.exists ) return null
+
+		// On meta update, parse blocks and mutes
+		const { blocked=[], muted=[] } = change.after.data()
+		const personaNonGrata = [ ...blocked, ...muted ]
+
+		// Remove nongrata from relevant props
+		await db.collection( 'userMeta' ).doc( context.params.userUid ).set( {
+			recommendations: FieldValue.arrayRemove( ...personaNonGrata ),
+			unconfirmedFollowers: FieldValue.arrayRemove( ...personaNonGrata ),
+			neverRecommend: FieldValue.arrayUnion( ...personaNonGrata )
+		}, { merge: true } )
+
+
+	} catch( e ) {
+		error( 'error in userMetaChanged: ', e )
+	}
+}
+
 exports.addMultipleTestFollowers = async myUid => {
 
 
@@ -124,8 +148,8 @@ exports.follow = async ( change, context ) => {
 		// If this is a demo user, do not send notis
 		if( silent ) return null
 
-		// Exit if this profile is unconfirmed and private
-		if( privateProfile && !confirmed ) return null
+		// Exit if this action is a confirmation by the user
+		if( privateProfile && confirmed ) return null
 
 		// Check if author has push tokens, and wants to get notified, exit if not
 		const { pushTokens=[], notifications={} } = await db.collection( 'settings' ).doc( author ).get().then( dataFromSnap ) || {}
@@ -184,7 +208,8 @@ exports.makePrivate = async ( change, context ) => {
 			// Set relationships to unconfirmed
 			await Promise.all( relationships.map( ( { uid, ...relationship } ) => {
 				return db.collection( 'relationships' ).doc( uid ).set( {
-					confirmed: false
+					confirmed: false,
+					silent: true // Prevent push notification spam
 				}, { merge: true } )
 			} ) )
 

@@ -173,7 +173,7 @@ export const Button = ( { style, labelStyle={}, color, mode='contained', loading
 
 	const theme = useSelector( store => store?.settings?.theme || {} )
 	const history = useHistory()
-	const buttonStyle = { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', flexGrow: 0, flexShrink: 1 }
+	const buttonStyle = { flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', flexGrow: 1, flexShrink: 1 }
 
 	const handleLink = link => {
 		if( link.includes( 'http' ) || link.includes( 'mailto:' ) ) return Linking.openURL( link )

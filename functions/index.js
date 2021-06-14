@@ -3,11 +3,12 @@ const functions = require('firebase-functions')
 // ///////////////////////////////
 // Relationship management
 // ///////////////////////////////
-const { follow, unfollow, makePrivate, addMultipleTestFollowers, userWasDeleted } = require( './modules/following' )
+const { follow, unfollow, makePrivate, addMultipleTestFollowers, userWasDeleted, userMetaChanged } = require( './modules/following' )
 exports.unFollow = functions.firestore.document( 'relationships/{relationId}' ).onDelete( unfollow )
 exports.follow = functions.firestore.document( 'relationships/{relationId}' ).onWrite( follow )
 exports.makeAccountPrivate = functions.firestore.document( 'settings/{userUid}' ).onWrite( makePrivate )
 exports.userWasDeleted = functions.firestore.document( 'users/{userUid}' ).onDelete( userWasDeleted )
+exports.userMetaChanged = functions.firestore.document( 'users/{userUid}' ).onWrite( userMetaChanged )
 
 
 
