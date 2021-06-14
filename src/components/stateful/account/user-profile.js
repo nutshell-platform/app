@@ -45,7 +45,8 @@ class UserProfile extends Component {
 
 			// If public profile of we follow them, load nutshells
 			const iFollowTHem = user.following.includes( profile.uid )
-			if( !profile.privateProfile || iFollowTHem ) nutshells = await app.getNutshellsOfUser( profile.uid )
+			const thisIsMe = user.uid == profile.uid
+			if( !profile.privateProfile || iFollowTHem || thisIsMe ) nutshells = await app.getNutshellsOfUser( profile.uid )
 			else profile.accessDenied = true
 
 			// Sort the Nutshells
