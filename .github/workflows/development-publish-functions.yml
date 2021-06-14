@@ -47,9 +47,6 @@ jobs:
           echo -e "${{ secrets.GOOGLE_SERVICES_JSON_DEVELOPMENT }}" > google-services-development.json
           echo -e "${{ secrets.GOOGLE_SERVICES_PLIST_DEVELOPMENT }}" > GoogleService-Info-development.plist
 
-      - name: Publish
-        run: npm run deploy:development
-
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:

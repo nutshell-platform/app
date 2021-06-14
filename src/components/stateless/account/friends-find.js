@@ -19,7 +19,7 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 		Promise.all( uniqueStrings( unconfirmedFollowers ).map( uid => app.getPerson( uid, 'uid' ) ) )
 		.then( users => {
 			log( 'Loaded requested followers: ', users, ' based on ', unconfirmedFollowers, uniqueStrings( unconfirmedFollowers ) )
-			setRequestedFollows( users.filter( filter_ignores_blocks_nameless ) )
+			setRequestedFollows( users.filter( filter_ignores_blocks_nameless ).sort( sort_by_score ) )
 		} )
 
 	}, [ unconfirmedFollowers.length ] )
@@ -49,6 +49,13 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 	const filter_friends = ( { uid, name } ) => {
 		if( filter == 'friends' || filter == 'search' ) return true
 		return !following.includes( uid )
+	}
+
+	// Sort by score
+	const sort_by_score = ( one, two ) => {
+		if( one.score > two.score ) return 1
+		if( one.score < two.score ) return -1
+		return 0
 	}
 
 	// Set sane results to state
