@@ -170,7 +170,7 @@ class Navigation extends Component {
 			links={ links } >
 				{ user && <Appbar.Action nativeID='navigation-home' icon='home' onPress={ f => history.push( `/` ) } /> }
 				{ user && <Appbar.Action nativeID='navigation-findfriends' icon='account-plus' onPress={ f => history.push( `/friends/find` ) } /> }
-				{ user?.privateProfile && user?.unconfirmedFollowers?.length && <Badge size={ 19 } style={ { marginLeft: -19, backgroundColor: 'red', zIndex: 9 } }>{ user?.unconfirmedFollowers?.length }</Badge> }
+				{ !!user?.privateProfile && !!user?.unconfirmedFollowers?.length && <Badge size={ 19 } style={ { marginLeft: -19, backgroundColor: 'red', zIndex: 9 } }>{ user?.unconfirmedFollowers?.length }</Badge> }
 				{ user && <Appbar.Action nativeID='navigation-writenutshel' icon='pencil-outline' onPress={ f => history.push( `/nutshells/write` ) } /> }
 		</Header>
 	}

@@ -148,7 +148,7 @@ class Firebase {
 
 			// Enable expetimental firestore setting
 			// https://firebase.google.com/docs/reference/js/firebase.firestore.Settings#experimentalforcelongpolling
-			this.db.settings( { experimentalForceLongPolling: true } )
+			// this.db.settings( { experimentalForceLongPolling: true } )
 
 			this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
 				{ name: 'profile', listener: listenUserChanges, action: setUserAction },
