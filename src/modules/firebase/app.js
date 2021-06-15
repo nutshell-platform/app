@@ -146,6 +146,10 @@ class Firebase {
 			// Keep a reference to the history object
 			if( history ) this.history = history
 
+			// Enable expetimental firestore setting
+			// https://firebase.google.com/docs/reference/js/firebase.firestore.Settings#experimentalforcelongpolling
+			this.db.settings( { experimentalForceLongPolling: true } )
+
 			this.listeners.auth = await listenUserLogin( this, dispatch, setUserAction, [
 				{ name: 'profile', listener: listenUserChanges, action: setUserAction },
 				{ name: 'meta', listener: listenUserMetaChanges, action: setUserMetaAction },

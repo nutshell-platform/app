@@ -20,7 +20,7 @@ import { Switch, Route, withRouter } from './router'
 
 // Helpers
 import { isWeb, getIsDarkMode, dev } from '../modules/apis/platform'
-import { log, wait } from '../modules/helpers'
+import { log, wait, error } from '../modules/helpers'
 
 // Components
 import LoginRegistration from '../components/stateful/onboarding/login-register'
@@ -66,20 +66,29 @@ class Routes extends Component {
 
 		} )
 
-		// Set the state to initialised if a user is already in stor
-		this.setState( { loading: !user } )
+		try {
 
-		// Set dark mode if need be, but only on mount so the user can override it
-		this.smartDarkMode()
+			// Set the state to initialised if a user is already in stor
+			this.setState( { loading: !user } )
 
-		// Handle query strings
-		await this.handleQueryAndParams()
+			// Set dark mode if need be, but only on mount so the user can override it
+			this.smartDarkMode()
 
-		// Init firebase
-		await firebase.init( history )
-		
-		// Disable loading screen
-		return this.setState( { loading: false } )
+			// Handle query strings
+			await this.handleQueryAndParams()
+
+			// Init firebase
+			await firebase.init( history )
+			
+			
+
+		} catch( e ) {
+			alert( `Init error: ${ e.message || JSON.stringify( e ) }` )
+			error( e )
+		} finally {
+			// Disable loading screen
+			this.setState( { loading: false } )
+		}
 		
 	}
 
