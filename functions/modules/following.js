@@ -21,15 +21,16 @@ exports.userMetaChanged = async ( change, context ) => {
 		if( !change.after.exists ) return null
 
 		// On meta update, parse blocks and mutes
-		const { blocked=[], muted=[] } = change.after.data()
+		const { blocked=[], muted=[], privateProfile } = change.after.data()
 		const personaNonGrata = [ ...blocked, ...muted ]
 
 		// Remove nongrata from relevant props
 		await db.collection( 'userMeta' ).doc( context.params.userUid ).set( {
 			recommendations: FieldValue.arrayRemove( ...personaNonGrata ),
-			unconfirmedFollowers: FieldValue.arrayRemove( ...personaNonGrata ),
+			...( privateProfile && { unconfirmedFollowers: FieldValue.arrayRemove( ...personaNonGrata ) } ),
 			neverRecommend: FieldValue.arrayUnion( ...personaNonGrata )
 		}, { merge: true } )
+
 
 
 	} catch( e ) {
@@ -94,8 +95,9 @@ exports.follow = async ( change, context ) => {
 		// ///////////////////////////////
 
 		// If this was a new ignore, remove from user array
-		if( !prevIgnored && ignored ) await db.collection( 'userMeta' ).doc( author ).set( {
-			unconfirmedFollowers: FieldValue.arrayRemove( follower )
+		if( !prevIgnored && ignored ) return db.collection( 'userMeta' ).doc( author ).set( {
+			unconfirmedFollowers: FieldValue.arrayRemove( follower ),
+			ignoredFollowRequests: FieldValue.arrayUnion( follower )
 		}, { merge: true } )
 
 		// If after write it is not confirmed, this was a system marking

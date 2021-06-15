@@ -18,8 +18,8 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 
 		Promise.all( uniqueStrings( unconfirmedFollowers ).map( uid => app.getPerson( uid, 'uid' ) ) )
 		.then( users => {
-			log( 'Loaded requested followers: ', users, ' based on ', unconfirmedFollowers, uniqueStrings( unconfirmedFollowers ) )
-			setRequestedFollows( users.filter( filter_ignores_blocks_nameless ).sort( sort_by_score ) )
+			log( 'Loaded requested followers: ', users, ' based on ', unconfirmedFollowers, uniqueStrings( unconfirmedFollowers ), ' with cleaned ', users.sort( sort_by_score ).filter( filter_ignores_and_blocks ) )
+			setRequestedFollows( users.sort( sort_by_score ).filter( filter_ignores_and_blocks ) )
 		} )
 
 	}, [ unconfirmedFollowers.length ] )
@@ -39,8 +39,13 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 	}
 
 	// Sanitisation
-	const filter_ignores_blocks_nameless = ( { uid, name} ) => {
+	const filter_ignores_blocks_nameless = ( { uid, name } ) => {
 		if( !name || !uid ) return false
+		if( ignored.includes( uid ) ) return false
+		if( blocked.includes( uid ) ) return false
+		return true
+	}
+	const filter_ignores_and_blocks = ( { uid, name } ) => {
 		if( ignored.includes( uid ) ) return false
 		if( blocked.includes( uid ) ) return false
 		return true
@@ -53,15 +58,21 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 
 	// Sort by score
 	const sort_by_score = ( one, two ) => {
-		if( one.score > two.score ) return 1
-		if( one.score < two.score ) return -1
+		if( one.score > two.score ) {
+			// log( one, 'won from', two )
+			return 1
+		}
+		if( one.score < two.score ) {
+			// log( two, 'won from', one )
+			return -1
+		}
 		return 0
 	}
 
 	// Set sane results to state
-	const [ saneResults, setSaneResults ] = useState( results.filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
-	const [ saneReccs, setSaneReccs ] = useState( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
-	const [ saneRequests, setSaneRequests ] = useState( requestedFollows.filter( filter_ignores_blocks_nameless ) )
+	const [ saneResults, setSaneResults ] = useState( results.sort( sort_by_score ).filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
+	const [ saneReccs, setSaneReccs ] = useState( recommendedProfiles.sort( sort_by_score ).filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
+	const [ saneRequests, setSaneRequests ] = useState( requestedFollows.sort( sort_by_score ).filter( filter_ignores_and_blocks ) )
 
 
 	useEffect( f => {
@@ -69,11 +80,11 @@ const UnoptimisedListResults = ( { results=[], recommendedProfiles=[], filter='a
 		log( 'Updating friend interface' )
 
 		// Update internal state
-		setSaneResults( results.filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
-		setSaneReccs( recommendedProfiles.filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
-		setSaneRequests( requestedFollows.filter( filter_ignores_blocks_nameless ) )
+		setSaneResults( results.sort( sort_by_score ).filter( filter_ignores_blocks_nameless ).filter( filter_friends ) )
+		setSaneReccs( recommendedProfiles.sort( sort_by_score ).filter( filter_friends ).filter( filter_ignores_blocks_nameless ) )
+		setSaneRequests( requestedFollows.sort( sort_by_score ).filter( filter_ignores_and_blocks ) )
 
-		log( 'Requested follows filtered and unfiltered: ', requestedFollows, requestedFollows.filter( filter_ignores_blocks_nameless ) )
+		log( 'Requested follows filtered and unfiltered: ', requestedFollows, requestedFollows.filter( filter_ignores_and_blocks ) )
 
 	}, [ results.length, recommendedProfiles.length, requestedFollows.length, ignored.length, blocked.length, following.length ] )
 
