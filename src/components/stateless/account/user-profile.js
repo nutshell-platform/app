@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo } from 'react'
 import { useSelector } from 'react-redux'
-import { Card, Main, Title, UserAvatar, Text, Button, View, Menu, IconButton, ActivityIndicator } from '../common/generic'
+import { Card, Main, Title, Link, UserAvatar, Text, Button, View, Menu, IconButton, ActivityIndicator } from '../common/generic'
 import { TouchableOpacity } from 'react-native'
 import { NutshellCard, Placeholder } from '../nutshells/read'
 import app from '../../../modules/firebase/app'
@@ -70,7 +70,10 @@ const UnoptimisedUserCard = ( { gutter=25, children, avatarSize=100, user={}, no
 				{ !loading && <View style={ { alignItems: 'center', justifyContent: 'center', paddingHorizontal: gutter } }>
 					<Title>{ user.name }{ blocked ? ' (blocked)' : '' }</Title>
 					<Text>{ user.bio }</Text>
-					<Text style={ { marginTop: 10, opacity: .7 } }>Following { user.following?.length || 0 } | Followers { user.followers?.length || 0 }</Text>
+					<View style={ { marginTop: 10, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' } }>
+						<Link to={ isSelf ? '/friends/manage' : `/${ user.handle }/following` } style={ { opacity: .7 } }>Following { user.following?.length || 0 }</Link>
+						<Link to={ `/${ user.handle }/followers` } style={ { opacity: .7 } }> | Followers { user.followers?.length || 0 }</Link>
+					</View>
 				</View> }
 
 				{ /* Either public or no unconfirmed */ }

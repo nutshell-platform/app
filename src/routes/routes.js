@@ -284,7 +284,7 @@ class Routes extends Component {
 				<Route path='/system/marketing' component={ Marketing } />
 
 				{ /* Unknown url? Check if it is a user */ }
-				<Route path='/:handle' component={ UserProfile } />
+				<Route path='/:handle/:filter?' component={ UserProfile } />
 
 				{ /* Home */ }
 				<Route path='/' component={ LoginRegistration } />

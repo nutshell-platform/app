@@ -4,6 +4,7 @@ import React from 'react'
 import { Component, Container, Loading, Main } from '../../stateless/common/generic'
 import Navigation from '../common/navigation'
 import { UserCard } from '../../stateless/account/user-profile'
+import ListUsers from '../../stateless/account/list-users'
 import Background from '../../../../assets/undraw_texting_k35o.svg'
 
 // Data
@@ -17,6 +18,7 @@ class UserProfile extends Component {
 
 	state = {
 		handle: this.props.match.params.handle,
+		filter: this.props.match.params.filter,
 		profile: {}
 	}
 
@@ -24,12 +26,13 @@ class UserProfile extends Component {
 
 	componentDidUpdate = async f => {
 
-		const { handle } = this.state
-		const { handle: paramHandle } = this.props.match.params
+		const { handle, filter } = this.state
+		const { handle: paramHandle, filter: paramFilter } = this.props.match.params
 		if( handle != paramHandle ) {
 			await this.updateState( { handle: paramHandle, loading: 'Finding user data' } )
 			await this.getUserByHandle().catch( catcher )
 		}
+		if( filter != paramFilter ) await this.updateState( { filter: paramFilter } )
 
 	}
 
@@ -69,14 +72,17 @@ class UserProfile extends Component {
 
 	render() {
 
-		const { profile, nutshells, loading } = this.state
-		const { draft } = this.props
+		const { profile, nutshells, loading, filter } = this.state
+		const { draft, user } = this.props
 		const noDraft = !( draft?.entries?.length > 0 )
+
+		log( this.state )
 
 		return <Container Background={ Background }>
 			<Navigation title='Profile' />
 			<Main.Top style={ { width: 500 } }>
-				<UserCard loading={ loading } noDraft={ noDraft } nutshells={ nutshells } user={ profile } />
+				{ !filter && <UserCard loading={ loading } noDraft={ noDraft } nutshells={ nutshells } user={ profile } /> }
+				{ !!filter && <ListUsers isSelf={ profile.uid == user.uid } username={ profile.name || profile.handle } users={ filter == 'followers' ? profile.followers : profile.following } filter={ filter } /> }
 			</Main.Top>
 		</Container>
 
