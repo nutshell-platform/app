@@ -255,7 +255,7 @@ class Routes extends Component {
 
 		{ /* Paper theme provider */ }
 		return <PaperProvider theme={ theme || Light }>
-			{ loading && <Loading message={ loading || 'Loading your stuff' } /> }
+			{ loading && <Loading color="black" message={ loading || 'Loading your stuff' } /> }
 			{ /* App router */ }
 			{ !loading && <Switch>
 

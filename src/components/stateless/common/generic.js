@@ -242,8 +242,8 @@ export const Checkbox = ( { checked, children, onPress, style, ...props } ) => <
 // ///////////////////////////////
 
 // Loading screen
-export const Loading = ( { message } ) => <Container style={ { justifyContent: 'center' } }>
-		<ActivityIndicator size='large' />
+export const Loading = ( { message, color } ) => <Container style={ { justifyContent: 'center' } }>
+		<ActivityIndicator color={ color } size='large' />
 		<Title style={ { textAlign: 'center', marginTop: 20 } }>{ message || 'Loading' }</Title>
 </Container>
 

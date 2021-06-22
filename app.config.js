@@ -30,7 +30,7 @@ console.log( 'Process.env.development: ', !!process.env.development, ' firebase 
 const conf = {
   dev: process.env.development,
   bundle: 'com.nutshell.nutshell', // ⚠️ Reverse DNS, same as android
-  version: 15, // ⚠️ Update on build
+  version: 16, // ⚠️ Update on build (last 22 jun 2021)
 }
 
 module.exports = {
@@ -56,7 +56,7 @@ module.exports = {
     "splash": {
       "image": "./assets/icon/app/app-icon-solid-bg.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000"
+      "backgroundColor": "#000000"
     },
     "notification": {
       icon: './assets/icon/app/app-icon-greyscale-alpha.png',
@@ -98,7 +98,7 @@ module.exports = {
       icon: "./assets/icon/app/app-icon-solid-bg-rounded.png",
       adaptiveIcon: {
         foregroundImage: "./assets/icon/app/app-icon-alpha-adaptive-108-outer-72-inner.png",
-        backgroundColor: "#808080"
+        backgroundColor: "#000000"
       },
       intentFilters: [
           {

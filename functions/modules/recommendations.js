@@ -176,7 +176,7 @@ const getContactRecommendations = async uid => {
 
 		// Write recommendations
 		logs.push( 'Sending graph links to database', rankedArray )
-		if( rankedArray.length > 0 ) await db.collection( 'userMeta' ).doc( uid ).set( { recommendations: FieldValue.arrayUnion( ...rankedArray ) }, { merge: true } )
+		if( rankedArray.length > 0 ) await db.collection( 'userMeta' ).doc( uid ).set( { recommendations: rankedArray }, { merge: true } )
 
 		// ///////////////////////////////
 		// Contact based recommendations

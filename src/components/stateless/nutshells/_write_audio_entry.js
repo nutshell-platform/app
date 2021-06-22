@@ -14,7 +14,6 @@ import app from '../../../modules/firebase/app'
 // Recording
 import useInterval from 'use-interval'
 import { Audio } from 'expo-av'
-import * as Permissions from 'expo-permissions'
 
 export const AudioEntry = ( { ...props } ) => {
 
@@ -28,7 +27,14 @@ export const AudioEntry = ( { ...props } ) => {
 export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 
 	// Permissions
-	const [ audioPermission, askPermission, getPermission ] = Permissions.usePermissions( Permissions.AUDIO_RECORDING )
+	// const [ audioPermission, askPermission, getPermission ] = Permissions.usePermissions( Permissions.AUDIO_RECORDING )
+	const [ audioPermission, setAudioPermission ] = useState()
+	const askPermission = f => Audio.requestPermissionsAsync()
+	const getPermission = async f => {
+		const permission = await Audio.getPermissionsAsync()
+		setAudioPermission( permission )
+		return permission
+	}
 
 	// Uid of nutshell draft
 	const draftNutshell = useSelector( store => store?.nutshells?.draft || {} )
@@ -94,8 +100,9 @@ export const AudioRecorder = memo( ( { existingAudioURI, ...props } ) => {
 		try {
 
 			// Prep for recording
-			getPermission()
-			if( !audioPermission?.granted ) return Dialogue( 'Please give the app audio permissions in order to record' ).finally( askPermission )
+			const { granted } = await getPermission()
+			log( granted, audioPermission )
+			if( !granted ) return Dialogue( 'Please give the app audio permissions in order to record' ).finally( askPermission )
 			if( isIos ) await Audio.setAudioModeAsync( { allowsRecordingIOS: true, playsInSilentModeIOS: true } )
 			
 			const { canRecord } = await recorder.getStatusAsync()
