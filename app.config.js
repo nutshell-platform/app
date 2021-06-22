@@ -56,7 +56,7 @@ module.exports = {
     "splash": {
       "image": "./assets/icon/app/app-icon-solid-bg.png",
       "resizeMode": "contain",
-      "backgroundColor": "#808080"
+      "backgroundColor": "#000"
     },
     "notification": {
       icon: './assets/icon/app/app-icon-greyscale-alpha.png',
