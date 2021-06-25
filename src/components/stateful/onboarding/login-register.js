@@ -19,7 +19,7 @@ export default class LoginRegister extends Component {
 		name: '',
 		handle: '',
 		email: '',
-		password: '',
+		password: 'vw&3erW9Ex6PwJ7DnKw*5YY#wfqzCg',
 		available: true,
 		loading: false,
 		timeout: 2000,
