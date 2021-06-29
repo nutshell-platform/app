@@ -94,7 +94,7 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 					const nutshell = offline.find( ( { uid } ) => entry == uid ) || await app.getNutshellByUid( entry )
 
 					// Use publish date as marked read because marked read date is unknown
-					return { uid: entry, markedread: nutshell.published }
+					return { uid: entry, markedread: nutshell.published || nutshell.created || Date.now() }
 
 
 				} ) )
