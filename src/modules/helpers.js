@@ -120,6 +120,7 @@ const oneJanDayType = oneJan.getDay()
 export const timestampToHuman = ( ms, view ) => {
 	if( view == 'dmy' ) return ( new Date( ms ).toString().match( /([a-zA-Z]* )(\d+ )(\d+)/ ) || [] )[0]
 	if( view == 'y' ) return new Date( ms ).getFullYear()
+	if( view == 'full' ) return ( new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)( \d+)/ ) || [] )[0]
 	return ( new Date( ms ).toString().match( /([a-zA-Z]* )([a-zA-Z]* )(\d+)/ ) || [] )[0]
 }
 

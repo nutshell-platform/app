@@ -37,18 +37,79 @@ export const InboxTimeline = memo( ( { renderInbox, ...props } ) => {
 
 export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 
+	// Archive data management
+	const { archive=[], offline=[] } = useSelector( store => store?.nutshells )
+	// Cached rich nutshell query
+	const getRichOfflineNusthells = f => archive
+	.sort( ( a, b ) => {
+
+		// Old format doesn't matter for sort
+		if( typeof a == 'string' || typeof b == 'string' ) return 0
+
+		// Sort by known marked read
+		if( a.markedread > b.markedread ) return 1
+		if( b.markedread > a.markedread ) return -1
+		return 0
+
+	} )
+	.map( nutshell => offline.find( ( { uid } ) => {
+
+		// is old uid format
+		if( typeof nutshell == 'string' ) return nutshell == uid
+		else return nutshell.uid == uid
+		
+	}) || { unavailable: nutshell.uid || nutshell } )
+
+
 	// ///////////////////////////////
 	// State management
 	// ///////////////////////////////
 	const user = useSelector( store => store.user || {} )
-	const { archive=[], offline=[] } = useSelector( store => store?.nutshells )
-	const getRichOfflineNusthells = f => archive.map( nutshellUid => offline.find( ( { uid } ) => nutshellUid == uid ) || { unavailable: nutshellUid } )
 	const [ nutshells, setNutshells ] = useState( getRichOfflineNusthells() )
-
 	const [ loading, setLoading ] = useState( false )
 	const [ visible, setVisible ] = useState( 10 )
 
-	// let throttle = useRef( undefined ).current
+	// ///////////////////////////////
+	// Backwards compatible archive transform
+	// ///////////////////////////////
+	useEffect( f => {
+
+		if( !user ) return
+
+		( async function() {
+
+			try {
+
+				// Check for old format ( uids )
+				const hasOldEntries = !!archive.find( nutshell => typeof nutshell == 'string' )
+				if( !hasOldEntries ) return
+
+				// Format new way
+				const newFormatArchive = await Promise.all( archive.map( async entry => {
+
+					// Keep correct entries
+					if( typeof entry != 'string' ) return entry
+
+					// For old entries tranfrorm
+					const nutshell = offline.find( ( { uid } ) => entry == uid ) || await app.getNutshellByUid( entry )
+
+					// Use publish date as marked read because marked read date is unknown
+					return { uid: entry, markedread: nutshell.published }
+
+
+				} ) )
+
+				// Write new format to user data
+				log( 'Writing new format: ', newFormatArchive )
+				await app.overwriteArchive( newFormatArchive )
+
+			} catch( e ) {
+				catcher( 'archive transform error: ', e )
+			}
+
+		} )(  )
+
+	}, [ archive.length, user ] )
 
 	// ///////////////////////////////
 	// Offline cache
@@ -185,7 +246,7 @@ export const NutshellCard = memo( ( { gutter=40, index, isArchive=false, nutshel
 					<Title onPress={ f => go( `/${ user.handle }` ) }>{user.name}</Title>
 					<HelperText style={ { paddingBottom: 10 } }>
 						{ user?.handle && `@${user.handle}, ` }
-						{ user && timestampToHuman( published || updated ) }
+						{ user && timestampToHuman( published || updated, 'full' ) }
 						{ /* readcount > 0 && `, read by ${readcount}` */ }
 					</HelperText>
 				</React.Fragment> }

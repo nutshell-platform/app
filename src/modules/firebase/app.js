@@ -32,7 +32,7 @@ import * as Network from 'expo-network'
 // Functions
 import { listenUserLogin, listenUserChanges, registerUser, loginUser, updateUser, resetPassword, logoutUser, deleteUser, handleIsAvailable, listenUserMetaChanges, updateContactMethods, listenContactMethods } from './_user'
 import { updateSettings, listenSettings, setLocalTimeToSettings } from './_settings'
-import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell, listenToNutshellArchive, removeNutshellFromArchive, getNutshellsByUids } from './_nutshells'
+import { createNutshell, updateNutshell, listenToLatestNutshell, getNutshellsOfUser, listenToNutshellInbox, getNutshellByUid, markNutshellRead, reportNutshell, muteNutshell, deleteNutshell, createTestNutshell, listenToNutshellArchive, removeNutshellFromArchive, getNutshellsByUids, overwriteArchive } from './_nutshells'
 import { saveAudioEntry, deleteAudioEntry } from './_audio_nutshells'
 import { getRandomPeople, followPerson, unfollowPerson, findPerson, getPerson, blockPerson, unblockPerson, getContactRecommendations, unrecommendPerson, ignoreRecommendation, ignoreRequest, acceptFollower, addMultipleTestFollowers } from './_friends'
 import { getModerationQueue, markAbuseModerated, sendMassMessage, getScheduledNutshells, updateAllAlgoliaAccountEntries, refreshAllReccsAndScores, deleteMyDemoData } from './_system'
@@ -90,6 +90,7 @@ class Firebase {
 	removeNutshellFromArchive   = uid 	  => removeNutshellFromArchive( this, uid )
 	reportNutshell	   = report   => reportNutshell( this, report )
 	muteNutshell	   = uid 	  => muteNutshell( this, uid )
+	overwriteArchive   = archive => overwriteArchive( this, archive )
 
 
 	// Audio
