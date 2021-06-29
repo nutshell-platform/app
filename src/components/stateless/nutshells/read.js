@@ -103,6 +103,9 @@ export const ArchiveTimeline = memo( ( { endReached, ...props } ) => {
 				log( 'Writing new format: ', newFormatArchive )
 				await app.overwriteArchive( newFormatArchive )
 
+				// Set new format to state
+				setNutshells( newFormatArchive )
+
 			} catch( e ) {
 				catcher( 'archive transform error: ', e )
 			}
